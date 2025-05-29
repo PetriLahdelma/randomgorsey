@@ -8,6 +8,12 @@
   margin: 0 auto;
 }
 
+h2 {
+  font-family: "Tschick Bold", sans-serif;
+  color: #f0f;
+  text-transform: uppercase;
+}
+
 @media (width <= 800px) {
   .notfound-container {
     margin-left: 2rem;

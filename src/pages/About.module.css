@@ -4,12 +4,18 @@
 
 .about-container {
   padding: 2rem;
-  font-family: "Europa Regular", sans-serif;
   line-height: 1.6;
   background-color: #f0ff;
   color: #ff0;
   max-width: 600px;
   margin: 0 auto;
+}
+
+.about-container h2 {
+  font-family: "Tschick Bold", sans-serif;
+  color: #ff0;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
 }
 
 @media (width <= 800px) {

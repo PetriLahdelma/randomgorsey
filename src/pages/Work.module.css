@@ -8,6 +8,13 @@
   margin: 0 auto;
 }
 
+.work-container h2 {
+  font-family: "Tschick Bold", sans-serif;
+  color: #ff0;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
 @media (width <= 800px) {
   .work-container {
     margin-left: 2rem;

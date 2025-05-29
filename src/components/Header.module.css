@@ -10,13 +10,14 @@ nav ul {
   padding: 0;
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 nav ul li a {
-  font-family: "Europa Bold", sans-serif;
+  font-family: "Tschick Bold", sans-serif;
   color: #fff;
   text-decoration: none;
+  font-size: 0.8rem;
   font-weight: bold;
 }
 
@@ -33,5 +34,6 @@ header img {
 @media (width <= 800px) {
   header img {
     margin: 0 auto;
+    display: block;
   }
 }
