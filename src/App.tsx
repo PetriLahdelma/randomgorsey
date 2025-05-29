@@ -7,10 +7,12 @@ import NotFound from './pages/NotFound';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
+import styles from './App.module.css';
+
 const App: React.FC = () => {
   return (
     <Router>
-      <div className="App">
+      <div className={styles.app}>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

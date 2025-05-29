@@ -25,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "stylelint 'src/**/*.css' --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +48,9 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
-    "gh-pages": "^6.3.0"
+    "gh-pages": "^6.3.0",
+    "stylelint": "^16.19.1",
+    "stylelint-config-css-modules": "^4.4.0",
+    "stylelint-config-standard": "^38.0.0"
   }
 }

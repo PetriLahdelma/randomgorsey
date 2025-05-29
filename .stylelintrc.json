@@ -1,0 +1,15 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-css-modules"],
+  "rules": {
+    "max-nesting-depth": 3,
+    "selector-max-id": 0,
+    "selector-max-specificity": "0,3,0",
+    "declaration-no-important": true,
+    "color-named": "never",
+    "font-family-no-missing-generic-family-keyword": true,
+    "unit-allowed-list": ["em", "rem", "%", "vw", "vh", "px"],
+    "block-no-empty": true,
+    "no-duplicate-selectors": true,
+    "property-no-unknown": true
+  }
+}

@@ -1,0 +1,16 @@
+/* App.module.css */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.header {
+  background-color: #282c34;
+  color: #fff;
+}
+
+footer {
+  margin-top: auto;
+}
