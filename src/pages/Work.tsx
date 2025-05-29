@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Work.module.css'; // Import the CSS module for styling
+import styles from './Work.module.css';
 
 const Work: React.FC = () => {
   return (
