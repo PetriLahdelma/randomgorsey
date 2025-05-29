@@ -25,6 +25,13 @@ nav ul li a:hover {
 }
 
 header img {
-  width: 70vw;
+  width: 90vw;
   height: auto;
+  margin: 0;
+}
+
+@media (width <= 800px) {
+  header img {
+    margin: 0 auto;
+  }
 }

@@ -27,17 +27,13 @@
 
 body {
   margin: 0;
-  font-family: "Europa Regular", sans-serif;
-
-  h2 {
-    text-transform: uppercase;
-  }
-
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Europa Regular", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h2 {
+  text-transform: uppercase;
 }
 
 code {

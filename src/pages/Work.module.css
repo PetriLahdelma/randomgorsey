@@ -1,19 +1,15 @@
-:root {
-  background-color: #000;
-}
-
-.about-container {
+.work-container {
   padding: 2rem;
   font-family: "Europa Regular", sans-serif;
   line-height: 1.6;
-  background-color: #f0ff;
+  background-color: #00f;
   color: #ff0;
   max-width: 600px;
   margin: 0 auto;
 }
 
 @media (width <= 800px) {
-  .about-container {
+  .work-container {
     margin-left: 2rem;
     margin-right: 2rem;
   }
