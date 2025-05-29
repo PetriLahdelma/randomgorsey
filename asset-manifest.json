@@ -1,15 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.e6c13ad2.css",
-    "main.js": "/static/js/main.de3a7b3f.js",
+    "main.css": "/static/css/main.05f081ec.css",
+    "main.js": "/static/js/main.b6620f30.js",
     "static/js/453.6779507f.chunk.js": "/static/js/453.6779507f.chunk.js",
+    "static/media/europa-light-webfont.ttf": "/static/media/europa-light-webfont.a5d681033246521a5108.ttf",
+    "static/media/europa-regular-webfont.ttf": "/static/media/europa-regular-webfont.886f76594d3ece4153ec.ttf",
+    "static/media/europa-bold-webfont.ttf": "/static/media/europa-bold-webfont.a3c4f3d6a9de5994510e.ttf",
+    "static/media/europa-bold-webfont.woff": "/static/media/europa-bold-webfont.3ac4ec7543a24415b0b9.woff",
+    "static/media/europa-light-webfont.woff": "/static/media/europa-light-webfont.d54383df44da837d73c6.woff",
+    "static/media/europa-regular-webfont.woff": "/static/media/europa-regular-webfont.ab9230c417bf5eb028d9.woff",
+    "static/media/europa-light-webfont.woff2": "/static/media/europa-light-webfont.666cbb951ad79b2da96f.woff2",
+    "static/media/europa-bold-webfont.woff2": "/static/media/europa-bold-webfont.2bfa20bd96321bb83335.woff2",
+    "static/media/europa-regular-webfont.woff2": "/static/media/europa-regular-webfont.9284071555db9d5e1ae6.woff2",
     "index.html": "/index.html",
-    "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
-    "main.de3a7b3f.js.map": "/static/js/main.de3a7b3f.js.map",
+    "main.05f081ec.css.map": "/static/css/main.05f081ec.css.map",
+    "main.b6620f30.js.map": "/static/js/main.b6620f30.js.map",
     "453.6779507f.chunk.js.map": "/static/js/453.6779507f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6c13ad2.css",
-    "static/js/main.de3a7b3f.js"
+    "static/css/main.05f081ec.css",
+    "static/js/main.b6620f30.js"
   ]
 }
