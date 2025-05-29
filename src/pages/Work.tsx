@@ -6,7 +6,7 @@ const Work: React.FC = () => {
     <div className={styles['work-container']}>
       <h2>Work</h2>
     <p className={styles['work-description']}>
-      Test test
+      Coming soon! This page will showcase work and projects. Stay tuned for updates!
     </p>
     </div>
   );
