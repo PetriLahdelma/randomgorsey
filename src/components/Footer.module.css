@@ -17,3 +17,9 @@ footer {
   justify-content: center;
   margin-top: 1rem;
 }
+
+@media (width <= 800px) {
+  footer {
+    padding: 0.2rem; /* Reduced padding for smaller screens */
+  }
+}
