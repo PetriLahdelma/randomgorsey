@@ -26,6 +26,10 @@
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Corrected max-width value */
 }
 
 ::placeholder {
@@ -41,9 +45,12 @@
   border-radius: 4px;
   font-family: "Europa Regular", sans-serif;
   font-size: 1rem;
-  max-width: 380px;
+  max-width: 100%; /* Corrected max-width value */
   min-height: 60px;
   margin-block-end: 1.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .contact-button {
@@ -121,7 +128,6 @@
 
   .contact-input {
     width: 96%;
-    max-width: auto;
   }
 
   .contact-textarea {
