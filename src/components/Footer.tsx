@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
         <a href="https://soundcloud.com/randomgorsey" target="_blank" rel="noopener noreferrer">
           <SocialIcon url="https://soundcloud.com" className="w-4 h-4" />
         </a>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/random_gorsey?igsh=am42eWcwNGdnY3hm&utm_source=qr" target="_blank" rel="noopener noreferrer">
           <SocialIcon url="https://instagram.com" className="w-4 h-4" />
         </a>
       </div>
