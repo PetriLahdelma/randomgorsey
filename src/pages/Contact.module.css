@@ -93,6 +93,7 @@
   flex-direction: row;
   justify-content: space-between;
   gap: 1.6rem;
+  width: 100%; /* Updated to occupy the full width of the parent div */
 }
 
 .subject-row {
@@ -112,5 +113,18 @@
   .contact-container {
     margin-left: 2rem;
     margin-right: 2rem;
+  }
+
+  .contact-row {
+    flex-direction: column;
+  }
+
+  .contact-input {
+    width: 96%;
+    max-width: auto;
+  }
+
+  .contact-textarea {
+    max-width: 96%;
   }
 }
