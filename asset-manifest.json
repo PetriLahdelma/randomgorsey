@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.f6c838ce.css",
-    "main.js": "/static/js/main.0b0b86ae.js",
+    "main.css": "/static/css/main.b3d0b154.css",
+    "main.js": "/static/js/main.d0a6e602.js",
     "static/js/453.6779507f.chunk.js": "/static/js/453.6779507f.chunk.js",
     "static/media/europa-light-webfont.ttf": "/static/media/europa-light-webfont.a5d681033246521a5108.ttf",
     "static/media/europa-regular-webfont.ttf": "/static/media/europa-regular-webfont.886f76594d3ece4153ec.ttf",
@@ -15,12 +15,12 @@
     "static/media/Tschick-Bold.woff": "/static/media/Tschick-Bold.643df78e82a0f0150b33.woff",
     "static/media/Tschick-Bold.woff2": "/static/media/Tschick-Bold.00394367f42316558f53.woff2",
     "index.html": "/index.html",
-    "main.f6c838ce.css.map": "/static/css/main.f6c838ce.css.map",
-    "main.0b0b86ae.js.map": "/static/js/main.0b0b86ae.js.map",
+    "main.b3d0b154.css.map": "/static/css/main.b3d0b154.css.map",
+    "main.d0a6e602.js.map": "/static/js/main.d0a6e602.js.map",
     "453.6779507f.chunk.js.map": "/static/js/453.6779507f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f6c838ce.css",
-    "static/js/main.0b0b86ae.js"
+    "static/css/main.b3d0b154.css",
+    "static/js/main.d0a6e602.js"
   ]
 }
