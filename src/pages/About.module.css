@@ -18,6 +18,15 @@
   margin-bottom: 1rem;
 }
 
+ul {
+  list-style: none; /* Removes the dots from the list items */
+  padding: 0;
+}
+
+li {
+  margin-bottom: 0.5rem; /* Adds spacing between list items */
+}
+
 @media (width <= 800px) {
   .about-container {
     margin-left: 2rem;
