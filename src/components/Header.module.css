@@ -36,16 +36,14 @@ header img {
     margin: 0 auto;
     display: block;
   }
-}
 
-@media (width <= 800px) {
-  nav ul li a {
-    font-size: 0.7rem; /* Reduced font size for smaller screens */
-  }
-}
-
-@media (width <= 800px) {
   nav ul {
-    gap: 0.8rem; /* Reduced gap for smaller screens */
+    gap: 0.4rem;
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  nav ul li a {
+    font-size: 0.6rem; /* Reduced font size for smaller screens */
   }
 }
