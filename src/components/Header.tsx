@@ -13,7 +13,7 @@ const Header: React.FC = () => {
           <li><a href="#/listen">Listen</a></li>
           <li><a href="#/about">About</a></li>
           <li><a href="#/contact">Contact</a></li>
-          <li><a href="#/work">Work</a></li>
+          <li><a href="#/gallery">Gallery</a></li>
         </ul>
       </nav>
     </header>

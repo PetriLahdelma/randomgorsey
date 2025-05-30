@@ -34,22 +34,29 @@ const Contact: React.FC = () => {
   return (
     <div className={styles['contact-container']}>
       <h2>Contact</h2>
-      <label className={styles['contact-label']}>Your Name</label>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Your Name"
-        className={styles['contact-input']}
-      />
-      <label className={styles['contact-label']}>Email</label>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Your Email"
-        className={styles['contact-input']}
-      />
+      <div className={styles['contact-row']}>
+        <div>
+          <label className={styles['contact-label']}>Your Name</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your Name"
+            className={styles['contact-input']}
+          />
+        </div>
+        <div>
+          <label className={styles['contact-label']}>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Your Email"
+            className={styles['contact-input']}
+          />
+        </div>
+      </div>
+      <div className={styles['subject-row']}>
       <label className={styles['contact-label']}>Subject</label>
       <input
         type="text"
@@ -57,7 +64,7 @@ const Contact: React.FC = () => {
         onChange={(e) => setSubject(e.target.value)}
         placeholder="Subject"
         className={styles['contact-input']}
-      />
+      /></div>
       <label className={styles['contact-label']}>Message</label>
       <textarea
         value={message}

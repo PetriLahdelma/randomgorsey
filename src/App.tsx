@@ -7,7 +7,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Listen from './pages/Listen';
 import NotFound from './pages/NotFound';
-import Work from './pages/Work';
+import Work from './pages/Gallery';
 
 import styles from './App.module.css';
 
@@ -21,7 +21,7 @@ const App: React.FC = () => {
           <Route path="/listen" element={<Listen />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/work" element={<Work />} />
+          <Route path="/gallery" element={<Work />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

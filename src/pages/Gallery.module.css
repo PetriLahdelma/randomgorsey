@@ -1,4 +1,4 @@
-.work-container {
+.gallery-container {
   padding: 2rem;
   font-family: "Europa Regular", sans-serif;
   line-height: 1.6;
@@ -8,7 +8,7 @@
   margin: 0 auto;
 }
 
-.work-container h2 {
+.gallery-container h2 {
   font-family: "Tschick Bold", sans-serif;
   color: #ff0;
   text-transform: uppercase;
@@ -16,7 +16,7 @@
 }
 
 @media (width <= 800px) {
-  .work-container {
+  .gallery-container {
     margin-left: 2rem;
     margin-right: 2rem;
   }
