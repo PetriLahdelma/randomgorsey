@@ -11,6 +11,12 @@ const Contact: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSend = () => {
+    const honeypotField = document.querySelector('input[name=honeypot]') as HTMLInputElement;
+    if (honeypotField && honeypotField.value) {
+      console.error('Spam detected: Honeypot field is filled.');
+      return;
+    }
+
     emailjs.send(
       'service_kua7hu3',
       'template_wr7fpxc',
@@ -72,6 +78,13 @@ const Contact: React.FC = () => {
         placeholder="Write your message here..."
         className={styles['contact-textarea']}
       ></textarea>
+      <input
+        type="text"
+        name="honeypot"
+        style={{ display: 'none' }}
+        value=""
+        onChange={() => {}}
+      />
       <ContactButton onClick={handleSend} className={styles['contact-button']}>
         Send
       </ContactButton>

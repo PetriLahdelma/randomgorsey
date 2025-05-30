@@ -25,9 +25,10 @@
   },
   "scripts": {
     "predeploy": "npm run build && cp CNAME build/CNAME",
-    "deploy": "gh-pages -d build --dotfiles",
-    "start": "react-scripts start",
+    "add-domain": "echo \"randomgorsey.com\" > build/CNAME",
     "build": "react-scripts build",
+    "deploy": "npm run add-domain && gh-pages -d build --dotfiles",
+    "start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "stylelint 'src/**/*.css' --fix"
