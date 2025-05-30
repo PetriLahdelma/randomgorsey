@@ -6,16 +6,16 @@ const Footer: React.FC = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles['social-links']}>
-        <a href="https://spotify.com" target="_blank" rel="noopener noreferrer">
-          <SocialIcon url="https://spotify.com" className={styles.icon} />
+        <a href="https://open.spotify.com/artist/54Vv9rlCqX2nW2V0tXw33q?si=TCP19UlhTpyHb7w0UOukmg" target="_blank" rel="noopener noreferrer">
+          <SocialIcon url="https://spotify.com" className="w-4 h-4" />
         </a>
-        <a href="https://soundcloud.com" target="_blank" rel="noopener noreferrer">
-          <SocialIcon url="https://soundcloud.com" className={styles.icon} />
+        <a href="https://soundcloud.com/randomgorsey" target="_blank" rel="noopener noreferrer">
+          <SocialIcon url="https://soundcloud.com" className="w-4 h-4" />
         </a>
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-          <SocialIcon url="https://instagram.com" className={styles.icon} />
+          <SocialIcon url="https://instagram.com" className="w-4 h-4" />
         </a>
-      </div>      
+      </div>
       <p>&copy; 2025 Random Gorsey. All Rights Reserved.</p>
 
     </footer>
