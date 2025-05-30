@@ -15,6 +15,20 @@
   margin-bottom: 1rem;
 }
 
+/* Add styles for the link */
+.who-link {
+  font-weight: bold;
+  letter-spacing: 0.4rem;
+  color: #0f0;
+  text-decoration: none;
+}
+
+/* Add hover styles for the link */
+.who-link:hover {
+  color: #0f0;
+  text-decoration: underline;
+}
+
 @media (width <= 800px) {
   .home-container {
     margin-left: 2rem;

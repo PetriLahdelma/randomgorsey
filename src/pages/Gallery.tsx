@@ -6,6 +6,7 @@ const Gallery: React.FC = () => {
     <div className={styles['gallery-container']}>
       <h2>Gallery</h2>
       <img
+        loading="lazy"
         src="/images/ride.jpg"
         alt="Ride in BLN"
         style={{
@@ -18,6 +19,7 @@ const Gallery: React.FC = () => {
         Ride in Birgit, Berlin
       </figcaption>
       <img
+        loading="lazy"
         src="/images/disco.jpg"
         alt="Disco balls in BLN"
         style={{
@@ -30,6 +32,7 @@ const Gallery: React.FC = () => {
         Disco balls in Birgit, Berlin
       </figcaption>
       <img
+        loading="lazy"
         src="/images/xberg.jpg"
         alt="Xberg Acid, Berlin"
         style={{
@@ -42,6 +45,7 @@ const Gallery: React.FC = () => {
         Xberg Acid, Berlin
       </figcaption>
       <img
+        loading="lazy"
         src="/images/ompputalo.jpg"
         alt="Ompputalo"
         style={{
@@ -54,6 +58,7 @@ const Gallery: React.FC = () => {
         Ompputalo in Lapinlahti, Helsinki
       </figcaption>
       <img
+        loading="lazy"
         src="/images/kuvaxtila.jpg"
         alt="Kuva x Tila"
         style={{
@@ -66,6 +71,7 @@ const Gallery: React.FC = () => {
         Projections in Kuva x Tila, Helsinki
       </figcaption>
       <img
+        loading="lazy"
         src="/images/laser.jpg"
         alt="Lasers"
         style={{
@@ -78,6 +84,7 @@ const Gallery: React.FC = () => {
         Warning, Lasers, Helsinki
       </figcaption>
       <img
+        loading="lazy"
         src="/images/smokebreak.jpg"
         alt="Smoke break"
         style={{
@@ -90,6 +97,7 @@ const Gallery: React.FC = () => {
         Smoke break, Helsinki
       </figcaption>
       <img
+        loading="lazy"
         src="/images/discosea.jpg"
         alt="Disco at sea"
         style={{
@@ -102,6 +110,7 @@ const Gallery: React.FC = () => {
         Disco at sea, Helsinki
       </figcaption>
       <img
+        loading="lazy"
         src="/images/kaiku.jpg"
         alt="Kaiku"
         style={{
@@ -114,6 +123,7 @@ const Gallery: React.FC = () => {
         Kaiku, Helsinki
       </figcaption>
       <img
+        loading="lazy"
         src="/images/freedom.jpg"
         alt="Freedom"
         style={{
@@ -126,6 +136,7 @@ const Gallery: React.FC = () => {
         Occupied freedom, Helsinki
       </figcaption>
       <img
+        loading="lazy"
         src="/images/promo.jpg"
         alt="Kaiku"
         style={{
