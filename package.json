@@ -17,7 +17,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.1",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "^5.0.1",
     "react-social-icons": "^6.24.0",
     "tailwindcss": "^4.1.8",
     "typescript": "^3.4.5",
