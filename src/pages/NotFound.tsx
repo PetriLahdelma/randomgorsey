@@ -14,8 +14,8 @@ const NotFound: React.FC = () => {
   return (
     <div className={styles['notfound-container']}>
       {/* <video className={styles['background-video']} autoPlay muted loop>
-        <source src="/images/butterflies.webm" type="video/webm" />
-        Your browser does not support the video tag.
+      <source src="/images/butterflies.webm" type="video/webm" />
+      Your browser does not support the video tag.
       </video> */}
       {loading && <Spinner />}
       {!loading && <h2>404 - Page Not Found</h2>}
