@@ -13,7 +13,7 @@ nav ul {
   gap: 1.2rem;
 }
 
-nav ul li a {
+nav a {
   font-family: "Tschick Bold", sans-serif;
   color: #fff;
   text-decoration: none;
@@ -21,7 +21,7 @@ nav ul li a {
   font-weight: bold;
 }
 
-nav ul li a:hover {
+nav a:hover {
   text-decoration: underline;
 }
 
@@ -43,7 +43,7 @@ header img {
     flex-flow: row wrap;
   }
 
-  nav ul li a {
+  nav a {
     font-size: 1rem; /* Reduced font size for smaller screens */
   }
 }
