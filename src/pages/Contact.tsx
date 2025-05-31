@@ -5,6 +5,7 @@ import emailjs from 'emailjs-com';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
+import Spinner from '../components/Spinner';
 
 const Contact: React.FC = () => {
   const [message, setMessage] = useState('');
@@ -12,6 +13,12 @@ const Contact: React.FC = () => {
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSend = () => {
     const honeypotField = document.querySelector('input[name=honeypot]') as HTMLInputElement;
@@ -42,67 +49,72 @@ const Contact: React.FC = () => {
 
   return (
     <div className={styles['contact-container']}>
-      <h2>Contact</h2>
-      <div className={styles['contact-row']}>
-        <div>
+      {loading && <Spinner />}
+      {!loading && (
+        <>
+          <h2>Contact</h2>
+          <div className={styles['contact-row']}>
+            <div>
+              <Input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your Name"
+                label="Your Name"
+                className={styles['contact-input']}
+              />
+            </div>
+            <div>
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your Email"
+                label="Email"
+                className={styles['contact-input']}
+              />
+            </div>
+          </div>
+          <div className={styles['subject-row']}>
           <Input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Your Name"
-            label="Your Name"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            placeholder="Subject"
+            label="Subject"
             className={styles['contact-input']}
+          /></div>
+          <TextArea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Write your message here..."
+            label="Message"
+            className={styles['contact-textarea']}
           />
-        </div>
-        <div>
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Your Email"
-            label="Email"
-            className={styles['contact-input']}
+          <input
+            type="text"
+            name="honeypot"
+            style={{ display: 'none' }}
+            value=""
+            onChange={() => {}}
           />
-        </div>
-      </div>
-      <div className={styles['subject-row']}>
-      <Input
-        type="text"
-        value={subject}
-        onChange={(e) => setSubject(e.target.value)}
-        placeholder="Subject"
-        label="Subject"
-        className={styles['contact-input']}
-      /></div>
-      <TextArea
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="Write your message here..."
-        label="Message"
-        className={styles['contact-textarea']}
-      />
-      <input
-        type="text"
-        name="honeypot"
-        style={{ display: 'none' }}
-        value=""
-        onChange={() => {}}
-      />
-      <ContactButton
-        variant="primary"
-        onClick={handleSend}
-        icon={<PaperAirplaneIcon className={styles['contact-icon']} />} // Updated icon with correct class
-        className={styles['contact-button']}
-      >
-        Send
-      </ContactButton>
-      {isModalOpen && (
-        <div className={styles['modal']}>
-          <p>Message sent successfully!</p>
-          <button onClick={() => setIsModalOpen(false)} className={styles['modal-close-button']}>
-            Close
-          </button>
-        </div>
+          <ContactButton
+            variant="primary"
+            onClick={handleSend}
+            icon={<PaperAirplaneIcon className={styles['contact-icon']} />} // Updated icon with correct class
+            className={styles['contact-button']}
+          >
+            Send
+          </ContactButton>
+          {isModalOpen && (
+            <div className={styles['modal']}>
+              <p>Message sent successfully!</p>
+              <button onClick={() => setIsModalOpen(false)} className={styles['modal-close-button']}>
+                Close
+              </button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

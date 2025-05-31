@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { XMarkIcon, ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 import styles from './Gallery.module.css';
+import Spinner from '../components/Spinner';
 
 type GalleryProps = {
   onOverlayStateChange?: (state: boolean) => void;
@@ -9,6 +10,7 @@ type GalleryProps = {
 const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
   const [overlayImage, setOverlayImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [loading, setLoading] = React.useState(true);
 
   const images = useMemo(
     () => [
@@ -68,35 +70,42 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
     };
   }, [closeOverlay, navigateLeft, navigateRight]);
 
+  const handleContentLoad = () => {
+    setLoading(false);
+  };
+
   return (
     <div className={styles['gallery-container']}>
-      <h2>Gallery</h2>
-      {images.map((image, index) => (
-        <div key={index}>
-          <img
-            loading="lazy"
-            src={image.src}
-            alt={image.caption}
-            style={{ width: '100%', borderRadius: '8px', marginTop: '1rem' }}
-            onClick={() => openOverlay(index)}
-          />
-          <figcaption style={{ textAlign: 'center', marginTop: '0.5rem', fontStyle: 'italic', color: '#fff' }}>
-            {image.caption}
-          </figcaption>
-        </div>
-      ))}
+      {loading && <Spinner />}
+      <div className={styles['gallery-content']} onLoad={handleContentLoad}>
+        <h2>Gallery</h2>
+        {images.map((image, index) => (
+          <div key={index}>
+            <img
+              loading="lazy"
+              src={image.src}
+              alt={image.caption}
+              style={{ width: '100%', borderRadius: '8px', marginTop: '1rem' }}
+              onClick={() => openOverlay(index)}
+            />
+            <figcaption style={{ textAlign: 'center', marginTop: '0.5rem', fontStyle: 'italic', color: '#fff' }}>
+              {image.caption}
+            </figcaption>
+          </div>
+        ))}
 
-      {overlayImage && (
-        <div className={styles['overlay']}>
-          <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
-          <ArrowLeftIcon className={styles['left-icon']} onClick={navigateLeft} />
-          <img src={overlayImage} alt={images[currentIndex].caption} style={{ width: '100%' }} />
-          <figcaption style={{ textAlign: 'center', marginTop: '0.5rem', fontStyle: 'italic', color: '#fff' }}>
-            {images[currentIndex].caption}
-          </figcaption>
-          <ArrowRightIcon className={styles['right-icon']} onClick={navigateRight} />
-        </div>
-      )}
+        {overlayImage && (
+          <div className={styles['overlay']}>
+            <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
+            <ArrowLeftIcon className={styles['left-icon']} onClick={navigateLeft} />
+            <img src={overlayImage} alt={images[currentIndex].caption} style={{ width: '100%' }} />
+            <figcaption style={{ textAlign: 'center', marginTop: '0.5rem', fontStyle: 'italic', color: '#fff' }}>
+              {images[currentIndex].caption}
+            </figcaption>
+            <ArrowRightIcon className={styles['right-icon']} onClick={navigateRight} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

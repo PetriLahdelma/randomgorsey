@@ -1,9 +1,17 @@
 import React from 'react';
 import styles from './Listen.module.css';
+import Spinner from '../components/Spinner';
 
 const Listen: React.FC = () => {
+  const [loading, setLoading] = React.useState(true);
+
+  const handleContentLoad = () => {
+    setLoading(false);
+  };
+
   return (
     <div className={styles['listen-container']}>
+      {loading && <Spinner />}
       <h2>Listen to Music</h2>
       <p className={styles['listen-description']}>Enjoy curated playlists and latest tracks.</p>
       <iframe
@@ -16,6 +24,7 @@ const Listen: React.FC = () => {
         allowFullScreen={true}
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
+        onLoad={handleContentLoad}
       ></iframe>
       <iframe style={{ borderRadius: '12px', marginTop: '1.6rem' }}
         title="SoundCloud Player"

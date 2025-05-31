@@ -1,12 +1,20 @@
 import React from 'react';
 import styles from './About.module.css';
+import Spinner from '../components/Spinner';
 
 const About: React.FC = () => {
+  const [loading, setLoading] = React.useState(true);
+
+  const handleContentLoad = () => {
+    setLoading(false);
+  };
+
   return (
     <div className={styles['about-container']}>
+      {loading && <Spinner />}
       <h2>About</h2>
             <figure>
-        <video src="/images/portrait.webm" autoPlay muted loop controls={false} style={{ width: '10vw', borderRadius: '50%' }} />
+        <video src="/images/portrait.webm" autoPlay muted loop controls={false} style={{ width: '10vw', borderRadius: '50%' }} onLoadedData={handleContentLoad} />
       </figure>
 
     <p className={styles['about-description']}>
@@ -14,16 +22,17 @@ const About: React.FC = () => {
     </p>
       <h2>Side projects</h2>
       <p className={styles['about-description']}>
-        Random Gorsey is also involved in several side projects, including:</p>
+        Random Gorsey is also involved in several side projects, including:
+      </p>
         <ul>
           <li className={styles.card}>
-            <img src="/images/scportrait.jpg" alt="Petri Lahdelma" />
+            <img src="/images/scportrait.jpg" alt="Petri Lahdelma" onLoad={handleContentLoad} />
             <a href="https://soundcloud.com/petri-lahdelma" target="_blank" rel="noopener noreferrer">
               Petri Lahdelma - A more coarse techno project on Soundcloud.
             </a>
           </li>
           <li className={styles.card}>
-            <img src="/images/scpizza.jpg" alt="Dj Pizza Hut" />
+            <img src="/images/scpizza.jpg" alt="Dj Pizza Hut" onLoad={handleContentLoad} />
             <a href="https://soundcloud.com/dj-pizza-hut" target="_blank" rel="noopener noreferrer">
               Dj Pizza Hut - Honestly, I don't even know, man. Check it out on SC.
             </a>
