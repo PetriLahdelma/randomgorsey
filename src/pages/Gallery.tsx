@@ -47,13 +47,6 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
     setOverlayImage(images[currentIndex < images.length - 1 ? currentIndex + 1 : 0].src);
   };
 
-  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const target = event.target as HTMLElement;
-    if (target.tagName !== 'IMG') {
-      closeOverlay();
-    }
-  };
-
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -69,7 +62,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [closeOverlay, navigateLeft, navigateRight]);
 
   return (
     <div className={styles['gallery-container']}>
