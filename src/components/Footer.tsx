@@ -9,6 +9,7 @@ const Footer: React.FC = () => {
         <SocialIcon label="Spotify" url="https://open.spotify.com/artist/54Vv9rlCqX2nW2V0tXw33q?si=TCP19UlhTpyHb7w0UOukmg" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} />
         <SocialIcon label="Soundcloud" url="https://soundcloud.com/randomgorsey" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} />
         <SocialIcon label="Instagram" url="https://www.instagram.com/random_gorsey?igsh=am42eWcwNGdnY3hm&utm_source=qr" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} />
+        <SocialIcon label="Bandcamp" url="https://randomgorsey.bandcamp.com/" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} />
       </div>
       <p>&copy; 2025 Random Gorsey. All Rights Reserved.</p>
     </footer>

@@ -18,6 +18,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
       { src: '/images/xberg.jpg', caption: 'Xberg Acid, Berlin' },
       { src: '/images/gordon.jpg', caption: 'Random Illustration, Helsinki' },
       { src: '/images/ompputalo.jpg', caption: 'Ompputalo in Lapinlahti, Helsinki' },
+      { src: '/images/duduk.jpg', caption: 'Duduk, Helsinki' },
       { src: '/images/kuvaxtila.jpg', caption: 'Projections in Kuva x Tila, Helsinki' },
       { src: '/images/laser.jpg', caption: 'Warning, Lasers, Helsinki' },
       { src: '/images/smokebreak.jpg', caption: 'Smoke break, Helsinki' },

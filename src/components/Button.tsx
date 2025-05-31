@@ -8,15 +8,17 @@ type ButtonProps = {
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;
-  icon?: React.ReactNode; // Added icon prop
+  icon?: React.ReactNode;
 };
 
-const Button: React.FC<ButtonProps> = ({ variant = 'primary', onClick, children, disabled = false, icon }) => {
+const Button: React.FC<ButtonProps> = ({ variant = 'primary', onClick, children, disabled = false, icon, className, style }) => {
   return (
     <button
-      className={`${styles.button} ${styles[variant]}`}
+      className={`${styles.button} ${styles[variant]} ${className}`}
       onClick={onClick}
       disabled={disabled}
+      style={style}
+      title={typeof children === 'string' ? children : ''} 
     >
       {icon && <span className={styles.icon}>{icon}</span>} {/* Render icon if provided */}
       {children}
