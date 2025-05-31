@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styles from './Contact.module.css'; // Import the CSS module for styling
 import { default as ContactButton } from '../components/Button';
 import emailjs from 'emailjs-com';
+import Input from '../components/Input';
+import TextArea from '../components/TextArea';
 
 const Contact: React.FC = () => {
   const [message, setMessage] = useState('');
@@ -42,42 +44,42 @@ const Contact: React.FC = () => {
       <h2>Contact</h2>
       <div className={styles['contact-row']}>
         <div>
-          <label className={styles['contact-label']}>Your Name</label>
-          <input
+          <Input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your Name"
+            label="Your Name"
             className={styles['contact-input']}
           />
         </div>
         <div>
-          <label className={styles['contact-label']}>Email</label>
-          <input
+          <Input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Your Email"
+            label="Email"
             className={styles['contact-input']}
           />
         </div>
       </div>
       <div className={styles['subject-row']}>
-      <label className={styles['contact-label']}>Subject</label>
-      <input
+      <Input
         type="text"
         value={subject}
         onChange={(e) => setSubject(e.target.value)}
         placeholder="Subject"
+        label="Subject"
         className={styles['contact-input']}
       /></div>
-      <label className={styles['contact-label']}>Message</label>
-      <textarea
+      <TextArea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Write your message here..."
+        label="Message"
         className={styles['contact-textarea']}
-      ></textarea>
+      />
       <input
         type="text"
         name="honeypot"

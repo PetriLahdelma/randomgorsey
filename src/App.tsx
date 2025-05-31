@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Footer from './components/Footer';
@@ -13,7 +13,7 @@ import styles from './App.module.css';
 
 const App: React.FC = () => {
   return (
-    <Router>
+    <HashRouter>
       <div className={styles.app}>
         <Header />
         <Routes>
@@ -26,7 +26,7 @@ const App: React.FC = () => {
         </Routes>
         <Footer />
       </div>
-    </Router>
+    </HashRouter>
   );
 };
 
