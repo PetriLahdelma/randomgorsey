@@ -22,6 +22,26 @@
   color: #fff;
 }
 
+.tertiary {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  border: 1px solid #6c757d;
+}
+
+.success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.icon {
+  margin-right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+}
+
 .button:disabled {
   background-color: #e0e0e0;
   color: #6c757d;

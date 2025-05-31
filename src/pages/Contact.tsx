@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styles from './Contact.module.css'; // Import the CSS module for styling
-import { default as ContactButton } from '../components/Button';
+import ContactButton from '../components/Button';
 import emailjs from 'emailjs-com';
 import Input from '../components/Input';
+import TextArea from '../components/TextArea';
+import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
 const Contact: React.FC = () => {
   const [message, setMessage] = useState('');
@@ -72,8 +74,7 @@ const Contact: React.FC = () => {
         label="Subject"
         className={styles['contact-input']}
       /></div>
-      <Input
-        type="textarea"
+      <TextArea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Write your message here..."
@@ -87,7 +88,12 @@ const Contact: React.FC = () => {
         value=""
         onChange={() => {}}
       />
-      <ContactButton onClick={handleSend} className={styles['contact-button']}>
+      <ContactButton
+        variant="primary"
+        onClick={handleSend}
+        icon={<PaperAirplaneIcon className={styles['contact-icon']} />} // Updated icon with correct class
+        className={styles['contact-button']}
+      >
         Send
       </ContactButton>
       {isModalOpen && (
