@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { XMarkIcon, ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 import styles from './Gallery.module.css';
 
@@ -32,20 +32,20 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
     onOverlayStateChange?.(true);
   };
 
-  const closeOverlay = () => {
+  const closeOverlay = useCallback(() => {
     setOverlayImage(null);
     onOverlayStateChange?.(false);
-  };
+  }, [onOverlayStateChange]);
 
-  const navigateLeft = () => {
+  const navigateLeft = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : images.length - 1));
     setOverlayImage(images[currentIndex > 0 ? currentIndex - 1 : images.length - 1].src);
-  };
+  }, [currentIndex, images]);
 
-  const navigateRight = () => {
+  const navigateRight = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex < images.length - 1 ? prevIndex + 1 : 0));
     setOverlayImage(images[currentIndex < images.length - 1 ? currentIndex + 1 : 0].src);
-  };
+  }, [currentIndex, images]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
