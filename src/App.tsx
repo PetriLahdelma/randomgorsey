@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -12,6 +12,12 @@ import Work from './pages/Gallery';
 import styles from './App.module.css';
 
 const App: React.FC = () => {
+  const [isOverlayActive, setIsOverlayActive] = useState(false);
+
+  const handleOverlayState = (state: boolean) => {
+    setIsOverlayActive(state);
+  };
+
   return (
     <HashRouter>
       <div className={styles.app}>
@@ -21,10 +27,10 @@ const App: React.FC = () => {
           <Route path="/listen" element={<Listen />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/gallery" element={<Work />} />
+          <Route path="/gallery" element={<Work onOverlayStateChange={handleOverlayState} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer />
+        {!isOverlayActive && <Footer />}
       </div>
     </HashRouter>
   );
