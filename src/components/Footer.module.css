@@ -20,6 +20,17 @@ footer {
 
 @media (width <= 800px) {
   footer {
-    padding: 0.2rem; /* Reduced padding for smaller screens */
+    padding: 0.2rem;
+  }
+}
+
+/* Styles for hiding elements on mobile */
+.hide-on-mobile {
+  display: inline;
+}
+
+@media (width <= 800px) {
+  .hide-on-mobile {
+    display: none;
   }
 }

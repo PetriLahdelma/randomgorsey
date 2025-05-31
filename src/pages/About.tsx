@@ -28,7 +28,7 @@ const About: React.FC = () => {
           <li className={styles.card} onClick={() => window.open('https://soundcloud.com/petri-lahdelma', '_blank')}>
             <img src="/images/scportrait.jpg" alt="Petri Lahdelma" onLoad={handleContentLoad} />
             <a href="https://soundcloud.com/petri-lahdelma" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-              Petri Lahdelma - A more coarse techno project on Soundcloud.
+              Petri Lahdelma - A raw techno project on Soundcloud.
             </a>
           </li>
           <li className={styles.card} onClick={() => window.open('https://soundcloud.com/dj-pizza-hut', '_blank')}>

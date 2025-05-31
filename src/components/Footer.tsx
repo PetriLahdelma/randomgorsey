@@ -1,5 +1,5 @@
 import React from 'react';
-import { SocialIcon } from 'react-social-icons'
+import { SocialIcon } from 'react-social-icons';
 import styles from './Footer.module.css';
 
 const Footer: React.FC = () => {
@@ -12,7 +12,23 @@ const Footer: React.FC = () => {
         <SocialIcon label="YouTube" url="https://www.youtube.com/@randomgorsey8125" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="YouTube" />
         <SocialIcon label="Bandcamp" url="https://randomgorsey.bandcamp.com/" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="Bandcamp" />
       </div>
-      <p style={{ display: 'inline-flex', alignItems: 'center', color: '#fff' }}>&copy; 2025 Random Gorsey. All Rights Reserved. &nbsp; <a href="https://www.instagram.com/digitaltableteur" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', color: '#fff' }}>Site by <img src="/images/dt.svg" alt="Digitaltableteur" style={{ width: '1.2rem', height: '1.2rem', filter: 'invert(100%) sepia(0%) saturate(0%) hue-rotate(180deg)', marginLeft: '0.3rem' }} /></a></p>
+      <p style={{ display: 'inline-flex', alignItems: 'center', color: '#fff' }}>
+        &copy; {new Date().getFullYear()} Random Gorsey. All Rights Reserved. &nbsp;
+        <a
+          href="https://www.instagram.com/digitaltableteur"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', color: '#fff' }}
+        >
+          <span title="Site by Digitaltableteur" className={styles.hideOnMobile}>Site by</span>
+          <img
+        src="/images/dt.svg"
+        title="Site by Digitaltableteur"
+        alt="Digitaltableteur"
+        style={{ width: '1.2rem', height: '1.2rem', filter: 'invert(100%) sepia(0%) saturate(0%) hue-rotate(180deg)', marginLeft: '0.3rem' }}
+          />
+        </a>
+      </p>
     </footer>
   );
 };
