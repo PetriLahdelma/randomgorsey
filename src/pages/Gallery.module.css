@@ -78,3 +78,18 @@
   cursor: pointer;
   z-index: 1100;
 }
+
+.gallery-overlay img,
+.gallery-overlay div,
+.gallery-overlay span {
+  transform: none;
+}
+
+.gallery-content img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-content img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+}

@@ -14,7 +14,7 @@ const About: React.FC = () => {
       {loading && <Spinner />}
       <h2>About</h2>
             <figure>
-        <video src="/images/portrait.webm" autoPlay muted loop controls={false} style={{ width: '10vw', borderRadius: '50%' }} onLoadedData={handleContentLoad} />
+        <video title="Portrait of Random Gorsey" src="/images/portrait.webm" autoPlay muted loop controls={false} style={{ width: '10vw', borderRadius: '50%' }} onLoadedData={handleContentLoad} />
       </figure>
 
     <p className={styles['about-description']}>
@@ -25,15 +25,15 @@ const About: React.FC = () => {
         Random Gorsey is also involved in several side projects, including:
       </p>
         <ul>
-          <li className={styles.card}>
+          <li className={styles.card} onClick={() => window.open('https://soundcloud.com/petri-lahdelma', '_blank')}>
             <img src="/images/scportrait.jpg" alt="Petri Lahdelma" onLoad={handleContentLoad} />
-            <a href="https://soundcloud.com/petri-lahdelma" target="_blank" rel="noopener noreferrer">
+            <a href="https://soundcloud.com/petri-lahdelma" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
               Petri Lahdelma - A more coarse techno project on Soundcloud.
             </a>
           </li>
-          <li className={styles.card}>
+          <li className={styles.card} onClick={() => window.open('https://soundcloud.com/dj-pizza-hut', '_blank')}>
             <img src="/images/scpizza.jpg" alt="Dj Pizza Hut" onLoad={handleContentLoad} />
-            <a href="https://soundcloud.com/dj-pizza-hut" target="_blank" rel="noopener noreferrer">
+            <a href="https://soundcloud.com/dj-pizza-hut" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
               Dj Pizza Hut - Honestly, I don't even know, man. Check it out on SC.
             </a>
           </li>
