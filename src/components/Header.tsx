@@ -9,11 +9,11 @@ const Header: React.FC = () => {
 <img src="/images/logo.jpg" alt="Random Gorsey Website" title="Back to the Homepage"/>    </a>
       <nav>
         <ul>
-          <li><a href="#/">Home</a></li>
-          <li><a href="#/listen">Listen</a></li>
-          <li><a href="#/about">About</a></li>
-          <li><a href="#/contact">Contact</a></li>
-          <li><a href="#/gallery">Gallery</a></li>
+          <li><a href="#/" title="Go to Home page">Home</a></li>
+          <li><a href="#/listen" title="Go to Listen page">Listen</a></li>
+          <li><a href="#/about" title="Info about RG">About</a></li>
+          <li><a href="#/contact" title="Contact RG">Contact</a></li>
+          <li><a href="#/gallery" title="View Gallery">Gallery</a></li>
         </ul>
       </nav>
     </header>
