@@ -3,7 +3,6 @@ import styles from './Contact.module.css'; // Import the CSS module for styling
 import { default as ContactButton } from '../components/Button';
 import emailjs from 'emailjs-com';
 import Input from '../components/Input';
-import TextArea from '../components/TextArea';
 
 const Contact: React.FC = () => {
   const [message, setMessage] = useState('');
@@ -73,7 +72,8 @@ const Contact: React.FC = () => {
         label="Subject"
         className={styles['contact-input']}
       /></div>
-      <TextArea
+      <Input
+        type="textarea"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Write your message here..."

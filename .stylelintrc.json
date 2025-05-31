@@ -10,6 +10,14 @@
     "unit-allowed-list": ["s", "px", "%", "em", "rem"],
     "block-no-empty": true,
     "no-duplicate-selectors": true,
-    "property-no-unknown": true
+    "property-no-unknown": true,
+    "color-hex-length": "short",
+    "selector-max-type": 3,
+    "selector-max-universal": 0,
+    "property-no-vendor-prefix": true,
+    "value-no-vendor-prefix": true,
+    "function-url-no-scheme-relative": true,
+    "no-empty-source": true,
+    "no-invalid-double-slash-comments": true
   }
 }
