@@ -38,6 +38,7 @@ body {
   font-family: "Europa Regular", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
 }
 
 h2 {
