@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
-    "eslint": "^9.28.0",
+    "eslint": "^8.57.1",
     "eslint-config-react-app": "^7.0.1",
     "gh-pages": "^6.3.0",
     "react-scripts": "^5.0.1",
