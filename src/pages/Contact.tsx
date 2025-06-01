@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Contact.module.css'; // Import the CSS module for styling
 import ContactButton from '../components/Button';
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';

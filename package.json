@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@heroicons/react": "^2.2.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -19,6 +20,8 @@
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.1",
     "react-social-icons": "^6.24.0",
+    "rimraf": "^6.0.1",
+    "svgo": "^3.3.2",
     "tailwindcss": "^4.1.8",
     "typescript": "^4.9.5",
     "web-vitals": "^5.0.2",
