@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
         <SocialIcon label="Bandcamp" url="https://randomgorsey.bandcamp.com/" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="Bandcamp" />
       </div>
       <p style={{ display: 'inline-flex', alignItems: 'center', color: '#fff' }}>
-        &copy; {new Date().getFullYear()} Random Gorsey. All Rights Reserved. &nbsp;
+        &copy; {new Date().getFullYear()} Random Gorsey. &nbsp;
         <a
           href="https://www.instagram.com/digitaltableteur"
           target="_blank"

@@ -14,14 +14,15 @@
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
     "emailjs-com": "^3.2.0",
+    "keyv": "^5.3.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.1",
-    "react-scripts": "^5.0.1",
     "react-social-icons": "^6.24.0",
     "tailwindcss": "^4.1.8",
-    "typescript": "^3.4.5",
-    "web-vitals": "^5.0.2"
+    "typescript": "^5.8.3",
+    "web-vitals": "^5.0.2",
+    "webpack": "^5.99.9"
   },
   "scripts": {
     "predeploy": "npm run build && cp CNAME build/CNAME",
@@ -52,7 +53,10 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
+    "eslint": "^9.28.0",
+    "eslint-config-react-app": "^7.0.1",
     "gh-pages": "^6.3.0",
+    "react-scripts": "^5.0.1",
     "stylelint": "^16.20.0",
     "stylelint-config-css-modules": "^4.4.0",
     "stylelint-config-standard": "^38.0.0"
