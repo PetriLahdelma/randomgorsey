@@ -10,7 +10,22 @@ const Footer: React.FC = () => {
         <SocialIcon label="Soundcloud" url="https://soundcloud.com/randomgorsey" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="Soundcloud" />
         <SocialIcon label="Instagram" url="https://www.instagram.com/random_gorsey?igsh=am42eWcwNGdnY3hm&utm_source=qr" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="Instagram" />
         <SocialIcon label="YouTube" url="https://www.youtube.com/@randomgorsey8125" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="YouTube" />
-        <SocialIcon label="Bandcamp" url="https://randomgorsey.bandcamp.com/" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="Bandcamp" />
+        <a
+          href="https://randomgorsey.bandcamp.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Bandcamp"
+          style={{ display: 'inline-flex', alignItems: 'center', width: '2rem', height: '2rem', marginRight: '0.5rem' }}
+        >
+          <img
+            src="/images/bandcamp.svg"
+            alt="Bandcamp"
+            style={{
+              width: '2rem',
+              height: '2rem',
+            }}
+          />
+        </a>
       </div>
       <p style={{ display: 'inline-flex', alignItems: 'center', color: '#fff' }}>
         &copy; {new Date().getFullYear()} Random Gorsey. Rights reserved.&nbsp;
