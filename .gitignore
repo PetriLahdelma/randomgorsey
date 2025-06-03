@@ -29,3 +29,6 @@ yarn-error.log*
 node_modules/.cache/.eslintcache
 node_modules
 
+
+*storybook.log
+storybook-static

@@ -1,41 +1,37 @@
 import React from 'react';
 import { SocialIcon } from 'react-social-icons';
-import styles from './Footer.module.css';
+import './Footer.module.css';
 
 const Footer: React.FC = () => {
   return (
-    <footer className={styles.footer}>
-      <div className={styles['social-links']}>
+    <footer className="footer">
+      <div className="social-links">
         <SocialIcon label="Spotify" url="https://open.spotify.com/artist/54Vv9rlCqX2nW2V0tXw33q?si=TCP19UlhTpyHb7w0UOukmg" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="Spotify" />
         <SocialIcon label="Soundcloud" url="https://soundcloud.com/randomgorsey" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="Soundcloud" />
         <SocialIcon label="Instagram" url="https://www.instagram.com/random_gorsey?igsh=am42eWcwNGdnY3hm&utm_source=qr" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="Instagram" />
         <SocialIcon label="YouTube" url="https://www.youtube.com/@randomgorsey8125" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="YouTube" />
-        <a
+        <a 
           href="https://randomgorsey.bandcamp.com/"
           target="_blank"
           rel="noopener noreferrer"
           title="Bandcamp"
-          style={{ display: 'inline-flex', alignItems: 'center', width: '2rem', height: '2rem', marginRight: '0.5rem' }}
         >
           <img
             src="/images/bandcamp.svg"
             alt="Bandcamp"
-            style={{
-              width: '2rem',
-              height: '2rem',
-            }}
+            style={{ verticalAlign: 'middle', width: '2rem', height: '2rem' }} // Ensure consistent size
           />
         </a>
       </div>
-      <p style={{ display: 'inline-flex', alignItems: 'center', color: '#fff' }}>
-        &copy; {new Date().getFullYear()} Random Gorsey. Rights reserved.&nbsp;
+      <p className="footerCopyright">
+        &copy; {new Date().getFullYear()} &nbsp;Random Gorsey. Rights reserved.&nbsp;
         <a
           href="https://www.instagram.com/digitaltableteur"
           target="_blank"
           rel="noopener noreferrer"
           style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', color: '#fff' }}
         >
-          <span title="Site by Digitaltableteur" className={styles.hideOnMobile}>Site by</span>
+          <span title="Site by Digitaltableteur" className="hideOnMobile">Site by</span>
           <img
         src="/images/dt.svg"
         title="Site by Digitaltableteur"

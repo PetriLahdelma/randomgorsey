@@ -1,11 +1,13 @@
 .text-area-container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
+  max-width: 100%;
+  width: 100%;
 }
 
 .label {
-  font-weight: bold;
+  font-family: "Europa Regular", sans-serif;
+  font-weight: 600;
   margin-bottom: 0.5rem;
   color: #00f;
 }
@@ -17,7 +19,9 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;
-  resize: vertical;
+  max-width: 100%;
+  box-sizing: border-box;
+  resize: both;
 }
 
 .text-area::placeholder {

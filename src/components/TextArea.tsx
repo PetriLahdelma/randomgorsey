@@ -13,13 +13,13 @@ type TextAreaProps = {
 
 const TextArea: React.FC<TextAreaProps> = ({ value, onChange, placeholder, label, className, rows, cols }) => {
   return (
-    <div className={styles.textAreaContainer}>
+    <div className={styles['text-area-container']}>
       {label && <label className={styles.label}>{label}</label>}
       <textarea
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`${styles.textArea} ${className}`}
+        className={`${styles['text-area']} ${className}`}
         rows={rows}
         cols={cols}
       ></textarea>

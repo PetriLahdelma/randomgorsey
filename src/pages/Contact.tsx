@@ -84,7 +84,7 @@ const Contact: React.FC = () => {
             label="Subject"
             className={styles['contact-input']}
           /></div>
-          <TextArea
+          <TextArea 
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Write your message here..."
@@ -101,7 +101,7 @@ const Contact: React.FC = () => {
           <ContactButton
             variant="primary"
             onClick={handleSend}
-            icon={<PaperAirplaneIcon className={styles['contact-icon']} />} // Updated icon with correct class
+            icon={<PaperAirplaneIcon className={styles['contact-icon']} />}
             className={styles['contact-button']}
           >
             Send

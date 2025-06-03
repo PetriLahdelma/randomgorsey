@@ -4,11 +4,10 @@
   align-items: center;
   padding: 2rem;
   font-family: "Europa Regular", sans-serif;
-  line-height: 1.6;
   background-color: #ff0;
-  color: #f0ff;
-  max-width: 600px;
+  max-width: 390px;
   margin: 0 auto;
+  text-align: left;
 }
 
 .contact-container h2 {
@@ -29,7 +28,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%; /* Corrected max-width value */
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 ::placeholder {
@@ -37,18 +37,22 @@
   font-style: italic;
 }
 
-.contact-textarea {
+.message-row {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  margin-bottom: 1rem;
+}
+
+.contact-textarea {
+  max-width: 390px;
+  box-sizing: border-box;
+  margin-bottom: 0.2rem;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-family: "Europa Regular", sans-serif;
   font-size: 1rem;
-  max-width: 100%; /* Corrected max-width value */
-  min-height: 60px;
-  margin-block-end: 1.4rem;
-  white-space: nowrap;
+  min-height: 80px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -99,7 +103,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  column-gap: 3rem;
+  column-gap: 1.5rem;
   width: 100%; /* Updated to occupy the full width of the parent div */
 }
 
@@ -118,8 +122,7 @@
 
 @media (width <= 800px) {
   .contact-container {
-    margin-left: 2rem;
-    margin-right: 2rem;
+    margin-left: 0 auto;
   }
 
   .contact-row {
