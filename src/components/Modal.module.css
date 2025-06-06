@@ -1,3 +1,4 @@
+@import "../variants.css";
 .overlay {
   position: fixed;
   top: 0;
@@ -12,8 +13,8 @@
 }
 
 .modal {
-  background-color: #fff;
-  color: #000;
+  background-color: var(--color-white);
+  color: var(--color-black);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
@@ -29,6 +30,6 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #00f;
+  color: var(--color-blue);
   font-family: "Tschick Bold", sans-serif;
 }

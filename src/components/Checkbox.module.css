@@ -1,17 +1,18 @@
+@import "../variants.css";
 .container {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
   font-family: "Europa Regular", sans-serif;
-  color: #fff;
+  color: var(--color-white);
 }
 
 .checkbox {
   appearance: none;
   width: 1rem;
   height: 1rem;
-  border: 2px solid #00f;
+  border: 2px solid var(--color-blue);
   border-radius: 2px;
   position: relative;
   cursor: pointer;
@@ -19,7 +20,7 @@
 }
 
 .checkbox:checked {
-  background-color: #00f;
+  background-color: var(--color-blue);
 }
 
 .checkbox:checked::after {
@@ -29,7 +30,7 @@
   top: 0.05rem;
   width: 0.4rem;
   height: 0.7rem;
-  border: solid #fff;
+  border: solid var(--color-white);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }

@@ -1,3 +1,4 @@
+@import "../variants.css";
 .card {
   padding: 1rem;
   border-radius: 8px;
@@ -16,7 +17,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #000;
+  background: var(--color-black);
 }
 
 .title {
@@ -31,8 +32,8 @@
 
 .type {
   margin-left: auto;
-  background: #000;
-  color: #fff;
+  background: var(--color-black);
+  color: var(--color-white);
   font-size: 0.75rem;
   padding: 0.2rem 0.4rem;
   border-radius: 4px;

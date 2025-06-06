@@ -1,9 +1,10 @@
+@import "../variants.css";
 .select {
   font-family: "Europa Regular", sans-serif;
   font-size: 1rem;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-gray);
   border-radius: 4px;
-  background-color: #fff;
-  color: #000;
+  background-color: var(--color-white);
+  color: var(--color-black);
 }

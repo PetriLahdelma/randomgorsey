@@ -1,3 +1,4 @@
+@import "../variants.css";
 .input-container {
   display: flex;
   flex-direction: column;
@@ -7,19 +8,19 @@
 .label {
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: #00f;
+  color: var(--color-blue);
 }
 
 .input {
   font-family: "Europa Regular", sans-serif;
   font-size: 1rem;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-gray);
   border-radius: 4px;
   width: 100%;
 }
 
 .input::placeholder {
-  color: #888;
+  color: var(--color-gray-medium);
   font-style: italic;
 }

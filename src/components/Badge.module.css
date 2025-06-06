@@ -1,3 +1,4 @@
+@import "../variants.css";
 .badge {
   display: inline-block;
   padding: 0.25rem 0.5rem;
@@ -7,21 +8,21 @@
 }
 
 .default {
-  background-color: #ccc;
-  color: #000;
+  background-color: var(--color-gray);
+  color: var(--color-black);
 }
 
 .primary {
-  background-color: #00f;
-  color: #fff;
+  background-color: var(--color-blue);
+  color: var(--color-white);
 }
 
 .success {
-  background-color: #0f0;
-  color: #000;
+  background-color: var(--color-green);
+  color: var(--color-black);
 }
 
 .danger {
-  background-color: #dc3545;
-  color: #fff;
+  background-color: var(--color-red);
+  color: var(--color-white);
 }
