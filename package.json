@@ -16,6 +16,7 @@
     "@types/node": "^22.15.29",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
+    "ajv": "^8.12.0",
     "emailjs-com": "^3.2.0",
     "keyv": "^5.3.3",
     "react": "^19.1.0",
