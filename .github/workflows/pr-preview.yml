@@ -50,8 +50,9 @@ jobs:
             const pr = context.payload.pull_request;
             const prNumber = pr.number;
 
+            // ✅ Hardcode the correct GitHub Pages domain
             const previewUrl = `https://petrilahdelma.github.io/randomgorsey/gh-pages-pr-${prNumber}/`;
-            const prUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/pull/${prNumber}`;
+            const prUrl = `https://github.com/petrilahdelma/randomgorsey/pull/${prNumber}`;
 
             const message = `🚀 **PR Preview Available!**\n\n🔗 [Live Preview](${previewUrl})\n📄 [View PR](${prUrl})`;
 
