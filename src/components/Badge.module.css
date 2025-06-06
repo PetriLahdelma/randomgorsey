@@ -1,0 +1,27 @@
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: "Tschick Bold", sans-serif;
+}
+
+.default {
+  background-color: #ccc;
+  color: #000;
+}
+
+.primary {
+  background-color: #00f;
+  color: #fff;
+}
+
+.success {
+  background-color: #0f0;
+  color: #000;
+}
+
+.danger {
+  background-color: #dc3545;
+  color: #fff;
+}

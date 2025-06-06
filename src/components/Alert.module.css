@@ -1,0 +1,26 @@
+.alert {
+  padding: 1rem;
+  border-radius: 4px;
+  font-family: "Europa Regular", sans-serif;
+  margin-bottom: 1rem;
+}
+
+.info {
+  background-color: #00f;
+  color: #fff;
+}
+
+.success {
+  background-color: #0f0;
+  color: #000;
+}
+
+.warning {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.error {
+  background-color: #dc3545;
+  color: #fff;
+}
