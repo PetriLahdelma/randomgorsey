@@ -1,9 +1,14 @@
 module.exports = {
   moduleNameMapper: {
-    '^react-router-dom$': '<rootDir>/node_modules/react-router-dom',
+    '^.+\\.(css|scss)$': 'identity-obj-proxy',
   },
   testEnvironment: 'jsdom',
   verbose: true,
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  testPathIgnorePatterns: ['<rootDir>/src/App.test.tsx'],
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+  },
+  transformIgnorePatterns: [
+    '/node_modules/(?!(react-router-dom|react-router)/)',
+  ],
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import * as ReactRouterDom from 'react-router-dom';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Footer from './patterns/Footer';
@@ -10,6 +10,8 @@ import NotFound from './pages/NotFound';
 import Work from './pages/Gallery';
 
 import styles from './App.module.css';
+
+const { HashRouter, Routes, Route } = ReactRouterDom;
 
 const App: React.FC = () => {
   const [isOverlayActive, setIsOverlayActive] = useState(false);
