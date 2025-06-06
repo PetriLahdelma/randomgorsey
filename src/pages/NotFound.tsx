@@ -7,7 +7,9 @@ const NotFound: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -18,7 +20,7 @@ const NotFound: React.FC = () => {
       Your browser does not support the video tag.
       </video> */}
       {loading && <Spinner />}
-      {!loading && <h2>404 - Page Not Found</h2>}
+      {!loading && <h2 data-testid="not-found-title">404 - Page Not Found</h2>}
       {!loading && <p className={styles['notfound-description']}>Sorry, the page you're looking for does not exist.</p>}
     </div>
   );
