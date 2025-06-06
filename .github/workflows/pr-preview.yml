@@ -20,8 +20,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Patch homepage for PR preview
+        run: |
+          node -e "
+            const fs = require('fs');
+            const pkg = JSON.parse(fs.readFileSync('package.json'));
+            pkg.homepage = 'https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/gh-pages-pr-${{ github.event.pull_request.number }}';
+            fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
+          "
+
+      - name: Build the React app
         run: npm run build
+
+      - name: Remove CNAME (if exists)
+        run: rm -f build/CNAME
 
       - name: Deploy to GitHub Pages (PR preview)
         uses: peaceiris/actions-gh-pages@v3
@@ -35,18 +47,19 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const prNumber = context.payload.pull_request.number;
-            const repoName = context.repo.repo;
+            const pr = context.payload.pull_request;
+            const repo = context.repo.repo;
             const owner = context.repo.owner;
+            const prNumber = pr.number;
 
-            const previewUrl = `https://${owner}.github.io/${repoName}/gh-pages-pr-${prNumber}/`;
-            const prUrl = `https://github.com/${owner}/${repoName}/pull/${prNumber}`;
+            const previewUrl = `https://${owner}.github.io/${repo}/gh-pages-pr-${prNumber}/`;
+            const prUrl = `https://github.com/${owner}/${repo}/pull/${prNumber}`;
 
-            const body = `🚀 **PR Preview Available!**\n\n🔗 [Live Preview](${previewUrl})\n📄 [PR Page](${prUrl})`;
+            const message = `🚀 **PR Preview Available!**\n\n🔗 [Live Preview](${previewUrl})\n📄 [View PR](${prUrl})`;
 
             await github.rest.issues.createComment({
               issue_number: prNumber,
               owner,
-              repo: repoName,
-              body,
+              repo,
+              body: message,
             });
