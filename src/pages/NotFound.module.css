@@ -2,7 +2,7 @@
   padding: 2rem;
   font-family: "Europa Regular", sans-serif;
   line-height: 1.6;
-  color: #0f0;
+  color: var(--color-primary);
   max-width: 800px;
   width: 35%;
   margin: 0 auto;
@@ -16,7 +16,7 @@
 
 h2 {
   font-family: "Tschick Bold", sans-serif;
-  color: #f0f;
+  color: var(--color-accent);
   text-transform: uppercase;
   margin-bottom: 0.5rem;
 }
