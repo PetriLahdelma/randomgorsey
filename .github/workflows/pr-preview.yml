@@ -25,7 +25,7 @@ jobs:
           node -e "
             const fs = require('fs');
             const pkg = JSON.parse(fs.readFileSync('package.json'));
-            pkg.homepage = 'https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/gh-pages-pr-${{ github.event.pull_request.number }}';
+            pkg.homepage = 'https://petrilahdelma.github.io/randomgorsey/gh-pages-pr-${{ github.event.pull_request.number }}';
             fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
           "
 
@@ -48,18 +48,16 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const pr = context.payload.pull_request;
-            const repo = context.repo.repo;
-            const owner = context.repo.owner;
             const prNumber = pr.number;
 
-            const previewUrl = `https://${owner}.github.io/${repo}/gh-pages-pr-${prNumber}/`;
-            const prUrl = `https://github.com/${owner}/${repo}/pull/${prNumber}`;
+            const previewUrl = `https://petrilahdelma.github.io/randomgorsey/gh-pages-pr-${prNumber}/`;
+            const prUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/pull/${prNumber}`;
 
             const message = `🚀 **PR Preview Available!**\n\n🔗 [Live Preview](${previewUrl})\n📄 [View PR](${prUrl})`;
 
             await github.rest.issues.createComment({
               issue_number: prNumber,
-              owner,
-              repo,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
               body: message,
             });
