@@ -7,10 +7,8 @@ const NotFound: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
+    const timer = window.requestAnimationFrame(() => setLoading(false));
+    return () => window.cancelAnimationFrame(timer);
   }, []);
 
   return (
