@@ -1,10 +1,11 @@
+@import "../variants.css";
 .contact-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
   font-family: "Europa Regular", sans-serif;
-  background-color: #ff0;
+  background-color: var(--color-yellow);
   max-width: 390px;
   margin: 0 auto;
   text-align: left;
@@ -12,7 +13,7 @@
 
 .contact-container h2 {
   font-family: "Tschick Bold", sans-serif;
-  color: #00f;
+  color: var(--color-blue);
   text-transform: uppercase;
   margin-block-end: 1.2rem;
 }
@@ -23,7 +24,7 @@
   width: auto;
   margin-block-end: 1rem;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-gray);
   border-radius: 4px;
   white-space: nowrap;
   overflow: hidden;
@@ -33,7 +34,7 @@
 }
 
 ::placeholder {
-  color: #888;
+  color: var(--color-gray-medium);
   font-style: italic;
 }
 
@@ -48,7 +49,7 @@
   box-sizing: border-box;
   margin-bottom: 0.2rem;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-gray);
   border-radius: 4px;
   font-family: "Europa Regular", sans-serif;
   font-size: 1rem;
@@ -65,8 +66,8 @@
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
-  background-color: #007bff;
-  color: #fff;
+  background-color: var(--color-blue-light);
+  color: var(--color-white);
 }
 
 .modal {
@@ -74,7 +75,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: var(--color-white);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
@@ -86,7 +87,7 @@
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
-  color: #00f;
+  color: var(--color-blue);
 }
 
 .modal-close-button {
@@ -94,8 +95,8 @@
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: var(--color-blue-light);
+  color: var(--color-white);
   cursor: pointer;
 }
 
@@ -117,7 +118,7 @@
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
-  color: #00f;
+  color: var(--color-blue);
 }
 
 @media (width <= 800px) {

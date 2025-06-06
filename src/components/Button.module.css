@@ -1,3 +1,4 @@
+@import "../variants.css";
 .button {
   padding: 0 1rem;
   height: 40px;
@@ -12,30 +13,30 @@
 }
 
 .primary {
-  background-color: #00f;
-  color: #fff;
+  background-color: var(--color-blue);
+  color: var(--color-white);
 }
 
 .secondary {
-  border: 1px solid #00f;
-  color: #00f;
+  border: 1px solid var(--color-blue);
+  color: var(--color-blue);
   background-color: transparent;
 }
 
 .danger {
-  background-color: #dc3545;
-  color: #fff;
+  background-color: var(--color-red);
+  color: var(--color-white);
 }
 
 .tertiary {
-  color: #00f;
+  color: var(--color-blue);
   border: none;
   background-color: transparent;
 }
 
 .success {
-  background-color: #0f0;
-  color: #fff;
+  background-color: var(--color-green);
+  color: var(--color-white);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -49,8 +50,8 @@
 }
 
 .button:disabled {
-  background-color: #e0e0e0;
-  color: #6c757d;
+  background-color: var(--color-gray-light);
+  color: var(--color-gray-dark);
   cursor: not-allowed;
   border-color: inherit;
 }

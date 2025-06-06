@@ -1,3 +1,4 @@
+@import "./variants.css";
 @font-face {
   font-family: "Europa Bold";
   src: url("./fonts/europa-bold-webfont.woff2") format("woff2"),
