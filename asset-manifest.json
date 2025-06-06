@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.32385971.css",
+    "main.css": "/static/css/main.42303910.css",
     "main.js": "/static/js/main.fdffbcf1.js",
     "static/media/europa-light-webfont.ttf": "/static/media/europa-light-webfont.a5d681033246521a5108.ttf",
     "static/media/europa-regular-webfont.ttf": "/static/media/europa-regular-webfont.886f76594d3ece4153ec.ttf",
@@ -14,11 +14,11 @@
     "static/media/Tschick-Bold.woff": "/static/media/Tschick-Bold.643df78e82a0f0150b33.woff",
     "static/media/Tschick-Bold.woff2": "/static/media/Tschick-Bold.00394367f42316558f53.woff2",
     "index.html": "/index.html",
-    "main.32385971.css.map": "/static/css/main.32385971.css.map",
+    "main.42303910.css.map": "/static/css/main.42303910.css.map",
     "main.fdffbcf1.js.map": "/static/js/main.fdffbcf1.js.map"
   },
   "entrypoints": [
-    "static/css/main.32385971.css",
+    "static/css/main.42303910.css",
     "static/js/main.fdffbcf1.js"
   ]
 }
