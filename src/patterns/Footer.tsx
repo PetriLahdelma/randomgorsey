@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
           <img src="/images/bandcamp.svg" alt="Bandcamp" className="bandcamp-icon" />
         </a>
       </div>
-      <p className="footerCopyright">
+      <p className="footer-copyright">
         &copy; {new Date().getFullYear()} &nbsp;Random Gorsey. Rights reserved.&nbsp;
         <a
           href="https://www.instagram.com/digitaltableteur"
@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
           rel="noopener noreferrer"
           className="footer-link"
         >
-          <span title="Site by Digitaltableteur" className="hideOnMobile">Site by</span>
+          <span title="Site by Digitaltableteur" className="hide-on-mobile">Site by</span>
           <img
             src="/images/dt.svg"
             title="Site by Digitaltableteur"
