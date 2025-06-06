@@ -17,31 +17,6 @@ footer {
   vertical-align: middle;
 }
 
-.social-icon {
-  width: 2rem;
-  height: 2rem;
-}
-
-.bandcamp-icon {
-  vertical-align: middle;
-  width: 2rem;
-  height: 2rem;
-}
-
-.dt-icon {
-  width: 1.2rem;
-  height: 1.2rem;
-  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(180deg);
-  margin-left: 0.3rem;
-}
-
-.footer-link {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  color: #fff;
-}
-
 .footer-copyright {
   display: inline-flex;
   align-items: center;

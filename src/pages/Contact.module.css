@@ -4,7 +4,7 @@
   align-items: center;
   padding: 2rem;
   font-family: "Europa Regular", sans-serif;
-  background-color: var(--color-accent);
+  background-color: #ff0;
   max-width: 390px;
   margin: 0 auto;
   text-align: left;
@@ -12,7 +12,7 @@
 
 .contact-container h2 {
   font-family: "Tschick Bold", sans-serif;
-  color: var(--color-link);
+  color: #00f;
   text-transform: uppercase;
   margin-block-end: 1.2rem;
 }
@@ -65,7 +65,7 @@
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
-  background-color: var(--color-link);
+  background-color: #007bff;
   color: #fff;
 }
 
@@ -86,7 +86,7 @@
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
-  color: var(--color-link);
+  color: #00f;
 }
 
 .modal-close-button {
@@ -117,7 +117,7 @@
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
-  color: var(--color-link);
+  color: #00f;
 }
 
 @media (width <= 800px) {

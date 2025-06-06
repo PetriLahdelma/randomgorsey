@@ -2,15 +2,15 @@
   padding: 2rem;
   font-family: "Europa Regular", sans-serif;
   line-height: 1.6;
-  background-color: var(--color-secondary);
-  color: var(--color-primary);
+  background-color: #f00;
+  color: #0f0;
   max-width: 600px;
   margin: 0 auto;
 }
 
 .home-container h2 {
   font-family: "Tschick Bold", sans-serif;
-  color: var(--color-primary);
+  color: #0f0;
   text-transform: uppercase;
   margin-bottom: 1rem;
 }
@@ -19,13 +19,13 @@
 .who-link {
   font-weight: bold;
   letter-spacing: 0.4rem;
-  color: var(--color-primary);
+  color: #0f0;
   text-decoration: none;
 }
 
 /* Add hover styles for the link */
 .who-link:hover {
-  color: var(--color-primary);
+  color: #0f0;
   text-decoration: underline;
 }
 

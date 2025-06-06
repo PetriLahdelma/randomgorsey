@@ -28,15 +28,15 @@ const Contact: React.FC = () => {
     }
 
     emailjs.send(
-      process.env.REACT_APP_EMAILJS_SERVICE_ID || '',
-      process.env.REACT_APP_EMAILJS_TEMPLATE_ID || '',
+      'service_kua7hu3',
+      'template_wr7fpxc',
       {
         name,
         email,
         subject,
         message,
       },
-      process.env.REACT_APP_EMAILJS_PUBLIC_KEY || ''
+      '-BdVWUzt4g0H07ZtM'
     )
     .then((response) => {
       console.log('Email sent successfully!', response);

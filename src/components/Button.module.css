@@ -12,13 +12,13 @@
 }
 
 .primary {
-  background-color: var(--color-link);
+  background-color: #00f;
   color: #fff;
 }
 
 .secondary {
-  border: 1px solid var(--color-link);
-  color: var(--color-link);
+  border: 1px solid #00f;
+  color: #00f;
   background-color: transparent;
 }
 
@@ -28,13 +28,13 @@
 }
 
 .tertiary {
-  color: var(--color-link);
+  color: #00f;
   border: none;
   background-color: transparent;
 }
 
 .success {
-  background-color: var(--color-primary);
+  background-color: #0f0;
   color: #fff;
   border: none;
   padding: 0.5rem 1rem;

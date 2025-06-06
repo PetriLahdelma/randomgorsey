@@ -2,15 +2,15 @@
   padding: 2rem;
   font-family: "Europa Regular", sans-serif;
   line-height: 1.6;
-  background-color: var(--color-primary);
-  color: var(--color-accent);
+  background-color: #0f0;
+  color: #f0f;
   max-width: 600px;
   margin: 0 auto;
 }
 
 h2 {
   font-family: "Tschick Bold", sans-serif;
-  color: var(--color-accent);
+  color: #f0f;
   text-transform: uppercase;
 }
 
