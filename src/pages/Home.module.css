@@ -2,31 +2,40 @@
   padding: 2rem;
   font-family: "Europa Regular", sans-serif;
   line-height: 1.6;
-  background-color: #f00;
-  color: #0f0;
+  background-color: #000;
+  color: #fff;
   max-width: 600px;
   margin: 0 auto;
 }
 
 .home-container h2 {
   font-family: "Tschick Bold", sans-serif;
-  color: #0f0;
+  color: #fff;
   text-transform: uppercase;
   margin-bottom: 1rem;
 }
 
-/* Add styles for the link */
 .who-link {
   font-weight: bold;
   letter-spacing: 0.4rem;
-  color: #0f0;
+  color: #fff;
   text-decoration: none;
 }
 
-/* Add hover styles for the link */
 .who-link:hover {
-  color: #0f0;
+  color: #fff;
   text-decoration: underline;
+}
+
+.load-more {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 1rem auto;
+  cursor: pointer;
+  display: block;
+  border-radius: 4px;
 }
 
 @media (width <= 800px) {
