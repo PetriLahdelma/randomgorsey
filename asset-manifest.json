@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.32385971.css",
+    "main.js": "/static/js/main.fdffbcf1.js",
+    "static/media/europa-light-webfont.ttf": "/static/media/europa-light-webfont.a5d681033246521a5108.ttf",
+    "static/media/europa-regular-webfont.ttf": "/static/media/europa-regular-webfont.886f76594d3ece4153ec.ttf",
+    "static/media/europa-bold-webfont.ttf": "/static/media/europa-bold-webfont.a3c4f3d6a9de5994510e.ttf",
+    "static/media/europa-bold-webfont.woff": "/static/media/europa-bold-webfont.3ac4ec7543a24415b0b9.woff",
+    "static/media/europa-light-webfont.woff": "/static/media/europa-light-webfont.d54383df44da837d73c6.woff",
+    "static/media/europa-regular-webfont.woff": "/static/media/europa-regular-webfont.ab9230c417bf5eb028d9.woff",
+    "static/media/europa-light-webfont.woff2": "/static/media/europa-light-webfont.666cbb951ad79b2da96f.woff2",
+    "static/media/europa-bold-webfont.woff2": "/static/media/europa-bold-webfont.2bfa20bd96321bb83335.woff2",
+    "static/media/europa-regular-webfont.woff2": "/static/media/europa-regular-webfont.9284071555db9d5e1ae6.woff2",
+    "static/media/Tschick-Bold.woff": "/static/media/Tschick-Bold.643df78e82a0f0150b33.woff",
+    "static/media/Tschick-Bold.woff2": "/static/media/Tschick-Bold.00394367f42316558f53.woff2",
+    "index.html": "/index.html",
+    "main.32385971.css.map": "/static/css/main.32385971.css.map",
+    "main.fdffbcf1.js.map": "/static/js/main.fdffbcf1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.32385971.css",
+    "static/js/main.fdffbcf1.js"
+  ]
+}
