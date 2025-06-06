@@ -2,15 +2,15 @@
   padding: 2rem;
   font-family: "Europa Regular", sans-serif;
   line-height: 1.6;
-  background-color: #00f;
-  color: #ff0;
+  background-color: var(--color-link);
+  color: var(--color-accent);
   max-width: 600px;
   margin: 0 auto;
 }
 
 .gallery-container h2 {
   font-family: "Tschick Bold", sans-serif;
-  color: #ff0;
+  color: var(--color-accent);
   text-transform: uppercase;
   margin-bottom: 1rem;
 }
