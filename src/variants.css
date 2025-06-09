@@ -1,0 +1,21 @@
+:root {
+  --color-dark: #282c34;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-blue: #00f;
+  --color-blue-light: #007bff;
+  --color-green: #0f0;
+  --color-red: #dc3545;
+  --color-orange: #ffc107;
+  --color-yellow: #ff0;
+  --color-magenta: #f0f;
+  --color-f0ff: #f0ff;
+  --color-gray: #ccc;
+  --color-gray-medium: #888;
+  --color-gray-dark: #6c757d;
+  --color-gray-light: #e0e0e0;
+  --color-light-bg: #f9f9f9;
+
+  --font-europa-regular: "Europa Regular", sans-serif;
+  --font-tschick-bold: "Tschick Bold", sans-serif;
+}

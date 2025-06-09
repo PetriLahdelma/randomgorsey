@@ -1,3 +1,4 @@
+@import "../variants.css";
 .text-area-container {
   display: flex;
   flex-direction: column;
@@ -9,14 +10,14 @@
   font-family: "Europa Regular", sans-serif;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #00f;
+  color: var(--color-blue);
 }
 
 .text-area {
   font-family: "Europa Regular", sans-serif;
   font-size: 1rem;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-gray);
   border-radius: 4px;
   width: 100%;
   max-width: 100%;
@@ -25,6 +26,6 @@
 }
 
 .text-area::placeholder {
-  color: #888;
+  color: var(--color-gray-medium);
   font-style: italic;
 }

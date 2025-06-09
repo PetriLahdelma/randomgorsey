@@ -1,3 +1,4 @@
+@import "./variants.css";
 .app {
   text-align: center;
 }
@@ -8,18 +9,18 @@
 }
 
 .app-header {
-  background-color: #282c34;
+  background-color: var(--color-dark);
   min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2rem);
-  color: #fff;
+  color: var(--color-white);
 }
 
 .app-link {
-  color: #fff;
+  color: var(--color-white);
 }
 
 @keyframes app-logo-spin {

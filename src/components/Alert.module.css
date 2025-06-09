@@ -1,3 +1,4 @@
+@import "../variants.css";
 .alert {
   padding: 1rem;
   border-radius: 4px;
@@ -6,21 +7,21 @@
 }
 
 .info {
-  background-color: #00f;
-  color: #fff;
+  background-color: var(--color-blue);
+  color: var(--color-white);
 }
 
 .success {
-  background-color: #0f0;
-  color: #000;
+  background-color: var(--color-green);
+  color: var(--color-black);
 }
 
 .warning {
-  background-color: #ffc107;
-  color: #000;
+  background-color: var(--color-orange);
+  color: var(--color-black);
 }
 
 .error {
-  background-color: #dc3545;
-  color: #fff;
+  background-color: var(--color-red);
+  color: var(--color-white);
 }
