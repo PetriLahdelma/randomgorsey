@@ -8,7 +8,7 @@ export default {
   argTypes: {
     text: { control: 'text' },
     variant: {
-      control: { type: 'select', options: ['default', 'primary', 'success', 'danger'] },
+      control: { type: 'select', options: ['default', 'primary', 'secondary', 'tertiary', 'success', 'danger'] },
     },
   },
 } as Meta<typeof Badge>;
@@ -27,6 +27,18 @@ Primary.args = {
   variant: 'primary',
 };
 
+export const Secondary = Template.bind({});
+Secondary.args = {
+  text: 'Secondary',
+  variant: 'secondary',
+};
+
+export const Tertiary = Template.bind({});
+Tertiary.args = {
+  text: 'Tertiary',
+  variant: 'tertiary',
+};
+
 export const Success = Template.bind({});
 Success.args = {
   text: 'Success',
@@ -37,4 +49,11 @@ export const Danger = Template.bind({});
 Danger.args = {
   text: 'Danger',
   variant: 'danger',
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  text: 'Disabled',
+  variant: 'default',
+  disabled: true,
 };

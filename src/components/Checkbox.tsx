@@ -9,16 +9,16 @@ type CheckboxProps = {
 };
 
 const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange, disabled }) => (
-  <label className={styles.container}>
+  <label className={`${styles.container} ${disabled ? styles['disabled-label'] : ''}`}>
     <input
       type="checkbox"
-      className={styles.checkbox}
+      className={`${styles.checkbox} ${checked && disabled ? styles['checked-disabled'] : ''}`}
       checked={checked}
       onChange={onChange}
       disabled={disabled}
     />
     <span className={styles.checkmark} />
-    {label && <span className={styles.label}>{label}</span>}
+    {label && <span className={`${styles.label} ${disabled ? styles['disabled-label'] : ''}`}>{label}</span>}
   </label>
 );
 

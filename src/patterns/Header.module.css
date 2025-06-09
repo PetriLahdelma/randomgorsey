@@ -1,4 +1,5 @@
-@import "../variants.css";
+@import url("../variables.css");
+
 header {
   background-color: var(--color-black);
   color: var(--color-white);

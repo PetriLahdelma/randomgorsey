@@ -31,3 +31,16 @@ Default.args = {
   checked: false,
   label: 'Accept Terms',
 };
+
+export const Checked = Template.bind({});
+Checked.args = {
+  checked: true,
+  label: 'Checked by Default',
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  checked: false,
+  disabled: true,
+  label: "Disabled Checkbox",
+};

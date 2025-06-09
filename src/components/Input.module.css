@@ -1,4 +1,5 @@
-@import "../variants.css";
+@import url("../variables.css");
+
 .input-container {
   display: flex;
   flex-direction: column;
