@@ -79,7 +79,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
 
         {overlayImage && (
           <div className={styles['overlay']} onClick={closeOverlay}>
-            <XMarkIcon className={styles['close-icon']} onClick={(e) => e.stopPropagation()} />
+            <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
             <ArrowLeftIcon className={styles['left-icon']} onClick={(e) => { e.stopPropagation(); navigateLeft(); }} />
             <img
               src={overlayImage}
