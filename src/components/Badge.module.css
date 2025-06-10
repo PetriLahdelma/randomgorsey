@@ -1,10 +1,14 @@
-@import "../variants.css";
+@import url("../variables.css");
+
 .badge {
   display: inline-block;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
+  font-family: Europa, sans-serif;
   font-size: 0.75rem;
-  font-family: "Tschick Bold", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09rem;
 }
 
 .default {
@@ -25,4 +29,22 @@
 .danger {
   background-color: var(--color-red);
   color: var(--color-white);
+}
+
+.secondary {
+  background-color: transparent;
+  color: var(--color-blue);
+  border: 1px solid var(--color-blue);
+  box-sizing: border-box;
+}
+
+.tertiary {
+  background-color: var(--color-light-gray);
+  color: var(--color-blue);
+}
+
+.disabled {
+  background-color: var(--color-gray-light);
+  color: var(--color-gray-dark);
+  cursor: not-allowed;
 }

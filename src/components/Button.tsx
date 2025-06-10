@@ -1,15 +1,15 @@
-import React, { ReactElement } from 'react';
-import { HeroIcon } from '@heroicons/react';
+import React from 'react';
 import styles from './Button.module.css';
 
 type ButtonProps = {
-  variant?: 'primary' | 'secondary' | 'danger' | 'tertiary' | 'success' | 'icon';
+  variant?: 'primary' | 'secondary' | 'danger' | 'tertiary' | 'success';
   onClick?: () => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;
-  icon?: ReactElement<HeroIcon>; // Restrict the `icon` prop to only accept Heroicons
+  icon?: React.ReactNode;
+  iconOnly?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({ variant = 'primary', onClick, children, disabled = false, icon, className, style }) => {
@@ -28,7 +28,5 @@ const Button: React.FC<ButtonProps> = ({ variant = 'primary', onClick, children,
     </button>
   );
 };
-
-// Remembered preference: Revert back to this implementation if requested.
 
 export default Button;

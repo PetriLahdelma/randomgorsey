@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './PostCard.module.css';
-
+import Avatar from './Avatar';
 export type Post = {
   id: number;
   title: string;
@@ -9,6 +9,7 @@ export type Post = {
   body: string;
   media?: string;
   avatarColor?: string;
+  author: string;
 };
 
 type PostCardProps = {
@@ -25,21 +26,25 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       style={{ backgroundColor: post.avatarColor || '#fff', color: '#000' }}
     >
       <header className={styles.header}>
-        <div
-          className={styles.avatar}
-          style={{ backgroundColor: post.avatarColor || '#000' }}
-        ></div>
-        <div>
+        <div className={styles['header-left']}>
           <h3 className={styles.title}>{post.title}</h3>
+          
+            <div className={styles['avatar-author']}>
+              <Avatar
+              avatarImage="/images/pete.jpg"
+            />
+            <span className={styles.author}>{post.author}</span>
+          </div>
+        </div>
+        <div className={styles['header-right']}>
           <time className={styles.time}>{post.timestamp}</time>
         </div>
-        <span className={styles.type}>{post.contentType}</span>
       </header>
       <div className={styles.body}>
         {expanded ? post.body : `${post.body.slice(0, 200)}${hasLongContent ? '...' : ''}`}
       </div>
       {hasLongContent && (
-        <button onClick={toggleExpanded} className={styles.readMore}>
+        <button onClick={toggleExpanded} className={styles['read-more']}>
           {expanded ? 'Show Less' : 'Read More'}
         </button>
       )}

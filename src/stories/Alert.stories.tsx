@@ -38,3 +38,10 @@ Error.args = {
   variant: 'error',
   children: 'Error message',
 };
+
+export const Closeable = Template.bind({});
+Closeable.args = {
+  variant: 'info',
+  children: 'Closeable informational message',
+  isCloseable: true,
+};

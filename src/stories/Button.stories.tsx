@@ -51,7 +51,7 @@ Success.args = {
 
 export const Icon = Template.bind({});
 Icon.args = {
-  variant: 'icon',
+  variant: 'primary',
   icon: <ArrowLeftCircleIcon style={{ height: '24px', width: '24px' }} />
 };
 

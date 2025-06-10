@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react-webpack5';
-import Avatar, { AvatarProps } from './Avatar';
+import Avatar, { AvatarProps } from '../components/Avatar';
 import PeteImg from '../../public/images/pete.jpg';
 
 export default {

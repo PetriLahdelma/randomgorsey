@@ -1,4 +1,5 @@
-@import "./variants.css";
+@import url("./variables.css");
+
 /* App.module.css */
 .app {
   display: flex;
