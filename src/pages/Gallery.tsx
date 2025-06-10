@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { XMarkIcon, ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 import styles from './Gallery.module.css';
 import Spinner from '../components/Spinner';
+import galleryImages from '../data/galleryImages';
 
 type GalleryProps = {
   onOverlayStateChange?: (state: boolean) => void;
@@ -12,27 +13,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [loading, setLoading] = React.useState(true);
 
-  const images = useMemo(
-    () => [
-      { src: '/images/clipart.jpg', caption: 'Clipart, Helsinki' },
-      { src: '/images/ride.jpg', caption: 'Ride in Birgit, Berlin' },
-      { src: '/images/disco.jpg', caption: 'Disco balls in Birgit, Berlin' },
-      { src: '/images/xberg.jpg', caption: 'Xberg Acid, Berlin' },
-      { src: '/images/gordon.jpg', caption: 'Random Illustration, Helsinki' },
-      { src: '/images/sunglasses.jpg', caption: 'Posing in sunglasses, Helsinki' },
-      { src: '/images/so_long_spectrum.jpg', caption: 'Cover process ideation, Helsinki' },
-      { src: '/images/ompputalo.jpg', caption: 'Ompputalo in Lapinlahti, Helsinki' },
-      { src: '/images/duduk.jpg', caption: 'Duduk, Helsinki' },
-      { src: '/images/kuvaxtila.jpg', caption: 'Projections in Kuva x Tila, Helsinki' },
-      { src: '/images/laser.jpg', caption: 'Warning, Lasers, Helsinki' },
-      { src: '/images/smokebreak.jpg', caption: 'Smoke break, Helsinki' },
-      { src: '/images/discosea.jpg', caption: 'Disco at sea, Helsinki' },
-      { src: '/images/kaiku.jpg', caption: 'Kaiku, Helsinki' },
-      { src: '/images/freedom.jpg', caption: 'Occupied freedom, Helsinki' },
-      { src: '/images/promo.jpg', caption: 'Shot by a friend, Helsinki' },
-    ],
-    []
-  );
+  const images = useMemo(() => galleryImages, []);
 
   const openOverlay = (index: number) => {
     setOverlayImage(images[index].src);
@@ -97,14 +78,19 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
         ))}
 
         {overlayImage && (
-          <div className={styles['overlay']}>
-            <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
-            <ArrowLeftIcon className={styles['left-icon']} onClick={navigateLeft} />
-            <img src={overlayImage} alt={images[currentIndex].caption} style={{ width: '100%' }} />
+          <div className={styles['overlay']} onClick={closeOverlay}>
+            <XMarkIcon className={styles['close-icon']} onClick={(e) => e.stopPropagation()} />
+            <ArrowLeftIcon className={styles['left-icon']} onClick={(e) => { e.stopPropagation(); navigateLeft(); }} />
+            <img
+              src={overlayImage}
+              alt={images[currentIndex].caption}
+              style={{ width: '100%' }}
+              onClick={(e) => { e.stopPropagation(); navigateRight(); }}
+            />
             <figcaption style={{ textAlign: 'center', marginTop: '0.5rem', fontStyle: 'italic', color: '#fff' }}>
               {images[currentIndex].caption}
             </figcaption>
-            <ArrowRightIcon className={styles['right-icon']} onClick={navigateRight} />
+            <ArrowRightIcon className={styles['right-icon']} onClick={(e) => { e.stopPropagation(); navigateRight(); }} />
           </div>
         )}
       </div>
