@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Listen from './pages/Listen';
 import NotFound from './pages/NotFound';
 import Gallery from './pages/Gallery';
+import CookieConsent from './components/CookieConsent';
 
 import styles from './App.module.css';
 
@@ -31,6 +32,7 @@ const App: React.FC = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
         {!isOverlayActive && <Footer />}
+        <CookieConsent />
       </div>
     </HashRouter>
   );
