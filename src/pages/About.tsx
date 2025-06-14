@@ -17,7 +17,8 @@ const About: React.FC = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
     >
-      {loading && <Spinner />}
+      {loading && <Spinner style={{ borderTopColor: '#FFD600' }} />}
+
       <h2>About</h2>
             <figure>
         <video title="Portrait of Random Gorsey" src="/images/portrait.webm" autoPlay muted loop controls={false} style={{ width: '10vw', borderRadius: '50%' }} onLoadedData={handleContentLoad} />

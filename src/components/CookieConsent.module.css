@@ -3,6 +3,20 @@
 .content {
   font-family: "Europa Regular", sans-serif;
   text-align: center;
+  max-width: 800px;
+}
+
+.content h2 {
+  font-family: "Tschick Bold", sans-serif;
+  color: var(--color-magenta);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.content p {
+  line-height: 1.3;
+  color: var(--color-blue);
+  margin-bottom: 2rem;
 }
 
 .actions {

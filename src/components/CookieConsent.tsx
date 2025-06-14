@@ -61,8 +61,8 @@ const CookieConsent: React.FC = () => {
       <div className={styles.content}>
         <h2>Cookie Notice</h2>
         <p>
-          We use cookies to remember your preferences and to analyze how visitors
-          interact with our site. Accepting all cookies allows us to use Google
+         <strong>We use cookies</strong> to remember your preferences and to analyze how visitors
+          interact with our site.<br />Accepting all cookies allows us to use Google
           Analytics for statistics. You can also choose to keep only the cookies
           necessary for the website to function.
         </p>

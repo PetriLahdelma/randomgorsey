@@ -57,7 +57,7 @@ const Home: React.FC = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
     >
-      {loading && <Spinner />}
+      {loading && <Spinner style={{ borderTopColor: '#FFD600' }} />}
       {!loading && (
         <>
           <h2>Latest Posts</h2>
