@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import styles from './Contact.module.css'; // Import the CSS module for styling
 import ContactButton from '../components/Button';
 import emailjs from '@emailjs/browser';
@@ -88,7 +89,12 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className={styles['contact-container']}>
+    <motion.div
+      className={styles['contact-container']}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
       {loading && <Spinner />}
       {sending && <Spinner />}
       {!loading && !sending && (
@@ -172,7 +178,7 @@ const Contact: React.FC = () => {
           )}
         </>
       )}
-    </div>
+    </motion.div>
   );
 };
 

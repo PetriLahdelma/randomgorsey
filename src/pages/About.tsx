@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import styles from './About.module.css';
 import Spinner from '../components/Spinner';
 
@@ -10,7 +11,12 @@ const About: React.FC = () => {
   };
 
   return (
-    <div className={styles['about-container']}>
+    <motion.div
+      className={styles['about-container']}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
       {loading && <Spinner />}
       <h2>About</h2>
             <figure>
@@ -38,7 +44,7 @@ const About: React.FC = () => {
             </a>
           </li>
           </ul>
-    </div>
+    </motion.div>
   );
 };
 

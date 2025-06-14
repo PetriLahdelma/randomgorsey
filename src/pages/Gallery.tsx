@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { XMarkIcon, ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Gallery.module.css';
 import Spinner from '../components/Spinner';
 import galleryImages from '../data/galleryImages';
@@ -58,7 +59,12 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
   };
 
   return (
-    <div className={styles['gallery-container']}>
+    <motion.div
+      className={styles['gallery-container']}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
       {loading && <Spinner />}
       <div className={styles['gallery-content']}>
         <h2>Gallery</h2>
@@ -78,8 +84,16 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
           </div>
         ))}
 
+        <AnimatePresence>
         {overlayImage && (
-          <div className={styles['overlay']} onClick={closeOverlay}>
+          <motion.div
+            className={styles['overlay']}
+            onClick={closeOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
             <ArrowLeftIcon className={styles['left-icon']} onClick={(e) => { e.stopPropagation(); navigateLeft(); }} />
             <img
@@ -92,10 +106,11 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
               {images[currentIndex].caption}
             </figcaption>
             <ArrowRightIcon className={styles['right-icon']} onClick={(e) => { e.stopPropagation(); navigateRight(); }} />
-          </div>
+          </motion.div>
         )}
+        </AnimatePresence>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

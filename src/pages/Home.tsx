@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import styles from './Home.module.css';
 import Spinner from '../components/Spinner';
 import Button from '../components/Button';
@@ -50,7 +51,12 @@ const Home: React.FC = () => {
   }, [autoLoads]);
 
   return (
-    <div className={styles['home-container']}>
+    <motion.div
+      className={styles['home-container']}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
       {loading && <Spinner />}
       {!loading && (
         <>
@@ -72,7 +78,7 @@ const Home: React.FC = () => {
           </Button>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
