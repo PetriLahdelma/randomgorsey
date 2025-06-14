@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import styles from './NotFound.module.css';
 import Spinner from '../components/Spinner';
  
@@ -12,7 +13,12 @@ const NotFound: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles['notfound-container']}>
+    <motion.div
+      className={styles['notfound-container']}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
       {/* <video className={styles['background-video']} autoPlay muted loop>
       <source src="/images/butterflies.webm" type="video/webm" />
       Your browser does not support the video tag.
@@ -20,7 +26,7 @@ const NotFound: React.FC = () => {
       {loading && <Spinner />}
       {!loading && <h2 data-testid="not-found-title">404 - Page Not Found</h2>}
       {!loading && <p className={styles['notfound-description']}>Sorry, the page you're looking for does not exist.</p>}
-    </div>
+    </motion.div>
   );
 };
 
