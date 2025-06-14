@@ -38,8 +38,7 @@ const Contact: React.FC = () => {
       },
       '-BdVWUzt4g0H07ZtM'
     )
-    .then((response) => {
-      console.log('Email sent successfully!', response);
+    .then(() => {
       setIsModalOpen(true);
     })
     .catch((error) => {

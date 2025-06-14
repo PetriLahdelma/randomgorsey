@@ -60,7 +60,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
   return (
     <div className={styles['gallery-container']}>
       {loading && <Spinner />}
-      <div className={styles['gallery-content']} onLoad={handleContentLoad}>
+      <div className={styles['gallery-content']}>
         <h2>Gallery</h2>
         {images.map((image, index) => (
           <div key={index}>
@@ -70,6 +70,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
               alt={image.caption}
               style={{ width: '100%', borderRadius: '8px', marginTop: '1rem' }}
               onClick={() => openOverlay(index)}
+              onLoad={index === 0 ? handleContentLoad : undefined}
             />
             <figcaption style={{ textAlign: 'center', marginTop: '0.5rem', fontStyle: 'italic', color: '#fff' }}>
               {image.caption}
