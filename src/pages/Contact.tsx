@@ -7,6 +7,7 @@ import TextArea from '../components/TextArea';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import Spinner from '../components/Spinner';
 import { contactFormSchema } from '../utils/validation';
+import Button from '../components/Button';
 
 const Contact: React.FC = () => {
   const [message, setMessage] = useState('');
@@ -22,11 +23,6 @@ const Contact: React.FC = () => {
     const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
-
-  // Move these to environment variables for security
-  const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || '';
-  const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || '';
-  const EMAILJS_USER_ID = process.env.REACT_APP_EMAILJS_USER_ID || '';
 
   const handleSend = () => {
     console.log('handleSend called', { name, email, subject, message });
@@ -61,13 +57,14 @@ const Contact: React.FC = () => {
       },
       '-BdVWUzt4g0H07ZtM'
     )
-    .then(() => {
-      setIsModalOpen(true);
-    })
-    .catch((error) => {
-      setSending(false);
-      console.error('Error sending email:', error);
-    });
+      .then(() => {
+        setIsModalOpen(true);
+        setSending(false);
+      })
+      .catch((error) => {
+        setSending(false);
+        console.error('Error sending email:', error);
+      });
   };
 
   const handleInputChange = (field: 'name' | 'email' | 'subject' | 'message', value: string) => {
@@ -157,9 +154,20 @@ const Contact: React.FC = () => {
           {isModalOpen && (
             <div className={styles['modal']}>
               <p>Message sent successfully!</p>
-              <button onClick={() => setIsModalOpen(false)} className={styles['modal-close-button']}>
+              <Button
+                onClick={() => {
+                  setIsModalOpen(false);
+                  // Reset form fields and errors after closing modal
+                  setName('');
+                  setEmail('');
+                  setSubject('');
+                  setMessage('');
+                  setFormErrors({});
+                }}
+                className={styles['modal-close-button']}
+              >
                 Close
-              </button>
+              </Button>
             </div>
           )}
         </>

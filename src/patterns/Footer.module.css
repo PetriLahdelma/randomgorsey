@@ -17,6 +17,7 @@ footer {
   gap: 1.2rem;
   margin-top: 1rem;
   vertical-align: middle;
+  justify-content: center;
 }
 
 .footer-copyright {
