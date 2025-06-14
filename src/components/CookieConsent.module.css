@@ -1,0 +1,13 @@
+@import url("../variables.css");
+
+.content {
+  font-family: "Europa Regular", sans-serif;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
