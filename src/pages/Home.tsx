@@ -1,15 +1,17 @@
 import React from 'react';
 import styles from './Home.module.css';
 import Spinner from '../components/Spinner';
+import Button from '../components/Button';
 import PostCard, { Post } from '../components/PostCard';
-import FirstPost from '../posts/FirstPost';
-import StudioSnapshot from '../posts/StudioSnapshot';
-import LiveClip from '../posts/LiveClip';
-import RandomLink from '../posts/RandomLink';
 
-const posts: Post[] = [FirstPost, StudioSnapshot, LiveClip, RandomLink].sort(
-  (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-);
+// Dynamically import all posts from the posts folder using require.context
+// @ts-ignore
+const postContext = require.context('../posts', false, /\.tsx$/);
+
+const posts: Post[] = postContext
+  .keys()
+  .map((key: string) => postContext(key).default)
+  .sort((a: Post, b: Post) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
 
 const Home: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
@@ -57,17 +59,17 @@ const Home: React.FC = () => {
             <PostCard key={post.id} post={post} />
           ))}
           {visibleCount < posts.length && (
-            <button onClick={() => setVisibleCount((v) => Math.min(v + 1, posts.length))} className={styles['load-more']}>
+            <Button onClick={() => setVisibleCount((v) => Math.min(v + 1, posts.length))} className={styles['load-more']}>
               Load more content
-            </button>
+            </Button>
           )}
         </>
       )}
       {!loading && (
-        <div className={styles['back-to-top']} style={{ textAlign: 'center', marginTop: '2rem' }}>
-          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <div className={styles['back-to-top']}>
+          <Button className={styles['back-to-top-button']} variant="secondary" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             Back to top
-          </button>
+          </Button>
         </div>
       )}
     </div>

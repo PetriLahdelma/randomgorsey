@@ -46,3 +46,31 @@
     margin-right: 2rem;
   }
 }
+
+.back-to-top {
+  bottom: 2rem;
+  right: 2rem;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.back-to-top-button {
+  color: var(--color-white);
+  border: 1px solid var(--color-white);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.input-error {
+  color: #ff4d4f;
+  font-size: 0.95em;
+  margin-top: 0.25rem;
+  background: rgb(255 77 79 / 8%);
+  border-left: 3px solid #ff4d4f;
+  padding: 0.25rem 0.75rem;
+  border-radius: 2px;
+  font-family: "Europa Regular", sans-serif;
+  letter-spacing: 0.01em;
+}

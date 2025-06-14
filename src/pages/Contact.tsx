@@ -6,6 +6,7 @@ import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import Spinner from '../components/Spinner';
+import { contactFormSchema } from '../utils/validation';
 
 const Contact: React.FC = () => {
   const [message, setMessage] = useState('');
@@ -14,19 +15,41 @@ const Contact: React.FC = () => {
   const [subject, setSubject] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = React.useState(true);
+  const [sending, setSending] = useState(false);
+  const [formErrors, setFormErrors] = useState<{ name?: string; email?: string; subject?: string; message?: string }>({});
 
   React.useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 
+  // Move these to environment variables for security
+  const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || '';
+  const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || '';
+  const EMAILJS_USER_ID = process.env.REACT_APP_EMAILJS_USER_ID || '';
+
   const handleSend = () => {
+    console.log('handleSend called', { name, email, subject, message });
+    // Validate with zod
+    const result = contactFormSchema.safeParse({ name, email, subject, message });
+    console.log('zod validation result', result);
+    if (!result.success) {
+      // Map zod errors to formErrors
+      const errors: { name?: string; email?: string; subject?: string; message?: string } = {};
+      result.error.errors.forEach((err) => {
+        if (err.path[0]) errors[err.path[0] as keyof typeof errors] = err.message;
+      });
+      setFormErrors(errors);
+      console.log('Validation failed, errors:', errors);
+      return;
+    }
+    setFormErrors({});
     const honeypotField = document.querySelector('input[name=honeypot]') as HTMLInputElement;
     if (honeypotField && honeypotField.value) {
       console.error('Spam detected: Honeypot field is filled.');
       return;
     }
-
+    setSending(true);
     emailjs.send(
       'service_kua7hu3',
       'template_wr7fpxc',
@@ -42,14 +65,36 @@ const Contact: React.FC = () => {
       setIsModalOpen(true);
     })
     .catch((error) => {
+      setSending(false);
       console.error('Error sending email:', error);
     });
+  };
+
+  const handleInputChange = (field: 'name' | 'email' | 'subject' | 'message', value: string) => {
+    if (field === 'name') setName(value);
+    if (field === 'email') setEmail(value);
+    if (field === 'subject') setSubject(value);
+    if (field === 'message') setMessage(value);
+    // Remove error for this field if value is now valid
+    const result = contactFormSchema.safeParse({
+      name: field === 'name' ? value : name,
+      email: field === 'email' ? value : email,
+      subject: field === 'subject' ? value : subject,
+      message: field === 'message' ? value : message,
+    });
+    if (result.success) {
+      setFormErrors((prev) => ({ ...prev, [field]: undefined }));
+    } else {
+      const errorForField = result.error.errors.find((err) => err.path[0] === field);
+      setFormErrors((prev) => ({ ...prev, [field]: errorForField ? errorForField.message : undefined }));
+    }
   };
 
   return (
     <div className={styles['contact-container']}>
       {loading && <Spinner />}
-      {!loading && (
+      {sending && <Spinner />}
+      {!loading && !sending && (
         <>
           <h2>Contact</h2>
           <div className={styles['contact-row']}>
@@ -57,20 +102,22 @@ const Contact: React.FC = () => {
               <Input
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => handleInputChange('name', e.target.value)}
                 placeholder="Your Name"
                 label="Your Name"
                 className={styles['contact-input']}
+                error={formErrors.name}
               />
             </div>
             <div>
               <Input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => handleInputChange('email', e.target.value)}
                 placeholder="Your Email"
                 label="Email"
                 className={styles['contact-input']}
+                error={formErrors.email}
               />
             </div>
           </div>
@@ -78,17 +125,19 @@ const Contact: React.FC = () => {
           <Input
             type="text"
             value={subject}
-            onChange={(e) => setSubject(e.target.value)}
+            onChange={(e) => handleInputChange('subject', e.target.value)}
             placeholder="Subject"
             label="Subject"
             className={styles['contact-input']}
+            error={formErrors.subject}
           /></div>
           <TextArea 
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => handleInputChange('message', e.target.value)}
             placeholder="Write your message here..."
             label="Message"
             className={styles['contact-textarea']}
+            error={formErrors.message}
           />
           <input
             type="text"

@@ -1,4 +1,5 @@
 import React from 'react';
+import { ExclamationCircleIcon } from '@heroicons/react/24/solid';
 import styles from './TextArea.module.css';
 
 type TextAreaProps = {
@@ -9,22 +10,29 @@ type TextAreaProps = {
   className?: string;
   rows?: number;
   cols?: number;
+  error?: string;
 };
 
-const TextArea: React.FC<TextAreaProps> = ({ value, onChange, placeholder, label, className, rows, cols }) => {
-  return (
-    <div className={styles['text-area-container']}>
-      {label && <label className={styles.label}>{label}</label>}
-      <textarea
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className={`${styles['text-area']} ${className}`}
-        rows={rows}
-        cols={cols}
-      ></textarea>
-    </div>
-  );
-};
+const TextArea: React.FC<TextAreaProps> = ({ value, onChange, placeholder, label, className, rows, cols, error }) => (
+  <div style={{ marginBottom: error ? '1.5rem' : '1rem' }} className={styles['text-area-container']}>
+    {label && <label className={styles.label}>{label}</label>}
+    <textarea
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      className={`${styles['text-area']} ${className}`}
+      rows={rows}
+      cols={cols}
+    ></textarea>
+    {error && (
+      <div className={styles['input-error']}>
+        <ExclamationCircleIcon style={{ width: 18, height: 18, color: '#ff4d4f', marginRight: 6, verticalAlign: 'middle', display: 'inline-block' }} />
+        <span role="alert" style={{ color: 'red', fontSize: '0.8em' }}>
+          {error}
+        </span>
+      </div>
+    )}
+  </div>
+);
 
 export default TextArea;
