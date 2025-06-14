@@ -7,7 +7,7 @@ import Header from './patterns/Header';
 import Home from './pages/Home';
 import Listen from './pages/Listen';
 import NotFound from './pages/NotFound';
-import Work from './pages/Gallery';
+import Gallery from './pages/Gallery';
 
 import styles from './App.module.css';
 
@@ -27,7 +27,7 @@ const App: React.FC = () => {
           <Route path="/listen" element={<Listen />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/gallery" element={<Work onOverlayStateChange={handleOverlayState} />} />
+          <Route path="/gallery" element={<Gallery onOverlayStateChange={handleOverlayState} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {!isOverlayActive && <Footer />}

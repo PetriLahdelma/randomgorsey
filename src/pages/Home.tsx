@@ -26,9 +26,7 @@ const Home: React.FC = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          console.log('Entry:', entry);
           if (entry.isIntersecting && autoLoads < 2) {
-            console.log('Autoload triggered');
             setVisibleCount((v) => Math.min(v + 1, posts.length));
             setAutoLoads((l) => l + 1);
           }
@@ -39,13 +37,11 @@ const Home: React.FC = () => {
 
     const current = sentinelRef.current;
     if (current) {
-      console.log('Sentinel observed');
       observer.observe(current);
     }
 
     return () => {
       if (current) {
-        console.log('Sentinel unobserved');
         observer.unobserve(current);
       }
     };
