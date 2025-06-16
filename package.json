@@ -17,6 +17,8 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.5",
     "ajv": "^8.12.0",
+    "axios": "^1.10.0",
+    "cheerio": "^1.1.0",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^12.18.1",
     "keyv": "^5.3.3",
@@ -41,7 +43,8 @@
     "eject": "react-scripts eject",
     "lint": "stylelint 'src/**/*.css' --fix",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "generate-meta": "node scripts/generate-meta.js"
   },
   "eslintConfig": {
     "extends": [

@@ -1,0 +1,51 @@
+# LLM.txt - Website Content Structure
+# Generated: 2025-06-16T21:18:45.098Z
+# Source: https://randomgorsey.com/sitemap.xml
+# Total Pages: 5
+
+## Site Metadata
+Site URL: https://randomgorsey.com
+Extraction Date: 2025-06-16
+Total Pages Processed: 5
+
+---
+
+### Page: https://randomgorsey.com/
+Title: Random Gorsey
+Meta Description: Random Gorsey words and music.
+Language: en
+Canonical URL: https://randomgorsey.com
+
+## Headings Structure:
+No headings found
+
+## Main Content:
+You need to enable JavaScript to run this app.
+
+---
+
+### Page: https://randomgorsey.com/about
+Could not fetch page.
+Error: Fetch error
+
+---
+
+### Page: https://randomgorsey.com/contact
+Could not fetch page.
+Error: Fetch error
+
+---
+
+### Page: https://randomgorsey.com/gallery
+Could not fetch page.
+Error: Fetch error
+
+---
+
+### Page: https://randomgorsey.com/listen
+Could not fetch page.
+Error: Fetch error
+
+---
+# Success Rate: 20.0%
+# Failed Pages: 4
