@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import styles from './PostCard.module.css';
 import Avatar from './Avatar';
 import SocialShare from './SocialShare';
@@ -26,6 +27,14 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       className={styles.card}
       style={{ backgroundColor: post.avatarColor || '#fff', color: '#000' }}
     >
+      <Helmet>
+        <title>{post.title} | Random Gorsey</title>
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.body.slice(0, 120) + (post.body.length > 120 ? '...' : '')} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.origin + '/posts/' + post.id : ''} />
+        <meta property="og:image" content={post.media && post.contentType === 'image' ? post.media : (typeof window !== 'undefined' ? window.location.origin + '/images/og.jpg' : 'https://randomgorsey.com/images/og.jpg')} />
+      </Helmet>
       <header className={styles.header}>
         <div className={styles['header-left']}>
           <h3 className={styles.title}>{post.title}</h3>

@@ -32,6 +32,11 @@ const SocialShare: React.FC<SocialShareProps> = ({ url, title, text }) => {
       url: `https://wa.me/?text=${shareText}%20${shareUrl}`,
       network: 'whatsapp',
     },
+    {
+      name: 'Telegram',
+      url: `https://t.me/share/url?url=${shareUrl}&text=${shareText}`,
+      network: 'telegram',
+    },
   ];
   return (
     <div className={styles.socialShare}>
