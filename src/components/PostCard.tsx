@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './PostCard.module.css';
 import Avatar from './Avatar';
+import SocialShare from './SocialShare';
 export type Post = {
   id: number;
   title: string;
@@ -43,11 +44,20 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       <div className={styles.body}>
         {expanded ? post.body : `${post.body.slice(0, 200)}${hasLongContent ? '...' : ''}`}
       </div>
-      {hasLongContent && (
-        <button onClick={toggleExpanded} className={styles['read-more']}>
-          {expanded ? 'Show Less' : 'Read More'}
-        </button>
-      )}
+      <div className={styles['post-footer-row']}>
+        {hasLongContent && (
+          <button onClick={toggleExpanded} className={styles['read-more']}>
+            {expanded ? 'Show Less' : 'Read More'}
+          </button>
+        )}
+        <div className={styles['post-footer-share']}>
+          <SocialShare
+            url={typeof window !== 'undefined' ? window.location.origin + '/posts/' + post.id : ''}
+            title={post.title}
+            text={post.body.slice(0, 120) + (post.body.length > 120 ? '...' : '')}
+          />
+        </div>
+      </div>
       {post.media && post.contentType === 'image' && (
         <img src={post.media} alt={post.title} className={styles.media} />
       )}

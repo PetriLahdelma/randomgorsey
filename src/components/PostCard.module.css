@@ -32,6 +32,8 @@
   height: 20px;
   border-radius: 50%;
   background: var(--color-black);
+
+  /* override any imported avatar styles */
 }
 
 .avatar-author {
@@ -59,15 +61,30 @@
 }
 
 .read-more {
+  font-family: "Europa Regular", sans-serif;
+  font-size: 1rem;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
   text-decoration: underline;
+  font-weight: bold;
+  margin-right: 0.5rem;
 }
 
 .media {
   width: 100%;
   margin-top: 0.5rem;
   border-radius: 4px;
+}
+
+.post-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.post-footer-share {
+  margin-left: auto;
 }

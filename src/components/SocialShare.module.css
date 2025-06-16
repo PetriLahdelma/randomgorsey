@@ -1,0 +1,40 @@
+.socialShare {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.icon {
+  font-size: 1.5rem;
+  transition: transform 0.15s;
+  text-decoration: none;
+  color: inherit;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
+
+.icon :global(svg) {
+  background: none;
+  border-radius: 0;
+  fill: currentcolor;
+  transition: background 0.2s;
+  box-shadow: none;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
