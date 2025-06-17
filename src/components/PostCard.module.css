@@ -37,6 +37,7 @@
 }
 
 .avatar-author {
+  font-size: 1.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -51,18 +52,20 @@
 }
 
 .time {
-  font-size: 1rem;
+  font-size: 1.1rem;
   text-align: left;
 }
 
 .body {
+  font-size: 1.1rem;
+  font-family: "Europa Regular", sans-serif;
   margin-bottom: 0.5rem;
   margin-top: 1rem;
 }
 
 .read-more {
   font-family: "Europa Regular", sans-serif;
-  font-size: 1rem;
+  font-size: 1.1rem;
   background: none;
   border: none;
   cursor: pointer;

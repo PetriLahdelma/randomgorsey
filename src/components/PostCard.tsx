@@ -42,6 +42,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
             <div className={styles['avatar-author']}>
               <Avatar
               avatarImage="/images/pete.jpg"
+              size='M'
             />
             <span className={styles.author}>{post.author}</span>
           </div>
