@@ -3,7 +3,7 @@
 .content {
   font-family: "Europa Regular", sans-serif;
   text-align: center;
-  max-width: 800px;
+  max-width: 50rem;
 }
 
 .content h2 {
@@ -24,4 +24,17 @@
   justify-content: flex-end;
   gap: 1rem;
   margin-top: 1rem;
+}
+
+@media (width <= 800px) {
+  .content {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    max-width: 80%;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: center;
+  }
 }
