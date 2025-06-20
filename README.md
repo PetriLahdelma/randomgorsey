@@ -1,46 +1,43 @@
-# Getting Started with Create React App
+# Random Gorsey Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains the source code for [randomgorsey.com](https://randomgorsey.com), a small React + TypeScript site. The project was originally bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and uses a couple of extra tools for linting and deploying to GitHub Pages.
 
-## Available Scripts
+## Requirements
 
-In the project directory, you can run:
+- Node.js 18 or newer
+- npm (comes with Node) to manage packages
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Install the dependencies and start a local development server:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+npm install
+npm start
+```
 
-### `npm test`
+The site will be available at [http://localhost:3000](http://localhost:3000). Any saved changes will hot reload in the browser.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Useful Scripts
 
-### `npm run build`
+- **`npm test`** – run unit tests using React Testing Library.
+- **`npm run lint`** – format and lint the CSS files with stylelint.
+- **`npm run storybook`** – launch the component Storybook on port 6006.
+- **`npm run build-storybook`** – generate the static Storybook site.
+- **`npm run build`** – create an optimized production build in the `build` directory.
+- **`npm run generate-meta`** – update `public/sitemap.xml` and `LLMs.txt` based on the current routes.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Deployment
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Deployment is handled through GitHub Pages. Two commands are available:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm run predeploy   # builds the site and copies CNAME into the build folder
+npm run deploy      # publishes the build folder to the gh-pages branch
+```
 
-### `npm run eject`
+After a successful deploy, the site will be served from the `gh-pages` branch using the domain specified in `CNAME`.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Further Reading
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+For more details on how Create React App works under the hood, see the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started). If you are new to React itself, the [React documentation](https://reactjs.org/) is a great starting point.
