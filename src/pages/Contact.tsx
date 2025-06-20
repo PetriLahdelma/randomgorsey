@@ -26,10 +26,8 @@ const Contact: React.FC = () => {
   }, []);
 
   const handleSend = () => {
-    console.log('handleSend called', { name, email, subject, message });
     // Validate with zod
     const result = contactFormSchema.safeParse({ name, email, subject, message });
-    console.log('zod validation result', result);
     if (!result.success) {
       // Map zod errors to formErrors
       const errors: { name?: string; email?: string; subject?: string; message?: string } = {};
@@ -37,13 +35,12 @@ const Contact: React.FC = () => {
         if (err.path[0]) errors[err.path[0] as keyof typeof errors] = err.message;
       });
       setFormErrors(errors);
-      console.log('Validation failed, errors:', errors);
       return;
     }
     setFormErrors({});
     const honeypotField = document.querySelector('input[name=honeypot]') as HTMLInputElement;
     if (honeypotField && honeypotField.value) {
-      console.error('Spam detected: Honeypot field is filled.');
+      // Optionally show a user-friendly error or silently fail for spam
       return;
     }
     setSending(true);
@@ -62,9 +59,9 @@ const Contact: React.FC = () => {
         setIsModalOpen(true);
         setSending(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setSending(false);
-        console.error('Error sending email:', error);
+        setFormErrors((prev) => ({ ...prev, general: 'Failed to send message. Please try again later.' }));
       });
   };
 

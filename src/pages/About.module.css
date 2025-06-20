@@ -20,10 +20,6 @@
   margin-block-start: 1.5rem;
 }
 
-.about-container :nth-child(2) {
-  margin-block-end: 1.5rem;
-}
-
 .about-container figure {
   margin-block-end: 2rem;
 }
@@ -46,13 +42,14 @@ li {
 
 .card {
   display: flex;
+  vertical-align: middle;
   align-items: center;
   gap: 1rem;
   padding: 1rem;
   border: 1px solid var(--color-gray);
   border-radius: 8px;
   background-color: var(--color-light-bg);
-  margin-bottom: 1rem;
+  margin-block-end: 1rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -69,8 +66,13 @@ li {
 
 .card a {
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   color: var(--color-blue-light);
   font-weight: bold;
+  height: 100%;
 }
 
 .card a:hover {
