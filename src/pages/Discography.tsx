@@ -4,8 +4,6 @@ import styles from './Discography.module.css';
 import SoLong from '../images/solongspectrum.jpg';
 import Customer from '../images/CustomerIsAlwaysRight.jpg';
 import PageMeta from '../components/PageMeta';
-import Button from '../components/Button';
-import { Link } from 'react-router-dom';
 
 interface Release {
   title: string;
