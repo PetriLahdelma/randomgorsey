@@ -117,7 +117,7 @@ const Contact: React.FC = () => {
                 type="email"
                 value={email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
-                placeholder="Your Email"
+                placeholder="@ Your Email"
                 label="Email"
                 className={styles['contact-input']}
                 error={formErrors.email}

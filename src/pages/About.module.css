@@ -17,7 +17,15 @@
   font-family: "Tschick Bold", sans-serif;
   color: var(--color-yellow);
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-block-start: 1.5rem;
+}
+
+.about-container :nth-child(2) {
+  margin-block-end: 1.5rem;
+}
+
+.about-container figure {
+  margin-block-end: 2rem;
 }
 
 ul {

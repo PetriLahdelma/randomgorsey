@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './Discography.module.css';
+import SoLong from '../images/solongspectrum.jpg';
+import Customer from '../images/CustomerIsAlwaysRight.jpg';
 
 interface Release {
   title: string;
@@ -33,7 +35,7 @@ const Discography: React.FC = () => (
       {releases.map((release) => (
         <div key={release.catalog} className={styles.release}>
           <img
-            src="https://via.placeholder.com/200"
+            src={release.title === 'So Long Spectrum' ? SoLong : Customer}
             alt={release.title}
             width={200}
             height={200}

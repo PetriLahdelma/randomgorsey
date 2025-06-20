@@ -4,7 +4,7 @@
   padding: 2rem;
   font-family: "Europa Regular", sans-serif;
   background-color: var(--color-orange);
-  color: var(--color-blue);
+  color: var(--color-magenta);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -13,7 +13,7 @@
 .discography-container h2 {
   font-family: "Tschick Bold", sans-serif;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-block-end: 2.5rem;
 }
 
 .release-grid {
