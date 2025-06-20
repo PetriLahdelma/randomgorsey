@@ -9,6 +9,7 @@ describe('Header Pattern', () => {
     expect(screen.getByText('Listen')).toBeInTheDocument();
     expect(screen.getByText('About')).toBeInTheDocument();
     expect(screen.getByText('Contact')).toBeInTheDocument();
+    expect(screen.getByText('Discography')).toBeInTheDocument();
     expect(screen.getByText('Gallery')).toBeInTheDocument();
   });
 });

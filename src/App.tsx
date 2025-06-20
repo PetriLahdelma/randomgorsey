@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Listen from './pages/Listen';
 import NotFound from './pages/NotFound';
 import Gallery from './pages/Gallery';
+import Discography from './pages/Discography';
 import CookieConsent from './components/CookieConsent';
 
 import styles from './App.module.css';
@@ -28,6 +29,7 @@ const App: React.FC = () => {
           <Route path="/listen" element={<Listen />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/discography" element={<Discography />} />
           <Route path="/gallery" element={<Gallery onOverlayStateChange={handleOverlayState} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

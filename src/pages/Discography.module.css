@@ -1,0 +1,42 @@
+@import url("../variables.css");
+
+.discography-container {
+  padding: 2rem;
+  font-family: "Europa Regular", sans-serif;
+  background-color: var(--color-orange);
+  color: var(--color-blue);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.discography-container h2 {
+  font-family: "Tschick Bold", sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.release-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.release img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.release h3 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+@media (width <= 800px) {
+  .discography-container {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}
