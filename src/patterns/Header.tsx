@@ -6,8 +6,8 @@ const Header: React.FC = () => {
   return (
     <header>
     <a href="/">
-<img src="/images/logo.jpg" alt="Random Gorsey Website" title="Back to the Homepage"/>    </a>
-      <nav>
+<img src="/images/logo.jpg" alt="Random Gorsey logo" title="Back to the Homepage"/>    </a>
+      <nav aria-label="Main navigation">
         <ul>
           <li><a href="#/" title="Go to Home page">Home</a></li>
           <li><a href="#/listen" title="Go to Listen page">Listen</a></li>

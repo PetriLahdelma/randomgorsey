@@ -62,7 +62,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
 
   return (
     <>
-      <PageMeta title="Gallery | Random Gorsey" description="Browse the Random Gorsey photo gallery." path="/gallery" />
+      <PageMeta title="Gallery | Random Gorsey" description="Photo gallery featuring Random Gorsey visuals." path="/gallery" />
       <motion.div
       className={styles['gallery-container']}
       initial={{ opacity: 0, y: 20 }}
@@ -78,6 +78,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
               loading="lazy"
               src={image.src}
               alt={image.caption}
+              title={image.caption}
               style={{ width: '100%', borderRadius: '8px', marginTop: '1rem' }}
               onClick={() => openOverlay(index)}
               onLoad={index === 0 ? handleContentLoad : undefined}
@@ -97,15 +98,16 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
             transition={{ duration: 0.3 }}
           >
             <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
-            <ArrowLeftIcon className={styles['left-icon']} onClick={(e) => { e.stopPropagation(); navigateLeft(); }} />
+            <ArrowLeftIcon aria-label="Previous image" className={styles['left-icon']} onClick={(e) => { e.stopPropagation(); navigateLeft(); }} />
             <img
               src={overlayImage}
               alt={images[currentIndex].caption}
+              title={images[currentIndex].caption}
               style={{ width: '100%' }}
               onClick={(e) => { e.stopPropagation(); navigateRight(); }}
             />
             <Caption>{images[currentIndex].caption}</Caption>
-            <ArrowRightIcon className={styles['right-icon']} onClick={(e) => { e.stopPropagation(); navigateRight(); }} />
+            <ArrowRightIcon aria-label="Next image" className={styles['right-icon']} onClick={(e) => { e.stopPropagation(); navigateRight(); }} />
           </motion.div>
         )}
         </AnimatePresence>

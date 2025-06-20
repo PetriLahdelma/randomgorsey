@@ -69,7 +69,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         </div>
       </div>
       {post.media && post.contentType === 'image' && (
-        <img src={post.media} alt={post.title} className={styles.media} />
+        <img src={post.media} alt={post.title} title={post.title} className={styles.media} />
       )}
       {post.media && post.contentType === 'video' && (
         <video src={post.media} controls className={styles.media} />

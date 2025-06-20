@@ -1,21 +1,20 @@
 import React from 'react';
 import { render, screen, act } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import Home from '../Home';
+import Listen from '../Listen';
 
-describe('Home Page', () => {
-  it('renders latest posts heading', () => {
+describe('Listen Page', () => {
+  it('renders heading', () => {
     jest.useFakeTimers();
     render(
-      <MemoryRouter>
-        <Home />
-      </MemoryRouter>
+      <HelmetProvider>
+        <Listen />
+      </HelmetProvider>
     );
     act(() => {
       jest.runAllTimers();
     });
-    expect(screen.getByRole('heading', { name: /Latest Posts/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Listen to Music/i })).toBeInTheDocument();
     jest.useRealTimers();
   });
 
@@ -24,15 +23,13 @@ describe('Home Page', () => {
     jest.useFakeTimers();
     render(
       <HelmetProvider context={helmetContext}>
-        <MemoryRouter>
-          <Home />
-        </MemoryRouter>
+        <Listen />
       </HelmetProvider>
     );
     act(() => {
       jest.runAllTimers();
     });
-    expect(helmetContext.helmet.title.toString()).toContain('Random Gorsey');
+    expect(helmetContext.helmet.title.toString()).toContain('Listen');
     jest.useRealTimers();
   });
 });

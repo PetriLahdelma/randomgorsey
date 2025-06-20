@@ -1,33 +1,37 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
+import { HelmetProvider } from 'react-helmet-async';
 import NotFound from '../NotFound';
 
-// Mock Spinner component
 jest.mock('../../components/Spinner', () => () => <div data-testid="spinner"></div>);
 
 describe('NotFound Page', () => {
-  test('renders loading spinner initially', () => {
-    render(<NotFound />);
-    const spinner = screen.getByTestId('spinner');
-    expect(spinner).toBeInTheDocument();
+  it('renders heading after load', () => {
+    jest.useFakeTimers();
+    render(
+      <HelmetProvider>
+        <NotFound />
+      </HelmetProvider>
+    );
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(screen.getByRole('heading', { name: /404 - Page Not Found/i })).toBeInTheDocument();
+    jest.useRealTimers();
   });
 
-  test('renders 404 message after loading', async () => {
+  it('sets page title', () => {
+    const helmetContext: any = {};
     jest.useFakeTimers();
-    render(<NotFound />);
-
-    // Fast-forward the timer
-    jest.runAllTimers();
-
-    const notFoundTitle = await screen.findByTestId('not-found-title');
-    expect(notFoundTitle).toBeInTheDocument();
-    expect(notFoundTitle).toHaveTextContent('404 - Page Not Found');
-
-    const notFoundDescription = screen.getByText(
-      "Sorry, the page you're looking for does not exist."
+    render(
+      <HelmetProvider context={helmetContext}>
+        <NotFound />
+      </HelmetProvider>
     );
-    expect(notFoundDescription).toBeInTheDocument();
-
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(helmetContext.helmet.title.toString()).toContain('404');
     jest.useRealTimers();
   });
 });

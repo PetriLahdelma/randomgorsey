@@ -21,6 +21,7 @@ const Avatar: React.FC<AvatarProps> = ({ avatarColor = '#000', avatarImage, init
   return (
     <div
       className={avatarImage ? styles['avatar-image'] : styles.avatar}
+      aria-label="User avatar"
       style={{
         width: dimension,
         height: dimension,

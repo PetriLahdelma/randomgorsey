@@ -18,7 +18,8 @@ const Footer: React.FC = () => {
         >
           <img
             src="/images/bandcamp.svg"
-            alt="Bandcamp"
+            alt="Bandcamp logo"
+            title="Bandcamp"
             style={{ verticalAlign: 'middle', width: '2rem', height: '2rem' }} // Ensure consistent size
           />
         </a>

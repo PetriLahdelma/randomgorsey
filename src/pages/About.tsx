@@ -13,7 +13,7 @@ const About: React.FC = () => {
 
   return (
     <>
-      <PageMeta title="About | Random Gorsey" description="Learn more about Random Gorsey and projects." path="/about" />
+      <PageMeta title="About | Random Gorsey" description="Background, influences and side projects of Random Gorsey." path="/about" />
       <motion.div
       className={styles['about-container']}
       initial={{ opacity: 0, y: 20 }}
@@ -36,13 +36,13 @@ const About: React.FC = () => {
       </p>
         <ul>
           <li className={styles.card} onClick={() => window.open('https://soundcloud.com/petri-lahdelma', '_blank')}>
-            <img src="/images/scportrait.jpg" alt="Petri Lahdelma" onLoad={handleContentLoad} />
+            <img src="/images/scportrait.jpg" alt="Petri Lahdelma portrait" title="Petri Lahdelma" onLoad={handleContentLoad} />
             <a href="https://soundcloud.com/petri-lahdelma" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
               Petri Lahdelma - A raw techno project on Soundcloud.
             </a>
           </li>
           <li className={styles.card} onClick={() => window.open('https://soundcloud.com/dj-pizza-hut', '_blank')}>
-            <img src="/images/scpizza.jpg" alt="Dj Pizza Hut" onLoad={handleContentLoad} />
+            <img src="/images/scpizza.jpg" alt="DJ Pizza Hut" title="DJ Pizza Hut" onLoad={handleContentLoad} />
             <a href="https://soundcloud.com/dj-pizza-hut" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
               Dj Pizza Hut - Honestly, I don't even know, man. Check it out on SC.
             </a>

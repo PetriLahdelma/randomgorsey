@@ -88,7 +88,7 @@ const Contact: React.FC = () => {
 
   return (
     <>
-      <PageMeta title="Contact | Random Gorsey" description="Get in touch with Random Gorsey." path="/contact" />
+      <PageMeta title="Contact | Random Gorsey" description="Send a message to Random Gorsey." path="/contact" />
       <motion.div
       className={styles['contact-container']}
       initial={{ opacity: 0, y: 20 }}
