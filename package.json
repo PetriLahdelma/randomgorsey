@@ -68,7 +68,6 @@
   },
   "devDependencies": {
     "@storybook/addon-docs": "^9.0.4",
-    "@storybook/addon-onboarding": "^9.0.4",
     "@storybook/preset-create-react-app": "^9.0.4",
     "@storybook/react-webpack5": "^9.0.4",
     "@types/react-router-dom": "^5.3.3",
