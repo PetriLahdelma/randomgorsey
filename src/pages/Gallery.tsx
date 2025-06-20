@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Gallery.module.css';
 import Spinner from '../components/Spinner';
 import galleryImages from '../data/galleryImages';
+import Caption from '../components/Caption';
 
 type GalleryProps = {
   onOverlayStateChange?: (state: boolean) => void;
@@ -78,9 +79,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
               onClick={() => openOverlay(index)}
               onLoad={index === 0 ? handleContentLoad : undefined}
             />
-            <figcaption style={{ textAlign: 'center', marginTop: '0.5rem', fontStyle: 'italic', color: '#fff' }}>
-              {image.caption}
-            </figcaption>
+            <Caption>{image.caption}</Caption>
           </div>
         ))}
 
@@ -102,9 +101,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
               style={{ width: '100%' }}
               onClick={(e) => { e.stopPropagation(); navigateRight(); }}
             />
-            <figcaption style={{ textAlign: 'center', marginTop: '0.5rem', fontStyle: 'italic', color: '#fff' }}>
-              {images[currentIndex].caption}
-            </figcaption>
+            <Caption>{images[currentIndex].caption}</Caption>
             <ArrowRightIcon className={styles['right-icon']} onClick={(e) => { e.stopPropagation(); navigateRight(); }} />
           </motion.div>
         )}
