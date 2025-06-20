@@ -5,6 +5,7 @@ import styles from './Gallery.module.css';
 import Spinner from '../components/Spinner';
 import galleryImages from '../data/galleryImages';
 import Caption from '../components/Caption';
+import PageMeta from '../components/PageMeta';
 
 type GalleryProps = {
   onOverlayStateChange?: (state: boolean) => void;
@@ -60,7 +61,9 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
   };
 
   return (
-    <motion.div
+    <>
+      <PageMeta title="Gallery | Random Gorsey" description="Browse the Random Gorsey photo gallery." path="/gallery" />
+      <motion.div
       className={styles['gallery-container']}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -108,6 +111,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
         </AnimatePresence>
       </div>
     </motion.div>
+    </>
   );
 };
 

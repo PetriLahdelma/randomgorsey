@@ -1,4 +1,5 @@
 import React from 'react';
+import PageMeta from '../components/PageMeta';
 import { motion } from 'framer-motion';
 import styles from './Home.module.css';
 import Spinner from '../components/Spinner';
@@ -51,7 +52,9 @@ const Home: React.FC = () => {
   }, [autoLoads]);
 
   return (
-    <motion.div
+    <>
+      <PageMeta title="Random Gorsey" description="Random Gorsey words and music." path="/" />
+      <motion.div
       className={styles['home-container']}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -79,6 +82,7 @@ const Home: React.FC = () => {
         </div>
       )}
     </motion.div>
+    </>
   );
 };
 

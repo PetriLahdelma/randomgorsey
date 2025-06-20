@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './Listen.module.css';
 import Spinner from '../components/Spinner';
+import PageMeta from '../components/PageMeta';
 
 const Listen: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
@@ -11,7 +12,9 @@ const Listen: React.FC = () => {
   };
 
   return (
-    <motion.div
+    <>
+      <PageMeta title="Listen | Random Gorsey" description="Listen to tracks and playlists from Random Gorsey." path="/listen" />
+      <motion.div
       className={styles['listen-container']}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -45,6 +48,7 @@ const Listen: React.FC = () => {
         <a href="https://soundcloud.com/randomgorsey" title="Random Gorsey" target="_blank" rel="noreferrer" style={{ color: '#cccccc', textDecoration: 'none' }}>Random Gorsey</a> · <a href="https://soundcloud.com/randomgorsey/sets/tuunz" title="Tuunz" target="_blank" rel="noreferrer" style={{ color: '#cccccc', textDecoration: 'none' }}>Tuunz</a>
       </div>
     </motion.div>
+    </>
   );
 };
 
