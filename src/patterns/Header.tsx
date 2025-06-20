@@ -13,6 +13,7 @@ const Header: React.FC = () => {
           <li><a href="#/listen" title="Go to Listen page">Listen</a></li>
           <li><a href="#/about" title="Info about RG">About</a></li>
           <li><a href="#/contact" title="Contact RG">Contact</a></li>
+          <li><a href="#/discography" title="View Discography">Discography</a></li>
           <li><a href="#/gallery" title="View Gallery">Gallery</a></li>
         </ul>
       </nav>
