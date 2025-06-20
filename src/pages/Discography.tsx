@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import styles from './Discography.module.css';
 import SoLong from '../images/solongspectrum.jpg';
 import Customer from '../images/CustomerIsAlwaysRight.jpg';
+import PageMeta from '../components/PageMeta';
 
 interface Release {
   title: string;
@@ -24,12 +25,14 @@ const releases: Release[] = [
 ];
 
 const Discography: React.FC = () => (
-  <motion.div
-    className={styles['discography-container']}
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.4 }}
-  >
+  <>
+    <PageMeta title="Discography | Random Gorsey" description="Releases by Random Gorsey." path="/discography" />
+    <motion.div
+      className={styles['discography-container']}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
     <h2>Discography</h2>
     <div className={styles['release-grid']}>
       {releases.map((release) => (
@@ -48,6 +51,7 @@ const Discography: React.FC = () => (
       ))}
     </div>
   </motion.div>
+  </>
 );
 
 export default Discography;

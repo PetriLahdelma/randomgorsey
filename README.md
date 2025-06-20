@@ -26,6 +26,7 @@ The site will be available at [http://localhost:3000](http://localhost:3000). An
 - **`npm run build-storybook`** – generate the static Storybook site.
 - **`npm run build`** – create an optimized production build in the `build` directory.
 - **`npm run generate-meta`** – update `public/sitemap.xml` and `LLMs.txt` based on the current routes.
+- SEO metadata for each page is managed through the `PageMeta` component in `src/components`.
 
 ## Deployment
 

@@ -9,6 +9,7 @@ import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import Spinner from '../components/Spinner';
 import { contactFormSchema } from '../utils/validation';
 import Button from '../components/Button';
+import PageMeta from '../components/PageMeta';
 
 const Contact: React.FC = () => {
   const [message, setMessage] = useState('');
@@ -86,7 +87,9 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <motion.div
+    <>
+      <PageMeta title="Contact | Random Gorsey" description="Get in touch with Random Gorsey." path="/contact" />
+      <motion.div
       className={styles['contact-container']}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -176,6 +179,7 @@ const Contact: React.FC = () => {
         </>
       )}
     </motion.div>
+    </>
   );
 };
 

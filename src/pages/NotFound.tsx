@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './NotFound.module.css';
 import Spinner from '../components/Spinner';
+import PageMeta from '../components/PageMeta';
  
 
 const NotFound: React.FC = () => {
@@ -13,7 +14,9 @@ const NotFound: React.FC = () => {
   }, []);
 
   return (
-    <motion.div
+    <>
+      <PageMeta title="404 - Page Not Found" description="The page you requested could not be found." path="/" />
+      <motion.div
       className={styles['notfound-container']}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -27,6 +30,7 @@ const NotFound: React.FC = () => {
       {!loading && <h2 data-testid="not-found-title">404 - Page Not Found</h2>}
       {!loading && <p className={styles['notfound-description']}>Sorry, the page you're looking for does not exist.</p>}
     </motion.div>
+    </>
   );
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './About.module.css';
 import Spinner from '../components/Spinner';
+import PageMeta from '../components/PageMeta';
 
 const About: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
@@ -11,7 +12,9 @@ const About: React.FC = () => {
   };
 
   return (
-    <motion.div
+    <>
+      <PageMeta title="About | Random Gorsey" description="Learn more about Random Gorsey and projects." path="/about" />
+      <motion.div
       className={styles['about-container']}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -46,6 +49,7 @@ const About: React.FC = () => {
           </li>
           </ul>
     </motion.div>
+    </>
   );
 };
 
