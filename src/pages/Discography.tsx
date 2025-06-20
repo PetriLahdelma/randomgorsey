@@ -4,6 +4,8 @@ import styles from './Discography.module.css';
 import SoLong from '../images/solongspectrum.jpg';
 import Customer from '../images/CustomerIsAlwaysRight.jpg';
 import PageMeta from '../components/PageMeta';
+import Button from '../components/Button';
+import { Link } from 'react-router-dom';
 
 interface Release {
   title: string;
@@ -35,21 +37,37 @@ const Discography: React.FC = () => (
     >
     <h2>Discography</h2>
     <div className={styles['release-grid']}>
-      {releases.map((release) => (
-        <div key={release.catalog} className={styles.release}>
-          <img
-            src={release.title === 'So Long Spectrum' ? SoLong : Customer}
-            alt={release.title}
-            title={release.title}
-            width={200}
-            height={200}
-          />
-          <h3>{release.title}</h3>
-          <p>
-            {release.catalog} · {release.year}
-          </p>
-        </div>
-      ))}
+      {releases.map((release) => {
+        const buyHref =
+          release.title === 'So Long Spectrum'
+            ? 'https://randomgorsey.bandcamp.com/track/so-long-spectrum'
+            : 'https://randomgorsey.bandcamp.com/album/the-customer-is-always-right-ep';
+        return (
+          <div key={release.catalog} className={styles.release}>
+            <a href={buyHref} target="_blank" rel="noopener noreferrer">
+              <img
+                src={release.title === 'So Long Spectrum' ? SoLong : Customer}
+                alt={release.title}
+                title={release.title}
+                width={200}
+                height={200}
+              />
+            </a>
+            <h3>{release.title}</h3>
+            <p>
+              {release.catalog} · {release.year}
+            </p>
+            <a
+              className={styles['buy-link']}
+              href={buyHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              BUY
+            </a>
+          </div>
+        );
+      })}
     </div>
   </motion.div>
   </>
