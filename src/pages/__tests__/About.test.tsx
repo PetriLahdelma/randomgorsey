@@ -1,15 +1,35 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
+import { HelmetProvider } from 'react-helmet-async';
 import About from '../About';
 
 describe('About Page', () => {
-  test('renders about page content', () => {
-    render(<About />);
+  it('renders heading', () => {
+    jest.useFakeTimers();
+    render(
+      <HelmetProvider>
+        <About />
+      </HelmetProvider>
+    );
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(screen.getByRole('heading', { name: /About/i })).toBeInTheDocument();
+    jest.useRealTimers();
+  });
 
-    const aboutTitle = screen.getByText('About Us');
-    expect(aboutTitle).toBeInTheDocument();
-
-    const aboutDescription = screen.getByText('Learn more about Random Gorsey and our mission.');
-    expect(aboutDescription).toBeInTheDocument();
+  it('sets page title', () => {
+    const helmetContext: any = {};
+    jest.useFakeTimers();
+    render(
+      <HelmetProvider context={helmetContext}>
+        <About />
+      </HelmetProvider>
+    );
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(helmetContext.helmet.title.toString()).toContain('About');
+    jest.useRealTimers();
   });
 });

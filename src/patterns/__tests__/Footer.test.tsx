@@ -2,9 +2,9 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Footer from '../Footer';
 
-describe('Footer Pattern', () => {
-  it('renders copyright', () => {
+describe('Footer', () => {
+  it('renders social links', () => {
     render(<Footer />);
-    expect(screen.getByText(/Random Gorsey/i)).toBeInTheDocument();
+    expect(screen.getByTitle('Bandcamp')).toBeInTheDocument();
   });
 });

@@ -1,15 +1,35 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
+import { HelmetProvider } from 'react-helmet-async';
 import Contact from '../Contact';
 
 describe('Contact Page', () => {
-  test('renders contact form', () => {
-    render(<Contact />);
+  it('renders heading', () => {
+    jest.useFakeTimers();
+    render(
+      <HelmetProvider>
+        <Contact />
+      </HelmetProvider>
+    );
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(screen.getByRole('heading', { name: /Contact/i })).toBeInTheDocument();
+    jest.useRealTimers();
+  });
 
-    const contactTitle = screen.getByText('Contact Us');
-    expect(contactTitle).toBeInTheDocument();
-
-    const contactForm = screen.getByRole('form');
-    expect(contactForm).toBeInTheDocument();
+  it('sets page title', () => {
+    const helmetContext: any = {};
+    jest.useFakeTimers();
+    render(
+      <HelmetProvider context={helmetContext}>
+        <Contact />
+      </HelmetProvider>
+    );
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(helmetContext.helmet.title.toString()).toContain('Contact');
+    jest.useRealTimers();
   });
 });

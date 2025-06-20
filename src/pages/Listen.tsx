@@ -13,7 +13,7 @@ const Listen: React.FC = () => {
 
   return (
     <>
-      <PageMeta title="Listen | Random Gorsey" description="Listen to tracks and playlists from Random Gorsey." path="/listen" />
+      <PageMeta title="Listen | Random Gorsey" description="Stream songs and playlists from Random Gorsey." path="/listen" />
       <motion.div
       className={styles['listen-container']}
       initial={{ opacity: 0, y: 20 }}

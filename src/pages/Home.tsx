@@ -53,7 +53,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <PageMeta title="Random Gorsey" description="Random Gorsey words and music." path="/" />
+      <PageMeta title="Random Gorsey" description="Explore Random Gorsey's latest music and posts." path="/" />
       <motion.div
       className={styles['home-container']}
       initial={{ opacity: 0, y: 20 }}

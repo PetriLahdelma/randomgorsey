@@ -26,7 +26,7 @@ const releases: Release[] = [
 
 const Discography: React.FC = () => (
   <>
-    <PageMeta title="Discography | Random Gorsey" description="Releases by Random Gorsey." path="/discography" />
+    <PageMeta title="Discography | Random Gorsey" description="Browse the official releases from Random Gorsey." path="/discography" />
     <motion.div
       className={styles['discography-container']}
       initial={{ opacity: 0, y: 20 }}
@@ -40,6 +40,7 @@ const Discography: React.FC = () => (
           <img
             src={release.title === 'So Long Spectrum' ? SoLong : Customer}
             alt={release.title}
+            title={release.title}
             width={200}
             height={200}
           />

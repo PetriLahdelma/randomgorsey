@@ -1,21 +1,20 @@
 import React from 'react';
 import { render, screen, act } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import Home from '../Home';
+import Gallery from '../Gallery';
 
-describe('Home Page', () => {
-  it('renders latest posts heading', () => {
+describe('Gallery Page', () => {
+  it('renders heading', () => {
     jest.useFakeTimers();
     render(
-      <MemoryRouter>
-        <Home />
-      </MemoryRouter>
+      <HelmetProvider>
+        <Gallery onOverlayStateChange={() => {}} />
+      </HelmetProvider>
     );
     act(() => {
       jest.runAllTimers();
     });
-    expect(screen.getByRole('heading', { name: /Latest Posts/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Gallery/i })).toBeInTheDocument();
     jest.useRealTimers();
   });
 
@@ -24,15 +23,13 @@ describe('Home Page', () => {
     jest.useFakeTimers();
     render(
       <HelmetProvider context={helmetContext}>
-        <MemoryRouter>
-          <Home />
-        </MemoryRouter>
+        <Gallery onOverlayStateChange={() => {}} />
       </HelmetProvider>
     );
     act(() => {
       jest.runAllTimers();
     });
-    expect(helmetContext.helmet.title.toString()).toContain('Random Gorsey');
+    expect(helmetContext.helmet.title.toString()).toContain('Gallery');
     jest.useRealTimers();
   });
 });
