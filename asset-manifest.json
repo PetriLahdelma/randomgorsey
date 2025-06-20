@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/randomgorsey/gh-pages-pr-27/static/css/main.f486b560.css",
+    "main.js": "/randomgorsey/gh-pages-pr-27/static/js/main.3f53722b.js",
+    "static/media/CustomerIsAlwaysRight.jpg": "/randomgorsey/gh-pages-pr-27/static/media/CustomerIsAlwaysRight.de15efb3903d9cbc7a54.jpg",
+    "static/media/solongspectrum.jpg": "/randomgorsey/gh-pages-pr-27/static/media/solongspectrum.3b6afe1b47432663d258.jpg",
+    "static/media/europa-light-webfont.ttf": "/randomgorsey/gh-pages-pr-27/static/media/europa-light-webfont.a5d681033246521a5108.ttf",
+    "static/media/europa-regular-webfont.ttf": "/randomgorsey/gh-pages-pr-27/static/media/europa-regular-webfont.886f76594d3ece4153ec.ttf",
+    "static/media/europa-bold-webfont.ttf": "/randomgorsey/gh-pages-pr-27/static/media/europa-bold-webfont.a3c4f3d6a9de5994510e.ttf",
+    "static/media/europa-bold-webfont.woff": "/randomgorsey/gh-pages-pr-27/static/media/europa-bold-webfont.3ac4ec7543a24415b0b9.woff",
+    "static/media/europa-light-webfont.woff": "/randomgorsey/gh-pages-pr-27/static/media/europa-light-webfont.d54383df44da837d73c6.woff",
+    "static/media/europa-regular-webfont.woff": "/randomgorsey/gh-pages-pr-27/static/media/europa-regular-webfont.ab9230c417bf5eb028d9.woff",
+    "static/media/europa-light-webfont.woff2": "/randomgorsey/gh-pages-pr-27/static/media/europa-light-webfont.666cbb951ad79b2da96f.woff2",
+    "static/media/europa-bold-webfont.woff2": "/randomgorsey/gh-pages-pr-27/static/media/europa-bold-webfont.2bfa20bd96321bb83335.woff2",
+    "static/media/europa-regular-webfont.woff2": "/randomgorsey/gh-pages-pr-27/static/media/europa-regular-webfont.9284071555db9d5e1ae6.woff2",
+    "static/media/Tschick-Bold.woff": "/randomgorsey/gh-pages-pr-27/static/media/Tschick-Bold.643df78e82a0f0150b33.woff",
+    "static/media/Tschick-Bold.woff2": "/randomgorsey/gh-pages-pr-27/static/media/Tschick-Bold.00394367f42316558f53.woff2",
+    "index.html": "/randomgorsey/gh-pages-pr-27/index.html",
+    "main.f486b560.css.map": "/randomgorsey/gh-pages-pr-27/static/css/main.f486b560.css.map",
+    "main.3f53722b.js.map": "/randomgorsey/gh-pages-pr-27/static/js/main.3f53722b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f486b560.css",
+    "static/js/main.3f53722b.js"
+  ]
+}
