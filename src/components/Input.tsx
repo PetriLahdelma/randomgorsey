@@ -1,5 +1,6 @@
 import React from 'react';
 import { ExclamationCircleIcon } from '@heroicons/react/24/solid';
+import Label from './Label';
 import styles from './Input.module.css';
 
 type InputProps = {
@@ -33,7 +34,7 @@ const Input: React.FC<InputProps> = ({ type, value, onChange, placeholder, label
 
   return (
     <div style={{ marginBottom: error ? '1.5rem' : '1rem' }} className={styles.inputContainer}>
-      {label && <label className={styles.label}>{label}</label>}
+      {label && <Label className={styles.label} style={{ color: '#00f' }}>{label}</Label>}
       {inputElement}
       {error && (
         <div className={styles['input-error']}>
