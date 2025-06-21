@@ -54,6 +54,24 @@ const Home: React.FC = () => {
   return (
     <>
       <PageMeta title="Random Gorsey" description="Explore Random Gorsey's latest music and posts." path="/" />
+      {/* Background looping video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: -1,
+        }}
+      >
+        <source src={require('../videos/home_canvas.webm')} type="video/webm" />
+      </video>
       <motion.div
       className={styles['home-container']}
       initial={{ opacity: 0, y: 20 }}
