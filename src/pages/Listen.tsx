@@ -39,7 +39,7 @@ const Listen: React.FC = () => {
       transition={{ duration: 0.4 }}
     >
       {loading && <Spinner />}
-      <h2>Listen to Music</h2>
+      <h1>Listen to Music</h1>
       <p className={styles['listen-description']}>Enjoy curated playlists and latest tracks.</p>
       <iframe
         title="RG player"

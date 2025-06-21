@@ -10,7 +10,7 @@
   margin: 0 auto;
 }
 
-.gallery-container h2 {
+.gallery-container h1 {
   font-family: "Tschick Bold", sans-serif;
   color: var(--color-yellow);
   text-transform: uppercase;

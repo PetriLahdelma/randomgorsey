@@ -6,6 +6,7 @@ export type AvatarProps = {
   avatarImage?: string;
   initials?: string;
   size?: 'XS' | 'S' | 'M' | 'L' | 'XL';
+  alt?: string;
 };
 
 const sizeMap = {
@@ -16,23 +17,38 @@ const sizeMap = {
   XL: 56,
 };
 
-const Avatar: React.FC<AvatarProps> = ({ avatarColor = '#000', avatarImage, initials = 'RG', size = 'M' }) => {
+const Avatar: React.FC<AvatarProps> = ({ avatarColor = '#000', avatarImage, initials = 'RG', size = 'M', alt = 'User avatar' }) => {
   const dimension = sizeMap[size] || 24;
+  if (avatarImage) {
+    return (
+      <img
+        src={avatarImage}
+        alt={alt}
+        className={styles['avatar-image']}
+        style={{
+          width: dimension,
+          height: dimension,
+          backgroundColor: avatarColor,
+          objectFit: 'cover',
+          fontSize: dimension * 0.5,
+        }}
+      />
+    );
+  }
   return (
     <div
-      className={avatarImage ? styles['avatar-image'] : styles.avatar}
-      aria-label="User avatar"
+      className={styles.avatar}
+      aria-label={alt}
       style={{
         width: dimension,
         height: dimension,
-        backgroundImage: avatarImage ? `url(${avatarImage})` : undefined,
-        backgroundColor: !avatarImage ? avatarColor : undefined,
+        backgroundColor: avatarColor,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         fontSize: dimension * 0.5,
       }}
     >
-      {!avatarImage && initials}
+      {initials}
     </div>
   );
 };

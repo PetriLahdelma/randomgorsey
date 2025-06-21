@@ -89,7 +89,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
     >
       {loading && <Spinner />}
       <div className={styles['gallery-content']}>
-        <h2>Gallery</h2>
+        <h1>Gallery</h1>
         {images.map((image, index) => (
           <div key={index}>
             <img

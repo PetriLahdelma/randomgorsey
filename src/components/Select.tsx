@@ -9,11 +9,25 @@ type SelectProps = {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   placeholder?: string;
+  id?: string;
+  label?: string;
+  className?: string;
 };
 
-const Select: React.FC<SelectProps> = ({ options, value, onChange, placeholder }) => (
+const Select: React.FC<SelectProps> = ({ options, value, onChange, placeholder, id, label, className }) => (
   <div className={styles['select-wrapper']} style={{ position: 'relative', display: 'inline-block' }}>
-    <select className={styles.select} value={value} onChange={onChange} aria-label="select">
+    {label && (
+      <label htmlFor={id} className={styles['select-label']} style={{ display: 'block', marginBottom: 4 }}>
+        {label}
+      </label>
+    )}
+    <select
+      id={id}
+      className={`${styles.select} ${className || ''}`}
+      value={value}
+      onChange={onChange}
+      aria-label={label || 'select'}
+    >
       {placeholder && (
         <option value="" disabled hidden>
           {placeholder}
