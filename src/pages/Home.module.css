@@ -10,7 +10,7 @@
   margin: 0 auto;
 }
 
-.home-container h2 {
+.home-container h1 {
   font-family: "Tschick Bold", sans-serif;
   color: var(--color-white);
   text-transform: uppercase;

@@ -52,7 +52,7 @@ const Discography: React.FC = () => (
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
     >
-    <h2>Discography</h2>
+      <h1>Discography</h1>
     <div className={styles['release-grid']}>
       {releases.map((release) => {
         const buyHref =

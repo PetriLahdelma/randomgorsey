@@ -117,7 +117,7 @@ const Contact: React.FC = () => {
       {sending && <Spinner />}
       {!loading && !sending && (
         <>
-          <h2>Contact</h2>
+          <h1>Contact</h1>
           <div className={styles['contact-row']}>
             <div>
               <Input
