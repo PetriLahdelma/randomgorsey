@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import styles from './NotFound.module.css';
 import Spinner from '../components/Spinner';
 import PageMeta from '../components/PageMeta';
+import { Link } from 'react-router-dom';
+import Button from '../components/Button';
  
 
 const NotFound: React.FC = () => {
@@ -28,7 +30,14 @@ const NotFound: React.FC = () => {
       </video> */}
       {loading && <Spinner />}
       {!loading && <h2 data-testid="not-found-title">404 - Page Not Found</h2>}
-      {!loading && <p className={styles['notfound-description']}>Sorry, the page you're looking for does not exist.</p>}
+      {!loading && <p className={styles['notfound-description']}>Sorry, the page you're looking for does not exist.😢</p>}
+      <div className={styles['notfound-footer']}>
+        <Link to="/" >
+          <Button className={styles['notfound-button']}>
+            Back to the Homepage
+          </Button>
+        </Link>
+      </div>
     </motion.div>
     </>
   );
