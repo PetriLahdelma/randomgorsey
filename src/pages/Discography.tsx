@@ -27,6 +27,25 @@ const releases: Release[] = [
 const Discography: React.FC = () => (
   <>
     <PageMeta title="Discography | Random Gorsey" description="Browse the official releases from Random Gorsey." path="/discography" />
+    {/* Background looping video */}
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      style={{          
+        position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: -1,
+
+      }}
+    >
+      <source src={require('../videos/FIRGO002_canvas.webm')} type="video/webm" />
+    </video>
     <motion.div
       className={styles['discography-container']}
       initial={{ opacity: 0, y: 20 }}

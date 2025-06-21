@@ -14,6 +14,24 @@ const About: React.FC = () => {
   return (
     <>
       <PageMeta title="About | Random Gorsey" description="Background, influences and side projects of Random Gorsey." path="/about" />
+      {/* Background looping video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: -1,
+        }}
+      >
+        <source src={require('../videos/promo_canvas.webm')} type="video/webm" />
+      </video>
       <motion.div
       className={styles['about-container']}
       initial={{ opacity: 0, y: 20 }}

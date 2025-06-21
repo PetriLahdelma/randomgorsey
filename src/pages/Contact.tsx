@@ -89,6 +89,24 @@ const Contact: React.FC = () => {
   return (
     <>
       <PageMeta title="Contact | Random Gorsey" description="Send a message to Random Gorsey." path="/contact" />
+      {/* Background looping video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: -1,
+        }}
+      >
+        <source src={require('../videos/contact_canvas.webm')} type="video/webm" />
+      </video>
       <motion.div
       className={styles['contact-container']}
       initial={{ opacity: 0, y: 20 }}

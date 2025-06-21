@@ -14,6 +14,24 @@ const Listen: React.FC = () => {
   return (
     <>
       <PageMeta title="Listen | Random Gorsey" description="Stream songs and playlists from Random Gorsey." path="/listen" />
+      {/* Background looping video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: -1,
+        }}
+      >
+        <source src={require('../videos/rg-glitch-bg.webm')} type="video/webm" />
+      </video>
       <motion.div
       className={styles['listen-container']}
       initial={{ opacity: 0, y: 20 }}
