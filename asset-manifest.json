@@ -1,7 +1,13 @@
 {
   "files": {
     "main.css": "/static/css/main.80461a9d.css",
-    "main.js": "/static/js/main.31a9d580.js",
+    "main.js": "/static/js/main.117e37c0.js",
+    "static/media/rg-glitch-bg.webm": "/static/media/rg-glitch-bg.ad23892d7c9b72e878ee.webm",
+    "static/media/logo_canvas.webm": "/static/media/logo_canvas.aaede8e76944c1343748.webm",
+    "static/media/home_canvas.webm": "/static/media/home_canvas.67a942f8a02b4b04452c.webm",
+    "static/media/FIRGO002_canvas.webm": "/static/media/FIRGO002_canvas.331cc58467b7d508baf3.webm",
+    "static/media/promo_canvas.webm": "/static/media/promo_canvas.7d0ea39caa48d3b73468.webm",
+    "static/media/contact_canvas.webm": "/static/media/contact_canvas.624d5eb4f832f0d22be5.webm",
     "static/media/CustomerIsAlwaysRight.jpg": "/static/media/CustomerIsAlwaysRight.de15efb3903d9cbc7a54.jpg",
     "static/media/solongspectrum.jpg": "/static/media/solongspectrum.3b6afe1b47432663d258.jpg",
     "static/media/europa-light-webfont.ttf": "/static/media/europa-light-webfont.a5d681033246521a5108.ttf",
@@ -17,10 +23,10 @@
     "static/media/Tschick-Bold.woff2": "/static/media/Tschick-Bold.00394367f42316558f53.woff2",
     "index.html": "/index.html",
     "main.80461a9d.css.map": "/static/css/main.80461a9d.css.map",
-    "main.31a9d580.js.map": "/static/js/main.31a9d580.js.map"
+    "main.117e37c0.js.map": "/static/js/main.117e37c0.js.map"
   },
   "entrypoints": [
     "static/css/main.80461a9d.css",
-    "static/js/main.31a9d580.js"
+    "static/js/main.117e37c0.js"
   ]
 }
