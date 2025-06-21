@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.80461a9d.css",
-    "main.js": "/static/js/main.36f614a3.js",
+    "main.css": "/static/css/main.69091c5a.css",
+    "main.js": "/static/js/main.bd0aa0ec.js",
     "static/media/rg-glitch-bg.webm": "/static/media/rg-glitch-bg.ad23892d7c9b72e878ee.webm",
     "static/media/logo_canvas.webm": "/static/media/logo_canvas.aaede8e76944c1343748.webm",
     "static/media/home_canvas.webm": "/static/media/home_canvas.67a942f8a02b4b04452c.webm",
@@ -22,11 +22,11 @@
     "static/media/Tschick-Bold.woff": "/static/media/Tschick-Bold.643df78e82a0f0150b33.woff",
     "static/media/Tschick-Bold.woff2": "/static/media/Tschick-Bold.00394367f42316558f53.woff2",
     "index.html": "/index.html",
-    "main.80461a9d.css.map": "/static/css/main.80461a9d.css.map",
-    "main.36f614a3.js.map": "/static/js/main.36f614a3.js.map"
+    "main.69091c5a.css.map": "/static/css/main.69091c5a.css.map",
+    "main.bd0aa0ec.js.map": "/static/js/main.bd0aa0ec.js.map"
   },
   "entrypoints": [
-    "static/css/main.80461a9d.css",
-    "static/js/main.36f614a3.js"
+    "static/css/main.69091c5a.css",
+    "static/js/main.bd0aa0ec.js"
   ]
 }
