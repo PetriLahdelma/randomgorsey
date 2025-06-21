@@ -29,7 +29,7 @@ const NotFound: React.FC = () => {
       Your browser does not support the video tag.
       </video> */}
       {loading && <Spinner />}
-      {!loading && <h2 data-testid="not-found-title">404 - Page Not Found</h2>}
+      {!loading && <h1 data-testid="not-found-title">404 - Page Not Found</h1>}
       {!loading && <p className={styles['notfound-description']}>Sorry, the page you're looking for does not exist.😢</p>}
       <div className={styles['notfound-footer']}>
         <Link to="/" >
