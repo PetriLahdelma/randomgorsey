@@ -69,10 +69,19 @@ const CookieConsent: React.FC = () => {
           necessary for the website to function.
         </p>
         <div className={styles.actions}>
-          <Button variant="secondary" onClick={acceptNecessary}>
-            Only necessary
+          <Button
+            variant="secondary"
+            onClick={acceptNecessary}
+            aria-label="Accept only necessary cookies"
+          >
+            Necessary
           </Button>
-          <Button onClick={acceptAll}>Accept all</Button>
+          <Button
+            onClick={acceptAll}
+            aria-label="Accept all cookies (including analytics)"
+          >
+            Accept all
+          </Button>
         </div>
       </div>
     </Modal>
