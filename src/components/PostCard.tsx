@@ -51,9 +51,12 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           <time className={styles.time}>{post.timestamp}</time>
         </div>
       </header>
-      <div className={styles.body}>
-        {expanded ? post.body : `${post.body.slice(0, 200)}${hasLongContent ? '...' : ''}`}
-      </div>
+      <div
+        className={styles.body}
+        dangerouslySetInnerHTML={{
+          __html: expanded ? post.body : `${post.body.slice(0, 200)}${hasLongContent ? '...' : ''}`
+        }}
+      />
       <div className={styles['post-footer-row']}>
         {hasLongContent && (
           <button onClick={toggleExpanded} className={styles['read-more']}>
