@@ -40,7 +40,7 @@ const About: React.FC = () => {
     >
       {loading && <Spinner style={{ borderTopColor: '#FFD600' }} />}
 
-      <h2>About</h2>
+      <h1>About</h1>
             <figure>
         <video title="Portrait of Random Gorsey" src="/images/portrait.webm" autoPlay muted loop controls={false} style={{ width: '10vw', borderRadius: '50%' }} onLoadedData={handleContentLoad} />
       </figure>

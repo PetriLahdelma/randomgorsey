@@ -81,7 +81,7 @@ const Home: React.FC = () => {
       {loading && <Spinner style={{ borderTopColor: '#FFD600' }} />}
       {!loading && (
         <>
-          <h2>Latest Posts</h2>
+          <h1>Latest Posts</h1>
           {posts.slice(0, visibleCount).map((post) => (
             <PostCard key={post.id} post={post} />
           ))}

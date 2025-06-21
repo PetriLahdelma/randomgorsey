@@ -10,21 +10,33 @@ type ButtonProps = {
   style?: React.CSSProperties;
   icon?: React.ReactNode;
   iconOnly?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 };
 
-const Button: React.FC<ButtonProps> = ({ variant = 'primary', onClick, children, disabled = false, icon, className, style }) => {
-  const buttonClass = icon && children ? styles['text-with-icon'] : icon ? styles.icon : '';
+const Button: React.FC<ButtonProps> = ({ variant = 'primary', onClick, children, disabled = false, icon, className, style, iconOnly = false, type = 'button' }) => {
+  const buttonClass = iconOnly
+    ? `${styles.iconOnly}`
+    : icon && children
+    ? styles['text-with-icon']
+    : icon
+    ? styles.icon
+    : '';
+
+  // Accessible label for icon-only buttons
+  const ariaLabel = iconOnly && typeof children === 'string' ? children : undefined;
 
   return (
     <button
+      type={type}
       className={`${styles.button} ${styles[variant]} ${buttonClass} ${className}`}
       onClick={onClick}
       disabled={disabled}
       style={style}
-      title={typeof children === 'string' ? children : ''} 
+      title={typeof children === 'string' ? children : ''}
+      aria-label={ariaLabel}
     >
       {icon && <span className={styles.icon}>{icon}</span>}
-      {children}
+      {!iconOnly && children}
     </button>
   );
 };
