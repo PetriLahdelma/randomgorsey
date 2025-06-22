@@ -58,7 +58,7 @@ const Discography: React.FC = () => (
         const buyHref =
           release.title === 'So Long Spectrum'
             ? 'https://randomgorsey.bandcamp.com/track/so-long-spectrum'
-            : 'https://randomgorsey.bandcamp.com/album/the-customer-is-always-right-ep';
+            : 'https://randomgorsey.bandcamp.com/album/the-customer-is-always-right';
         return (
           <div key={release.catalog} className={styles.release}>
             <a href={buyHref} target="_blank" rel="noopener noreferrer">
