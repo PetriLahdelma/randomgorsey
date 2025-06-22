@@ -33,7 +33,7 @@ The site will be available at [http://localhost:3000](http://localhost:3000). An
 Deployment is handled through GitHub Pages. Two commands are available:
 
 ```bash
-npm run predeploy   # builds the site and copies CNAME into the build folder
+npm run predeploy   # builds the site, copies CNAME and 404.html into the build folder
 npm run deploy      # publishes the build folder to the gh-pages branch
 ```
 
