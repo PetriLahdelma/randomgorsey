@@ -11,9 +11,10 @@ type ButtonProps = {
   icon?: React.ReactNode;
   iconOnly?: boolean;
   type?: 'button' | 'submit' | 'reset';
+  ariaLabel?: string;
 };
 
-const Button: React.FC<ButtonProps> = ({ variant = 'primary', onClick, children, disabled = false, icon, className, style, iconOnly = false, type = 'button' }) => {
+const Button: React.FC<ButtonProps> = ({ variant = 'primary', onClick, children, disabled = false, icon, className, style, iconOnly = false, type = 'button', ariaLabel }) => {
   const buttonClass = iconOnly
     ? `${styles.iconOnly}`
     : icon && children
@@ -23,7 +24,7 @@ const Button: React.FC<ButtonProps> = ({ variant = 'primary', onClick, children,
     : '';
 
   // Accessible label for icon-only buttons
-  const ariaLabel = iconOnly && typeof children === 'string' ? children : undefined;
+  const computedAriaLabel = ariaLabel || (iconOnly && typeof children === 'string' ? children : undefined);
 
   return (
     <button
@@ -33,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({ variant = 'primary', onClick, children,
       disabled={disabled}
       style={style}
       title={typeof children === 'string' ? children : ''}
-      aria-label={ariaLabel}
+      aria-label={computedAriaLabel}
     >
       {icon && <span className={styles.icon}>{icon}</span>}
       {!iconOnly && children}

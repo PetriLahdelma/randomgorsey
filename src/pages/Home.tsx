@@ -86,16 +86,25 @@ const Home: React.FC = () => {
             <PostCard key={post.id} post={post} />
           ))}
           {visibleCount < posts.length && (
-            <Button onClick={() => setVisibleCount((v) => Math.min(v + 1, posts.length))} className={styles['load-more']}>
-              Load more content
+            <Button
+              onClick={() => setVisibleCount((v) => Math.min(v + 1, posts.length))}
+              className={styles['load-more']}
+              ariaLabel="Load more posts"
+            >
+              Load More
             </Button>
           )}
         </>
       )}
       {!loading && (
         <div className={styles['back-to-top']}>
-          <Button className={styles['back-to-top-button']} variant="secondary" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            Back to top
+          <Button
+            className={styles['back-to-top-button']}
+            variant="secondary"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            ariaLabel="Back to top"
+          >
+            Back to Top
           </Button>
         </div>
       )}

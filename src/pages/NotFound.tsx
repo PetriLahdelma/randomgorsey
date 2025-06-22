@@ -33,8 +33,11 @@ const NotFound: React.FC = () => {
       {!loading && <p className={styles['notfound-description']}>Sorry, the page you're looking for does not exist.😢</p>}
       <div className={styles['notfound-footer']}>
         <Link to="/" >
-          <Button className={styles['notfound-button']}>
-            Back to the Homepage
+          <Button
+            className={styles['notfound-button']}
+            ariaLabel="Go to home page"
+          >
+            Go Home
           </Button>
         </Link>
       </div>
