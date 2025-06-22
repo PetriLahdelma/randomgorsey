@@ -42,7 +42,19 @@ const About: React.FC = () => {
 
       <h1>About</h1>
             <figure>
-        <video title="Portrait of Random Gorsey" src="/images/portrait.webm" autoPlay muted loop controls={false} style={{ width: '10vw', borderRadius: '50%' }} onLoadedData={handleContentLoad} />
+        <video
+          title="Portrait of Random Gorsey"
+          autoPlay
+          muted
+          loop
+          controls={false}
+          style={{ width: '10vw', borderRadius: '50%' }}
+          onLoadedData={handleContentLoad}
+        >
+          <source src="/images/portrait.webm" type="video/webm" />
+          <source src="/images/portrait.mp4" type="video/mp4" />
+          <img src="/images/portrait.jpg" alt="Portrait of Random Gorsey" />
+        </video>
       </figure>
 
     <p className={styles['about-description']}>
