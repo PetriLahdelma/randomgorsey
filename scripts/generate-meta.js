@@ -113,5 +113,8 @@ async function fetchPageMeta(url) {
   llms += `# Success Rate: ${(success / urls.length * 100).toFixed(1)}%\n`;
   llms += `# Failed Pages: ${failed}\n`;
   fs.writeFileSync(LLMS_PATH, llms);
+  // Also copy to public/LLMs.txt for deployment
+  const publicLLMsPath = path.join(__dirname, '../public/LLMs.txt');
+  fs.writeFileSync(publicLLMsPath, llms);
   console.log(`LLMs.txt updated! Success: ${success}, Failed: ${failed}`);
 })();
