@@ -13,13 +13,13 @@
     <loc>https://randomgorsey.com/about</loc>
     <lastmod>2025-06-22</lastmod>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://randomgorsey.com/contact</loc>
     <lastmod>2025-06-22</lastmod>
     <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://randomgorsey.com/gallery</loc>
@@ -32,5 +32,11 @@
     <lastmod>2025-06-22</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://randomgorsey.com/discography</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.7</priority>
+    <changefreq>yearly</changefreq>
   </url>
 </urlset>
