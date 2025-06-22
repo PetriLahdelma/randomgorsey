@@ -8,7 +8,7 @@ jest.mock('react-router-dom', () => {
   return {
     __esModule: true,
     ...originalModule,
-    HashRouter: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+    BrowserRouter: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   };
 });
 

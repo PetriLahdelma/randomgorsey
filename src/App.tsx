@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Footer from './patterns/Footer';
@@ -21,7 +21,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <div className={styles.app}>
         <Header />
         <Routes>
@@ -36,7 +36,7 @@ const App: React.FC = () => {
         {!isOverlayActive && <Footer />}
         <CookieConsent />
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
