@@ -4,16 +4,23 @@
   padding: 1rem;
   font-family: "Europa Regular", sans-serif;
   margin-bottom: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-block-size: 1.5rem;
 }
 
 .close-button {
-  position: absolute;
   border: none;
   cursor: pointer;
-  top: 1.5rem;
-  right: 1.5rem;
-  width: 40px;
-  height: 40px;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  margin-left: auto;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .close-button svg {
