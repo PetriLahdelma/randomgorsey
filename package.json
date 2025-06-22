@@ -38,7 +38,7 @@
     "zod": "^3.25.64"
   },
   "scripts": {
-    "predeploy": "npm run build && cp CNAME build/CNAME && node scripts/copy-404.js",
+    "predeploy": "npm run build && node scripts/copy-cname.js && node scripts/copy-404.js",
     "build": "react-scripts build",
     "deploy": "gh-pages -d build --dotfiles",
     "start": "react-scripts start",
