@@ -20,6 +20,13 @@
   align-items: flex-start;
 }
 
+.header-left h2 {
+  margin: 0;
+  font-family: "Tschick Bold", sans-serif;
+  text-transform: uppercase;
+  font-size: 1.17rem;
+}
+
 .header-right {
   text-align: right;
   display: flex;

@@ -37,7 +37,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       </Helmet>
       <header className={styles.header}>
         <div className={styles['header-left']}>
-          <h3 className={styles.title}>{post.title}</h3>
+          <h2 className={styles.title}>{post.title}</h2>
           
             <div className={styles['avatar-author']}>
               <Avatar
