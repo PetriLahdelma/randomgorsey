@@ -69,9 +69,11 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^9.0.12",
     "@storybook/addon-docs": "^9.0.4",
     "@storybook/preset-create-react-app": "^9.0.4",
     "@storybook/react-webpack5": "^9.0.4",
+    "@storybook/test": "^8.6.14",
     "@types/react-router-dom": "^5.3.3",
     "eslint": "^8.57.1",
     "eslint-config-react-app": "^7.0.1",

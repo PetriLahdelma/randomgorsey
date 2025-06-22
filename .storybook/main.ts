@@ -7,7 +7,8 @@ const config: StorybookConfig = {
   ],
   "addons": [
     "@storybook/preset-create-react-app",
-    "@storybook/addon-docs"
+    "@storybook/addon-docs",
+    "@storybook/addon-a11y"
   ],
   "framework": {
     "name": "@storybook/react-webpack5",
