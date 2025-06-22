@@ -1,5 +1,5 @@
 # LLM.txt - Website Content Structure
-# Generated: 2025-06-22T21:36:49.530Z
+# Generated: 2025-06-22T21:40:50.213Z
 # Source: https://randomgorsey.com/sitemap.xml
 # Total Pages: 6
 
