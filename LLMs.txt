@@ -1,12 +1,12 @@
 # LLM.txt - Website Content Structure
-# Generated: 2025-06-22T20:14:05.102Z
+# Generated: 2025-06-22T20:27:20.174Z
 # Source: https://randomgorsey.com/sitemap.xml
-# Total Pages: 5
+# Total Pages: 6
 
 ## Site Metadata
 Site URL: https://randomgorsey.com
 Extraction Date: 2025-06-22
-Total Pages Processed: 5
+Total Pages Processed: 6
 
 ---
 
@@ -47,5 +47,11 @@ Could not fetch page.
 Error: Fetch error
 
 ---
-# Success Rate: 20.0%
-# Failed Pages: 4
+
+### Page: https://randomgorsey.com/discography
+Could not fetch page.
+Error: Fetch error
+
+---
+# Success Rate: 16.7%
+# Failed Pages: 5
