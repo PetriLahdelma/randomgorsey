@@ -16,6 +16,7 @@ const ROUTES = [
   { path: '/contact', priority: 0.7, changefreq: 'monthly' },
   { path: '/gallery', priority: 0.7, changefreq: 'monthly' },
   { path: '/listen', priority: 0.7, changefreq: 'monthly' },
+  { path: '/discography', priority: 0.7, changefreq: 'monthly' },
 ];
 const today = new Date().toISOString().slice(0, 10);
 
