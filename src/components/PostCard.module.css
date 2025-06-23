@@ -95,6 +95,53 @@
   margin-top: 1rem;
 }
 
+@media (max-width: 800px) {
+  .post-footer-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .read-more-mobile-wrap {
+    order: 1;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .post-footer-share {
+    order: 2;
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .read-more {
+    color: var(--color-black) !important;
+  }
+}
+
 .post-footer-share {
   margin-left: auto;
+}
+
+@media (width <= 800px) {
+  .header-right .time {
+    display: none;
+  }
+
+  .date-mobile {
+    display: block;
+    font-size: 1rem;
+    color: var(--color-grey-light, #ccc);
+    margin-top: 0.2em;
+    margin-left: 2.2em;
+
+    /* visually under author/avatar */
+  }
+}
+
+.date-mobile {
+  display: none;
 }
