@@ -1,6 +1,9 @@
 import React from 'react';
 import { SocialIcon } from 'react-social-icons';
 import styles from './Footer.module.css';
+import { SiBandcamp } from "react-icons/si";
+
+const BandcampIcon = SiBandcamp as React.ComponentType<React.SVGProps<SVGSVGElement>>;
 
 const Footer: React.FC = () => {
   return (
@@ -10,18 +13,9 @@ const Footer: React.FC = () => {
         <SocialIcon label="Soundcloud" url="https://soundcloud.com/randomgorsey" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="Soundcloud" />
         <SocialIcon label="Instagram" url="https://www.instagram.com/random_gorsey?igsh=am42eWcwNGdnY3hm&utm_source=qr" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="Instagram" />
         <SocialIcon label="YouTube" url="https://www.youtube.com/@randomgorsey8125" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="YouTube" />
-        <a 
-          href="https://randomgorsey.bandcamp.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Bandcamp"
-        >
-          <img
-            src="/images/bandcamp.svg"
-            alt="Bandcamp logo"
-            title="Bandcamp"
-            style={{ verticalAlign: 'middle', width: '2rem', height: '2rem' }} // Ensure consistent size
-          />
+        <a className={styles['bandcamp-link']} href='https://randomgorsey.bandcamp.com'>
+          <BandcampIcon
+            style={{ width: '1rem', height: '1rem', color: '#fff', alignItems: 'center' }} />
         </a>
       </div>
       <p className={styles['footer-copyright']}>

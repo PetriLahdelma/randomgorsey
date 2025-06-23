@@ -98,17 +98,9 @@ nav ul.links-desktop {
     justify-content: center;
     background: none;
     border: none;
-    color: var(--color-white);
-    font-family: "Tschick Bold", sans-serif;
-    font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
     gap: 0.4em;
     padding: 0.5em 1em;
-  }
-
-  .chevron-icon {
-    font-size: 1em;
-    margin-right: 0.3em;
   }
 }
