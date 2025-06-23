@@ -86,7 +86,8 @@
     ],
     "exclude": [
       "/listen"
-    ]
+    ],
+    "skipThirdPartyRequests": true
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^9.0.12",
