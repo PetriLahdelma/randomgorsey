@@ -3,15 +3,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 
-jest.mock('react-router-dom', () => {
-  const originalModule = jest.requireActual('react-router-dom');
-  return {
-    __esModule: true,
-    ...originalModule,
-    BrowserRouter: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-  };
-});
-
 test('renders the header and footer', () => {
   render(
     <MemoryRouter>
