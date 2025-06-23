@@ -24,7 +24,7 @@ The site will be available at [http://localhost:3000](http://localhost:3000). An
 - **`npm run lint`** – format and lint the CSS files with stylelint.
 - **`npm run storybook`** – launch the component Storybook on port 6006.
 - **`npm run build-storybook`** – generate the static Storybook site.
-- **`npm run build`** – create an optimized production build in the `build` directory.
+- **`npm run build`** – create an optimized production build and pre-render each route using `react-snap`.
 - **`npm run generate-meta`** – update `public/sitemap.xml` and `LLMs.txt` based on the current routes.
 - SEO metadata for each page is managed through the `PageMeta` component in `src/components`.
 
@@ -33,7 +33,7 @@ The site will be available at [http://localhost:3000](http://localhost:3000). An
 Deployment is handled through GitHub Pages. Two commands are available:
 
 ```bash
-npm run predeploy   # builds the site, copies CNAME and 404.html into the build folder
+npm run predeploy   # build the site and copy CNAME for GitHub Pages
 npm run deploy      # publishes the build folder to the gh-pages branch
 ```
 

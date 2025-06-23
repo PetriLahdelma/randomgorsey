@@ -36,8 +36,9 @@
     "zod": "^3.25.64"
   },
   "scripts": {
-    "predeploy": "npm run build && node scripts/copy-cname.js && node scripts/copy-404.js",
+    "predeploy": "npm run build && node scripts/copy-cname.js",
     "build": "react-scripts build",
+    "postbuild": "react-snap && node scripts/copy-404.js",
     "deploy": "gh-pages -d build --dotfiles",
     "start": "react-scripts start",
     "test": "react-scripts test",
@@ -66,6 +67,19 @@
       "last 1 safari version"
     ]
   },
+  "reactSnap": {
+    "puppeteerArgs": [
+      "--no-sandbox"
+    ],
+    "include": [
+      "/",
+      "/about",
+      "/contact",
+      "/gallery",
+      "/listen",
+      "/discography"
+    ]
+  },
   "devDependencies": {
     "@storybook/addon-a11y": "^9.0.12",
     "@storybook/addon-docs": "^9.0.12",
@@ -78,6 +92,7 @@
     "gh-pages": "^6.3.0",
     "prop-types": "^15.8.1",
     "react-scripts": "^5.0.1",
+    "react-snap": "^1.23.0",
     "storybook": "^9.0.12",
     "stylelint": "^16.20.0",
     "stylelint-config-css-modules": "^4.4.0",
