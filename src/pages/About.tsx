@@ -52,7 +52,6 @@ const About: React.FC = () => {
           onLoadedData={handleContentLoad}
         >
           <source src="/images/portrait.webm" type="video/webm" />
-          <source src="/images/portrait.mp4" type="video/mp4" />
           <img src="/images/portrait.jpg" alt="Portrait of Random Gorsey" />
         </video>
       </figure>
