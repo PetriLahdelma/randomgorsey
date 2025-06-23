@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/randomgorsey/gh-pages-pr-36/static/css/main.eb3b5ee9.css",
-    "main.js": "/randomgorsey/gh-pages-pr-36/static/js/main.c6469f4c.js",
+    "main.css": "/randomgorsey/gh-pages-pr-36/static/css/main.cbdb790d.css",
+    "main.js": "/randomgorsey/gh-pages-pr-36/static/js/main.9852bbf4.js",
     "static/media/rg-glitch-bg.webm": "/randomgorsey/gh-pages-pr-36/static/media/rg-glitch-bg.ad23892d7c9b72e878ee.webm",
     "static/media/logo_canvas.webm": "/randomgorsey/gh-pages-pr-36/static/media/logo_canvas.aaede8e76944c1343748.webm",
     "static/media/home_canvas.webm": "/randomgorsey/gh-pages-pr-36/static/media/home_canvas.67a942f8a02b4b04452c.webm",
@@ -22,11 +22,11 @@
     "static/media/Tschick-Bold.woff": "/randomgorsey/gh-pages-pr-36/static/media/Tschick-Bold.643df78e82a0f0150b33.woff",
     "static/media/Tschick-Bold.woff2": "/randomgorsey/gh-pages-pr-36/static/media/Tschick-Bold.00394367f42316558f53.woff2",
     "index.html": "/randomgorsey/gh-pages-pr-36/index.html",
-    "main.eb3b5ee9.css.map": "/randomgorsey/gh-pages-pr-36/static/css/main.eb3b5ee9.css.map",
-    "main.c6469f4c.js.map": "/randomgorsey/gh-pages-pr-36/static/js/main.c6469f4c.js.map"
+    "main.cbdb790d.css.map": "/randomgorsey/gh-pages-pr-36/static/css/main.cbdb790d.css.map",
+    "main.9852bbf4.js.map": "/randomgorsey/gh-pages-pr-36/static/js/main.9852bbf4.js.map"
   },
   "entrypoints": [
-    "static/css/main.eb3b5ee9.css",
-    "static/js/main.c6469f4c.js"
+    "static/css/main.cbdb790d.css",
+    "static/js/main.9852bbf4.js"
   ]
 }
