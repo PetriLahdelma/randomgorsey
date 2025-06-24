@@ -4,12 +4,15 @@ import styles from './NotFound.module.css';
 import Spinner from '../components/Spinner';
 import PageMeta from '../components/PageMeta';
 import { isWebMSupported } from '../utils/isWebMSupported';
+import { isIOS } from '../utils/isIOS';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
  
 
 const NotFound: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
+
+  const Container: React.ElementType = isIOS() ? 'div' : motion.div;
 
   React.useEffect(() => {
     const timer = window.requestAnimationFrame(() => setLoading(false));
@@ -39,12 +42,14 @@ const NotFound: React.FC = () => {
           <source src={require('../videos/rg-glitch-bg.webm')} type="video/webm" />
         </video>
       )}
-      <motion.div
-      className={styles['notfound-container']}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
+      <Container
+        className={styles['notfound-container']}
+        {...(!isIOS() && {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.4 },
+        })}
+      >
       {loading && <Spinner />}
       {!loading && <h1 data-testid="not-found-title">404 - Page Not Found</h1>}
       {!loading && <p className={styles['notfound-description']}>Sorry, the page you're looking for does not exist.😢</p>}
@@ -58,7 +63,7 @@ const NotFound: React.FC = () => {
           </Button>
         </Link>
       </div>
-    </motion.div>
+    </Container>
     </>
   );
 };

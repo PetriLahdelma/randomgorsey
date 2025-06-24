@@ -6,6 +6,7 @@ import styles from './Home.module.css';
 import Spinner from '../components/Spinner';
 import Button from '../components/Button';
 import PostCard, { Post } from '../components/PostCard';
+import { isIOS } from '../utils/isIOS';
 
 // Dynamically import all posts from the posts folder using require.context
 // @ts-ignore
@@ -21,6 +22,8 @@ const Home: React.FC = () => {
   const [visibleCount, setVisibleCount] = React.useState(3);
   const [autoLoads, setAutoLoads] = React.useState(0);
   const sentinelRef = React.useRef<HTMLDivElement | null>(null);
+
+  const Container: React.ElementType = isIOS() ? 'div' : motion.div;
 
   React.useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -75,12 +78,14 @@ const Home: React.FC = () => {
           <source src={require('../videos/home_canvas.webm')} type="video/webm" />
         </video>
       )}
-      <motion.div
-      className={styles['home-container']}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
+      <Container
+        className={styles['home-container']}
+        {...(!isIOS() && {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.4 },
+        })}
+      >
       {loading && <Spinner style={{ borderTopColor: '#FFD600' }} />}
       {!loading && (
         <>
@@ -111,7 +116,7 @@ const Home: React.FC = () => {
           </Button>
         </div>
       )}
-    </motion.div>
+    </Container>
     </>
   );
 };

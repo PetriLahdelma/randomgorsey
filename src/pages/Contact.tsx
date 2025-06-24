@@ -11,6 +11,7 @@ import { contactFormSchema } from '../utils/validation';
 import Button from '../components/Button';
 import PageMeta from '../components/PageMeta';
 import { isWebMSupported } from '../utils/isWebMSupported';
+import { isIOS } from '../utils/isIOS';
 
 const Contact: React.FC = () => {
   const [message, setMessage] = useState('');
@@ -21,6 +22,8 @@ const Contact: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
   const [sending, setSending] = useState(false);
   const [formErrors, setFormErrors] = useState<{ name?: string; email?: string; subject?: string; message?: string }>({});
+
+  const Container: React.ElementType = isIOS() ? 'div' : motion.div;
 
   React.useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -110,12 +113,15 @@ const Contact: React.FC = () => {
           <source src={require('../videos/contact_canvas.webm')} type="video/webm" />
         </video>
       )}
-      <motion.div
-      className={styles['contact-container']}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
+      <Container
+        className={styles['contact-container']}
+        {...(!isIOS() && {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.4 },
+        })}
+      >
+
       {loading && <Spinner />}
       {sending && <Spinner />}
       {!loading && !sending && (
@@ -200,7 +206,7 @@ const Contact: React.FC = () => {
           )}
         </>
       )}
-    </motion.div>
+    </Container>
     </>
   );
 };

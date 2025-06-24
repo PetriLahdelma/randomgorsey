@@ -4,9 +4,12 @@ import styles from './About.module.css';
 import Spinner from '../components/Spinner';
 import PageMeta from '../components/PageMeta';
 import { isWebMSupported } from '../utils/isWebMSupported';
+import { isIOS } from '../utils/isIOS';
 
 const About: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
+
+  const Container: React.ElementType = isIOS() ? 'div' : motion.div;
 
   const handleContentLoad = () => {
     setLoading(false);
@@ -35,12 +38,14 @@ const About: React.FC = () => {
           <source src={require('../videos/promo_canvas.webm')} type="video/webm" />
         </video>
       )}
-      <motion.div
-      className={styles['about-container']}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
+      <Container
+        className={styles['about-container']}
+        {...(!isIOS() && {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.4 },
+        })}
+      >
       {loading && <Spinner style={{ borderTopColor: '#FFD600' }} />}
 
       <h1>About</h1>
@@ -84,7 +89,7 @@ const About: React.FC = () => {
             </a>
           </li>
           </ul>
-    </motion.div>
+    </Container>
     </>
   );
 };
