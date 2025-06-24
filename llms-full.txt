@@ -1,0 +1,99 @@
+# llms-full.txt - Website Content Structure
+# Generated: 2025-06-24T17:03:21.595Z
+# Source: https://randomgorsey.com/sitemap.xml
+# Total Pages: 6
+
+## Site Metadata
+Site URL: https://randomgorsey.com
+Extraction Date: 2025-06-24
+Total Pages Processed: 6
+
+---
+
+### Page: https://randomgorsey.com/
+Title: First Post | Random Gorsey
+Meta Description: Random Gorsey words, visuals and music. Random Gorsey is an experimental audiovisual artist who pushes the boundaries of creativity and generative art. Witness a landscape of spontaneous creation and exploratory design. On the agenda are live sets and a curated collection of coding sessions, Ableton trickery tutorials, reactive visualizations, and electronic soundscapes that evolve in response to user interaction. Whether you’re an electronic music enthusiast, a visual artist, or just curious about experimental web experiences, you’ll find interesting blog posts, behind-the-scenes tutorial breakdowns, downloadable presets, and open source code repositories. Stay up to date with an ever expanding event calendar featuring pop-up performances, collaborative art exhibitions, and virtual listening sessions. Connect via integrated social feeds and community forums where fellow creators share tips, patches, and track releases. Random Gorsey is your gateway to a living laboratory of glitch aesthetics and futuristic sound exploration on the web.
+Language: en
+Canonical URL: http://localhost:45678/
+
+## Headings Structure:
+- Latest Posts
+- Random Recommends
+- First Post
+- Cookie Notice
+
+## Main Content:
+You need to enable JavaScript to run this app.MenuLatest PostsRandom RecommendsRandom Gorsey2025-06-212025-06-21Some summer heat for you! I've put together a playlist of some of my favorite tracks that are perfect for those dubby sunny days. Peace!Click on "Read More" to reveal player. ...Read MoreShare:First PostRandom Gorsey2025-05-012025-05-01Welcome to the brand new Random Gorsey blog! This space will be filled with updates about music, art and more. Stay tuned for upcoming releases and random thoughts. This first entry is here just to le...Read MoreShare:Back to Top© 2025 Random Gorsey. Rights reserved. Site by×Cookie NoticeWe use cookies to remember your preferences and to analyze how visitors interact with our site.Accepting all cookies allows us to use Google Analytics for statistics. You can also choose to keep only the cookies necessary for the website to function.NecessaryAccept all
+
+---
+
+### Page: https://randomgorsey.com/about
+Title: About | Random Gorsey
+Meta Description: Random Gorsey words, visuals and music. Random Gorsey is an experimental audiovisual artist who pushes the boundaries of creativity and generative art. Witness a landscape of spontaneous creation and exploratory design. On the agenda are live sets and a curated collection of coding sessions, Ableton trickery tutorials, reactive visualizations, and electronic soundscapes that evolve in response to user interaction. Whether you’re an electronic music enthusiast, a visual artist, or just curious about experimental web experiences, you’ll find interesting blog posts, behind-the-scenes tutorial breakdowns, downloadable presets, and open source code repositories. Stay up to date with an ever expanding event calendar featuring pop-up performances, collaborative art exhibitions, and virtual listening sessions. Connect via integrated social feeds and community forums where fellow creators share tips, patches, and track releases. Random Gorsey is your gateway to a living laboratory of glitch aesthetics and futuristic sound exploration on the web.
+Language: en
+Canonical URL: http://localhost:45678/about
+
+## Headings Structure:
+- About
+- Side projects
+- Cookie Notice
+
+## Main Content:
+You need to enable JavaScript to run this app.MenuAboutHelsinki-based producer/musician Random Gorsey aka DJ Pizza Hut makes warm, nostalgic lo-fi house and electronic music with soulful chords and minimalist grooves. His music pays homage to mid-paced, high-energy electronic music.Having spent the last few years producing for his own amusement and after his debut EP steadily brought the much-needed confidence, he decided to take a step forward and start producing on a more regular basis. Random G doesn't feel he belongs to any particular scene. As is the nature of his music, he just acts on instinct and goes wherever it takes him and tries not to overthink it.Originally from Turku, Finland, he studied graphic design in the UK, before returning to Finland for his master's. While he is currently on hiatus focusing on his design career, he has always had a deep passion for making music. He loves exploring new tools, sounds, and ideas, constantly finding fresh processes in an artistic way. Mostly he is inspired by aestheticism, raw energy, and talent, always looking to solve problems and push creative boundaries.Side projectsRandom Gorsey is also involved in several side projects, including:Petri Lahdelma - A raw techno project on Soundcloud.Dj Pizza Hut - Honestly, I don't even know, man. Check it out on SC.© 2025 Random Gorsey. Rights reserved. Site by×Cookie NoticeWe use cookies to remember your preferences and to analyze how visitors interact with our site.Accepting all cookies allows us to use Google Analytics for statistics. You can also choose to keep only the cookies necessary for the website to function.NecessaryAccept all
+
+---
+
+### Page: https://randomgorsey.com/contact
+Title: Contact | Random Gorsey
+Meta Description: Random Gorsey words, visuals and music. Random Gorsey is an experimental audiovisual artist who pushes the boundaries of creativity and generative art. Witness a landscape of spontaneous creation and exploratory design. On the agenda are live sets and a curated collection of coding sessions, Ableton trickery tutorials, reactive visualizations, and electronic soundscapes that evolve in response to user interaction. Whether you’re an electronic music enthusiast, a visual artist, or just curious about experimental web experiences, you’ll find interesting blog posts, behind-the-scenes tutorial breakdowns, downloadable presets, and open source code repositories. Stay up to date with an ever expanding event calendar featuring pop-up performances, collaborative art exhibitions, and virtual listening sessions. Connect via integrated social feeds and community forums where fellow creators share tips, patches, and track releases. Random Gorsey is your gateway to a living laboratory of glitch aesthetics and futuristic sound exploration on the web.
+Language: en
+Canonical URL: http://localhost:45678/contact
+
+## Headings Structure:
+- Contact
+- Cookie Notice
+
+## Main Content:
+You need to enable JavaScript to run this app.MenuContactYour NameEmailSubjectMessageSend© 2025 Random Gorsey. Rights reserved. Site by×Cookie NoticeWe use cookies to remember your preferences and to analyze how visitors interact with our site.Accepting all cookies allows us to use Google Analytics for statistics. You can also choose to keep only the cookies necessary for the website to function.NecessaryAccept all
+
+---
+
+### Page: https://randomgorsey.com/gallery
+Title: Gallery | Random Gorsey
+Meta Description: Random Gorsey words, visuals and music. Random Gorsey is an experimental audiovisual artist who pushes the boundaries of creativity and generative art. Witness a landscape of spontaneous creation and exploratory design. On the agenda are live sets and a curated collection of coding sessions, Ableton trickery tutorials, reactive visualizations, and electronic soundscapes that evolve in response to user interaction. Whether you’re an electronic music enthusiast, a visual artist, or just curious about experimental web experiences, you’ll find interesting blog posts, behind-the-scenes tutorial breakdowns, downloadable presets, and open source code repositories. Stay up to date with an ever expanding event calendar featuring pop-up performances, collaborative art exhibitions, and virtual listening sessions. Connect via integrated social feeds and community forums where fellow creators share tips, patches, and track releases. Random Gorsey is your gateway to a living laboratory of glitch aesthetics and futuristic sound exploration on the web.
+Language: en
+Canonical URL: http://localhost:45678/gallery
+
+## Headings Structure:
+- Gallery
+- Cookie Notice
+
+## Main Content:
+You need to enable JavaScript to run this app.MenuGalleryClipart, HelsinkiRide in Birgit, BerlinDisco balls in Birgit, BerlinXberg Acid, BerlinRandom Illustration, HelsinkiPosing in sunglasses, HelsinkiCover process ideation, HelsinkiOmpputalo in Lapinlahti, HelsinkiDuduk, HelsinkiProjections in Kuva x Tila, HelsinkiWarning, Lasers, HelsinkiSmoke break, HelsinkiDisco at sea, HelsinkiKaiku, HelsinkiOccupied freedom, HelsinkiShot by a friend, Helsinki© 2025 Random Gorsey. Rights reserved. Site by×Cookie NoticeWe use cookies to remember your preferences and to analyze how visitors interact with our site.Accepting all cookies allows us to use Google Analytics for statistics. You can also choose to keep only the cookies necessary for the website to function.NecessaryAccept all
+
+---
+
+### Page: https://randomgorsey.com/listen
+Could not fetch page.
+Error: Fetch error
+
+---
+
+### Page: https://randomgorsey.com/discography
+Title: Discography | Random Gorsey
+Meta Description: Random Gorsey words, visuals and music. Random Gorsey is an experimental audiovisual artist who pushes the boundaries of creativity and generative art. Witness a landscape of spontaneous creation and exploratory design. On the agenda are live sets and a curated collection of coding sessions, Ableton trickery tutorials, reactive visualizations, and electronic soundscapes that evolve in response to user interaction. Whether you’re an electronic music enthusiast, a visual artist, or just curious about experimental web experiences, you’ll find interesting blog posts, behind-the-scenes tutorial breakdowns, downloadable presets, and open source code repositories. Stay up to date with an ever expanding event calendar featuring pop-up performances, collaborative art exhibitions, and virtual listening sessions. Connect via integrated social feeds and community forums where fellow creators share tips, patches, and track releases. Random Gorsey is your gateway to a living laboratory of glitch aesthetics and futuristic sound exploration on the web.
+Language: en
+Canonical URL: http://localhost:45678/discography
+
+## Headings Structure:
+- Disco-graphy
+- Cookie Notice
+- So Long Spectrum
+- The Customer is Always Right EP
+
+## Main Content:
+You need to enable JavaScript to run this app.MenuDisco-graphySo Long SpectrumFIRGO2100004 · 2022BUYThe Customer is Always Right EPRDGY 01 · 2021BUY© 2025 Random Gorsey. Rights reserved. Site by×Cookie NoticeWe use cookies to remember your preferences and to analyze how visitors interact with our site.Accepting all cookies allows us to use Google Analytics for statistics. You can also choose to keep only the cookies necessary for the website to function.NecessaryAccept all
+
+---
+# Success Rate: 83.3%
+# Failed Pages: 1
