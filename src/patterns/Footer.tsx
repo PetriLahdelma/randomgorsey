@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
         <SocialIcon label="Soundcloud" url="https://soundcloud.com/randomgorsey" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="Soundcloud" />
         <SocialIcon label="Instagram" url="https://www.instagram.com/random_gorsey?igsh=am42eWcwNGdnY3hm&utm_source=qr" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="Instagram" />
         <SocialIcon label="YouTube" url="https://www.youtube.com/@randomgorsey8125" bgColor="#000" fgColor="#fff" style={{ width: '2rem', height: '2rem' }} title="YouTube" />
-        <a className={styles['bandcamp-link']} href='https://randomgorsey.bandcamp.com'>
+        <a className={styles['bandcamp-link']} href='https://randomgorsey.bandcamp.com' title="Bandcamp" aria-label="Bandcamp" target="_blank" rel="noopener noreferrer">
           <BandcampIcon
             style={{ width: '1rem', height: '1rem', color: '#fff', alignItems: 'center' }} />
         </a>
