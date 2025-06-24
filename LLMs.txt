@@ -1,0 +1,57 @@
+# LLM.txt - Website Content Structure
+# Generated: 2025-06-22T20:23:05.265Z
+# Source: https://randomgorsey.com/sitemap.xml
+# Total Pages: 6
+
+## Site Metadata
+Site URL: https://randomgorsey.com
+Extraction Date: 2025-06-22
+Total Pages Processed: 6
+
+---
+
+### Page: https://randomgorsey.com/
+Title: Random Gorsey
+Meta Description: Random Gorsey words, visuals and music. Random Gorsey is an experimental audiovisual artist who pushes the boundaries of creativity and generative art. Witness a landscape of spontaneous creation and exploratory design. On the agenda are live sets and a curated collection of coding sessions, Ableton trickery tutorials, reactive visualizations, and electronic soundscapes that evolve in response to user interaction. Whether you’re an electronic music enthusiast, a visual artist, or just curious about experimental web experiences, you’ll find interesting blog posts, behind-the-scenes tutorial breakdowns, downloadable presets, and open source code repositories. Stay up to date with an ever expanding event calendar featuring pop-up performances, collaborative art exhibitions, and virtual listening sessions. Connect via integrated social feeds and community forums where fellow creators share tips, patches, and track releases. Random Gorsey is your gateway to a living laboratory of glitch aesthetics and futuristic sound exploration on the web.
+Language: en
+Canonical URL: https://randomgorsey.com/
+
+## Headings Structure:
+No headings found
+
+## Main Content:
+You need to enable JavaScript to run this app.
+
+---
+
+### Page: https://randomgorsey.com/about
+Could not fetch page.
+Error: Fetch error
+
+---
+
+### Page: https://randomgorsey.com/contact
+Could not fetch page.
+Error: Fetch error
+
+---
+
+### Page: https://randomgorsey.com/gallery
+Could not fetch page.
+Error: Fetch error
+
+---
+
+### Page: https://randomgorsey.com/listen
+Could not fetch page.
+Error: Fetch error
+
+---
+
+### Page: https://randomgorsey.com/discography
+Could not fetch page.
+Error: Fetch error
+
+---
+# Success Rate: 16.7%
+# Failed Pages: 5
