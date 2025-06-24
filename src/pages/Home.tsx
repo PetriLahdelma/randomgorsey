@@ -1,5 +1,6 @@
 import React from 'react';
 import PageMeta from '../components/PageMeta';
+import { isWebMSupported } from '../utils/isWebMSupported';
 import { motion } from 'framer-motion';
 import styles from './Home.module.css';
 import Spinner from '../components/Spinner';
@@ -54,24 +55,26 @@ const Home: React.FC = () => {
   return (
     <>
       <PageMeta title="Random Gorsey" description="Explore Random Gorsey's latest music and posts." path="/" />
-      {/* Background looping video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: -1,
-        }}
-      >
-        <source src={require('../videos/home_canvas.webm')} type="video/webm" />
-      </video>
+      {/* Background looping video (disabled if WebM unsupported) */}
+      {isWebMSupported() && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: -1,
+          }}
+        >
+          <source src={require('../videos/home_canvas.webm')} type="video/webm" />
+        </video>
+      )}
       <motion.div
       className={styles['home-container']}
       initial={{ opacity: 0, y: 20 }}
