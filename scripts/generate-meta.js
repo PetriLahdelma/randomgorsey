@@ -1,4 +1,4 @@
-// Auto-generate sitemap.xml and LLMs.txt based on your routes/pages
+// Auto-generate sitemap.xml and llms.txt based on your routes/pages
 // Run: node scripts/generate-meta.js
 
 const fs = require('fs');
@@ -9,7 +9,7 @@ const cheerio = require('cheerio');
 // --- CONFIG ---
 const SITE_URL = 'https://randomgorsey.com';
 const SITEMAP_PATH = path.join(__dirname, '../public/sitemap.xml');
-const LLMS_PATH = path.join(__dirname, '../LLMs.txt');
+const LLMS_PATH = path.join(__dirname, '../llms.txt');
 const ROUTES = [
   { path: '/', priority: 1.0, changefreq: 'weekly' },
   { path: '/about', priority: 0.8, changefreq: 'monthly' },
@@ -37,7 +37,7 @@ function parseSitemap(xml) {
   return urls;
 }
 
-// --- LLMs.txt GENERATION ---
+// --- llms.txt GENERATION ---
 async function fetchPageMeta(url) {
   try {
     const { data } = await axios.get(url, { timeout: 10000 });
@@ -73,8 +73,8 @@ async function fetchPageMeta(url) {
   const sitemapXml = fs.readFileSync(SITEMAP_PATH, 'utf-8');
   const urls = parseSitemap(sitemapXml);
 
-  // --- LLMs.txt GENERATION ---
-  let llms = `# LLM.txt - Website Content Structure\n`;
+  // --- llms.txt GENERATION ---
+  let llms = `# llms.txt - Website Content Structure\n`;
   llms += `# Generated: ${new Date().toISOString()}\n`;
   llms += `# Source: ${SITE_URL}/sitemap.xml\n`;
   llms += `# Total Pages: ${urls.length}\n`;
@@ -114,8 +114,8 @@ async function fetchPageMeta(url) {
   llms += `# Success Rate: ${(success / urls.length * 100).toFixed(1)}%\n`;
   llms += `# Failed Pages: ${failed}\n`;
   fs.writeFileSync(LLMS_PATH, llms);
-  // Also copy to public/LLMs.txt for deployment
-  const publicLLMsPath = path.join(__dirname, '../public/LLMs.txt');
+  // Also copy to public/llms.txt for deployment
+  const publicLLMsPath = path.join(__dirname, '../public/llms.txt');
   fs.writeFileSync(publicLLMsPath, llms);
-  console.log(`LLMs.txt updated! Success: ${success}, Failed: ${failed}`);
+  console.log(`llms.txt updated! Success: ${success}, Failed: ${failed}`);
 })();
