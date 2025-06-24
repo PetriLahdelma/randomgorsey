@@ -10,13 +10,14 @@ const cheerio = require('cheerio');
 const SITE_URL = 'https://randomgorsey.com';
 const SITEMAP_PATH = path.join(__dirname, '../public/sitemap.xml');
 const LLMS_PATH = path.join(__dirname, '../llms.txt');
+const LLMS_FULL_PATH = path.join(__dirname, '../llms-full.txt');
 const ROUTES = [
-  { path: '/', priority: 1.0, changefreq: 'weekly' },
-  { path: '/about', priority: 0.8, changefreq: 'monthly' },
-  { path: '/contact', priority: 0.7, changefreq: 'monthly' },
-  { path: '/gallery', priority: 0.7, changefreq: 'monthly' },
-  { path: '/listen', priority: 0.7, changefreq: 'monthly' },
-  { path: '/discography', priority: 0.7, changefreq: 'monthly' },
+  { path: '/', label: 'Home', priority: 1.0, changefreq: 'weekly' },
+  { path: '/about', label: 'About', priority: 0.8, changefreq: 'monthly' },
+  { path: '/contact', label: 'Contact', priority: 0.7, changefreq: 'monthly' },
+  { path: '/gallery', label: 'Gallery', priority: 0.7, changefreq: 'monthly' },
+  { path: '/listen', label: 'Listen', priority: 0.7, changefreq: 'monthly' },
+  { path: '/discography', label: 'Discography', priority: 0.7, changefreq: 'monthly' },
 ];
 const today = new Date().toISOString().slice(0, 10);
 
@@ -73,49 +74,63 @@ async function fetchPageMeta(url) {
   const sitemapXml = fs.readFileSync(SITEMAP_PATH, 'utf-8');
   const urls = parseSitemap(sitemapXml);
 
-  // --- llms.txt GENERATION ---
-  let llms = `# llms.txt - Website Content Structure\n`;
-  llms += `# Generated: ${new Date().toISOString()}\n`;
-  llms += `# Source: ${SITE_URL}/sitemap.xml\n`;
-  llms += `# Total Pages: ${urls.length}\n`;
+  // --- llms-full.txt GENERATION ---
+  let llmsFull = `# llms-full.txt - Website Content Structure\n`;
+  llmsFull += `# Generated: ${new Date().toISOString()}\n`;
+  llmsFull += `# Source: ${SITE_URL}/sitemap.xml\n`;
+  llmsFull += `# Total Pages: ${urls.length}\n`;
 
-  llms += `\n## Site Metadata\n`;
-  llms += `Site URL: ${SITE_URL}\n`;
-  llms += `Extraction Date: ${today}\n`;
-  llms += `Total Pages Processed: ${urls.length}\n`;
+  llmsFull += `\n## Site Metadata\n`;
+  llmsFull += `Site URL: ${SITE_URL}\n`;
+  llmsFull += `Extraction Date: ${today}\n`;
+  llmsFull += `Total Pages Processed: ${urls.length}\n`;
 
   let success = 0;
   let failed = 0;
   for (const url of urls) {
-    llms += `\n---\n\n### Page: ${url}\n`;
+    llmsFull += `\n---\n\n### Page: ${url}\n`;
     try {
       const meta = await fetchPageMeta(url);
       if (meta.error) throw new Error('Fetch error');
       success++;
-      llms += `Title: ${meta.title}\n`;
-      llms += `Meta Description: ${meta.metaDesc}\n`;
-      llms += `Language: ${meta.lang}\n`;
-      llms += `Canonical URL: ${meta.canonical}\n`;
-      llms += `\n## Headings Structure:\n`;
+      llmsFull += `Title: ${meta.title}\n`;
+      llmsFull += `Meta Description: ${meta.metaDesc}\n`;
+      llmsFull += `Language: ${meta.lang}\n`;
+      llmsFull += `Canonical URL: ${meta.canonical}\n`;
+      llmsFull += `\n## Headings Structure:\n`;
       if (meta.headings.length) {
-        llms += meta.headings.join('\n') + '\n';
+        llmsFull += meta.headings.join('\n') + '\n';
       } else {
-        llms += 'No headings found\n';
+        llmsFull += 'No headings found\n';
       }
-      llms += `\n## Main Content:\n`;
-      llms += meta.mainContent ? meta.mainContent : 'No content found';
-      llms += `\n`;
+      llmsFull += `\n## Main Content:\n`;
+      llmsFull += meta.mainContent ? meta.mainContent : 'No content found';
+      llmsFull += `\n`;
     } catch (e) {
       failed++;
-      llms += `Could not fetch page.\nError: ${(e && e.message) || e}\n`;
+      llmsFull += `Could not fetch page.\nError: ${(e && e.message) || e}\n`;
     }
   }
-  llms += `\n---\n`;
-  llms += `# Success Rate: ${(success / urls.length * 100).toFixed(1)}%\n`;
-  llms += `# Failed Pages: ${failed}\n`;
+
+  llmsFull += `\n---\n`;
+  llmsFull += `# Success Rate: ${(success / urls.length * 100).toFixed(1)}%\n`;
+  llmsFull += `# Failed Pages: ${failed}\n`;
+
+  fs.writeFileSync(LLMS_FULL_PATH, llmsFull);
+  const publicFullPath = path.join(__dirname, '../public/llms-full.txt');
+  fs.writeFileSync(publicFullPath, llmsFull);
+  console.log(`llms-full.txt updated! Success: ${success}, Failed: ${failed}`);
+
+  // --- llms.txt GENERATION ---
+  let llms = `# Random Gorsey\n`;
+  llms += `> Explore Random Gorsey's music and visuals.\n\n`;
+  llms += `## Pages\n`;
+  for (const r of ROUTES) {
+    llms += `- [${r.label}](${r.path})\n`;
+  }
+
   fs.writeFileSync(LLMS_PATH, llms);
-  // Also copy to public/llms.txt for deployment
   const publicLLMsPath = path.join(__dirname, '../public/llms.txt');
   fs.writeFileSync(publicLLMsPath, llms);
-  console.log(`llms.txt updated! Success: ${success}, Failed: ${failed}`);
+  console.log('llms.txt updated!');
 })();

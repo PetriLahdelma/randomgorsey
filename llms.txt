@@ -1,0 +1,10 @@
+# Random Gorsey
+> Explore Random Gorsey's music and visuals.
+
+## Pages
+- [Home](/)
+- [About](/about)
+- [Gallery](/gallery)
+- [Listen](/listen)
+- [Discography](/discography)
+- [Contact](/contact)
