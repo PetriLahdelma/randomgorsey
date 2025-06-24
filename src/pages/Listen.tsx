@@ -3,9 +3,13 @@ import { motion } from 'framer-motion';
 import styles from './Listen.module.css';
 import Spinner from '../components/Spinner';
 import PageMeta from '../components/PageMeta';
+import { isWebMSupported } from '../utils/isWebMSupported';
+import { isIOS } from '../utils/isIOS';
 
 const Listen: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
+
+  const Container: React.ElementType = isIOS() ? 'div' : motion.div;
 
   const handleContentLoad = () => {
     setLoading(false);
@@ -14,30 +18,34 @@ const Listen: React.FC = () => {
   return (
     <>
       <PageMeta title="Listen | Random Gorsey" description="Stream songs and playlists from Random Gorsey." path="/listen" />
-      {/* Background looping video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: -1,
-        }}
+      {/* Background looping video (disabled if WebM unsupported) */}
+      {isWebMSupported() && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: -1,
+          }}
+        >
+          <source src={require('../videos/rg-glitch-bg.webm')} type="video/webm" />
+        </video>
+      )}
+      <Container
+        className={styles['listen-container']}
+        {...(!isIOS() && {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.4 },
+        })}
       >
-        <source src={require('../videos/rg-glitch-bg.webm')} type="video/webm" />
-      </video>
-      <motion.div
-      className={styles['listen-container']}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
       {loading && <Spinner />}
       <h1>Listen to Music</h1>
       <p className={styles['listen-description']}>Enjoy curated playlists and latest tracks.</p>
@@ -69,7 +77,7 @@ const Listen: React.FC = () => {
       <div style={{ fontSize: '10px', color: '#cccccc', lineBreak: 'anywhere', wordBreak: 'normal', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', fontFamily: 'Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif', fontWeight: 100 }}>
         <a href="https://soundcloud.com/randomgorsey" title="Random Gorsey" target="_blank" rel="noreferrer" style={{ color: '#cccccc', textDecoration: 'none' }}>Random Gorsey</a> · <a href="https://soundcloud.com/randomgorsey/sets/tuunz" title="Tuunz" target="_blank" rel="noreferrer" style={{ color: '#cccccc', textDecoration: 'none' }}>Tuunz</a>
       </div>
-    </motion.div>
+    </Container>
     </>
   );
 };

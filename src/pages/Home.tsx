@@ -1,10 +1,12 @@
 import React from 'react';
 import PageMeta from '../components/PageMeta';
+import { isWebMSupported } from '../utils/isWebMSupported';
 import { motion } from 'framer-motion';
 import styles from './Home.module.css';
 import Spinner from '../components/Spinner';
 import Button from '../components/Button';
 import PostCard, { Post } from '../components/PostCard';
+import { isIOS } from '../utils/isIOS';
 
 // Dynamically import all posts from the posts folder using require.context
 // @ts-ignore
@@ -20,6 +22,8 @@ const Home: React.FC = () => {
   const [visibleCount, setVisibleCount] = React.useState(3);
   const [autoLoads, setAutoLoads] = React.useState(0);
   const sentinelRef = React.useRef<HTMLDivElement | null>(null);
+
+  const Container: React.ElementType = isIOS() ? 'div' : motion.div;
 
   React.useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -54,30 +58,34 @@ const Home: React.FC = () => {
   return (
     <>
       <PageMeta title="Random Gorsey" description="Explore Random Gorsey's latest music and posts." path="/" />
-      {/* Background looping video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: -1,
-        }}
+      {/* Background looping video (disabled if WebM unsupported) */}
+      {isWebMSupported() && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: -1,
+          }}
+        >
+          <source src={require('../videos/home_canvas.webm')} type="video/webm" />
+        </video>
+      )}
+      <Container
+        className={styles['home-container']}
+        {...(!isIOS() && {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.4 },
+        })}
       >
-        <source src={require('../videos/home_canvas.webm')} type="video/webm" />
-      </video>
-      <motion.div
-      className={styles['home-container']}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
       {loading && <Spinner style={{ borderTopColor: '#FFD600' }} />}
       {!loading && (
         <>
@@ -108,7 +116,7 @@ const Home: React.FC = () => {
           </Button>
         </div>
       )}
-    </motion.div>
+    </Container>
     </>
   );
 };

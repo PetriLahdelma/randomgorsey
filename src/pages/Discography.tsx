@@ -4,6 +4,8 @@ import styles from './Discography.module.css';
 import SoLong from '../images/solongspectrum.jpg';
 import Customer from '../images/CustomerIsAlwaysRight.jpg';
 import PageMeta from '../components/PageMeta';
+import { isWebMSupported } from '../utils/isWebMSupported';
+import { isIOS } from '../utils/isIOS';
 
 interface Release {
   title: string;
@@ -24,17 +26,21 @@ const releases: Release[] = [
   },
 ];
 
-const Discography: React.FC = () => (
+const Discography: React.FC = () => {
+  const Container: React.ElementType = isIOS() ? 'div' : motion.div;
+
+  return (
   <>
     <PageMeta title="Discography | Random Gorsey" description="Browse the official releases from Random Gorsey." path="/discography" />
-    {/* Background looping video */}
-    <video
-      autoPlay
-      muted
-      loop
-      playsInline
-      style={{          
-        position: 'fixed',
+    {/* Background looping video (disabled if WebM unsupported) */}
+    {isWebMSupported() && (
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{
+          position: 'fixed',
           top: 0,
           left: 0,
           width: '100%',
@@ -42,15 +48,18 @@ const Discography: React.FC = () => (
           objectFit: 'cover',
           zIndex: -1,
 
-      }}
-    >
-      <source src={require('../videos/FIRGO002_canvas.webm')} type="video/webm" />
-    </video>
-    <motion.div
+        }}
+      >
+        <source src={require('../videos/FIRGO002_canvas.webm')} type="video/webm" />
+      </video>
+    )}
+    <Container
       className={styles['discography-container']}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
+      {...(!isIOS() && {
+        initial: { opacity: 0, y: 20 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.4 },
+      })}
     >
       <h1 className={styles['discography-title']}><span className={styles['disco-break']}>Disco-</span>graphy</h1>
     <div className={styles['release-grid']}>
@@ -86,8 +95,9 @@ const Discography: React.FC = () => (
         );
       })}
     </div>
-  </motion.div>
+  </Container>
   </>
-);
+  );
+};
 
 export default Discography;

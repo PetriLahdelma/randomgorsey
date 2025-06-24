@@ -10,6 +10,8 @@ import Spinner from '../components/Spinner';
 import { contactFormSchema } from '../utils/validation';
 import Button from '../components/Button';
 import PageMeta from '../components/PageMeta';
+import { isWebMSupported } from '../utils/isWebMSupported';
+import { isIOS } from '../utils/isIOS';
 
 const Contact: React.FC = () => {
   const [message, setMessage] = useState('');
@@ -20,6 +22,8 @@ const Contact: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
   const [sending, setSending] = useState(false);
   const [formErrors, setFormErrors] = useState<{ name?: string; email?: string; subject?: string; message?: string }>({});
+
+  const Container: React.ElementType = isIOS() ? 'div' : motion.div;
 
   React.useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -89,30 +93,34 @@ const Contact: React.FC = () => {
   return (
     <>
       <PageMeta title="Contact | Random Gorsey" description="Send a message to Random Gorsey." path="/contact" />
-      {/* Background looping video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: -1,
-        }}
+      {/* Background looping video (disabled if WebM unsupported) */}
+      {isWebMSupported() && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: -1,
+          }}
+        >
+          <source src={require('../videos/contact_canvas.webm')} type="video/webm" />
+        </video>
+      )}
+      <Container
+        className={styles['contact-container']}
+        {...(!isIOS() && {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.4 },
+        })}
       >
-        <source src={require('../videos/contact_canvas.webm')} type="video/webm" />
-      </video>
-      <motion.div
-      className={styles['contact-container']}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
       {loading && <Spinner />}
       {sending && <Spinner />}
       {!loading && !sending && (
@@ -197,7 +205,7 @@ const Contact: React.FC = () => {
           )}
         </>
       )}
-    </motion.div>
+    </Container>
     </>
   );
 };

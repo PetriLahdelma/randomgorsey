@@ -6,6 +6,8 @@ import Spinner from '../components/Spinner';
 import galleryImages from '../data/galleryImages';
 import Caption from '../components/Caption';
 import PageMeta from '../components/PageMeta';
+import { isWebMSupported } from '../utils/isWebMSupported';
+import { isIOS } from '../utils/isIOS';
 
 type GalleryProps = {
   onOverlayStateChange?: (state: boolean) => void;
@@ -15,6 +17,8 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
   const [overlayImage, setOverlayImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [loading, setLoading] = React.useState(true);
+
+  const Container: React.ElementType = isIOS() ? 'div' : motion.div;
 
   const images = useMemo(() => galleryImages, []);
 
@@ -63,30 +67,34 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
   return (
     <>
       <PageMeta title="Gallery | Random Gorsey" description="Photo gallery featuring Random Gorsey visuals." path="/gallery" />
-      {/* Background looping video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: -1,
-        }}
+      {/* Background looping video (disabled if WebM unsupported) */}
+      {isWebMSupported() && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: -1,
+          }}
+        >
+          <source src={require('../videos/logo_canvas.webm')} type="video/webm" />
+        </video>
+      )}
+      <Container
+        className={styles['gallery-container']}
+        {...(!isIOS() && {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.4 },
+        })}
       >
-        <source src={require('../videos/logo_canvas.webm')} type="video/webm" />
-      </video>
-      <motion.div
-      className={styles['gallery-container']}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
       {loading && <Spinner />}
       <div className={styles['gallery-content']}>
         <h1>Gallery</h1>
@@ -107,30 +115,46 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
 
         <AnimatePresence>
         {overlayImage && (
-          <motion.div
-            className={styles['overlay']}
-            onClick={closeOverlay}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
-            <ArrowLeftIcon aria-label="Previous image" className={styles['left-icon']} onClick={(e) => { e.stopPropagation(); navigateLeft(); }} />
-            <img
-              src={overlayImage}
-              alt={images[currentIndex].caption}
-              title={images[currentIndex].caption}
-              style={{ width: '100%' }}
-              onClick={(e) => { e.stopPropagation(); navigateRight(); }}
-            />
-            <Caption>{images[currentIndex].caption}</Caption>
-            <ArrowRightIcon aria-label="Next image" className={styles['right-icon']} onClick={(e) => { e.stopPropagation(); navigateRight(); }} />
-          </motion.div>
+          isIOS() ? (
+            <div className={styles['overlay']} onClick={closeOverlay}>
+              <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
+              <ArrowLeftIcon aria-label="Previous image" className={styles['left-icon']} onClick={(e) => { e.stopPropagation(); navigateLeft(); }} />
+              <img
+                src={overlayImage}
+                alt={images[currentIndex].caption}
+                title={images[currentIndex].caption}
+                style={{ width: '100%' }}
+                onClick={(e) => { e.stopPropagation(); navigateRight(); }}
+              />
+              <Caption>{images[currentIndex].caption}</Caption>
+              <ArrowRightIcon aria-label="Next image" className={styles['right-icon']} onClick={(e) => { e.stopPropagation(); navigateRight(); }} />
+            </div>
+          ) : (
+            <motion.div
+              className={styles['overlay']}
+              onClick={closeOverlay}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
+              <ArrowLeftIcon aria-label="Previous image" className={styles['left-icon']} onClick={(e) => { e.stopPropagation(); navigateLeft(); }} />
+              <img
+                src={overlayImage}
+                alt={images[currentIndex].caption}
+                title={images[currentIndex].caption}
+                style={{ width: '100%' }}
+                onClick={(e) => { e.stopPropagation(); navigateRight(); }}
+              />
+              <Caption>{images[currentIndex].caption}</Caption>
+              <ArrowRightIcon aria-label="Next image" className={styles['right-icon']} onClick={(e) => { e.stopPropagation(); navigateRight(); }} />
+            </motion.div>
+          )
         )}
         </AnimatePresence>
       </div>
-    </motion.div>
+    </Container>
     </>
   );
 };
