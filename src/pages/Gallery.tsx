@@ -6,6 +6,7 @@ import Spinner from '../components/Spinner';
 import galleryImages from '../data/galleryImages';
 import Caption from '../components/Caption';
 import PageMeta from '../components/PageMeta';
+import { isWebMSupported } from '../utils/isWebMSupported';
 
 type GalleryProps = {
   onOverlayStateChange?: (state: boolean) => void;
@@ -63,24 +64,26 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
   return (
     <>
       <PageMeta title="Gallery | Random Gorsey" description="Photo gallery featuring Random Gorsey visuals." path="/gallery" />
-      {/* Background looping video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: -1,
-        }}
-      >
-        <source src={require('../videos/logo_canvas.webm')} type="video/webm" />
-      </video>
+      {/* Background looping video (disabled if WebM unsupported) */}
+      {isWebMSupported() && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: -1,
+          }}
+        >
+          <source src={require('../videos/logo_canvas.webm')} type="video/webm" />
+        </video>
+      )}
       <motion.div
       className={styles['gallery-container']}
       initial={{ opacity: 0, y: 20 }}
