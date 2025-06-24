@@ -20,6 +20,22 @@ footer {
   justify-content: center;
 }
 
+.bandcamp-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: middle;
+}
+
+.bandcamp-link > svg {
+  display: block;
+  margin: auto;
+  width: 2rem;
+  height: 2rem;
+}
+
 .footer-copyright {
   display: inline-flex;
   align-items: center;

@@ -38,14 +38,15 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       <header className={styles.header}>
         <div className={styles['header-left']}>
           <h2 className={styles.title}>{post.title}</h2>
-          
-            <div className={styles['avatar-author']}>
-              <Avatar
+          <div className={styles['avatar-author']}>
+            <Avatar
               avatarImage="/images/pete.jpg"
               size='M'
             />
             <span className={styles.author}>{post.author}</span>
           </div>
+          {/* Date under author on mobile only */}
+          <span className={styles['date-mobile']}>{post.timestamp}</span>
         </div>
         <div className={styles['header-right']}>
           <time className={styles.time}>{post.timestamp}</time>
@@ -58,11 +59,13 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         }}
       />
       <div className={styles['post-footer-row']}>
-        {hasLongContent && (
-          <button onClick={toggleExpanded} className={styles['read-more']}>
-            {expanded ? 'Show Less' : 'Read More'}
-          </button>
-        )}
+        <div className={styles['read-more-mobile-wrap']}>
+          {hasLongContent && (
+            <button onClick={toggleExpanded} className={styles['read-more']}>
+              {expanded ? 'Show Less' : 'Read More'}
+            </button>
+          )}
+        </div>
         <div className={styles['post-footer-share']}>
           <SocialShare
             url={typeof window !== 'undefined' ? window.location.origin + '/posts/' + post.id : ''}

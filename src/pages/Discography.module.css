@@ -57,6 +57,25 @@
 }
 
 @media (width <= 800px) {
+  .discography-title {
+    font-size: 1.5rem;
+    line-height: 1rem;
+    text-align: center;
+  }
+
+  .disco-break {
+    display: inline-block;
+
+    /* force break after dash on mobile */
+    word-break: break-all;
+  }
+
+  .disco-break::after {
+    content: "\A";
+    white-space: pre;
+    display: block;
+  }
+
   .discography-container {
     margin-left: 2rem;
     margin-right: 2rem;
