@@ -4,6 +4,7 @@ import Footer from './patterns/Footer';
 import Header from './patterns/Header';
 import CookieConsent from './components/CookieConsent';
 import Spinner from './components/Spinner';
+import styles from './App.module.css';
 
 const Home = lazy(() => import('./pages/Home'));
 const Listen = lazy(() => import('./pages/Listen'));
@@ -13,14 +14,10 @@ const Discography = lazy(() => import('./pages/Discography'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-import styles from './App.module.css';
-
 const App: React.FC = () => {
   const [isOverlayActive, setIsOverlayActive] = useState(false);
 
-  const handleOverlayState = (state: boolean) => {
-    setIsOverlayActive(state);
-  };
+  const handleOverlayState = setIsOverlayActive;
 
   return (
     <BrowserRouter>
