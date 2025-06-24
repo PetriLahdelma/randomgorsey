@@ -1,5 +1,3 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
-
-Sitemap: https://randomgorsey.com/sitemap.xml

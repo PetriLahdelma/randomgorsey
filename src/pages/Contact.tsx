@@ -170,7 +170,8 @@ const Contact: React.FC = () => {
           <ContactButton
             variant="primary"
             onClick={handleSend}
-            icon={<PaperAirplaneIcon className={styles['contact-icon']} />}
+            icon={PaperAirplaneIcon}
+            iconClassName={styles['contact-icon']}
             className={styles['contact-button']}
             ariaLabel="Send message"
           >

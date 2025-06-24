@@ -31,7 +31,7 @@ const Alert: React.FC<AlertProps> = ({ variant = 'info', children, isCloseable =
           variant="tertiary"
           className={styles['close-button']}
           aria-label="Close alert"
-          icon={<XCircleIcon style={{ width: '24px', height: '24px' }} />}
+          icon={XCircleIcon}
           onClick={() => setIsVisible(false)}
         />
       )}

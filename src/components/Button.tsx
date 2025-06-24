@@ -8,13 +8,15 @@ type ButtonProps = {
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;
-  icon?: React.ReactNode;
+  icon?: React.ElementType;
+  iconClassName?: string;
+  iconStyle?: React.CSSProperties;
   iconOnly?: boolean;
   type?: 'button' | 'submit' | 'reset';
   ariaLabel?: string;
 };
 
-const Button: React.FC<ButtonProps> = ({ variant = 'primary', onClick, children, disabled = false, icon, className, style, iconOnly = false, type = 'button', ariaLabel }) => {
+const Button: React.FC<ButtonProps> = ({ variant = 'primary', onClick, children, disabled = false, icon, className, style, iconOnly = false, type = 'button', ariaLabel, iconClassName, iconStyle }) => {
   const buttonClass = iconOnly
     ? `${styles.iconOnly}`
     : icon && children
@@ -36,7 +38,11 @@ const Button: React.FC<ButtonProps> = ({ variant = 'primary', onClick, children,
       title={typeof children === 'string' ? children : ''}
       aria-label={computedAriaLabel}
     >
-      {icon && <span className={styles.icon}>{icon}</span>}
+      {icon && React.createElement(icon, {
+        className: [styles.icon, 'chevron-icon', iconClassName].filter(Boolean).join(' '),
+        style: iconStyle,
+        'aria-hidden': true
+      })}
       {!iconOnly && children}
     </button>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BiSolidChevronUp, BiSolidChevronDown } from 'react-icons/bi';
-
+import { BiSolidChevronDown } from 'react-icons/bi';
+import { BiSolidChevronUp } from 'react-icons/bi';
 import Button from '../components/Button';
 import './Header.module.css';
 
@@ -13,16 +13,6 @@ const navLinks = [
   { to: '/discography', label: 'Discography', title: 'View Discography' },
   { to: '/gallery', label: 'Gallery', title: 'View Gallery' },
 ];
-
-const ChevronUp = React.createElement(
-  BiSolidChevronUp as React.ComponentType<React.SVGProps<SVGSVGElement>>,
-  { className: 'chevron-icon', 'aria-hidden': 'true' }
-);
-const ChevronDown = React.createElement(
-  BiSolidChevronDown as React.ComponentType<React.SVGProps<SVGSVGElement>>,
-  { className: 'chevron-icon', 'aria-hidden': 'true' }
-);
-
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -68,7 +58,7 @@ const Header: React.FC = () => {
               aria-controls="mobile-menu"
               onClick={() => setMenuOpen(open => !open)}
               type="button"
-              icon={menuOpen ? ChevronUp : ChevronDown}
+              icon={menuOpen ? (BiSolidChevronUp as React.ElementType) : (BiSolidChevronDown as React.ElementType)}
             >
               Menu
             </Button>

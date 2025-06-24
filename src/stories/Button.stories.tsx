@@ -52,12 +52,14 @@ Success.args = {
 export const Icon = Template.bind({});
 Icon.args = {
   variant: 'primary',
-  icon: <ArrowLeftCircleIcon style={{ height: '24px', width: '24px' }} />
+  icon: ArrowLeftCircleIcon,
+  iconStyle: { height: '24px', width: '24px' }
 };
 
 export const TextWithIcon = Template.bind({});
 TextWithIcon.args = {
   variant: 'primary',
   children: 'Back',
-  icon: <ArrowLeftCircleIcon style={{ height: '24px', width: '24px' }} />
+  icon: ArrowLeftCircleIcon,
+  iconStyle: { height: '24px', width: '24px' }
 };

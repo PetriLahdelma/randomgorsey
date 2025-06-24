@@ -1,13 +1,20 @@
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react-webpack5';
 import Header from '../patterns/Header';
+import { MemoryRouter } from 'react-router-dom';
 
 export default {
   title: 'Patterns/Header',
   component: Header,
-} as Meta<typeof Header>;
+  decorators: [
+    (StoryFn: React.FC) => (
+      <MemoryRouter>
+        <StoryFn />
+      </MemoryRouter>
+    ),
+  ],
+};
 
-const Template: StoryFn<typeof Header> = (args) => <Header {...args} />;
+export const Desktop = () => <Header />;
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Mobile = () => <Header />;
+Mobile.parameters = { viewport: { defaultViewport: 'iphone12', } }; // Storybook's built-in mobile viewport (375px)
