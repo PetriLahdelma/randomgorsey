@@ -8,6 +8,7 @@
   max-width: 800px;
   width: 35%;
   margin: 0 auto;
+  background-color: var(--color-black);
   background-size: contain;
   background-position: center;
   height: 338px;
