@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import styles from './About.module.css';
 import Spinner from '../components/Spinner';
 import PageMeta from '../components/PageMeta';
+import { isWebMSupported } from '../utils/isWebMSupported';
 
 const About: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
@@ -14,24 +15,26 @@ const About: React.FC = () => {
   return (
     <>
       <PageMeta title="About | Random Gorsey" description="Background, influences and side projects of Random Gorsey." path="/about" />
-      {/* Background looping video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: -1,
-        }}
-      >
-        <source src={require('../videos/promo_canvas.webm')} type="video/webm" />
-      </video>
+      {/* Background looping video (disabled if WebM unsupported) */}
+      {isWebMSupported() && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: -1,
+          }}
+        >
+          <source src={require('../videos/promo_canvas.webm')} type="video/webm" />
+        </video>
+      )}
       <motion.div
       className={styles['about-container']}
       initial={{ opacity: 0, y: 20 }}
@@ -41,19 +44,23 @@ const About: React.FC = () => {
       {loading && <Spinner style={{ borderTopColor: '#FFD600' }} />}
 
       <h1>About</h1>
-            <figure>
-        <video
-          title="Portrait of Random Gorsey"
-          autoPlay
-          muted
-          loop
-          controls={false}
-          style={{ width: '10vw', borderRadius: '50%' }}
-          onLoadedData={handleContentLoad}
-        >
-          <source src="/images/portrait.webm" type="video/webm" />
-          <img src="/images/portrait.jpg" alt="Portrait of Random Gorsey" />
-        </video>
+      <figure>
+        {isWebMSupported() ? (
+          <video
+            title="Portrait of Random Gorsey"
+            autoPlay
+            muted
+            loop
+            controls={false}
+            style={{ width: '10vw', borderRadius: '50%' }}
+            onLoadedData={handleContentLoad}
+          >
+            <source src="/images/portrait.webm" type="video/webm" />
+            <img src="/images/portrait.jpg" alt="Portrait of Random Gorsey" />
+          </video>
+        ) : (
+          <img src="/images/portrait.jpg" alt="Portrait of Random Gorsey" onLoad={handleContentLoad} />
+        )}
       </figure>
 
     <p className={styles['about-description']}>
