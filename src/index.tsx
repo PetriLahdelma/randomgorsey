@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.module.css';
 import './variables.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { HelmetProvider } from 'react-helmet-async';
 
 const root = ReactDOM.createRoot(
@@ -16,5 +15,3 @@ root.render(
     </HelmetProvider>
   </React.StrictMode>
 );
-
-reportWebVitals();
