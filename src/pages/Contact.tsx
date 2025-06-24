@@ -121,6 +121,7 @@ const Contact: React.FC = () => {
           transition: { duration: 0.4 },
         })}
       >
+
       {loading && <Spinner />}
       {sending && <Spinner />}
       {!loading && !sending && (

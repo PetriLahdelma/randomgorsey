@@ -61,7 +61,11 @@ const Discography: React.FC = () => {
         transition: { duration: 0.4 },
       })}
     >
-      <h1 className={styles['discography-title']}><span className={styles['disco-break']}>Disco-</span>graphy</h1>
+      <h1 className={styles['discography-title']}>
+        <span className={styles['disco-break']}>Disco</span>
+        <span className={styles['mobile-dash']}>-</span>
+        graphy
+      </h1>
     <div className={styles['release-grid']}>
       {releases.map((release) => {
         const buyHref =
