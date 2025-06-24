@@ -1,5 +1,5 @@
 # llms-full.txt - Website Content Structure
-# Generated: 2025-06-24T17:06:50.487Z
+# Generated: 2025-06-24T17:37:44.946Z
 # Source: https://randomgorsey.com/sitemap.xml
 # Total Pages: 6
 
@@ -50,11 +50,10 @@ Language: en
 Canonical URL: http://localhost:45678/contact
 
 ## Headings Structure:
-- Contact
 - Cookie Notice
 
 ## Main Content:
-You need to enable JavaScript to run this app.MenuContactYour NameEmailSubjectMessageSend© 2025 Random Gorsey. Rights reserved. Site by×Cookie NoticeWe use cookies to remember your preferences and to analyze how visitors interact with our site.Accepting all cookies allows us to use Google Analytics for statistics. You can also choose to keep only the cookies necessary for the website to function.NecessaryAccept all
+You need to enable JavaScript to run this app.Menu© 2025 Random Gorsey. Rights reserved. Site by×Cookie NoticeWe use cookies to remember your preferences and to analyze how visitors interact with our site.Accepting all cookies allows us to use Google Analytics for statistics. You can also choose to keep only the cookies necessary for the website to function.NecessaryAccept all
 
 ---
 
