@@ -121,7 +121,7 @@
   }
 
   .read-more {
-    color: var(--color-black) !important;
+    color: var(--color-black);
   }
 }
 

@@ -9,5 +9,13 @@ export default {
 
 const Template: StoryFn<typeof Header> = (args) => <Header {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Desktop = Template.bind({});
+Desktop.args = {};
+
+export const Mobile = Template.bind({});
+Mobile.args = {};
+Mobile.parameters = {
+  viewport: {
+    defaultViewport: 'largeMobile',
+  },
+};
