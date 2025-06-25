@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.ffc26443.css",
-    "main.js": "/static/js/main.491761a2.js",
-    "static/css/85.16f8f22d.chunk.css": "/static/css/85.16f8f22d.chunk.css",
+    "main.js": "/static/js/main.b1c23917.js",
+    "static/css/85.66969f77.chunk.css": "/static/css/85.66969f77.chunk.css",
     "static/js/85.b8bbcf15.chunk.js": "/static/js/85.b8bbcf15.chunk.js",
     "static/css/494.87be3d7c.chunk.css": "/static/css/494.87be3d7c.chunk.css",
     "static/js/494.4be063b1.chunk.js": "/static/js/494.4be063b1.chunk.js",
@@ -39,8 +39,8 @@
     "static/media/Tschick-Bold.woff2": "/static/media/Tschick-Bold.00394367f42316558f53.woff2",
     "index.html": "/index.html",
     "main.ffc26443.css.map": "/static/css/main.ffc26443.css.map",
-    "main.491761a2.js.map": "/static/js/main.491761a2.js.map",
-    "85.16f8f22d.chunk.css.map": "/static/css/85.16f8f22d.chunk.css.map",
+    "main.b1c23917.js.map": "/static/js/main.b1c23917.js.map",
+    "85.66969f77.chunk.css.map": "/static/css/85.66969f77.chunk.css.map",
     "85.b8bbcf15.chunk.js.map": "/static/js/85.b8bbcf15.chunk.js.map",
     "494.87be3d7c.chunk.css.map": "/static/css/494.87be3d7c.chunk.css.map",
     "494.4be063b1.chunk.js.map": "/static/js/494.4be063b1.chunk.js.map",
@@ -59,6 +59,6 @@
   },
   "entrypoints": [
     "static/css/main.ffc26443.css",
-    "static/js/main.491761a2.js"
+    "static/js/main.b1c23917.js"
   ]
 }
