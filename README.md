@@ -21,7 +21,7 @@ The site will be available at [http://localhost:3000](http://localhost:3000). An
 ## Useful Scripts
 
 - **`npm test`** – run unit tests using React Testing Library.
-- **`npm run lint`** – format and lint the CSS files with stylelint.
+- **`npm run lint`** – format and lint the CSS files and inline styles with stylelint.
 - **`npm run storybook`** – launch the component Storybook on port 6006.
 - **`npm run build-storybook`** – generate the static Storybook site.
 - **`npm run build`** – create an optimized production build and pre-render each route using `react-snap`.
