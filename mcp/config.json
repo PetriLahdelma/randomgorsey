@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "typescript": {
+      "command": "node",
+      "args": ["./mcp/typescript-server.js"],
+      "env": {},
+      "description": "TypeScript MCP Server for code analysis and checking"
+    }
+  },
+  "settings": {
+    "typescript": {
+      "strictMode": false,
+      "autoFix": false,
+      "includeNodeModules": false
+    }
+  }
+}

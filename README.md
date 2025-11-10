@@ -18,6 +18,26 @@ npm start
 
 The site will be available at [http://localhost:3000](http://localhost:3000). Any saved changes will hot reload in the browser.
 
+### Environment Setup
+
+For the contact form to work, you need to configure EmailJS environment variables:
+
+1. Copy the example environment file:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Fill in your EmailJS credentials in `.env`:
+   ```
+   REACT_APP_EMAILJS_SERVICE_ID=your_service_id
+   REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
+   REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
+   EMAILJS_PRIVATE_KEY=your_private_key
+   ```
+
+**Note**: The `.env` file is ignored by git to keep your credentials secure. Never commit sensitive credentials to version control.
+
 ## Useful Scripts
 
 - **`npm test`** – run unit tests using React Testing Library.

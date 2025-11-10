@@ -42,21 +42,17 @@ const SocialShare: React.FC<SocialShareProps> = ({ url, title, text }) => {
     <div className={styles['social-share']}>
       <span className={styles.label}>Share:</span>
       {platforms.map((platform) => (
-        <a
+        <SocialIcon 
           key={platform.name}
-          href={platform.url}
+          url={platform.url}
+          network={platform.network} 
+          bgColor="#000" 
+          fgColor="#fff" 
+          style={{ height: 24, width: 24 }} 
           target="_blank"
-          rel="noopener noreferrer"
           aria-label={`Share on ${platform.name}`}
           className={styles.icon}
-        >
-          <SocialIcon 
-            network={platform.network} 
-            bgColor="#000" 
-            fgColor="#fff" 
-            style={{ height: 24, width: 24 }} 
-          />
-        </a>
+        />
       ))}
     </div>
   );
