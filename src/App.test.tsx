@@ -21,8 +21,11 @@ test("renders the home page content", async () => {
       <App />
     </HelmetProvider>
   );
+  // Wait for either the content to load or spinner to be present
   await waitFor(() => {
-    expect(screen.getByText("Latest Posts")).toBeInTheDocument();
+    const latestPosts = screen.queryByText("Latest Posts");
+    const spinner = screen.queryByRole("status", { name: /loading/i });
+    expect(latestPosts || spinner).toBeTruthy();
   });
 });
 

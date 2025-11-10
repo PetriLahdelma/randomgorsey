@@ -1,10 +1,11 @@
-import React, { Suspense, useState, lazy } from 'react';
+import React, { Suspense, useState, lazy, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Footer from './patterns/Footer';
 import Header from './patterns/Header';
 import CookieConsent from './components/CookieConsent';
 import Spinner from './components/Spinner';
 import styles from './App.module.css';
+import { initializeSecurityMeasures } from './utils/httpsEnforcement';
 
 const Home = lazy(() => import('./pages/Home'));
 const Listen = lazy(() => import('./pages/Listen'));
@@ -18,6 +19,11 @@ const App: React.FC = () => {
   const [isOverlayActive, setIsOverlayActive] = useState(false);
 
   const handleOverlayState = setIsOverlayActive;
+
+  // Initialize security measures on app load
+  useEffect(() => {
+    initializeSecurityMeasures();
+  }, []);
 
   return (
     <BrowserRouter>

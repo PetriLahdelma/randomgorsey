@@ -25,3 +25,18 @@
   font-style: italic;
   color: var(--color-gray-medium);
 }
+
+.error-message {
+  display: flex;
+  align-items: center;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--color-red);
+}
+
+.error-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-right: 0.375rem;
+}

@@ -59,6 +59,17 @@
   border-radius: 4px;
 }
 
+.error-message {
+  padding: 0.75rem;
+  margin-block-end: 1rem;
+  font-size: 0.875rem;
+  color: var(--color-red);
+  text-align: center;
+  background-color: rgb(255 0 0 / 10%);
+  border: 1px solid var(--color-red);
+  border-radius: 4px;
+}
+
 .contact-button {
   width: 100%;
   padding: 0.5rem;
@@ -138,4 +149,21 @@
   .contact-textarea {
     max-width: 96%;
   }
+}
+
+.disclaimer {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.disclaimer-text {
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--color-blue);
+  text-align: center;
+  background-color: rgb(0 0 255 / 5%);
+  border: 1px solid rgb(0 0 255 / 20%);
+  border-radius: 4px;
 }

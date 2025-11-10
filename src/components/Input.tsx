@@ -214,9 +214,9 @@ const Input: React.FC<InputProps> = ({
       )}
 
       {error && (
-        <div className={styles.errorMessage} id={`${inputId}-error`}>
+        <div className={styles['error-message']} id={`${inputId}-error`}>
           <ExclamationCircleIcon
-            className={styles.errorIcon}
+            className={styles['error-icon']}
             aria-hidden="true"
           />
           <span role="alert">{error}</span>
