@@ -5,37 +5,36 @@
  * Automatically updates AI assistant documentation files after successful builds
  */
 
-const fs = require('fs').promises;
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs").promises;
+const path = require("path");
+const { execSync } = require("child_process");
 
 class DocumentationUpdater {
   constructor() {
     this.projectRoot = process.cwd();
-    this.packageJsonPath = path.join(this.projectRoot, 'package.json');
-    this.copilotPath = path.join(this.projectRoot, 'COPILOT_INSTRUCTIONS.md');
-    this.claudePath = path.join(this.projectRoot, 'CLAUDE.md');
+    this.packageJsonPath = path.join(this.projectRoot, "package.json");
+    this.copilotPath = path.join(this.projectRoot, "COPILOT_INSTRUCTIONS.md");
+    this.claudePath = path.join(this.projectRoot, "CLAUDE.md");
   }
 
   async updateDocumentation() {
     try {
-      console.log('🔄 Updating AI assistant documentation...');
-      
+      console.log("🔄 Updating AI assistant documentation...");
+
       // Get current project status
       const status = await this.getProjectStatus();
-      const timestamp = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
-      
+      const timestamp = new Date().toISOString().split("T")[0]; // YYYY-MM-DD format
+
       // Update both documentation files
       await this.updateCopilotInstructions(status, timestamp);
       await this.updateClaudeGuide(status, timestamp);
-      
-      console.log('✅ AI assistant documentation updated successfully!');
+
+      console.log("✅ AI assistant documentation updated successfully!");
       console.log(`📊 Build Status: ${status.buildStatus}`);
       console.log(`🔍 TypeScript: ${status.typeScriptStatus}`);
       console.log(`🧪 Tests: ${status.testStatus}`);
-      
     } catch (error) {
-      console.error('❌ Failed to update documentation:', error.message);
+      console.error("❌ Failed to update documentation:", error.message);
       process.exit(1);
     }
   }
@@ -43,51 +42,54 @@ class DocumentationUpdater {
   async getProjectStatus() {
     const status = {
       timestamp: new Date().toISOString(),
-      buildStatus: '❌ Unknown',
-      typeScriptStatus: '❌ Unknown', 
-      testStatus: '❌ Unknown',
+      buildStatus: "❌ Unknown",
+      typeScriptStatus: "❌ Unknown",
+      testStatus: "❌ Unknown",
       dependencies: {},
       scripts: {},
-      lastUpdated: new Date().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      })
+      lastUpdated: new Date().toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
     };
 
     try {
       // Get package.json info
-      const packageJson = JSON.parse(await fs.readFile(this.packageJsonPath, 'utf8'));
+      const packageJson = JSON.parse(
+        await fs.readFile(this.packageJsonPath, "utf8")
+      );
       status.dependencies = packageJson.dependencies;
       status.scripts = packageJson.scripts;
       status.version = packageJson.version;
 
       // Check TypeScript compilation
       try {
-        execSync('npx tsc --noEmit', { stdio: 'pipe' });
-        status.typeScriptStatus = '✅ No errors';
+        execSync("npx tsc --noEmit", { stdio: "pipe" });
+        status.typeScriptStatus = "✅ No errors";
       } catch {
-        status.typeScriptStatus = '❌ Has errors';
+        status.typeScriptStatus = "❌ Has errors";
       }
 
       // Check if tests pass
       try {
-        execSync('npm test -- --passWithNoTests --watchAll=false', { stdio: 'pipe' });
-        status.testStatus = '✅ Passing';
+        execSync("npm test -- --passWithNoTests --watchAll=false", {
+          stdio: "pipe",
+        });
+        status.testStatus = "✅ Passing";
       } catch {
-        status.testStatus = '❌ Failing';
+        status.testStatus = "❌ Failing";
       }
 
       // Check build status
       try {
-        execSync('npm run build', { stdio: 'pipe' });
-        status.buildStatus = '✅ Successful';
+        execSync("npm run build", { stdio: "pipe" });
+        status.buildStatus = "✅ Successful";
       } catch {
-        status.buildStatus = '❌ Failed';
+        status.buildStatus = "❌ Failed";
       }
-
     } catch (error) {
-      console.warn('⚠️ Could not determine all project status:', error.message);
+      console.warn("⚠️ Could not determine all project status:", error.message);
     }
 
     return status;
@@ -95,8 +97,8 @@ class DocumentationUpdater {
 
   async updateCopilotInstructions(status, timestamp) {
     try {
-      let content = await fs.readFile(this.copilotPath, 'utf8');
-      
+      let content = await fs.readFile(this.copilotPath, "utf8");
+
       // Update status section
       const newStatusSection = `### 🎯 Current Status (${status.lastUpdated})
 
@@ -115,7 +117,7 @@ class DocumentationUpdater {
       // Replace the status section
       content = content.replace(
         /### 🎯 Current Status \(.*?\)[\s\S]*?- Tests: [^\\n]*\n/,
-        newStatusSection + '\n'
+        newStatusSection + "\n"
       );
 
       // Update timestamp at bottom
@@ -124,25 +126,34 @@ class DocumentationUpdater {
         `**Last Updated**: ${status.lastUpdated}\n`
       );
 
-      await fs.writeFile(this.copilotPath, content, 'utf8');
-      
+      await fs.writeFile(this.copilotPath, content, "utf8");
     } catch (error) {
-      console.error('Failed to update COPILOT_INSTRUCTIONS.md:', error.message);
+      console.error("Failed to update COPILOT_INSTRUCTIONS.md:", error.message);
     }
   }
 
   async updateClaudeGuide(status, timestamp) {
     try {
-      let content = await fs.readFile(this.claudePath, 'utf8');
-      
+      let content = await fs.readFile(this.claudePath, "utf8");
+
       // Update status section
-      const newStatusSection = `### 📊 Current System Status (${status.lastUpdated})
+      const newStatusSection = `### 📊 Current System Status (${
+        status.lastUpdated
+      })
 
 **🟢 OPERATIONAL STATUS**
-- ${status.typeScriptStatus.includes('✅') ? '✅' : '❌'} TypeScript 5.9.3 compilation: ${status.typeScriptStatus.includes('✅') ? 'CLEAN' : 'ERRORS'}
+- ${
+        status.typeScriptStatus.includes("✅") ? "✅" : "❌"
+      } TypeScript 5.9.3 compilation: ${
+        status.typeScriptStatus.includes("✅") ? "CLEAN" : "ERRORS"
+      }
 - ✅ React 19.2.0 runtime: STABLE  
-- ${status.buildStatus.includes('✅') ? '✅' : '❌'} Production build: ${status.buildStatus.includes('✅') ? 'SUCCESS' : 'FAILED'}
-- ${status.testStatus.includes('✅') ? '✅' : '❌'} Test suite: ${status.testStatus.includes('✅') ? 'PASSING' : 'FAILING'}
+- ${status.buildStatus.includes("✅") ? "✅" : "❌"} Production build: ${
+        status.buildStatus.includes("✅") ? "SUCCESS" : "FAILED"
+      }
+- ${status.testStatus.includes("✅") ? "✅" : "❌"} Test suite: ${
+        status.testStatus.includes("✅") ? "PASSING" : "FAILING"
+      }
 - ⚠️ ESLint: 12 minor issues (non-breaking)`;
 
       // Replace the status section
@@ -160,19 +171,22 @@ class DocumentationUpdater {
       // Update system status line
       content = content.replace(
         /\*\*📊 System Status\*\*: [^\\n]*/,
-        `**📊 System Status**: ${status.buildStatus.includes('✅') ? '✅ Fully Operational' : '❌ Issues Detected'}`
+        `**📊 System Status**: ${
+          status.buildStatus.includes("✅")
+            ? "✅ Fully Operational"
+            : "❌ Issues Detected"
+        }`
       );
 
-      await fs.writeFile(this.claudePath, content, 'utf8');
-      
+      await fs.writeFile(this.claudePath, content, "utf8");
     } catch (error) {
-      console.error('Failed to update CLAUDE.md:', error.message);
+      console.error("Failed to update CLAUDE.md:", error.message);
     }
   }
 
   async generateStatusReport() {
     const status = await this.getProjectStatus();
-    
+
     const report = `
 📊 PROJECT STATUS REPORT
 ========================
@@ -186,12 +200,14 @@ class DocumentationUpdater {
   - Production Build: ${status.buildStatus}
 
 🔧 Key Dependencies:
-  - React: ${status.dependencies?.react || 'N/A'}
-  - TypeScript: ${status.dependencies?.typescript || 'N/A'}
-  - Framer Motion: ${status.dependencies?.['framer-motion'] || 'N/A'}
-  - Zod: ${status.dependencies?.zod || 'N/A'}
+  - React: ${status.dependencies?.react || "N/A"}
+  - TypeScript: ${status.dependencies?.typescript || "N/A"}
+  - Framer Motion: ${status.dependencies?.["framer-motion"] || "N/A"}
+  - Zod: ${status.dependencies?.zod || "N/A"}
 
-📋 Available Scripts: ${Object.keys(status.scripts || {}).length} scripts configured
+📋 Available Scripts: ${
+      Object.keys(status.scripts || {}).length
+    } scripts configured
 `;
 
     console.log(report);
@@ -203,10 +219,10 @@ class DocumentationUpdater {
 if (require.main === module) {
   const updater = new DocumentationUpdater();
   const command = process.argv[2];
-  
-  if (command === 'report') {
+
+  if (command === "report") {
     updater.generateStatusReport().catch(console.error);
-  } else if (command === 'update') {
+  } else if (command === "update") {
     updater.updateDocumentation().catch(console.error);
   } else {
     console.log(`

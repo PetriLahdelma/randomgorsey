@@ -38,7 +38,7 @@
     "build-storybook": "storybook build",
     "generate-meta": "node scripts/generate-meta.js",
     "docs:update": "node scripts/update-docs.js update",
-    "docs:report": "node scripts/update-docs.js report", 
+    "docs:report": "node scripts/update-docs.js report",
     "build:complete": "npm run build && npm run docs:update",
     "ts:check": "node mcp/direct-checker.js",
     "ts:check:types": "node mcp/direct-checker.js check",

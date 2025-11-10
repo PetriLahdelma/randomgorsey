@@ -57,22 +57,26 @@ npm run mcp:checker
 ## Features
 
 ### Type Checking
+
 - Validates TypeScript compilation without emitting files
 - Supports strict mode checking
 - Reports type errors and warnings
 
 ### ESLint Integration
+
 - Runs TypeScript-specific ESLint rules
 - Supports auto-fixing of linting issues
 - Configurable rules for TypeScript best practices
 
 ### File Analysis
+
 - Analyzes individual TypeScript files
 - Detects TypeScript features (interfaces, types, generics, etc.)
 - Provides code improvement suggestions
 - Shows file statistics and patterns
 
 ### Project Structure Analysis
+
 - Analyzes TypeScript configuration (tsconfig.json)
 - Shows project dependencies and scripts
 - Lists all TypeScript files in the project
@@ -165,10 +169,12 @@ npm run ts:check:lint
 ### Common Issues
 
 1. **"No tsconfig.json found"**
+
    - Ensure your project has a `tsconfig.json` file
    - Run the command from the project root directory
 
 2. **ESLint configuration errors**
+
    - Check that all TypeScript ESLint dependencies are installed
    - Verify the `.eslintrc.json` configuration is valid
 
@@ -191,6 +197,7 @@ npm run ts:check help
 For integration with MCP-compatible tools, you can use the full protocol server:
 
 1. Start the server:
+
    ```bash
    npm run mcp:server
    ```

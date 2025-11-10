@@ -1,0 +1,37 @@
+# CODEOWNERS file for Random Gorsey
+
+# This file defines who should review specific parts of the codebase
+
+# Global owners - these users will be requested for review on every PR
+
+- @PetriLahdelma
+
+# GitHub Actions and CI/CD
+
+/.github/ @PetriLahdelma
+
+# Security-sensitive files
+
+/.env.example @PetriLahdelma
+/package.json @PetriLahdelma
+/package-lock.json @PetriLahdelma
+
+# Core application files
+
+/src/pages/Contact.tsx @PetriLahdelma
+/src/utils/ @PetriLahdelma
+
+# Build and deployment scripts
+
+/scripts/ @PetriLahdelma
+/public/ @PetriLahdelma
+
+# Documentation
+
+\*.md @PetriLahdelma
+/docs/ @PetriLahdelma
+
+# TypeScript configuration
+
+tsconfig.json @PetriLahdelma
+\*.d.ts @PetriLahdelma

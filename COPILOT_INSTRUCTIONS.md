@@ -49,6 +49,7 @@ src/
 ### 🔧 Development Workflow
 
 #### Essential Commands
+
 ```bash
 npm start                    # Development server
 npm run build               # Production build
@@ -63,18 +64,21 @@ npm run lint               # CSS linting
 #### Key Development Patterns
 
 **Component Creation**:
+
 - Use TypeScript interfaces for props
 - Create accompanying CSS Module files
 - Include Storybook stories for complex components
 - Write tests for user-facing components
 
 **Styling Approach**:
+
 - CSS Modules for component-specific styles
 - Global CSS variables in `variables.css`
 - Responsive design with mobile-first approach
 - Consistent design system with reusable components
 
 **Animation Guidelines**:
+
 - Use Framer Motion for page transitions and interactions
 - Import: `import { motion } from 'framer-motion'`
 - Consistent animation variants for enter/exit
@@ -83,6 +87,7 @@ npm run lint               # CSS linting
 ### 🎯 Current Status (November 2025)
 
 **Recent Major Updates**:
+
 - ✅ React 18 → 19 upgrade completed
 - ✅ TypeScript 4 → 5 migration finished
 - ✅ Storybook 9 → 10 updated
@@ -90,11 +95,13 @@ npm run lint               # CSS linting
 - ✅ All dependencies updated to latest versions
 
 **Known Issues**:
+
 - ESLint 8 (react-scripts limitation prevents ESLint 9)
 - 12 minor linting issues (code quality, not breaking)
 - Some Storybook stories need type annotation updates
 
 **Build Status**: ✅ All systems operational
+
 - TypeScript compilation: ✅ No errors
 - Production build: ✅ Successful
 - Tests: ✅ Passing
@@ -102,11 +109,12 @@ npm run lint               # CSS linting
 ### 📝 Code Style Guidelines
 
 **TypeScript**:
+
 ```typescript
 // Prefer interface over type for component props
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary';
+  variant?: "primary" | "secondary";
   onClick?: () => void;
 }
 
@@ -118,16 +126,14 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 ```
 
 **React Patterns**:
+
 ```typescript
 // Functional components with TypeScript
 const Component: React.FC<Props> = ({ prop1, prop2 }) => {
-  const [state, setState] = useState<string>('');
-  
+  const [state, setState] = useState<string>("");
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       {/* Component content */}
     </motion.div>
   );
@@ -135,6 +141,7 @@ const Component: React.FC<Props> = ({ prop1, prop2 }) => {
 ```
 
 **CSS Modules**:
+
 ```css
 /* Component.module.css */
 .container {
@@ -151,34 +158,38 @@ const Component: React.FC<Props> = ({ prop1, prop2 }) => {
 ### 🔍 Debugging & Testing
 
 **TypeScript Checking**:
+
 - Use `npm run ts:check:types` for compilation errors
 - Use `npm run ts:check:lint` for code quality issues
 - Use `npm run ts:check:all` for comprehensive analysis
 
 **Component Testing**:
+
 ```typescript
 // Use React Testing Library patterns
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-test('should handle user interaction', async () => {
+test("should handle user interaction", async () => {
   const user = userEvent.setup();
   render(<Component />);
-  
-  await user.click(screen.getByRole('button'));
-  expect(screen.getByText('Expected text')).toBeInTheDocument();
+
+  await user.click(screen.getByRole("button"));
+  expect(screen.getByText("Expected text")).toBeInTheDocument();
 });
 ```
 
 ### 🚀 Deployment
 
 **Production Build**:
+
 - Automatic optimization and bundling
 - Static site generation with react-snap
 - Deployed to GitHub Pages
 - Custom domain: randomgorsey.com
 
 **Build Process**:
+
 1. TypeScript compilation
 2. Webpack bundling
 3. react-snap static generation
@@ -187,6 +198,7 @@ test('should handle user interaction', async () => {
 ### 💡 AI Assistant Guidelines
 
 **When adding new features**:
+
 1. Check existing patterns in similar components
 2. Use TypeScript interfaces for all props
 3. Include CSS Module styling
@@ -195,6 +207,7 @@ test('should handle user interaction', async () => {
 6. Update Storybook if component is reusable
 
 **When fixing bugs**:
+
 1. Run `npm run ts:check:types` first
 2. Check component tests
 3. Verify responsive behavior
@@ -202,6 +215,7 @@ test('should handle user interaction', async () => {
 5. Ensure accessibility standards
 
 **When updating dependencies**:
+
 1. Check for breaking changes in major versions
 2. Update TypeScript types if needed
 3. Test build process after updates

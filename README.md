@@ -23,6 +23,7 @@ The site will be available at [http://localhost:3000](http://localhost:3000). An
 For the contact form to work, you need to configure EmailJS environment variables:
 
 1. Copy the example environment file:
+
    ```bash
    cp .env.example .env
    ```
@@ -30,7 +31,7 @@ For the contact form to work, you need to configure EmailJS environment variable
 2. Fill in your EmailJS credentials in `.env`:
    ```
    REACT_APP_EMAILJS_SERVICE_ID=your_service_id
-   REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id  
+   REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
    REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
    EMAILJS_PRIVATE_KEY=your_private_key
    ```

@@ -5,19 +5,24 @@
  * Provides TypeScript code analysis, linting, and checking capabilities
  */
 
-const { Server } = require('@modelcontextprotocol/sdk/server/index.js');
-const { StdioServerTransport } = require('@modelcontextprotocol/sdk/server/stdio.js');
-const { CallToolRequestSchema, ListToolsRequestSchema } = require('@modelcontextprotocol/sdk/types.js');
-const fs = require('fs').promises;
-const path = require('path');
-const { execSync } = require('child_process');
+const { Server } = require("@modelcontextprotocol/sdk/server/index.js");
+const {
+  StdioServerTransport,
+} = require("@modelcontextprotocol/sdk/server/stdio.js");
+const {
+  CallToolRequestSchema,
+  ListToolsRequestSchema,
+} = require("@modelcontextprotocol/sdk/types.js");
+const fs = require("fs").promises;
+const path = require("path");
+const { execSync } = require("child_process");
 
 class TypeScriptMCPServer {
   constructor() {
     this.server = new Server(
       {
-        name: 'typescript-mcp-server',
-        version: '1.0.0',
+        name: "typescript-mcp-server",
+        version: "1.0.0",
       },
       {
         capabilities: {
@@ -35,79 +40,79 @@ class TypeScriptMCPServer {
       return {
         tools: [
           {
-            name: 'check_typescript',
-            description: 'Run TypeScript compiler to check for type errors',
+            name: "check_typescript",
+            description: "Run TypeScript compiler to check for type errors",
             inputSchema: {
-              type: 'object',
+              type: "object",
               properties: {
                 project_path: {
-                  type: 'string',
-                  description: 'Path to the TypeScript project',
+                  type: "string",
+                  description: "Path to the TypeScript project",
                 },
                 strict: {
-                  type: 'boolean',
-                  description: 'Use strict type checking',
+                  type: "boolean",
+                  description: "Use strict type checking",
                   default: false,
                 },
               },
-              required: ['project_path'],
+              required: ["project_path"],
             },
           },
           {
-            name: 'lint_typescript',
-            description: 'Run ESLint on TypeScript files',
+            name: "lint_typescript",
+            description: "Run ESLint on TypeScript files",
             inputSchema: {
-              type: 'object',
+              type: "object",
               properties: {
                 project_path: {
-                  type: 'string',
-                  description: 'Path to the project to lint',
+                  type: "string",
+                  description: "Path to the project to lint",
                 },
                 fix: {
-                  type: 'boolean',
-                  description: 'Auto-fix linting errors where possible',
+                  type: "boolean",
+                  description: "Auto-fix linting errors where possible",
                   default: false,
                 },
                 files: {
-                  type: 'array',
-                  items: { type: 'string' },
-                  description: 'Specific files to lint (optional)',
+                  type: "array",
+                  items: { type: "string" },
+                  description: "Specific files to lint (optional)",
                 },
               },
-              required: ['project_path'],
+              required: ["project_path"],
             },
           },
           {
-            name: 'analyze_file',
-            description: 'Analyze a specific TypeScript file for issues',
+            name: "analyze_file",
+            description: "Analyze a specific TypeScript file for issues",
             inputSchema: {
-              type: 'object',
+              type: "object",
               properties: {
                 file_path: {
-                  type: 'string',
-                  description: 'Path to the TypeScript file to analyze',
+                  type: "string",
+                  description: "Path to the TypeScript file to analyze",
                 },
                 include_suggestions: {
-                  type: 'boolean',
-                  description: 'Include code improvement suggestions',
+                  type: "boolean",
+                  description: "Include code improvement suggestions",
                   default: true,
                 },
               },
-              required: ['file_path'],
+              required: ["file_path"],
             },
           },
           {
-            name: 'get_project_structure',
-            description: 'Get TypeScript project structure and configuration',
+            name: "get_project_structure",
+            description: "Get TypeScript project structure and configuration",
             inputSchema: {
-              type: 'object',
+              type: "object",
               properties: {
                 project_path: {
-                  type: 'string',
-                  description: 'Path to the project',
+                  type: "string",
+                  description: "Path to the project",
                 },
               },
-              required: ['project_path'],
+              required: ["project_path"],
             },
           },
         ],
@@ -120,13 +125,13 @@ class TypeScriptMCPServer {
         const { name, arguments: args } = request.params;
 
         switch (name) {
-          case 'check_typescript':
+          case "check_typescript":
             return await this.checkTypeScript(args);
-          case 'lint_typescript':
+          case "lint_typescript":
             return await this.lintTypeScript(args);
-          case 'analyze_file':
+          case "analyze_file":
             return await this.analyzeFile(args);
-          case 'get_project_structure':
+          case "get_project_structure":
             return await this.getProjectStructure(args);
           default:
             throw new Error(`Unknown tool: ${name}`);
@@ -135,7 +140,7 @@ class TypeScriptMCPServer {
         return {
           content: [
             {
-              type: 'text',
+              type: "text",
               text: `Error: ${error.message}`,
             },
           ],
@@ -146,10 +151,10 @@ class TypeScriptMCPServer {
 
   async checkTypeScript(args) {
     const { project_path, strict = false } = args;
-    
+
     try {
-      const tsConfigPath = path.join(project_path, 'tsconfig.json');
-      
+      const tsConfigPath = path.join(project_path, "tsconfig.json");
+
       // Check if tsconfig.json exists
       try {
         await fs.access(tsConfigPath);
@@ -157,8 +162,8 @@ class TypeScriptMCPServer {
         return {
           content: [
             {
-              type: 'text',
-              text: 'No tsconfig.json found in the project directory.',
+              type: "text",
+              text: "No tsconfig.json found in the project directory.",
             },
           ],
         };
@@ -167,19 +172,21 @@ class TypeScriptMCPServer {
       // Run TypeScript compiler check
       let command = `cd "${project_path}" && npx tsc --noEmit`;
       if (strict) {
-        command += ' --strict';
+        command += " --strict";
       }
 
-      const output = execSync(command, { 
-        encoding: 'utf8',
-        cwd: project_path 
+      const output = execSync(command, {
+        encoding: "utf8",
+        cwd: project_path,
       });
 
       return {
         content: [
           {
-            type: 'text',
-            text: `TypeScript compilation check completed successfully!\n\n${output || 'No type errors found.'}`,
+            type: "text",
+            text: `TypeScript compilation check completed successfully!\n\n${
+              output || "No type errors found."
+            }`,
           },
         ],
       };
@@ -187,8 +194,10 @@ class TypeScriptMCPServer {
       return {
         content: [
           {
-            type: 'text',
-            text: `TypeScript compilation errors found:\n\n${error.stdout || error.message}`,
+            type: "text",
+            text: `TypeScript compilation errors found:\n\n${
+              error.stdout || error.message
+            }`,
           },
         ],
       };
@@ -197,32 +206,34 @@ class TypeScriptMCPServer {
 
   async lintTypeScript(args) {
     const { project_path, fix = false, files } = args;
-    
+
     try {
       let command = `cd "${project_path}" && npx eslint`;
-      
+
       if (files && files.length > 0) {
-        command += ` ${files.join(' ')}`;
+        command += ` ${files.join(" ")}`;
       } else {
         command += ` "src/**/*.{ts,tsx}"`;
       }
-      
-      if (fix) {
-        command += ' --fix';
-      }
-      
-      command += ' --ext .ts,.tsx';
 
-      const output = execSync(command, { 
-        encoding: 'utf8',
-        cwd: project_path 
+      if (fix) {
+        command += " --fix";
+      }
+
+      command += " --ext .ts,.tsx";
+
+      const output = execSync(command, {
+        encoding: "utf8",
+        cwd: project_path,
       });
 
       return {
         content: [
           {
-            type: 'text',
-            text: `ESLint check completed!\n\n${output || 'No linting issues found.'}`,
+            type: "text",
+            text: `ESLint check completed!\n\n${
+              output || "No linting issues found."
+            }`,
           },
         ],
       };
@@ -230,7 +241,7 @@ class TypeScriptMCPServer {
       return {
         content: [
           {
-            type: 'text',
+            type: "text",
             text: `ESLint found issues:\n\n${error.stdout || error.message}`,
           },
         ],
@@ -240,58 +251,58 @@ class TypeScriptMCPServer {
 
   async analyzeFile(args) {
     const { file_path, include_suggestions = true } = args;
-    
+
     try {
       // Check if file exists
       await fs.access(file_path);
-      
+
       // Read file content
-      const content = await fs.readFile(file_path, 'utf8');
-      
+      const content = await fs.readFile(file_path, "utf8");
+
       let analysis = `Analysis for: ${file_path}\n\n`;
-      
+
       // Basic file statistics
-      const lines = content.split('\n');
+      const lines = content.split("\n");
       analysis += `File Statistics:\n`;
       analysis += `- Lines: ${lines.length}\n`;
       analysis += `- Characters: ${content.length}\n\n`;
-      
+
       // Check for common TypeScript patterns
       const hasInterface = /interface\s+\w+/.test(content);
       const hasType = /type\s+\w+/.test(content);
       const hasEnum = /enum\s+\w+/.test(content);
       const hasGenerics = /<[A-Z]\w*>/.test(content);
       const hasAsyncAwait = /async\s+\w+|await\s+/.test(content);
-      
+
       analysis += `TypeScript Features Detected:\n`;
-      analysis += `- Interfaces: ${hasInterface ? 'Yes' : 'No'}\n`;
-      analysis += `- Type Aliases: ${hasType ? 'Yes' : 'No'}\n`;
-      analysis += `- Enums: ${hasEnum ? 'Yes' : 'No'}\n`;
-      analysis += `- Generics: ${hasGenerics ? 'Yes' : 'No'}\n`;
-      analysis += `- Async/Await: ${hasAsyncAwait ? 'Yes' : 'No'}\n\n`;
-      
+      analysis += `- Interfaces: ${hasInterface ? "Yes" : "No"}\n`;
+      analysis += `- Type Aliases: ${hasType ? "Yes" : "No"}\n`;
+      analysis += `- Enums: ${hasEnum ? "Yes" : "No"}\n`;
+      analysis += `- Generics: ${hasGenerics ? "Yes" : "No"}\n`;
+      analysis += `- Async/Await: ${hasAsyncAwait ? "Yes" : "No"}\n\n`;
+
       if (include_suggestions) {
         analysis += `Suggestions:\n`;
-        
+
         if (!hasInterface && !hasType) {
           analysis += `- Consider adding interfaces or type definitions for better type safety\n`;
         }
-        
-        if (content.includes('any')) {
+
+        if (content.includes("any")) {
           analysis += `- Found 'any' types - consider using more specific types\n`;
         }
-        
-        if (!content.includes('export') && !content.includes('import')) {
+
+        if (!content.includes("export") && !content.includes("import")) {
           analysis += `- Consider adding exports/imports for better modularity\n`;
         }
-        
+
         analysis += `\n`;
       }
 
       return {
         content: [
           {
-            type: 'text',
+            type: "text",
             text: analysis,
           },
         ],
@@ -300,7 +311,7 @@ class TypeScriptMCPServer {
       return {
         content: [
           {
-            type: 'text',
+            type: "text",
             text: `Error analyzing file: ${error.message}`,
           },
         ],
@@ -310,42 +321,48 @@ class TypeScriptMCPServer {
 
   async getProjectStructure(args) {
     const { project_path } = args;
-    
+
     try {
       let structure = `Project Structure Analysis for: ${project_path}\n\n`;
-      
+
       // Check for TypeScript configuration
-      const tsConfigPath = path.join(project_path, 'tsconfig.json');
+      const tsConfigPath = path.join(project_path, "tsconfig.json");
       try {
-        const tsConfig = await fs.readFile(tsConfigPath, 'utf8');
+        const tsConfig = await fs.readFile(tsConfigPath, "utf8");
         structure += `TypeScript Configuration (tsconfig.json):\n`;
         structure += `${tsConfig}\n\n`;
       } catch {
         structure += `No tsconfig.json found\n\n`;
       }
-      
+
       // Check for package.json
-      const packageJsonPath = path.join(project_path, 'package.json');
+      const packageJsonPath = path.join(project_path, "package.json");
       try {
-        const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf8'));
+        const packageJson = JSON.parse(
+          await fs.readFile(packageJsonPath, "utf8")
+        );
         structure += `Project Dependencies:\n`;
-        
+
         if (packageJson.dependencies) {
           structure += `Runtime Dependencies:\n`;
-          Object.entries(packageJson.dependencies).forEach(([name, version]) => {
-            structure += `  - ${name}: ${version}\n`;
-          });
+          Object.entries(packageJson.dependencies).forEach(
+            ([name, version]) => {
+              structure += `  - ${name}: ${version}\n`;
+            }
+          );
           structure += `\n`;
         }
-        
+
         if (packageJson.devDependencies) {
           structure += `Development Dependencies:\n`;
-          Object.entries(packageJson.devDependencies).forEach(([name, version]) => {
-            structure += `  - ${name}: ${version}\n`;
-          });
+          Object.entries(packageJson.devDependencies).forEach(
+            ([name, version]) => {
+              structure += `  - ${name}: ${version}\n`;
+            }
+          );
           structure += `\n`;
         }
-        
+
         if (packageJson.scripts) {
           structure += `Available Scripts:\n`;
           Object.entries(packageJson.scripts).forEach(([name, command]) => {
@@ -356,36 +373,40 @@ class TypeScriptMCPServer {
       } catch {
         structure += `No package.json found\n\n`;
       }
-      
+
       // Find TypeScript files
       const findTsFiles = (dir) => {
         try {
           const files = [];
           const entries = fs.readdirSync(dir);
-          
+
           for (const entry of entries) {
             const fullPath = path.join(dir, entry);
             const stat = fs.statSync(fullPath);
-            
-            if (stat.isDirectory() && !entry.startsWith('.') && entry !== 'node_modules') {
+
+            if (
+              stat.isDirectory() &&
+              !entry.startsWith(".") &&
+              entry !== "node_modules"
+            ) {
               files.push(...findTsFiles(fullPath));
-            } else if (entry.endsWith('.ts') || entry.endsWith('.tsx')) {
+            } else if (entry.endsWith(".ts") || entry.endsWith(".tsx")) {
               files.push(path.relative(project_path, fullPath));
             }
           }
-          
+
           return files;
         } catch {
           return [];
         }
       };
-      
+
       const tsFiles = findTsFiles(project_path);
       structure += `TypeScript Files Found (${tsFiles.length}):\n`;
-      tsFiles.slice(0, 20).forEach(file => {
+      tsFiles.slice(0, 20).forEach((file) => {
         structure += `  - ${file}\n`;
       });
-      
+
       if (tsFiles.length > 20) {
         structure += `  ... and ${tsFiles.length - 20} more files\n`;
       }
@@ -393,7 +414,7 @@ class TypeScriptMCPServer {
       return {
         content: [
           {
-            type: 'text',
+            type: "text",
             text: structure,
           },
         ],
@@ -402,7 +423,7 @@ class TypeScriptMCPServer {
       return {
         content: [
           {
-            type: 'text',
+            type: "text",
             text: `Error analyzing project structure: ${error.message}`,
           },
         ],
@@ -413,7 +434,7 @@ class TypeScriptMCPServer {
   async run() {
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
-    console.error('TypeScript MCP Server running on stdio');
+    console.error("TypeScript MCP Server running on stdio");
   }
 }
 
