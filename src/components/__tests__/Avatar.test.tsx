@@ -13,6 +13,6 @@ describe('Avatar Component', () => {
   it('renders an image when avatarImage is provided', () => {
     render(<Avatar avatarImage="/path/to/image.jpg" />);
     const avatar = screen.getByRole('img');
-    expect(avatar).toHaveStyle('background-image: url(/path/to/image.jpg)');
+    expect(avatar).toHaveAttribute('src', '/path/to/image.jpg');
   });
 });

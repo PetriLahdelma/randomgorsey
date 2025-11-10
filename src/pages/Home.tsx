@@ -8,13 +8,15 @@ import Button from '../components/Button';
 import PostCard, { Post } from '../components/PostCard';
 import { isIOS } from '../utils/isIOS';
 
-// Dynamically import all posts from the posts folder using require.context
-// @ts-ignore
-const postContext = require.context('../posts', false, /\.tsx$/);
+// Import all posts statically for Jest compatibility
+import FirstPost from '../posts/FirstPost';
+import RandomRecommends from '../posts/RandomRecommends';
 
-const posts: Post[] = postContext
-  .keys()
-  .map((key: string) => postContext(key).default)
+// Static posts array that works in both webpack and Jest
+const allPosts = [FirstPost, RandomRecommends];
+
+const posts: Post[] = allPosts
+  .filter(post => post && typeof post === 'object') // Ensure valid posts
   .sort((a: Post, b: Post) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
 
 const Home: React.FC = () => {
