@@ -27,8 +27,8 @@ export interface SelectOption {
 export interface SelectProps extends Omit<BaseComponentProps, "children"> {
   /** Array of options to display */
   options: SelectOption[];
-  /** Currently selected value */
-  value: string;
+  /** Currently selected value(s) - string for single select, string[] for multiple */
+  value: string | string[];
   /** Change handler function */
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   /** Blur handler function */
@@ -117,17 +117,17 @@ const Select: React.FC<SelectProps> = ({
   }, {} as Record<string, SelectOption[]>);
 
   return (
-    <div className={styles.selectContainer}>
+    <div className={styles['select-container']}>
       {label && (
         <Label className={styles.label} htmlFor={selectId} required={required}>
           {label}
         </Label>
       )}
 
-      <div className={styles.selectWrapper}>
+      <div className={styles['select-wrapper']}>
         <select
           id={selectId}
-          value={value}
+          value={multiple ? undefined : (value as string)}
           onChange={onChange}
           onBlur={onBlur}
           onFocus={onFocus}
@@ -156,6 +156,9 @@ const Select: React.FC<SelectProps> = ({
 
           {Object.keys(groupedOptions).map((groupKey) => {
             const groupOptions = groupedOptions[groupKey];
+            const selectedValues = multiple 
+              ? (Array.isArray(value) ? value : [])
+              : [];
 
             if (groupKey === "default") {
               return groupOptions.map((option) => (
@@ -163,6 +166,7 @@ const Select: React.FC<SelectProps> = ({
                   key={option.value}
                   value={option.value}
                   disabled={option.disabled}
+                  selected={multiple ? selectedValues.includes(option.value) : undefined}
                 >
                   {option.label}
                 </option>
@@ -176,6 +180,7 @@ const Select: React.FC<SelectProps> = ({
                     key={option.value}
                     value={option.value}
                     disabled={option.disabled}
+                    selected={multiple ? selectedValues.includes(option.value) : undefined}
                   >
                     {option.label}
                   </option>
@@ -185,7 +190,7 @@ const Select: React.FC<SelectProps> = ({
           })}
         </select>
 
-        <ChevronDownIcon className={styles.chevronIcon} aria-hidden="true" />
+        <ChevronDownIcon className={styles['chevron-icon']} aria-hidden="true" />
 
         {loading && (
           <span className={styles.spinner} aria-hidden="true">
@@ -195,15 +200,15 @@ const Select: React.FC<SelectProps> = ({
       </div>
 
       {helpText && !error && (
-        <div className={styles.helpText} id={`${selectId}-help`}>
+        <div className={styles['help-text']} id={`${selectId}-help`}>
           {helpText}
         </div>
       )}
 
       {error && (
-        <div className={styles.errorMessage} id={`${selectId}-error`}>
+        <div className={styles['error-message']} id={`${selectId}-error`}>
           <ExclamationCircleIcon
-            className={styles.errorIcon}
+            className={styles['error-icon']}
             aria-hidden="true"
           />
           <span role="alert">{error}</span>

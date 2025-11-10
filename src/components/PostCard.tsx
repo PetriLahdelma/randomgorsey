@@ -3,7 +3,8 @@ import { Helmet } from "react-helmet-async";
 import styles from "./PostCard.module.css";
 import Avatar from "./Avatar";
 import SocialShare from "./SocialShare";
-import { BaseComponentProps } from '../types/common';
+import { BaseComponentProps } from "../types/common";
+import { Surface, Heading, Text } from "./design-system";
 
 /**
  * Supported content types for posts
@@ -52,7 +53,7 @@ export interface Post {
 /**
  * Props for the PostCard component
  */
-export interface PostCardProps extends Omit<BaseComponentProps, 'children'> {
+export interface PostCardProps extends Omit<BaseComponentProps, "children"> {
   /** Post data to display */
   post: Post;
   /** Whether to show full content initially */
@@ -116,44 +117,55 @@ const PostCard: React.FC<PostCardProps> = ({
     : post.body;
 
   const cardClasses = [
-    styles.card, 
-    className, 
-    onClick ? styles.clickable : "",
+    styles.card,
     post.featured ? styles.featured : "",
+    onClick ? styles.clickable : "",
+    className,
   ]
     .filter(Boolean)
     .join(" ");
 
-  const postUrl = typeof window !== "undefined"
-    ? `${window.location.origin}/posts/${post.id}`
-    : `https://randomgorsey.com/posts/${post.id}`;
+  const surfaceVariant = post.featured ? "inverted" : "flat";
+  const surfaceStyle = {
+    ...(post.avatarColor ? { backgroundColor: post.avatarColor } : {}),
+    ...style,
+  };
+  const headingTone = "light";
+  const metaTone = "contrast";
+  const isInteractive = Boolean(onClick);
 
-  const shareText = post.excerpt || 
-    (post.body.slice(0, 120) + (post.body.length > 120 ? "..." : ""));
+  const postUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/posts/${post.id}`
+      : `https://randomgorsey.com/posts/${post.id}`;
+
+  const shareText =
+    post.excerpt ||
+    post.body.slice(0, 120) + (post.body.length > 120 ? "..." : "");
 
   return (
-    <article
+    <Surface
+      as="article"
       id={id}
       className={cardClasses}
-      style={{ 
-        backgroundColor: post.avatarColor || "#fff", 
-        color: "#000",
-        ...style 
-      }}
+      style={surfaceStyle}
       onClick={onClick ? handleCardClick : undefined}
       role={onClick ? "button" : "article"}
       tabIndex={onClick ? 0 : undefined}
       data-testid={testId}
-      onKeyDown={
-        onClick
-          ? (e) => {
+      interactive={isInteractive}
+      variant={surfaceVariant}
+      padding="lg"
+      {...(onClick
+        ? {
+            onKeyDown: (e: React.KeyboardEvent) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
                 handleCardClick();
               }
-            }
-          : undefined
-      }
+            },
+          }
+        : {})}
       {...accessibilityProps}
     >
       <Helmet>
@@ -179,22 +191,47 @@ const PostCard: React.FC<PostCardProps> = ({
 
       <header className={styles.header}>
         <div className={styles["header-left"]}>
-          <h2 className={styles.title}>{post.title}</h2>
+          <Heading level={2} as="h2" className={styles.title} tone={headingTone}>
+            {post.title}
+          </Heading>
           <div className={styles["avatar-author"]}>
             <Avatar avatarImage="/images/pete.jpg" size="M" />
-            <span className={styles.author}>{post.author}</span>
+            <Text as="span" variant="body" tone="contrast" className={styles.author}>
+              {post.author}
+            </Text>
           </div>
           {/* Date under author on mobile only */}
-          <span className={styles["date-mobile"]}>{post.timestamp}</span>
+          <Text
+            as="span"
+            variant="bodySmall"
+            tone={metaTone}
+            className={styles["date-mobile"]}
+          >
+            {post.timestamp}
+          </Text>
         </div>
         <div className={styles["header-right"]}>
-          <time className={styles.time} dateTime={post.timestamp}>
+          <Text<"time">
+            as="time"
+            variant="bodySmall"
+            tone={metaTone}
+            className={styles.time}
+            dateTime={post.timestamp}
+          >
             {post.timestamp}
-          </time>
+          </Text>
           {showMetadata && (
             <div className={styles.metadata}>
-              {post.views && <span className={styles.views}>{post.views} views</span>}
-              {post.likes && <span className={styles.likes}>{post.likes} likes</span>}
+              {post.views && (
+                <Text as="span" variant="caption" tone={metaTone}>
+                  {post.views} views
+                </Text>
+              )}
+              {post.likes && (
+                <Text as="span" variant="caption" tone={metaTone}>
+                  {post.likes} likes
+                </Text>
+              )}
             </div>
           )}
         </div>
@@ -210,8 +247,8 @@ const PostCard: React.FC<PostCardProps> = ({
       <div className={styles["post-footer-row"]}>
         <div className={styles["read-more-mobile-wrap"]}>
           {hasLongContent && (
-            <button 
-              onClick={toggleExpanded} 
+            <button
+              onClick={toggleExpanded}
               className={styles["read-more"]}
               aria-expanded={expanded}
               aria-label={expanded ? "Show less content" : "Show more content"}
@@ -220,14 +257,10 @@ const PostCard: React.FC<PostCardProps> = ({
             </button>
           )}
         </div>
-        
+
         {showSocialShare && (
           <div className={styles["post-footer-share"]}>
-            <SocialShare
-              url={postUrl}
-              title={post.title}
-              text={shareText}
-            />
+            <SocialShare url={postUrl} title={post.title} text={shareText} />
           </div>
         )}
       </div>
@@ -241,27 +274,27 @@ const PostCard: React.FC<PostCardProps> = ({
           loading="lazy"
         />
       )}
-      
+
       {post.media && post.contentType === PostContentType.VIDEO && (
-        <video 
-          src={post.media} 
-          controls 
+        <video
+          src={post.media}
+          controls
           className={styles.media}
           preload="metadata"
           aria-label={`Video: ${post.title}`}
         />
       )}
-      
+
       {post.media && post.contentType === PostContentType.AUDIO && (
-        <audio 
-          src={post.media} 
-          controls 
+        <audio
+          src={post.media}
+          controls
           className={styles.media}
           preload="metadata"
           aria-label={`Audio: ${post.title}`}
         />
       )}
-    </article>
+    </Surface>
   );
 };
 

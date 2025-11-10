@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react-webpack5';
+import { Meta, StoryFn } from '@storybook/react';
 import Button from '../components/Button';
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
 

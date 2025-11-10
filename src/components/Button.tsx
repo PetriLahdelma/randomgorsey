@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./Button.module.css";
-import { BaseComponentProps, Size } from '../types/common';
+import { BaseComponentProps, Size } from "../types/common";
 
 /**
  * Button component variants for different use cases
  */
 export type ButtonVariant =
   | "primary"
-  | "secondary" 
+  | "secondary"
   | "danger"
   | "tertiary"
   | "success";
@@ -20,7 +20,7 @@ export type IconPosition = "left" | "right";
 /**
  * Props for the Button component
  */
-export interface ButtonProps extends Omit<BaseComponentProps, 'children'> {
+export interface ButtonProps extends Omit<BaseComponentProps, "children"> {
   /** Visual style variant of the button */
   variant?: ButtonVariant;
   /** Size of the button */

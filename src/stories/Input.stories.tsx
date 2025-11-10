@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react-webpack5';
+import { StoryFn, Meta } from '@storybook/react';
 import Input from '../components/Input';
 
 export default {

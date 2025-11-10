@@ -7,7 +7,7 @@
  * Checks if the current page is loaded over HTTPS
  */
 export function isHTTPS(): boolean {
-  return window.location.protocol === 'https:';
+  return window.location.protocol === "https:";
 }
 
 /**
@@ -16,8 +16,12 @@ export function isHTTPS(): boolean {
  */
 export function enforceHTTPS(): void {
   // Only redirect in production environments
-  if (process.env.NODE_ENV === 'production' && !isHTTPS() && window.location.hostname !== 'localhost') {
-    const httpsUrl = window.location.href.replace('http://', 'https://');
+  if (
+    process.env.NODE_ENV === "production" &&
+    !isHTTPS() &&
+    window.location.hostname !== "localhost"
+  ) {
+    const httpsUrl = window.location.href.replace("http://", "https://");
     window.location.replace(httpsUrl);
   }
 }
@@ -27,9 +31,9 @@ export function enforceHTTPS(): void {
  */
 export function shouldEnforceHTTPS(): boolean {
   return (
-    process.env.NODE_ENV === 'production' &&
-    window.location.hostname !== 'localhost' &&
-    !window.location.hostname.includes('127.0.0.1')
+    process.env.NODE_ENV === "production" &&
+    window.location.hostname !== "localhost" &&
+    !window.location.hostname.includes("127.0.0.1")
   );
 }
 
@@ -43,18 +47,18 @@ export function initializeSecurityMeasures(): void {
   }
 
   // Warn about mixed content in development
-  if (process.env.NODE_ENV === 'development') {
-    window.addEventListener('load', () => {
+  if (process.env.NODE_ENV === "development") {
+    window.addEventListener("load", () => {
       if (isHTTPS()) {
-        console.log('✅ Running over HTTPS');
+        console.log("✅ Running over HTTPS");
       } else {
-        console.warn('⚠️ Running over HTTP - ensure HTTPS in production');
+        console.warn("⚠️ Running over HTTP - ensure HTTPS in production");
       }
     });
   }
 
   // Add security event listeners
-  window.addEventListener('beforeunload', () => {
+  window.addEventListener("beforeunload", () => {
     // Clear any sensitive data from memory if needed
     // This is a good place to clean up sensitive state
   });
@@ -63,14 +67,17 @@ export function initializeSecurityMeasures(): void {
 /**
  * Content Security Policy helpers for inline scripts
  */
-export function createSecureScriptTag(content: string, nonce?: string): HTMLScriptElement {
-  const script = document.createElement('script');
-  script.type = 'text/javascript';
-  
+export function createSecureScriptTag(
+  content: string,
+  nonce?: string
+): HTMLScriptElement {
+  const script = document.createElement("script");
+  script.type = "text/javascript";
+
   if (nonce) {
     script.nonce = nonce;
   }
-  
+
   script.textContent = content;
   return script;
 }
@@ -82,16 +89,16 @@ export function createSecureExternalLink(url: string): string {
   // Add security attributes for external links
   try {
     const parsedUrl = new URL(url);
-    
+
     // Only allow http and https protocols
-    if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
-      throw new Error('Invalid protocol');
+    if (!["http:", "https:"].includes(parsedUrl.protocol)) {
+      throw new Error("Invalid protocol");
     }
-    
+
     return url;
   } catch {
-    console.warn('Invalid external URL:', url);
-    return '#';
+    console.warn("Invalid external URL:", url);
+    return "#";
   }
 }
 
@@ -101,20 +108,22 @@ export function createSecureExternalLink(url: string): string {
 export function isSafeExternalUrl(url: string): boolean {
   try {
     const parsedUrl = new URL(url);
-    
+
     // Only allow http and https protocols
-    if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
+    if (!["http:", "https:"].includes(parsedUrl.protocol)) {
       return false;
     }
-    
+
     // Block known malicious domains (extend this list as needed)
     const blockedDomains = [
-      'bit.ly',
-      'tinyurl.com',
+      "bit.ly",
+      "tinyurl.com",
       // Add more as needed
     ];
-    
-    return !blockedDomains.some(domain => parsedUrl.hostname.includes(domain));
+
+    return !blockedDomains.some((domain) =>
+      parsedUrl.hostname.includes(domain)
+    );
   } catch {
     return false;
   }

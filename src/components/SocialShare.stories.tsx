@@ -1,8 +1,8 @@
-import React from 'react';
-import SocialShare from './SocialShare';
+import React from "react";
+import SocialShare from "./SocialShare";
 
 const meta = {
-  title: 'Components/SocialShare',
+  title: "Components/SocialShare",
   component: SocialShare,
 };
 
@@ -10,7 +10,11 @@ export default meta;
 
 export const Default = () => (
   <SocialShare
-    url={typeof window !== 'undefined' ? window.location.href : 'https://randomgorsey.com/'}
+    url={
+      typeof window !== "undefined"
+        ? window.location.href
+        : "https://randomgorsey.com/"
+    }
     title="First Post"
     text="Welcome to the brand new Random Gorsey blog! This space will be filled with updates about music, art and more."
   />

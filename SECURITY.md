@@ -7,12 +7,14 @@ This document outlines the security measures implemented in the Random Gorsey ap
 ## Implemented Security Measures
 
 ### 1. ✅ API Key Protection
+
 - **Issue**: Hardcoded Google Analytics tracking ID exposed in source code
 - **Solution**: Moved to environment variable `REACT_APP_GA_TRACKING_ID`
 - **Location**: `src/components/CookieConsent.tsx`
 - **Benefit**: Prevents API keys from being exposed in public repositories
 
 ### 2. ✅ Input Sanitization & Validation
+
 - **Implementation**: Comprehensive input validation system
 - **Location**: `src/utils/security.ts`
 - **Features**:
@@ -24,12 +26,14 @@ This document outlines the security measures implemented in the Random Gorsey ap
   - Length limits to prevent payload attacks
 
 ### 3. ✅ Rate Limiting
+
 - **Implementation**: Client-side rate limiter for form submissions
 - **Configuration**: 5 attempts per minute per user
 - **Location**: Contact form in `src/pages/Contact.tsx`
 - **Benefit**: Prevents spam and bot attacks
 
 ### 4. ✅ HTTPS Enforcement
+
 - **Implementation**: Automatic HTTPS redirect in production
 - **Location**: `src/utils/httpsEnforcement.ts`
 - **Features**:
@@ -39,11 +43,13 @@ This document outlines the security measures implemented in the Random Gorsey ap
   - Safe external URL validation
 
 ### 5. ✅ Anti-Spam Measures
+
 - **Honeypot Field**: Hidden form field to catch bots
 - **Location**: Contact form
 - **Behavior**: Silently reject submissions with honeypot data
 
 ### 6. ✅ Secure External Links
+
 - **Implementation**: URL validation for external links
 - **Features**: Protocol validation, domain blocking capability
 - **Location**: `src/utils/httpsEnforcement.ts`
@@ -72,7 +78,7 @@ REACT_APP_GA_TRACKING_ID=G-XXXXXXXXXX
 
 # EmailJS Configuration
 REACT_APP_EMAILJS_SERVICE_ID=your_service_id
-REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id  
+REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
 REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
 
 # CAPTCHA (if implementing)
@@ -82,22 +88,27 @@ REACT_APP_CAPTCHA_SITE_KEY=your_captcha_site_key
 ## Additional Security Recommendations
 
 ### 1. Content Security Policy (CSP)
+
 Implement a strict CSP header to prevent XSS attacks:
+
 ```
 Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'
 ```
 
 ### 2. CAPTCHA Implementation
+
 - Add CAPTCHA to the contact form
 - Use services like Google reCAPTCHA or hCaptcha
 - Implement on both frontend and backend
 
 ### 3. Dependency Management
+
 - Run `npm audit` regularly
 - Enable Dependabot for automated security updates
 - Keep dependencies updated monthly
 
 ### 4. Backend Security (if applicable)
+
 - Implement CORS properly
 - Use proper authentication/authorization
 - Implement rate limiting at server level
@@ -107,12 +118,14 @@ Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googl
 ## Security Testing
 
 ### Manual Testing
+
 1. Test contact form with malicious input
 2. Verify rate limiting works
 3. Test HTTPS redirects
 4. Verify honeypot catches bots
 
 ### Automated Testing
+
 - ESLint rules for security
 - Dependency vulnerability scanning
 - Regular penetration testing (recommended)
@@ -127,6 +140,7 @@ Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googl
 ## Monitoring & Logging
 
 Consider implementing:
+
 - Error boundary for security issues
 - Client-side error logging
 - Form submission monitoring
@@ -135,7 +149,7 @@ Consider implementing:
 ## Regular Maintenance
 
 1. Update dependencies monthly
-2. Review security configurations quarterly  
+2. Review security configurations quarterly
 3. Test security measures after deployments
 4. Monitor for new vulnerabilities
 5. Review and update blocked domains list
@@ -143,6 +157,7 @@ Consider implementing:
 ## Security Contact
 
 For security issues, please:
+
 1. Do not create public issues
 2. Contact development team privately
 3. Include detailed reproduction steps

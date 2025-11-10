@@ -8,13 +8,13 @@
  */
 export function escapeHtml(text: string): string {
   const map: { [key: string]: string } = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
   };
-  
+
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
@@ -22,16 +22,16 @@ export function escapeHtml(text: string): string {
  * Sanitize text input by removing dangerous characters
  */
 export function sanitizeText(input: string): string {
-  if (typeof input !== 'string') {
-    return '';
+  if (typeof input !== "string") {
+    return "";
   }
-  
+
   // Remove or escape potentially dangerous characters
   return input
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove script tags
-    .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '') // Remove iframe tags
-    .replace(/javascript:/gi, '') // Remove javascript: protocol
-    .replace(/on\w+\s*=/gi, '') // Remove event handlers like onclick=
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "") // Remove script tags
+    .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, "") // Remove iframe tags
+    .replace(/javascript:/gi, "") // Remove javascript: protocol
+    .replace(/on\w+\s*=/gi, "") // Remove event handlers like onclick=
     .trim()
     .slice(0, 1000); // Limit length to prevent huge payloads
 }
@@ -58,7 +58,7 @@ export function isValidName(name: string): boolean {
 export function isValidUrl(url: string): boolean {
   try {
     const parsedUrl = new URL(url);
-    return ['http:', 'https:'].includes(parsedUrl.protocol);
+    return ["http:", "https:"].includes(parsedUrl.protocol);
   } catch {
     return false;
   }
@@ -80,7 +80,9 @@ export interface ValidationResult {
   sanitizedData: ContactFormData;
 }
 
-export function validateAndSanitizeContactForm(data: ContactFormData): ValidationResult {
+export function validateAndSanitizeContactForm(
+  data: ContactFormData
+): ValidationResult {
   const errors: { [key: string]: string } = {};
   const sanitizedData: ContactFormData = {
     name: sanitizeText(data.name),
@@ -91,38 +93,38 @@ export function validateAndSanitizeContactForm(data: ContactFormData): Validatio
 
   // Validate name
   if (!sanitizedData.name) {
-    errors.name = 'Name is required';
+    errors.name = "Name is required";
   } else if (!isValidName(sanitizedData.name)) {
-    errors.name = 'Name contains invalid characters';
+    errors.name = "Name contains invalid characters";
   }
 
   // Validate email
   if (!sanitizedData.email) {
-    errors.email = 'Email is required';
+    errors.email = "Email is required";
   } else if (!isValidEmail(sanitizedData.email)) {
-    errors.email = 'Please enter a valid email address';
+    errors.email = "Please enter a valid email address";
   }
 
   // Validate subject
   if (!sanitizedData.subject) {
-    errors.subject = 'Subject is required';
+    errors.subject = "Subject is required";
   } else if (sanitizedData.subject.length > 200) {
-    errors.subject = 'Subject is too long (max 200 characters)';
+    errors.subject = "Subject is too long (max 200 characters)";
   }
 
   // Validate message
   if (!sanitizedData.message) {
-    errors.message = 'Message is required';
+    errors.message = "Message is required";
   } else if (sanitizedData.message.length < 10) {
-    errors.message = 'Message is too short (minimum 10 characters)';
+    errors.message = "Message is too short (minimum 10 characters)";
   } else if (sanitizedData.message.length > 5000) {
-    errors.message = 'Message is too long (max 5000 characters)';
+    errors.message = "Message is too long (max 5000 characters)";
   }
 
   return {
     isValid: Object.keys(errors).length === 0,
     errors,
-    sanitizedData
+    sanitizedData,
   };
 }
 
@@ -130,8 +132,9 @@ export function validateAndSanitizeContactForm(data: ContactFormData): Validatio
  * Rate limiting utilities
  */
 export class RateLimiter {
-  private attempts: Map<string, { count: number; resetTime: number }> = new Map();
-  
+  private attempts: Map<string, { count: number; resetTime: number }> =
+    new Map();
+
   constructor(
     private maxAttempts: number = 5,
     private windowMs: number = 60 * 1000 // 1 minute
@@ -140,16 +143,19 @@ export class RateLimiter {
   isAllowed(identifier: string): boolean {
     const now = Date.now();
     const record = this.attempts.get(identifier);
-    
+
     if (!record || now > record.resetTime) {
-      this.attempts.set(identifier, { count: 1, resetTime: now + this.windowMs });
+      this.attempts.set(identifier, {
+        count: 1,
+        resetTime: now + this.windowMs,
+      });
       return true;
     }
-    
+
     if (record.count >= this.maxAttempts) {
       return false;
     }
-    
+
     record.count++;
     return true;
   }
@@ -177,16 +183,18 @@ export class RateLimiter {
 export function generateCSPNonce(): string {
   const array = new Uint8Array(16);
   crypto.getRandomValues(array);
-  return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+  return Array.from(array, (byte) => byte.toString(16).padStart(2, "0")).join(
+    ""
+  );
 }
 
 /**
  * Security headers configuration
  */
 export const SECURITY_HEADERS = {
-  'X-Content-Type-Options': 'nosniff',
-  'X-Frame-Options': 'DENY',
-  'X-XSS-Protection': '1; mode=block',
-  'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "X-XSS-Protection": "1; mode=block",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
 } as const;
