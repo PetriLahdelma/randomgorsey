@@ -208,7 +208,18 @@ permissions:
 #### React 19 Dependency Conflicts
 **Error**: NPM dependency resolution errors during security updates
 
-**Solution**: Use `--legacy-peer-deps` flag or accept that some dev dependencies may have warnings due to React 19 migration timing.
+**Solution**: The CI/CD pipeline now uses `--legacy-peer-deps` to handle React 19 ecosystem transitions:
+```bash
+# Workflows automatically use:
+npm ci --legacy-peer-deps
+
+# For local development:
+npm install --legacy-peer-deps
+```
+
+**Root Cause**: Some dependencies (react-helmet-async, eslint-plugin-jest) haven't updated peer dependencies for React 19 yet.
+
+**Timeline**: Expected resolution Q1 2026 as ecosystem catches up.
 
 #### Storybook Build Failures  
 **Error**: Storybook fails to build after dependency updates

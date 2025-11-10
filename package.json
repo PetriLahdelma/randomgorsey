@@ -3,6 +3,7 @@
   "name": "randomgorsey",
   "version": "0.1.0",
   "private": true,
+  "_note": "Using --legacy-peer-deps due to React 19 ecosystem transition. Some dependencies (react-helmet-async, eslint-plugin-jest) not yet compatible with React 19.",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@heroicons/react": "^2.2.0",
