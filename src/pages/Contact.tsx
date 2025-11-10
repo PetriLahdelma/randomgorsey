@@ -12,6 +12,7 @@ import Button from "../components/Button";
 import PageMeta from "../components/PageMeta";
 import { isWebMSupported } from "../utils/isWebMSupported";
 import { isIOS } from "../utils/isIOS";
+import { validateAndSanitizeContactForm, RateLimiter } from "../utils/security";
 
 const Contact: React.FC = () => {
   const [message, setMessage] = useState("");
@@ -26,7 +27,11 @@ const Contact: React.FC = () => {
     email?: string;
     subject?: string;
     message?: string;
+    general?: string;
   }>({});
+
+  // Rate limiter for contact form submissions (5 attempts per minute per user)
+  const rateLimiter = new RateLimiter(5, 60 * 1000);
 
   const Container: React.ElementType = isIOS() ? "div" : motion.div;
 
@@ -46,13 +51,35 @@ const Contact: React.FC = () => {
   }, []);
 
   const handleSend = () => {
-    // Validate with zod
-    const result = contactFormSchema.safeParse({
+    // Check rate limiting first
+    const userIdentifier = `${name}-${email}`; // Simple identifier (in production, use IP or session)
+    if (!rateLimiter.isAllowed(userIdentifier)) {
+      const resetTime = rateLimiter.getResetTime(userIdentifier);
+      const remainingTime = Math.ceil((resetTime - Date.now()) / 1000);
+      setFormErrors({
+        general: `Too many attempts. Please wait ${remainingTime} seconds before trying again.`
+      });
+      return;
+    }
+
+    // Security validation and sanitization
+    const securityValidation = validateAndSanitizeContactForm({
       name,
       email,
       subject,
-      message,
+      message
     });
+
+    if (!securityValidation.isValid) {
+      setFormErrors(securityValidation.errors);
+      return;
+    }
+
+    // Use sanitized data for further processing
+    const sanitizedData = securityValidation.sanitizedData;
+
+    // Additional validation with zod (keeping existing validation)
+    const result = contactFormSchema.safeParse(sanitizedData);
     if (!result.success) {
       // Map zod errors to formErrors
       const errors: {
@@ -69,13 +96,17 @@ const Contact: React.FC = () => {
       return;
     }
     setFormErrors({});
+
+    // Honeypot spam check
     const honeypotField = document.querySelector(
       "input[name=honeypot]"
     ) as HTMLInputElement;
     if (honeypotField && honeypotField.value) {
-      // Optionally show a user-friendly error or silently fail for spam
+      // Silently fail for spam (don't give feedback to bots)
+      console.warn('Honeypot field filled - potential spam');
       return;
     }
+
     setSending(true);
 
     const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
@@ -97,18 +128,24 @@ const Contact: React.FC = () => {
         serviceId,
         templateId,
         {
-          name,
-          email,
-          subject,
-          message,
+          name: sanitizedData.name,
+          email: sanitizedData.email,
+          subject: sanitizedData.subject,
+          message: sanitizedData.message,
         },
         publicKey
       )
       .then(() => {
         setIsModalOpen(true);
         setSending(false);
+        // Clear form on success
+        setName("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error("EmailJS error:", error);
         setSending(false);
         setFormErrors((prev) => ({
           ...prev,
@@ -231,6 +268,11 @@ const Contact: React.FC = () => {
               className={styles["contact-textarea"]}
               error={formErrors.message}
             />
+            {formErrors.general && (
+              <div className={styles["error-message"]} role="alert">
+                {formErrors.general}
+              </div>
+            )}
             <input
               type="text"
               name="honeypot"
@@ -243,10 +285,17 @@ const Contact: React.FC = () => {
               onClick={handleSend}
               icon={<PaperAirplaneIcon className={styles["contact-icon"]} />}
               className={styles["contact-button"]}
-              ariaLabel="Send message"
+              aria-label="Send message"
             >
               Send
             </ContactButton>
+            <div className={styles["disclaimer"]}>
+              <p className={styles["disclaimer-text"]}>
+                By submitting this form, you agree that your personal information (name, email, and message) will be used to respond to your inquiry. 
+                Your data will not be shared with third parties and will be handled in accordance with our privacy practices. 
+                We may retain your message for record-keeping purposes.
+              </p>
+            </div>
             {isModalOpen && (
               <div className={styles["modal"]}>
                 <p>Message sent successfully!</p>

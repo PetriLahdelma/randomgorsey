@@ -17,9 +17,15 @@ const setCookie = (value: string) => {
 const loadGoogleAnalytics = () => {
   if (document.getElementById('ga-script')) return;
 
+  const gaTrackingId = process.env.REACT_APP_GA_TRACKING_ID;
+  if (!gaTrackingId) {
+    console.warn('Google Analytics tracking ID not configured');
+    return;
+  }
+
   const script = document.createElement('script');
   script.async = true;
-  script.src = 'https://www.googletagmanager.com/gtag/js?id=G-754TS7FXNC';
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`;
   script.id = 'ga-script';
   document.head.appendChild(script);
 
@@ -28,7 +34,7 @@ const loadGoogleAnalytics = () => {
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-754TS7FXNC');
+    gtag('config', '${gaTrackingId}');
   `;
   document.head.appendChild(script2);
 };

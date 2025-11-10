@@ -155,20 +155,20 @@ jobs:
           echo "ESLint: ${{ steps.eslint.outcome }}"
           echo "Tests: ${{ steps.tests.outcome }}"
           echo "Build: ${{ steps.build.outcome }}"
-          
+
           # Check if any critical step failed
           if [[ "${{ steps.typecheck.outcome }}" != "success" ]] || \
              [[ "${{ steps.build.outcome }}" != "success" ]]; then
             echo "❌ Critical checks failed - TypeScript or Build issues must be resolved"
             exit 1
           fi
-          
+
           # ESLint and tests are warnings but don't block
           if [[ "${{ steps.eslint.outcome }}" != "success" ]] || \
              [[ "${{ steps.tests.outcome }}" != "success" ]]; then
             echo "⚠️ Some quality checks have issues - review recommended but not blocking"
           fi
-          
+
           echo "✅ Quality review completed successfully"
 
   security-scan:
@@ -185,7 +185,7 @@ jobs:
           # Check for critical and high vulnerabilities in direct dependencies
           # Allow moderate/low in transitive dependencies due to React 19 ecosystem constraints
           npm audit --audit-level=high --production || true
-          
+
           # Generate audit report for information
           npm audit --json > audit-report.json || true
           echo "Security audit completed - see full report in job logs"
@@ -213,14 +213,14 @@ jobs:
       - name: Dependency vulnerability check
         run: |
           echo "📦 Checking for critical vulnerabilities only..."
-          
+
           # Focus on critical vulnerabilities that can realistically be fixed
           # Note: Some moderate/high vulnerabilities in react-scripts ecosystem 
           # cannot be resolved without breaking changes due to React 19 migration
-          
+
           # Check if we can install security updates
           npm audit fix --dry-run --only=prod || echo "Some vulnerabilities require manual review"
-          
+
           # Report critical issues only for now
           echo "✅ Critical dependency security check completed"
         continue-on-error: true

@@ -1,26 +1,26 @@
 @import url("../variables.css");
 
 .alert {
-  padding: 1rem;
-  font-family: "Europa Regular", sans-serif;
-  margin-bottom: 1rem;
   position: relative;
   display: flex;
-  align-items: center;
   gap: 0.5rem;
+  align-items: center;
   min-block-size: 1.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-family: "Europa Regular", sans-serif;
 }
 
 .close-button {
-  border: none;
-  cursor: pointer;
-  inline-size: 1.5rem;
-  block-size: 1.5rem;
-  margin-left: auto;
-  background: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  margin-left: auto;
+  cursor: pointer;
+  background: none;
+  border: none;
 }
 
 .close-button svg {
@@ -30,13 +30,13 @@
 }
 
 .info {
-  background-color: var(--color-blue);
   color: var(--color-white);
+  background-color: var(--color-blue);
 }
 
 .success {
-  background-color: var(--color-green);
   color: var(--color-black);
+  background-color: var(--color-green);
 }
 
 .success .close-button {
@@ -44,8 +44,8 @@
 }
 
 .warning {
-  background-color: var(--color-yellow);
   color: var(--color-black);
+  background-color: var(--color-yellow);
 }
 
 .warning .close-button {
@@ -53,6 +53,6 @@
 }
 
 .error {
-  background-color: var(--color-magenta);
   color: var(--color-white);
+  background-color: var(--color-magenta);
 }

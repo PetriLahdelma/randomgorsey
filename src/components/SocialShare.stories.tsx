@@ -1,10 +1,12 @@
 import React from 'react';
 import SocialShare from './SocialShare';
 
-export default {
+const meta = {
   title: 'Components/SocialShare',
   component: SocialShare,
 };
+
+export default meta;
 
 export const Default = () => (
   <SocialShare

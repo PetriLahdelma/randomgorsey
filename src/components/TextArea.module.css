@@ -3,30 +3,30 @@
 .text-area-container {
   display: flex;
   flex-direction: column;
-  max-width: 100%;
   width: 100%;
+  max-width: 100%;
 }
 
 .label {
+  margin-bottom: 0.5rem;
   font-family: "Europa Regular", sans-serif;
   font-weight: 600;
-  margin-bottom: 0.5rem;
   color: var(--color-blue);
 }
 
 .text-area {
-  font-family: "Europa Regular", sans-serif;
-  font-size: 1rem;
-  padding: 0.5rem;
-  border: 1px solid var(--color-gray);
-  border-radius: 4px;
+  box-sizing: border-box;
   width: 100%;
   max-width: 100%;
-  box-sizing: border-box;
+  padding: 0.5rem;
+  font-family: "Europa Regular", sans-serif;
+  font-size: 1rem;
   resize: both;
+  border: 1px solid var(--color-gray);
+  border-radius: 4px;
 }
 
 .text-area::placeholder {
-  color: var(--color-gray-medium);
   font-style: italic;
+  color: var(--color-gray-medium);
 }

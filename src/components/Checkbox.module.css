@@ -2,22 +2,22 @@
 
 .container {
   display: inline-flex;
-  align-items: center;
   gap: 0.25rem;
-  cursor: pointer;
+  align-items: center;
   font-family: "Europa Regular", sans-serif;
   color: var(--color-white);
+  cursor: pointer;
 }
 
 .checkbox {
-  appearance: none;
+  position: relative;
   width: 1.5rem;
   height: 1.5rem;
-  border: 2px solid var(--color-blue);
-  border-radius: 2px;
-  position: relative;
+  appearance: none;
   cursor: pointer;
   background-color: transparent;
+  border: 2px solid var(--color-blue);
+  border-radius: 2px;
 }
 
 .checkbox:checked {
@@ -25,12 +25,12 @@
 }
 
 .checkbox:checked::after {
-  content: "";
   position: absolute;
-  left: 0.35rem;
   top: 0.1rem;
+  left: 0.35rem;
   width: 0.4rem;
   height: 0.7rem;
+  content: "";
   border: solid var(--color-white);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
@@ -38,16 +38,16 @@
 
 .label {
   font-family: "Europa Regular", sans-serif;
-  font-weight: 500;
   font-size: 1rem;
+  font-weight: 500;
   color: var(--color-blue);
 }
 
 .checkbox:disabled {
-  cursor: not-allowed;
   color: var(--color-dark-gray);
-  border-color: var(--color-gray-medium);
+  cursor: not-allowed;
   background-color: transparent;
+  border-color: var(--color-gray-medium);
 }
 
 .disabled-label {
@@ -56,7 +56,7 @@
 }
 
 .checkbox:checked:disabled {
+  cursor: not-allowed;
   background-color: var(--color-gray-light);
   border-color: var(--color-gray-medium);
-  cursor: not-allowed;
 }

@@ -3,48 +3,48 @@
 .badge {
   display: inline-block;
   padding: 0.25rem 0.5rem;
-  border-radius: 4px;
   font-family: Europa, sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.09rem;
+  border-radius: 4px;
 }
 
 .default {
-  background-color: var(--color-gray);
   color: var(--color-black);
+  background-color: var(--color-gray);
 }
 
 .primary {
-  background-color: var(--color-blue);
   color: var(--color-white);
+  background-color: var(--color-blue);
 }
 
 .success {
-  background-color: var(--color-green);
   color: var(--color-black);
+  background-color: var(--color-green);
 }
 
 .danger {
-  background-color: var(--color-red);
   color: var(--color-white);
+  background-color: var(--color-red);
 }
 
 .secondary {
-  background-color: transparent;
-  color: var(--color-blue);
-  border: 1px solid var(--color-blue);
   box-sizing: border-box;
+  color: var(--color-blue);
+  background-color: transparent;
+  border: 1px solid var(--color-blue);
 }
 
 .tertiary {
-  background-color: var(--color-light-gray);
   color: var(--color-blue);
+  background-color: var(--color-light-gray);
 }
 
 .disabled {
-  background-color: var(--color-gray-light);
   color: var(--color-gray-dark);
   cursor: not-allowed;
+  background-color: var(--color-gray-light);
 }

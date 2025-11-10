@@ -69,7 +69,7 @@ const NotFound: React.FC = () => {
           <Link to="/">
             <Button
               className={styles["notfound-button"]}
-              ariaLabel="Go to home page"
+              aria-label="Go to home page"
             >
               Go Home
             </Button>
