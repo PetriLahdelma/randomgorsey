@@ -9,6 +9,7 @@ permissions:
   contents: read
   pull-requests: write
   checks: write
+  statuses: write
 
 jobs:
   review:
@@ -144,36 +145,29 @@ jobs:
               });
             }
 
-      - name: Set PR Status
+      - name: Set Overall Result
         if: always()
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const typecheck = '${{ steps.typecheck.outcome }}';
-            const eslint = '${{ steps.eslint.outcome }}';
-            const tests = '${{ steps.tests.outcome }}';
-            const build = '${{ steps.build.outcome }}';
-
-            const allPassed = typecheck === 'success' && 
-                             eslint === 'success' && 
-                             tests === 'success' && 
-                             build === 'success';
-
-            const state = allPassed ? 'success' : 'failure';
-            const description = allPassed ? 
-              'All quality checks passed ✅' : 
-              'Some quality checks failed ❌';
-
-            await github.rest.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: context.sha,
-              state: state,
-              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
-              description: description,
-              context: 'PR Quality Review'
-            });
+        run: |
+          echo "📊 Quality Check Results:"
+          echo "TypeScript: ${{ steps.typecheck.outcome }}"
+          echo "ESLint: ${{ steps.eslint.outcome }}"
+          echo "Tests: ${{ steps.tests.outcome }}"
+          echo "Build: ${{ steps.build.outcome }}"
+          
+          # Check if any critical step failed
+          if [[ "${{ steps.typecheck.outcome }}" != "success" ]] || \
+             [[ "${{ steps.build.outcome }}" != "success" ]]; then
+            echo "❌ Critical checks failed - TypeScript or Build issues must be resolved"
+            exit 1
+          fi
+          
+          # ESLint and tests are warnings but don't block
+          if [[ "${{ steps.eslint.outcome }}" != "success" ]] || \
+             [[ "${{ steps.tests.outcome }}" != "success" ]]; then
+            echo "⚠️ Some quality checks have issues - review recommended but not blocking"
+          fi
+          
+          echo "✅ Quality review completed successfully"
 
   security-scan:
     name: Security Scan

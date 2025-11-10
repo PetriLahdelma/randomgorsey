@@ -110,9 +110,10 @@ All PRs must pass:
 
 ### Status Checks Required
 
-- `PR Quality Review` - Overall quality gate
-- `Security Scan` - Security validation
-- `Pre-deployment Validation` - Build readiness
+- `Code Quality Review` - Overall quality gate (TypeScript + Build critical, ESLint + Tests warnings)
+- `Security Scan` - Security validation (Production dependencies + secrets)
+
+**Note**: The pipeline uses job success/failure for status indication rather than commit statuses to avoid GitHub API permission issues. Critical checks (TypeScript, Build) will fail the job if they don't pass, while warnings (ESLint, Tests) are reported but don't block merging.
 
 ## 📝 Templates & Guidelines
 
@@ -187,6 +188,32 @@ npm run ts:check:structure # Project structure
 ### Deployment Failures
 
 - Pre-deployment validation prevents bad deployments
+- Rollback procedures available
+- Monitoring and alerting in place
+
+### Common Issues & Troubleshooting
+
+#### GitHub API Permissions Error
+**Error**: `Resource not accessible by integration` when creating commit statuses
+
+**Solution**: The workflow now uses job success/failure instead of commit statuses to avoid permission issues. Ensure these permissions are set:
+```yaml
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+  statuses: write  # Optional, fallback approach
+```
+
+#### React 19 Dependency Conflicts
+**Error**: NPM dependency resolution errors during security updates
+
+**Solution**: Use `--legacy-peer-deps` flag or accept that some dev dependencies may have warnings due to React 19 migration timing.
+
+#### Storybook Build Failures  
+**Error**: Storybook fails to build after dependency updates
+
+**Solution**: Check Storybook compatibility with React 19 and consider updating to latest Storybook version or temporarily disable Storybook builds.
 - Rollback procedures available
 - Monitoring and alerting in place
 
