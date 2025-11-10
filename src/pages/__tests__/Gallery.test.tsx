@@ -1,10 +1,10 @@
-import React from 'react';
-import { render, screen, act } from '@testing-library/react';
-import { HelmetProvider } from 'react-helmet-async';
-import Gallery from '../Gallery';
+import React from "react";
+import { render, screen, act } from "@testing-library/react";
+import { HelmetProvider } from "react-helmet-async";
+import Gallery from "../Gallery";
 
-describe('Gallery Page', () => {
-  it('renders heading', () => {
+describe("Gallery Page", () => {
+  it("renders heading", () => {
     jest.useFakeTimers();
     render(
       <HelmetProvider>
@@ -14,11 +14,13 @@ describe('Gallery Page', () => {
     act(() => {
       jest.runAllTimers();
     });
-    expect(screen.getByRole('heading', { name: /Gallery/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /Gallery/i })
+    ).toBeInTheDocument();
     jest.useRealTimers();
   });
 
-  it('sets page title', () => {
+  it("sets page title", () => {
     jest.useFakeTimers();
     render(
       <HelmetProvider>
@@ -29,7 +31,9 @@ describe('Gallery Page', () => {
       jest.runAllTimers();
     });
     // The component should render without errors (helmet will update document.title)
-    expect(screen.getByRole('heading', { name: /Gallery/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /Gallery/i })
+    ).toBeInTheDocument();
     jest.useRealTimers();
   });
 });

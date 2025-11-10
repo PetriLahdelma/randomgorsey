@@ -1,14 +1,14 @@
 .label {
-  font-family: "Europa Regular", sans-serif;
-  font-weight: bold;
-  font-size: 1rem;
-  color: #00f;
-  margin-bottom: 0.25rem;
   display: inline-block;
+  margin-bottom: 0.25rem;
+  font-family: "Europa Regular", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #00f;
 }
 
 .required {
-  color: var(--color-red, #d32f2f);
   margin-left: 0.25em;
   font-size: 1em;
+  color: var(--color-red, #d32f2f);
 }

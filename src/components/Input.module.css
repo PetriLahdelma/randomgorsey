@@ -7,21 +7,21 @@
 }
 
 .label {
-  font-weight: bold;
   margin-bottom: 0.5rem;
+  font-weight: bold;
   color: var(--color-blue);
 }
 
 .input {
+  width: 100%;
+  padding: 0.5rem;
   font-family: "Europa Regular", sans-serif;
   font-size: 1rem;
-  padding: 0.5rem;
   border: 1px solid var(--color-gray);
   border-radius: 4px;
-  width: 100%;
 }
 
 .input::placeholder {
-  color: var(--color-gray-medium);
   font-style: italic;
+  color: var(--color-gray-medium);
 }

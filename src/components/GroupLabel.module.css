@@ -1,16 +1,16 @@
 .group-label {
-  font-family: "Europa Regular", sans-serif;
-  font-weight: bold;
-  font-size: 1.1rem;
-  color: var(--color-blue, #00f);
+  display: block;
   margin-bottom: 0.5rem;
+  font-family: "Europa Regular", sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--color-blue, #00f);
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  display: block;
 }
 
 .required {
-  color: var(--color-red, #d32f2f);
   margin-left: 0.25em;
   font-size: 1em;
+  color: var(--color-red, #d32f2f);
 }

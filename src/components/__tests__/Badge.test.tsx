@@ -9,7 +9,8 @@ describe('Badge Component', () => {
   });
 
   it('applies variant class', () => {
-    const { container } = render(<Badge text="Hot" variant="danger" />);
-    expect(container.firstChild).toHaveClass('danger');
+    render(<Badge text="Hot" variant="danger" />);
+    const badgeElement = screen.getByText('Hot');
+    expect(badgeElement).toHaveClass('danger');
   });
 });

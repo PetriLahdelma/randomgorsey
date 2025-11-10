@@ -1,26 +1,26 @@
 @import url("../variables.css");
 
 .home-container {
+  max-width: 600px;
   padding: 1.5rem;
+  margin: 0 auto;
   font-family: "Europa Regular", sans-serif;
   line-height: 1.6;
-  background-color: var(--color-black);
   color: var(--color-white);
-  max-width: 600px;
-  margin: 0 auto;
+  background-color: var(--color-black);
 }
 
 .home-container h1 {
+  margin-bottom: 3rem;
   font-family: "Tschick Bold", sans-serif;
   color: var(--color-white);
   text-transform: uppercase;
-  margin-bottom: 3rem;
 }
 
 .who-link {
   font-weight: bold;
-  letter-spacing: 0.4rem;
   color: var(--color-white);
+  letter-spacing: 0.4rem;
   text-decoration: none;
 }
 
@@ -30,74 +30,74 @@
 }
 
 .load-more {
-  background: var(--color-white);
-  color: var(--color-black);
-  border: none;
+  display: block;
   padding: 0.5rem 1rem;
   margin: 1rem auto;
+  color: var(--color-black);
   cursor: pointer;
-  display: block;
+  background: var(--color-white);
+  border: none;
   border-radius: 4px;
 }
 
 @media (width <= 800px) {
   .home-container {
-    margin-left: 2rem;
     margin-right: 2rem;
+    margin-left: 2rem;
   }
 }
 
 .back-to-top {
-  bottom: 2rem;
   right: 2rem;
-  border: none;
+  bottom: 2rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
+  border: none;
 }
 
 .back-to-top-button {
-  color: var(--color-white);
-  border: 1px solid var(--color-white);
   padding: 0.5rem 1rem;
+  color: var(--color-white);
   cursor: pointer;
+  border: 1px solid var(--color-white);
   border-radius: 4px;
 }
 
 .input-error {
-  color: #ff4d4f;
-  font-size: 0.95em;
+  padding: 0.25rem 0.75rem;
   margin-top: 0.25rem;
+  font-family: "Europa Regular", sans-serif;
+  font-size: 0.95em;
+  color: #ff4d4f;
+  letter-spacing: 0.01em;
   background: rgb(255 77 79 / 8%);
   border-left: 3px solid #ff4d4f;
-  padding: 0.25rem 0.75rem;
   border-radius: 2px;
-  font-family: "Europa Regular", sans-serif;
-  letter-spacing: 0.01em;
 }
 
 @media (width <= 600px) {
   .home-container {
-    padding: 0.75rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
     max-width: 100%;
+    padding: 0.75rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
     font-size: 1rem;
   }
 
   .home-container h1 {
-    font-size: 1.2rem;
-    white-space: nowrap;
+    display: block;
+    max-width: 100%;
+    margin-bottom: 2rem;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100%;
-    display: block;
-    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    white-space: nowrap;
   }
 
   .load-more,
   .back-to-top-button {
-    font-size: 1rem;
     padding: 0.5rem 0.75rem;
+    font-size: 1rem;
   }
 
   .who-link {
@@ -106,7 +106,7 @@
   }
 
   .input-error {
-    font-size: 0.9em;
     padding: 0.2rem 0.5rem;
+    font-size: 0.9em;
   }
 }

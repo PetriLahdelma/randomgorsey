@@ -9,7 +9,8 @@ describe('Alert Component', () => {
   });
 
   it('applies variant class', () => {
-    const { container } = render(<Alert variant="success">OK</Alert>);
-    expect(container.firstChild).toHaveClass('success');
+    render(<Alert variant="success">OK</Alert>);
+    const alertElement = screen.getByText('OK');
+    expect(alertElement).toHaveClass('success');
   });
 });

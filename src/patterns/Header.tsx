@@ -63,7 +63,7 @@ const Header: React.FC = () => {
               variant="tertiary"
               className="menu-button"
               style={{ color: 'var(--color-white)' }}
-              ariaLabel={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
               onClick={() => setMenuOpen(open => !open)}

@@ -1,25 +1,25 @@
 .social-share {
   display: flex;
-  align-items: center;
-  vertical-align: middle;
   gap: 0.5rem;
+  align-items: center;
   margin: 1rem 0;
+  vertical-align: middle;
 }
 
 .label {
-  font-weight: bold;
   margin-right: 0.5rem;
+  font-weight: bold;
 }
 
 .icon {
-  font-size: 1.5rem;
-  transition: transform 0.15s;
-  text-decoration: none;
-  color: inherit;
-  background: none;
-  box-shadow: none;
   padding: 0;
   margin: 0;
+  font-size: 1.5rem;
+  color: inherit;
+  text-decoration: none;
+  background: none;
+  box-shadow: none;
+  transition: transform 0.15s;
 }
 
 .icon:hover {
@@ -27,14 +27,14 @@
 }
 
 .icon :global(svg) {
-  background: none;
-  border-radius: 0;
-  fill: currentcolor;
-  transition: background 0.2s;
-  box-shadow: none;
   width: 24px;
   height: 24px;
-  vertical-align: middle;
-  margin: 0;
   padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  fill: currentcolor;
+  transition: background 0.2s;
 }

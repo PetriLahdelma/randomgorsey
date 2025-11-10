@@ -243,7 +243,7 @@ const Contact: React.FC = () => {
               onClick={handleSend}
               icon={<PaperAirplaneIcon className={styles["contact-icon"]} />}
               className={styles["contact-button"]}
-              ariaLabel="Send message"
+              aria-label="Send message"
             >
               Send
             </ContactButton>
