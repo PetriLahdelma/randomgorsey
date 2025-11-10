@@ -6,8 +6,10 @@ import '@testing-library/jest-dom';
 
 // Polyfill TextEncoder and TextDecoder for Node.js environment
 const { TextEncoder, TextDecoder } = require('util');
-global.TextEncoder = TextEncoder;
-global.TextDecoder = TextDecoder;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(global as any).TextEncoder = TextEncoder;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(global as any).TextDecoder = TextDecoder;
 
 // Mock IntersectionObserver globally
 const mockIntersectionObserver = jest.fn();
