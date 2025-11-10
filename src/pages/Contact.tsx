@@ -30,13 +30,23 @@ const Contact: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Initialize EmailJS
+  React.useEffect(() => {
+    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init(publicKey);
+    } else {
+      console.error('EmailJS public key not found in environment variables');
+    }
+  }, []);
+
   const handleSend = () => {
     // Validate with zod
     const result = contactFormSchema.safeParse({ name, email, subject, message });
     if (!result.success) {
       // Map zod errors to formErrors
       const errors: { name?: string; email?: string; subject?: string; message?: string } = {};
-      result.error.errors.forEach((err) => {
+      result.error.issues.forEach((err) => {
         if (err.path[0]) errors[err.path[0] as keyof typeof errors] = err.message;
       });
       setFormErrors(errors);
@@ -49,16 +59,28 @@ const Contact: React.FC = () => {
       return;
     }
     setSending(true);
+    
+    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+    
+    if (!serviceId || !templateId || !publicKey) {
+      console.error('EmailJS configuration missing in environment variables');
+      setSending(false);
+      setFormErrors((prev) => ({ ...prev, general: 'Email service configuration error. Please try again later.' }));
+      return;
+    }
+
     emailjs.send(
-      'service_kua7hu3',
-      'template_wr7fpxc',
+      serviceId,
+      templateId,
       {
         name,
         email,
         subject,
         message,
       },
-      '-BdVWUzt4g0H07ZtM'
+      publicKey
     )
       .then(() => {
         setIsModalOpen(true);
@@ -85,7 +107,7 @@ const Contact: React.FC = () => {
     if (result.success) {
       setFormErrors((prev) => ({ ...prev, [field]: undefined }));
     } else {
-      const errorForField = result.error.errors.find((err) => err.path[0] === field);
+      const errorForField = result.error.issues.find((err) => err.path[0] === field);
       setFormErrors((prev) => ({ ...prev, [field]: errorForField ? errorForField.message : undefined }));
     }
   };
