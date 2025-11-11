@@ -1,35 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import Modal from './Modal';
-import Button from './Button';
-import styles from './CookieConsent.module.css';
+import React, { useEffect, useState } from "react";
+import Modal from "./Modal";
+import Button from "./Button";
+import styles from "./CookieConsent.module.css";
 
-const COOKIE_NAME = 'cookieConsent';
+const COOKIE_NAME = "cookieConsent";
 
 const getCookie = (): string | null => {
-  const match = document.cookie.match(new RegExp('(^| )' + COOKIE_NAME + '=([^;]+)'));
+  const match = document.cookie.match(
+    new RegExp("(^| )" + COOKIE_NAME + "=([^;]+)")
+  );
   return match ? match[2] : null;
 };
 
 const setCookie = (value: string) => {
-  document.cookie = `${COOKIE_NAME}=${value}; path=/; max-age=${60 * 60 * 24 * 365}`;
+  document.cookie = `${COOKIE_NAME}=${value}; path=/; max-age=${
+    60 * 60 * 24 * 365
+  }`;
 };
 
 const loadGoogleAnalytics = () => {
-  if (document.getElementById('ga-script')) return;
+  if (document.getElementById("ga-script")) return;
 
   const gaTrackingId = process.env.REACT_APP_GA_TRACKING_ID;
   if (!gaTrackingId) {
-    console.warn('Google Analytics tracking ID not configured');
+    // Only show warning in production or when explicitly set
+    if (process.env.NODE_ENV === "production") {
+      console.warn("Google Analytics tracking ID not configured");
+    }
     return;
   }
 
-  const script = document.createElement('script');
+  const script = document.createElement("script");
   script.async = true;
   script.src = `https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`;
-  script.id = 'ga-script';
+  script.id = "ga-script";
   document.head.appendChild(script);
 
-  const script2 = document.createElement('script');
+  const script2 = document.createElement("script");
   script2.innerHTML = `
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -46,19 +53,19 @@ const CookieConsent: React.FC = () => {
     const consent = getCookie();
     if (!consent) {
       setOpen(true);
-    } else if (consent === 'all') {
+    } else if (consent === "all") {
       loadGoogleAnalytics();
     }
   }, []);
 
   const acceptAll = () => {
-    setCookie('all');
+    setCookie("all");
     loadGoogleAnalytics();
     setOpen(false);
   };
 
   const acceptNecessary = () => {
-    setCookie('necessary');
+    setCookie("necessary");
     setOpen(false);
   };
 
@@ -67,12 +74,13 @@ const CookieConsent: React.FC = () => {
       <div className={styles.content}>
         <h2>Cookie Notice</h2>
         <p>
-         <strong>We use cookies</strong> to remember your preferences and to analyze how visitors
-          interact with our site.</p>
-          <p>
-          Accepting all cookies allows us to use Google
-          Analytics for statistics. You can also choose to keep only the cookies
-          necessary for the website to function.
+          <strong>We use cookies</strong> to remember your preferences and to
+          analyze how visitors interact with our site.
+        </p>
+        <p>
+          Accepting all cookies allows us to use Google Analytics for
+          statistics. You can also choose to keep only the cookies necessary for
+          the website to function.
         </p>
         <div className={styles.actions}>
           <Button

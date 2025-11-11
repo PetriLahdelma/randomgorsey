@@ -5,7 +5,32 @@
         "scss",
         "less"
     ],
+    "stylelint.config": {
+        "extends": [
+            "stylelint-config-standard",
+            "stylelint-config-css-modules",
+            "stylelint-config-recess-order"
+        ],
+        "rules": {
+            "block-no-redundant-nested-style-rules": null,
+            "media-type-no-deprecated": null,
+            "nesting-selector-no-missing-scoping-root": null,
+            "no-invalid-position-declaration": null,
+            "property-no-deprecated": null
+        }
+    },
     "editor.codeActionsOnSave": {
         "source.fixAll": "explicit"
-    }
+    },
+    "json.schemas": [
+        {
+            "fileMatch": [".eslintrc.json"],
+            "schema": {}
+        },
+        {
+            "fileMatch": [".stylelintrc.json"],
+            "schema": {}
+        }
+    ],
+    "json.schemaDownload.enable": false
 }

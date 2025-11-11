@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react-webpack5';
+import { Meta, StoryFn } from '@storybook/react';
 import Avatar, { AvatarProps } from '../components/Avatar';
 import PeteImg from '../../public/images/pete.jpg';
 

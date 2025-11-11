@@ -2,8 +2,8 @@ import React from "react";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import Label from "./Label";
 import styles from "./Input.module.css";
-import { BaseComponentProps, Size } from '../types/common';
-import { ValidationRule } from '../types/forms';
+import { BaseComponentProps, Size } from "../types/common";
+import { ValidationRule } from "../types/forms";
 
 /**
  * Input types supported by the component
@@ -25,7 +25,7 @@ export type InputType =
 /**
  * Props for the Input component
  */
-export interface InputProps extends Omit<BaseComponentProps, 'children'> {
+export interface InputProps extends Omit<BaseComponentProps, "children"> {
   /** Type of input field */
   type: InputType;
   /** Current value of the input */
@@ -214,9 +214,9 @@ const Input: React.FC<InputProps> = ({
       )}
 
       {error && (
-        <div className={styles['error-message']} id={`${inputId}-error`}>
+        <div className={styles["error-message"]} id={`${inputId}-error`}>
           <ExclamationCircleIcon
-            className={styles['error-icon']}
+            className={styles["error-icon"]}
             aria-hidden="true"
           />
           <span role="alert">{error}</span>

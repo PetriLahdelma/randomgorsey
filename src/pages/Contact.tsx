@@ -57,7 +57,7 @@ const Contact: React.FC = () => {
       const resetTime = rateLimiter.getResetTime(userIdentifier);
       const remainingTime = Math.ceil((resetTime - Date.now()) / 1000);
       setFormErrors({
-        general: `Too many attempts. Please wait ${remainingTime} seconds before trying again.`
+        general: `Too many attempts. Please wait ${remainingTime} seconds before trying again.`,
       });
       return;
     }
@@ -67,7 +67,7 @@ const Contact: React.FC = () => {
       name,
       email,
       subject,
-      message
+      message,
     });
 
     if (!securityValidation.isValid) {
@@ -103,7 +103,7 @@ const Contact: React.FC = () => {
     ) as HTMLInputElement;
     if (honeypotField && honeypotField.value) {
       // Silently fail for spam (don't give feedback to bots)
-      console.warn('Honeypot field filled - potential spam');
+      console.warn("Honeypot field filled - potential spam");
       return;
     }
 
@@ -291,9 +291,11 @@ const Contact: React.FC = () => {
             </ContactButton>
             <div className={styles["disclaimer"]}>
               <p className={styles["disclaimer-text"]}>
-                By submitting this form, you agree that your personal information (name, email, and message) will be used to respond to your inquiry. 
-                Your data will not be shared with third parties and will be handled in accordance with our privacy practices. 
-                We may retain your message for record-keeping purposes.
+                By submitting this form, you agree that your personal
+                information (name, email, and message) will be used to respond
+                to your inquiry. Your data will not be shared with third parties
+                and will be handled in accordance with our privacy practices. We
+                may retain your message for record-keeping purposes.
               </p>
             </div>
             {isModalOpen && (

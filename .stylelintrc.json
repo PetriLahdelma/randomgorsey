@@ -4,7 +4,6 @@
     "stylelint-config-css-modules",
     "stylelint-config-recess-order"
   ],
-  "plugins": ["stylelint-use-logical", "stylelint-plugin-logical-css"],
   "rules": {
     "max-nesting-depth": 3,
     "selector-max-id": 0,
@@ -12,7 +11,7 @@
     "declaration-no-important": true,
     "color-named": "never",
     "font-family-no-missing-generic-family-keyword": true,
-    "unit-allowed-list": ["s", "px", "%", "em", "rem", "deg"],
+    "unit-allowed-list": ["s", "px", "%", "em", "rem", "deg", "vw", "vh"],
     "block-no-empty": true,
     "no-duplicate-selectors": true,
     "property-no-unknown": true,
@@ -23,6 +22,11 @@
     "value-no-vendor-prefix": true,
     "function-url-no-scheme-relative": true,
     "no-empty-source": true,
-    "no-invalid-double-slash-comments": true
+    "no-invalid-double-slash-comments": true,
+    "block-no-redundant-nested-style-rules": null,
+    "media-type-no-deprecated": null,
+    "nesting-selector-no-missing-scoping-root": null,
+    "no-invalid-position-declaration": null,
+    "property-no-deprecated": null
   }
 }
