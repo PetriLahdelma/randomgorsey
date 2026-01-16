@@ -22,7 +22,16 @@ This roadmap transforms a functional React 19 portfolio into a bold, design-forw
 3. User experiences no visual regressions from the CSS Modules version
 4. Developer can import Radix primitives and shadcn components in any file
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 7 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Migrate from CRA to Vite build system
+- [ ] 01-02-PLAN.md — Install Tailwind CSS v4 and shadcn/ui foundation
+- [ ] 01-03-PLAN.md — Migrate design system primitives (Heading, Text, Surface)
+- [ ] 01-04-PLAN.md — Migrate form components (Button, Input, TextArea, Select, Checkbox, Label)
+- [ ] 01-05-PLAN.md — Migrate feedback components (Alert, Badge, Modal, Spinner, Avatar, Caption)
+- [ ] 01-06-PLAN.md — Migrate layout patterns (Header, Footer, App) and verify
+- [ ] 01-07-PLAN.md — Update Storybook and cleanup CSS Modules
 
 ---
 
@@ -161,7 +170,7 @@ This roadmap transforms a functional React 19 portfolio into a bold, design-forw
 
 | Phase | Status | Completed |
 |-------|--------|-----------|
-| 1 - Tailwind Migration | Not started | - |
+| 1 - Tailwind Migration | Planned | - |
 | 2 - Token Architecture | Not started | - |
 | 3 - Typography System | Not started | - |
 | 4 - Motion Foundation | Not started | - |
