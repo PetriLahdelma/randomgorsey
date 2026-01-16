@@ -1,7 +1,7 @@
 # Requirements: Random Gorsey
 
 **Defined:** 2026-01-17
-**Core Value:** Ship something you'd be proud to show design-literate peers — every decision should feel intentional, not safe.
+**Core Value:** Ship something you'd be proud to show design-literate peers - every decision should feel intentional, not safe.
 
 ## v1 Requirements
 
@@ -9,7 +9,7 @@ Requirements for the creative transformation. Each maps to roadmap phases.
 
 ### Design Foundation
 
-- [ ] **FOUND-01**: Three-layer token architecture (primitives → semantics → section-scoped)
+- [ ] **FOUND-01**: Three-layer token architecture (primitives -> semantics -> section-scoped)
 - [ ] **FOUND-02**: Section personality system via `data-section` attributes
 - [ ] **FOUND-03**: Variable fonts with fluid clamp() sizing
 - [ ] **FOUND-04**: CSS `@layer` cascade organization
@@ -67,7 +67,7 @@ Explicitly excluded. Documented to prevent scope creep.
 | Enterprise UX patterns | This project is explicitly experimental |
 | Mobile app framing | Web-first |
 | Conservative/safe design | Allowed and encouraged to be bold |
-| Startup clichés | No hero illustrations, "we're passionate about", bento grids |
+| Startup cliches | No hero illustrations, "we're passionate about", bento grids |
 | Client-safe decisions | Personal project, can take creative risks |
 
 ## Constraints
@@ -79,6 +79,7 @@ Hard limits that affect implementation choices.
 - **Accessibility**: `prefers-reduced-motion` respected throughout all animations
 - **Stack**: shadcn/ui v2 + Tailwind CSS + Radix primitives (migration from CSS Modules)
 - **Hosting**: GitHub Pages static deployment (existing)
+- **Storybook**: Every component has a 1:1 Storybook story — no component ships without documentation
 
 ## Traceability
 
@@ -86,31 +87,31 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | TBD | Pending |
-| FOUND-02 | TBD | Pending |
-| FOUND-03 | TBD | Pending |
-| FOUND-04 | TBD | Pending |
-| FOUND-05 | TBD | Pending |
-| MOTN-01 | TBD | Pending |
-| MOTN-02 | TBD | Pending |
-| MOTN-03 | TBD | Pending |
-| MOTN-04 | TBD | Pending |
-| LAYT-01 | TBD | Pending |
-| LAYT-02 | TBD | Pending |
-| LAYT-03 | TBD | Pending |
-| EXPN-01 | TBD | Pending |
-| EXPN-02 | TBD | Pending |
-| EXPN-03 | TBD | Pending |
-| VSFX-01 | TBD | Pending |
-| VSFX-02 | TBD | Pending |
-| VSFX-03 | TBD | Pending |
-| VSFX-04 | TBD | Pending |
+| FOUND-01 | Phase 2 | Pending |
+| FOUND-02 | Phase 2 | Pending |
+| FOUND-03 | Phase 3 | Pending |
+| FOUND-04 | Phase 2 | Pending |
+| FOUND-05 | Phase 1 | Pending |
+| MOTN-01 | Phase 4 | Pending |
+| MOTN-02 | Phase 5 | Pending |
+| MOTN-03 | Phase 8 | Pending |
+| MOTN-04 | Phase 5 | Pending |
+| LAYT-01 | Phase 6 | Pending |
+| LAYT-02 | Phase 6 | Pending |
+| LAYT-03 | Phase 6 | Pending |
+| EXPN-01 | Phase 8 | Pending |
+| EXPN-02 | Phase 8 | Pending |
+| EXPN-03 | Phase 9 | Pending |
+| VSFX-01 | Phase 7 | Pending |
+| VSFX-02 | Phase 7 | Pending |
+| VSFX-03 | Phase 7 | Pending |
+| VSFX-04 | Phase 7 | Pending |
 
 **Coverage:**
 - v1 requirements: 19 total
-- Mapped to phases: 0
-- Unmapped: 19 ⚠️
+- Mapped to phases: 19
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-17*
-*Last updated: 2026-01-17 after initial definition*
+*Last updated: 2026-01-17 after roadmap creation*
