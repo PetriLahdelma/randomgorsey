@@ -2,6 +2,7 @@ import React, { Suspense, useState, lazy, useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { AnimationProvider, AnimatedRoutes } from '@/lib/motion';
+import { CursorProvider } from '@/lib/cursor';
 import Footer from './patterns/Footer';
 import Header from './patterns/Header';
 import CookieConsent from './components/CookieConsent';
@@ -28,26 +29,28 @@ const App: React.FC = () => {
 
   return (
     <AnimationProvider>
-      <BrowserRouter>
-        <div className={cn(
-          "flex flex-col min-h-screen text-center"
-        )}>
-          <Header />
-          <Suspense fallback={<Spinner />}>
-            <AnimatedRoutes>
-              <Route path="/" element={<Home />} />
-              <Route path="/listen" element={<Listen />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/discography" element={<Discography />} />
-              <Route path="/gallery" element={<Gallery onOverlayStateChange={handleOverlayState} />} />
-              <Route path="*" element={<NotFound />} />
-            </AnimatedRoutes>
-          </Suspense>
-          {!isOverlayActive && <Footer />}
-          <CookieConsent />
-        </div>
-      </BrowserRouter>
+      <CursorProvider>
+        <BrowserRouter>
+          <div className={cn(
+            "flex flex-col min-h-screen text-center"
+          )}>
+            <Header />
+            <Suspense fallback={<Spinner />}>
+              <AnimatedRoutes>
+                <Route path="/" element={<Home />} />
+                <Route path="/listen" element={<Listen />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/discography" element={<Discography />} />
+                <Route path="/gallery" element={<Gallery onOverlayStateChange={handleOverlayState} />} />
+                <Route path="*" element={<NotFound />} />
+              </AnimatedRoutes>
+            </Suspense>
+            {!isOverlayActive && <Footer />}
+            <CookieConsent />
+          </div>
+        </BrowserRouter>
+      </CursorProvider>
     </AnimationProvider>
   );
 };
