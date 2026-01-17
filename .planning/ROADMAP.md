@@ -69,11 +69,12 @@ Plans:
 3. User experiences smooth font rendering with no layout shift on load
 4. Developer can use clamp()-based sizing for any text element
 
-**Plans:** 2 plans
+**Plans:** 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Create typography tokens with fluid type scale and optimize font loading
-- [ ] 03-02-PLAN.md — Update Heading and Text components to use typography tokens
+- [x] 03-01-PLAN.md — Create typography tokens with fluid type scale and optimize font loading
+- [x] 03-02-PLAN.md — Update Heading and Text components to use typography tokens
+- [ ] 03-03-PLAN.md — Apply fluid tokens to base h1-h6 and remove CSS Module fixed font-size overrides (gap closure)
 
 ---
 
@@ -182,7 +183,7 @@ Plans:
 |-------|--------|-----------|
 | 1 - Tailwind Migration | Complete | 2026-01-17 |
 | 2 - Token Architecture | Complete | 2026-01-17 |
-| 3 - Typography System | Planned | - |
+| 3 - Typography System | In Progress | - |
 | 4 - Motion Foundation | Not started | - |
 | 5 - Smooth Scroll Integration | Not started | - |
 | 6 - Layout Primitives | Not started | - |
