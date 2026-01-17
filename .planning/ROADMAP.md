@@ -53,13 +53,13 @@ Plans:
 - [x] 02-01-PLAN.md — Create primitive token layer with @theme directive
 - [x] 02-02-PLAN.md — Create semantic token layer with :root mappings
 - [x] 02-03-PLAN.md — Create section token layer and integrate into globals.css
-- [ ] 02-04-PLAN.md — Wire section tokens to pages and add legacy color aliases (gap closure)
+- [x] 02-04-PLAN.md — Wire section tokens to pages and add legacy color aliases (gap closure)
 
 ---
 
 ### Phase 3: Typography System
 
-**Goal:** Implement variable fonts with fluid sizing and expressive hierarchy
+**Goal:** Implement fluid typography with clamp()-based sizing and optimized font loading
 **Depends on:** Phase 2
 **Requirements:** FOUND-03
 
@@ -69,7 +69,11 @@ Plans:
 3. User experiences smooth font rendering with no layout shift on load
 4. Developer can use clamp()-based sizing for any text element
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 2 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Create typography tokens with fluid type scale and optimize font loading
+- [ ] 03-02-PLAN.md — Update Heading and Text components to use typography tokens
 
 ---
 
@@ -178,7 +182,7 @@ Plans:
 |-------|--------|-----------|
 | 1 - Tailwind Migration | Complete | 2026-01-17 |
 | 2 - Token Architecture | Complete | 2026-01-17 |
-| 3 - Typography System | Not started | - |
+| 3 - Typography System | Planned | - |
 | 4 - Motion Foundation | Not started | - |
 | 5 - Smooth Scroll Integration | Not started | - |
 | 6 - Layout Primitives | Not started | - |
