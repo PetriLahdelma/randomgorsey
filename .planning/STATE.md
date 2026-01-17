@@ -10,22 +10,22 @@ See: .planning/PROJECT.md
 ## Current Position
 
 Phase: 5 of 9 (Smooth Scroll Integration)
-Plan: 2 of 5 complete (05-01, 05-02)
+Plan: 3 of 5 complete (05-01, 05-02, 05-03)
 Status: In progress
-Last activity: 2026-01-17 - Completed 05-02-PLAN.md (Reveal Variants and RevealOnScroll)
+Last activity: 2026-01-17 - Completed 05-03-PLAN.md (Scroll Utility Wiring)
 
-Progress: [========================================] ~40% (20/~50 total plans estimated)
+Progress: [==========================================] ~42% (21/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 20
+- Total plans completed: 21
 - Average duration: 6 min
 - Phase 1 total: ~70 min
 - Phase 2 total: ~18 min
 - Phase 3 total: ~13 min
 - Phase 4 total: ~12 min
-- Phase 5 so far: ~6 min
+- Phase 5 so far: ~8 min
 
 **By Phase:**
 
@@ -35,7 +35,7 @@ Progress: [========================================] ~40% (20/~50 total plans es
 | 02-token-architecture | 4 | 18 min | 5 min |
 | 03-typography-system | 3 | 13 min | 4 min |
 | 04-motion-foundation | 4 | 12 min | 3 min |
-| 05-smooth-scroll-integration | 2/5 | 6 min | 3 min |
+| 05-smooth-scroll-integration | 3/5 | 8 min | 3 min |
 
 ## Accumulated Context
 
@@ -112,6 +112,9 @@ Progress: [========================================] ~40% (20/~50 total plans es
 - 2026-01-17: syncTouch: false to avoid iOS scroll issues
 - 2026-01-17: Reveal variants use hidden/visible naming for whileInView compatibility
 - 2026-01-17: RevealOnScroll automatically switches to fade-only for reduced motion users
+- 2026-01-17: useLenisScrollTo uses Lenis when available, native smooth scroll as fallback
+- 2026-01-17: useScrollToTopOnRouteChange uses immediate scroll to prevent flash of previous position
+- 2026-01-17: data-lenis-prevent attribute on overlay prevents background scroll
 
 ### Phase 1 Completion Summary
 
@@ -195,10 +198,11 @@ Progress: [========================================] ~40% (20/~50 total plans es
 - `src/lib/motion/LenisProvider.tsx` - Lenis smooth scroll integration (Plan 05-01)
 - `src/lib/motion/variants.ts` - Added 4 reveal variants (Plan 05-02)
 - `src/components/RevealOnScroll.tsx` - Scroll-triggered reveal component (Plan 05-02)
+- `src/lib/motion/hooks.ts` - Custom scroll hooks (Plan 05-03)
 
 **Plan 05-01:** Lenis Smooth Scroll Setup (COMPLETE)
 **Plan 05-02:** Reveal Variants and RevealOnScroll (COMPLETE)
-**Plan 05-03:** ScrollProgress Components (PENDING)
+**Plan 05-03:** Scroll Utility Wiring (COMPLETE)
 **Plan 05-04:** Parallax and Scroll Effects (PENDING)
 **Plan 05-05:** Gap Closure (PENDING)
 
@@ -216,5 +220,5 @@ Progress: [========================================] ~40% (20/~50 total plans es
 ## Session Continuity
 
 Last session: 2026-01-17
-Stopped at: Completed 05-02-PLAN.md - Reveal Variants and RevealOnScroll
-Resume file: None - continue with 05-03-PLAN.md
+Stopped at: Completed 05-03-PLAN.md - Scroll Utility Wiring
+Resume file: None - continue with 05-04-PLAN.md
