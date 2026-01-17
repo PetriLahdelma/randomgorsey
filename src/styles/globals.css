@@ -159,3 +159,28 @@
     font-family: var(--font-family-europa-light);
   }
 }
+
+/* === CUSTOM CURSOR === */
+/* Hide default cursor when custom cursor is active (desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active {
+    cursor: none;
+  }
+
+  body.custom-cursor-active a,
+  body.custom-cursor-active button,
+  body.custom-cursor-active [role="button"],
+  body.custom-cursor-active input,
+  body.custom-cursor-active textarea,
+  body.custom-cursor-active select,
+  body.custom-cursor-active label {
+    cursor: none;
+  }
+}
+
+/* Touch/mobile devices - always show native cursor */
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+}
