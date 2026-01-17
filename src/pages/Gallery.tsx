@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { XMarkIcon, ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 import { motion, AnimatePresence, pageVariants, overlayVariants } from '@/lib/motion';
+import RevealOnScroll from '../components/RevealOnScroll';
 import styles from './Gallery.module.css';
 import Spinner from '../components/Spinner';
 import galleryImages from '../data/galleryImages';
@@ -94,20 +95,24 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
       >
       {loading && <Spinner />}
       <div className={styles['gallery-content']}>
-        <h1>Gallery</h1>
+        <RevealOnScroll>
+          <h1>Gallery</h1>
+        </RevealOnScroll>
         {images.map((image, index) => (
-          <div key={index}>
-            <img
-              loading="lazy"
-              src={image.src}
-              alt={image.caption}
-              title={image.caption}
-              style={{ width: '100%', borderRadius: '8px', marginTop: '1rem' }}
-              onClick={() => openOverlay(index)}
-              onLoad={index === 0 ? handleContentLoad : undefined}
-            />
-            <Caption>{image.caption}</Caption>
-          </div>
+          <RevealOnScroll key={index}>
+            <div>
+              <img
+                loading="lazy"
+                src={image.src}
+                alt={image.caption}
+                title={image.caption}
+                style={{ width: '100%', borderRadius: '8px', marginTop: '1rem' }}
+                onClick={() => openOverlay(index)}
+                onLoad={index === 0 ? handleContentLoad : undefined}
+              />
+              <Caption>{image.caption}</Caption>
+            </div>
+          </RevealOnScroll>
         ))}
 
         <AnimatePresence>
