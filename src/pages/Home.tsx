@@ -93,6 +93,7 @@ const Home: React.FC = () => {
       )}
       <Container
         className={styles["home-container"]}
+        data-section="hero"
         {...(!isIOS() && {
           initial: { opacity: 0, y: 20 },
           animate: { opacity: 1, y: 0 },

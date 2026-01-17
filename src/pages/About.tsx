@@ -41,6 +41,7 @@ const About: React.FC = () => {
       )}
       <Container
         className={styles['about-container']}
+        data-section="about"
         {...(!isIOS() && {
           initial: { opacity: 0, y: 20 },
           animate: { opacity: 1, y: 0 },

@@ -56,6 +56,7 @@ const Discography: React.FC = () => {
     )}
     <Container
       className={styles['discography-container']}
+      data-section="discography"
       {...(!isIOS() && {
         initial: { opacity: 0, y: 20 },
         animate: { opacity: 1, y: 0 },
