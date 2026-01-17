@@ -115,4 +115,24 @@
   --color-card-foreground: oklch(0.145 0 0);  /* neutral-950 */
   --color-popover: oklch(1 0 0);         /* white */
   --color-popover-foreground: oklch(0.145 0 0);  /* neutral-950 */
+
+  /* ========================================
+   * LEGACY COLOR ALIASES
+   * Bridge for CSS Modules during migration
+   * Maps old variable names to new primitives
+   * TODO: Remove after Phase 3+ page migration
+   * ======================================== */
+  --color-yellow: var(--color-yellow-400);
+  --color-magenta: var(--color-magenta-500);
+  --color-blue: oklch(0.45 0.31 264);  /* Pure blue #00f in oklch */
+  --color-green: oklch(0.87 0.35 142);  /* Pure green #0f0 in oklch */
+  --color-orange: oklch(0.80 0.15 75);  /* Warm orange for discography */
+  --color-gray: var(--color-neutral-300);
+  --color-gray-medium: var(--color-neutral-500);
+  --color-gray-dark: var(--color-neutral-600);
+  --color-gray-light: var(--color-neutral-200);
+  --color-light-bg: var(--color-neutral-50);
+  --color-blue-light: oklch(0.55 0.22 255);  /* #007bff equivalent */
+  --color-red: oklch(0.577 0.245 27.325);  /* Same as red-500 */
+  --color-dark: var(--color-neutral-800);
 }
