@@ -61,6 +61,10 @@ export { LenisProvider } from './LenisProvider';
 // Lenis hook for programmatic scroll control
 export { useLenis } from 'lenis/react';
 
+// === CUSTOM HOOKS ===
+// Scroll utilities with Lenis integration
+export { useScrollToTopOnRouteChange, useLenisScrollTo } from './hooks';
+
 // === FRAMER MOTION RE-EXPORTS ===
 // Commonly used utilities for convenience
 export {
