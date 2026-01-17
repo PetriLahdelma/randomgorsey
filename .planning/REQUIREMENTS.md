@@ -19,7 +19,7 @@ Requirements for the creative transformation. Each maps to roadmap phases.
 
 - [x] **MOTN-01**: Centralized motion config (springs, variants, reduced-motion handling)
 - [x] **MOTN-02**: Lenis smooth scroll integration
-- [ ] **MOTN-03**: Kinetic typography with SplitType
+- [x] **MOTN-03**: Kinetic typography with SplitType
 - [x] **MOTN-04**: Scroll-driven reveal animations
 
 ### Layout
@@ -30,8 +30,8 @@ Requirements for the creative transformation. Each maps to roadmap phases.
 
 ### Page Experience
 
-- [ ] **EXPN-01**: Custom cursor with personality (desktop), graceful touch fallback (mobile)
-- [ ] **EXPN-02**: Choreographed page transitions with AnimatePresence coordination
+- [x] **EXPN-01**: Custom cursor with personality (desktop), graceful touch fallback (mobile)
+- [x] **EXPN-02**: Choreographed page transitions with AnimatePresence coordination
 - [ ] **EXPN-03**: Section-specific visual identities per page
 
 ### Visual Effects
@@ -94,13 +94,13 @@ Which phases cover which requirements. Updated by create-roadmap.
 | FOUND-05 | Phase 1 | Complete |
 | MOTN-01 | Phase 4 | Complete |
 | MOTN-02 | Phase 5 | Complete |
-| MOTN-03 | Phase 8 | Pending |
+| MOTN-03 | Phase 8 | Complete |
 | MOTN-04 | Phase 5 | Complete |
 | LAYT-01 | Phase 6 | Complete |
 | LAYT-02 | Phase 6 | Complete |
 | LAYT-03 | Phase 6 | Complete |
-| EXPN-01 | Phase 8 | Pending |
-| EXPN-02 | Phase 8 | Pending |
+| EXPN-01 | Phase 8 | Complete |
+| EXPN-02 | Phase 8 | Complete |
 | EXPN-03 | Phase 9 | Pending |
 | VSFX-01 | Phase 7 | Complete |
 | VSFX-02 | Phase 7 | Complete |
@@ -114,4 +114,4 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 ---
 *Requirements defined: 2026-01-17*
-*Last updated: 2026-01-17 after Phase 7 completion*
+*Last updated: 2026-01-17 after Phase 8 completion*
