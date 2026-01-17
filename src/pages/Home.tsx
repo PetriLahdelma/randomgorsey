@@ -2,6 +2,7 @@ import React from "react";
 import PageMeta from "../components/PageMeta";
 import { isWebMSupported } from "../utils/isWebMSupported";
 import { motion, pageVariants } from "@/lib/motion";
+import RevealOnScroll from "../components/RevealOnScroll";
 import styles from "./Home.module.css";
 import Spinner from "../components/Spinner";
 import Button from "../components/Button";
@@ -98,9 +99,13 @@ const Home: React.FC = () => {
         {loading && <Spinner style={{ borderTopColor: "#FFD600" }} />}
         {!loading && (
           <>
-            <h1>Latest Posts</h1>
+            <RevealOnScroll>
+              <h1>Latest Posts</h1>
+            </RevealOnScroll>
             {posts.slice(0, visibleCount).map((post) => (
-              <PostCard key={post.id} post={post} />
+              <RevealOnScroll key={post.id}>
+                <PostCard post={post} />
+              </RevealOnScroll>
             ))}
             {visibleCount < posts.length && (
               <Button
@@ -116,16 +121,18 @@ const Home: React.FC = () => {
           </>
         )}
         {!loading && (
-          <div className={styles["back-to-top"]}>
-            <Button
-              className={styles["back-to-top-button"]}
-              variant="secondary"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              aria-label="Back to top"
-            >
-              Back to Top
-            </Button>
-          </div>
+          <RevealOnScroll>
+            <div className={styles["back-to-top"]}>
+              <Button
+                className={styles["back-to-top-button"]}
+                variant="secondary"
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                aria-label="Back to top"
+              >
+                Back to Top
+              </Button>
+            </div>
+          </RevealOnScroll>
         )}
       </motion.div>
     </>
