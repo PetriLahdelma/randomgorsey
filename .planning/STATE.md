@@ -5,29 +5,31 @@
 See: .planning/PROJECT.md
 
 **Core value:** Ship something you'd be proud to show design-literate peers - every decision should feel intentional, not safe.
-**Current focus:** Phase 1 Complete - Ready for Phase 2
+**Current focus:** Phase 2 - Token Architecture (Plan 01 complete)
 
 ## Current Position
 
-Phase: 1 of 9 (Tailwind Migration) - COMPLETE
-Plan: 7 of 7 complete (01-01 through 01-07)
-Status: Phase complete
-Last activity: 2026-01-17 - Completed 01-07-PLAN.md (Storybook + CSS Cleanup)
+Phase: 2 of 9 (Token Architecture)
+Plan: 1 of 3 complete (02-01)
+Status: In progress
+Last activity: 2026-01-17 - Completed 02-01-PLAN.md (Primitive Token Layer)
 
-Progress: [==========] ~14% (7/~50 total plans estimated)
+Progress: [================----] ~16% (8/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
-- Average duration: 10 min
+- Total plans completed: 8
+- Average duration: 9 min
 - Phase 1 total: ~70 min
+- Phase 2 current: ~5 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-tailwind-migration | 7 | 70 min | 10 min |
+| 02-token-architecture | 1 | 5 min | 5 min |
 
 ## Accumulated Context
 
@@ -62,6 +64,10 @@ Progress: [==========] ~14% (7/~50 total plans estimated)
 - 2026-01-17: Storybook switched to react-vite builder
 - 2026-01-17: Stories use StoryObj format with autodocs tag
 - 2026-01-17: Keep variables.css for page CSS Module compatibility
+- 2026-01-17: Three-layer token architecture (primitives -> semantics -> sections)
+- 2026-01-17: oklch color format for all primitive tokens (perceptual uniformity)
+- 2026-01-17: Yellow-400 tuned to oklch(0.88 0.17 85) to match #ff0 brand color
+- 2026-01-17: Spacing base 0.25rem creates standard Tailwind spacing scale
 
 ### Phase 1 Completion Summary
 
@@ -77,10 +83,18 @@ Progress: [==========] ~14% (7/~50 total plans estimated)
 - `src/lib/utils.ts` - cn() utility for class merging
 - `.storybook/main.ts` - Vite-based Storybook config
 
-**Remaining Work (Future Phases):**
-- Page-level CSS Modules still exist (pages/*.module.css)
-- Pages use variables.css for CSS variable definitions
-- Test configuration needs Vitest setup
+### Phase 2 Progress (Token Architecture)
+
+**Plan 02-01 Complete:**
+- Primitive token layer created at `src/styles/tokens/primitives.css`
+- Neutral scale (50-950) in oklch format
+- Accent colors (yellow, magenta, blue)
+- Feedback colors (red, green)
+- Spacing, radius, typography, animation tokens
+
+**Remaining Plans:**
+- 02-02: Semantic tokens layer
+- 02-03: Section-scoped tokens
 
 ### Pending Todos
 
@@ -90,10 +104,10 @@ Progress: [==========] ~14% (7/~50 total plans estimated)
 
 ### Blockers/Concerns
 
-(None - Phase 1 complete)
+(None)
 
 ## Session Continuity
 
-Last session: 2026-01-17T02:37:00Z
-Stopped at: Completed 01-07-PLAN.md - Phase 1 Complete
-Resume file: None - ready to start Phase 2
+Last session: 2026-01-17T03:05:00Z
+Stopped at: Completed 02-01-PLAN.md - Primitive Token Layer
+Resume file: None - ready for 02-02-PLAN.md
