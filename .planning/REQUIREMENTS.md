@@ -11,7 +11,7 @@ Requirements for the creative transformation. Each maps to roadmap phases.
 
 - [x] **FOUND-01**: Three-layer token architecture (primitives -> semantics -> section-scoped)
 - [x] **FOUND-02**: Section personality system via `data-section` attributes
-- [ ] **FOUND-03**: Variable fonts with fluid clamp() sizing
+- [x] **FOUND-03**: Variable fonts with fluid clamp() sizing
 - [x] **FOUND-04**: CSS `@layer` cascade organization
 - [ ] **FOUND-05**: Migrate to shadcn/ui v2 + Tailwind CSS + Radix primitives
 
@@ -89,7 +89,7 @@ Which phases cover which requirements. Updated by create-roadmap.
 |-------------|-------|--------|
 | FOUND-01 | Phase 2 | Complete |
 | FOUND-02 | Phase 2 | Complete |
-| FOUND-03 | Phase 3 | Pending |
+| FOUND-03 | Phase 3 | Complete |
 | FOUND-04 | Phase 2 | Complete |
 | FOUND-05 | Phase 1 | Complete |
 | MOTN-01 | Phase 4 | Pending |
@@ -114,4 +114,4 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 ---
 *Requirements defined: 2026-01-17*
-*Last updated: 2026-01-17 after Phase 2 completion*
+*Last updated: 2026-01-17 after Phase 3 completion*
