@@ -205,7 +205,16 @@ Plans:
 3. User on mobile gets full section personality experience (not stripped-down version)
 4. Design-literate peer would describe the site as "intentionally designed" not "assembled from templates"
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 7 plans
+
+Plans:
+- [ ] 09-01-PLAN.md — Create section-specific motion variants
+- [ ] 09-02-PLAN.md — Enhance Home page with dramatic personality
+- [ ] 09-03-PLAN.md — Enhance Gallery page with light, airy personality
+- [ ] 09-04-PLAN.md — Enhance Listen page with immersive, moody personality
+- [ ] 09-05-PLAN.md — Enhance About page with warm, personal personality
+- [ ] 09-06-PLAN.md — Enhance Contact and Discography pages
+- [ ] 09-07-PLAN.md — Final polish and cross-page verification
 
 ---
 
