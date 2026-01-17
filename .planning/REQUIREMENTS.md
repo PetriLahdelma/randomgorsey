@@ -18,15 +18,15 @@ Requirements for the creative transformation. Each maps to roadmap phases.
 ### Motion & Animation
 
 - [x] **MOTN-01**: Centralized motion config (springs, variants, reduced-motion handling)
-- [ ] **MOTN-02**: Lenis smooth scroll integration
+- [x] **MOTN-02**: Lenis smooth scroll integration
 - [ ] **MOTN-03**: Kinetic typography with SplitType
-- [ ] **MOTN-04**: Scroll-driven reveal animations
+- [x] **MOTN-04**: Scroll-driven reveal animations
 
 ### Layout
 
-- [ ] **LAYT-01**: Layout primitives (Stack, Cluster, Grid, Bleed components)
-- [ ] **LAYT-02**: Intentional grid breaks (full-width sections within contained layouts)
-- [ ] **LAYT-03**: Container queries for component-level responsiveness
+- [x] **LAYT-01**: Layout primitives (Stack, Cluster, Grid, Bleed components)
+- [x] **LAYT-02**: Intentional grid breaks (full-width sections within contained layouts)
+- [x] **LAYT-03**: Container queries for component-level responsiveness
 
 ### Page Experience
 
@@ -93,12 +93,12 @@ Which phases cover which requirements. Updated by create-roadmap.
 | FOUND-04 | Phase 2 | Complete |
 | FOUND-05 | Phase 1 | Complete |
 | MOTN-01 | Phase 4 | Complete |
-| MOTN-02 | Phase 5 | Pending |
+| MOTN-02 | Phase 5 | Complete |
 | MOTN-03 | Phase 8 | Pending |
-| MOTN-04 | Phase 5 | Pending |
-| LAYT-01 | Phase 6 | Pending |
-| LAYT-02 | Phase 6 | Pending |
-| LAYT-03 | Phase 6 | Pending |
+| MOTN-04 | Phase 5 | Complete |
+| LAYT-01 | Phase 6 | Complete |
+| LAYT-02 | Phase 6 | Complete |
+| LAYT-03 | Phase 6 | Complete |
 | EXPN-01 | Phase 8 | Pending |
 | EXPN-02 | Phase 8 | Pending |
 | EXPN-03 | Phase 9 | Pending |
@@ -114,4 +114,4 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 ---
 *Requirements defined: 2026-01-17*
-*Last updated: 2026-01-17 after Phase 4 completion*
+*Last updated: 2026-01-17 after Phase 6 completion*
