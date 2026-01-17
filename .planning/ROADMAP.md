@@ -115,11 +115,11 @@ Plans:
 **Plans:** 5 plans
 
 Plans:
-- [ ] 05-01-PLAN.md — Install Lenis and create conditional smooth scroll provider
-- [ ] 05-02-PLAN.md — Create reveal variants and RevealOnScroll component
-- [ ] 05-03-PLAN.md — Wire scroll utilities for route changes and overlay handling
-- [ ] 05-04-PLAN.md — Apply reveal animations to Home, About, and Gallery pages
-- [ ] 05-05-PLAN.md — Complete integration with route scroll reset and Storybook
+- [x] 05-01-PLAN.md — Install Lenis and create conditional smooth scroll provider
+- [x] 05-02-PLAN.md — Create reveal variants and RevealOnScroll component
+- [x] 05-03-PLAN.md — Wire scroll utilities for route changes and overlay handling
+- [x] 05-04-PLAN.md — Apply reveal animations to Home, About, and Gallery pages
+- [x] 05-05-PLAN.md — Complete integration with route scroll reset and Storybook
 
 ---
 
@@ -198,7 +198,7 @@ Plans:
 | 2 - Token Architecture | Complete | 2026-01-17 |
 | 3 - Typography System | Complete | 2026-01-17 |
 | 4 - Motion Foundation | Complete | 2026-01-17 |
-| 5 - Smooth Scroll Integration | Planned | - |
+| 5 - Smooth Scroll Integration | Complete | 2026-01-17 |
 | 6 - Layout Primitives | Not started | - |
 | 7 - Visual Effects Foundation | Not started | - |
 | 8 - Page Transitions | Not started | - |
