@@ -45,11 +45,21 @@ export {
   staggerItem,
   overlayVariants,
   modalVariants,
+  // Scroll-triggered reveal variants
+  revealVariants,
+  revealContainerVariants,
+  revealItemVariants,
+  revealFadeVariants,
 } from './variants';
 
 // === PROVIDER ===
 // Global animation configuration wrapper
 export { AnimationProvider } from './AnimationProvider';
+export { LenisProvider } from './LenisProvider';
+
+// === SMOOTH SCROLL ===
+// Lenis hook for programmatic scroll control
+export { useLenis } from 'lenis/react';
 
 // === FRAMER MOTION RE-EXPORTS ===
 // Commonly used utilities for convenience
