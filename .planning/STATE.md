@@ -5,27 +5,28 @@
 See: .planning/PROJECT.md
 
 **Core value:** Ship something you'd be proud to show design-literate peers - every decision should feel intentional, not safe.
-**Current focus:** Phase 5 - Smooth Scroll Integration (COMPLETE)
+**Current focus:** Phase 6 - Layout Primitives (COMPLETE)
 
 ## Current Position
 
-Phase: 5 of 9 (Smooth Scroll Integration) - COMPLETE
-Plan: 5 of 5 complete (05-01, 05-02, 05-03, 05-04, 05-05)
-Status: Phase 5 complete - ready for Phase 6
-Last activity: 2026-01-17 - Completed 05-05-PLAN.md (Complete Integration)
+Phase: 6 of 9 (Layout Primitives) - COMPLETE
+Plan: 4 of 4 complete (all plans)
+Status: Phase complete
+Last activity: 2026-01-17 - Completed 06-04-PLAN.md (Layout Storybook Stories)
 
-Progress: [================================================] ~46% (23/~50 total plans estimated)
+Progress: [====================================================] ~56% (28/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 23
+- Total plans completed: 28
 - Average duration: 6 min
 - Phase 1 total: ~70 min
 - Phase 2 total: ~18 min
 - Phase 3 total: ~13 min
 - Phase 4 total: ~12 min
 - Phase 5 total: ~26 min (includes debugging)
+- Phase 6 total: ~20 min
 
 **By Phase:**
 
@@ -36,6 +37,7 @@ Progress: [================================================] ~46% (23/~50 total 
 | 03-typography-system | 3 | 13 min | 4 min |
 | 04-motion-foundation | 4 | 12 min | 3 min |
 | 05-smooth-scroll-integration | 5 | 26 min | 5 min |
+| 06-layout-primitives | 4 | 20 min | 5 min |
 
 ## Accumulated Context
 
@@ -118,6 +120,14 @@ Progress: [================================================] ~46% (23/~50 total 
 - 2026-01-17: Wrap semantic content blocks with RevealOnScroll, not individual elements
 - 2026-01-17: Move key prop to RevealOnScroll when wrapping mapped arrays
 - 2026-01-17: pageVariants handles page enter, RevealOnScroll handles scroll reveals for below-fold content
+- 2026-01-17: Stack gap variants: none, xs, sm, md, lg, xl, 2xl, section
+- 2026-01-17: Cluster gap variants: none, xs, sm, md, lg (simpler than Stack)
+- 2026-01-17: Layout primitives use polymorphic as prop for semantic HTML elements
+- 2026-01-17: Grid uses @container queries for context-aware responsiveness
+- 2026-01-17: Grid minItemWidth prop uses CSS auto-fit minmax for intrinsic sizing
+- 2026-01-17: Container size variants: sm, md, lg, xl, 2xl, prose, full
+- 2026-01-17: Bleed uses relative left-1/2 w-screen -translate-x-1/2 for breakout
+- 2026-01-17: Layout stories organized in src/stories/layout/ subdirectory
 
 ### Phase 1 Completion Summary
 
@@ -215,6 +225,26 @@ Progress: [================================================] ~46% (23/~50 total 
 - Lenis CSS imported via `lenis/dist/lenis.css`
 - useLenis replaced with safe LenisContext access (prevents crash outside provider)
 
+### Phase 6 Completion Summary
+
+**Layout Primitives Complete:**
+- `src/components/layout/Stack.tsx` - Vertical flow with gap variants (95 lines)
+- `src/components/layout/Cluster.tsx` - Horizontal wrapping with justify/align (106 lines)
+- `src/components/layout/Grid.tsx` - Container query responsive grid (135 lines)
+- `src/components/layout/Bleed.tsx` - Full-width breakout component (52 lines)
+- `src/components/layout/Container.tsx` - Max-width constraint with padding (108 lines)
+
+**Plan 06-01:** Stack and Cluster primitives (COMPLETE)
+**Plan 06-02:** Grid with container queries (COMPLETE)
+**Plan 06-03:** Bleed and Container (COMPLETE)
+**Plan 06-04:** Layout Storybook Stories (COMPLETE)
+
+**Key Artifacts:**
+- `src/components/layout/` - 5 layout primitives
+- `src/stories/layout/` - 5 Storybook story files (1143 total lines)
+- All components have interactive argTypes controls
+- ContainerQueryDemo proves container-based responsiveness
+
 ### Pending Todos
 
 - Configure Vitest for testing (Phase 2 or later)
@@ -229,5 +259,5 @@ Progress: [================================================] ~46% (23/~50 total 
 ## Session Continuity
 
 Last session: 2026-01-17
-Stopped at: Completed Phase 5 - Smooth Scroll Integration
-Resume file: None - Phase 5 complete, ready for Phase 6
+Stopped at: Completed Phase 6 - Layout Primitives
+Resume file: None - Phase 6 complete, ready for Phase 7
