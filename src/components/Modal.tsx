@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, overlayVariants, modalVariants } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 
 interface ModalProps {
@@ -56,10 +56,10 @@ const Modal: React.FC<ModalProps> = ({
         <>
           {/* Backdrop/Overlay */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            variants={overlayVariants}
+            initial="initial"
+            animate="enter"
+            exit="exit"
             onClick={handleOverlayClick}
             data-testid="modal-overlay"
             className={cn(
@@ -69,10 +69,10 @@ const Modal: React.FC<ModalProps> = ({
           >
             {/* Modal Content */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
+              variants={modalVariants}
+              initial="initial"
+              animate="enter"
+              exit="exit"
               role="dialog"
               aria-modal="true"
               aria-labelledby={labelledById}
