@@ -84,4 +84,35 @@
    * ======================================== */
   --animate-duration: 200ms;
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ========================================
+   * SEMANTIC TOKENS FOR TAILWIND UTILITIES
+   * These create utilities (bg-background, text-foreground, etc.)
+   * Default values here, overridden by semantic.css :root/.dark
+   * ======================================== */
+  --color-background: oklch(0.985 0 0);  /* neutral-50 */
+  --color-foreground: oklch(0.145 0 0);  /* neutral-950 */
+  --color-surface: oklch(0.970 0 0);     /* neutral-100 */
+  --color-surface-foreground: oklch(0.205 0 0);  /* neutral-900 */
+  --color-surface-elevated: oklch(1 0 0);  /* white */
+  --color-surface-elevated-foreground: oklch(0.145 0 0);  /* neutral-950 */
+  --color-primary: oklch(0.205 0 0);     /* neutral-900 */
+  --color-primary-foreground: oklch(0.985 0 0);  /* neutral-50 */
+  --color-secondary: oklch(0.922 0 0);   /* neutral-200 */
+  --color-secondary-foreground: oklch(0.205 0 0);  /* neutral-900 */
+  --color-accent: oklch(0.88 0.17 85);   /* yellow-400 */
+  --color-accent-foreground: oklch(0.145 0 0);  /* neutral-950 */
+  --color-muted: oklch(0.970 0 0);       /* neutral-100 */
+  --color-muted-foreground: oklch(0.556 0 0);  /* neutral-500 */
+  --color-destructive: oklch(0.577 0.245 27.325);  /* red-500 */
+  --color-destructive-foreground: oklch(0.985 0 0);  /* neutral-50 */
+  --color-success: oklch(0.723 0.219 142.136);  /* green-500 */
+  --color-success-foreground: oklch(0.985 0 0);  /* neutral-50 */
+  --color-border: oklch(0.922 0 0);      /* neutral-200 */
+  --color-input: oklch(0.922 0 0);       /* neutral-200 */
+  --color-ring: oklch(0.708 0 0);        /* neutral-400 */
+  --color-card: oklch(1 0 0);            /* white */
+  --color-card-foreground: oklch(0.145 0 0);  /* neutral-950 */
+  --color-popover: oklch(1 0 0);         /* white */
+  --color-popover-foreground: oklch(0.145 0 0);  /* neutral-950 */
 }
