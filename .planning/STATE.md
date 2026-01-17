@@ -5,26 +5,27 @@
 See: .planning/PROJECT.md
 
 **Core value:** Ship something you'd be proud to show design-literate peers - every decision should feel intentional, not safe.
-**Current focus:** Phase 4 - Motion Foundation (COMPLETE)
+**Current focus:** Phase 5 - Smooth Scroll Integration (IN PROGRESS)
 
 ## Current Position
 
-Phase: 4 of 9 (Motion Foundation) - COMPLETE
-Plan: 4 of 4 complete (04-01, 04-02, 04-03, 04-04)
-Status: Phase 4 complete - ready for Phase 5
-Last activity: 2026-01-17 - Completed 04-03-PLAN.md (Component Migration to Centralized Variants)
+Phase: 5 of 9 (Smooth Scroll Integration)
+Plan: 2 of 5 complete (05-01, 05-02)
+Status: In progress
+Last activity: 2026-01-17 - Completed 05-02-PLAN.md (Reveal Variants and RevealOnScroll)
 
-Progress: [====================================] ~36% (18/~50 total plans estimated)
+Progress: [========================================] ~40% (20/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 18
+- Total plans completed: 20
 - Average duration: 6 min
 - Phase 1 total: ~70 min
 - Phase 2 total: ~18 min
 - Phase 3 total: ~13 min
 - Phase 4 total: ~12 min
+- Phase 5 so far: ~6 min
 
 **By Phase:**
 
@@ -34,6 +35,7 @@ Progress: [====================================] ~36% (18/~50 total plans estima
 | 02-token-architecture | 4 | 18 min | 5 min |
 | 03-typography-system | 3 | 13 min | 4 min |
 | 04-motion-foundation | 4 | 12 min | 3 min |
+| 05-smooth-scroll-integration | 2/5 | 6 min | 3 min |
 
 ## Accumulated Context
 
@@ -103,6 +105,8 @@ Progress: [====================================] ~36% (18/~50 total plans estima
 - 2026-01-17: isIOS pattern removed from all page components - AnimationProvider handles reduced-motion
 - 2026-01-17: All 7 pages use pageVariants from @/lib/motion for consistent enter animations
 - 2026-01-17: Gallery overlay uses overlayVariants for enter/exit animations
+- 2026-01-17: Reveal variants use hidden/visible naming for whileInView compatibility
+- 2026-01-17: RevealOnScroll automatically switches to fade-only for reduced motion users
 
 ### Phase 1 Completion Summary
 
@@ -180,6 +184,19 @@ Progress: [====================================] ~36% (18/~50 total plans estima
 - `src/components/Modal.tsx` - Uses overlayVariants and modalVariants
 - All 7 page components use pageVariants from @/lib/motion
 
+### Phase 5 Progress (In Progress)
+
+**Smooth Scroll Integration:**
+- `src/lib/motion/LenisProvider.tsx` - Lenis smooth scroll integration (Plan 05-01)
+- `src/lib/motion/variants.ts` - Added 4 reveal variants (Plan 05-02)
+- `src/components/RevealOnScroll.tsx` - Scroll-triggered reveal component (Plan 05-02)
+
+**Plan 05-01:** Lenis Smooth Scroll Setup (COMPLETE)
+**Plan 05-02:** Reveal Variants and RevealOnScroll (COMPLETE)
+**Plan 05-03:** ScrollProgress Components (PENDING)
+**Plan 05-04:** Parallax and Scroll Effects (PENDING)
+**Plan 05-05:** Gap Closure (PENDING)
+
 ### Pending Todos
 
 - Configure Vitest for testing (Phase 2 or later)
@@ -193,6 +210,6 @@ Progress: [====================================] ~36% (18/~50 total plans estima
 
 ## Session Continuity
 
-Last session: 2026-01-17T10:42:00Z
-Stopped at: Completed 04-03-PLAN.md - Component Migration to Centralized Variants
-Resume file: None - Phase 4 complete, ready for Phase 5
+Last session: 2026-01-17
+Stopped at: Completed 05-02-PLAN.md - Reveal Variants and RevealOnScroll
+Resume file: None - continue with 05-03-PLAN.md
