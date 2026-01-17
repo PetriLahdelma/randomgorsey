@@ -90,6 +90,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
       )}
       <Container
         className={styles['gallery-container']}
+        data-section="gallery"
         {...(!isIOS() && {
           initial: { opacity: 0, y: 20 },
           animate: { opacity: 1, y: 0 },
