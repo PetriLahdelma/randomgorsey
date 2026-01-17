@@ -13,7 +13,7 @@ Requirements for the creative transformation. Each maps to roadmap phases.
 - [x] **FOUND-02**: Section personality system via `data-section` attributes
 - [x] **FOUND-03**: Variable fonts with fluid clamp() sizing
 - [x] **FOUND-04**: CSS `@layer` cascade organization
-- [ ] **FOUND-05**: Migrate to shadcn/ui v2 + Tailwind CSS + Radix primitives
+- [x] **FOUND-05**: Migrate to shadcn/ui v2 + Tailwind CSS + Radix primitives
 
 ### Motion & Animation
 
@@ -36,10 +36,10 @@ Requirements for the creative transformation. Each maps to roadmap phases.
 
 ### Visual Effects
 
-- [ ] **VSFX-01**: Full-bleed video backgrounds with mobile fallbacks (poster images, autoplay handling)
-- [ ] **VSFX-02**: Full-bleed hero images (edge-to-edge, responsive)
-- [ ] **VSFX-03**: WebGL particle effects (performance-tiered for mobile/low-power devices)
-- [ ] **VSFX-04**: 3D elements via React Three Fiber (mobile-optimized, graceful degradation)
+- [x] **VSFX-01**: Full-bleed video backgrounds with mobile fallbacks (poster images, autoplay handling)
+- [x] **VSFX-02**: Full-bleed hero images (edge-to-edge, responsive)
+- [x] **VSFX-03**: WebGL particle effects (performance-tiered for mobile/low-power devices)
+- [x] **VSFX-04**: 3D elements via React Three Fiber (mobile-optimized, graceful degradation)
 
 ## v2 Requirements
 
@@ -102,10 +102,10 @@ Which phases cover which requirements. Updated by create-roadmap.
 | EXPN-01 | Phase 8 | Pending |
 | EXPN-02 | Phase 8 | Pending |
 | EXPN-03 | Phase 9 | Pending |
-| VSFX-01 | Phase 7 | Pending |
-| VSFX-02 | Phase 7 | Pending |
-| VSFX-03 | Phase 7 | Pending |
-| VSFX-04 | Phase 7 | Pending |
+| VSFX-01 | Phase 7 | Complete |
+| VSFX-02 | Phase 7 | Complete |
+| VSFX-03 | Phase 7 | Complete |
+| VSFX-04 | Phase 7 | Complete |
 
 **Coverage:**
 - v1 requirements: 19 total
@@ -114,4 +114,4 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 ---
 *Requirements defined: 2026-01-17*
-*Last updated: 2026-01-17 after Phase 6 completion*
+*Last updated: 2026-01-17 after Phase 7 completion*
