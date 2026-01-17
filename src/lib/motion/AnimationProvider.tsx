@@ -1,5 +1,6 @@
 import React from 'react';
 import { LazyMotion, domAnimation, MotionConfig } from 'framer-motion';
+import { LenisProvider } from './LenisProvider';
 
 interface AnimationProviderProps {
   children: React.ReactNode;
@@ -13,11 +14,13 @@ interface AnimationProviderProps {
  * Features:
  * - Automatic prefers-reduced-motion detection when reducedMotion="user"
  * - LazyMotion for bundle optimization (loads animation features on demand)
+ * - Smooth scroll via Lenis (desktop only, respects reduced motion)
  *
  * When reduced motion is enabled:
  * - Transform animations (x, y, scale, rotate) are disabled
  * - Layout animations are disabled
  * - Opacity and color animations are preserved
+ * - Smooth scroll is disabled (native scroll behavior)
  */
 export const AnimationProvider: React.FC<AnimationProviderProps> = ({
   children,
@@ -26,7 +29,7 @@ export const AnimationProvider: React.FC<AnimationProviderProps> = ({
   return (
     <LazyMotion features={domAnimation} strict>
       <MotionConfig reducedMotion={reducedMotion}>
-        {children}
+        <LenisProvider>{children}</LenisProvider>
       </MotionConfig>
     </LazyMotion>
   );
