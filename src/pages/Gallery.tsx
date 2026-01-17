@@ -8,6 +8,7 @@ import Caption from '../components/Caption';
 import PageMeta from '../components/PageMeta';
 import { isWebMSupported } from '../utils/isWebMSupported';
 import { isIOS } from '../utils/isIOS';
+import logoCanvasVideo from '../videos/logo_canvas.webm';
 
 type GalleryProps = {
   onOverlayStateChange?: (state: boolean) => void;
@@ -84,7 +85,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
             zIndex: -1,
           }}
         >
-          <source src={require('../videos/logo_canvas.webm')} type="video/webm" />
+          <source src={logoCanvasVideo} type="video/webm" />
         </video>
       )}
       <Container

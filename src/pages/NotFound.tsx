@@ -7,6 +7,7 @@ import { isWebMSupported } from "../utils/isWebMSupported";
 import { isIOS } from "../utils/isIOS";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
+import glitchBgVideo from "../videos/rg-glitch-bg.webm";
 
 const NotFound: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
@@ -43,7 +44,7 @@ const NotFound: React.FC = () => {
           }}
         >
           <source
-            src={require("../videos/rg-glitch-bg.webm")}
+            src={glitchBgVideo}
             type="video/webm"
           />
         </video>

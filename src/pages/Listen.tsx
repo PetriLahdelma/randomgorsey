@@ -5,6 +5,7 @@ import Spinner from '../components/Spinner';
 import PageMeta from '../components/PageMeta';
 import { isWebMSupported } from '../utils/isWebMSupported';
 import { isIOS } from '../utils/isIOS';
+import glitchBgVideo from '../videos/rg-glitch-bg.webm';
 
 const Listen: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
@@ -35,7 +36,7 @@ const Listen: React.FC = () => {
             zIndex: -1,
           }}
         >
-          <source src={require('../videos/rg-glitch-bg.webm')} type="video/webm" />
+          <source src={glitchBgVideo} type="video/webm" />
         </video>
       )}
       <Container

@@ -21,10 +21,10 @@ const setCookie = (value: string) => {
 const loadGoogleAnalytics = () => {
   if (document.getElementById("ga-script")) return;
 
-  const gaTrackingId = process.env.REACT_APP_GA_TRACKING_ID;
+  const gaTrackingId = import.meta.env.VITE_GA_TRACKING_ID;
   if (!gaTrackingId) {
     // Only show warning in production or when explicitly set
-    if (process.env.NODE_ENV === "production") {
+    if (import.meta.env.PROD) {
       console.warn("Google Analytics tracking ID not configured");
     }
     return;

@@ -6,6 +6,7 @@ import Customer from '../images/CustomerIsAlwaysRight.jpg';
 import PageMeta from '../components/PageMeta';
 import { isWebMSupported } from '../utils/isWebMSupported';
 import { isIOS } from '../utils/isIOS';
+import firgoCanvasVideo from '../videos/FIRGO002_canvas.webm';
 
 interface Release {
   title: string;
@@ -50,7 +51,7 @@ const Discography: React.FC = () => {
 
         }}
       >
-        <source src={require('../videos/FIRGO002_canvas.webm')} type="video/webm" />
+        <source src={firgoCanvasVideo} type="video/webm" />
       </video>
     )}
     <Container

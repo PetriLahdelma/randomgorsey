@@ -7,6 +7,7 @@ import Spinner from "../components/Spinner";
 import Button from "../components/Button";
 import PostCard, { Post } from "../components/PostCard";
 import { isIOS } from "../utils/isIOS";
+import homeCanvasVideo from "../videos/home_canvas.webm";
 
 // Import all posts statically for Jest compatibility
 import FirstPost from "../posts/FirstPost";
@@ -85,7 +86,7 @@ const Home: React.FC = () => {
           }}
         >
           <source
-            src={require("../videos/home_canvas.webm")}
+            src={homeCanvasVideo}
             type="video/webm"
           />
         </video>
