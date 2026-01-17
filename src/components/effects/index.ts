@@ -1,14 +1,25 @@
 /**
  * Visual effects components for the Random Gorsey website.
  *
- * Includes performance-tiered WebGL effects using React Three Fiber.
- * All components respect GPU tier detection and reduced motion preferences.
+ * Includes performance-tiered components that adapt to device capabilities
+ * using the usePerformance hook from @/lib/performance.
+ *
+ * - VideoBackground: Full-bleed video with poster fallback
+ * - HeroImage: Responsive full-bleed hero images
+ * - Scene3D: React Three Fiber Canvas wrapper with performance scaling
+ * - ParticleField: Animated particle system for WebGL backgrounds
  *
  * @example
  * ```tsx
- * import { Scene3D, ParticleField } from '@/components/effects';
+ * import { VideoBackground, HeroImage, Scene3D, ParticleField } from '@/components/effects';
  *
- * // Render a particle field as background overlay
+ * // Video background with poster fallback
+ * <VideoBackground src={videoSrc} poster={posterImg} overlayOpacity={0.3} />
+ *
+ * // Responsive hero image
+ * <HeroImage src="/hero.jpg" alt="Hero" height="half" />
+ *
+ * // 3D particle field overlay
  * <Scene3D overlay className="pointer-events-none">
  *   <ambientLight intensity={0.5} />
  *   <ParticleField count={500} color="#ffffff" />
