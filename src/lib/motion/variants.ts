@@ -17,7 +17,7 @@
  */
 
 import type { Variants } from 'framer-motion';
-import { springs, durations } from './config';
+import { springs, durations, eases } from './config';
 
 // === PAGE TRANSITIONS ===
 
@@ -142,5 +142,84 @@ export const modalVariants: Variants = {
     opacity: 0,
     scale: 0.95,
     transition: { duration: durations.fast },
+  },
+};
+
+// === SCROLL-TRIGGERED REVEALS ===
+
+/**
+ * Standard scroll-triggered reveal animation.
+ * Use with whileInView="visible" viewport={{ once: true, amount: 0.3 }}
+ *
+ * Uses hidden/visible naming for whileInView compatibility.
+ */
+export const revealVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: durations.normal,
+      ease: eases.out,
+    },
+  },
+};
+
+/**
+ * Container variant for staggered scroll reveals.
+ * Apply to parent element containing revealItemVariants children.
+ *
+ * @example
+ * ```tsx
+ * <motion.ul
+ *   variants={revealContainerVariants}
+ *   initial="hidden"
+ *   whileInView="visible"
+ *   viewport={{ once: true }}
+ * >
+ *   {items.map(item => (
+ *     <motion.li key={item.id} variants={revealItemVariants}>
+ *       {item.content}
+ *     </motion.li>
+ *   ))}
+ * </motion.ul>
+ * ```
+ */
+export const revealContainerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+/**
+ * Item variant for children in staggered scroll reveals.
+ * Must be used with revealContainerVariants parent.
+ */
+export const revealItemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: durations.normal,
+      ease: eases.out,
+    },
+  },
+};
+
+/**
+ * Reduced motion safe reveal (opacity only).
+ * Use for users with prefers-reduced-motion.
+ * No transform animations - just fade.
+ */
+export const revealFadeVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: durations.normal },
   },
 };
