@@ -1,0 +1,87 @@
+/**
+ * Primitive Token Layer
+ *
+ * This is the foundation of the three-layer token architecture:
+ * 1. PRIMITIVES (this file) - Raw values that create Tailwind utilities
+ * 2. SEMANTIC - Meaningful names referencing primitives (semantic.css)
+ * 3. SECTIONS - Context-specific overrides (sections.css)
+ *
+ * Primitives define raw values using @theme directive which:
+ * - Creates Tailwind utility classes (bg-neutral-950, text-yellow-400, etc.)
+ * - Exposes CSS variables for semantic layer references
+ *
+ * All colors use oklch() format for perceptual uniformity.
+ */
+
+@theme {
+  /* ==========================================================================
+   * COLOR PRIMITIVES
+   * ========================================================================== */
+
+  /* Neutral Scale (achromatic grays) */
+  --color-neutral-50: oklch(0.985 0 0);
+  --color-neutral-100: oklch(0.970 0 0);
+  --color-neutral-200: oklch(0.922 0 0);
+  --color-neutral-300: oklch(0.870 0 0);
+  --color-neutral-400: oklch(0.708 0 0);
+  --color-neutral-500: oklch(0.556 0 0);
+  --color-neutral-600: oklch(0.439 0 0);
+  --color-neutral-700: oklch(0.371 0 0);
+  --color-neutral-800: oklch(0.269 0 0);
+  --color-neutral-900: oklch(0.205 0 0);
+  --color-neutral-950: oklch(0.145 0 0);
+
+  /* Absolute Colors */
+  --color-white: oklch(1 0 0);
+  --color-black: oklch(0 0 0);
+
+  /* Yellow Accent (matches existing #ff0 brand color) */
+  --color-yellow-400: oklch(0.88 0.17 85);
+  --color-yellow-500: oklch(0.82 0.17 85);
+
+  /* Magenta Accent */
+  --color-magenta-400: oklch(0.70 0.28 328);
+  --color-magenta-500: oklch(0.65 0.28 328);
+
+  /* Blue Accent */
+  --color-blue-400: oklch(0.67 0.21 255);
+  --color-blue-500: oklch(0.62 0.21 255);
+
+  /* Feedback Colors */
+  --color-red-500: oklch(0.577 0.245 27.325);
+  --color-green-500: oklch(0.723 0.219 142.136);
+
+  /* ==========================================================================
+   * SPACING PRIMITIVE
+   * ========================================================================== */
+
+  /* Base spacing unit - creates Tailwind's p-1, p-2, p-4, m-1, m-2, etc.
+   * p-1 = 0.25rem, p-2 = 0.5rem, p-4 = 1rem, p-8 = 2rem */
+  --spacing: 0.25rem;
+
+  /* ==========================================================================
+   * RADIUS PRIMITIVES
+   * ========================================================================== */
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+
+  /* ==========================================================================
+   * FONT FAMILY PRIMITIVES
+   * ========================================================================== */
+
+  --font-family-tschick-bold: "Tschick Bold", ui-sans-serif, system-ui, sans-serif;
+  --font-family-europa: "Europa Regular", ui-sans-serif, system-ui, sans-serif;
+  --font-family-europa-bold: "Europa Bold", ui-sans-serif, system-ui, sans-serif;
+  --font-family-europa-light: "Europa Light", ui-sans-serif, system-ui, sans-serif;
+
+  /* ==========================================================================
+   * ANIMATION PRIMITIVES
+   * ========================================================================== */
+
+  --animate-duration: 200ms;
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
