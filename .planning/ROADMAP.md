@@ -74,7 +74,7 @@ Plans:
 Plans:
 - [x] 03-01-PLAN.md — Create typography tokens with fluid type scale and optimize font loading
 - [x] 03-02-PLAN.md — Update Heading and Text components to use typography tokens
-- [ ] 03-03-PLAN.md — Apply fluid tokens to base h1-h6 and remove CSS Module fixed font-size overrides (gap closure)
+- [x] 03-03-PLAN.md — Apply fluid tokens to base h1-h6 and remove CSS Module fixed font-size overrides (gap closure)
 
 ---
 
@@ -90,7 +90,13 @@ Plans:
 3. Developer can import motion presets (springs, durations, variants) from central config
 4. Developer can wrap components in AnimationProvider for global motion context
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 4 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Create motion configuration module (config.ts, variants.ts, index.ts)
+- [ ] 04-02-PLAN.md — Create AnimationProvider and integrate into App.tsx
+- [ ] 04-03-PLAN.md — Migrate page animations to centralized variants (remove isIOS pattern)
+- [ ] 04-04-PLAN.md — Migrate Modal component to centralized variants
 
 ---
 
@@ -183,7 +189,7 @@ Plans:
 |-------|--------|-----------|
 | 1 - Tailwind Migration | Complete | 2026-01-17 |
 | 2 - Token Architecture | Complete | 2026-01-17 |
-| 3 - Typography System | In Progress | - |
+| 3 - Typography System | Complete | 2026-01-17 |
 | 4 - Motion Foundation | Not started | - |
 | 5 - Smooth Scroll Integration | Not started | - |
 | 6 - Layout Primitives | Not started | - |
