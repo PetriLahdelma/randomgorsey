@@ -1,0 +1,95 @@
+/**
+ * Section Token Overrides
+ *
+ * Each [data-section] selector overrides semantic tokens to create
+ * distinct visual personalities. Use data-section="name" on container
+ * elements to apply these overrides.
+ *
+ * This is the third layer of the three-layer token architecture:
+ * 1. Primitives (@theme) - raw values that become utilities
+ * 2. Semantics (:root) - meaningful mappings for components
+ * 3. Sections ([data-section]) - context-specific overrides
+ *
+ * Layer: base (utilities will always override these via cascade)
+ *
+ * @see primitives.css for raw values
+ * @see semantic.css for default semantic mappings
+ */
+@layer base {
+  /* Hero section - dramatic, high contrast, dark */
+  [data-section="hero"] {
+    --color-background: var(--color-neutral-950);
+    --color-foreground: var(--color-neutral-50);
+    --color-surface: var(--color-neutral-900);
+    --color-surface-foreground: var(--color-neutral-100);
+    --color-accent: var(--color-yellow-400);
+    --color-accent-foreground: var(--color-neutral-950);
+    --color-muted: var(--color-neutral-800);
+    --color-muted-foreground: var(--color-neutral-400);
+    --color-border: var(--color-neutral-800);
+    --space-section: calc(var(--spacing) * 24);  /* Extra breathing room */
+  }
+
+  /* Gallery section - light, airy, spacious */
+  [data-section="gallery"] {
+    --color-background: var(--color-neutral-100);
+    --color-foreground: var(--color-neutral-900);
+    --color-surface: var(--color-white);
+    --color-surface-foreground: var(--color-neutral-950);
+    --color-accent: var(--color-magenta-500);
+    --color-accent-foreground: var(--color-white);
+    --color-border: var(--color-neutral-200);
+    --space-element: calc(var(--spacing) * 6);  /* More space between images */
+  }
+
+  /* Listen section - moody, immersive, purple-tinted */
+  [data-section="listen"] {
+    --color-background: oklch(0.12 0.015 280);  /* Slight purple tint */
+    --color-foreground: var(--color-neutral-100);
+    --color-surface: oklch(0.18 0.02 280);
+    --color-surface-foreground: var(--color-neutral-50);
+    --color-accent: var(--color-blue-500);
+    --color-accent-foreground: var(--color-white);
+    --color-muted: oklch(0.22 0.015 280);
+    --color-muted-foreground: var(--color-neutral-400);
+    --color-border: oklch(0.25 0.02 280);
+  }
+
+  /* Contact section - professional, clean, white */
+  [data-section="contact"] {
+    --color-background: var(--color-white);
+    --color-foreground: var(--color-neutral-900);
+    --color-surface: var(--color-neutral-50);
+    --color-surface-foreground: var(--color-neutral-800);
+    --color-primary: var(--color-neutral-950);
+    --color-primary-foreground: var(--color-white);
+    --color-border: var(--color-neutral-200);
+  }
+
+  /* About section - warm, personal, inviting */
+  [data-section="about"] {
+    --color-background: oklch(0.98 0.01 60);  /* Warm off-white */
+    --color-foreground: var(--color-neutral-900);
+    --color-surface: var(--color-white);
+    --color-surface-foreground: var(--color-neutral-900);
+    --color-accent: oklch(0.72 0.14 50);  /* Warm orange accent */
+    --color-accent-foreground: var(--color-neutral-950);
+    --color-border: oklch(0.90 0.02 60);
+  }
+
+  /* Discography section - similar to listen but distinct */
+  [data-section="discography"] {
+    --color-background: var(--color-neutral-950);
+    --color-foreground: var(--color-neutral-100);
+    --color-surface: var(--color-neutral-900);
+    --color-surface-foreground: var(--color-neutral-50);
+    --color-accent: var(--color-magenta-400);
+    --color-accent-foreground: var(--color-neutral-950);
+  }
+
+  /* Base section styles - applies to all sections */
+  [data-section] {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
