@@ -5,26 +5,26 @@
 See: .planning/PROJECT.md
 
 **Core value:** Ship something you'd be proud to show design-literate peers - every decision should feel intentional, not safe.
-**Current focus:** Phase 4 - Motion Foundation (IN PROGRESS)
+**Current focus:** Phase 4 - Motion Foundation (COMPLETE)
 
 ## Current Position
 
-Phase: 4 of 9 (Motion Foundation) - IN PROGRESS
-Plan: 3 of 4 complete (04-01, 04-02, 04-04)
-Status: In progress - continuing Phase 4
-Last activity: 2026-01-17 - Completed 04-04-PLAN.md (Modal Migration to Centralized Variants)
+Phase: 4 of 9 (Motion Foundation) - COMPLETE
+Plan: 4 of 4 complete (04-01, 04-02, 04-03, 04-04)
+Status: Phase 4 complete - ready for Phase 5
+Last activity: 2026-01-17 - Completed 04-03-PLAN.md (Component Migration to Centralized Variants)
 
-Progress: [================================] ~34% (17/~50 total plans estimated)
+Progress: [====================================] ~36% (18/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 17
-- Average duration: 7 min
+- Total plans completed: 18
+- Average duration: 6 min
 - Phase 1 total: ~70 min
 - Phase 2 total: ~18 min
 - Phase 3 total: ~13 min
-- Phase 4 total: ~8 min (in progress)
+- Phase 4 total: ~12 min
 
 **By Phase:**
 
@@ -33,7 +33,7 @@ Progress: [================================] ~34% (17/~50 total plans estimated)
 | 01-tailwind-migration | 7 | 70 min | 10 min |
 | 02-token-architecture | 4 | 18 min | 5 min |
 | 03-typography-system | 3 | 13 min | 4 min |
-| 04-motion-foundation | 3 | 8 min | 3 min |
+| 04-motion-foundation | 4 | 12 min | 3 min |
 
 ## Accumulated Context
 
@@ -100,6 +100,9 @@ Progress: [================================] ~34% (17/~50 total plans estimated)
 - 2026-01-17: Modal imports from @/lib/motion instead of framer-motion for centralized control
 - 2026-01-17: Modal backdrop uses overlayVariants (opacity-only, fast duration)
 - 2026-01-17: Modal content uses modalVariants (scale+opacity with snappy spring)
+- 2026-01-17: isIOS pattern removed from all page components - AnimationProvider handles reduced-motion
+- 2026-01-17: All 7 pages use pageVariants from @/lib/motion for consistent enter animations
+- 2026-01-17: Gallery overlay uses overlayVariants for enter/exit animations
 
 ### Phase 1 Completion Summary
 
@@ -157,15 +160,17 @@ Progress: [================================] ~34% (17/~50 total plans estimated)
 - `src/components/Heading.tsx` - Token-based heading component
 - `src/components/Text.tsx` - Token-based text component
 
-### Phase 4 Progress
+### Phase 4 Completion Summary
 
-**Motion Foundation In Progress:**
+**Motion Foundation Complete:**
 - `src/lib/motion/config.ts` - Spring, duration, easing presets
-- `src/lib/motion/variants.ts` - Reusable animation variants
+- `src/lib/motion/variants.ts` - Reusable animation variants (page, fade, stagger, overlay, modal)
 - `src/lib/motion/index.ts` - Public API barrel export
+- `src/lib/motion/AnimationProvider.tsx` - Global motion config wrapper
 
 **Plan 04-01:** Motion Configuration Module (COMPLETE)
 **Plan 04-02:** AnimationProvider Setup (COMPLETE)
+**Plan 04-03:** Component Migration to Centralized Variants (COMPLETE)
 **Plan 04-04:** Modal Migration to Centralized Variants (COMPLETE)
 
 **Key Artifacts:**
@@ -173,6 +178,7 @@ Progress: [================================] ~34% (17/~50 total plans estimated)
 - `src/lib/motion/AnimationProvider.tsx` - Global motion config wrapper
 - `src/App.tsx` - Wrapped with AnimationProvider
 - `src/components/Modal.tsx` - Uses overlayVariants and modalVariants
+- All 7 page components use pageVariants from @/lib/motion
 
 ### Pending Todos
 
@@ -187,6 +193,6 @@ Progress: [================================] ~34% (17/~50 total plans estimated)
 
 ## Session Continuity
 
-Last session: 2026-01-17T11:00:00Z
-Stopped at: Completed 04-04-PLAN.md - Modal Migration to Centralized Variants
-Resume file: None - continuing Phase 4
+Last session: 2026-01-17T10:42:00Z
+Stopped at: Completed 04-03-PLAN.md - Component Migration to Centralized Variants
+Resume file: None - Phase 4 complete, ready for Phase 5
