@@ -1,20 +1,29 @@
 /**
- * Visual effects components.
+ * Visual effects components for the Random Gorsey website.
  *
- * Performance-aware components that adapt to device capabilities
- * using the usePerformance hook from @/lib/performance.
+ * Includes performance-tiered WebGL effects using React Three Fiber.
+ * All components respect GPU tier detection and reduced motion preferences.
  *
  * @example
  * ```tsx
- * import { VideoBackground } from '@/components/effects';
+ * import { Scene3D, ParticleField } from '@/components/effects';
  *
- * <VideoBackground
- *   src={videoSrc}
- *   poster={posterImg}
- *   overlayOpacity={0.3}
- * />
+ * // Render a particle field as background overlay
+ * <Scene3D overlay className="pointer-events-none">
+ *   <ambientLight intensity={0.5} />
+ *   <ParticleField count={500} color="#ffffff" />
+ * </Scene3D>
  * ```
  */
 
 export { VideoBackground } from './VideoBackground';
 export type { VideoBackgroundProps } from './VideoBackground';
+
+export { HeroImage } from './HeroImage';
+export type { HeroImageProps } from './HeroImage';
+
+export { Scene3D } from './Scene3D';
+export type { Scene3DProps } from './Scene3D';
+
+export { ParticleField } from './ParticleField';
+export type { ParticleFieldProps } from './ParticleField';
