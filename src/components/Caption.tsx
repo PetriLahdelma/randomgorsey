@@ -13,7 +13,14 @@ const Caption: React.FC<CaptionProps> = ({
 }) => {
   return (
     <Component
-      className={cn('mt-2 italic text-yellow-400 text-center', className)}
+      className={cn(
+        'mt-2 italic text-center',
+        // Use amber-300 for better readability while maintaining yellow aesthetic
+        // On dark backgrounds: bright enough to read
+        // On light backgrounds: darker amber provides contrast
+        'text-amber-600 dark:text-amber-300',
+        className
+      )}
       {...props}
     >
       {children}

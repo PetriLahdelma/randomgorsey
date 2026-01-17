@@ -77,19 +77,19 @@ const CookieConsent: React.FC<CookieConsentProps> = ({ className }) => {
     <Modal isOpen={open} onClose={acceptNecessary}>
       <div
         className={cn(
-          "max-w-[50rem] font-['Europa_Regular',sans-serif] text-center",
+          "max-w-[50rem] font-europa text-center",
           "max-xl:max-w-[80%] max-xl:mx-8",
           className
         )}
       >
-        <h2 className="mb-8 font-['Tschick_Bold',sans-serif] text-[#f0f] uppercase">
+        <h2 className="mb-8 font-tschick-bold text-fuchsia-600 uppercase">
           Cookie Notice
         </h2>
-        <p className="mb-8 leading-[1.3] text-[#00f]">
+        <p className="mb-8 leading-[1.3] text-blue-800">
           <strong>We use cookies</strong> to remember your preferences and to
           analyze how visitors interact with our site.
         </p>
-        <p className="mb-8 leading-[1.3] text-[#00f]">
+        <p className="mb-8 leading-[1.3] text-blue-800">
           Accepting all cookies allows us to use Google Analytics for
           statistics. You can also choose to keep only the cookies necessary for
           the website to function.

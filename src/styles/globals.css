@@ -68,9 +68,11 @@
   --color-red: #dc3545;
   --color-gray-dark: #6c757d;
 
-  /* Font family tokens */
-  --font-tschick-bold: "Tschick Bold", sans-serif;
-  --font-europa: "Europa Regular", sans-serif;
+  /* Font family tokens - using Tailwind v4 font-family syntax */
+  --font-family-tschick-bold: "Tschick Bold", ui-sans-serif, system-ui, sans-serif;
+  --font-family-europa: "Europa Regular", ui-sans-serif, system-ui, sans-serif;
+  --font-family-europa-bold: "Europa Bold", ui-sans-serif, system-ui, sans-serif;
+  --font-family-europa-light: "Europa Light", ui-sans-serif, system-ui, sans-serif;
 
   /* Border radius tokens */
   --radius-lg: 0.625rem;
@@ -115,17 +117,35 @@
   body {
     @apply bg-background text-foreground;
     margin: 0;
-    font-family: "Europa Regular", "Helvetica Neue", sans-serif;
+    font-family: var(--font-family-europa);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-  h2 {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-tschick-bold);
     text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
       monospace;
+  }
+}
+
+/* Custom utility classes for fonts */
+@layer utilities {
+  .font-tschick-bold {
+    font-family: var(--font-family-tschick-bold);
+  }
+  .font-europa {
+    font-family: var(--font-family-europa);
+  }
+  .font-europa-bold {
+    font-family: var(--font-family-europa-bold);
+  }
+  .font-europa-light {
+    font-family: var(--font-family-europa-light);
   }
 }

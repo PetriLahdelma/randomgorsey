@@ -253,7 +253,7 @@ const PostCard: React.FC<PostCardProps> = ({
 
       {/* Body content */}
       <div
-        className="mt-4 mb-3 font-['Europa_Regular',sans-serif] text-[1.05rem] leading-[1.7]"
+        className="mt-4 mb-3 font-europa text-[1.05rem] leading-[1.7]"
         dangerouslySetInnerHTML={{
           __html: displayBody,
         }}
@@ -265,7 +265,7 @@ const PostCard: React.FC<PostCardProps> = ({
           {hasLongContent && (
             <button
               onClick={toggleExpanded}
-              className="p-0 mr-2 font-['Europa_Regular',sans-serif] text-base font-bold text-inherit underline cursor-pointer bg-transparent border-none"
+              className="p-0 mr-2 font-europa text-base font-bold text-inherit underline cursor-pointer bg-transparent border-none"
               aria-expanded={expanded}
               aria-label={expanded ? "Show less content" : "Show more content"}
             >
