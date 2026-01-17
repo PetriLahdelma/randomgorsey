@@ -27,13 +27,15 @@
     "zod": "^4.1.12"
   },
   "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "predeploy": "npm run build && node scripts/copy-cname.js",
-    "build": "react-scripts build",
+    "postinstall": "node scripts/ensure-source-map-quick-sort.js",
     "postbuild": "node scripts/copy-404.js",
     "deploy": "gh-pages -d build --dotfiles",
-    "start": "react-scripts start",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "test": "echo \"Tests need reconfiguration for Vite - see Plan 07\"",
     "lint": "stylelint 'src/**/*.css' --fix",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -96,6 +98,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
+    "@vitejs/plugin-react": "^5.1.2",
     "axios": "^1.10.0",
     "cheerio": "^1.1.0",
     "eslint": "^8.57.1",
@@ -110,7 +113,10 @@
     "stylelint-config-css-modules": "^4.4.0",
     "stylelint-config-recess-order": "^7.4.0",
     "stylelint-config-standard": "^39.0.1",
-    "stylelint-order": "^7.0.0"
+    "stylelint-order": "^7.0.0",
+    "vite": "^7.3.1",
+    "vite-plugin-svgr": "^4.5.0",
+    "vite-tsconfig-paths": "^6.0.4"
   },
   "overrides": {
     "minimist": "^1.2.8"
