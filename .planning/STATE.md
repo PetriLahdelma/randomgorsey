@@ -5,21 +5,21 @@
 See: .planning/PROJECT.md
 
 **Core value:** Ship something you'd be proud to show design-literate peers - every decision should feel intentional, not safe.
-**Current focus:** Phase 7 - Visual Effects Foundation (IN PROGRESS)
+**Current focus:** Phase 7 - Visual Effects Foundation (COMPLETE)
 
 ## Current Position
 
-Phase: 7 of 9 (Visual Effects Foundation) - IN PROGRESS
-Plan: 4 of 5 complete
-Status: In progress
-Last activity: 2026-01-17 - Completed 07-02-PLAN.md (Video Background Component)
+Phase: 7 of 9 (Visual Effects Foundation) - COMPLETE
+Plan: 5 of 5 complete
+Status: Phase complete
+Last activity: 2026-01-17 - Completed 07-05-PLAN.md (Effects Storybook Stories)
 
-Progress: [==============================================================] ~64% (32/~50 total plans estimated)
+Progress: [================================================================] ~66% (33/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 32
+- Total plans completed: 33
 - Average duration: 6 min
 - Phase 1 total: ~70 min
 - Phase 2 total: ~18 min
@@ -27,7 +27,7 @@ Progress: [==============================================================] ~64% 
 - Phase 4 total: ~12 min
 - Phase 5 total: ~26 min (includes debugging)
 - Phase 6 total: ~20 min
-- Phase 7 partial: 13 min (4 plans)
+- Phase 7 total: ~16 min (5 plans)
 
 **By Phase:**
 
@@ -39,7 +39,7 @@ Progress: [==============================================================] ~64% 
 | 04-motion-foundation | 4 | 12 min | 3 min |
 | 05-smooth-scroll-integration | 5 | 26 min | 5 min |
 | 06-layout-primitives | 4 | 20 min | 5 min |
-| 07-visual-effects-foundation | 4/5 | 13 min | 3 min |
+| 07-visual-effects-foundation | 5 | 16 min | 3 min |
 
 ## Accumulated Context
 
@@ -143,6 +143,8 @@ Progress: [==============================================================] ~64% 
 - 2026-01-17: VideoBackground mobile gets poster regardless of tier (battery-conscious)
 - 2026-01-17: VideoBackground uses h-dvh for proper mobile viewport (dynamic viewport height)
 - 2026-01-17: HeroImage uses Bleed for viewport-width breakout from Container
+- 2026-01-17: Effects stories organized in src/stories/effects/ subdirectory
+- 2026-01-17: R3F stories use decorator pattern to wrap in Scene3D context
 
 ### Phase 1 Completion Summary
 
@@ -260,6 +262,27 @@ Progress: [==============================================================] ~64% 
 - All components have interactive argTypes controls
 - ContainerQueryDemo proves container-based responsiveness
 
+### Phase 7 Completion Summary
+
+**Visual Effects Foundation Complete:**
+- `src/lib/performance/PerformanceProvider.tsx` - GPU tier detection with usePerformance hook
+- `src/components/effects/VideoBackground.tsx` - Performance-tiered video background
+- `src/components/effects/HeroImage.tsx` - Full-bleed responsive hero images
+- `src/components/effects/Scene3D.tsx` - R3F Canvas with tier-scaled quality
+- `src/components/effects/ParticleField.tsx` - Instanced particle system
+
+**Plan 07-01:** GPU Tier Detection Infrastructure (COMPLETE)
+**Plan 07-02:** Video Background Component (COMPLETE)
+**Plan 07-03:** Hero Image Component (COMPLETE)
+**Plan 07-04:** React Three Fiber Infrastructure (COMPLETE)
+**Plan 07-05:** Effects Storybook Stories (COMPLETE)
+
+**Key Artifacts:**
+- `src/lib/performance/` - Performance detection module
+- `src/components/effects/` - 4 visual effects components
+- `src/stories/effects/` - 4 Storybook story files (666 total lines)
+- All effects adapt to GPU tier for optimal performance
+
 ### Pending Todos
 
 - Configure Vitest for testing (Phase 2 or later)
@@ -271,34 +294,8 @@ Progress: [==============================================================] ~64% 
 
 (None)
 
-### Phase 7 Progress
-
-**Plan 07-01:** GPU Tier Detection Infrastructure (COMPLETE)
-- detect-gpu@5.0.70 installed
-- PerformanceProvider with usePerformance hook
-- Integrated into AnimationProvider hierarchy
-- GPU tier 0-3 classification ready for visual effects
-
-**Plan 07-02:** Video Background Component (COMPLETE)
-- VideoBackground with performance-tiered rendering
-- Poster fallback for tier 0/reduced-motion/mobile
-- Video playback for desktop tier 1+
-- Battery-conscious mobile behavior
-
-**Plan 07-03:** Hero Image Component (COMPLETE)
-- HeroImage with full-bleed responsive images
-- Uses Bleed component for viewport-width breakout
-- srcSet/sizes support for responsive loading
-- Optional overlay for text contrast
-
-**Plan 07-04:** React Three Fiber Infrastructure (COMPLETE)
-- @react-three/fiber@9.5.0, @react-three/drei@10.7.7, three@0.182.0 installed
-- Scene3D Canvas wrapper with tier-based DPR and antialiasing
-- ParticleField instanced particle system with tier-scaled count
-- Effects components exported from @/components/effects
-
 ## Session Continuity
 
 Last session: 2026-01-17
-Stopped at: Completed 07-02-PLAN.md (Video Background Component)
-Resume file: None - ready for 07-05-PLAN.md
+Stopped at: Completed Phase 7 - Visual Effects Foundation
+Resume file: None - ready for Phase 8 planning
