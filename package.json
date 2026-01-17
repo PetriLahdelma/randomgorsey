@@ -100,7 +100,7 @@
     "@modelcontextprotocol/sdk": "^1.21.1",
     "@storybook/addon-a11y": "^10.0.6",
     "@storybook/addon-docs": "^10.0.6",
-    "@storybook/react-webpack5": "^10.0.6",
+    "@storybook/react-vite": "^10.1.11",
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
