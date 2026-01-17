@@ -5,31 +5,31 @@
 See: .planning/PROJECT.md
 
 **Core value:** Ship something you'd be proud to show design-literate peers - every decision should feel intentional, not safe.
-**Current focus:** Phase 2 - Token Architecture COMPLETE
+**Current focus:** Phase 2 - Token Architecture COMPLETE (including gap closure)
 
 ## Current Position
 
 Phase: 2 of 9 (Token Architecture) - COMPLETE
-Plan: 3 of 3 complete (02-01, 02-02, 02-03)
+Plan: 4 of 4 complete (02-01, 02-02, 02-03, 02-04)
 Status: Phase complete - Ready for Phase 3
-Last activity: 2026-01-17 - Completed 02-03-PLAN.md (Section Token Overrides)
+Last activity: 2026-01-17 - Completed 02-04-PLAN.md (Wire Section Token Layer)
 
-Progress: [===================] ~20% (10/~50 total plans estimated)
+Progress: [====================] ~22% (11/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
-- Average duration: 9 min
+- Total plans completed: 11
+- Average duration: 8 min
 - Phase 1 total: ~70 min
-- Phase 2 total: ~14 min
+- Phase 2 total: ~18 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-tailwind-migration | 7 | 70 min | 10 min |
-| 02-token-architecture | 3 | 14 min | 5 min |
+| 02-token-architecture | 4 | 18 min | 5 min |
 
 ## Accumulated Context
 
@@ -75,6 +75,8 @@ Progress: [===================] ~20% (10/~50 total plans estimated)
 - 2026-01-17: Section overrides use [data-section] attribute selectors
 - 2026-01-17: Sections in @layer base so utilities always override
 - 2026-01-17: Semantic tokens also in @theme for Tailwind utility generation
+- 2026-01-17: Legacy color aliases inside @theme block for CSS variable compatibility
+- 2026-01-17: data-section values match section names in sections.css
 
 ### Phase 1 Completion Summary
 
@@ -90,42 +92,24 @@ Progress: [===================] ~20% (10/~50 total plans estimated)
 - `src/lib/utils.ts` - cn() utility for class merging
 - `.storybook/main.ts` - Vite-based Storybook config
 
-### Phase 2 Progress (Token Architecture)
-
-**Plan 02-01 Complete:**
-- Primitive token layer created at `src/styles/tokens/primitives.css`
-- Neutral scale (50-950) in oklch format
-- Accent colors (yellow, magenta, blue)
-- Feedback colors (red, green)
-- Spacing, radius, typography, animation tokens
-
-**Plan 02-02 Complete:**
-- Semantic token layer created at `src/styles/tokens/semantic.css`
-- Background/foreground, surface, interactive, feedback tokens
-- UI element tokens (border, input, ring, muted)
-- Card/popover tokens for shadcn/ui compatibility
-- Semantic spacing tokens (page, section, element, inline)
-- Complete .dark selector overrides for dark mode
-
-**Plan 02-03 Complete:**
-- Section-scoped tokens created at `src/styles/tokens/sections.css`
-- 6 sections: hero, gallery, listen, contact, about, discography
-- Each section has distinct visual personality via token overrides
-- globals.css refactored to import all token files
-- Three-layer token architecture complete and tested
-
 ### Phase 2 Completion Summary
 
 **Token Architecture Complete:**
 - Three-layer cascade: primitives -> semantics -> sections
-- `src/styles/tokens/primitives.css` - Raw values and defaults (118 lines)
+- `src/styles/tokens/primitives.css` - Raw values, defaults, and legacy aliases (137 lines)
 - `src/styles/tokens/semantic.css` - Meaningful mappings and dark mode (115 lines)
 - `src/styles/tokens/sections.css` - Section overrides (95 lines)
-- `src/styles/globals.css` - Integrated imports (81 lines, reduced from 154)
+- `src/styles/globals.css` - Integrated imports (81 lines)
+
+**Plan 02-01:** Primitive token layer (colors, spacing, radius, typography)
+**Plan 02-02:** Semantic token layer (background/foreground, surfaces, interactive states)
+**Plan 02-03:** Section token overrides (6 sections with distinct visual personalities)
+**Plan 02-04:** Gap closure - wired sections to pages via data-section attributes
 
 **Key Artifacts:**
 - Token files in `src/styles/tokens/`
-- globals.css with proper cascade organization
+- All 6 pages have data-section attributes
+- Legacy color aliases for CSS Module compatibility
 - Build verified and passing
 
 ### Pending Todos
@@ -133,6 +117,7 @@ Progress: [===================] ~20% (10/~50 total plans estimated)
 - Configure Vitest for testing (Phase 2 or later)
 - Migrate page CSS Modules (when pages are enhanced)
 - Delete variables.css (after page migration)
+- Remove legacy color aliases (after Phase 3+ page migration)
 
 ### Blockers/Concerns
 
@@ -140,6 +125,6 @@ Progress: [===================] ~20% (10/~50 total plans estimated)
 
 ## Session Continuity
 
-Last session: 2026-01-17T05:35:00Z
-Stopped at: Completed 02-03-PLAN.md - Section Token Overrides (Phase 2 Complete)
+Last session: 2026-01-17T03:56:00Z
+Stopped at: Completed 02-04-PLAN.md - Wire Section Token Layer (Phase 2 Complete)
 Resume file: None - ready for Phase 3
