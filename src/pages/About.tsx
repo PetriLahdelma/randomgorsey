@@ -1,16 +1,13 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, pageVariants } from '@/lib/motion';
 import styles from './About.module.css';
 import Spinner from '../components/Spinner';
 import PageMeta from '../components/PageMeta';
 import { isWebMSupported } from '../utils/isWebMSupported';
-import { isIOS } from '../utils/isIOS';
 import promoCanvasVideo from '../videos/promo_canvas.webm';
 
 const About: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
-
-  const Container: React.ElementType = isIOS() ? 'div' : motion.div;
 
   const handleContentLoad = () => {
     setLoading(false);
@@ -39,14 +36,12 @@ const About: React.FC = () => {
           <source src={promoCanvasVideo} type="video/webm" />
         </video>
       )}
-      <Container
+      <motion.div
         className={styles['about-container']}
         data-section="about"
-        {...(!isIOS() && {
-          initial: { opacity: 0, y: 20 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.4 },
-        })}
+        variants={pageVariants}
+        initial="initial"
+        animate="enter"
       >
       {loading && <Spinner style={{ borderTopColor: '#FFD600' }} />}
 
@@ -91,7 +86,7 @@ const About: React.FC = () => {
             </a>
           </li>
           </ul>
-    </Container>
+    </motion.div>
     </>
   );
 };
