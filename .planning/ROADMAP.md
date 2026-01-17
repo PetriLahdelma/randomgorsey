@@ -159,7 +159,14 @@ Plans:
 4. User sees 3D elements via React Three Fiber that degrade gracefully on mobile/low-power
 5. All visual effects components have 1:1 Storybook stories with device/performance controls
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 5 plans
+
+Plans:
+- [ ] 07-01-PLAN.md — Performance infrastructure (GPU tier detection, PerformanceProvider)
+- [ ] 07-02-PLAN.md — VideoBackground component with poster fallbacks
+- [ ] 07-03-PLAN.md — HeroImage component with Bleed integration
+- [ ] 07-04-PLAN.md — React Three Fiber setup and ParticleField component
+- [ ] 07-05-PLAN.md — Storybook stories for all effects components
 
 ---
 
