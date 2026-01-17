@@ -1,6 +1,37 @@
 @import "tailwindcss";
 
 /*
+ * Custom Font Faces
+ * These fonts are used throughout the application
+ */
+@font-face {
+  font-family: "Europa Bold";
+  src: url("../fonts/europa-bold-webfont.woff2") format("woff2"),
+    url("../fonts/europa-bold-webfont.woff") format("woff"),
+    url("../fonts/europa-bold-webfont.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Europa Regular";
+  src: url("../fonts/europa-regular-webfont.woff2") format("woff2"),
+    url("../fonts/europa-regular-webfont.woff") format("woff"),
+    url("../fonts/europa-regular-webfont.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Europa Light";
+  src: url("../fonts/europa-light-webfont.woff2") format("woff2"),
+    url("../fonts/europa-light-webfont.woff") format("woff"),
+    url("../fonts/europa-light-webfont.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Tschick Bold";
+  src: url("../fonts/Tschick-Bold.woff2") format("woff2"),
+    url("../fonts/Tschick-Bold.woff") format("woff");
+}
+
+/*
  * Theme Configuration (Tailwind v4 CSS-first approach)
  * These CSS variables are used by both Tailwind utilities and components
  */
@@ -27,6 +58,15 @@
   --color-border: oklch(0.922 0 0);
   --color-input: oklch(0.922 0 0);
   --color-ring: oklch(0.708 0 0);
+
+  /* Legacy color tokens (for components using CSS var references) */
+  --color-white: #fff;
+  --color-black: #000;
+  --color-blue: #00f;
+  --color-magenta: #f0f;
+  --color-yellow: #ff0;
+  --color-red: #dc3545;
+  --color-gray-dark: #6c757d;
 
   /* Font family tokens */
   --font-tschick-bold: "Tschick Bold", sans-serif;
@@ -74,6 +114,18 @@
   }
   body {
     @apply bg-background text-foreground;
+    margin: 0;
+    font-family: "Europa Regular", "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h2 {
+    text-transform: uppercase;
+  }
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
   }
 }
