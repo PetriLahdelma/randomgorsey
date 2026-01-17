@@ -10,24 +10,26 @@ type TextWeight = "regular" | "medium" | "bold";
 const DEFAULT_TEXT_TAG = "p";
 
 /**
- * CVA variant definitions for Text component
- * Maps CSS Module styles to Tailwind utilities
+ * Text component with fluid typography
+ * Uses typography tokens from src/styles/tokens/typography.css
+ * All variants scale fluidly between mobile and desktop viewports
  */
 const textVariants = cva(
   // Base classes - always applied
   // Using font-europa utility class for custom font
-  "m-0 font-europa leading-[1.6]",
+  "m-0 font-europa",
   {
     variants: {
       variant: {
-        // 1rem
+        // Maps to --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem)
         body: "text-base",
-        // 0.95rem
-        bodySmall: "text-[0.95rem]",
-        // 0.85rem with letter-spacing 0.02em
-        caption: "text-[0.85rem] tracking-[0.02em]",
-        // 0.75rem with uppercase and letter-spacing 0.25em
-        eyebrow: "text-[0.75rem] uppercase tracking-[0.25em]",
+        // Maps to --text-sm: clamp(0.8rem, 0.75rem + 0.25vw, 1rem)
+        bodySmall: "text-sm",
+        // Maps to --text-xs: clamp(0.64rem, 0.6rem + 0.2vw, 0.8rem)
+        // Keep tracking-[0.02em] for caption styling
+        caption: "text-xs tracking-[0.02em]",
+        // Keep text-xs with uppercase and wider tracking for eyebrow
+        eyebrow: "text-xs uppercase tracking-[0.25em]",
       },
       tone: {
         default: "text-black",
