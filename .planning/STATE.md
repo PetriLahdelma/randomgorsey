@@ -152,6 +152,10 @@ Progress: [==================================================================] ~
 - 2026-01-17: Cursor spring config: stiffness 500, damping 28, mass 0.5 for responsive feel
 - 2026-01-17: Three cursor variants: default (16px), hover (48px yellow), text (80px blend)
 - 2026-01-17: body.custom-cursor-active class controls CSS cursor hiding
+- 2026-01-17: AnimatePresence mode='wait' ensures exit completes before enter starts
+- 2026-01-17: Scroll reset via onExitComplete callback (replaces ScrollToTop component)
+- 2026-01-17: Location.pathname as key for proper route transition detection
+- 2026-01-17: exit='exit' prop required on all page motion wrappers for exit animations
 
 ### Phase 1 Completion Summary
 
@@ -304,17 +308,18 @@ Progress: [==================================================================] ~
 ### Phase 8 Progress (In Progress)
 
 **Page Transitions:**
+- `src/lib/motion/AnimatedRoutes.tsx` - AnimatePresence route wrapper with exit coordination
 - `src/lib/cursor/CursorProvider.tsx` - Desktop detection + cursor context
 - `src/lib/cursor/CustomCursor.tsx` - Spring-based cursor with 3 variants
 - `src/lib/cursor/index.ts` - Public exports (CursorProvider, useCursor)
 
-**Plan 08-01:** Page Transition Architecture (COMPLETE)
+**Plan 08-01:** AnimatePresence Route Wrapper (COMPLETE)
 **Plan 08-02:** Custom Cursor System (COMPLETE)
-**Plan 08-03:** Transition Components (PENDING)
+**Plan 08-03:** Kinetic Text Animations (IN PROGRESS)
 **Plan 08-04:** App Integration (PENDING)
 
 ## Session Continuity
 
 Last session: 2026-01-17
-Stopped at: Completed 08-02-PLAN.md (Custom Cursor System)
-Resume file: None - continue with 08-03-PLAN.md
+Stopped at: Completed 08-01-PLAN.md (AnimatePresence Route Wrapper)
+Resume file: None - 08-02 complete, 08-03 in progress by parallel agent
