@@ -69,8 +69,6 @@
 
 @media (width <= 800px) {
   .discography-title {
-    font-size: 1.5rem;
-    line-height: 1rem;
     text-align: center;
   }
 
