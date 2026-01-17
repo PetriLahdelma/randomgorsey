@@ -105,6 +105,11 @@ Progress: [========================================] ~40% (20/~50 total plans es
 - 2026-01-17: isIOS pattern removed from all page components - AnimationProvider handles reduced-motion
 - 2026-01-17: All 7 pages use pageVariants from @/lib/motion for consistent enter animations
 - 2026-01-17: Gallery overlay uses overlayVariants for enter/exit animations
+- 2026-01-17: Lenis disabled for mobile (pointer: coarse) - native scroll UX preferred
+- 2026-01-17: Lenis disabled for prefers-reduced-motion - accessibility compliance
+- 2026-01-17: RAF synced with Framer Motion frame scheduler to prevent double animation loops
+- 2026-01-17: lerp: 0.1 for smooth but responsive Lenis feel
+- 2026-01-17: syncTouch: false to avoid iOS scroll issues
 - 2026-01-17: Reveal variants use hidden/visible naming for whileInView compatibility
 - 2026-01-17: RevealOnScroll automatically switches to fade-only for reduced motion users
 
