@@ -5,31 +5,31 @@
 See: .planning/PROJECT.md
 
 **Core value:** Ship something you'd be proud to show design-literate peers - every decision should feel intentional, not safe.
-**Current focus:** Phase 2 - Token Architecture (Plan 01 complete)
+**Current focus:** Phase 2 - Token Architecture (Plan 02 complete)
 
 ## Current Position
 
 Phase: 2 of 9 (Token Architecture)
-Plan: 1 of 3 complete (02-01)
+Plan: 2 of 3 complete (02-01, 02-02)
 Status: In progress
-Last activity: 2026-01-17 - Completed 02-01-PLAN.md (Primitive Token Layer)
+Last activity: 2026-01-17 - Completed 02-02-PLAN.md (Semantic Token Layer)
 
-Progress: [================----] ~16% (8/~50 total plans estimated)
+Progress: [================----] ~18% (9/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
+- Total plans completed: 9
 - Average duration: 9 min
 - Phase 1 total: ~70 min
-- Phase 2 current: ~5 min
+- Phase 2 current: ~8 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-tailwind-migration | 7 | 70 min | 10 min |
-| 02-token-architecture | 1 | 5 min | 5 min |
+| 02-token-architecture | 2 | 8 min | 4 min |
 
 ## Accumulated Context
 
@@ -68,6 +68,10 @@ Progress: [================----] ~16% (8/~50 total plans estimated)
 - 2026-01-17: oklch color format for all primitive tokens (perceptual uniformity)
 - 2026-01-17: Yellow-400 tuned to oklch(0.88 0.17 85) to match #ff0 brand color
 - 2026-01-17: Spacing base 0.25rem creates standard Tailwind spacing scale
+- 2026-01-17: Semantic tokens reference primitives via var() for cascade
+- 2026-01-17: Feedback colors (destructive, success) stay absolute in dark mode
+- 2026-01-17: Card/popover tokens alias surface-elevated for consistency
+- 2026-01-17: Accent color unchanged in dark mode - yellow works on both
 
 ### Phase 1 Completion Summary
 
@@ -92,8 +96,15 @@ Progress: [================----] ~16% (8/~50 total plans estimated)
 - Feedback colors (red, green)
 - Spacing, radius, typography, animation tokens
 
+**Plan 02-02 Complete:**
+- Semantic token layer created at `src/styles/tokens/semantic.css`
+- Background/foreground, surface, interactive, feedback tokens
+- UI element tokens (border, input, ring, muted)
+- Card/popover tokens for shadcn/ui compatibility
+- Semantic spacing tokens (page, section, element, inline)
+- Complete .dark selector overrides for dark mode
+
 **Remaining Plans:**
-- 02-02: Semantic tokens layer
 - 02-03: Section-scoped tokens
 
 ### Pending Todos
@@ -108,6 +119,6 @@ Progress: [================----] ~16% (8/~50 total plans estimated)
 
 ## Session Continuity
 
-Last session: 2026-01-17T03:05:00Z
-Stopped at: Completed 02-01-PLAN.md - Primitive Token Layer
-Resume file: None - ready for 02-02-PLAN.md
+Last session: 2026-01-17T03:28:00Z
+Stopped at: Completed 02-02-PLAN.md - Semantic Token Layer
+Resume file: None - ready for 02-03-PLAN.md
