@@ -108,6 +108,35 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
+  /* Fluid typography scale applied to native heading elements
+   * This ensures ALL pages get fluid typography without needing
+   * to migrate to <Heading> components
+   * Scale: text-6xl -> text-xl (matches Heading component)
+   */
+  h1 {
+    font-size: var(--text-6xl);
+    line-height: var(--text-6xl--line-height);
+  }
+  h2 {
+    font-size: var(--text-5xl);
+    line-height: var(--text-5xl--line-height);
+  }
+  h3 {
+    font-size: var(--text-4xl);
+    line-height: var(--text-4xl--line-height);
+  }
+  h4 {
+    font-size: var(--text-3xl);
+    line-height: var(--text-3xl--line-height);
+  }
+  h5 {
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+  }
+  h6 {
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
+  }
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
       monospace;
