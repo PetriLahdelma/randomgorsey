@@ -1,7 +1,7 @@
-import React from "react";
+import { forwardRef } from "react";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import Label from "./Label";
-import styles from "./Input.module.css";
+import { cn } from "@/lib/utils";
 import { BaseComponentProps, Size } from "../types/common";
 import { ValidationRule } from "../types/forms";
 
@@ -100,130 +100,170 @@ export interface InputProps extends Omit<BaseComponentProps, "children"> {
  * />
  * ```
  */
-const Input: React.FC<InputProps> = ({
-  type,
-  value,
-  onChange,
-  onBlur,
-  onFocus,
-  placeholder,
-  label,
-  size = "medium",
-  maxLength,
-  minLength,
-  autoComplete,
-  autoFocus = false,
-  helpText,
-  icon,
-  rows = 4,
-  validation,
-  pattern,
-  step,
-  min,
-  max,
-  className,
-  style,
-  id,
-  testId,
-  disabled = false,
-  required = false,
-  error,
-  loading = false,
-  ...accessibilityProps
-}) => {
-  const inputId =
-    id || (label ? label.replace(/\s+/g, "-").toLowerCase() : undefined);
+const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
+  (
+    {
+      type,
+      value,
+      onChange,
+      onBlur,
+      onFocus,
+      placeholder,
+      label,
+      size = "medium",
+      maxLength,
+      minLength,
+      autoComplete,
+      autoFocus = false,
+      helpText,
+      icon,
+      rows = 4,
+      validation,
+      pattern,
+      step,
+      min,
+      max,
+      className,
+      style,
+      id,
+      testId,
+      disabled = false,
+      required = false,
+      error,
+      loading = false,
+      ...accessibilityProps
+    },
+    ref
+  ) => {
+    const inputId =
+      id || (label ? label.replace(/\s+/g, "-").toLowerCase() : undefined);
 
-  // Combine CSS classes
-  const inputClasses = [
-    styles.input,
-    styles[size],
-    error ? styles.error : "",
-    disabled ? styles.disabled : "",
-    loading ? styles.loading : "",
-    icon ? styles.withIcon : "",
-    className || "",
-  ]
-    .filter(Boolean)
-    .join(" ");
+    // Size-based classes
+    const sizeClasses = {
+      small: "py-1 px-2 text-sm",
+      medium: "py-2 px-3 text-base",
+      large: "py-3 px-4 text-lg",
+    };
 
-  const commonProps = {
-    id: inputId,
-    value,
-    onChange,
-    onBlur,
-    onFocus,
-    placeholder,
-    disabled: disabled || loading,
-    required,
-    maxLength,
-    minLength,
-    autoComplete,
-    autoFocus,
-    pattern,
-    step,
-    min,
-    max,
-    className: inputClasses,
-    style,
-    "data-testid": testId,
-    "aria-invalid": error ? ("true" as const) : ("false" as const),
-    "aria-describedby": error
-      ? `${inputId}-error`
-      : helpText
-      ? `${inputId}-help`
-      : undefined,
-    ...accessibilityProps,
-  };
-
-  const inputElement =
-    type === "textarea" ? (
-      <textarea {...commonProps} rows={rows} />
-    ) : (
-      <input {...commonProps} type={type} />
+    // Base input classes
+    const inputClasses = cn(
+      "w-full font-europa rounded border border-input bg-background",
+      "ring-offset-background transition-colors",
+      "placeholder:italic placeholder:text-muted-foreground",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:border-primary",
+      "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted",
+      sizeClasses[size],
+      error && "border-destructive focus-visible:ring-destructive",
+      icon && "pl-10",
+      loading && "opacity-70",
+      className
     );
 
-  return (
-    <div className={styles.inputContainer}>
-      {label && (
-        <Label className={styles.label} htmlFor={inputId} required={required}>
-          {label}
-        </Label>
-      )}
+    const commonProps = {
+      id: inputId,
+      value,
+      onChange,
+      onBlur,
+      onFocus,
+      placeholder,
+      disabled: disabled || loading,
+      required,
+      maxLength,
+      minLength,
+      autoComplete,
+      autoFocus,
+      pattern,
+      step,
+      min,
+      max,
+      className: inputClasses,
+      style,
+      "data-testid": testId,
+      "aria-invalid": error ? ("true" as const) : ("false" as const),
+      "aria-describedby": error
+        ? `${inputId}-error`
+        : helpText
+        ? `${inputId}-help`
+        : undefined,
+      ...accessibilityProps,
+    };
 
-      <div className={styles.inputWrapper}>
-        {icon && !loading && (
-          <span className={styles.inputIcon} aria-hidden="true">
-            {icon}
-          </span>
+    const inputElement =
+      type === "textarea" ? (
+        <textarea
+          {...commonProps}
+          rows={rows}
+          ref={ref as React.ForwardedRef<HTMLTextAreaElement>}
+        />
+      ) : (
+        <input
+          {...commonProps}
+          type={type}
+          ref={ref as React.ForwardedRef<HTMLInputElement>}
+        />
+      );
+
+    return (
+      <div className="flex flex-col mb-4">
+        {label && (
+          <Label
+            className="mb-2 font-bold text-primary"
+            htmlFor={inputId}
+            required={required}
+          >
+            {label}
+          </Label>
         )}
 
-        {loading && (
-          <span className={styles.inputSpinner} aria-hidden="true">
-            ⟳
-          </span>
+        <div className="relative">
+          {icon && !loading && (
+            <span
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+              aria-hidden="true"
+            >
+              {icon}
+            </span>
+          )}
+
+          {loading && (
+            <span
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-primary animate-spin"
+              aria-hidden="true"
+            >
+              &#10227;
+            </span>
+          )}
+
+          {inputElement}
+        </div>
+
+        {helpText && !error && (
+          <div
+            className="mt-1 text-sm text-muted-foreground"
+            id={`${inputId}-help`}
+          >
+            {helpText}
+          </div>
         )}
 
-        {inputElement}
+        {error && (
+          <div
+            className="flex items-center mt-1 text-sm text-destructive"
+            id={`${inputId}-error`}
+          >
+            <ExclamationCircleIcon
+              className="shrink-0 w-4 h-4 mr-1.5"
+              aria-hidden="true"
+            />
+            <span role="alert">{error}</span>
+          </div>
+        )}
       </div>
+    );
+  }
+);
 
-      {helpText && !error && (
-        <div className={styles.helpText} id={`${inputId}-help`}>
-          {helpText}
-        </div>
-      )}
-
-      {error && (
-        <div className={styles["error-message"]} id={`${inputId}-error`}>
-          <ExclamationCircleIcon
-            className={styles["error-icon"]}
-            aria-hidden="true"
-          />
-          <span role="alert">{error}</span>
-        </div>
-      )}
-    </div>
-  );
-};
+Input.displayName = "Input";
 
 export default Input;
+export { Input };
