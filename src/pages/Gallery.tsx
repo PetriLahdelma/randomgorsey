@@ -119,6 +119,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
             initial="initial"
             animate="enter"
             exit="exit"
+            data-lenis-prevent
           >
             <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
             <ArrowLeftIcon aria-label="Previous image" className={styles['left-icon']} onClick={(e) => { e.stopPropagation(); navigateLeft(); }} />
