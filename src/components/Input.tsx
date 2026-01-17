@@ -147,7 +147,7 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
 
     // Base input classes
     const inputClasses = cn(
-      "w-full font-europa rounded border border-input bg-background",
+      "w-full max-w-full box-border font-europa rounded border border-input bg-background",
       "ring-offset-background transition-colors",
       "placeholder:italic placeholder:text-muted-foreground",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:border-primary",
@@ -204,7 +204,7 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
       );
 
     return (
-      <div className="flex flex-col mb-4">
+      <div className="flex flex-col w-full max-w-full mb-4">
         {label && (
           <Label
             className="mb-2 font-bold text-primary"
