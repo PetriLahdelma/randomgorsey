@@ -204,37 +204,30 @@ const PostCard: React.FC<PostCardProps> = ({
           </Heading>
           <div className="flex flex-row gap-2 items-center">
             <Avatar avatarImage="/images/pete.jpg" size="M" />
-            <Text
-              as="span"
-              variant="body"
-              tone="contrast"
-              className="text-base tracking-[0.04em]"
-            >
-              {post.author}
-            </Text>
+            <div className="flex flex-col">
+              <Text
+                as="span"
+                variant="body"
+                tone="default"
+                className="text-base tracking-[0.04em] text-gray-800"
+              >
+                {post.author}
+              </Text>
+              <Text
+                as="time"
+                variant="bodySmall"
+                tone="muted"
+                className="text-[0.85rem] text-[#555]"
+                dateTime={post.timestamp}
+              >
+                {post.timestamp}
+              </Text>
+            </div>
           </div>
-          {/* Date under author on mobile only */}
-          <Text
-            as="span"
-            variant="bodySmall"
-            tone={metaTone}
-            className="hidden max-md:block mt-[0.2em] ml-[2.2em] text-[0.9rem] text-[#6c757d]"
-          >
-            {post.timestamp}
-          </Text>
         </div>
 
-        {/* Right side: time and metadata */}
-        <div className="flex flex-col gap-[0.45rem] items-end text-right flex-[0_0_200px] max-md:flex-[1_1_100%] max-md:items-start max-md:text-left max-md:gap-1">
-          <Text
-            as="time"
-            variant="bodySmall"
-            tone={metaTone}
-            className="text-[0.95rem] text-left max-md:hidden"
-            dateTime={post.timestamp}
-          >
-            {post.timestamp}
-          </Text>
+        {/* Right side: metadata only (timestamp moved to author row) */}
+        <div className="flex flex-col gap-[0.45rem] items-end text-right flex-shrink-0 max-md:flex-[1_1_100%] max-md:items-start max-md:text-left max-md:gap-1">
           {showMetadata && (
             <div className="flex flex-col gap-1 items-end text-[0.85rem] uppercase tracking-[0.05em] max-md:items-start">
               {post.views && (
