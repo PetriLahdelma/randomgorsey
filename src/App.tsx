@@ -1,12 +1,21 @@
 import React, { Suspense, useState, lazy, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { AnimationProvider } from '@/lib/motion';
+import { AnimationProvider, useScrollToTopOnRouteChange } from '@/lib/motion';
 import Footer from './patterns/Footer';
 import Header from './patterns/Header';
 import CookieConsent from './components/CookieConsent';
 import Spinner from './components/Spinner';
 import { initializeSecurityMeasures } from './utils/httpsEnforcement';
+
+/**
+ * Scrolls to top on route changes.
+ * Must be rendered inside BrowserRouter since it uses useLocation.
+ */
+const ScrollToTop: React.FC = () => {
+  useScrollToTopOnRouteChange();
+  return null;
+};
 
 const Home = lazy(() => import('./pages/Home'));
 const Listen = lazy(() => import('./pages/Listen'));
@@ -29,6 +38,7 @@ const App: React.FC = () => {
   return (
     <AnimationProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <div className={cn(
           "flex flex-col min-h-screen text-center"
         )}>
