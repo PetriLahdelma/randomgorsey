@@ -131,8 +131,9 @@ const PostCard: React.FC<PostCardProps> = ({
     ...(post.avatarColor ? { backgroundColor: post.avatarColor } : {}),
     ...style,
   };
-  const headingTone = "light";
-  const metaTone = "contrast";
+  // Use light/contrast text for inverted (dark) surfaces, dark/default text for flat (light) surfaces
+  const headingTone = surfaceVariant === "inverted" ? "light" : "dark";
+  const metaTone = surfaceVariant === "inverted" ? "contrast" : "default";
   const isInteractive = Boolean(onClick);
 
   // Route shares to an in-page anchor because /posts/:id is not a standalone route.
