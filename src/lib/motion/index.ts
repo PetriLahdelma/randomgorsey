@@ -50,12 +50,20 @@ export {
   revealContainerVariants,
   revealItemVariants,
   revealFadeVariants,
+  // Kinetic text variants
+  textRevealContainer,
+  textRevealItem,
+  textRevealDramatic,
 } from './variants';
 
 // === PROVIDER ===
 // Global animation configuration wrapper
 export { AnimationProvider } from './AnimationProvider';
 export { LenisProvider } from './LenisProvider';
+
+// === ROUTING ===
+// Animated route transitions with AnimatePresence
+export { AnimatedRoutes } from './AnimatedRoutes';
 
 // === SMOOTH SCROLL ===
 // Lenis hook for programmatic scroll control
