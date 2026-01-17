@@ -223,3 +223,66 @@ export const revealFadeVariants: Variants = {
     transition: { duration: durations.normal },
   },
 };
+
+// === KINETIC TEXT ANIMATIONS ===
+
+/**
+ * Container variant for kinetic text (character/word stagger).
+ * Use with KineticText component.
+ *
+ * @example
+ * ```tsx
+ * <motion.span variants={textRevealContainer} initial="hidden" animate="visible">
+ *   {splitElements.map(...)}
+ * </motion.span>
+ * ```
+ */
+export const textRevealContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.03,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+/**
+ * Item variant for individual characters/words in kinetic text.
+ * Slides up and fades in with smooth ease.
+ */
+export const textRevealItem: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: eases.default,
+    },
+  },
+};
+
+/**
+ * Alternative text reveal - characters slide from below with rotation.
+ * More dramatic effect for hero headings.
+ */
+export const textRevealDramatic: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+    rotateX: -90,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      duration: 0.6,
+      ease: eases.default,
+    },
+  },
+};
