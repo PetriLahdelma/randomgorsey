@@ -16,8 +16,8 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         "sticky bottom-0 z-[1000]",
         "p-4 max-md:p-[0.2rem]",
         "mt-auto",
-        "font-['Europa_Regular',sans-serif]",
-        "text-white text-center",
+        "font-europa",
+        "text-white text-center text-sm",
         "bg-black",
         className
       )}

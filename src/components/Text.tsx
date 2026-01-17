@@ -15,8 +15,8 @@ const DEFAULT_TEXT_TAG = "p";
  */
 const textVariants = cva(
   // Base classes - always applied
-  // Using font-['Europa_Regular'] for custom font, leading-[1.6] for line-height
-  "m-0 font-['Europa_Regular',sans-serif] leading-[1.6]",
+  // Using font-europa utility class for custom font
+  "m-0 font-europa leading-[1.6]",
   {
     variants: {
       variant: {
@@ -33,7 +33,8 @@ const textVariants = cva(
         default: "text-black",
         muted: "text-[#6c757d]", // gray-dark
         contrast: "text-white",
-        accent: "text-[#ff0]", // yellow
+        // Accent uses amber for better contrast - amber-600 on light, amber-300 on dark
+        accent: "text-amber-600 dark:text-amber-300",
       },
       align: {
         left: "text-left",

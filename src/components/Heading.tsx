@@ -14,8 +14,8 @@ const DEFAULT_HEADING_TAG = "h2";
  */
 const headingVariants = cva(
   // Base classes - always applied
-  // Using font-['Tschick_Bold'] for custom font, tracking-[0.08em] for letter-spacing
-  "m-0 font-['Tschick_Bold',sans-serif] tracking-[0.08em]",
+  // Using font-tschick-bold utility class for custom font
+  "m-0 font-tschick-bold tracking-[0.08em]",
   {
     variants: {
       level: {
@@ -35,7 +35,8 @@ const headingVariants = cva(
       tone: {
         light: "text-white",
         dark: "text-black",
-        accent: "text-[#f0f]", // magenta
+        // Accent uses fuchsia-500 for magenta-like color with better contrast
+        accent: "text-fuchsia-500",
       },
       align: {
         left: "text-left",

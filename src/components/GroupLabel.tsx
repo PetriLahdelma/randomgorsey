@@ -12,15 +12,15 @@ const GroupLabel: React.FC<GroupLabelProps> = ({ children, className, required, 
   <div
     className={cn(
       "block mb-2",
-      "font-['Europa_Regular',sans-serif] text-[1.1rem] font-bold",
-      "text-[#00f] uppercase tracking-[0.03em]",
+      "font-europa text-[1.1rem] font-bold",
+      "text-blue-800 uppercase tracking-[0.03em]",
       className
     )}
     style={style}
   >
     {children}
     {required && (
-      <span className="ml-1 text-[1em] text-[#d32f2f]">*</span>
+      <span className="ml-1 text-[1em] text-destructive">*</span>
     )}
   </div>
 );

@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
   return (
     <header
       className={cn(
-        "p-4 text-white text-center bg-black",
+        "relative p-4 text-white text-center bg-black",
         className
       )}
     >
@@ -63,13 +63,13 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
       <nav aria-label="Main navigation">
         {/* Desktop links */}
         {!isMobile && (
-          <ul className="flex gap-[1.2rem] justify-center p-0 list-none">
+          <ul className="flex gap-5 justify-center p-0 m-0 list-none">
             {navLinks.map(link => (
               <li key={link.to}>
                 <Link
                   to={link.to}
                   title={link.title}
-                  className="font-['Tschick_Bold',sans-serif] text-[0.8rem] font-bold text-white no-underline hover:underline"
+                  className="font-tschick-bold text-sm font-bold text-white no-underline uppercase tracking-wide hover:underline hover:text-yellow-400 transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -99,19 +99,19 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
                 className={cn(
                   "absolute top-full right-0 left-0 z-[1000]",
                   "flex flex-col items-center",
-                  "py-[1em] px-0",
-                  "bg-black border-t border-[#6c757d]",
-                  "shadow-[0_2px_8px_rgb(0_0_0/20%)]",
+                  "py-4 px-0 m-0",
+                  "bg-black border-t border-gray-600",
+                  "shadow-lg",
                   "list-none"
                 )}
               >
                 {navLinks.map(link => (
-                  <li key={link.to} className="my-[0.5em]">
+                  <li key={link.to} className="my-2">
                     <Link
                       to={link.to}
                       title={link.title}
                       onClick={() => setMenuOpen(false)}
-                      className="font-['Tschick_Bold',sans-serif] text-[1.1em] font-bold text-white no-underline hover:underline"
+                      className="font-tschick-bold text-lg font-bold text-white no-underline uppercase tracking-wide hover:underline hover:text-yellow-400 transition-colors"
                     >
                       {link.label}
                     </Link>
