@@ -5,21 +5,21 @@
 See: .planning/PROJECT.md
 
 **Core value:** Ship something you'd be proud to show design-literate peers - every decision should feel intentional, not safe.
-**Current focus:** Phase 6 - Layout Primitives (COMPLETE)
+**Current focus:** Phase 7 - Visual Effects Foundation (IN PROGRESS)
 
 ## Current Position
 
-Phase: 6 of 9 (Layout Primitives) - COMPLETE
-Plan: 4 of 4 complete (all plans)
-Status: Phase complete
-Last activity: 2026-01-17 - Completed 06-04-PLAN.md (Layout Storybook Stories)
+Phase: 7 of 9 (Visual Effects Foundation) - IN PROGRESS
+Plan: 1 of 5 complete
+Status: In progress
+Last activity: 2026-01-17 - Completed 07-01-PLAN.md (GPU Tier Detection Infrastructure)
 
-Progress: [====================================================] ~56% (28/~50 total plans estimated)
+Progress: [========================================================] ~58% (29/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 28
+- Total plans completed: 29
 - Average duration: 6 min
 - Phase 1 total: ~70 min
 - Phase 2 total: ~18 min
@@ -27,6 +27,7 @@ Progress: [====================================================] ~56% (28/~50 to
 - Phase 4 total: ~12 min
 - Phase 5 total: ~26 min (includes debugging)
 - Phase 6 total: ~20 min
+- Phase 7 partial: 3 min (1 plan)
 
 **By Phase:**
 
@@ -38,6 +39,7 @@ Progress: [====================================================] ~56% (28/~50 to
 | 04-motion-foundation | 4 | 12 min | 3 min |
 | 05-smooth-scroll-integration | 5 | 26 min | 5 min |
 | 06-layout-primitives | 4 | 20 min | 5 min |
+| 07-visual-effects-foundation | 1/5 | 3 min | 3 min |
 
 ## Accumulated Context
 
@@ -128,6 +130,10 @@ Progress: [====================================================] ~56% (28/~50 to
 - 2026-01-17: Container size variants: sm, md, lg, xl, 2xl, prose, full
 - 2026-01-17: Bleed uses relative left-1/2 w-screen -translate-x-1/2 for breakout
 - 2026-01-17: Layout stories organized in src/stories/layout/ subdirectory
+- 2026-01-17: PerformanceProvider wraps LazyMotion as outermost provider (GPU detection first)
+- 2026-01-17: Safe default tier 1 before detection completes to prevent flash of high-fidelity content
+- 2026-01-17: Reduced motion forces tier 0 regardless of GPU capability for accessibility
+- 2026-01-17: Performance-tiered rendering: tier 0 static, tier 1 video, tier 2-3 WebGL
 
 ### Phase 1 Completion Summary
 
@@ -256,8 +262,16 @@ Progress: [====================================================] ~56% (28/~50 to
 
 (None)
 
+### Phase 7 Progress
+
+**Plan 07-01:** GPU Tier Detection Infrastructure (COMPLETE)
+- detect-gpu@5.0.70 installed
+- PerformanceProvider with usePerformance hook
+- Integrated into AnimationProvider hierarchy
+- GPU tier 0-3 classification ready for visual effects
+
 ## Session Continuity
 
 Last session: 2026-01-17
-Stopped at: Completed Phase 6 - Layout Primitives
-Resume file: None - Phase 6 complete, ready for Phase 7
+Stopped at: Completed 07-01-PLAN.md (GPU Tier Detection Infrastructure)
+Resume file: None - ready for 07-02-PLAN.md
