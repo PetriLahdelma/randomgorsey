@@ -112,7 +112,14 @@ Plans:
 3. User on mobile gets native scroll behavior (no scroll-jacking)
 4. User with reduced-motion preference sees instant reveals without animation
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 5 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — Install Lenis and create conditional smooth scroll provider
+- [ ] 05-02-PLAN.md — Create reveal variants and RevealOnScroll component
+- [ ] 05-03-PLAN.md — Wire scroll utilities for route changes and overlay handling
+- [ ] 05-04-PLAN.md — Apply reveal animations to Home, About, and Gallery pages
+- [ ] 05-05-PLAN.md — Complete integration with route scroll reset and Storybook
 
 ---
 
@@ -191,7 +198,7 @@ Plans:
 | 2 - Token Architecture | Complete | 2026-01-17 |
 | 3 - Typography System | Complete | 2026-01-17 |
 | 4 - Motion Foundation | Complete | 2026-01-17 |
-| 5 - Smooth Scroll Integration | Not started | - |
+| 5 - Smooth Scroll Integration | Planned | - |
 | 6 - Layout Primitives | Not started | - |
 | 7 - Visual Effects Foundation | Not started | - |
 | 8 - Page Transitions | Not started | - |
