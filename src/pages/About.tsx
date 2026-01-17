@@ -5,6 +5,7 @@ import Spinner from '../components/Spinner';
 import PageMeta from '../components/PageMeta';
 import { isWebMSupported } from '../utils/isWebMSupported';
 import { isIOS } from '../utils/isIOS';
+import promoCanvasVideo from '../videos/promo_canvas.webm';
 
 const About: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
@@ -35,7 +36,7 @@ const About: React.FC = () => {
             zIndex: -1,
           }}
         >
-          <source src={require('../videos/promo_canvas.webm')} type="video/webm" />
+          <source src={promoCanvasVideo} type="video/webm" />
         </video>
       )}
       <Container

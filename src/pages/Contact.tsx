@@ -13,6 +13,7 @@ import PageMeta from "../components/PageMeta";
 import { isWebMSupported } from "../utils/isWebMSupported";
 import { isIOS } from "../utils/isIOS";
 import { validateAndSanitizeContactForm, RateLimiter } from "../utils/security";
+import contactCanvasVideo from "../videos/contact_canvas.webm";
 
 const Contact: React.FC = () => {
   const [message, setMessage] = useState("");
@@ -42,7 +43,7 @@ const Contact: React.FC = () => {
 
   // Initialize EmailJS
   React.useEffect(() => {
-    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
     if (publicKey) {
       emailjs.init(publicKey);
     } else {
@@ -109,9 +110,9 @@ const Contact: React.FC = () => {
 
     setSending(true);
 
-    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
-    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey) {
       console.error("EmailJS configuration missing in environment variables");
@@ -207,7 +208,7 @@ const Contact: React.FC = () => {
           }}
         >
           <source
-            src={require("../videos/contact_canvas.webm")}
+            src={contactCanvasVideo}
             type="video/webm"
           />
         </video>
