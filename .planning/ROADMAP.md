@@ -162,11 +162,11 @@ Plans:
 **Plans:** 5 plans
 
 Plans:
-- [ ] 07-01-PLAN.md — Performance infrastructure (GPU tier detection, PerformanceProvider)
-- [ ] 07-02-PLAN.md — VideoBackground component with poster fallbacks
-- [ ] 07-03-PLAN.md — HeroImage component with Bleed integration
-- [ ] 07-04-PLAN.md — React Three Fiber setup and ParticleField component
-- [ ] 07-05-PLAN.md — Storybook stories for all effects components
+- [x] 07-01-PLAN.md — Performance infrastructure (GPU tier detection, PerformanceProvider)
+- [x] 07-02-PLAN.md — VideoBackground component with poster fallbacks
+- [x] 07-03-PLAN.md — HeroImage component with Bleed integration
+- [x] 07-04-PLAN.md — React Three Fiber setup and ParticleField component
+- [x] 07-05-PLAN.md — Storybook stories for all effects components
 
 ---
 
@@ -213,7 +213,7 @@ Plans:
 | 4 - Motion Foundation | Complete | 2026-01-17 |
 | 5 - Smooth Scroll Integration | Complete | 2026-01-17 |
 | 6 - Layout Primitives | Complete | 2026-01-17 |
-| 7 - Visual Effects Foundation | Not started | - |
+| 7 - Visual Effects Foundation | Complete | 2026-01-17 |
 | 8 - Page Transitions | Not started | - |
 | 9 - Section Experiences | Not started | - |
 
