@@ -140,6 +140,9 @@ Progress: [==============================================================] ~64% 
 - 2026-01-17: On-demand frameloop for battery efficiency in R3F Canvas
 - 2026-01-17: ParticleField count scaling: tier1=count/4, tier2=count/2, tier3=full
 - 2026-01-17: drei Instances for GPU-efficient instanced rendering
+- 2026-01-17: VideoBackground mobile gets poster regardless of tier (battery-conscious)
+- 2026-01-17: VideoBackground uses h-dvh for proper mobile viewport (dynamic viewport height)
+- 2026-01-17: HeroImage uses Bleed for viewport-width breakout from Container
 
 ### Phase 1 Completion Summary
 
@@ -276,6 +279,18 @@ Progress: [==============================================================] ~64% 
 - Integrated into AnimationProvider hierarchy
 - GPU tier 0-3 classification ready for visual effects
 
+**Plan 07-02:** Video Background Component (COMPLETE)
+- VideoBackground with performance-tiered rendering
+- Poster fallback for tier 0/reduced-motion/mobile
+- Video playback for desktop tier 1+
+- Battery-conscious mobile behavior
+
+**Plan 07-03:** Hero Image Component (COMPLETE)
+- HeroImage with full-bleed responsive images
+- Uses Bleed component for viewport-width breakout
+- srcSet/sizes support for responsive loading
+- Optional overlay for text contrast
+
 **Plan 07-04:** React Three Fiber Infrastructure (COMPLETE)
 - @react-three/fiber@9.5.0, @react-three/drei@10.7.7, three@0.182.0 installed
 - Scene3D Canvas wrapper with tier-based DPR and antialiasing
@@ -285,5 +300,5 @@ Progress: [==============================================================] ~64% 
 ## Session Continuity
 
 Last session: 2026-01-17
-Stopped at: Completed 07-04-PLAN.md (React Three Fiber Infrastructure)
-Resume file: None - ready for 07-02-PLAN.md or 07-03-PLAN.md (wave 2 parallel)
+Stopped at: Completed 07-02-PLAN.md (Video Background Component)
+Resume file: None - ready for 07-05-PLAN.md
