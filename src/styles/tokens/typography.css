@@ -1,0 +1,75 @@
+/**
+ * Typography Token Layer
+ *
+ * Part of the three-layer token architecture (primitives -> semantics -> sections).
+ * This file defines fluid typography using clamp() for responsive scaling.
+ *
+ * Scale ratio: 1.25 (Major Third)
+ * Viewport range: 400px to 1280px
+ *
+ * Each size token scales smoothly between mobile and desktop viewports.
+ * Line heights are tuned per size: tighter for large display text,
+ * looser for body text to improve readability.
+ *
+ * @see primitives.css for font-family definitions
+ * @see globals.css for base typography styles
+ */
+
+@theme {
+  /* ========================================
+   * FLUID TYPE SCALE
+   * Using clamp() for viewport-responsive sizing
+   * Format: clamp(min, preferred, max)
+   * ======================================== */
+
+  /* Extra Small - Captions, labels, fine print */
+  --text-xs: clamp(0.64rem, 0.6rem + 0.2vw, 0.8rem);
+  --text-xs--line-height: 1.4;
+
+  /* Small - Secondary text, metadata */
+  --text-sm: clamp(0.8rem, 0.75rem + 0.25vw, 1rem);
+  --text-sm--line-height: 1.5;
+
+  /* Base - Body text, primary reading size */
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-base--line-height: 1.6;
+
+  /* Large - Lead paragraphs, emphasized text */
+  --text-lg: clamp(1.125rem, 1.05rem + 0.375vw, 1.35rem);
+  --text-lg--line-height: 1.5;
+
+  /* XL - Subheadings, section intros */
+  --text-xl: clamp(1.266rem, 1.15rem + 0.58vw, 1.62rem);
+  --text-xl--line-height: 1.4;
+
+  /* 2XL - Small headings (h4, h5) */
+  --text-2xl: clamp(1.424rem, 1.27rem + 0.77vw, 1.944rem);
+  --text-2xl--line-height: 1.35;
+
+  /* 3XL - Medium headings (h3) */
+  --text-3xl: clamp(1.602rem, 1.4rem + 1.01vw, 2.333rem);
+  --text-3xl--line-height: 1.25;
+
+  /* 4XL - Large headings (h2) */
+  --text-4xl: clamp(1.802rem, 1.54rem + 1.31vw, 2.8rem);
+  --text-4xl--line-height: 1.2;
+
+  /* 5XL - Hero headings (h1) */
+  --text-5xl: clamp(2.027rem, 1.69rem + 1.69vw, 3.36rem);
+  --text-5xl--line-height: 1.1;
+
+  /* 6XL - Display text, maximum impact */
+  --text-6xl: clamp(2.281rem, 1.85rem + 2.16vw, 4.032rem);
+  --text-6xl--line-height: 1.05;
+
+  /* ========================================
+   * LETTER SPACING TOKENS
+   * Fine-tuned tracking for different contexts
+   * ======================================== */
+
+  /* Tight tracking for small text to improve legibility */
+  --text-xs--letter-spacing: 0.02em;
+
+  /* Wide tracking for uppercase eyebrow/label text */
+  --text-eyebrow--letter-spacing: 0.25em;
+}
