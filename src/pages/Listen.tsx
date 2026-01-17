@@ -1,16 +1,13 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, pageVariants } from '@/lib/motion';
 import styles from './Listen.module.css';
 import Spinner from '../components/Spinner';
 import PageMeta from '../components/PageMeta';
 import { isWebMSupported } from '../utils/isWebMSupported';
-import { isIOS } from '../utils/isIOS';
 import glitchBgVideo from '../videos/rg-glitch-bg.webm';
 
 const Listen: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
-
-  const Container: React.ElementType = isIOS() ? 'div' : motion.div;
 
   const handleContentLoad = () => {
     setLoading(false);
@@ -39,14 +36,12 @@ const Listen: React.FC = () => {
           <source src={glitchBgVideo} type="video/webm" />
         </video>
       )}
-      <Container
+      <motion.div
         className={styles['listen-container']}
         data-section="listen"
-        {...(!isIOS() && {
-          initial: { opacity: 0, y: 20 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.4 },
-        })}
+        variants={pageVariants}
+        initial="initial"
+        animate="enter"
       >
       {loading && <Spinner />}
       <h1>Listen to Music</h1>
@@ -79,7 +74,7 @@ const Listen: React.FC = () => {
       <div style={{ fontSize: '10px', color: '#cccccc', lineBreak: 'anywhere', wordBreak: 'normal', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', fontFamily: 'Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif', fontWeight: 100 }}>
         <a href="https://soundcloud.com/randomgorsey" title="Random Gorsey" target="_blank" rel="noreferrer" style={{ color: '#cccccc', textDecoration: 'none' }}>Random Gorsey</a> · <a href="https://soundcloud.com/randomgorsey/sets/tuunz" title="Tuunz" target="_blank" rel="noreferrer" style={{ color: '#cccccc', textDecoration: 'none' }}>Tuunz</a>
       </div>
-    </Container>
+    </motion.div>
     </>
   );
 };

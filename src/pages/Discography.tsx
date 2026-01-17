@@ -1,11 +1,10 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, pageVariants } from '@/lib/motion';
 import styles from './Discography.module.css';
 import SoLong from '../images/solongspectrum.jpg';
 import Customer from '../images/CustomerIsAlwaysRight.jpg';
 import PageMeta from '../components/PageMeta';
 import { isWebMSupported } from '../utils/isWebMSupported';
-import { isIOS } from '../utils/isIOS';
 import firgoCanvasVideo from '../videos/FIRGO002_canvas.webm';
 
 interface Release {
@@ -28,8 +27,6 @@ const releases: Release[] = [
 ];
 
 const Discography: React.FC = () => {
-  const Container: React.ElementType = isIOS() ? 'div' : motion.div;
-
   return (
   <>
     <PageMeta title="Discography | Random Gorsey" description="Browse the official releases from Random Gorsey." path="/discography" />
@@ -54,14 +51,12 @@ const Discography: React.FC = () => {
         <source src={firgoCanvasVideo} type="video/webm" />
       </video>
     )}
-    <Container
+    <motion.div
       className={styles['discography-container']}
       data-section="discography"
-      {...(!isIOS() && {
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.4 },
-      })}
+      variants={pageVariants}
+      initial="initial"
+      animate="enter"
     >
       <h1 className={styles['discography-title']}>
         <span className={styles['disco-break']}>Disco</span>
@@ -101,7 +96,7 @@ const Discography: React.FC = () => {
         );
       })}
     </div>
-  </Container>
+  </motion.div>
   </>
   );
 };

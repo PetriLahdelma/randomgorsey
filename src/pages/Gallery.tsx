@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { XMarkIcon, ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, pageVariants, overlayVariants } from '@/lib/motion';
 import styles from './Gallery.module.css';
 import Spinner from '../components/Spinner';
 import galleryImages from '../data/galleryImages';
 import Caption from '../components/Caption';
 import PageMeta from '../components/PageMeta';
 import { isWebMSupported } from '../utils/isWebMSupported';
-import { isIOS } from '../utils/isIOS';
 import logoCanvasVideo from '../videos/logo_canvas.webm';
 
 type GalleryProps = {
@@ -18,8 +17,6 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
   const [overlayImage, setOverlayImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [loading, setLoading] = React.useState(true);
-
-  const Container: React.ElementType = isIOS() ? 'div' : motion.div;
 
   const images = useMemo(() => galleryImages, []);
 
@@ -88,14 +85,12 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
           <source src={logoCanvasVideo} type="video/webm" />
         </video>
       )}
-      <Container
+      <motion.div
         className={styles['gallery-container']}
         data-section="gallery"
-        {...(!isIOS() && {
-          initial: { opacity: 0, y: 20 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.4 },
-        })}
+        variants={pageVariants}
+        initial="initial"
+        animate="enter"
       >
       {loading && <Spinner />}
       <div className={styles['gallery-content']}>
@@ -117,46 +112,30 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
 
         <AnimatePresence>
         {overlayImage && (
-          isIOS() ? (
-            <div className={styles['overlay']} onClick={closeOverlay}>
-              <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
-              <ArrowLeftIcon aria-label="Previous image" className={styles['left-icon']} onClick={(e) => { e.stopPropagation(); navigateLeft(); }} />
-              <img
-                src={overlayImage}
-                alt={images[currentIndex].caption}
-                title={images[currentIndex].caption}
-                style={{ width: '100%' }}
-                onClick={(e) => { e.stopPropagation(); navigateRight(); }}
-              />
-              <Caption>{images[currentIndex].caption}</Caption>
-              <ArrowRightIcon aria-label="Next image" className={styles['right-icon']} onClick={(e) => { e.stopPropagation(); navigateRight(); }} />
-            </div>
-          ) : (
-            <motion.div
-              className={styles['overlay']}
-              onClick={closeOverlay}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
-              <ArrowLeftIcon aria-label="Previous image" className={styles['left-icon']} onClick={(e) => { e.stopPropagation(); navigateLeft(); }} />
-              <img
-                src={overlayImage}
-                alt={images[currentIndex].caption}
-                title={images[currentIndex].caption}
-                style={{ width: '100%' }}
-                onClick={(e) => { e.stopPropagation(); navigateRight(); }}
-              />
-              <Caption>{images[currentIndex].caption}</Caption>
-              <ArrowRightIcon aria-label="Next image" className={styles['right-icon']} onClick={(e) => { e.stopPropagation(); navigateRight(); }} />
-            </motion.div>
-          )
+          <motion.div
+            className={styles['overlay']}
+            onClick={closeOverlay}
+            variants={overlayVariants}
+            initial="initial"
+            animate="enter"
+            exit="exit"
+          >
+            <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
+            <ArrowLeftIcon aria-label="Previous image" className={styles['left-icon']} onClick={(e) => { e.stopPropagation(); navigateLeft(); }} />
+            <img
+              src={overlayImage}
+              alt={images[currentIndex].caption}
+              title={images[currentIndex].caption}
+              style={{ width: '100%' }}
+              onClick={(e) => { e.stopPropagation(); navigateRight(); }}
+            />
+            <Caption>{images[currentIndex].caption}</Caption>
+            <ArrowRightIcon aria-label="Next image" className={styles['right-icon']} onClick={(e) => { e.stopPropagation(); navigateRight(); }} />
+          </motion.div>
         )}
         </AnimatePresence>
       </div>
-    </Container>
+    </motion.div>
     </>
   );
 };

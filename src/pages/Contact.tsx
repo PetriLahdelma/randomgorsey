@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, pageVariants } from "@/lib/motion";
 import styles from "./Contact.module.css"; // Import the CSS module for styling
 import ContactButton from "../components/Button";
 import emailjs from "@emailjs/browser";
@@ -11,7 +11,6 @@ import { contactFormSchema } from "../utils/validation";
 import Button from "../components/Button";
 import PageMeta from "../components/PageMeta";
 import { isWebMSupported } from "../utils/isWebMSupported";
-import { isIOS } from "../utils/isIOS";
 import { validateAndSanitizeContactForm, RateLimiter } from "../utils/security";
 import contactCanvasVideo from "../videos/contact_canvas.webm";
 
@@ -33,8 +32,6 @@ const Contact: React.FC = () => {
 
   // Rate limiter for contact form submissions (5 attempts per minute per user)
   const rateLimiter = new RateLimiter(5, 60 * 1000);
-
-  const Container: React.ElementType = isIOS() ? "div" : motion.div;
 
   React.useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -213,14 +210,12 @@ const Contact: React.FC = () => {
           />
         </video>
       )}
-      <Container
+      <motion.div
         className={styles["contact-container"]}
         data-section="contact"
-        {...(!isIOS() && {
-          initial: { opacity: 0, y: 20 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.4 },
-        })}
+        variants={pageVariants}
+        initial="initial"
+        animate="enter"
       >
         {loading && <Spinner />}
         {sending && <Spinner />}
@@ -321,7 +316,7 @@ const Contact: React.FC = () => {
             )}
           </>
         )}
-      </Container>
+      </motion.div>
     </>
   );
 };

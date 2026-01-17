@@ -1,18 +1,15 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, pageVariants } from "@/lib/motion";
 import styles from "./NotFound.module.css";
 import Spinner from "../components/Spinner";
 import PageMeta from "../components/PageMeta";
 import { isWebMSupported } from "../utils/isWebMSupported";
-import { isIOS } from "../utils/isIOS";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import glitchBgVideo from "../videos/rg-glitch-bg.webm";
 
 const NotFound: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
-
-  const Container: React.ElementType = isIOS() ? "div" : motion.div;
 
   React.useEffect(() => {
     const timer = window.requestAnimationFrame(() => setLoading(false));
@@ -49,13 +46,11 @@ const NotFound: React.FC = () => {
           />
         </video>
       )}
-      <Container
+      <motion.div
         className={styles["notfound-container"]}
-        {...(!isIOS() && {
-          initial: { opacity: 0, y: 20 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.4 },
-        })}
+        variants={pageVariants}
+        initial="initial"
+        animate="enter"
       >
         {loading && <Spinner />}
         {!loading && (
@@ -76,7 +71,7 @@ const NotFound: React.FC = () => {
             </Button>
           </Link>
         </div>
-      </Container>
+      </motion.div>
     </>
   );
 };
