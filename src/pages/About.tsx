@@ -43,6 +43,7 @@ const About: React.FC = () => {
         variants={pageVariants}
         initial="initial"
         animate="enter"
+        exit="exit"
       >
       {loading && <Spinner style={{ borderTopColor: '#FFD600' }} />}
 

@@ -57,6 +57,7 @@ const Discography: React.FC = () => {
       variants={pageVariants}
       initial="initial"
       animate="enter"
+      exit="exit"
     >
       <h1 className={styles['discography-title']}>
         <span className={styles['disco-break']}>Disco</span>

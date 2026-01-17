@@ -51,6 +51,7 @@ const NotFound: React.FC = () => {
         variants={pageVariants}
         initial="initial"
         animate="enter"
+        exit="exit"
       >
         {loading && <Spinner />}
         {!loading && (

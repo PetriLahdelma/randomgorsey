@@ -216,6 +216,7 @@ const Contact: React.FC = () => {
         variants={pageVariants}
         initial="initial"
         animate="enter"
+        exit="exit"
       >
         {loading && <Spinner />}
         {sending && <Spinner />}
