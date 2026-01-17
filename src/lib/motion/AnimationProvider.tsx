@@ -27,7 +27,7 @@ export const AnimationProvider: React.FC<AnimationProviderProps> = ({
   reducedMotion = 'user',
 }) => {
   return (
-    <LazyMotion features={domAnimation} strict>
+    <LazyMotion features={domAnimation}>
       <MotionConfig reducedMotion={reducedMotion}>
         <LenisProvider>{children}</LenisProvider>
       </MotionConfig>
