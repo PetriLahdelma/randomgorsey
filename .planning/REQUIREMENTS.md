@@ -17,7 +17,7 @@ Requirements for the creative transformation. Each maps to roadmap phases.
 
 ### Motion & Animation
 
-- [ ] **MOTN-01**: Centralized motion config (springs, variants, reduced-motion handling)
+- [x] **MOTN-01**: Centralized motion config (springs, variants, reduced-motion handling)
 - [ ] **MOTN-02**: Lenis smooth scroll integration
 - [ ] **MOTN-03**: Kinetic typography with SplitType
 - [ ] **MOTN-04**: Scroll-driven reveal animations
@@ -92,7 +92,7 @@ Which phases cover which requirements. Updated by create-roadmap.
 | FOUND-03 | Phase 3 | Complete |
 | FOUND-04 | Phase 2 | Complete |
 | FOUND-05 | Phase 1 | Complete |
-| MOTN-01 | Phase 4 | Pending |
+| MOTN-01 | Phase 4 | Complete |
 | MOTN-02 | Phase 5 | Pending |
 | MOTN-03 | Phase 8 | Pending |
 | MOTN-04 | Phase 5 | Pending |
@@ -114,4 +114,4 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 ---
 *Requirements defined: 2026-01-17*
-*Last updated: 2026-01-17 after Phase 3 completion*
+*Last updated: 2026-01-17 after Phase 4 completion*
