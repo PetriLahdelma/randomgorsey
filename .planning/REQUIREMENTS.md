@@ -91,7 +91,7 @@ Which phases cover which requirements. Updated by create-roadmap.
 | FOUND-02 | Phase 2 | Pending |
 | FOUND-03 | Phase 3 | Pending |
 | FOUND-04 | Phase 2 | Pending |
-| FOUND-05 | Phase 1 | Pending |
+| FOUND-05 | Phase 1 | Complete |
 | MOTN-01 | Phase 4 | Pending |
 | MOTN-02 | Phase 5 | Pending |
 | MOTN-03 | Phase 8 | Pending |
