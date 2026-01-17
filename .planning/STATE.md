@@ -5,22 +5,22 @@
 See: .planning/PROJECT.md
 
 **Core value:** Ship something you'd be proud to show design-literate peers - every decision should feel intentional, not safe.
-**Current focus:** Phase 7 - Visual Effects Foundation (COMPLETE)
+**Current focus:** Phase 8 - Page Transitions (IN PROGRESS)
 
 ## Current Position
 
-Phase: 7 of 9 (Visual Effects Foundation) - COMPLETE
-Plan: 5 of 5 complete
-Status: Phase complete
-Last activity: 2026-01-17 - Completed 07-05-PLAN.md (Effects Storybook Stories)
+Phase: 8 of 9 (Page Transitions)
+Plan: 2 of 4 complete
+Status: In progress
+Last activity: 2026-01-17 - Completed 08-02-PLAN.md (Custom Cursor System)
 
-Progress: [================================================================] ~66% (33/~50 total plans estimated)
+Progress: [==================================================================] ~70% (35/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 33
-- Average duration: 6 min
+- Total plans completed: 35
+- Average duration: 5 min
 - Phase 1 total: ~70 min
 - Phase 2 total: ~18 min
 - Phase 3 total: ~13 min
@@ -28,6 +28,7 @@ Progress: [================================================================] ~66
 - Phase 5 total: ~26 min (includes debugging)
 - Phase 6 total: ~20 min
 - Phase 7 total: ~16 min (5 plans)
+- Phase 8 partial: ~4 min (2 plans)
 
 **By Phase:**
 
@@ -40,6 +41,7 @@ Progress: [================================================================] ~66
 | 05-smooth-scroll-integration | 5 | 26 min | 5 min |
 | 06-layout-primitives | 4 | 20 min | 5 min |
 | 07-visual-effects-foundation | 5 | 16 min | 3 min |
+| 08-page-transitions | 2/4 | 4 min | 2 min |
 
 ## Accumulated Context
 
@@ -145,6 +147,11 @@ Progress: [================================================================] ~66
 - 2026-01-17: HeroImage uses Bleed for viewport-width breakout from Container
 - 2026-01-17: Effects stories organized in src/stories/effects/ subdirectory
 - 2026-01-17: R3F stories use decorator pattern to wrap in Scene3D context
+- 2026-01-17: Desktop cursor detection uses "(hover: hover) and (pointer: fine)" media query
+- 2026-01-17: useCursor returns no-op outside provider for safe touch device usage
+- 2026-01-17: Cursor spring config: stiffness 500, damping 28, mass 0.5 for responsive feel
+- 2026-01-17: Three cursor variants: default (16px), hover (48px yellow), text (80px blend)
+- 2026-01-17: body.custom-cursor-active class controls CSS cursor hiding
 
 ### Phase 1 Completion Summary
 
@@ -294,8 +301,20 @@ Progress: [================================================================] ~66
 
 (None)
 
+### Phase 8 Progress (In Progress)
+
+**Page Transitions:**
+- `src/lib/cursor/CursorProvider.tsx` - Desktop detection + cursor context
+- `src/lib/cursor/CustomCursor.tsx` - Spring-based cursor with 3 variants
+- `src/lib/cursor/index.ts` - Public exports (CursorProvider, useCursor)
+
+**Plan 08-01:** Page Transition Architecture (COMPLETE)
+**Plan 08-02:** Custom Cursor System (COMPLETE)
+**Plan 08-03:** Transition Components (PENDING)
+**Plan 08-04:** App Integration (PENDING)
+
 ## Session Continuity
 
 Last session: 2026-01-17
-Stopped at: Completed Phase 7 - Visual Effects Foundation
-Resume file: None - ready for Phase 8 planning
+Stopped at: Completed 08-02-PLAN.md (Custom Cursor System)
+Resume file: None - continue with 08-03-PLAN.md
