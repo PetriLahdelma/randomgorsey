@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 import Modal from "./Modal";
 import Button from "./Button";
-import styles from "./CookieConsent.module.css";
 
 const COOKIE_NAME = "cookieConsent";
 
@@ -46,7 +46,11 @@ const loadGoogleAnalytics = () => {
   document.head.appendChild(script2);
 };
 
-const CookieConsent: React.FC = () => {
+export interface CookieConsentProps {
+  className?: string;
+}
+
+const CookieConsent: React.FC<CookieConsentProps> = ({ className }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -71,18 +75,31 @@ const CookieConsent: React.FC = () => {
 
   return (
     <Modal isOpen={open} onClose={acceptNecessary}>
-      <div className={styles.content}>
-        <h2>Cookie Notice</h2>
-        <p>
+      <div
+        className={cn(
+          "max-w-[50rem] font-['Europa_Regular',sans-serif] text-center",
+          "max-xl:max-w-[80%] max-xl:mx-8",
+          className
+        )}
+      >
+        <h2 className="mb-8 font-['Tschick_Bold',sans-serif] text-[#f0f] uppercase">
+          Cookie Notice
+        </h2>
+        <p className="mb-8 leading-[1.3] text-[#00f]">
           <strong>We use cookies</strong> to remember your preferences and to
           analyze how visitors interact with our site.
         </p>
-        <p>
+        <p className="mb-8 leading-[1.3] text-[#00f]">
           Accepting all cookies allows us to use Google Analytics for
           statistics. You can also choose to keep only the cookies necessary for
           the website to function.
         </p>
-        <div className={styles.actions}>
+        <div
+          className={cn(
+            "flex gap-4 justify-end mt-4",
+            "max-xl:flex-col max-xl:items-center"
+          )}
+        >
           <Button
             variant="secondary"
             onClick={acceptNecessary}
