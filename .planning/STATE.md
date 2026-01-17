@@ -10,16 +10,16 @@ See: .planning/PROJECT.md
 ## Current Position
 
 Phase: 7 of 9 (Visual Effects Foundation) - IN PROGRESS
-Plan: 1 of 5 complete
+Plan: 2 of 5 complete
 Status: In progress
-Last activity: 2026-01-17 - Completed 07-01-PLAN.md (GPU Tier Detection Infrastructure)
+Last activity: 2026-01-17 - Completed 07-04-PLAN.md (React Three Fiber Infrastructure)
 
-Progress: [========================================================] ~58% (29/~50 total plans estimated)
+Progress: [============================================================] ~60% (30/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 29
+- Total plans completed: 30
 - Average duration: 6 min
 - Phase 1 total: ~70 min
 - Phase 2 total: ~18 min
@@ -27,7 +27,7 @@ Progress: [========================================================] ~58% (29/~5
 - Phase 4 total: ~12 min
 - Phase 5 total: ~26 min (includes debugging)
 - Phase 6 total: ~20 min
-- Phase 7 partial: 3 min (1 plan)
+- Phase 7 partial: 7 min (2 plans)
 
 **By Phase:**
 
@@ -39,7 +39,7 @@ Progress: [========================================================] ~58% (29/~5
 | 04-motion-foundation | 4 | 12 min | 3 min |
 | 05-smooth-scroll-integration | 5 | 26 min | 5 min |
 | 06-layout-primitives | 4 | 20 min | 5 min |
-| 07-visual-effects-foundation | 1/5 | 3 min | 3 min |
+| 07-visual-effects-foundation | 2/5 | 7 min | 4 min |
 
 ## Accumulated Context
 
@@ -134,6 +134,12 @@ Progress: [========================================================] ~58% (29/~5
 - 2026-01-17: Safe default tier 1 before detection completes to prevent flash of high-fidelity content
 - 2026-01-17: Reduced motion forces tier 0 regardless of GPU capability for accessibility
 - 2026-01-17: Performance-tiered rendering: tier 0 static, tier 1 video, tier 2-3 WebGL
+- 2026-01-17: Scene3D returns null for tier 0 or no WebGL (graceful degradation)
+- 2026-01-17: Scene3D DPR scaling: tier 1=1, tier 2=1.5, tier 3=2
+- 2026-01-17: Scene3D antialiasing enabled for tier 2+ only
+- 2026-01-17: On-demand frameloop for battery efficiency in R3F Canvas
+- 2026-01-17: ParticleField count scaling: tier1=count/4, tier2=count/2, tier3=full
+- 2026-01-17: drei Instances for GPU-efficient instanced rendering
 
 ### Phase 1 Completion Summary
 
@@ -270,8 +276,14 @@ Progress: [========================================================] ~58% (29/~5
 - Integrated into AnimationProvider hierarchy
 - GPU tier 0-3 classification ready for visual effects
 
+**Plan 07-04:** React Three Fiber Infrastructure (COMPLETE)
+- @react-three/fiber@9.5.0, @react-three/drei@10.7.7, three@0.182.0 installed
+- Scene3D Canvas wrapper with tier-based DPR and antialiasing
+- ParticleField instanced particle system with tier-scaled count
+- Effects components exported from @/components/effects
+
 ## Session Continuity
 
 Last session: 2026-01-17
-Stopped at: Completed 07-01-PLAN.md (GPU Tier Detection Infrastructure)
-Resume file: None - ready for 07-02-PLAN.md
+Stopped at: Completed 07-04-PLAN.md (React Three Fiber Infrastructure)
+Resume file: None - ready for 07-02-PLAN.md or 07-03-PLAN.md (wave 2 parallel)
