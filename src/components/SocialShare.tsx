@@ -1,14 +1,15 @@
 import React from "react";
-import styles from "./SocialShare.module.css";
+import { cn } from "@/lib/utils";
 import { SocialIcon } from "react-social-icons";
 
 export type SocialShareProps = {
   url: string;
   title?: string;
   text?: string;
+  className?: string;
 };
 
-const SocialShare: React.FC<SocialShareProps> = ({ url, title, text }) => {
+const SocialShare: React.FC<SocialShareProps> = ({ url, title, text, className }) => {
   const shareText = encodeURIComponent(
     text || title || "Check this out on Random Gorsey!"
   );
@@ -40,9 +41,10 @@ const SocialShare: React.FC<SocialShareProps> = ({ url, title, text }) => {
       network: "telegram",
     },
   ];
+
   return (
-    <div className={styles["social-share"]}>
-      <span className={styles.label}>Share:</span>
+    <div className={cn("flex gap-2 items-center my-4", className)}>
+      <span className="mr-2 font-bold text-inherit">Share:</span>
       {platforms.map((platform) => (
         <SocialIcon
           key={platform.name}
@@ -53,7 +55,7 @@ const SocialShare: React.FC<SocialShareProps> = ({ url, title, text }) => {
           style={{ height: 24, width: 24 }}
           target="_blank"
           aria-label={`Share on ${platform.name}`}
-          className={styles.icon}
+          className="p-0 m-0 text-2xl text-inherit no-underline bg-transparent shadow-none transition-transform duration-150 hover:scale-[1.2]"
         />
       ))}
     </div>

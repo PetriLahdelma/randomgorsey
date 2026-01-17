@@ -1,10 +1,12 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import styles from "./PostCard.module.css";
+import { cn } from "@/lib/utils";
 import Avatar from "./Avatar";
 import SocialShare from "./SocialShare";
 import { BaseComponentProps } from "../types/common";
-import { Surface, Heading, Text } from "./design-system";
+import Surface from "./Surface";
+import Heading from "./Heading";
+import Text from "./Text";
 
 /**
  * Supported content types for posts
@@ -116,14 +118,12 @@ const PostCard: React.FC<PostCardProps> = ({
     ? `${post.body.slice(0, truncateLength)}...`
     : post.body;
 
-  const cardClasses = [
-    styles.card,
-    post.featured ? styles.featured : "",
-    onClick ? styles.clickable : "",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const cardClasses = cn(
+    "mb-6",
+    post.featured && "border-white/[0.45]",
+    onClick && "cursor-pointer focus-visible:outline-2 focus-visible:outline-[#ff0] focus-visible:outline-offset-[3px]",
+    className
+  );
 
   const surfaceVariant = post.featured ? "inverted" : "flat";
   const surfaceStyle = {
@@ -189,14 +189,26 @@ const PostCard: React.FC<PostCardProps> = ({
         )}
       </Helmet>
 
-      <header className={styles.header}>
-        <div className={styles["header-left"]}>
-          <Heading level={2} as="h2" className={styles.title} tone={headingTone}>
+      {/* Header section */}
+      <header className="flex flex-wrap gap-4 items-start justify-between mb-4">
+        {/* Left side: title, avatar, author */}
+        <div className="flex flex-col gap-[0.35rem] items-start text-left flex-[1_1_60%] min-w-[240px] max-md:flex-[1_1_100%]">
+          <Heading
+            level={2}
+            as="h2"
+            className="m-0"
+            tone={headingTone}
+          >
             {post.title}
           </Heading>
-          <div className={styles["avatar-author"]}>
+          <div className="flex flex-row gap-2 items-center">
             <Avatar avatarImage="/images/pete.jpg" size="M" />
-            <Text as="span" variant="body" tone="contrast" className={styles.author}>
+            <Text
+              as="span"
+              variant="body"
+              tone="contrast"
+              className="text-base tracking-[0.04em]"
+            >
               {post.author}
             </Text>
           </div>
@@ -205,23 +217,25 @@ const PostCard: React.FC<PostCardProps> = ({
             as="span"
             variant="bodySmall"
             tone={metaTone}
-            className={styles["date-mobile"]}
+            className="hidden max-md:block mt-[0.2em] ml-[2.2em] text-[0.9rem] text-[#6c757d]"
           >
             {post.timestamp}
           </Text>
         </div>
-        <div className={styles["header-right"]}>
-          <Text<"time">
+
+        {/* Right side: time and metadata */}
+        <div className="flex flex-col gap-[0.45rem] items-end text-right flex-[0_0_200px] max-md:flex-[1_1_100%] max-md:items-start max-md:text-left max-md:gap-1">
+          <Text
             as="time"
             variant="bodySmall"
             tone={metaTone}
-            className={styles.time}
+            className="text-[0.95rem] text-left max-md:hidden"
             dateTime={post.timestamp}
           >
             {post.timestamp}
           </Text>
           {showMetadata && (
-            <div className={styles.metadata}>
+            <div className="flex flex-col gap-1 items-end text-[0.85rem] uppercase tracking-[0.05em] max-md:items-start">
               {post.views && (
                 <Text as="span" variant="caption" tone={metaTone}>
                   {post.views} views
@@ -237,19 +251,21 @@ const PostCard: React.FC<PostCardProps> = ({
         </div>
       </header>
 
+      {/* Body content */}
       <div
-        className={styles.body}
+        className="mt-4 mb-3 font-['Europa_Regular',sans-serif] text-[1.05rem] leading-[1.7]"
         dangerouslySetInnerHTML={{
           __html: displayBody,
         }}
       />
 
-      <div className={styles["post-footer-row"]}>
-        <div className={styles["read-more-mobile-wrap"]}>
+      {/* Footer row: Read more and social share */}
+      <div className="flex flex-wrap gap-3 items-center justify-between mt-3 max-md:flex-col max-md:gap-[0.35rem] max-md:items-center">
+        <div className="max-md:flex max-md:justify-center max-md:order-1 max-md:w-full max-md:mb-1 max-md:text-center">
           {hasLongContent && (
             <button
               onClick={toggleExpanded}
-              className={styles["read-more"]}
+              className="p-0 mr-2 font-['Europa_Regular',sans-serif] text-base font-bold text-inherit underline cursor-pointer bg-transparent border-none"
               aria-expanded={expanded}
               aria-label={expanded ? "Show less content" : "Show more content"}
             >
@@ -259,18 +275,19 @@ const PostCard: React.FC<PostCardProps> = ({
         </div>
 
         {showSocialShare && (
-          <div className={styles["post-footer-share"]}>
+          <div className="ml-auto max-md:flex max-md:justify-center max-md:order-2 max-md:w-full max-md:ml-0 max-md:text-center">
             <SocialShare url={postUrl} title={post.title} text={shareText} />
           </div>
         )}
       </div>
 
+      {/* Media content */}
       {post.media && post.contentType === PostContentType.IMAGE && (
         <img
           src={post.media}
           alt={post.title}
           title={post.title}
-          className={styles.media}
+          className="w-full mt-2 rounded"
           loading="lazy"
         />
       )}
@@ -279,7 +296,7 @@ const PostCard: React.FC<PostCardProps> = ({
         <video
           src={post.media}
           controls
-          className={styles.media}
+          className="w-full mt-2 rounded"
           preload="metadata"
           aria-label={`Video: ${post.title}`}
         />
@@ -289,7 +306,7 @@ const PostCard: React.FC<PostCardProps> = ({
         <audio
           src={post.media}
           controls
-          className={styles.media}
+          className="w-full mt-2 rounded"
           preload="metadata"
           aria-label={`Audio: ${post.title}`}
         />

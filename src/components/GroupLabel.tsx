@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './GroupLabel.module.css';
+import { cn } from '@/lib/utils';
 
 export type GroupLabelProps = {
   children: React.ReactNode;
@@ -9,9 +9,19 @@ export type GroupLabelProps = {
 };
 
 const GroupLabel: React.FC<GroupLabelProps> = ({ children, className, required, style }) => (
-  <div className={`${styles['group-label']}${className ? ' ' + className : ''}`} style={style}>
+  <div
+    className={cn(
+      "block mb-2",
+      "font-['Europa_Regular',sans-serif] text-[1.1rem] font-bold",
+      "text-[#00f] uppercase tracking-[0.03em]",
+      className
+    )}
+    style={style}
+  >
     {children}
-    {required && <span className={styles.required}>*</span>}
+    {required && (
+      <span className="ml-1 text-[1em] text-[#d32f2f]">*</span>
+    )}
   </div>
 );
 
