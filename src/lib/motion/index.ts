@@ -1,0 +1,58 @@
+/**
+ * Motion System Public API
+ *
+ * Single import point for all motion-related utilities, constants, and variants.
+ * This module provides a centralized, type-safe way to access animation
+ * configuration throughout the application.
+ *
+ * @example
+ * ```tsx
+ * import {
+ *   motion,
+ *   springs,
+ *   pageVariants,
+ *   useReducedMotion,
+ * } from '@/lib/motion';
+ *
+ * const MyComponent = () => {
+ *   const shouldReduceMotion = useReducedMotion();
+ *
+ *   return (
+ *     <motion.div
+ *       variants={shouldReduceMotion ? fadeVariants : pageVariants}
+ *       initial="initial"
+ *       animate="enter"
+ *       exit="exit"
+ *     >
+ *       Content
+ *     </motion.div>
+ *   );
+ * };
+ * ```
+ */
+
+// === CONFIGURATION ===
+// Spring physics, duration, and easing presets
+export { springs, durations, eases } from './config';
+export type { SpringPreset, DurationPreset, EasePreset } from './config';
+
+// === VARIANTS ===
+// Reusable animation variant objects
+export {
+  pageVariants,
+  fadeVariants,
+  staggerContainer,
+  staggerItem,
+  overlayVariants,
+  modalVariants,
+} from './variants';
+
+// === FRAMER MOTION RE-EXPORTS ===
+// Commonly used utilities for convenience
+export {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  useAnimation,
+  useInView,
+} from 'framer-motion';
