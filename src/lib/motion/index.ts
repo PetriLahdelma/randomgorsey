@@ -47,6 +47,10 @@ export {
   modalVariants,
 } from './variants';
 
+// === PROVIDER ===
+// Global animation configuration wrapper
+export { AnimationProvider } from './AnimationProvider';
+
 // === FRAMER MOTION RE-EXPORTS ===
 // Commonly used utilities for convenience
 export {
