@@ -5,9 +5,18 @@
  * while providing native fallbacks.
  */
 
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useLenis } from 'lenis/react';
+import { LenisContext } from 'lenis/react';
+
+/**
+ * Safely get Lenis instance - returns null if no provider exists.
+ * This is necessary because useLenis() throws when called outside ReactLenis.
+ */
+function useLenisSafe() {
+  const context = useContext(LenisContext);
+  return context?.lenis ?? null;
+}
 
 /**
  * Scrolls to top of page when route changes.
@@ -16,7 +25,7 @@ import { useLenis } from 'lenis/react';
  * Must be called within a component inside BrowserRouter.
  */
 export function useScrollToTopOnRouteChange(): void {
-  const lenis = useLenis();
+  const lenis = useLenisSafe();
   const location = useLocation();
 
   useEffect(() => {
@@ -56,7 +65,7 @@ interface ScrollToOptions {
  * ```
  */
 export function useLenisScrollTo() {
-  const lenis = useLenis();
+  const lenis = useLenisSafe();
 
   const scrollTo = useCallback(
     (target: number | string, options: ScrollToOptions = {}) => {
