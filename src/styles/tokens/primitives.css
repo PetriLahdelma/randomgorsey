@@ -77,6 +77,8 @@
   --font-family-europa: "Europa Regular", ui-sans-serif, system-ui, sans-serif;
   --font-family-europa-bold: "Europa Bold", ui-sans-serif, system-ui, sans-serif;
   --font-family-europa-light: "Europa Light", ui-sans-serif, system-ui, sans-serif;
+  /* Unified Europa - use font-weight to select variant (300, 400, 700) */
+  --font-family-europa-unified: "Europa", ui-sans-serif, system-ui, sans-serif;
 
   /* ========================================
    * ANIMATION PRIMITIVES
