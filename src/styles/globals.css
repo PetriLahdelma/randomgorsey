@@ -115,7 +115,9 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    /* Note: No background-color on body - pages use fixed video backgrounds */
+    /* that need to show through. Components apply their own backgrounds. */
+    @apply text-foreground;
     margin: 0;
     font-family: var(--font-family-europa);
     font-size: 16px;
