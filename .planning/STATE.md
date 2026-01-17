@@ -10,22 +10,22 @@ See: .planning/PROJECT.md
 ## Current Position
 
 Phase: 5 of 9 (Smooth Scroll Integration)
-Plan: 3 of 5 complete (05-01, 05-02, 05-03)
+Plan: 4 of 5 complete (05-01, 05-02, 05-03, 05-04)
 Status: In progress
-Last activity: 2026-01-17 - Completed 05-03-PLAN.md (Scroll Utility Wiring)
+Last activity: 2026-01-17 - Completed 05-04-PLAN.md (Page Content Reveal Animations)
 
-Progress: [==========================================] ~42% (21/~50 total plans estimated)
+Progress: [============================================] ~44% (22/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 21
+- Total plans completed: 22
 - Average duration: 6 min
 - Phase 1 total: ~70 min
 - Phase 2 total: ~18 min
 - Phase 3 total: ~13 min
 - Phase 4 total: ~12 min
-- Phase 5 so far: ~8 min
+- Phase 5 so far: ~11 min
 
 **By Phase:**
 
@@ -35,7 +35,7 @@ Progress: [==========================================] ~42% (21/~50 total plans 
 | 02-token-architecture | 4 | 18 min | 5 min |
 | 03-typography-system | 3 | 13 min | 4 min |
 | 04-motion-foundation | 4 | 12 min | 3 min |
-| 05-smooth-scroll-integration | 3/5 | 8 min | 3 min |
+| 05-smooth-scroll-integration | 4/5 | 11 min | 3 min |
 
 ## Accumulated Context
 
@@ -115,6 +115,9 @@ Progress: [==========================================] ~42% (21/~50 total plans 
 - 2026-01-17: useLenisScrollTo uses Lenis when available, native smooth scroll as fallback
 - 2026-01-17: useScrollToTopOnRouteChange uses immediate scroll to prevent flash of previous position
 - 2026-01-17: data-lenis-prevent attribute on overlay prevents background scroll
+- 2026-01-17: Wrap semantic content blocks with RevealOnScroll, not individual elements
+- 2026-01-17: Move key prop to RevealOnScroll when wrapping mapped arrays
+- 2026-01-17: pageVariants handles page enter, RevealOnScroll handles scroll reveals for below-fold content
 
 ### Phase 1 Completion Summary
 
@@ -203,7 +206,7 @@ Progress: [==========================================] ~42% (21/~50 total plans 
 **Plan 05-01:** Lenis Smooth Scroll Setup (COMPLETE)
 **Plan 05-02:** Reveal Variants and RevealOnScroll (COMPLETE)
 **Plan 05-03:** Scroll Utility Wiring (COMPLETE)
-**Plan 05-04:** Parallax and Scroll Effects (PENDING)
+**Plan 05-04:** Page Content Reveal Animations (COMPLETE)
 **Plan 05-05:** Gap Closure (PENDING)
 
 ### Pending Todos
@@ -220,5 +223,5 @@ Progress: [==========================================] ~42% (21/~50 total plans 
 ## Session Continuity
 
 Last session: 2026-01-17
-Stopped at: Completed 05-03-PLAN.md - Scroll Utility Wiring
-Resume file: None - continue with 05-04-PLAN.md
+Stopped at: Completed 05-04-PLAN.md - Page Content Reveal Animations
+Resume file: None - continue with 05-05-PLAN.md
