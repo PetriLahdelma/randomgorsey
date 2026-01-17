@@ -42,6 +42,7 @@ const Listen: React.FC = () => {
         variants={pageVariants}
         initial="initial"
         animate="enter"
+        exit="exit"
       >
       {loading && <Spinner />}
       <h1>Listen to Music</h1>

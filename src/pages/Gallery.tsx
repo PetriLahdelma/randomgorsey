@@ -92,6 +92,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
         variants={pageVariants}
         initial="initial"
         animate="enter"
+        exit="exit"
       >
       {loading && <Spinner />}
       <div className={styles['gallery-content']}>
