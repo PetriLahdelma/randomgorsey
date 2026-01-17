@@ -136,7 +136,13 @@ Plans:
 4. Developer can create intentional asymmetric layouts without custom CSS
 5. All layout primitives have 1:1 Storybook stories with interactive controls
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 4 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — Create Stack and Cluster layout primitives
+- [ ] 06-02-PLAN.md — Create Grid component with container queries
+- [ ] 06-03-PLAN.md — Create Bleed and Container components
+- [ ] 06-04-PLAN.md — Create Storybook stories for all layout primitives
 
 ---
 
@@ -199,7 +205,7 @@ Plans:
 | 3 - Typography System | Complete | 2026-01-17 |
 | 4 - Motion Foundation | Complete | 2026-01-17 |
 | 5 - Smooth Scroll Integration | Complete | 2026-01-17 |
-| 6 - Layout Primitives | Not started | - |
+| 6 - Layout Primitives | Planned | - |
 | 7 - Visual Effects Foundation | Not started | - |
 | 8 - Page Transitions | Not started | - |
 | 9 - Section Experiences | Not started | - |
