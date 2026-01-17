@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './styles/globals.css';  // Tailwind + theme
-import './index.module.css';    // Keep existing for now (gradual migration)
-import './variables.css';       // Keep existing CSS variables for now
+import './styles/globals.css';  // Tailwind + theme + fonts + base styles
 import App from './App';
 import { HelmetProvider } from 'react-helmet-async';
 
