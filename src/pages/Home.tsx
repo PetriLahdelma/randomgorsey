@@ -1,7 +1,7 @@
 import React from "react";
 import PageMeta from "../components/PageMeta";
 import { isWebMSupported } from "../utils/isWebMSupported";
-import { motion, pageVariants } from "@/lib/motion";
+import { motion, pageVariants, useLenisScrollTo } from "@/lib/motion";
 import RevealOnScroll from "../components/RevealOnScroll";
 import styles from "./Home.module.css";
 import Spinner from "../components/Spinner";
@@ -28,6 +28,7 @@ const Home: React.FC = () => {
   const [visibleCount, setVisibleCount] = React.useState(3);
   const [autoLoads, setAutoLoads] = React.useState(0);
   const sentinelRef = React.useRef<HTMLDivElement | null>(null);
+  const scrollTo = useLenisScrollTo();
 
   React.useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -126,7 +127,7 @@ const Home: React.FC = () => {
               <Button
                 className={styles["back-to-top-button"]}
                 variant="secondary"
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                onClick={() => scrollTo(0)}
                 aria-label="Back to top"
               >
                 Back to Top
