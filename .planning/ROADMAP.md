@@ -183,7 +183,13 @@ Plans:
 4. User sees kinetic typography effects (text splitting, character animation) on key headings
 5. Cursor and kinetic typography components have 1:1 Storybook stories
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 4 plans
+
+Plans:
+- [ ] 08-01-PLAN.md — Wire AnimatePresence for coordinated page exit/enter animations
+- [ ] 08-02-PLAN.md — Create custom cursor system with desktop detection
+- [ ] 08-03-PLAN.md — Create KineticText component with SplitType
+- [ ] 08-04-PLAN.md — Integrate cursor and create Storybook stories
 
 ---
 
@@ -214,7 +220,7 @@ Plans:
 | 5 - Smooth Scroll Integration | Complete | 2026-01-17 |
 | 6 - Layout Primitives | Complete | 2026-01-17 |
 | 7 - Visual Effects Foundation | Complete | 2026-01-17 |
-| 8 - Page Transitions | Not started | - |
+| 8 - Page Transitions | Planned | - |
 | 9 - Section Experiences | Not started | - |
 
 ---
