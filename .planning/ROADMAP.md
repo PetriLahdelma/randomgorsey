@@ -47,12 +47,13 @@ Plans:
 3. Developer can override semantic tokens at section level via data-section attributes
 4. Developer can trace cascade behavior predictably via @layer organization
 
-**Plans:** 3 plans
+**Plans:** 4 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Create primitive token layer with @theme directive
-- [ ] 02-02-PLAN.md — Create semantic token layer with :root mappings
-- [ ] 02-03-PLAN.md — Create section token layer and integrate into globals.css
+- [x] 02-01-PLAN.md — Create primitive token layer with @theme directive
+- [x] 02-02-PLAN.md — Create semantic token layer with :root mappings
+- [x] 02-03-PLAN.md — Create section token layer and integrate into globals.css
+- [ ] 02-04-PLAN.md — Wire section tokens to pages and add legacy color aliases (gap closure)
 
 ---
 
@@ -176,7 +177,7 @@ Plans:
 | Phase | Status | Completed |
 |-------|--------|-----------|
 | 1 - Tailwind Migration | Complete | 2026-01-17 |
-| 2 - Token Architecture | Planned | - |
+| 2 - Token Architecture | In Progress | - |
 | 3 - Typography System | Not started | - |
 | 4 - Motion Foundation | Not started | - |
 | 5 - Smooth Scroll Integration | Not started | - |
