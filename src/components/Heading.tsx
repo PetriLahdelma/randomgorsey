@@ -17,7 +17,8 @@ const DEFAULT_HEADING_TAG = "h2";
 const headingVariants = cva(
   // Base classes - always applied
   // Using font-tschick-bold utility class for custom font
-  "m-0 font-tschick-bold tracking-[0.08em]",
+  // break-words ensures long words break on mobile to prevent horizontal scroll
+  "m-0 font-tschick-bold tracking-[0.08em] break-words",
   {
     variants: {
       level: {

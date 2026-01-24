@@ -8,6 +8,7 @@
   line-height: 1.6;
   color: var(--color-yellow);
   background-color: var(--color-blue);
+  overflow-x: hidden;
 }
 
 .gallery-container h1 {
@@ -91,11 +92,13 @@
 
 @media (width <= 800px) {
   .gallery-container {
-    margin-right: 2rem;
-    margin-left: 2rem;
+    max-width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
   }
 
   .gallery-container h1 {
     text-align: center;
+    word-break: break-word;
   }
 }

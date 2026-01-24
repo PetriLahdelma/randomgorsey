@@ -152,7 +152,11 @@ export function KineticText({
           variants={containerVariant}
           initial="hidden"
           animate={shouldAnimate ? 'visible' : 'hidden'}
-          style={{ display: 'inline' }}
+          style={{
+            display: 'inline-flex',
+            flexWrap: 'wrap',
+            justifyContent: 'inherit',
+          }}
         >
           {elements.map((text, i) => (
             <motion.span

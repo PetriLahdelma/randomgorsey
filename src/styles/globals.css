@@ -93,6 +93,11 @@
   * {
     @apply border-border;
   }
+  /* Prevent horizontal overflow/scroll on mobile */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
   body {
     /* Note: No background-color on body - pages use fixed video backgrounds */
     /* that need to show through. Components apply their own backgrounds. */

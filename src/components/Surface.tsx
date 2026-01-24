@@ -16,7 +16,7 @@ const surfaceVariants = cva(
   // Base classes - always applied
   // Position, box model, colors, border, shadow, and transitions
   [
-    "relative box-border block",
+    "relative box-border block overflow-hidden",
     "text-black bg-white",
     "border border-black/[0.14]",
     "rounded-xl", // 0.75rem default
