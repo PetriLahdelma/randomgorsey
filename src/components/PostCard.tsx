@@ -68,6 +68,8 @@ export interface PostCardProps extends Omit<BaseComponentProps, "children"> {
   truncateLength?: number;
   /** Whether to show metadata (views, likes, etc.) */
   showMetadata?: boolean;
+  /** Heading level for the post title */
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 /**
@@ -96,6 +98,7 @@ const PostCard: React.FC<PostCardProps> = ({
   showSocialShare = true,
   truncateLength = 200,
   showMetadata = false,
+  headingLevel = 2,
   className,
   style,
   id,
@@ -112,10 +115,13 @@ const PostCard: React.FC<PostCardProps> = ({
     onClick?.(post);
   }, [onClick, post]);
 
+  const stripHtml = (value: string) =>
+    value.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  const plainBody = stripHtml(post.body);
   const hasLongContent = post.body.length > truncateLength;
   const shouldShowReadMore = hasLongContent && !expanded;
   const displayBody = shouldShowReadMore
-    ? `${post.body.slice(0, truncateLength)}...`
+    ? `${plainBody.slice(0, truncateLength)}...`
     : post.body;
 
   const cardClasses = cn(
@@ -134,6 +140,12 @@ const PostCard: React.FC<PostCardProps> = ({
   const headingTone = surfaceVariant === "inverted" ? "light" : "dark";
   const metaTone = surfaceVariant === "inverted" ? "contrast" : "default";
   const isInteractive = Boolean(onClick);
+  const isCompactTitle = headingLevel >= 4;
+
+  const headingClassName = cn(
+    "m-0 max-w-full break-normal tracking-normal md:tracking-[0.04em]",
+    isCompactTitle && "text-[clamp(1.2rem,5vw,1.4rem)] md:text-2xl"
+  );
 
   const postUrl =
     typeof window !== "undefined"
@@ -142,7 +154,7 @@ const PostCard: React.FC<PostCardProps> = ({
 
   const shareText =
     post.excerpt ||
-    post.body.slice(0, 120) + (post.body.length > 120 ? "..." : "");
+    plainBody.slice(0, 120) + (plainBody.length > 120 ? "..." : "");
 
   return (
     <Surface
@@ -193,11 +205,10 @@ const PostCard: React.FC<PostCardProps> = ({
       {/* Header section */}
       <header className="flex flex-wrap gap-4 items-start justify-between mb-4">
         {/* Left side: title, avatar, author */}
-        <div className="flex flex-col gap-[0.35rem] items-start text-left flex-[1_1_60%] min-w-[240px] max-md:flex-[1_1_100%]">
+        <div className="flex flex-col gap-[0.35rem] items-start text-left flex-[1_1_60%] min-w-[240px] max-w-full overflow-hidden max-md:flex-[1_1_100%]">
           <Heading
-            level={2}
-            as="h2"
-            className="m-0"
+            level={headingLevel}
+            className={headingClassName}
             tone={headingTone}
           >
             {post.title}

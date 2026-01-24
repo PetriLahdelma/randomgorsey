@@ -113,7 +113,12 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
           <Stack gap="xl">
             {/* Animated headline with word-by-word reveal for gentle feel */}
             <RevealOnScroll>
-              <KineticText as="h1" splitBy="words" variant="default" className="text-center">
+              <KineticText
+                as="h1"
+                splitBy="words"
+                variant="default"
+                className="mx-auto w-full max-w-[90%] text-center uppercase tracking-[0.02em] text-[clamp(1.5rem,4.8vw,2.6rem)]"
+              >
                 Gallery
               </KineticText>
             </RevealOnScroll>
@@ -127,15 +132,21 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
             >
               {images.map((image, index) => (
                 <motion.div key={index} variants={staggerItem}>
-                  <img
-                    loading="lazy"
-                    src={image.src}
-                    alt={image.caption}
-                    title={image.caption}
-                    className="w-full rounded-lg cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+                  <button
+                    type="button"
+                    className={styles["image-button"]}
                     onClick={() => openOverlay(index)}
-                    onLoad={index === 0 ? handleContentLoad : undefined}
-                  />
+                    aria-label={`Open image: ${image.caption}`}
+                  >
+                    <img
+                      loading="lazy"
+                      src={image.src}
+                      alt={image.caption}
+                      title={image.caption}
+                      className="w-full rounded-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+                      onLoad={index === 0 ? handleContentLoad : undefined}
+                    />
+                  </button>
                   <Caption>{image.caption}</Caption>
                 </motion.div>
               ))}
@@ -153,17 +164,33 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
               initial="initial"
               animate="enter"
               exit="exit"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Image viewer"
               data-lenis-prevent
             >
-              <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
-              <ArrowLeftIcon
+              <button
+                type="button"
+                className={styles["close-icon"]}
+                aria-label="Close image"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeOverlay();
+                }}
+              >
+                <XMarkIcon aria-hidden="true" className={styles["icon"]} />
+              </button>
+              <button
+                type="button"
+                className={styles["left-icon"]}
                 aria-label="Previous image"
-                className={styles['left-icon']}
                 onClick={(e) => {
                   e.stopPropagation();
                   navigateLeft();
                 }}
-              />
+              >
+                <ArrowLeftIcon aria-hidden="true" className={styles["icon"]} />
+              </button>
 
               {/* Lightbox content with modal scale animation */}
               <motion.div
@@ -184,14 +211,17 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
                 <Caption>{images[currentIndex].caption}</Caption>
               </motion.div>
 
-              <ArrowRightIcon
+              <button
+                type="button"
+                className={styles["right-icon"]}
                 aria-label="Next image"
-                className={styles['right-icon']}
                 onClick={(e) => {
                   e.stopPropagation();
                   navigateRight();
                 }}
-              />
+              >
+                <ArrowRightIcon aria-hidden="true" className={styles["icon"]} />
+              </button>
             </motion.div>
           )}
         </AnimatePresence>

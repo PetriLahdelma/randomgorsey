@@ -64,7 +64,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           rel="noopener noreferrer"
         >
           <BandcampIcon
-            className="block w-8 h-8 m-auto"
+            className="block w-5 h-5 m-auto"
             style={{ color: '#fff' }}
           />
         </a>

@@ -18,13 +18,9 @@ import { Stack } from "@/components/layout/Stack";
 import homeCanvasVideo from "../videos/home_canvas.webm";
 
 // Import all posts statically for Jest compatibility
-import FirstPost from "../posts/FirstPost";
-import RandomRecommends from "../posts/RandomRecommends";
+import postsData from "../posts";
 
-// Static posts array that works in both webpack and Jest
-const allPosts = [FirstPost, RandomRecommends];
-
-const posts: Post[] = allPosts
+const posts: Post[] = postsData
   .filter((post) => post && typeof post === "object") // Ensure valid posts
   .sort(
     (a: Post, b: Post) =>
@@ -120,7 +116,7 @@ const Home: React.FC = () => {
                   <Stack gap="lg">
                     {posts.slice(0, visibleCount).map((post) => (
                       <motion.div key={post.id} variants={staggerItem}>
-                        <PostCard post={post} />
+                        <PostCard post={post} headingLevel={5} />
                       </motion.div>
                     ))}
                   </Stack>
@@ -147,7 +143,7 @@ const Home: React.FC = () => {
                       variant="secondary"
                       onClick={() => scrollTo(0)}
                       aria-label="Back to top"
-                      className="border border-white/50"
+                      className="border border-white/60 text-white bg-white/5 hover:bg-white/10"
                     >
                       Back to Top
                     </Button>

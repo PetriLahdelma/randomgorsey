@@ -62,7 +62,7 @@ const meta: Meta = {
     docs: {
       description: {
         component: `
-Custom cursor that follows mouse position with spring-based smoothing.
+Custom cursor that follows mouse position with adaptive smoothing.
 
 ## Features
 - Desktop-only (uses \`(hover: hover) and (pointer: fine)\` detection)

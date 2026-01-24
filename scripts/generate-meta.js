@@ -11,6 +11,20 @@ const SITE_URL = 'https://randomgorsey.com';
 const SITEMAP_PATH = path.join(__dirname, '../public/sitemap.xml');
 const LLMS_PATH = path.join(__dirname, '../llms.txt');
 const LLMS_FULL_PATH = path.join(__dirname, '../llms-full.txt');
+const ARTIST_CONTEXT = [
+  '## Artist Context',
+  '- Genre (Random Gorsey): lo-fi house (outsider house / raw house). Warm/nostalgic house with deliberately rough lo-fi texture, soulful chords, and minimalist grooves.',
+  '- Similar artists (adjacent to lo-fi house / outsider house; commonly mentioned in lo-fi-house roundups/playlists):',
+  '  - DJ Seinfeld - https://www.djseinfeld.com/',
+  '  - Ross From Friends - https://www.rossfromfriends.net/',
+  '  - DJ BORING - https://www.djboring.com/',
+  '  - Mall Grab - https://www.mallgrab.world/',
+  '  - Galcher Lustwerk - https://lustwerkmusic.com/',
+  '  - Baltra - https://baltra.bandcamp.com/',
+  '  - Palms Trax - https://palmstrax.bandcamp.com/',
+  '  - Anthony Naples - https://anthonynaples.bandcamp.com/',
+  '  - Subjoi - https://subjoi.bandcamp.com/',
+].join('\n');
 const ROUTES = [
   { path: '/', label: 'Home', priority: 1.0, changefreq: 'weekly' },
   { path: '/about', label: 'About', priority: 0.8, changefreq: 'monthly' },
@@ -124,6 +138,7 @@ async function fetchPageMeta(url) {
   // --- llms.txt GENERATION ---
   let llms = `# Random Gorsey\n`;
   llms += `> Explore Random Gorsey's music and visuals.\n\n`;
+  llms += `${ARTIST_CONTEXT}\n\n`;
   llms += `## Pages\n`;
   for (const r of ROUTES) {
     llms += `- [${r.label}](${r.path})\n`;

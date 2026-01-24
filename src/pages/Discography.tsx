@@ -48,7 +48,7 @@ const Discography: React.FC = () => {
         overlayOpacity={0.3}
       />
       <motion.div
-        className="mx-auto max-w-2xl px-8 py-8 font-sans leading-relaxed text-fuchsia-700 bg-section-background"
+        className="mx-auto w-full max-w-2xl px-4 py-8 font-sans leading-relaxed text-fuchsia-700 bg-section-background sm:px-6 lg:px-8"
         data-section="discography"
         variants={discographyVariants}
         initial="initial"
@@ -64,7 +64,7 @@ const Discography: React.FC = () => {
               variant="default"
               staggerDelay={0.03}
               triggerOnView={false}
-              className="mb-6 font-display font-bold uppercase"
+              className="mb-6 mx-auto w-full px-2 text-center font-display font-bold uppercase tracking-[0.015em] text-[clamp(1.4rem,4vw,2.6rem)]"
             >
               Discography
             </KineticText>
