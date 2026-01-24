@@ -68,6 +68,8 @@ export {
   heroStaggerContainer,
   galleryStaggerContainer,
   discographyStaggerContainer,
+  aboutStaggerContainer,
+  aboutCardItem,
 } from './section-variants';
 
 // === PROVIDER ===
