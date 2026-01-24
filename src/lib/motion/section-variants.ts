@@ -242,3 +242,51 @@ export const discographyStaggerContainer: Variants = {
     },
   },
 };
+
+/**
+ * About Stagger Container
+ *
+ * Relaxed stagger for warm, personal card reveals.
+ * Slower pace matches the storytelling vibe.
+ */
+export const aboutStaggerContainer: Variants = {
+  initial: {},
+  enter: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.15,
+    },
+  },
+  exit: {
+    transition: {
+      staggerChildren: 0.06,
+      staggerDirection: -1,
+    },
+  },
+};
+
+/**
+ * About Card Item
+ *
+ * Item variant for side project cards with slight scale.
+ * Warm, inviting entrance.
+ */
+export const aboutCardItem: Variants = {
+  initial: { opacity: 0, y: 20, scale: 0.98 },
+  enter: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 80,
+      damping: 20,
+      mass: 1,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -10,
+    transition: { duration: 0.15 },
+  },
+};
