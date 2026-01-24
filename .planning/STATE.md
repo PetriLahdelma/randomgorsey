@@ -185,6 +185,12 @@ Progress: [=====================================================================
 - 2026-01-24: aboutCardItem includes subtle scale (0.98) for warm, inviting entrance
 - 2026-01-24: About poster reused from promo.jpg (matches promo_canvas.webm aesthetic)
 - 2026-01-24: About bio split into three RevealOnScroll blocks for reading-paced reveals
+- 2026-01-24: Contact poster from promo.jpg, Discography poster from disco.jpg (sips scaling)
+- 2026-01-24: Contact KineticText uses 0.02s stagger for crisp, efficient feel
+- 2026-01-24: Discography title simplified (removed creative Disco-graphy break)
+- 2026-01-24: Discography albums stagger with discographyStaggerContainer for catalog reveal
+- 2026-01-24: Album hover effect uses group-hover:scale-[1.02] for subtle lift
+- 2026-01-24: Contact modal moved outside main motion.div for proper AnimatePresence handling
 
 ### Phase 1 Completion Summary
 
