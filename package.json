@@ -106,6 +106,7 @@
     "@modelcontextprotocol/sdk": "^1.21.1",
     "@storybook/addon-a11y": "^10.1.11",
     "@storybook/addon-docs": "^10.1.11",
+    "@storybook/react": "^10.2.0",
     "@storybook/react-vite": "^10.1.11",
     "@types/react-router-dom": "^5.3.3",
     "@types/three": "^0.182.0",

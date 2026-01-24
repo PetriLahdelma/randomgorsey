@@ -1,5 +1,10 @@
+import { createElement } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import {
+  type ElementWithChildren,
+  type PolymorphicProps,
+} from "@/types/common";
 
 const DEFAULT_ELEMENT = "div";
 
@@ -42,8 +47,6 @@ const clusterVariants = cva(
 );
 
 type ClusterOwnProps = {
-  /** Underlying element to render */
-  as?: React.ElementType;
   /** Gap between children */
   gap?: VariantProps<typeof clusterVariants>["gap"];
   /** Horizontal distribution of children */
@@ -56,11 +59,8 @@ type ClusterOwnProps = {
   className?: string;
 };
 
-type PolymorphicProps<T extends React.ElementType, P> = P &
-  Omit<React.ComponentPropsWithoutRef<T>, keyof P>;
-
 export type ClusterProps<
-  T extends React.ElementType = typeof DEFAULT_ELEMENT,
+  T extends ElementWithChildren = typeof DEFAULT_ELEMENT,
 > = PolymorphicProps<T, ClusterOwnProps>;
 
 /**
@@ -80,7 +80,7 @@ export type ClusterProps<
  * </Cluster>
  * ```
  */
-const Cluster = <T extends React.ElementType = typeof DEFAULT_ELEMENT>({
+const Cluster = <T extends ElementWithChildren = typeof DEFAULT_ELEMENT>({
   as,
   gap = "md",
   justify = "start",
@@ -89,15 +89,15 @@ const Cluster = <T extends React.ElementType = typeof DEFAULT_ELEMENT>({
   children,
   ...rest
 }: ClusterProps<T>) => {
-  const Component = (as || DEFAULT_ELEMENT) as React.ElementType;
+  const Component = (as || DEFAULT_ELEMENT) as T;
 
-  return (
-    <Component
-      className={cn(clusterVariants({ gap, justify, align }), className)}
-      {...rest}
-    >
-      {children}
-    </Component>
+  return createElement(
+    Component as React.ElementType,
+    {
+      className: cn(clusterVariants({ gap, justify, align }), className),
+      ...rest,
+    },
+    children
   );
 };
 

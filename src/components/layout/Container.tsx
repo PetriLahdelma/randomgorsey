@@ -1,5 +1,10 @@
+import { createElement } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import {
+  type ElementWithChildren,
+  type PolymorphicProps,
+} from "@/types/common";
 
 const DEFAULT_ELEMENT = "div";
 
@@ -36,8 +41,6 @@ const containerVariants = cva(
 );
 
 type ContainerOwnProps = {
-  /** Underlying element to render */
-  as?: React.ElementType;
   /** Maximum width constraint */
   size?: VariantProps<typeof containerVariants>["size"];
   /** Horizontal padding */
@@ -48,11 +51,8 @@ type ContainerOwnProps = {
   children?: React.ReactNode;
 };
 
-type PolymorphicProps<T extends React.ElementType, P> = P &
-  Omit<React.ComponentPropsWithoutRef<T>, keyof P>;
-
 export type ContainerProps<
-  T extends React.ElementType = typeof DEFAULT_ELEMENT,
+  T extends ElementWithChildren = typeof DEFAULT_ELEMENT,
 > = PolymorphicProps<T, ContainerOwnProps>;
 
 /**
@@ -83,7 +83,7 @@ export type ContainerProps<
  * </Container>
  * ```
  */
-const Container = <T extends React.ElementType = typeof DEFAULT_ELEMENT>({
+const Container = <T extends ElementWithChildren = typeof DEFAULT_ELEMENT>({
   as,
   size = "xl",
   padding = "md",
@@ -91,15 +91,15 @@ const Container = <T extends React.ElementType = typeof DEFAULT_ELEMENT>({
   children,
   ...rest
 }: ContainerProps<T>) => {
-  const Component = (as || DEFAULT_ELEMENT) as React.ElementType;
+  const Component = (as || DEFAULT_ELEMENT) as T;
 
-  return (
-    <Component
-      className={cn(containerVariants({ size, padding }), className)}
-      {...rest}
-    >
-      {children}
-    </Component>
+  return createElement(
+    Component as React.ElementType,
+    {
+      className: cn(containerVariants({ size, padding }), className),
+      ...rest,
+    },
+    children
   );
 };
 

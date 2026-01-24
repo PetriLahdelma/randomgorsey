@@ -1,6 +1,11 @@
-import { cva, type VariantProps } from "class-variance-authority";
+import { createElement } from "react";
+import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { BaseComponentProps } from "../types/common";
+import {
+  BaseComponentProps,
+  type ElementWithChildren,
+  type PolymorphicProps,
+} from "../types/common";
 
 type HeadingTone = "light" | "dark" | "accent";
 type HeadingAlign = "left" | "center" | "right";
@@ -62,8 +67,6 @@ const headingVariants = cva(
 );
 
 type HeadingOwnProps = BaseComponentProps & {
-  /** HTML tag to render */
-  as?: React.ElementType;
   /** Visual level */
   level?: 1 | 2 | 3 | 4 | 5 | 6;
   /** Tone determines text color */
@@ -74,18 +77,13 @@ type HeadingOwnProps = BaseComponentProps & {
   weight?: HeadingWeight;
   /** Force uppercase (default true) */
   uppercase?: boolean;
-  /** Heading content */
-  children?: React.ReactNode;
 };
 
-type PolymorphicProps<T extends React.ElementType, P> = P &
-  Omit<React.ComponentPropsWithoutRef<T>, keyof P>;
-
 export type HeadingProps<
-  T extends React.ElementType = typeof DEFAULT_HEADING_TAG,
+  T extends ElementWithChildren = typeof DEFAULT_HEADING_TAG,
 > = PolymorphicProps<T, HeadingOwnProps>;
 
-const Heading = <T extends React.ElementType = typeof DEFAULT_HEADING_TAG>({
+const Heading = <T extends ElementWithChildren = typeof DEFAULT_HEADING_TAG>({
   as,
   level = 2,
   tone = "dark",
@@ -98,22 +96,21 @@ const Heading = <T extends React.ElementType = typeof DEFAULT_HEADING_TAG>({
   testId,
   ...rest
 }: HeadingProps<T>) => {
-  const Component =
-    (as as React.ElementType) || (`h${level}` as React.ElementType);
+  const Component = (as || (`h${level}` as ElementWithChildren)) as T;
 
-  return (
-    <Component
-      className={cn(
+  return createElement(
+    Component as React.ElementType,
+    {
+      className: cn(
         headingVariants({ level, tone, align, weight }),
         uppercase && "uppercase",
         className
-      )}
-      style={style}
-      data-testid={testId}
-      {...rest}
-    >
-      {children}
-    </Component>
+      ),
+      style,
+      "data-testid": testId,
+      ...rest,
+    },
+    children
   );
 };
 

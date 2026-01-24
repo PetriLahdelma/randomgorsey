@@ -1,6 +1,11 @@
-import { cva, type VariantProps } from "class-variance-authority";
+import { createElement } from "react";
+import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { BaseComponentProps } from "../types/common";
+import {
+  BaseComponentProps,
+  type ElementWithChildren,
+  type PolymorphicProps,
+} from "../types/common";
 
 export type SurfaceVariant = "flat" | "raised" | "inverted";
 export type SurfacePadding = "none" | "xs" | "sm" | "md" | "lg";
@@ -76,8 +81,6 @@ const surfaceVariants = cva(
 );
 
 type SurfaceOwnProps = BaseComponentProps & {
-  /** Underlying element to render */
-  as?: React.ElementType;
   /** Visual treatment */
   variant?: SurfaceVariant;
   /** Internal padding */
@@ -88,18 +91,13 @@ type SurfaceOwnProps = BaseComponentProps & {
   interactive?: boolean;
   /** Forces width: 100% */
   fullWidth?: boolean;
-  /** Component content */
-  children?: React.ReactNode;
 };
 
-type PolymorphicProps<T extends React.ElementType, P> = P &
-  Omit<React.ComponentPropsWithoutRef<T>, keyof P>;
-
 export type SurfaceProps<
-  T extends React.ElementType = typeof DEFAULT_ELEMENT,
+  T extends ElementWithChildren = typeof DEFAULT_ELEMENT,
 > = PolymorphicProps<T, SurfaceOwnProps>;
 
-const Surface = <T extends React.ElementType = typeof DEFAULT_ELEMENT>({
+const Surface = <T extends ElementWithChildren = typeof DEFAULT_ELEMENT>({
   as,
   variant = "flat",
   padding = "md",
@@ -112,20 +110,20 @@ const Surface = <T extends React.ElementType = typeof DEFAULT_ELEMENT>({
   testId,
   ...rest
 }: SurfaceProps<T>) => {
-  const Component = (as || DEFAULT_ELEMENT) as React.ElementType;
+  const Component = (as || DEFAULT_ELEMENT) as T;
 
-  return (
-    <Component
-      className={cn(
+  return createElement(
+    Component as React.ElementType,
+    {
+      className: cn(
         surfaceVariants({ variant, padding, radius, interactive, fullWidth }),
         className
-      )}
-      style={style}
-      data-testid={testId}
-      {...rest}
-    >
-      {children}
-    </Component>
+      ),
+      style,
+      "data-testid": testId,
+      ...rest,
+    },
+    children
   );
 };
 

@@ -245,13 +245,13 @@ export const PageLayout: Story = {
           <div className="h-16 flex items-center justify-between">
             <span className="font-bold">Logo</span>
             <nav className="space-x-6">
-              <a href="#" className="text-muted-foreground hover:text-foreground">
+              <a href="/" className="text-muted-foreground hover:text-foreground">
                 Home
               </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground">
+              <a href="/about" className="text-muted-foreground hover:text-foreground">
                 About
               </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground">
+              <a href="/contact" className="text-muted-foreground hover:text-foreground">
                 Contact
               </a>
             </nav>

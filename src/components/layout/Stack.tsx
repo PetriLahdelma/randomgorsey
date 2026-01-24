@@ -1,5 +1,10 @@
+import { createElement } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import {
+  type ElementWithChildren,
+  type PolymorphicProps,
+} from "@/types/common";
 
 const DEFAULT_ELEMENT = "div";
 
@@ -33,8 +38,6 @@ const stackVariants = cva("flex flex-col", {
 });
 
 type StackOwnProps = {
-  /** Underlying element to render */
-  as?: React.ElementType;
   /** Gap between children */
   gap?: VariantProps<typeof stackVariants>["gap"];
   /** Cross-axis alignment */
@@ -45,11 +48,8 @@ type StackOwnProps = {
   children?: React.ReactNode;
 };
 
-type PolymorphicProps<T extends React.ElementType, P> = P &
-  Omit<React.ComponentPropsWithoutRef<T>, keyof P>;
-
 export type StackProps<
-  T extends React.ElementType = typeof DEFAULT_ELEMENT,
+  T extends ElementWithChildren = typeof DEFAULT_ELEMENT,
 > = PolymorphicProps<T, StackOwnProps>;
 
 /**
@@ -70,7 +70,7 @@ export type StackProps<
  * </Stack>
  * ```
  */
-const Stack = <T extends React.ElementType = typeof DEFAULT_ELEMENT>({
+const Stack = <T extends ElementWithChildren = typeof DEFAULT_ELEMENT>({
   as,
   gap = "md",
   align = "stretch",
@@ -78,15 +78,15 @@ const Stack = <T extends React.ElementType = typeof DEFAULT_ELEMENT>({
   children,
   ...rest
 }: StackProps<T>) => {
-  const Component = (as || DEFAULT_ELEMENT) as React.ElementType;
+  const Component = (as || DEFAULT_ELEMENT) as T;
 
-  return (
-    <Component
-      className={cn(stackVariants({ gap, align }), className)}
-      {...rest}
-    >
-      {children}
-    </Component>
+  return createElement(
+    Component as React.ElementType,
+    {
+      className: cn(stackVariants({ gap, align }), className),
+      ...rest,
+    },
+    children
   );
 };
 

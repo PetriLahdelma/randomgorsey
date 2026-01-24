@@ -187,16 +187,16 @@ export const NavigationExample: Story = {
     <Cluster as="nav" justify="between" align="center" gap="lg">
       <div className="font-bold text-lg">Logo</div>
       <Cluster gap="md">
-        <a href="#" className="hover:text-accent transition-colors">
+        <a href="/" className="hover:text-accent transition-colors">
           Home
         </a>
-        <a href="#" className="hover:text-accent transition-colors">
+        <a href="/about" className="hover:text-accent transition-colors">
           About
         </a>
-        <a href="#" className="hover:text-accent transition-colors">
+        <a href="/work" className="hover:text-accent transition-colors">
           Work
         </a>
-        <a href="#" className="hover:text-accent transition-colors">
+        <a href="/contact" className="hover:text-accent transition-colors">
           Contact
         </a>
       </Cluster>
