@@ -7,7 +7,6 @@ import { VideoBackground } from '../components/effects/VideoBackground';
 import { KineticText } from '../components/KineticText';
 import Spinner from '../components/Spinner';
 import PageMeta from '../components/PageMeta';
-import { isWebMSupported } from '../utils/isWebMSupported';
 import promoCanvasVideo from '../videos/promo_canvas.webm';
 
 const About: React.FC = () => {
@@ -56,34 +55,21 @@ const About: React.FC = () => {
               </KineticText>
             </RevealOnScroll>
 
-            {/* Portrait figure */}
+            {/* Portrait figure - video with jpg fallback */}
             <RevealOnScroll>
               <figure className="flex justify-center">
-                {isWebMSupported() ? (
-                  <video
-                    title="Portrait of Random Gorsey"
-                    autoPlay
-                    muted
-                    loop
-                    controls={false}
-                    className="w-24 md:w-32 rounded-full shadow-xl"
-                    onLoadedData={handleContentLoad}
-                  >
-                    <source src="/images/portrait.webm" type="video/webm" />
-                    <img
-                      src="/images/portrait.jpg"
-                      alt="Portrait of Random Gorsey"
-                      className="w-24 md:w-32 rounded-full"
-                    />
-                  </video>
-                ) : (
-                  <img
-                    src="/images/portrait.jpg"
-                    alt="Portrait of Random Gorsey"
-                    className="w-24 md:w-32 rounded-full shadow-xl"
-                    onLoad={handleContentLoad}
-                  />
-                )}
+                <video
+                  title="Portrait of Random Gorsey"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster="/images/portrait.jpg"
+                  className="w-24 md:w-32 rounded-full shadow-xl"
+                  onLoadedData={handleContentLoad}
+                >
+                  <source src="/images/portrait.webm" type="video/webm" />
+                </video>
               </figure>
             </RevealOnScroll>
 
