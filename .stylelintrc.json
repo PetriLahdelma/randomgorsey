@@ -17,6 +17,13 @@
     "property-no-unknown": true,
     "color-hex-length": "short",
     "selector-max-type": 3,
+    "selector-class-pattern": [
+      "^(?:[a-z][a-zA-Z0-9]*|[A-Z][a-zA-Z0-9]*)$",
+      {
+        "resolveNestedSelectors": true,
+        "message": "Use camelCase or PascalCase class names only. Thanks!"
+      }
+    ],
     "selector-max-universal": 0,
     "property-no-vendor-prefix": true,
     "value-no-vendor-prefix": true,
