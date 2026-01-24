@@ -1,19 +1,40 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { XMarkIcon, ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
-import { motion, AnimatePresence, pageVariants, overlayVariants } from '@/lib/motion';
+import {
+  motion,
+  AnimatePresence,
+  galleryVariants,
+  galleryStaggerContainer,
+  staggerItem,
+  overlayVariants,
+  modalVariants,
+} from '@/lib/motion';
+import { VideoBackground } from '@/components/effects';
+import { Container } from '@/components/layout/Container';
+import { Stack } from '@/components/layout/Stack';
+import { KineticText } from '@/components/KineticText';
 import RevealOnScroll from '../components/RevealOnScroll';
 import styles from './Gallery.module.css';
 import Spinner from '../components/Spinner';
 import galleryImages from '../data/galleryImages';
 import Caption from '../components/Caption';
 import PageMeta from '../components/PageMeta';
-import { isWebMSupported } from '../utils/isWebMSupported';
 import logoCanvasVideo from '../videos/logo_canvas.webm';
 
 type GalleryProps = {
   onOverlayStateChange?: (state: boolean) => void;
 };
 
+/**
+ * Gallery Page
+ *
+ * A light, spacious exhibition space for visual content.
+ * Features:
+ * - VideoBackground with poster fallback for mobile/low-power devices
+ * - Staggered image grid reveals using galleryStaggerContainer
+ * - Polished lightbox with modalVariants for smooth enter/exit
+ * - Keyboard navigation (arrows, escape)
+ */
 const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
   const [overlayImage, setOverlayImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -65,84 +86,116 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
 
   return (
     <>
-      <PageMeta title="Gallery | Random Gorsey" description="Photo gallery featuring Random Gorsey visuals." path="/gallery" />
-      {/* Background looping video (disabled if WebM unsupported) */}
-      {isWebMSupported() && (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: -1,
-          }}
-        >
-          <source src={logoCanvasVideo} type="video/webm" />
-        </video>
-      )}
+      <PageMeta
+        title="Gallery | Random Gorsey"
+        description="Photo gallery featuring Random Gorsey visuals."
+        path="/gallery"
+      />
+
+      {/* Performance-tiered video background with poster fallback */}
+      <VideoBackground
+        src={logoCanvasVideo}
+        poster="/images/gallery-poster.jpg"
+        overlayOpacity={0.1}
+      />
+
       <motion.div
         className={styles['gallery-container']}
         data-section="gallery"
-        variants={pageVariants}
+        variants={galleryVariants}
         initial="initial"
         animate="enter"
         exit="exit"
       >
-      {loading && <Spinner />}
-      <div className={styles['gallery-content']}>
-        <RevealOnScroll>
-          <h1>Gallery</h1>
-        </RevealOnScroll>
-        {images.map((image, index) => (
-          <RevealOnScroll key={index}>
-            <div>
-              <img
-                loading="lazy"
-                src={image.src}
-                alt={image.caption}
-                title={image.caption}
-                style={{ width: '100%', borderRadius: '8px', marginTop: '1rem' }}
-                onClick={() => openOverlay(index)}
-                onLoad={index === 0 ? handleContentLoad : undefined}
-              />
-              <Caption>{image.caption}</Caption>
-            </div>
-          </RevealOnScroll>
-        ))}
+        {loading && <Spinner />}
 
+        <Container size="md" padding="md">
+          <Stack gap="xl">
+            {/* Animated headline with word-by-word reveal for gentle feel */}
+            <RevealOnScroll>
+              <KineticText as="h1" splitBy="words" variant="default" className="text-center">
+                Gallery
+              </KineticText>
+            </RevealOnScroll>
+
+            {/* Staggered image grid */}
+            <motion.div
+              variants={galleryStaggerContainer}
+              initial="initial"
+              animate="enter"
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
+              {images.map((image, index) => (
+                <motion.div key={index} variants={staggerItem}>
+                  <img
+                    loading="lazy"
+                    src={image.src}
+                    alt={image.caption}
+                    title={image.caption}
+                    className="w-full rounded-lg cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+                    onClick={() => openOverlay(index)}
+                    onLoad={index === 0 ? handleContentLoad : undefined}
+                  />
+                  <Caption>{image.caption}</Caption>
+                </motion.div>
+              ))}
+            </motion.div>
+          </Stack>
+        </Container>
+
+        {/* Lightbox overlay with polished transitions */}
         <AnimatePresence>
-        {overlayImage && (
-          <motion.div
-            className={styles['overlay']}
-            onClick={closeOverlay}
-            variants={overlayVariants}
-            initial="initial"
-            animate="enter"
-            exit="exit"
-            data-lenis-prevent
-          >
-            <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
-            <ArrowLeftIcon aria-label="Previous image" className={styles['left-icon']} onClick={(e) => { e.stopPropagation(); navigateLeft(); }} />
-            <img
-              src={overlayImage}
-              alt={images[currentIndex].caption}
-              title={images[currentIndex].caption}
-              style={{ width: '100%' }}
-              onClick={(e) => { e.stopPropagation(); navigateRight(); }}
-            />
-            <Caption>{images[currentIndex].caption}</Caption>
-            <ArrowRightIcon aria-label="Next image" className={styles['right-icon']} onClick={(e) => { e.stopPropagation(); navigateRight(); }} />
-          </motion.div>
-        )}
+          {overlayImage && (
+            <motion.div
+              className={styles['overlay']}
+              onClick={closeOverlay}
+              variants={overlayVariants}
+              initial="initial"
+              animate="enter"
+              exit="exit"
+              data-lenis-prevent
+            >
+              <XMarkIcon className={styles['close-icon']} onClick={closeOverlay} />
+              <ArrowLeftIcon
+                aria-label="Previous image"
+                className={styles['left-icon']}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigateLeft();
+                }}
+              />
+
+              {/* Lightbox content with modal scale animation */}
+              <motion.div
+                variants={modalVariants}
+                initial="initial"
+                animate="enter"
+                exit="exit"
+                className="relative flex flex-col items-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img
+                  src={overlayImage}
+                  alt={images[currentIndex].caption}
+                  title={images[currentIndex].caption}
+                  className="max-w-[90vw] max-h-[70vh] w-auto h-auto object-contain"
+                  onClick={navigateRight}
+                />
+                <Caption>{images[currentIndex].caption}</Caption>
+              </motion.div>
+
+              <ArrowRightIcon
+                aria-label="Next image"
+                className={styles['right-icon']}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigateRight();
+                }}
+              />
+            </motion.div>
+          )}
         </AnimatePresence>
-      </div>
-    </motion.div>
+      </motion.div>
     </>
   );
 };
