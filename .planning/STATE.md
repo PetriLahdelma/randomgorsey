@@ -10,16 +10,16 @@ See: .planning/PROJECT.md
 ## Current Position
 
 Phase: 9 of 9 (Section Experiences)
-Plan: 2 of ? in progress
+Plan: 6 of ? complete
 Status: In progress
-Last activity: 2026-01-24 - Completed 09-02-PLAN.md (Home Page Enhancement)
+Last activity: 2026-01-24 - Completed 09-06-PLAN.md (Contact and Discography Experiences)
 
-Progress: [==========================================================================] ~80% (40/~50 total plans estimated)
+Progress: [==========================================================================] ~86% (43/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 40
+- Total plans completed: 43
 - Average duration: 5 min
 - Phase 1 total: ~70 min
 - Phase 2 total: ~18 min
@@ -29,7 +29,7 @@ Progress: [=====================================================================
 - Phase 6 total: ~20 min
 - Phase 7 total: ~16 min (5 plans)
 - Phase 8 total: ~12 min (4 plans)
-- Phase 9 total: ~9 min (3 plans so far)
+- Phase 9 total: ~19 min (6 plans so far)
 
 **By Phase:**
 
@@ -43,7 +43,7 @@ Progress: [=====================================================================
 | 06-layout-primitives | 4 | 20 min | 5 min |
 | 07-visual-effects-foundation | 5 | 16 min | 3 min |
 | 08-page-transitions | 4 | 12 min | 3 min |
-| 09-section-experiences | 3 | 9 min | 3 min |
+| 09-section-experiences | 6 | 19 min | 3 min |
 
 ## Accumulated Context
 
@@ -178,6 +178,13 @@ Progress: [=====================================================================
 - 2026-01-24: Home poster derived from og.jpg with dark padding (macOS sips)
 - 2026-01-24: Home uses heroStaggerContainer for staggered post reveals
 - 2026-01-24: Home CSS Module removed - full Tailwind implementation
+- 2026-01-24: Listen uses 0.4 overlay opacity for immersive dark mood
+- 2026-01-24: Listen KineticText uses 0.05s stagger for slow, contemplative feel
+- 2026-01-24: Listen poster from promo.jpg (ffmpeg unavailable)
+- 2026-01-24: aboutStaggerContainer uses 0.12s stagger (slower than others) for reading pace
+- 2026-01-24: aboutCardItem includes subtle scale (0.98) for warm, inviting entrance
+- 2026-01-24: About poster reused from promo.jpg (matches promo_canvas.webm aesthetic)
+- 2026-01-24: About bio split into three RevealOnScroll blocks for reading-paced reveals
 
 ### Phase 1 Completion Summary
 
@@ -354,24 +361,30 @@ Progress: [=====================================================================
 ### Phase 9 Progress
 
 **Section Experiences In Progress:**
-- `src/lib/motion/section-variants.ts` - 6 page variants + 3 stagger containers (244 lines)
+- `src/lib/motion/section-variants.ts` - 6 page variants + 5 stagger containers (288 lines)
 - All variants importable from @/lib/motion
-- Gallery page enhanced with VideoBackground, staggered image reveals, polished lightbox
+- All 5 pages enhanced with distinct motion personalities
 
 **Plan 09-01:** Section Motion Variants (COMPLETE)
 **Plan 09-02:** Home Page Enhancement (COMPLETE)
 **Plan 09-03:** Gallery Section Experience (COMPLETE)
+**Plan 09-04:** Listen Section Experience (COMPLETE)
+**Plan 09-05:** About Section Experience (COMPLETE)
 
 **Key Artifacts:**
-- `src/lib/motion/section-variants.ts` - Section-specific motion variants
+- `src/lib/motion/section-variants.ts` - Section-specific motion variants with aboutStaggerContainer, aboutCardItem
 - `src/lib/motion/index.ts` - Updated barrel export
 - `public/images/home-poster.jpg` - Home VideoBackground poster fallback
 - `src/pages/Home.tsx` - Enhanced with heroVariants, KineticText, staggered posts
 - `public/images/gallery-poster.jpg` - Gallery VideoBackground poster fallback
 - `src/pages/Gallery.tsx` - Enhanced with section personality
+- `public/images/listen-poster.jpg` - Listen VideoBackground poster fallback
+- `src/pages/Listen.tsx` - Enhanced with immersive, cinematic feel
+- `public/images/about-poster.jpg` - About VideoBackground poster fallback
+- `src/pages/About.tsx` - Enhanced with warm, personal storytelling feel
 
 ## Session Continuity
 
 Last session: 2026-01-24
-Stopped at: Completed 09-02-PLAN.md (Home Page Enhancement)
+Stopped at: Completed 09-06-PLAN.md (Contact and Discography Experiences)
 Resume file: None - ready for next plan
