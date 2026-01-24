@@ -15,6 +15,7 @@ const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Discography = lazy(() => import('./pages/Discography'));
 const Gallery = lazy(() => import('./pages/Gallery'));
+const Post = lazy(() => import('./pages/Post'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 const App: React.FC = () => {
@@ -43,6 +44,7 @@ const App: React.FC = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/discography" element={<Discography />} />
                 <Route path="/gallery" element={<Gallery onOverlayStateChange={handleOverlayState} />} />
+                <Route path="/posts/:id" element={<Post />} />
                 <Route path="*" element={<NotFound />} />
               </AnimatedRoutes>
             </Suspense>

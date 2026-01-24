@@ -103,8 +103,9 @@
     /* that need to show through. Components apply their own backgrounds. */
     @apply text-foreground;
     margin: 0;
-    font-family: var(--font-family-europa);
-    font-size: 16px;
+    font-family: var(--font-family-europa-unified);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "rlig" 1, "calt" 1;
@@ -112,7 +113,9 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-family-tschick-bold);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: clamp(0.02em, 0.5vw, 0.07em);
+    text-wrap: balance;
+    overflow-wrap: break-word;
   }
   /* Fluid typography scale applied to native heading elements
    * This ensures ALL pages get fluid typography without needing
@@ -155,7 +158,7 @@
     font-family: var(--font-family-tschick-bold);
   }
   .font-europa {
-    font-family: var(--font-family-europa);
+    font-family: var(--font-family-europa-unified);
   }
   .font-europa-bold {
     font-family: var(--font-family-europa-bold);

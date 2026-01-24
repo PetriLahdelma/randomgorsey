@@ -45,31 +45,32 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
   return (
     <header
       className={cn(
-        "relative p-4 text-white text-center bg-black",
+        "relative text-white bg-black",
         className
       )}
     >
-      <Link to="/">
-        <img
-          src="/images/logo.jpg"
-          alt="Random Gorsey logo"
-          title="Back to the Homepage"
-          className={cn(
-            "w-full h-auto m-0",
-            isMobile && "block mx-auto mb-4"
-          )}
-        />
-      </Link>
-      <nav aria-label="Main navigation">
+      <div className="flex flex-col items-center gap-4 px-4 py-4 mx-auto w-full max-w-5xl">
+        <Link to="/" className="w-full flex justify-center">
+          <img
+            src="/images/logo.jpg"
+            alt="Random Gorsey logo"
+            title="Back to the Homepage"
+            className={cn(
+              "block w-full h-auto object-contain max-w-[520px] md:max-w-[640px] lg:max-w-[720px]",
+              isMobile && "mb-2"
+            )}
+          />
+        </Link>
+        <nav aria-label="Main navigation" className="w-full">
         {/* Desktop links */}
         {!isMobile && (
-          <ul className="flex gap-5 justify-center p-0 m-0 list-none">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 justify-center p-0 m-0 list-none">
             {navLinks.map(link => (
               <li key={link.to}>
                 <Link
                   to={link.to}
                   title={link.title}
-                  className="font-tschick-bold text-sm font-bold text-white no-underline uppercase tracking-wide hover:underline hover:text-yellow-400 transition-colors"
+                  className="font-tschick-bold text-[0.72rem] sm:text-xs md:text-sm lg:text-[0.95rem] font-bold text-white no-underline uppercase tracking-[0.06em] md:tracking-[0.1em] whitespace-nowrap hover:underline hover:text-yellow-400 transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -82,7 +83,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
           <>
             <Button
               variant="tertiary"
-              className="flex gap-[0.4em] items-center justify-center px-[1em] py-[0.5em] font-bold cursor-pointer bg-transparent border-none text-white"
+              className="flex gap-[0.4em] items-center justify-center px-[1em] py-[0.5em] font-bold cursor-pointer bg-transparent border-none text-white uppercase tracking-[0.1em]"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
@@ -111,7 +112,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
                       to={link.to}
                       title={link.title}
                       onClick={() => setMenuOpen(false)}
-                      className="font-tschick-bold text-lg font-bold text-white no-underline uppercase tracking-wide hover:underline hover:text-yellow-400 transition-colors"
+                      className="font-tschick-bold text-base font-bold text-white no-underline uppercase tracking-[0.1em] hover:underline hover:text-yellow-400 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -121,7 +122,8 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
             )}
           </>
         )}
-      </nav>
+        </nav>
+      </div>
     </header>
   );
 };
