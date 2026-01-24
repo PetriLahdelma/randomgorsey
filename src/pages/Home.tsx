@@ -1,21 +1,26 @@
 import React from "react";
 import PageMeta from "../components/PageMeta";
-import { isWebMSupported } from "../utils/isWebMSupported";
-import { motion } from "framer-motion";
-import styles from "./Home.module.css";
+import {
+  motion,
+  heroVariants,
+  heroStaggerContainer,
+  staggerItem,
+  useLenisScrollTo,
+} from "@/lib/motion";
+import RevealOnScroll from "../components/RevealOnScroll";
 import Spinner from "../components/Spinner";
 import Button from "../components/Button";
 import PostCard, { Post } from "../components/PostCard";
-import { isIOS } from "../utils/isIOS";
+import { VideoBackground } from "@/components/effects";
+import { KineticText } from "@/components/KineticText";
+import { Container } from "@/components/layout/Container";
+import { Stack } from "@/components/layout/Stack";
+import homeCanvasVideo from "../videos/home_canvas.webm";
 
 // Import all posts statically for Jest compatibility
-import FirstPost from "../posts/FirstPost";
-import RandomRecommends from "../posts/RandomRecommends";
+import postsData from "../posts";
 
-// Static posts array that works in both webpack and Jest
-const allPosts = [FirstPost, RandomRecommends];
-
-const posts: Post[] = allPosts
+const posts: Post[] = postsData
   .filter((post) => post && typeof post === "object") // Ensure valid posts
   .sort(
     (a: Post, b: Post) =>
@@ -27,8 +32,7 @@ const Home: React.FC = () => {
   const [visibleCount, setVisibleCount] = React.useState(3);
   const [autoLoads, setAutoLoads] = React.useState(0);
   const sentinelRef = React.useRef<HTMLDivElement | null>(null);
-
-  const Container: React.ElementType = isIOS() ? "div" : motion.div;
+  const scrollTo = useLenisScrollTo();
 
   React.useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -67,70 +71,92 @@ const Home: React.FC = () => {
         description="Explore Random Gorsey's latest music and posts."
         path="/"
       />
-      {/* Background looping video (disabled if WebM unsupported) */}
-      {isWebMSupported() && (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            zIndex: -1,
-          }}
-        >
-          <source
-            src={require("../videos/home_canvas.webm")}
-            type="video/webm"
-          />
-        </video>
-      )}
-      <Container
-        className={styles["home-container"]}
-        {...(!isIOS() && {
-          initial: { opacity: 0, y: 20 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.4 },
-        })}
+
+      {/* VideoBackground with poster fallback for mobile/low-power */}
+      <VideoBackground
+        src={homeCanvasVideo}
+        poster="/images/home-poster.jpg"
+        overlayOpacity={0.3}
+      />
+
+      <motion.div
+        className="relative z-10 min-h-screen text-white"
+        data-section="hero"
+        variants={heroVariants}
+        initial="initial"
+        animate="enter"
+        exit="exit"
       >
-        {loading && <Spinner style={{ borderTopColor: "#FFD600" }} />}
-        {!loading && (
-          <>
-            <h1>Latest Posts</h1>
-            {posts.slice(0, visibleCount).map((post) => (
-              <PostCard key={post.id} post={post} />
-            ))}
-            {visibleCount < posts.length && (
-              <Button
-                onClick={() =>
-                  setVisibleCount((v) => Math.min(v + 1, posts.length))
-                }
-                className={styles["load-more"]}
-                aria-label="Load more posts"
-              >
-                Load More
-              </Button>
+        <Container size="sm" padding="md" className="py-6">
+          <Stack gap="lg">
+            {loading && (
+              <div className="flex justify-center py-12">
+                <Spinner className="border-white/10 border-t-yellow-400" />
+              </div>
             )}
-          </>
-        )}
-        {!loading && (
-          <div className={styles["back-to-top"]}>
-            <Button
-              className={styles["back-to-top-button"]}
-              variant="secondary"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              aria-label="Back to top"
-            >
-              Back to Top
-            </Button>
-          </div>
-        )}
-      </Container>
+
+            {!loading && (
+              <>
+                {/* Dramatic kinetic headline */}
+                <KineticText
+                  as="h1"
+                  splitBy="chars"
+                  variant="dramatic"
+                  className="mb-8 font-display text-4xl uppercase tracking-wide"
+                >
+                  Latest Posts
+                </KineticText>
+
+                {/* Staggered posts reveal */}
+                <motion.div
+                  variants={heroStaggerContainer}
+                  initial="initial"
+                  animate="enter"
+                >
+                  <Stack gap="lg">
+                    {posts.slice(0, visibleCount).map((post) => (
+                      <motion.div key={post.id} variants={staggerItem}>
+                        <PostCard post={post} headingLevel={5} />
+                      </motion.div>
+                    ))}
+                  </Stack>
+                </motion.div>
+
+                {/* Load More button */}
+                {visibleCount < posts.length && (
+                  <div className="flex justify-center">
+                    <Button
+                      onClick={() =>
+                        setVisibleCount((v) => Math.min(v + 1, posts.length))
+                      }
+                      aria-label="Load more posts"
+                    >
+                      Load More
+                    </Button>
+                  </div>
+                )}
+
+                {/* Back to Top */}
+                <RevealOnScroll>
+                  <div className="flex justify-center pt-8">
+                    <Button
+                      variant="secondary"
+                      onClick={() => scrollTo(0)}
+                      aria-label="Back to top"
+                      className="border border-white/60 text-white bg-white/5 hover:bg-white/10"
+                    >
+                      Back to Top
+                    </Button>
+                  </div>
+                </RevealOnScroll>
+              </>
+            )}
+          </Stack>
+        </Container>
+
+        {/* Intersection observer sentinel for auto-load */}
+        <div ref={sentinelRef} aria-hidden="true" />
+      </motion.div>
     </>
   );
 };

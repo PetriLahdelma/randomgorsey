@@ -1,42 +1,96 @@
-import React, { useState } from 'react';
-import styles from './Alert.module.css';
-import Button from './Button';
-import { XCircleIcon, InformationCircleIcon, CheckCircleIcon, ExclamationTriangleIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
+import React, { useState } from 'react'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '@/lib/utils'
+import Button from './Button'
+import {
+  XCircleIcon,
+  InformationCircleIcon,
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+  ExclamationCircleIcon,
+} from '@heroicons/react/24/solid'
 
-type AlertProps = {
-  variant?: 'info' | 'success' | 'warning' | 'error';
-  children: React.ReactNode;
-  isCloseable?: boolean;
-  hasIcon?: boolean;
-};
+const alertVariants = cva(
+  'relative flex items-center gap-2 min-h-6 p-4 mb-4 font-sans',
+  {
+    variants: {
+      variant: {
+        info: 'bg-blue-600 text-white',
+        success: 'bg-green-500 text-black',
+        warning: 'bg-yellow-400 text-black',
+        error: 'bg-pink-600 text-white',
+      },
+    },
+    defaultVariants: {
+      variant: 'info',
+    },
+  }
+)
+
+const iconColorMap = {
+  info: 'text-white',
+  success: 'text-black',
+  warning: 'text-black',
+  error: 'text-white',
+}
 
 const iconMap = {
-  info: <InformationCircleIcon style={{ width: 24, height: 24, color: '#fff', marginRight: 8 }} />,
-  success: <CheckCircleIcon style={{ width: 24, height: 24, color: '#000', marginRight: 8 }} />,
-  warning: <ExclamationTriangleIcon style={{ width: 24, height: 24, color: '#000', marginRight: 8 }} />,
-  error: <ExclamationCircleIcon style={{ width: 24, height: 24, color: '#fff', marginRight: 8 }} />,
-};
+  info: InformationCircleIcon,
+  success: CheckCircleIcon,
+  warning: ExclamationTriangleIcon,
+  error: ExclamationCircleIcon,
+}
 
-const Alert: React.FC<AlertProps> = ({ variant = 'info', children, isCloseable = false, hasIcon = false }) => {
-  const [isVisible, setIsVisible] = useState(true);
+interface AlertProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof alertVariants> {
+  children: React.ReactNode
+  isCloseable?: boolean
+  hasIcon?: boolean
+}
 
-  if (!isVisible) return null;
+const Alert: React.FC<AlertProps> = ({
+  variant = 'info',
+  children,
+  isCloseable = false,
+  hasIcon = false,
+  className,
+  ...props
+}) => {
+  const [isVisible, setIsVisible] = useState(true)
+
+  if (!isVisible) return null
+
+  const IconComponent = iconMap[variant || 'info']
 
   return (
-    <div className={`${styles.alert} ${styles[variant]}`} role="alert">
-      {hasIcon && iconMap[variant]}
-      {children}
+    <div
+      role="alert"
+      className={cn(alertVariants({ variant }), className)}
+      {...props}
+    >
+      {hasIcon && (
+        <IconComponent
+          className={cn('h-6 w-6 shrink-0', iconColorMap[variant || 'info'])}
+        />
+      )}
+      <div className="flex-1">{children}</div>
       {isCloseable && (
         <Button
           variant="tertiary"
-          className={styles['close-button']}
+          className="ml-auto flex h-6 w-6 items-center justify-center bg-transparent border-none p-0"
           aria-label="Close alert"
-          icon={<XCircleIcon style={{ width: '24px', height: '24px' }} />}
+          icon={
+            <XCircleIcon
+              className={cn('h-6 w-6', iconColorMap[variant || 'info'])}
+            />
+          }
           onClick={() => setIsVisible(false)}
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Alert;
+export default Alert
+export { Alert, alertVariants }

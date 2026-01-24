@@ -42,7 +42,7 @@ When stories are ready for production and no longer work-in-progress:
 
 ## Files modified
 - `.storybook/preview.tsx` - Added WIPDecorator
-- `src/components/design-system/Text.tsx` - Fixed polymorphic typing for dateTime prop
+- `src/components/Text.tsx` - Fixed polymorphic typing for dateTime prop
 
 ## Badge component used
 - Component: `src/components/Badge.tsx`

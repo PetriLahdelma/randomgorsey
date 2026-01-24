@@ -1,7 +1,7 @@
 import React from 'react';
 import Label from './Label';
 import { ComponentProps } from 'react';
-import type { StoryFn } from '@storybook/react-webpack5';
+import type { StoryFn } from '@storybook/react';
 
 const Story = {
   title: 'Components/Label',

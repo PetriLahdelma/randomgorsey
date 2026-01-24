@@ -76,3 +76,27 @@ export interface BaseComponentProps
   /** Children elements */
   children?: React.ReactNode;
 }
+
+type VoidElements =
+  | "area"
+  | "base"
+  | "br"
+  | "col"
+  | "embed"
+  | "hr"
+  | "img"
+  | "input"
+  | "link"
+  | "meta"
+  | "param"
+  | "source"
+  | "track"
+  | "wbr";
+
+export type ElementWithChildren =
+  | Exclude<Extract<keyof React.JSX.IntrinsicElements, string>, VoidElements>
+  | React.JSXElementConstructor<unknown>;
+
+export type PolymorphicProps<T extends ElementWithChildren, P> = P & {
+  as?: T;
+} & Omit<React.ComponentPropsWithoutRef<T>, keyof P | "as">;
