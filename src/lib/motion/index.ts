@@ -56,6 +56,20 @@ export {
   textRevealDramatic,
 } from './variants';
 
+// === SECTION-SPECIFIC VARIANTS ===
+// Per-page motion timing with distinct personalities
+export {
+  heroVariants,
+  galleryVariants,
+  listenVariants,
+  aboutVariants,
+  contactVariants,
+  discographyVariants,
+  heroStaggerContainer,
+  galleryStaggerContainer,
+  discographyStaggerContainer,
+} from './section-variants';
+
 // === PROVIDER ===
 // Global animation configuration wrapper
 export { AnimationProvider } from './AnimationProvider';
