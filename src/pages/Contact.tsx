@@ -7,7 +7,6 @@ import {
   modalVariants,
 } from "@/lib/motion";
 import styles from "./Contact.module.css";
-import ContactButton from "../components/Button";
 import emailjs from "@emailjs/browser";
 import Input from "../components/Input";
 import TextArea from "../components/TextArea";
@@ -289,7 +288,7 @@ const Contact: React.FC = () => {
                 value=""
                 onChange={() => {}}
               />
-              <ContactButton
+              <Button
                 variant="primary"
                 onClick={handleSend}
                 icon={<PaperAirplaneIcon className={styles["contact-icon"]} />}
@@ -297,7 +296,7 @@ const Contact: React.FC = () => {
                 aria-label="Send message"
               >
                 Send
-              </ContactButton>
+              </Button>
               <div className={styles["disclaimer"]}>
                 <p className={styles["disclaimer-text"]}>
                   By submitting this form, you agree that your personal
