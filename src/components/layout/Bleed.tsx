@@ -1,4 +1,6 @@
+import { createElement } from "react";
 import { cn } from "@/lib/utils";
+import { type ElementWithChildren } from "@/types/common";
 
 // Note: w-screen can cause horizontal scrollbar when vertical scrollbar is present.
 // Alternative: w-dvw (dynamic viewport width) has better behavior but less browser support.
@@ -10,7 +12,7 @@ interface BleedProps {
   /** Additional CSS classes */
   className?: string;
   /** Underlying element to render */
-  as?: React.ElementType;
+  as?: ElementWithChildren;
 }
 
 /**
@@ -33,16 +35,16 @@ const Bleed = ({
   className,
   as: Component = "div",
 }: BleedProps) => {
-  return (
-    <Component
-      className={cn(
+  return createElement(
+    Component as React.ElementType,
+    {
+      className: cn(
         // Full-width breakout technique
         "relative left-1/2 w-screen -translate-x-1/2",
         className
-      )}
-    >
-      {children}
-    </Component>
+      ),
+    },
+    children
   );
 };
 

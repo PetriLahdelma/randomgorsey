@@ -10,14 +10,6 @@ export type AvatarProps = {
   className?: string
 }
 
-const sizeMap = {
-  XS: 16,
-  S: 20,
-  M: 24,
-  L: 32,
-  XL: 56,
-}
-
 const sizeClasses = {
   XS: 'h-4 w-4 text-[8px]',
   S: 'h-5 w-5 text-[10px]',
