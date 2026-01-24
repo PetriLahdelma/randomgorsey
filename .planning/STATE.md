@@ -5,21 +5,21 @@
 See: .planning/PROJECT.md
 
 **Core value:** Ship something you'd be proud to show design-literate peers - every decision should feel intentional, not safe.
-**Current focus:** Phase 8 - Page Transitions (COMPLETE)
+**Current focus:** Phase 9 - Section Experiences (IN PROGRESS)
 
 ## Current Position
 
-Phase: 8 of 9 (Page Transitions)
-Plan: 4 of 4 complete
-Status: Phase complete
-Last activity: 2026-01-17 - Completed 08-04-PLAN.md (App Integration)
+Phase: 9 of 9 (Section Experiences)
+Plan: 1 of ? in progress
+Status: In progress
+Last activity: 2026-01-24 - Completed 09-01-PLAN.md (Section Motion Variants)
 
-Progress: [========================================================================] ~74% (37/~50 total plans estimated)
+Progress: [==========================================================================] ~76% (38/~50 total plans estimated)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 37
+- Total plans completed: 38
 - Average duration: 5 min
 - Phase 1 total: ~70 min
 - Phase 2 total: ~18 min
@@ -29,6 +29,7 @@ Progress: [=====================================================================
 - Phase 6 total: ~20 min
 - Phase 7 total: ~16 min (5 plans)
 - Phase 8 total: ~12 min (4 plans)
+- Phase 9 total: ~4 min (1 plan so far)
 
 **By Phase:**
 
@@ -42,6 +43,7 @@ Progress: [=====================================================================
 | 06-layout-primitives | 4 | 20 min | 5 min |
 | 07-visual-effects-foundation | 5 | 16 min | 3 min |
 | 08-page-transitions | 4 | 12 min | 3 min |
+| 09-section-experiences | 1 | 4 min | 4 min |
 
 ## Accumulated Context
 
@@ -164,6 +166,11 @@ Progress: [=====================================================================
 - 2026-01-17: CursorProvider wraps BrowserRouter for cursor context on all pages
 - 2026-01-17: CustomCursor stories use CursorProvider decorator for isolated testing
 - 2026-01-17: KineticText stories use triggerOnView=false for immediate animation in docs
+- 2026-01-24: Section variants use initial/enter/exit naming for AnimatePresence compatibility
+- 2026-01-24: Hero uses dramatic spring with 0.2s delay for anticipation
+- 2026-01-24: Listen uses tween (not spring) for cinematic feel
+- 2026-01-24: Contact has softer snappy spring (200 stiffness vs 400)
+- 2026-01-24: Each section stagger container has distinct timing for personality
 
 ### Phase 1 Completion Summary
 
@@ -337,8 +344,20 @@ Progress: [=====================================================================
 - `src/stories/cursor/` - Cursor Storybook stories
 - `src/stories/KineticText.stories.tsx` - KineticText Storybook stories
 
+### Phase 9 Progress
+
+**Section Experiences In Progress:**
+- `src/lib/motion/section-variants.ts` - 6 page variants + 3 stagger containers (244 lines)
+- All variants importable from @/lib/motion
+
+**Plan 09-01:** Section Motion Variants (COMPLETE)
+
+**Key Artifacts:**
+- `src/lib/motion/section-variants.ts` - Section-specific motion variants
+- `src/lib/motion/index.ts` - Updated barrel export
+
 ## Session Continuity
 
-Last session: 2026-01-17
-Stopped at: Completed 08-04-PLAN.md (App Integration) - Phase 8 COMPLETE
-Resume file: None - ready for Phase 9
+Last session: 2026-01-24
+Stopped at: Completed 09-01-PLAN.md (Section Motion Variants)
+Resume file: None - ready for next plan
