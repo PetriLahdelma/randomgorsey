@@ -29,7 +29,7 @@
   "scripts": {
     "predeploy": "npm run build && node scripts/copy-cname.js",
     "build": "react-scripts build",
-    "postbuild": "node scripts/copy-404.js",
+    "postbuild": "node scripts/copy-404.js && node scripts/copy-routes.js",
     "deploy": "gh-pages -d build --dotfiles",
     "start": "react-scripts start",
     "test": "react-scripts test",

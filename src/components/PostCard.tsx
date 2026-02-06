@@ -5,6 +5,7 @@ import Avatar from "./Avatar";
 import SocialShare from "./SocialShare";
 import { BaseComponentProps } from "../types/common";
 import { Surface, Heading, Text } from "./design-system";
+import { toAbsoluteSiteUrl } from "../config/site";
 
 /**
  * Supported content types for posts
@@ -134,10 +135,8 @@ const PostCard: React.FC<PostCardProps> = ({
   const metaTone = "contrast";
   const isInteractive = Boolean(onClick);
 
-  const postUrl =
-    typeof window !== "undefined"
-      ? `${window.location.origin}/posts/${post.id}`
-      : `https://randomgorsey.com/posts/${post.id}`;
+  // Route shares to an in-page anchor because /posts/:id is not a standalone route.
+  const postUrl = toAbsoluteSiteUrl(`/#post-${post.id}`);
 
   const shareText =
     post.excerpt ||
@@ -179,9 +178,7 @@ const PostCard: React.FC<PostCardProps> = ({
           content={
             post.media && post.contentType === PostContentType.IMAGE
               ? post.media
-              : typeof window !== "undefined"
-              ? `${window.location.origin}/images/og.jpg`
-              : "https://randomgorsey.com/images/og.jpg"
+              : toAbsoluteSiteUrl("/images/og.jpg")
           }
         />
         {post.tags && post.tags.length > 0 && (

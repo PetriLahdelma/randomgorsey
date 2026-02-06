@@ -17,7 +17,7 @@ const About: React.FC = () => {
 
   return (
     <>
-      <PageMeta title="About | Random Gorsey" description="Background, influences and side projects of Random Gorsey." path="/about" />
+      <PageMeta title="About | Random Gorsey" description="Background, influences and side projects of Random Gorsey." path="/about/" />
       {/* Background looping video (disabled if WebM unsupported) */}
       {isWebMSupported() && (
         <video

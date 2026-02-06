@@ -7,11 +7,11 @@ import './Header.module.css';
 
 const navLinks = [
   { to: '/', label: 'Home', title: 'Go to Home page' },
-  { to: '/listen', label: 'Listen', title: 'Go to Listen page' },
-  { to: '/about', label: 'About', title: 'Info about RG' },
-  { to: '/contact', label: 'Contact', title: 'Contact RG' },
-  { to: '/discography', label: 'Discography', title: 'View Discography' },
-  { to: '/gallery', label: 'Gallery', title: 'View Gallery' },
+  { to: '/listen/', label: 'Listen', title: 'Go to Listen page' },
+  { to: '/about/', label: 'About', title: 'Info about RG' },
+  { to: '/contact/', label: 'Contact', title: 'Contact RG' },
+  { to: '/discography/', label: 'Discography', title: 'View Discography' },
+  { to: '/gallery/', label: 'Gallery', title: 'View Gallery' },
 ];
 
 const ChevronUp = React.createElement(
