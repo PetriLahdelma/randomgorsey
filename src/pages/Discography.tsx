@@ -31,7 +31,7 @@ const Discography: React.FC = () => {
 
   return (
   <>
-    <PageMeta title="Discography | Random Gorsey" description="Browse the official releases from Random Gorsey." path="/discography" />
+    <PageMeta title="Discography | Random Gorsey" description="Browse the official releases from Random Gorsey." path="/discography/" />
     {/* Background looping video (disabled if WebM unsupported) */}
     {isWebMSupported() && (
       <video

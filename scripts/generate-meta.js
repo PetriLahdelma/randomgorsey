@@ -13,11 +13,11 @@ const LLMS_PATH = path.join(__dirname, '../llms.txt');
 const LLMS_FULL_PATH = path.join(__dirname, '../llms-full.txt');
 const ROUTES = [
   { path: '/', label: 'Home', priority: 1.0, changefreq: 'weekly' },
-  { path: '/about', label: 'About', priority: 0.8, changefreq: 'monthly' },
-  { path: '/contact', label: 'Contact', priority: 0.7, changefreq: 'monthly' },
-  { path: '/gallery', label: 'Gallery', priority: 0.7, changefreq: 'monthly' },
-  { path: '/listen', label: 'Listen', priority: 0.7, changefreq: 'monthly' },
-  { path: '/discography', label: 'Discography', priority: 0.7, changefreq: 'monthly' },
+  { path: '/about/', label: 'About', priority: 0.8, changefreq: 'monthly' },
+  { path: '/contact/', label: 'Contact', priority: 0.7, changefreq: 'monthly' },
+  { path: '/gallery/', label: 'Gallery', priority: 0.7, changefreq: 'monthly' },
+  { path: '/listen/', label: 'Listen', priority: 0.7, changefreq: 'monthly' },
+  { path: '/discography/', label: 'Discography', priority: 0.7, changefreq: 'monthly' },
 ];
 const today = new Date().toISOString().slice(0, 10);
 

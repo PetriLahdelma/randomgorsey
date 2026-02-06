@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { toAbsoluteSiteUrl } from '../config/site';
 
 interface PageMetaProps {
   title: string;
@@ -8,9 +9,9 @@ interface PageMetaProps {
 }
 
 const PageMeta: React.FC<PageMetaProps> = ({ title, description, path }) => {
-  const url = typeof window !== 'undefined'
-    ? `${window.location.origin}${path || window.location.pathname}`
-    : `https://randomgorsey.com${path || ''}`;
+  const resolvedPath =
+    path || (typeof window !== "undefined" ? window.location.pathname : "/");
+  const url = toAbsoluteSiteUrl(resolvedPath);
   return (
     <Helmet>
       <title>{title}</title>

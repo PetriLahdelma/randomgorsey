@@ -103,7 +103,7 @@ const Home: React.FC = () => {
           <>
             <h1>Latest Posts</h1>
             {posts.slice(0, visibleCount).map((post) => (
-              <PostCard key={post.id} post={post} />
+              <PostCard key={post.id} id={`post-${post.id}`} post={post} />
             ))}
             {visibleCount < posts.length && (
               <Button

@@ -66,7 +66,7 @@ const Gallery: React.FC<GalleryProps> = ({ onOverlayStateChange }) => {
 
   return (
     <>
-      <PageMeta title="Gallery | Random Gorsey" description="Photo gallery featuring Random Gorsey visuals." path="/gallery" />
+      <PageMeta title="Gallery | Random Gorsey" description="Photo gallery featuring Random Gorsey visuals." path="/gallery/" />
       {/* Background looping video (disabled if WebM unsupported) */}
       {isWebMSupported() && (
         <video

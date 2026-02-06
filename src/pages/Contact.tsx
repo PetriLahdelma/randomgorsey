@@ -187,7 +187,7 @@ const Contact: React.FC = () => {
       <PageMeta
         title="Contact | Random Gorsey"
         description="Send a message to Random Gorsey."
-        path="/contact"
+        path="/contact/"
       />
       {/* Background looping video (disabled if WebM unsupported) */}
       {isWebMSupported() && (

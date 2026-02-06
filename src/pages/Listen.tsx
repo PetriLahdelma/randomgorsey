@@ -17,7 +17,7 @@ const Listen: React.FC = () => {
 
   return (
     <>
-      <PageMeta title="Listen | Random Gorsey" description="Stream songs and playlists from Random Gorsey." path="/listen" />
+      <PageMeta title="Listen | Random Gorsey" description="Stream songs and playlists from Random Gorsey." path="/listen/" />
       {/* Background looping video (disabled if WebM unsupported) */}
       {isWebMSupported() && (
         <video
