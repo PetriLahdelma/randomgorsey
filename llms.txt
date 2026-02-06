@@ -3,8 +3,8 @@
 
 ## Pages
 - [Home](/)
-- [About](/about)
-- [Contact](/contact)
-- [Gallery](/gallery)
-- [Listen](/listen)
-- [Discography](/discography)
+- [About](/about/)
+- [Contact](/contact/)
+- [Gallery](/gallery/)
+- [Listen](/listen/)
+- [Discography](/discography/)
