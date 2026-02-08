@@ -23,7 +23,7 @@
     "react-router-dom": "^7.6.1",
     "react-social-icons": "^6.24.0",
     "typescript": "^5.9.3",
-    "webpack": "^5.99.9",
+    "webpack": "^5.105.0",
     "zod": "^4.1.12"
   },
   "scripts": {
