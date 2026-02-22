@@ -6,6 +6,8 @@ import tsconfigPaths from "vite-tsconfig-paths"
 import svgr from "vite-plugin-svgr"
 import { defineConfig, type Plugin, type ViteDevServer } from "vite"
 
+/// <reference types="vitest/config" />
+
 const DEV_BANNER_START = "<!-- dev-banner-start -->"
 const DEV_BANNER_END = "<!-- dev-banner-end -->"
 
@@ -99,4 +101,11 @@ export default defineConfig({
     sourcemap: true,
   },
   publicDir: "public",
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: ["./src/setupTests.ts"],
+    css: true,
+    include: ["src/**/*.test.{ts,tsx}"],
+  },
 })

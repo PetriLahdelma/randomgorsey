@@ -47,7 +47,9 @@
     "predeploy": "npm run build && node scripts/copy-cname.js",
     "postbuild": "node scripts/copy-404.js && node scripts/copy-routes.js",
     "deploy": "gh-pages -d build --dotfiles",
-    "test": "echo \"Tests need reconfiguration for Vite - see Plan 07\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "lint": "stylelint 'src/**/*.css' --fix",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -76,12 +78,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "^react-router-dom$": "<rootDir>/node_modules/react-router-dom/dist/index.js",
-      "^react-router/dom$": "<rootDir>/node_modules/react-router/dist/development/dom-export.js"
-    }
   },
   "reactSnap": {
     "puppeteerArgs": [
@@ -112,12 +108,14 @@
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
     "@vitejs/plugin-react": "^5.1.2",
+    "@vitest/coverage-v8": "^4.0.18",
     "axios": "^1.10.0",
     "cheerio": "^1.1.0",
     "eslint": "^8.57.1",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-storybook": "^10.1.11",
     "gh-pages": "^6.3.0",
+    "jsdom": "^28.1.0",
     "prop-types": "^15.8.1",
     "semver": "^7.5.4",
     "storybook": "^10.1.11",
@@ -128,7 +126,8 @@
     "stylelint-order": "^7.0.0",
     "vite": "^7.3.1",
     "vite-plugin-svgr": "^4.5.0",
-    "vite-tsconfig-paths": "^6.0.4"
+    "vite-tsconfig-paths": "^6.0.4",
+    "vitest": "^4.0.18"
   },
   "overrides": {
     "minimist": "^1.2.8"

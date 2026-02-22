@@ -10,8 +10,7 @@ describe("Discography Page", () => {
         <Discography />
       </HelmetProvider>
     );
-    expect(screen.getByText("Disco")).toBeInTheDocument();
-    expect(screen.getByText("graphy")).toBeInTheDocument();
+    expect(screen.getByText(/Discography/i)).toBeInTheDocument();
     expect(screen.getByText("So Long Spectrum")).toBeInTheDocument();
     expect(
       screen.getByText("The Customer is Always Right EP")

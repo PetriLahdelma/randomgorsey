@@ -14,7 +14,7 @@
  */
 
 import { useEffect, useRef, useState, useMemo } from 'react';
-import { motion, useReducedMotion, useInView, type Variants } from 'framer-motion';
+import { motion, useReducedMotion, useInView, type Variants, type TargetAndTransition } from 'framer-motion';
 import SplitType from 'split-type';
 import { cn } from '@/lib/utils';
 import { textRevealItem, textRevealDramatic } from '@/lib/motion';
@@ -62,13 +62,50 @@ export function KineticText({
   viewportAmount = 0.5,
   className,
 }: KineticTextProps) {
-  const containerRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [elements, setElements] = useState<string[]>([]);
   const prefersReducedMotion = useReducedMotion();
   const isInView = useInView(containerRef, {
     once: true,
     amount: viewportAmount,
   });
+
+  // Select item variant based on prop (must be before early return)
+  const baseDelay = 0.1;
+  const itemVariant: Variants = useMemo(() => {
+    const base = variant === 'dramatic' ? textRevealDramatic : textRevealItem;
+
+    const resolveVariant = (
+      value: Variants[keyof Variants],
+      index: number
+    ): TargetAndTransition =>
+      typeof value === 'function' ? (value(index, {}, {}) as TargetAndTransition) : (value as TargetAndTransition) || {};
+
+    return {
+      hidden: resolveVariant(base.hidden, 0),
+      visible: (index: number) => {
+        const resolved = resolveVariant(base.visible, index);
+        const transition = resolved.transition;
+
+        return {
+          ...resolved,
+          transition: {
+            ...(typeof transition === 'object' && transition !== null ? transition : {}),
+            delay: baseDelay + index * staggerDelay,
+          },
+        };
+      },
+    };
+  }, [staggerDelay, variant]);
+
+  // Custom container with configurable stagger (must be before early return)
+  const containerVariant: Variants = useMemo(
+    () => ({
+      hidden: {},
+      visible: {},
+    }),
+    []
+  );
 
   // Split text on mount using SplitType (lines) or manual split (chars/words)
   useEffect(() => {
@@ -127,56 +164,12 @@ export function KineticText({
 
   const shouldAnimate = triggerOnView ? isInView : true;
 
-  // Select item variant based on prop
-  const baseDelay = 0.1;
-  const itemVariant: Variants = useMemo(() => {
-    const base = variant === 'dramatic' ? textRevealDramatic : textRevealItem;
-
-    const resolveVariant = (
-      value: Variants[keyof Variants],
-      index: number
-    ) => (typeof value === 'function' ? value(index) : value || {});
-
-    return {
-      hidden: resolveVariant(base.hidden, 0),
-      visible: (index: number) => {
-        const resolved = resolveVariant(base.visible, index) as Record<
-          string,
-          unknown
-        >;
-        const transition =
-          typeof resolved === 'object' &&
-          resolved !== null &&
-          'transition' in resolved
-            ? (resolved as { transition?: Record<string, unknown> }).transition
-            : undefined;
-
-        return {
-          ...resolved,
-          transition: {
-            ...(transition ?? {}),
-            delay: baseDelay + index * staggerDelay,
-          },
-        };
-      },
-    };
-  }, [staggerDelay, variant]);
-
-  // Custom container with configurable stagger
-  const containerVariant: Variants = useMemo(
-    () => ({
-      hidden: {},
-      visible: {},
-    }),
-    []
-  );
-
   // Determine if we need perspective for 3D rotateX effect
   const needsPerspective = variant === 'dramatic';
 
   return (
     <Tag
-      ref={containerRef as React.RefObject<HTMLElement>}
+      ref={containerRef as React.RefObject<HTMLDivElement>}
       className={cn('kinetic-text', className)}
       aria-label={children}
       style={{

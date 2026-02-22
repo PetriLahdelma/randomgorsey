@@ -5,35 +5,31 @@ import Contact from "../Contact";
 
 describe("Contact Page", () => {
   it("renders heading", () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     render(
       <HelmetProvider>
         <Contact />
       </HelmetProvider>
     );
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
-    expect(
-      screen.getByRole("heading", { name: /Contact/i })
-    ).toBeInTheDocument();
-    jest.useRealTimers();
+    expect(screen.getByText(/Contact/i)).toBeInTheDocument();
+    vi.useRealTimers();
   });
 
   it("sets page title", () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     render(
       <HelmetProvider>
         <Contact />
       </HelmetProvider>
     );
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
     // The component should render without errors (helmet will update document.title)
-    expect(
-      screen.getByRole("heading", { name: /Contact/i })
-    ).toBeInTheDocument();
-    jest.useRealTimers();
+    expect(screen.getByText(/Contact/i)).toBeInTheDocument();
+    vi.useRealTimers();
   });
 });

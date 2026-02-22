@@ -11,11 +11,11 @@ describe('Button Component', () => {
   it('applies the correct variant class', () => {
     render(<Button variant="secondary">Secondary</Button>);
     const button = screen.getByText('Secondary');
-    expect(button).toHaveClass('secondary');
+    expect(button).toHaveClass('bg-transparent');
   });
 
   it('handles the onClick event', () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<Button onClick={handleClick}>Click Me</Button>);
     fireEvent.click(screen.getByText('Click Me'));
     expect(handleClick).toHaveBeenCalledTimes(1);

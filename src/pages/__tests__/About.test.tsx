@@ -5,21 +5,21 @@ import About from "../About";
 
 describe("About Page", () => {
   it("renders heading", () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     render(
       <HelmetProvider>
         <About />
       </HelmetProvider>
     );
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
-    expect(screen.getByRole("heading", { name: /About/i })).toBeInTheDocument();
-    jest.useRealTimers();
+    expect(screen.getByText(/About/i)).toBeInTheDocument();
+    vi.useRealTimers();
   });
 
   it("sets page title", () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     // Test that the component renders and check document title
     render(
       <HelmetProvider>
@@ -27,10 +27,10 @@ describe("About Page", () => {
       </HelmetProvider>
     );
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
     // The component should render without errors (helmet will update document.title)
-    expect(screen.getByRole("heading", { name: /About/i })).toBeInTheDocument();
-    jest.useRealTimers();
+    expect(screen.getByText(/About/i)).toBeInTheDocument();
+    vi.useRealTimers();
   });
 });

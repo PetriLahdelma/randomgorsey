@@ -13,7 +13,7 @@ describe('Modal Component', () => {
   });
 
   it('calls onClose when overlay is clicked', () => {
-    const handleClose = jest.fn();
+    const handleClose = vi.fn();
     render(
       <Modal isOpen onClose={handleClose}>
         <p>Content</p>
@@ -24,7 +24,7 @@ describe('Modal Component', () => {
   });
 
   it('calls onClose when close button is clicked', () => {
-    const handleClose = jest.fn();
+    const handleClose = vi.fn();
     render(
       <Modal isOpen onClose={handleClose}>
         <p>Content</p>

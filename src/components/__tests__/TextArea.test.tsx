@@ -14,7 +14,7 @@ describe('TextArea Component', () => {
   });
 
   it('handles the onChange event', () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(<TextArea value="" onChange={handleChange} />);
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'New Value' } });
     expect(handleChange).toHaveBeenCalledTimes(1);
