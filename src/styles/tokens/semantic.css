@@ -97,6 +97,7 @@
   --color-primary-foreground: var(--color-neutral-900);
   --color-secondary: var(--color-neutral-800);
   --color-secondary-foreground: var(--color-neutral-100);
+
   /* accent stays the same - yellow pops on both light and dark */
 
   /* UI elements */
