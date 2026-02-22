@@ -1,6 +1,19 @@
 # Random Gorsey
 > Explore Random Gorsey's music and visuals.
 
+## Artist Context
+- Genre (Random Gorsey): lo-fi house (outsider house / raw house). Warm/nostalgic house with deliberately rough lo-fi texture, soulful chords, and minimalist grooves.
+- Similar artists (adjacent to lo-fi house / outsider house; commonly mentioned in lo-fi-house roundups/playlists):
+  - DJ Seinfeld - https://www.djseinfeld.com/
+  - Ross From Friends - https://www.rossfromfriends.net/
+  - DJ BORING - https://www.djboring.com/
+  - Mall Grab - https://www.mallgrab.world/
+  - Galcher Lustwerk - https://lustwerkmusic.com/
+  - Baltra - https://baltra.bandcamp.com/
+  - Palms Trax - https://palmstrax.bandcamp.com/
+  - Anthony Naples - https://anthonynaples.bandcamp.com/
+  - Subjoi - https://subjoi.bandcamp.com/
+
 ## Pages
 - [Home](/)
 - [About](/about)

@@ -1,0 +1,140 @@
+@import url("../variables.css");
+
+.gallery-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 600px;
+  padding: 2rem;
+  margin: 0 auto;
+  overflow-x: hidden;
+  font-family: "Europa Regular", sans-serif;
+  line-height: 1.6;
+  color: var(--color-yellow);
+  background-color: var(--color-blue);
+}
+
+.gallery-container h1 {
+  margin-bottom: 1rem;
+  font-family: "Tschick Bold", sans-serif;
+  color: var(--color-yellow);
+  text-transform: uppercase;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 80%);
+}
+
+.image-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  text-align: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.image-button:focus-visible {
+  outline: 2px solid var(--color-yellow);
+  outline-offset: 4px;
+  border-radius: 0.5rem;
+}
+
+.overlay img {
+  width: auto;
+  max-width: 90%;
+  height: auto;
+  max-height: 70%;
+  object-fit: contain;
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+}
+
+.close-icon {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1100;
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-white);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.left-icon {
+  position: fixed;
+  top: 50%;
+  left: 1rem;
+  z-index: 1100;
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-white);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transform: translateY(-50%);
+}
+
+.right-icon {
+  position: fixed;
+  top: 50%;
+  right: 1rem;
+  z-index: 1100;
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-white);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transform: translateY(-50%);
+}
+
+.close-icon:focus-visible,
+.left-icon:focus-visible,
+.right-icon:focus-visible {
+  outline: 2px solid var(--color-yellow);
+  outline-offset: 3px;
+}
+
+.gallery-overlay img,
+.gallery-overlay div,
+.gallery-overlay span {
+  transform: none;
+}
+
+.gallery-content img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-content img:hover {
+  box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+  transform: scale(1.02);
+}
+
+@media (width <= 800px) {
+  .gallery-container {
+    max-width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .gallery-container h1 {
+    text-align: center;
+    word-break: break-word;
+  }
+}

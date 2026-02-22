@@ -11,6 +11,6 @@ describe("Badge Component", () => {
   it("applies variant class", () => {
     render(<Badge text="Hot" variant="danger" />);
     const badgeElement = screen.getByText("Hot");
-    expect(badgeElement).toHaveClass("danger");
+    expect(badgeElement).toHaveClass("bg-red-600");
   });
 });

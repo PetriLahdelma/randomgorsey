@@ -22,7 +22,7 @@ describe("Select Component", () => {
   });
 
   it("calls onChange when new value selected", () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(<Select options={options} value="1" onChange={handleChange} />);
     const selectElement = screen.getByRole("combobox");
     fireEvent.change(selectElement, { target: { value: "2" } });
@@ -30,7 +30,7 @@ describe("Select Component", () => {
   });
 
   it("renders with label correctly", () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(
       <Select
         options={options}

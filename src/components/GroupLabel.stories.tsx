@@ -1,6 +1,6 @@
 import React from 'react';
 import GroupLabel from './GroupLabel';
-import type { StoryFn } from '@storybook/react-webpack5';
+import type { StoryFn } from '@storybook/react';
 
 const Story = {
   title: 'Components/GroupLabel',

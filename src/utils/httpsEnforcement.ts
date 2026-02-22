@@ -17,7 +17,7 @@ export function isHTTPS(): boolean {
 export function enforceHTTPS(): void {
   // Only redirect in production environments
   if (
-    process.env.NODE_ENV === "production" &&
+    import.meta.env.PROD &&
     !isHTTPS() &&
     window.location.hostname !== "localhost"
   ) {
@@ -31,7 +31,7 @@ export function enforceHTTPS(): void {
  */
 export function shouldEnforceHTTPS(): boolean {
   return (
-    process.env.NODE_ENV === "production" &&
+    import.meta.env.PROD &&
     window.location.hostname !== "localhost" &&
     !window.location.hostname.includes("127.0.0.1")
   );
@@ -47,7 +47,7 @@ export function initializeSecurityMeasures(): void {
   }
 
   // Warn about mixed content in development
-  if (process.env.NODE_ENV === "development") {
+  if (import.meta.env.DEV) {
     window.addEventListener("load", () => {
       if (isHTTPS()) {
         console.log("✅ Running over HTTPS");

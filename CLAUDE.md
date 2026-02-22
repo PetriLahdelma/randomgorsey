@@ -13,7 +13,7 @@ You are assisting with the development of **Random Gorsey**, a professional arti
 - ✅ React 19.2.0 runtime: STABLE  
 - ✅ Production build: SUCCESS
 - ❌ Test suite: FAILING
-- ⚠️ ESLint: 12 minor issues (non-breaking)nor issues (non-breaking)nor issues (non-breaking)nor issues (non-breaking)nor issues (non-breaking)nor issues (non-breaking)nor issues (non-breaking)nor issues (non-breaking)nor issues (non-breaking)nor issues (non-breaking)
+- ⚠️ ESLint: 12 minor issues (non-breaking)
 
 **Recent Major Updates Completed**:
 
@@ -291,6 +291,61 @@ npm start                  # Development server
 3. Asset optimization and compression
 4. GitHub Pages deployment
 
+### 🌐 Viewing the Live Site (For AI Agents)
+
+When you need to view the live website for visual verification, layout inspection, or user experience review, use the **Vercel Agent Browser** CLI tool instead of running tests.
+
+#### Installation (if not already available)
+
+```bash
+npm install -g agent-browser
+agent-browser install  # Downloads Chromium
+```
+
+#### Viewing the Production Site
+
+```bash
+# Open the live site
+agent-browser open https://randomgorsey.com
+
+# Take a snapshot to see interactive elements
+agent-browser snapshot
+
+# Navigate pages
+agent-browser click @e1  # Click element by ref from snapshot
+
+# Capture screenshots for review
+agent-browser screenshot home.png
+
+# Get text content from elements
+agent-browser get text @e2
+
+# Close when done
+agent-browser close
+```
+
+#### Common Viewing Tasks
+
+| Task | Command |
+|------|---------|
+| View homepage | `agent-browser open https://randomgorsey.com` |
+| View gallery | `agent-browser open https://randomgorsey.com/gallery` |
+| View contact page | `agent-browser open https://randomgorsey.com/contact` |
+| Check mobile layout | `agent-browser viewport 375 812` then `agent-browser snapshot` |
+| Full page screenshot | `agent-browser screenshot --full-page page.png` |
+
+#### When to Use Agent Browser vs Tests
+
+- **Agent Browser**: Visual verification, layout review, UX inspection, checking animations, viewing live content
+- **Tests**: Functional verification, regression testing, CI/CD pipelines, component behavior
+
+#### Important Notes
+
+- Agent Browser reduces token usage by ~93% compared to raw HTML parsing
+- Use `snapshot` to get a condensed accessibility tree with element refs (@e1, @e2, etc.)
+- For cloud/headless environments, configure Browserbase credentials
+- This is for **viewing only** - do not use for automated testing
+
 ### 💡 AI Assistant Best Practices
 
 #### When Writing Code
@@ -320,6 +375,6 @@ npm start                  # Development server
 ---
 
 **🔄 Last Updated**: November 10, 2025
-**📊 System Status**: ✅ Fully Operationalnalnalnalnalnalnalnalnalnal  
+**📊 System Status**: ✅ Fully Operational  
 **🏗️ Build Health**: ✅ Passing All Checks  
 **📋 Next Review**: December 2025

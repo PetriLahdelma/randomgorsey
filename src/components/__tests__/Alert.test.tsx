@@ -10,7 +10,7 @@ describe("Alert Component", () => {
 
   it("applies variant class", () => {
     render(<Alert variant="success">OK</Alert>);
-    const alertElement = screen.getByText("OK");
-    expect(alertElement).toHaveClass("success");
+    const alertElement = screen.getByRole("alert");
+    expect(alertElement).toHaveClass("bg-green-500");
   });
 });

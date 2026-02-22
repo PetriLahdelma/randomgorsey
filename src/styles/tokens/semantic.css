@@ -1,0 +1,114 @@
+/**
+ * Semantic Token Layer
+ *
+ * This layer maps primitive values to meaningful design concepts.
+ * Instead of using bg-neutral-950, components use bg-background.
+ * This enables section-scoped overrides - sections redefine semantic
+ * tokens, not primitive usage.
+ *
+ * @see primitives.css for raw values
+ * @see sections.css for context-specific overrides
+ */
+
+:root {
+  /* ========================================
+   * BACKGROUND & FOREGROUND
+   * Primary page colors
+   * ======================================== */
+  --color-background: var(--color-neutral-50);
+  --color-foreground: var(--color-neutral-950);
+
+  /* ========================================
+   * SURFACE TOKENS
+   * For cards, panels, elevated UI elements
+   * ======================================== */
+  --color-surface: var(--color-neutral-100);
+  --color-surface-foreground: var(--color-neutral-900);
+  --color-surface-elevated: var(--color-white);
+  --color-surface-elevated-foreground: var(--color-neutral-950);
+
+  /* ========================================
+   * INTERACTIVE TOKENS
+   * Buttons, links, clickable elements
+   * ======================================== */
+  --color-primary: var(--color-neutral-900);
+  --color-primary-foreground: var(--color-neutral-50);
+  --color-secondary: var(--color-neutral-200);
+  --color-secondary-foreground: var(--color-neutral-900);
+  --color-accent: var(--color-yellow-400);
+  --color-accent-foreground: var(--color-neutral-950);
+
+  /* ========================================
+   * FEEDBACK TOKENS
+   * Status indicators, alerts, messages
+   * ======================================== */
+  --color-destructive: var(--color-red-500);
+  --color-destructive-foreground: var(--color-neutral-50);
+  --color-success: var(--color-green-500);
+  --color-success-foreground: var(--color-neutral-50);
+
+  /* ========================================
+   * UI ELEMENT TOKENS
+   * Borders, inputs, focus rings, muted text
+   * ======================================== */
+  --color-border: var(--color-neutral-200);
+  --color-input: var(--color-neutral-200);
+  --color-ring: var(--color-neutral-400);
+  --color-muted: var(--color-neutral-100);
+  --color-muted-foreground: var(--color-neutral-500);
+
+  /* ========================================
+   * CARD/POPOVER TOKENS
+   * For shadcn/ui compatibility
+   * ======================================== */
+  --color-card: var(--color-surface-elevated);
+  --color-card-foreground: var(--color-surface-elevated-foreground);
+  --color-popover: var(--color-surface-elevated);
+  --color-popover-foreground: var(--color-surface-elevated-foreground);
+
+  /* ========================================
+   * SEMANTIC SPACING
+   * Meaningful spacing values
+   * ======================================== */
+  --space-page: calc(var(--spacing) * 6);      /* 1.5rem - page padding */
+  --space-section: calc(var(--spacing) * 16);  /* 4rem - between sections */
+  --space-element: calc(var(--spacing) * 4);   /* 1rem - between elements */
+  --space-inline: calc(var(--spacing) * 2);    /* 0.5rem - inline spacing */
+}
+
+/* ========================================
+ * DARK MODE OVERRIDES
+ * Inverted semantic mappings for dark theme
+ * Note: Feedback colors stay the same - absolute, not inverted
+ * ======================================== */
+.dark {
+  /* Inverted background/foreground */
+  --color-background: var(--color-neutral-950);
+  --color-foreground: var(--color-neutral-50);
+
+  /* Surface tokens */
+  --color-surface: var(--color-neutral-900);
+  --color-surface-foreground: var(--color-neutral-100);
+  --color-surface-elevated: var(--color-neutral-800);
+  --color-surface-elevated-foreground: var(--color-neutral-50);
+
+  /* Interactive tokens */
+  --color-primary: var(--color-neutral-50);
+  --color-primary-foreground: var(--color-neutral-900);
+  --color-secondary: var(--color-neutral-800);
+  --color-secondary-foreground: var(--color-neutral-100);
+  /* accent stays the same - yellow pops on both light and dark */
+
+  /* UI elements */
+  --color-border: var(--color-neutral-800);
+  --color-input: var(--color-neutral-800);
+  --color-ring: var(--color-neutral-600);
+  --color-muted: var(--color-neutral-800);
+  --color-muted-foreground: var(--color-neutral-400);
+
+  /* Card/Popover - reference surface-elevated for consistency */
+  --color-card: var(--color-surface-elevated);
+  --color-card-foreground: var(--color-surface-elevated-foreground);
+  --color-popover: var(--color-surface-elevated);
+  --color-popover-foreground: var(--color-surface-elevated-foreground);
+}

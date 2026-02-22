@@ -1,21 +1,45 @@
-import React from 'react';
-import styles from './Spinner.module.css';
+import React from 'react'
+import { cn } from '@/lib/utils'
 
-type SpinnerProps = {
-  style?: React.CSSProperties;
-  size?: number;
-  ariaLabel?: string;
-};
+interface SpinnerProps {
+  size?: 'sm' | 'md' | 'lg' | number
+  className?: string
+  ariaLabel?: string
+}
 
-const Spinner: React.FC<SpinnerProps> = ({ style, size = 32, ariaLabel = 'Loading' }) => {
+const sizeClasses = {
+  sm: 'h-4 w-4 border-2',
+  md: 'h-8 w-8 border-4',
+  lg: 'h-12 w-12 border-4',
+}
+
+const Spinner: React.FC<SpinnerProps> = ({
+  size = 'md',
+  className,
+  ariaLabel = 'Loading',
+}) => {
+  // Handle numeric size for backwards compatibility
+  const isNumericSize = typeof size === 'number'
+  const sizeStyle = isNumericSize
+    ? { width: size, height: size }
+    : undefined
+  const sizeClass = isNumericSize ? 'border-4' : sizeClasses[size]
+
   return (
     <div
-      className={styles.spinner}
-      style={{ width: size, height: size, ...style }}
+      className={cn(
+        'animate-spin rounded-full border-black/10 border-t-black mx-auto',
+        sizeClass,
+        className
+      )}
+      style={sizeStyle}
       role="status"
       aria-label={ariaLabel}
-    ></div>
-  );
-};
+    >
+      <span className="sr-only">{ariaLabel}</span>
+    </div>
+  )
+}
 
-export default Spinner;
+export default Spinner
+export { Spinner }

@@ -1,17 +1,15 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, pageVariants } from "@/lib/motion";
 import styles from "./NotFound.module.css";
 import Spinner from "../components/Spinner";
 import PageMeta from "../components/PageMeta";
-import { isWebMSupported } from "../utils/isWebMSupported";
-import { isIOS } from "../utils/isIOS";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
+import { VideoBackground } from "@/components/effects";
+import glitchBgVideo from "../videos/rg-glitch-bg.webm";
 
 const NotFound: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
-
-  const Container: React.ElementType = isIOS() ? "div" : motion.div;
 
   React.useEffect(() => {
     const timer = window.requestAnimationFrame(() => setLoading(false));
@@ -25,36 +23,18 @@ const NotFound: React.FC = () => {
         description="The page you requested could not be found."
         path="/"
       />
-      {/* Background looping video (disabled if WebM unsupported) */}
-      {isWebMSupported() && (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            zIndex: -1,
-          }}
-        >
-          <source
-            src={require("../videos/rg-glitch-bg.webm")}
-            type="video/webm"
-          />
-        </video>
-      )}
-      <Container
+      {/* Performance-tiered video background */}
+      <VideoBackground
+        src={glitchBgVideo}
+        poster="/images/listen-poster.jpg"
+        overlayOpacity={0.3}
+      />
+      <motion.div
         className={styles["notfound-container"]}
-        {...(!isIOS() && {
-          initial: { opacity: 0, y: 20 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.4 },
-        })}
+        variants={pageVariants}
+        initial="initial"
+        animate="enter"
+        exit="exit"
       >
         {loading && <Spinner />}
         {!loading && (
@@ -75,7 +55,7 @@ const NotFound: React.FC = () => {
             </Button>
           </Link>
         </div>
-      </Container>
+      </motion.div>
     </>
   );
 };

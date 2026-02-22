@@ -5,35 +5,31 @@ import Gallery from "../Gallery";
 
 describe("Gallery Page", () => {
   it("renders heading", () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     render(
       <HelmetProvider>
         <Gallery onOverlayStateChange={() => {}} />
       </HelmetProvider>
     );
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
-    expect(
-      screen.getByRole("heading", { name: /Gallery/i })
-    ).toBeInTheDocument();
-    jest.useRealTimers();
+    expect(screen.getByText(/Gallery/i)).toBeInTheDocument();
+    vi.useRealTimers();
   });
 
   it("sets page title", () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     render(
       <HelmetProvider>
         <Gallery />
       </HelmetProvider>
     );
     act(() => {
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
     // The component should render without errors (helmet will update document.title)
-    expect(
-      screen.getByRole("heading", { name: /Gallery/i })
-    ).toBeInTheDocument();
-    jest.useRealTimers();
+    expect(screen.getByText(/Gallery/i)).toBeInTheDocument();
+    vi.useRealTimers();
   });
 });
