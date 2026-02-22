@@ -35,7 +35,7 @@ human_verification:
 |---|-------|--------|----------|
 | 1 | User sees typography scale fluidly from mobile to desktop without breakpoint jumps | VERIFIED | Base h1-h6 use fluid tokens via var(--text-*xl), no fixed font-size in page CSS Modules |
 | 2 | User sees bold, editorial-style headings that establish visual hierarchy | VERIFIED | Tschick Bold font applied to h1-h6 via globals.css base layer (line 107) |
-| 3 | User experiences smooth font rendering with no layout shift on load | VERIFIED | 7x font-display: swap declarations, 2 preload links in index.html |
+| 3 | User experiences smooth font rendering with no layout shift on load | VERIFIED | 8x font-display: swap declarations, 2 preload links in index.html |
 | 4 | Developer can use clamp()-based sizing for any text element | VERIFIED | Base h1-h6 get fluid tokens automatically; text-* utilities available for other elements |
 
 **Score:** 4/4 truths fully verified
@@ -44,11 +44,11 @@ human_verification:
 
 | Artifact | Expected | Status | Details |
 |----------|----------|--------|---------|
-| `src/styles/tokens/typography.css` | Fluid type scale with clamp() values | VERIFIED | 76 lines, 10 size tokens (xs-6xl) with line-heights, all using clamp() |
-| `src/styles/globals.css` | font-display: swap on all @font-face | VERIFIED | 7 font-display: swap declarations (lines 24, 34, 44, 55, 65, 75, 85) |
+| `src/styles/tokens/typography.css` | Fluid type scale with clamp() values | VERIFIED | 75 lines, 10 size tokens (xs-6xl) with line-heights, all using clamp() |
+| `src/styles/globals.css` | font-display: swap on all @font-face | VERIFIED | 8 font-display: swap declarations |
 | `index.html` | Font preloading for critical fonts | VERIFIED | 2 preload links (europa-regular, Tschick-Bold) on lines 9-10 |
 | `src/components/Heading.tsx` | Token-based fluid sizing | VERIFIED | 121 lines, uses text-6xl through text-xl via cva variants |
-| `src/components/Text.tsx` | Token-based fluid sizing | VERIFIED | 114 lines, uses text-base, text-sm, text-xs via cva variants |
+| `src/components/Text.tsx` | Token-based fluid sizing | VERIFIED | 113 lines, uses text-base, text-sm, text-xs via cva variants |
 | `src/styles/tokens/primitives.css` | --font-family-europa-unified token | VERIFIED | Line 81: `--font-family-europa-unified: "Europa", ...` |
 | `src/styles/globals.css` | Base h1-h6 with fluid font-size tokens | VERIFIED | Lines 116-139: h1-h6 each have `font-size: var(--text-*xl)` |
 
