@@ -1,16 +1,16 @@
 @import url("../variables.css");
 
 .gallery-container {
-  max-width: 600px;
+  box-sizing: border-box;
   width: 100%;
+  max-width: 600px;
   padding: 2rem;
   margin: 0 auto;
-  box-sizing: border-box;
+  overflow-x: hidden;
   font-family: "Europa Regular", sans-serif;
   line-height: 1.6;
   color: var(--color-yellow);
   background-color: var(--color-blue);
-  overflow-x: hidden;
 }
 
 .gallery-container h1 {
@@ -38,10 +38,10 @@
   display: block;
   width: 100%;
   padding: 0;
-  border: none;
-  background: transparent;
-  cursor: pointer;
   text-align: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: none;
 }
 
 .image-button:focus-visible {
@@ -71,9 +71,9 @@
   width: 2rem;
   height: 2rem;
   color: var(--color-white);
+  cursor: pointer;
   background: transparent;
   border: none;
-  cursor: pointer;
 }
 
 .left-icon {
@@ -84,9 +84,9 @@
   width: 2rem;
   height: 2rem;
   color: var(--color-white);
+  cursor: pointer;
   background: transparent;
   border: none;
-  cursor: pointer;
   transform: translateY(-50%);
 }
 
@@ -98,9 +98,9 @@
   width: 2rem;
   height: 2rem;
   color: var(--color-white);
+  cursor: pointer;
   background: transparent;
   border: none;
-  cursor: pointer;
   transform: translateY(-50%);
 }
 

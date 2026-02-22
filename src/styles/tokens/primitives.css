@@ -15,42 +15,43 @@
    * COLOR PRIMITIVES - Neutral Scale
    * Using oklch for perceptual uniformity
    * ======================================== */
-  --color-neutral-50: oklch(0.985 0 0);
-  --color-neutral-100: oklch(0.970 0 0);
-  --color-neutral-200: oklch(0.922 0 0);
-  --color-neutral-300: oklch(0.870 0 0);
-  --color-neutral-400: oklch(0.708 0 0);
-  --color-neutral-500: oklch(0.556 0 0);
-  --color-neutral-600: oklch(0.439 0 0);
-  --color-neutral-700: oklch(0.371 0 0);
-  --color-neutral-800: oklch(0.269 0 0);
-  --color-neutral-900: oklch(0.205 0 0);
-  --color-neutral-950: oklch(0.145 0 0);
+  --color-neutral-50: oklch(98.5% 0 0deg);
+  --color-neutral-100: oklch(97% 0 0deg);
+  --color-neutral-200: oklch(92.2% 0 0deg);
+  --color-neutral-300: oklch(87% 0 0deg);
+  --color-neutral-400: oklch(70.8% 0 0deg);
+  --color-neutral-500: oklch(55.6% 0 0deg);
+  --color-neutral-600: oklch(43.9% 0 0deg);
+  --color-neutral-700: oklch(37.1% 0 0deg);
+  --color-neutral-800: oklch(26.9% 0 0deg);
+  --color-neutral-900: oklch(20.5% 0 0deg);
+  --color-neutral-950: oklch(14.5% 0 0deg);
 
   /* Pure black and white */
-  --color-white: oklch(1 0 0);
-  --color-black: oklch(0 0 0);
+  --color-white: oklch(100% 0 0deg);
+  --color-black: oklch(0% 0 0deg);
 
   /* ========================================
    * COLOR PRIMITIVES - Accent Colors
    * ======================================== */
+
   /* Yellow - Primary accent, matches legacy #ff0 */
-  --color-yellow-400: oklch(0.88 0.17 85);
-  --color-yellow-500: oklch(0.82 0.17 85);
+  --color-yellow-400: oklch(88% 0.17 85deg);
+  --color-yellow-500: oklch(82% 0.17 85deg);
 
   /* Magenta - Secondary accent */
-  --color-magenta-400: oklch(0.70 0.28 328);
-  --color-magenta-500: oklch(0.65 0.28 328);
+  --color-magenta-400: oklch(70% 0.28 328deg);
+  --color-magenta-500: oklch(65% 0.28 328deg);
 
   /* Blue - Tertiary accent */
-  --color-blue-400: oklch(0.67 0.21 255);
-  --color-blue-500: oklch(0.62 0.21 255);
+  --color-blue-400: oklch(67% 0.21 255deg);
+  --color-blue-500: oklch(62% 0.21 255deg);
 
   /* Red - Destructive/error states */
-  --color-red-500: oklch(0.577 0.245 27.325);
+  --color-red-500: oklch(57.7% 0.245 27.325deg);
 
   /* Green - Success states */
-  --color-green-500: oklch(0.723 0.219 142.136);
+  --color-green-500: oklch(72.3% 0.219 142.136deg);
 
   /* ========================================
    * SPACING PRIMITIVE
@@ -77,8 +78,10 @@
   --font-family-europa: "Europa Regular", ui-sans-serif, system-ui, sans-serif;
   --font-family-europa-bold: "Europa Bold", ui-sans-serif, system-ui, sans-serif;
   --font-family-europa-light: "Europa Light", ui-sans-serif, system-ui, sans-serif;
+
   /* Unified Europa - use font-weight to select variant (300, 400, 700) */
   --font-family-europa-unified: "Europa", ui-sans-serif, system-ui, sans-serif;
+
   /* Display/heading font alias */
   --font-display: "Tschick Bold", ui-sans-serif, system-ui, sans-serif;
 
@@ -94,31 +97,31 @@
    * These create utilities (bg-background, text-foreground, etc.)
    * Default values here, overridden by semantic.css :root/.dark
    * ======================================== */
-  --color-background: oklch(0.985 0 0);  /* neutral-50 */
-  --color-foreground: oklch(0.145 0 0);  /* neutral-950 */
-  --color-surface: oklch(0.970 0 0);     /* neutral-100 */
-  --color-surface-foreground: oklch(0.205 0 0);  /* neutral-900 */
-  --color-surface-elevated: oklch(1 0 0);  /* white */
-  --color-surface-elevated-foreground: oklch(0.145 0 0);  /* neutral-950 */
-  --color-primary: oklch(0.205 0 0);     /* neutral-900 */
-  --color-primary-foreground: oklch(0.985 0 0);  /* neutral-50 */
-  --color-secondary: oklch(0.922 0 0);   /* neutral-200 */
-  --color-secondary-foreground: oklch(0.205 0 0);  /* neutral-900 */
-  --color-accent: oklch(0.88 0.17 85);   /* yellow-400 */
-  --color-accent-foreground: oklch(0.145 0 0);  /* neutral-950 */
-  --color-muted: oklch(0.970 0 0);       /* neutral-100 */
-  --color-muted-foreground: oklch(0.556 0 0);  /* neutral-500 */
-  --color-destructive: oklch(0.577 0.245 27.325);  /* red-500 */
-  --color-destructive-foreground: oklch(0.985 0 0);  /* neutral-50 */
-  --color-success: oklch(0.723 0.219 142.136);  /* green-500 */
-  --color-success-foreground: oklch(0.985 0 0);  /* neutral-50 */
-  --color-border: oklch(0.922 0 0);      /* neutral-200 */
-  --color-input: oklch(0.922 0 0);       /* neutral-200 */
-  --color-ring: oklch(0.708 0 0);        /* neutral-400 */
-  --color-card: oklch(1 0 0);            /* white */
-  --color-card-foreground: oklch(0.145 0 0);  /* neutral-950 */
-  --color-popover: oklch(1 0 0);         /* white */
-  --color-popover-foreground: oklch(0.145 0 0);  /* neutral-950 */
+  --color-background: oklch(98.5% 0 0deg);  /* neutral-50 */
+  --color-foreground: oklch(14.5% 0 0deg);  /* neutral-950 */
+  --color-surface: oklch(97% 0 0deg);     /* neutral-100 */
+  --color-surface-foreground: oklch(20.5% 0 0deg);  /* neutral-900 */
+  --color-surface-elevated: oklch(100% 0 0deg);  /* white */
+  --color-surface-elevated-foreground: oklch(14.5% 0 0deg);  /* neutral-950 */
+  --color-primary: oklch(20.5% 0 0deg);     /* neutral-900 */
+  --color-primary-foreground: oklch(98.5% 0 0deg);  /* neutral-50 */
+  --color-secondary: oklch(92.2% 0 0deg);   /* neutral-200 */
+  --color-secondary-foreground: oklch(20.5% 0 0deg);  /* neutral-900 */
+  --color-accent: oklch(88% 0.17 85deg);   /* yellow-400 */
+  --color-accent-foreground: oklch(14.5% 0 0deg);  /* neutral-950 */
+  --color-muted: oklch(97% 0 0deg);       /* neutral-100 */
+  --color-muted-foreground: oklch(55.6% 0 0deg);  /* neutral-500 */
+  --color-destructive: oklch(57.7% 0.245 27.325deg);  /* red-500 */
+  --color-destructive-foreground: oklch(98.5% 0 0deg);  /* neutral-50 */
+  --color-success: oklch(72.3% 0.219 142.136deg);  /* green-500 */
+  --color-success-foreground: oklch(98.5% 0 0deg);  /* neutral-50 */
+  --color-border: oklch(92.2% 0 0deg);      /* neutral-200 */
+  --color-input: oklch(92.2% 0 0deg);       /* neutral-200 */
+  --color-ring: oklch(70.8% 0 0deg);        /* neutral-400 */
+  --color-card: oklch(100% 0 0deg);            /* white */
+  --color-card-foreground: oklch(14.5% 0 0deg);  /* neutral-950 */
+  --color-popover: oklch(100% 0 0deg);         /* white */
+  --color-popover-foreground: oklch(14.5% 0 0deg);  /* neutral-950 */
 
   /* ========================================
    * LEGACY COLOR ALIASES
@@ -128,15 +131,15 @@
    * ======================================== */
   --color-yellow: var(--color-yellow-400);
   --color-magenta: var(--color-magenta-500);
-  --color-blue: oklch(0.45 0.31 264);  /* Pure blue #00f in oklch */
-  --color-green: oklch(0.87 0.35 142);  /* Pure green #0f0 in oklch */
-  --color-orange: oklch(0.80 0.15 75);  /* Warm orange for discography */
+  --color-blue: oklch(45% 0.31 264deg);  /* Pure blue #00f in oklch */
+  --color-green: oklch(87% 0.35 142deg);  /* Pure green #0f0 in oklch */
+  --color-orange: oklch(80% 0.15 75deg);  /* Warm orange for discography */
   --color-gray: var(--color-neutral-300);
   --color-gray-medium: var(--color-neutral-500);
   --color-gray-dark: var(--color-neutral-600);
   --color-gray-light: var(--color-neutral-200);
   --color-light-bg: var(--color-neutral-50);
-  --color-blue-light: oklch(0.55 0.22 255);  /* #007bff equivalent */
-  --color-red: oklch(0.577 0.245 27.325);  /* Same as red-500 */
+  --color-blue-light: oklch(55.% 0.22 255deg);  /* #007bff equivalent */
+  --color-red: oklch(57.7% 0.245 27.325deg);  /* Same as red-500 */
   --color-dark: var(--color-neutral-800);
 }

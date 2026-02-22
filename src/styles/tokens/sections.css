@@ -44,15 +44,15 @@
 
   /* Listen section - moody, immersive, purple-tinted */
   [data-section="listen"] {
-    --color-background: oklch(0.12 0.015 280);  /* Slight purple tint */
+    --color-background: oklch(12% 0.015 280deg);  /* Slight purple tint */
     --color-foreground: var(--color-neutral-100);
-    --color-surface: oklch(0.18 0.02 280);
+    --color-surface: oklch(18% 0.02 280deg);
     --color-surface-foreground: var(--color-neutral-50);
     --color-accent: var(--color-blue-500);
     --color-accent-foreground: var(--color-white);
-    --color-muted: oklch(0.22 0.015 280);
+    --color-muted: oklch(22% 0.015 280deg);
     --color-muted-foreground: var(--color-neutral-400);
-    --color-border: oklch(0.25 0.02 280);
+    --color-border: oklch(25% 0.02 280deg);
   }
 
   /* Contact section - professional, clean, white */
@@ -68,13 +68,13 @@
 
   /* About section - warm, personal, inviting */
   [data-section="about"] {
-    --color-background: oklch(0.98 0.01 60);  /* Warm off-white */
+    --color-background: oklch(98% 0.01 60deg);  /* Warm off-white */
     --color-foreground: var(--color-neutral-900);
     --color-surface: var(--color-white);
     --color-surface-foreground: var(--color-neutral-900);
-    --color-accent: oklch(0.72 0.14 50);  /* Warm orange accent */
+    --color-accent: oklch(72% 0.14 50deg);  /* Warm orange accent */
     --color-accent-foreground: var(--color-neutral-950);
-    --color-border: oklch(0.90 0.02 60);
+    --color-border: oklch(90% 0.02 60deg);
   }
 
   /* Discography section - similar to listen but distinct */
@@ -89,7 +89,7 @@
 
   /* Base section styles - applies to all sections */
   [data-section] {
-    background-color: var(--color-background);
     color: var(--color-foreground);
+    background-color: var(--color-background);
   }
 }

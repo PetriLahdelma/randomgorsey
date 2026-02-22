@@ -25,7 +25,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "22"
           cache: "npm"
 
       - name: Install dependencies
@@ -44,7 +44,7 @@ jobs:
         id: eslint
 
       - name: Run Tests
-        run: npm test -- --coverage --watchAll=false
+        run: npm test -- --coverage
         continue-on-error: true
         id: tests
 
@@ -58,7 +58,7 @@ jobs:
           npm run build
           echo "## Bundle Size Analysis" >> $GITHUB_STEP_SUMMARY
           echo "```" >> $GITHUB_STEP_SUMMARY
-          du -sh build/static/js/*.js | head -10 >> $GITHUB_STEP_SUMMARY
+          du -sh build/assets/*.js | head -10 >> $GITHUB_STEP_SUMMARY
           echo "```" >> $GITHUB_STEP_SUMMARY
         continue-on-error: true
 

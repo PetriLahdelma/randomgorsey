@@ -3,7 +3,7 @@ const DEFAULT_SITE_ORIGIN = "https://randomgorsey.com";
 const normalizeOrigin = (origin: string): string => origin.replace(/\/+$/, "");
 
 const getSiteOrigin = (): string => {
-  const envOrigin = process.env.REACT_APP_SITE_ORIGIN;
+  const envOrigin = import.meta.env.VITE_SITE_ORIGIN as string | undefined;
   if (envOrigin && envOrigin.trim().length > 0) {
     return normalizeOrigin(envOrigin.trim());
   }
