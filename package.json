@@ -118,7 +118,7 @@
     "jsdom": "^28.1.0",
     "prop-types": "^15.8.1",
     "semver": "^7.5.4",
-    "storybook": "^10.1.11",
+    "storybook": "^10.2.13",
     "stylelint": "^16.20.0",
     "stylelint-config-css-modules": "^4.4.0",
     "stylelint-config-recess-order": "^7.4.0",
