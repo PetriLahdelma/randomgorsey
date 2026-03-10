@@ -11,135 +11,101 @@
  */
 
 @theme {
-  /* ========================================
-   * COLOR PRIMITIVES - Neutral Scale
-   * Using oklch for perceptual uniformity
-   * ======================================== */
-  --color-neutral-50: oklch(98.5% 0 0deg);
-  --color-neutral-100: oklch(97% 0 0deg);
-  --color-neutral-200: oklch(92.2% 0 0deg);
-  --color-neutral-300: oklch(87% 0 0deg);
-  --color-neutral-400: oklch(70.8% 0 0deg);
-  --color-neutral-500: oklch(55.6% 0 0deg);
-  --color-neutral-600: oklch(43.9% 0 0deg);
-  --color-neutral-700: oklch(37.1% 0 0deg);
-  --color-neutral-800: oklch(26.9% 0 0deg);
-  --color-neutral-900: oklch(20.5% 0 0deg);
-  --color-neutral-950: oklch(14.5% 0 0deg);
+  /* Neutral Scale - darker, grittier */
+  --color-neutral-50: oklch(92% 0 0deg);    /* off-white text */
+  --color-neutral-100: oklch(85% 0 0deg);
+  --color-neutral-200: oklch(70% 0 0deg);
+  --color-neutral-300: oklch(55% 0 0deg);
+  --color-neutral-400: oklch(40% 0 0deg);    /* muted text */
+  --color-neutral-500: oklch(33% 0 0deg);
+  --color-neutral-600: oklch(27% 0 0deg);    /* dim borders */
+  --color-neutral-700: oklch(20% 0 0deg);
+  --color-neutral-800: oklch(11% 0 0deg);    /* elevated surface */
+  --color-neutral-900: oklch(8% 0 0deg);     /* surface */
+  --color-neutral-950: oklch(4% 0 0deg);     /* base black */
 
-  /* Pure black and white */
   --color-white: oklch(100% 0 0deg);
   --color-black: oklch(0% 0 0deg);
 
-  /* ========================================
-   * COLOR PRIMITIVES - Accent Colors
-   * ======================================== */
+  /* Single accent: Electric Yellow */
+  --color-yellow-400: oklch(90% 0.18 85deg);
+  --color-yellow-500: oklch(85% 0.18 85deg);
 
-  /* Yellow - Primary accent, matches legacy #ff0 */
-  --color-yellow-400: oklch(88% 0.17 85deg);
-  --color-yellow-500: oklch(82% 0.17 85deg);
+  /* Remove magenta, blue as accent colors — keep only for legacy compat */
+  --color-magenta-400: oklch(90% 0.18 85deg);  /* map to yellow */
+  --color-magenta-500: oklch(85% 0.18 85deg);  /* map to yellow */
+  --color-blue-400: oklch(90% 0.18 85deg);     /* map to yellow */
+  --color-blue-500: oklch(85% 0.18 85deg);     /* map to yellow */
 
-  /* Magenta - Secondary accent */
-  --color-magenta-400: oklch(70% 0.28 328deg);
-  --color-magenta-500: oklch(65% 0.28 328deg);
-
-  /* Blue - Tertiary accent */
-  --color-blue-400: oklch(67% 0.21 255deg);
-  --color-blue-500: oklch(62% 0.21 255deg);
-
-  /* Red - Destructive/error states */
+  /* Feedback colors stay */
   --color-red-500: oklch(57.7% 0.245 27.325deg);
-
-  /* Green - Success states */
   --color-green-500: oklch(72.3% 0.219 142.136deg);
 
-  /* ========================================
-   * SPACING PRIMITIVE
-   * Base unit for Tailwind spacing scale
-   * Creates p-1, p-2, p-4, m-1, gap-2, etc.
-   * ======================================== */
+  /* Gallery slate — the one "break" color */
+  --color-gallery-slate: oklch(15% 0.02 230deg);
+
+  /* Spacing — unchanged */
   --spacing: 0.25rem;
 
-  /* ========================================
-   * RADIUS PRIMITIVES
-   * Border radius scale
-   * ======================================== */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.625rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
+  /* Radius — all zero. Punk has no curves. */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
 
-  /* ========================================
-   * FONT FAMILY PRIMITIVES
-   * Custom fonts with system fallbacks
-   * ======================================== */
+  /* Font families — add mono for labels */
   --font-family-tschick-bold: "Tschick Bold", ui-sans-serif, system-ui, sans-serif;
   --font-family-europa: "Europa Regular", ui-sans-serif, system-ui, sans-serif;
   --font-family-europa-bold: "Europa Bold", ui-sans-serif, system-ui, sans-serif;
   --font-family-europa-light: "Europa Light", ui-sans-serif, system-ui, sans-serif;
-
-  /* Unified Europa - use font-weight to select variant (300, 400, 700) */
   --font-family-europa-unified: "Europa", ui-sans-serif, system-ui, sans-serif;
-
-  /* Display/heading font alias */
   --font-display: "Tschick Bold", ui-sans-serif, system-ui, sans-serif;
+  --font-family-mono: ui-monospace, "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", "Courier New", monospace;
 
-  /* ========================================
-   * ANIMATION PRIMITIVES
-   * Base timing and easing values
-   * ======================================== */
-  --animate-duration: 200ms;
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  /* Animation — faster */
+  --animate-duration: 100ms;
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* ========================================
-   * SEMANTIC TOKENS FOR TAILWIND UTILITIES
-   * These create utilities (bg-background, text-foreground, etc.)
-   * Default values here, overridden by semantic.css :root/.dark
-   * ======================================== */
-  --color-background: oklch(98.5% 0 0deg);  /* neutral-50 */
-  --color-foreground: oklch(14.5% 0 0deg);  /* neutral-950 */
-  --color-surface: oklch(97% 0 0deg);     /* neutral-100 */
-  --color-surface-foreground: oklch(20.5% 0 0deg);  /* neutral-900 */
-  --color-surface-elevated: oklch(100% 0 0deg);  /* white */
-  --color-surface-elevated-foreground: oklch(14.5% 0 0deg);  /* neutral-950 */
-  --color-primary: oklch(20.5% 0 0deg);     /* neutral-900 */
-  --color-primary-foreground: oklch(98.5% 0 0deg);  /* neutral-50 */
-  --color-secondary: oklch(92.2% 0 0deg);   /* neutral-200 */
-  --color-secondary-foreground: oklch(20.5% 0 0deg);  /* neutral-900 */
-  --color-accent: oklch(88% 0.17 85deg);   /* yellow-400 */
-  --color-accent-foreground: oklch(14.5% 0 0deg);  /* neutral-950 */
-  --color-muted: oklch(97% 0 0deg);       /* neutral-100 */
-  --color-muted-foreground: oklch(55.6% 0 0deg);  /* neutral-500 */
-  --color-destructive: oklch(57.7% 0.245 27.325deg);  /* red-500 */
-  --color-destructive-foreground: oklch(98.5% 0 0deg);  /* neutral-50 */
-  --color-success: oklch(72.3% 0.219 142.136deg);  /* green-500 */
-  --color-success-foreground: oklch(98.5% 0 0deg);  /* neutral-50 */
-  --color-border: oklch(92.2% 0 0deg);      /* neutral-200 */
-  --color-input: oklch(92.2% 0 0deg);       /* neutral-200 */
-  --color-ring: oklch(70.8% 0 0deg);        /* neutral-400 */
-  --color-card: oklch(100% 0 0deg);            /* white */
-  --color-card-foreground: oklch(14.5% 0 0deg);  /* neutral-950 */
-  --color-popover: oklch(100% 0 0deg);         /* white */
-  --color-popover-foreground: oklch(14.5% 0 0deg);  /* neutral-950 */
+  /* Semantic tokens defaults (dark-first for punk) */
+  --color-background: oklch(4% 0 0deg);
+  --color-foreground: oklch(92% 0 0deg);
+  --color-surface: oklch(8% 0 0deg);
+  --color-surface-foreground: oklch(85% 0 0deg);
+  --color-surface-elevated: oklch(11% 0 0deg);
+  --color-surface-elevated-foreground: oklch(92% 0 0deg);
+  --color-primary: oklch(90% 0.18 85deg);   /* yellow */
+  --color-primary-foreground: oklch(4% 0 0deg);
+  --color-secondary: oklch(11% 0 0deg);
+  --color-secondary-foreground: oklch(92% 0 0deg);
+  --color-accent: oklch(90% 0.18 85deg);
+  --color-accent-foreground: oklch(4% 0 0deg);
+  --color-muted: oklch(11% 0 0deg);
+  --color-muted-foreground: oklch(40% 0 0deg);
+  --color-destructive: oklch(57.7% 0.245 27.325deg);
+  --color-destructive-foreground: oklch(92% 0 0deg);
+  --color-success: oklch(72.3% 0.219 142.136deg);
+  --color-success-foreground: oklch(92% 0 0deg);
+  --color-border: oklch(20% 0 0deg);
+  --color-input: oklch(20% 0 0deg);
+  --color-ring: oklch(40% 0 0deg);
+  --color-card: oklch(8% 0 0deg);
+  --color-card-foreground: oklch(92% 0 0deg);
+  --color-popover: oklch(8% 0 0deg);
+  --color-popover-foreground: oklch(92% 0 0deg);
 
-  /* ========================================
-   * LEGACY COLOR ALIASES
-   * Bridge for CSS Modules during migration
-   * Maps old variable names to new primitives
-   * TODO: Remove after Phase 3+ page migration
-   * ======================================== */
+  /* Legacy aliases — all map to yellow now */
   --color-yellow: var(--color-yellow-400);
-  --color-magenta: var(--color-magenta-500);
-  --color-blue: oklch(45% 0.31 264deg);  /* Pure blue #00f in oklch */
-  --color-green: oklch(87% 0.35 142deg);  /* Pure green #0f0 in oklch */
-  --color-orange: oklch(80% 0.15 75deg);  /* Warm orange for discography */
+  --color-magenta: var(--color-yellow-400);
+  --color-blue: var(--color-yellow-400);
+  --color-green: oklch(87% 0.35 142deg);
+  --color-orange: var(--color-yellow-400);
   --color-gray: var(--color-neutral-300);
   --color-gray-medium: var(--color-neutral-500);
   --color-gray-dark: var(--color-neutral-600);
   --color-gray-light: var(--color-neutral-200);
   --color-light-bg: var(--color-neutral-50);
-  --color-blue-light: oklch(55.% 0.22 255deg);  /* #007bff equivalent */
-  --color-red: oklch(57.7% 0.245 27.325deg);  /* Same as red-500 */
+  --color-blue-light: var(--color-yellow-400);
+  --color-red: oklch(57.7% 0.245 27.325deg);
   --color-dark: var(--color-neutral-800);
 }

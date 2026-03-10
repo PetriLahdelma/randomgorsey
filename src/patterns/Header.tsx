@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { BiSolidChevronUp, BiSolidChevronDown } from 'react-icons/bi';
 import { cn } from '@/lib/utils';
 import Button from '../components/Button';
@@ -9,7 +10,7 @@ const navLinks = [
   { to: '/listen/', label: 'Listen', title: 'Go to Listen page' },
   { to: '/about/', label: 'About', title: 'Info about RG' },
   { to: '/contact/', label: 'Contact', title: 'Contact RG' },
-  { to: '/discography/', label: 'Discography', title: 'View Discography' },
+  { to: '/discography/', label: 'Disco', title: 'View Discography' },
   { to: '/gallery/', label: 'Gallery', title: 'View Gallery' },
 ];
 
@@ -29,6 +30,7 @@ export interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ className }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
 
   React.useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 800);
@@ -37,91 +39,95 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Hide mobile menu if switching to desktop
   React.useEffect(() => {
     if (!isMobile && menuOpen) setMenuOpen(false);
   }, [isMobile, menuOpen]);
 
+  const isActive = (path: string) => {
+    if (path === '/') return pathname === '/';
+    return pathname.startsWith(path.replace(/\/$/, ''));
+  };
+
   return (
     <header
       className={cn(
-        "relative text-white bg-black",
+        "relative border-b border-border",
         className
       )}
     >
-      <div className="flex flex-col items-center gap-4 px-4 py-4 mx-auto w-full max-w-5xl">
-        <Link to="/" className="w-full flex justify-center">
-          <img
-            src="/images/logo.jpg"
-            alt="Random Gorsey logo"
-            title="Back to the Homepage"
-            className={cn(
-              "block w-full h-auto object-contain max-w-[520px] md:max-w-[640px] lg:max-w-[720px]",
-              isMobile && "mb-2"
-            )}
-          />
+      <div className="flex items-center justify-between px-6 py-4 mx-auto w-full max-w-5xl">
+        <Link href="/" className="font-tschick-bold text-lg text-foreground uppercase tracking-[0.05em] no-underline hover:text-accent">
+          Random Gorsey
         </Link>
-        <nav aria-label="Main navigation" className="w-full">
-        {/* Desktop links */}
-        {!isMobile && (
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 justify-center p-0 m-0 list-none">
-            {navLinks.map(link => (
-              <li key={link.to}>
-                <Link
-                  to={link.to}
-                  title={link.title}
-                  className="font-tschick-bold text-[0.72rem] sm:text-xs md:text-sm lg:text-[0.95rem] font-bold text-white no-underline uppercase tracking-[0.06em] md:tracking-[0.1em] whitespace-nowrap hover:underline hover:text-yellow-400 transition-colors"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-        {/* Mobile menu button */}
-        {isMobile && (
-          <>
-            <Button
-              variant="tertiary"
-              className="flex gap-[0.4em] items-center justify-center px-[1em] py-[0.5em] font-bold cursor-pointer bg-transparent border-none text-white uppercase tracking-[0.1em]"
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
-              onClick={() => setMenuOpen(open => !open)}
-              type="button"
-              icon={menuOpen ? ChevronUp : ChevronDown}
-            >
-              Menu
-            </Button>
-            {/* Mobile dropdown menu */}
-            {menuOpen && (
-              <ul
-                id="mobile-menu"
-                className={cn(
-                  "absolute top-full right-0 left-0 z-[1000]",
-                  "flex flex-col items-center",
-                  "py-4 px-0 m-0",
-                  "bg-black border-t border-gray-600",
-                  "shadow-lg",
-                  "list-none"
-                )}
+
+        <nav aria-label="Main navigation">
+          {!isMobile && (
+            <ul className="flex gap-6 p-0 m-0 list-none">
+              {navLinks.map(link => (
+                <li key={link.to}>
+                  <Link
+                    href={link.to}
+                    title={link.title}
+                    className={cn(
+                      "font-mono-label no-underline whitespace-nowrap",
+                      isActive(link.to)
+                        ? "text-accent underline underline-offset-4"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {isMobile && (
+            <>
+              <Button
+                variant="tertiary"
+                className="flex gap-1 items-center font-mono-label text-foreground bg-transparent border-none"
+                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={menuOpen}
+                aria-controls="mobile-menu"
+                onClick={() => setMenuOpen(open => !open)}
+                type="button"
+                icon={menuOpen ? ChevronUp : ChevronDown}
               >
-                {navLinks.map(link => (
-                  <li key={link.to} className="my-2">
-                    <Link
-                      to={link.to}
-                      title={link.title}
-                      onClick={() => setMenuOpen(false)}
-                      className="font-tschick-bold text-base font-bold text-white no-underline uppercase tracking-[0.1em] hover:underline hover:text-yellow-400 transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </>
-        )}
+                Menu
+              </Button>
+              {menuOpen && (
+                <ul
+                  id="mobile-menu"
+                  className={cn(
+                    "absolute top-full right-0 left-0 z-[1000]",
+                    "flex flex-col items-center",
+                    "py-4 px-0 m-0",
+                    "bg-background border-t border-border",
+                    "list-none"
+                  )}
+                >
+                  {navLinks.map(link => (
+                    <li key={link.to} className="my-2">
+                      <Link
+                        href={link.to}
+                        title={link.title}
+                        onClick={() => setMenuOpen(false)}
+                        className={cn(
+                          "font-mono-label text-sm no-underline",
+                          isActive(link.to)
+                            ? "text-accent underline underline-offset-4"
+                            : "text-muted-foreground hover:text-foreground"
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
+          )}
         </nav>
       </div>
     </header>

@@ -1,12 +1,9 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
-import Avatar from "./Avatar";
 import SocialShare from "./SocialShare";
 import { BaseComponentProps } from "../types/common";
-import Surface from "./Surface";
 import Heading from "./Heading";
-import Text from "./Text";
 import { toAbsoluteSiteUrl } from "../config/site";
 
 /**
@@ -37,6 +34,10 @@ export interface Post {
   body: string;
   /** Media URL if applicable */
   media?: string;
+  /** Intrinsic media width for optimized image rendering */
+  mediaWidth?: number;
+  /** Intrinsic media height for optimized image rendering */
+  mediaHeight?: number;
   /** Background color for the post card */
   avatarColor?: string;
   /** Author name */
@@ -73,32 +74,13 @@ export interface PostCardProps extends Omit<BaseComponentProps, "children"> {
   headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
-/**
- * PostCard component for displaying blog post content with social sharing
- *
- * @example
- * ```tsx
- * <PostCard
- *   post={postData}
- *   showFullContent={false}
- *   onClick={(post) => navigate(`/post/${post.id}`)}
- * />
- *
- * <PostCard
- *   post={featuredPost}
- *   showFullContent={true}
- *   showSocialShare={true}
- *   truncateLength={300}
- * />
- * ```
- */
 const PostCard: React.FC<PostCardProps> = ({
   post,
   showFullContent = false,
   onClick,
   showSocialShare = true,
   truncateLength = 200,
-  showMetadata = false,
+  showMetadata: _showMetadata = false,
   headingLevel = 2,
   className,
   style,
@@ -125,30 +107,8 @@ const PostCard: React.FC<PostCardProps> = ({
     ? `${plainBody.slice(0, truncateLength)}...`
     : post.body;
 
-  const cardClasses = cn(
-    "mb-6",
-    post.featured && "border-white/[0.45]",
-    onClick && "cursor-pointer focus-visible:outline-2 focus-visible:outline-[#ff0] focus-visible:outline-offset-[3px]",
-    className
-  );
-
-  const surfaceVariant = post.featured ? "inverted" : "flat";
-  const surfaceStyle = {
-    ...(post.avatarColor ? { backgroundColor: post.avatarColor } : {}),
-    ...style,
-  };
-  // Use light/contrast text for inverted (dark) surfaces, dark/default text for flat (light) surfaces
-  const headingTone = surfaceVariant === "inverted" ? "light" : "dark";
-  const metaTone = surfaceVariant === "inverted" ? "contrast" : "default";
-  const isInteractive = Boolean(onClick);
   const isCompactTitle = headingLevel >= 4;
 
-  const headingClassName = cn(
-    "m-0 max-w-full break-normal tracking-normal md:tracking-[0.04em]",
-    isCompactTitle && "text-[clamp(1.2rem,5vw,1.4rem)] md:text-2xl"
-  );
-
-  // Route shares to an in-page anchor because /posts/:id is not a standalone route.
   const postUrl = toAbsoluteSiteUrl(`/#post-${post.id}`);
 
   const shareText =
@@ -156,18 +116,18 @@ const PostCard: React.FC<PostCardProps> = ({
     plainBody.slice(0, 120) + (plainBody.length > 120 ? "..." : "");
 
   return (
-    <Surface
-      as="article"
+    <article
       id={id}
-      className={cardClasses}
-      style={surfaceStyle}
+      className={cn(
+        "border-l-3 border-accent pl-5 py-4 mb-6",
+        onClick && "cursor-pointer",
+        className
+      )}
+      style={style}
       onClick={onClick ? handleCardClick : undefined}
       role={onClick ? "button" : "article"}
       tabIndex={onClick ? 0 : undefined}
       data-testid={testId}
-      interactive={isInteractive}
-      variant={surfaceVariant}
-      padding="lg"
       {...(onClick
         ? {
             onKeyDown: (e: React.KeyboardEvent) => {
@@ -180,140 +140,82 @@ const PostCard: React.FC<PostCardProps> = ({
         : {})}
       {...accessibilityProps}
     >
-      <Helmet>
-        <title>{post.title} | Random Gorsey</title>
-        <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={shareText} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={postUrl} />
-        <meta
-          property="og:image"
-          content={
-            post.media && post.contentType === PostContentType.IMAGE
-              ? post.media
-              : toAbsoluteSiteUrl("/images/og.jpg")
-          }
-        />
-        {post.tags && post.tags.length > 0 && (
-          <meta name="keywords" content={post.tags.join(", ")} />
+      {/* Date */}
+      <time
+        dateTime={post.timestamp}
+        className="font-mono-label text-muted-foreground block mb-2"
+      >
+        {post.timestamp}
+      </time>
+
+      {/* Title */}
+      <Heading
+        level={headingLevel}
+        className={cn(
+          "m-0 mb-2 text-foreground",
+          isCompactTitle && "text-[clamp(1.2rem,5vw,1.4rem)]"
         )}
-      </Helmet>
+        tone="light"
+      >
+        {post.title}
+      </Heading>
 
-      {/* Header section */}
-      <header className="flex flex-wrap gap-4 items-start justify-between mb-4">
-        {/* Left side: title, avatar, author */}
-        <div className="flex flex-col gap-[0.35rem] items-start text-left flex-[1_1_60%] min-w-[240px] max-w-full overflow-hidden max-md:flex-[1_1_100%]">
-          <Heading
-            level={headingLevel}
-            className={headingClassName}
-            tone={headingTone}
-          >
-            {post.title}
-          </Heading>
-          <div className="flex flex-row gap-2 items-center">
-            <Avatar avatarImage="/images/pete.jpg" size="M" />
-            <div className="flex flex-col">
-              <Text
-                as="span"
-                variant="body"
-                tone="default"
-                className="text-base tracking-[0.04em] text-gray-800"
-              >
-                {post.author}
-              </Text>
-              <Text
-                as="time"
-                variant="bodySmall"
-                tone="muted"
-                className="text-[0.85rem] text-[#555]"
-                dateTime={post.timestamp}
-              >
-                {post.timestamp}
-              </Text>
-            </div>
-          </div>
-        </div>
-
-        {/* Right side: metadata only (timestamp moved to author row) */}
-        <div className="flex flex-col gap-[0.45rem] items-end text-right flex-shrink-0 max-md:flex-[1_1_100%] max-md:items-start max-md:text-left max-md:gap-1">
-          {showMetadata && (
-            <div className="flex flex-col gap-1 items-end text-[0.85rem] uppercase tracking-[0.05em] max-md:items-start">
-              {post.views && (
-                <Text as="span" variant="caption" tone={metaTone}>
-                  {post.views} views
-                </Text>
-              )}
-              {post.likes && (
-                <Text as="span" variant="caption" tone={metaTone}>
-                  {post.likes} likes
-                </Text>
-              )}
-            </div>
-          )}
-        </div>
-      </header>
-
-      {/* Body content */}
+      {/* Body */}
       <div
-        className="mt-4 mb-3 font-europa text-[1.05rem] leading-[1.7]"
-        dangerouslySetInnerHTML={{
-          __html: displayBody,
-        }}
+        className="mt-2 mb-3 font-europa text-[1.05rem] leading-[1.7] text-muted-foreground"
+        dangerouslySetInnerHTML={{ __html: displayBody }}
       />
 
-      {/* Footer row: Read more and social share */}
-      <div className="flex flex-wrap gap-3 items-center justify-between mt-3 max-md:flex-col max-md:gap-[0.35rem] max-md:items-center">
-        <div className="max-md:flex max-md:justify-center max-md:order-1 max-md:w-full max-md:mb-1 max-md:text-center">
-          {hasLongContent && (
-            <button
-              onClick={toggleExpanded}
-              className="p-0 mr-2 font-europa text-base font-bold text-inherit underline cursor-pointer bg-transparent border-none"
-              aria-expanded={expanded}
-              aria-label={expanded ? "Show less content" : "Show more content"}
-            >
-              {expanded ? "Show Less" : "Read More"}
-            </button>
-          )}
-        </div>
-
+      {/* Read more + share */}
+      <div className="flex flex-wrap gap-3 items-center mt-3">
+        {hasLongContent && (
+          <button
+            onClick={toggleExpanded}
+            className="p-0 font-mono-label text-accent underline underline-offset-4 cursor-pointer bg-transparent border-none hover:text-foreground"
+            aria-expanded={expanded}
+            aria-label={expanded ? "Show less content" : "Show more content"}
+          >
+            {expanded ? "Show Less" : "Read More"}
+          </button>
+        )}
         {showSocialShare && (
-          <div className="ml-auto max-md:flex max-md:justify-center max-md:order-2 max-md:w-full max-md:ml-0 max-md:text-center">
+          <div className="ml-auto">
             <SocialShare url={postUrl} title={post.title} text={shareText} />
           </div>
         )}
       </div>
 
-      {/* Media content */}
+      {/* Media */}
       {post.media && post.contentType === PostContentType.IMAGE && (
-        <img
+        <Image
           src={post.media}
           alt={post.title}
           title={post.title}
-          className="w-full mt-2 rounded"
-          loading="lazy"
+          width={post.mediaWidth ?? 1200}
+          height={post.mediaHeight ?? 675}
+          sizes="100vw"
+          className="w-full mt-3"
         />
       )}
-
       {post.media && post.contentType === PostContentType.VIDEO && (
         <video
           src={post.media}
           controls
-          className="w-full mt-2 rounded"
+          className="w-full mt-3"
           preload="metadata"
           aria-label={`Video: ${post.title}`}
         />
       )}
-
       {post.media && post.contentType === PostContentType.AUDIO && (
         <audio
           src={post.media}
           controls
-          className="w-full mt-2 rounded"
+          className="w-full mt-3"
           preload="metadata"
           aria-label={`Audio: ${post.title}`}
         />
       )}
-    </Surface>
+    </article>
   );
 };
 

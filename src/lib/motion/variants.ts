@@ -29,15 +29,14 @@ import { springs, durations, eases } from './config';
  * quick fade for exit to avoid blocking navigation.
  */
 export const pageVariants: Variants = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 8 },
   enter: {
     opacity: 1,
     y: 0,
-    transition: { type: 'spring', ...springs.page },
+    transition: { type: 'spring', ...springs.snappy },
   },
   exit: {
     opacity: 0,
-    y: -10,
     transition: { duration: durations.fast },
   },
 };
@@ -82,13 +81,13 @@ export const staggerContainer: Variants = {
   initial: {},
   enter: {
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
+      staggerChildren: 0.03,
+      delayChildren: 0.05,
     },
   },
   exit: {
     transition: {
-      staggerChildren: 0.05,
+      staggerChildren: 0.02,
       staggerDirection: -1,
     },
   },
@@ -99,13 +98,13 @@ export const staggerContainer: Variants = {
  * Must be used with staggerContainer parent.
  */
 export const staggerItem: Variants = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 8 },
   enter: {
     opacity: 1,
     y: 0,
-    transition: { type: 'spring', ...springs.default },
+    transition: { type: 'spring', ...springs.snappy },
   },
-  exit: { opacity: 0, y: -10 },
+  exit: { opacity: 0, y: -4 },
 };
 
 // === MODAL/OVERLAY ANIMATIONS ===
@@ -154,13 +153,13 @@ export const modalVariants: Variants = {
  * Uses hidden/visible naming for whileInView compatibility.
  */
 export const revealVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: durations.normal,
-      ease: eases.out,
+      ease: eases.default,
     },
   },
 };
@@ -189,8 +188,8 @@ export const revealContainerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
+      staggerChildren: 0.03,
+      delayChildren: 0.05,
     },
   },
 };
@@ -200,13 +199,13 @@ export const revealContainerVariants: Variants = {
  * Must be used with revealContainerVariants parent.
  */
 export const revealItemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: durations.normal,
-      ease: eases.out,
+      ease: eases.default,
     },
   },
 };
@@ -252,15 +251,12 @@ export const textRevealContainer: Variants = {
  * Slides up and fades in with smooth ease.
  */
 export const textRevealItem: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-  },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.4,
+      duration: 0.15,
       ease: eases.default,
     },
   },
@@ -271,17 +267,13 @@ export const textRevealItem: Variants = {
  * More dramatic effect for hero headings.
  */
 export const textRevealDramatic: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 40,
-    rotateX: -90,
-  },
+  hidden: { opacity: 0, y: 20, rotateX: -45 },
   visible: {
     opacity: 1,
     y: 0,
     rotateX: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.2,
       ease: eases.default,
     },
   },

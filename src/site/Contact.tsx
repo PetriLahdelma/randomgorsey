@@ -1,0 +1,344 @@
+"use client";
+
+import React, { useState } from "react";
+import {
+  motion,
+  AnimatePresence,
+  contactVariants,
+  overlayVariants,
+  modalVariants,
+} from "@/lib/motion";
+import { cn } from "@/lib/utils";
+import styles from "./Contact.module.css";
+import emailjs from "@emailjs/browser";
+import Input from "../components/Input";
+import TextArea from "../components/TextArea";
+import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
+import Spinner from "../components/Spinner";
+import { contactFormSchema } from "../utils/validation";
+import Button from "../components/Button";
+import PageMeta from "../components/PageMeta";
+import { validateAndSanitizeContactForm, RateLimiter } from "../utils/security";
+import { VideoBackground } from "@/components/effects";
+import { KineticText } from "@/components/KineticText";
+import { Container } from "@/components/layout/Container";
+import { Stack } from "@/components/layout/Stack";
+const contactCanvasVideo = "/videos/contact_canvas.webm";
+
+const Contact: React.FC = () => {
+  const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = React.useState(true);
+  const [sending, setSending] = useState(false);
+  const [formErrors, setFormErrors] = useState<{
+    name?: string;
+    email?: string;
+    subject?: string;
+    message?: string;
+    general?: string;
+  }>({});
+
+  // Rate limiter for contact form submissions (5 attempts per minute per user)
+  const rateLimiter = new RateLimiter(5, 60 * 1000);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Initialize EmailJS
+  React.useEffect(() => {
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init(publicKey);
+    } else {
+      console.error("EmailJS public key not found in environment variables");
+    }
+  }, []);
+
+  const handleSend = () => {
+    // Check rate limiting first
+    const userIdentifier = `${name}-${email}`; // Simple identifier (in production, use IP or session)
+    if (!rateLimiter.isAllowed(userIdentifier)) {
+      const resetTime = rateLimiter.getResetTime(userIdentifier);
+      const remainingTime = Math.ceil((resetTime - Date.now()) / 1000);
+      setFormErrors({
+        general: `Too many attempts. Please wait ${remainingTime} seconds before trying again.`,
+      });
+      return;
+    }
+
+    // Security validation and sanitization
+    const securityValidation = validateAndSanitizeContactForm({
+      name,
+      email,
+      subject,
+      message,
+    });
+
+    if (!securityValidation.isValid) {
+      setFormErrors(securityValidation.errors);
+      return;
+    }
+
+    // Use sanitized data for further processing
+    const sanitizedData = securityValidation.sanitizedData;
+
+    // Additional validation with zod (keeping existing validation)
+    const result = contactFormSchema.safeParse(sanitizedData);
+    if (!result.success) {
+      // Map zod errors to formErrors
+      const errors: {
+        name?: string;
+        email?: string;
+        subject?: string;
+        message?: string;
+      } = {};
+      result.error.issues.forEach((err) => {
+        if (err.path[0])
+          errors[err.path[0] as keyof typeof errors] = err.message;
+      });
+      setFormErrors(errors);
+      return;
+    }
+    setFormErrors({});
+
+    // Honeypot spam check
+    const honeypotField = document.querySelector(
+      "input[name=honeypot]"
+    ) as HTMLInputElement;
+    if (honeypotField && honeypotField.value) {
+      // Silently fail for spam (don't give feedback to bots)
+      console.warn("Honeypot field filled - potential spam");
+      return;
+    }
+
+    setSending(true);
+
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("EmailJS configuration missing in environment variables");
+      setSending(false);
+      setFormErrors((prev) => ({
+        ...prev,
+        general: "Email service configuration error. Please try again later.",
+      }));
+      return;
+    }
+
+    emailjs
+      .send(
+        serviceId,
+        templateId,
+        {
+          name: sanitizedData.name,
+          email: sanitizedData.email,
+          subject: sanitizedData.subject,
+          message: sanitizedData.message,
+        },
+        publicKey
+      )
+      .then(() => {
+        setIsModalOpen(true);
+        setSending(false);
+        // Clear form on success
+        setName("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
+      })
+      .catch((error) => {
+        console.error("EmailJS error:", error);
+        setSending(false);
+        setFormErrors((prev) => ({
+          ...prev,
+          general: "Failed to send message. Please try again later.",
+        }));
+      });
+  };
+
+  const handleInputChange = (
+    field: "name" | "email" | "subject" | "message",
+    value: string
+  ) => {
+    if (field === "name") setName(value);
+    if (field === "email") setEmail(value);
+    if (field === "subject") setSubject(value);
+    if (field === "message") setMessage(value);
+    // Remove error for this field if value is now valid
+    const result = contactFormSchema.safeParse({
+      name: field === "name" ? value : name,
+      email: field === "email" ? value : email,
+      subject: field === "subject" ? value : subject,
+      message: field === "message" ? value : message,
+    });
+    if (result.success) {
+      setFormErrors((prev) => ({ ...prev, [field]: undefined }));
+    } else {
+      const errorForField = result.error.issues.find(
+        (err) => err.path[0] === field
+      );
+      setFormErrors((prev) => ({
+        ...prev,
+        [field]: errorForField ? errorForField.message : undefined,
+      }));
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    // Reset form fields and errors after closing modal
+    setName("");
+    setEmail("");
+    setSubject("");
+    setMessage("");
+    setFormErrors({});
+  };
+
+  return (
+    <>
+      <PageMeta
+        title="Contact | Random Gorsey"
+        description="Send a message to Random Gorsey."
+        path="/contact/"
+      />
+      {/* Performance-tiered video background */}
+      <VideoBackground
+        src={contactCanvasVideo}
+        poster="/images/contact-poster.jpg"
+        overlayOpacity={0.25}
+      />
+      <motion.div
+        className={cn(styles["contact-container"], "grain-overlay")}
+        variants={contactVariants}
+        initial="initial"
+        animate="enter"
+        exit="exit"
+      >
+        {loading && <Spinner />}
+        {sending && <Spinner />}
+        {!loading && !sending && (
+          <Container size="sm" padding="md">
+            <Stack gap="md" align="stretch">
+              <KineticText
+                as="h1"
+                splitBy="chars"
+                variant="default"
+                staggerDelay={0.02}
+                triggerOnView={false}
+              >
+                Contact
+              </KineticText>
+              <div className={styles["contact-row"]}>
+                <div>
+                  <Input
+                    type="text"
+                    value={name}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
+                    placeholder="Your Name"
+                    label="Your Name"
+                    className={styles["contact-input"]}
+                    error={formErrors.name}
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    placeholder="@ Your Email"
+                    label="Email"
+                    className={styles["contact-input"]}
+                    error={formErrors.email}
+                  />
+                </div>
+              </div>
+              <div className={styles["subject-row"]}>
+                <Input
+                  type="text"
+                  value={subject}
+                  onChange={(e) => handleInputChange("subject", e.target.value)}
+                  placeholder="Subject"
+                  label="Subject"
+                  className={styles["contact-input"]}
+                  error={formErrors.subject}
+                />
+              </div>
+              <TextArea
+                value={message}
+                onChange={(e) => handleInputChange("message", e.target.value)}
+                placeholder="Write your message here..."
+                label="Message"
+                className={styles["contact-textarea"]}
+                error={formErrors.message}
+              />
+              {formErrors.general && (
+                <div className={styles["error-message"]} role="alert">
+                  {formErrors.general}
+                </div>
+              )}
+              <input
+                type="text"
+                name="honeypot"
+                style={{ display: "none" }}
+                value=""
+                onChange={() => {}}
+              />
+              <Button
+                variant="primary"
+                onClick={handleSend}
+                icon={<PaperAirplaneIcon className={styles["contact-icon"]} />}
+                className={styles["contact-button"]}
+                aria-label="Send message"
+              >
+                Send
+              </Button>
+              <div className={styles["disclaimer"]}>
+                <p className={styles["disclaimer-text"]}>
+                  By submitting this form, you agree that your personal
+                  information (name, email, and message) will be used to respond
+                  to your inquiry. Your data will not be shared with third parties
+                  and will be handled in accordance with our privacy practices. We
+                  may retain your message for record-keeping purposes.
+                </p>
+              </div>
+            </Stack>
+          </Container>
+        )}
+      </motion.div>
+      {/* Success modal with motion variants */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+            variants={overlayVariants}
+            initial="initial"
+            animate="enter"
+            exit="exit"
+          >
+            <motion.div
+              className={styles["modal"]}
+              variants={modalVariants}
+              initial="initial"
+              animate="enter"
+              exit="exit"
+            >
+              <p>Message sent successfully!</p>
+              <Button onClick={handleCloseModal} className={styles["modal-close-button"]}>
+                Close
+              </Button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default Contact;

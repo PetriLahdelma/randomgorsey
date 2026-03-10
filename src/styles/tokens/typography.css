@@ -54,13 +54,13 @@
   --text-4xl: clamp(1.802rem, 1.54rem + 1.31vw, 2.8rem);
   --text-4xl--line-height: 1.2;
 
-  /* 5XL - Hero headings (h1) */
-  --text-5xl: clamp(2.027rem, 1.69rem + 1.69vw, 3.36rem);
-  --text-5xl--line-height: 1.1;
+  /* 5XL - Hero headings */
+  --text-5xl: clamp(2rem, 5vw, 4rem);
+  --text-5xl--line-height: 1.0;
 
-  /* 6XL - Display text, maximum impact */
-  --text-6xl: clamp(2.281rem, 1.85rem + 2.16vw, 4.032rem);
-  --text-6xl--line-height: 1.05;
+  /* 6XL - Display text, MAXIMUM IMPACT */
+  --text-6xl: clamp(3rem, 8vw, 6rem);
+  --text-6xl--line-height: 0.95;
 
   /* ========================================
    * LETTER SPACING TOKENS
