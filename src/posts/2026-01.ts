@@ -54,7 +54,7 @@ const jan2026: Post[] = [
     body: `<p>January playlist is ready. This one has a contemplative energy: lots of slow-building tracks, deep pads, and rhythms that don't rush anywhere. Music for long dark evenings.</p>
 <p>I've included a few of the new releases I mentioned in the "First Finds" post, plus some older tracks that I rediscovered this month. There's a Kerri Chandler record from the late 90s that I pulled out of a crate in a Kallio second-hand shop and it stopped me dead. Sometimes the old stuff hits hardest.</p>
 <p>The playlist opens slow and gets gradually more energetic towards the end — think of it as a night out compressed into two hours. From the pre-game coffee to the 3am peak to the walk home through snow.</p>
-<br /><iframe title="January 2026 Picks" style="border-radius: 12px;" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<br /><iframe title="January 2026 Picks" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
     avatarColor: '#1a1a3e',
     author: 'Random Gorsey',
     tags: ['playlist', 'january', '2026'],

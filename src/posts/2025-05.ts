@@ -34,7 +34,7 @@ const may2025: Post[] = [
 
 <p>Palms Trax — "To Paradise." This is the one. If a track can sound like sunlight hitting water, this is it. The arpeggiated synth line is so simple but it carries this incredible sense of forward motion, like you're moving towards something good. I've been playing it on my bike rides along the waterfront and it's almost too perfect for that context.</p>
 
-<iframe title="Spring playlist picks" style="border-radius: 12px;" src="https://open.spotify.com/embed/track/5AaOIyOh3IjjISgMAnJGnQ?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<iframe title="Spring playlist picks" src="https://open.spotify.com/embed/track/5AaOIyOh3IjjISgMAnJGnQ?utm_source=generator" width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
 <p>Peggy Gou — "Starry Night." Another one that just radiates warmth. The vocal hook is infectious without being annoying, which is a fine line that she walks effortlessly. It's pop-house done right, accessible without sacrificing any of the underground quality that makes it interesting.</p>
 
@@ -101,7 +101,7 @@ const may2025: Post[] = [
 <p><strong>3. Hunee — "Rare"</strong></p>
 <p>I know this isn't new but I'm putting it on the list because I played it three times in a row last Tuesday and it made me late for dinner. That piano riff is one of the greatest things in dance music. It's so joyful, so unashamedly melodic. Every time the track breaks down and the piano comes back in, it feels like a reward.</p>
 
-<iframe title="Hunee Rare" style="border-radius: 12px;" src="https://open.spotify.com/embed/track/3uyHDWkEgXYS6IFxdSYZbc?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<iframe title="Hunee Rare" src="https://open.spotify.com/embed/track/3uyHDWkEgXYS6IFxdSYZbc?utm_source=generator" width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
 <p><strong>4. Mall Grab — "Sunflower"</strong></p>
 <p>Pure lo-fi bliss. The chords on this are so warm they practically glow. It's a simple track (not much happens structurally) but the mood is so perfectly sustained that you don't want it to change. This is the kind of music that makes you want to make music.</p>

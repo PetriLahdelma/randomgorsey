@@ -37,7 +37,7 @@ const mar2025: Post[] = [
 
 <p>I've been thinking a lot about economy in production lately. It's tempting, especially working in Ableton where you have unlimited tracks, to keep adding layers. Another synth line, another percussion element, another effect. But the tracks that really stick with me are usually the ones where every element earns its place. "Nana" is a masterclass in that. Nothing is there for decoration. Everything is structural.</p>
 
-<iframe title="Rush Hour Records" style="border-radius: 12px;" src="https://open.spotify.com/embed/track/3HT9kJYNMROOnOBJqfeDKE?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<iframe title="Rush Hour Records" src="https://open.spotify.com/embed/track/3HT9kJYNMROOnOBJqfeDKE?utm_source=generator" width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
 <p>If you like this, dig deeper into the Rush Hour catalog. It's one of those labels where almost everything they put out is worth your time. And check Antal's Dekmantel sets. The man knows how to build a night.</p>`,
     author: 'Random Gorsey',
@@ -77,7 +77,7 @@ const mar2025: Post[] = [
 
 <p>On the deeper end, I've been playing a lot of Saoirse's recent mixes. She has this ability to hold a vibe for hours without it getting monotonous. There's always this thread of tension running through her sets, like something big is about to happen but she keeps pulling back, making you wait for it. Brilliant DJ.</p>
 
-<iframe title="Spotify Playlist" style="border-radius: 12px;" src="https://open.spotify.com/embed/track/2aJDlirz6v2a4HREki98cP?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<iframe title="Spotify Playlist" src="https://open.spotify.com/embed/track/2aJDlirz6v2a4HREki98cP?utm_source=generator" width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
 <p>Some other highlights from this month:</p>
 

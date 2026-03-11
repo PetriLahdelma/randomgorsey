@@ -29,7 +29,7 @@ const jul24: Post = {
 <p>The back half gets a bit deeper and slower as a nod to those late July evenings where the energy shifts from frenetic to contemplative. A couple of Antal selections, a DJ Koze edit that makes me emotional every time, and some newer bits from labels I've been watching like Lobster Theremin and Shall Not Fade.</p>
 <p>Perfect for: cycling along the seafront at sunset, that weird 11pm light, pretending you're not sunburned.</p>
 <p>&nbsp;</p>
-<iframe title="July Heat Tape" style="border-radius: 12px;" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<iframe title="July Heat Tape" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
   avatarColor: '#e76f51',
   author: 'Random Gorsey',
   tags: ['playlist', 'summer', 'lo-fi house'],

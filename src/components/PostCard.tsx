@@ -216,7 +216,7 @@ const PostCard: React.FC<PostCardProps> = ({
 
       {/* Body */}
       <div
-        className="mt-6 mb-3 font-europa text-[1.05rem] leading-[1.7] text-[oklch(65%_0_0deg)] [&>p]:mb-6 [&>p:last-child]:mb-0"
+        className="mt-6 mb-3 font-europa text-[1.05rem] leading-[1.7] text-[oklch(65%_0_0deg)] [&>p]:mb-6 [&>p:last-child]:mb-0 [&_iframe]:w-full [&_iframe]:my-6 [&_iframe]:border-0 [&_iframe]:rounded-none [&_iframe]:bg-[oklch(6%_0_0deg)]"
         dangerouslySetInnerHTML={{ __html: displayBody }}
       />
 

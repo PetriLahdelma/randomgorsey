@@ -55,7 +55,7 @@ const nov2025: Post[] = [
 <p>Heavy on the lo-fi house this month. Mall Grab's recent output has been incredible and there are a couple of his tracks in here that I've been hammering. Also some deeper cuts from Chaos in the CBD. Those guys never miss. Their production is so clean but still has that hand-made warmth.</p>
 <p>There's a section in the middle that gets pretty ambient. I've been listening to a lot of quiet music between studio sessions and some of that crept in. A few Floating Points-adjacent bits that work perfectly for those grey Helsinki afternoons when you're staring out the window with a coffee.</p>
 <p>Enjoy, and let me know if any of these are new to you.</p>
-<br /><iframe title="November 2025 Picks" style="border-radius: 12px;" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<br /><iframe title="November 2025 Picks" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
     avatarColor: '#1a1a33',
     author: 'Random Gorsey',
     tags: ['playlist', 'november', 'lo-fi-house'],

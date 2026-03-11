@@ -40,7 +40,7 @@ const oct2025: Post[] = [
 <p>Highlights: there's a new Binh track on there that's been stuck in my head for weeks. Just a relentless groove with these tiny melodic fragments floating over the top. Also included a couple of Lobster Theremin bits that dropped recently. That label continues to be one of the most consistent in the game.</p>
 <p>The closing track is a long ambient piece that I've been using as my wind-down after late nights. Perfect for the walk home through empty Helsinki streets at 3am.</p>
 <p>Hit play, turn the lights down.</p>
-<br /><iframe title="October 2025 Picks" style="border-radius: 12px;" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<br /><iframe title="October 2025 Picks" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
     avatarColor: '#0d0d1a',
     author: 'Random Gorsey',
     tags: ['playlist', 'october', 'dark'],

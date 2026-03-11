@@ -65,7 +65,7 @@ const sep34: Post = {
 <p>The back end gets contemplative. A couple of ambient-leaning pieces, a Floating Points track that I keep coming back to because it does this thing where the rhythm dissolves and reforms over four minutes in a way that feels like breathing. And closing with something stripped and honest: just a drum machine, a chord, and space. September music.</p>
 <p>As always, best experienced in order but shuffle won't ruin it. Headphones recommended for this one more than usual.</p>
 <p>&nbsp;</p>
-<iframe title="September Selections playlist" style="border-radius: 12px;" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<iframe title="September Selections playlist" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
   avatarColor: '#264653',
   author: 'Random Gorsey',
   tags: ['playlist', 'september', 'autumn'],

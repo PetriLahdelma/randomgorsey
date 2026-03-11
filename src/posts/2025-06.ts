@@ -45,7 +45,7 @@ const jun2: Post = {
 <p>A few highlights: there's a Chaos in the CBD track in there that I keep coming back to. Their stuff always sounds like it was recorded in a room with open windows. Also snuck in some Palms Trax because you can't do summer without at least one of his edits, and a deeper Floating Points cut that most people probably missed. There's some newer stuff too from producers I've been following on Bandcamp, the kind of tracks that have 200 plays but deserve 200,000.</p>
 <p>Hit shuffle or play it front to back, I've tried to make both work. And if you find something new in there that makes your afternoon a little better, that's the whole point.</p>
 <p>&nbsp;</p>
-<iframe title="Random Recommends playlist" style="border-radius: 12px;" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<iframe title="Random Recommends playlist" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
   avatarColor: '#00e0e0',
   author: 'Random Gorsey',
   tags: ['playlist', 'summer', 'recommendations'],

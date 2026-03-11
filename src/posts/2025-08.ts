@@ -46,7 +46,7 @@ const aug29: Post = {
 <p>Heavy rotation this month has been anything on the Meda Fury label. They've been putting out these immaculate 12"s that sit right at the intersection of lo-fi house and deep house: warm without being cheesy, lo-fi without being lazy. Also been revisiting some classic Kerri Chandler bits because his music has this timeless quality where it sounds as relevant now as it did twenty years ago. There's a reason he's still the benchmark.</p>
 <p>The tail end of the playlist gets more downtempo: some ambient pieces, a couple of slower grooves that could soundtrack a late-night walk along the shore. August endings deserve music that knows how to be still.</p>
 <p>&nbsp;</p>
-<iframe title="August Picks playlist" style="border-radius: 12px;" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<iframe title="August Picks playlist" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
   avatarColor: '#d4a373',
   author: 'Random Gorsey',
   tags: ['playlist', 'august', 'deep-house'],

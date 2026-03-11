@@ -61,7 +61,7 @@ const dec2025: Post[] = [
 <p>2025 felt like a year where the underground got stronger while the mainstream dance music world continued doing its thing. The gap between hype and substance widened, and I found myself spending more time on Bandcamp and less on algorithmic playlists. That feels healthy. The music that mattered to me this year was the stuff I had to look for, not the stuff that was pushed at me.</p>
 
 <p>Full playlist below. It's long (about five hours) so treat it as a journey rather than background music. Start from the top and let it take you through the year.</p>
-<br /><iframe title="Best of 2025" style="border-radius: 12px;" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<br /><iframe title="Best of 2025" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
     avatarColor: '#ff3366',
     author: 'Random Gorsey',
     tags: ['playlist', 'best-of', '2025', 'year-end'],

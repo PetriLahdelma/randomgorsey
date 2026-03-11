@@ -55,7 +55,7 @@ const feb2026: Post[] = [
     body: `<p>February playlist. Possibly my favourite one yet. There's a cohesion to this selection that happened by accident. Everything sits in this zone between meditative and groovy. Not quite ambient, not quite dance music. That liminal space where lo-fi house lives at its best.</p>
 <p>I went deep on Bandcamp this month and found some incredible stuff from producers I'd never heard of. There's a track in here from a Japanese artist making lo-fi house with traditional instrument samples and it's one of the most original things I've heard in ages. Also a couple of South African producers blending house music with local rhythms in a way that feels completely fresh.</p>
 <p>The playlist closes with a long ambient piece recorded in a cathedral. I know that's a left turn from the rest of the selection but sometimes you need to end the night somewhere quiet. Let it play out.</p>
-<br /><iframe title="February 2026 Picks" style="border-radius: 12px;" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<br /><iframe title="February 2026 Picks" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
     avatarColor: '#2e2e3e',
     author: 'Random Gorsey',
     tags: ['playlist', 'february', '2026'],
