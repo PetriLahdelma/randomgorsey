@@ -29,7 +29,7 @@ import { springs, durations, eases } from './config';
  * quick fade for exit to avoid blocking navigation.
  */
 export const pageVariants: Variants = {
-  initial: { opacity: 0, y: 8 },
+  initial: { opacity: 0, y: 12 },
   enter: {
     opacity: 1,
     y: 0,
@@ -81,13 +81,13 @@ export const staggerContainer: Variants = {
   initial: {},
   enter: {
     transition: {
-      staggerChildren: 0.03,
-      delayChildren: 0.05,
+      staggerChildren: 0.06,
+      delayChildren: 0.08,
     },
   },
   exit: {
     transition: {
-      staggerChildren: 0.02,
+      staggerChildren: 0.03,
       staggerDirection: -1,
     },
   },
@@ -98,7 +98,7 @@ export const staggerContainer: Variants = {
  * Must be used with staggerContainer parent.
  */
 export const staggerItem: Variants = {
-  initial: { opacity: 0, y: 8 },
+  initial: { opacity: 0, y: 12 },
   enter: {
     opacity: 1,
     y: 0,
@@ -153,7 +153,7 @@ export const modalVariants: Variants = {
  * Uses hidden/visible naming for whileInView compatibility.
  */
 export const revealVariants: Variants = {
-  hidden: { opacity: 0, y: 8 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
@@ -188,8 +188,8 @@ export const revealContainerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.03,
-      delayChildren: 0.05,
+      staggerChildren: 0.06,
+      delayChildren: 0.08,
     },
   },
 };
@@ -199,7 +199,7 @@ export const revealContainerVariants: Variants = {
  * Must be used with revealContainerVariants parent.
  */
 export const revealItemVariants: Variants = {
-  hidden: { opacity: 0, y: 8 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
@@ -240,8 +240,8 @@ export const textRevealContainer: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.03,
-      delayChildren: 0.1,
+      staggerChildren: 0.06,
+      delayChildren: 0.12,
     },
   },
 };
@@ -256,7 +256,7 @@ export const textRevealItem: Variants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.15,
+      duration: 0.35,
       ease: eases.default,
     },
   },
@@ -267,13 +267,13 @@ export const textRevealItem: Variants = {
  * More dramatic effect for hero headings.
  */
 export const textRevealDramatic: Variants = {
-  hidden: { opacity: 0, y: 20, rotateX: -45 },
+  hidden: { opacity: 0, y: 12, rotateX: -45 },
   visible: {
     opacity: 1,
     y: 0,
     rotateX: 0,
     transition: {
-      duration: 0.2,
+      duration: 0.5,
       ease: eases.default,
     },
   },

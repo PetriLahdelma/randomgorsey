@@ -1,38 +1,38 @@
 /**
  * Motion Configuration Constants
  *
- * Punk timing: fast, snappy, immediate.
+ * Gallery timing: smooth, deliberate, elegant.
  */
 
 export const springs = {
-  /** Punk snap — hard, immediate */
-  snappy: { stiffness: 500, damping: 30, mass: 1 },
-  /** Default — still fast */
-  default: { stiffness: 400, damping: 28, mass: 1 },
-  /** Gentle — barely */
-  gentle: { stiffness: 300, damping: 25, mass: 1 },
+  /** Snappy — responsive but smooth */
+  snappy: { stiffness: 300, damping: 30, mass: 1 },
+  /** Default — balanced gallery feel */
+  default: { stiffness: 260, damping: 28, mass: 1 },
+  /** Gentle — slow, graceful */
+  gentle: { stiffness: 200, damping: 25, mass: 1 },
   /** Bouncy — use sparingly */
-  bouncy: { stiffness: 500, damping: 12, mass: 1 },
-  /** Page — quick settle */
-  page: { stiffness: 400, damping: 30, mass: 1 },
-  /** Dramatic — still fast but heavier */
-  dramatic: { stiffness: 500, damping: 30, mass: 1.5 },
+  bouncy: { stiffness: 300, damping: 14, mass: 1 },
+  /** Page — smooth settle */
+  page: { stiffness: 260, damping: 30, mass: 1 },
+  /** Dramatic — heavy, cinematic */
+  dramatic: { stiffness: 300, damping: 30, mass: 1.5 },
 } as const;
 
 export const durations = {
   instant: 0,
-  fast: 0.08,
-  normal: 0.15,
-  slow: 0.25,
-  slower: 0.35,
+  fast: 0.2,
+  normal: 0.35,
+  slow: 0.5,
+  slower: 0.7,
 } as const;
 
 export const eases = {
-  /** Punk ease — fast attack, hard stop */
-  default: [0.16, 1, 0.3, 1] as const,
+  /** Gallery ease — smooth attack, gentle deceleration */
+  default: [0.22, 1, 0.36, 1] as const,
   in: [0.4, 0, 1, 1] as const,
-  out: [0.16, 1, 0.3, 1] as const,
-  inOut: [0.16, 1, 0.3, 1] as const,
+  out: [0.22, 1, 0.36, 1] as const,
+  inOut: [0.22, 1, 0.36, 1] as const,
 } as const;
 
 // === TYPE EXPORTS ===
