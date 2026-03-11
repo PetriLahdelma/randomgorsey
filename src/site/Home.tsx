@@ -87,7 +87,7 @@ const Home: React.FC = () => {
           <Stack gap="lg">
             {/* Featured post — latest, rendered large with no truncation */}
             {featuredPost && (
-              <section aria-label="Featured post">
+              <RevealOnScroll as="section" aria-label="Featured post">
                 <PostCard
                   id={`post-${featuredPost.id}`}
                   post={featuredPost}
@@ -96,7 +96,7 @@ const Home: React.FC = () => {
                   showFullContent
                   className="border-[oklch(12%_0_0deg)]"
                 />
-              </section>
+              </RevealOnScroll>
             )}
 
             {/* Posts — single column feed */}
@@ -104,12 +104,13 @@ const Home: React.FC = () => {
               <section aria-label="All posts">
                 <Stack gap="lg">
                   {remainingPosts.map((post) => (
-                    <PostCard
-                      key={post.id}
-                      id={`post-${post.id}`}
-                      post={post}
-                      headingLevel={3}
-                    />
+                    <RevealOnScroll key={post.id} amount={0.2}>
+                      <PostCard
+                        id={`post-${post.id}`}
+                        post={post}
+                        headingLevel={3}
+                      />
+                    </RevealOnScroll>
                   ))}
                 </Stack>
               </section>
