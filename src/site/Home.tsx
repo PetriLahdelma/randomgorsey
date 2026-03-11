@@ -83,7 +83,7 @@ const Home: React.FC = () => {
         animate="enter"
         exit="exit"
       >
-        <Container size="sm" padding="md" className="py-6">
+        <Container size="lg" padding="md" className="py-6">
           <Stack gap="lg">
             {/* Featured post — latest, rendered large with no truncation */}
             {featuredPost && (
@@ -99,10 +99,10 @@ const Home: React.FC = () => {
               </section>
             )}
 
-            {/* Post grid — responsive 1-col / 2-col */}
+            {/* Posts — single column feed */}
             {remainingPosts.length > 0 && (
               <section aria-label="All posts">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Stack gap="lg">
                   {remainingPosts.map((post) => (
                     <PostCard
                       key={post.id}
@@ -111,7 +111,7 @@ const Home: React.FC = () => {
                       headingLevel={3}
                     />
                   ))}
-                </div>
+                </Stack>
               </section>
             )}
 

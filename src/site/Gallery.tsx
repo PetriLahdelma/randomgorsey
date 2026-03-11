@@ -121,7 +121,7 @@ const Gallery: React.FC = () => {
                 as="h1"
                 splitBy="words"
                 variant="default"
-                className="mx-auto w-full max-w-[90%] text-center uppercase tracking-[0.02em] text-[clamp(1.5rem,4.8vw,2.6rem)]"
+                className="mx-auto w-full max-w-[90%] text-center uppercase tracking-[0.02em] text-[clamp(1.5rem,4.8vw,2.6rem)] !text-black [&_*]:!text-black"
               >
                 Gallery
               </KineticText>

@@ -49,7 +49,7 @@ const About: React.FC = () => {
         animate="enter"
         exit="exit"
       >
-        <Container size="prose" padding="md" className="py-8">
+        <Container size="md" padding="lg" className="py-8 text-left bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] my-8">
           <Stack gap="xl">
             {loading && <Spinner className="border-t-accent" />}
 
@@ -86,7 +86,7 @@ const About: React.FC = () => {
             {/* Bio text */}
             <RevealOnScroll>
               <p className="text-base leading-relaxed">
-                <HoverWords>Helsinki-based producer Random Gorsey aka DJ Pizza Hut makes warm, nostalgic lo-fi house and electronic music. Soulful chords, minimalist grooves, mid-paced and high-energy. Connected to both the Helsinki and Berlin electronic scenes.</HoverWords>
+                <HoverWords>Helsinki-based producer Random Gorsey aka DJ Pizza Hut makes warm, nostalgic lo-fi house and electronic music. Soulful chords, minimalist grooves, mid-paced and high-energy. Connected to both the Helsinki and global electronic scenes.</HoverWords>
               </p>
             </RevealOnScroll>
 

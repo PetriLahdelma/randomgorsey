@@ -32,11 +32,11 @@ const releases: Release[] = [
   {
     title: 'So Long Spectrum',
     catalog: 'FIRGO2100004',
-    year: 2022,
+    year: 2021,
     image: SoLong,
     bandcamp: 'https://randomgorsey.bandcamp.com/track/so-long-spectrum',
     spotify: 'https://open.spotify.com/artist/54Vv9rlCqX2nW2V0tXw33q',
-    tracks: ['So Long Spectrum'],
+    tracks: ['So long spectrum'],
   },
   {
     title: 'The Customer is Always Right EP',
@@ -45,7 +45,7 @@ const releases: Release[] = [
     image: Customer,
     bandcamp: 'https://randomgorsey.bandcamp.com/album/the-customer-is-always-right',
     spotify: 'https://open.spotify.com/artist/54Vv9rlCqX2nW2V0tXw33q',
-    tracks: ['The Customer Is Always Right', 'Deli Counter', 'Returns Policy'],
+    tracks: ['Chillax Karen', 'The Customer is Always Right', 'Fuck Face Masks'],
   },
 ];
 
@@ -64,7 +64,7 @@ const Discography: React.FC = () => {
         overlayOpacity={0.3}
       />
       <motion.div
-        className="mx-auto w-full max-w-2xl px-4 py-8 font-sans leading-relaxed text-foreground grain-overlay sm:px-6 lg:px-8"
+        className="mx-auto w-full max-w-screen-lg px-4 py-8 font-sans leading-relaxed text-foreground grain-overlay sm:px-6 lg:px-8 text-left"
         variants={discographyVariants}
         initial="initial"
         animate="enter"
@@ -120,12 +120,20 @@ const Discography: React.FC = () => {
                         <p className="font-mono-label text-muted-foreground mt-1">
                           {release.catalog} &middot; {release.year}
                         </p>
-                        {release.tracks && (
-                          <ol className="mt-4 space-y-1 list-decimal list-inside text-sm text-muted-foreground">
-                            {release.tracks.map((track) => (
-                              <li key={track}>{track}</li>
-                            ))}
-                          </ol>
+                        {release.tracks && release.tracks.length > 1 && (
+                          <details className="mt-4">
+                            <summary className="cursor-pointer font-mono-label text-sm text-accent underline underline-offset-4 hover:text-foreground transition-colors list-none">
+                              Tracklist
+                            </summary>
+                            <ol className="mt-2 space-y-1 list-decimal list-inside text-sm text-muted-foreground">
+                              {release.tracks.map((track) => (
+                                <li key={track}>{track}</li>
+                              ))}
+                            </ol>
+                          </details>
+                        )}
+                        {release.tracks && release.tracks.length === 1 && (
+                          <p className="mt-4 text-sm text-muted-foreground">{release.tracks[0]}</p>
                         )}
                       </div>
                       <div className="flex flex-wrap gap-3 mt-6">

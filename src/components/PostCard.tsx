@@ -135,21 +135,34 @@ const PostCard: React.FC<PostCardProps> = ({
     <article
       id={id}
       className={cn(
-        "bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] p-8 mb-6 transition-colors hover:bg-[oklch(10%_0_0deg)]",
-        onClick && "cursor-pointer",
+        "bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] p-8 mb-6 transition-colors hover:bg-[oklch(10%_0_0deg)] text-left",
+        (onClick || shouldShowReadMore) && "cursor-pointer",
         className
       )}
       style={style}
-      onClick={onClick ? handleCardClick : undefined}
-      role={onClick ? "button" : "article"}
-      tabIndex={onClick ? 0 : undefined}
+      onClick={(e) => {
+        // Don't expand if clicking on interactive elements inside
+        const target = e.target as HTMLElement;
+        if (target.closest("button, a, [role='menu']")) return;
+        if (shouldShowReadMore) {
+          toggleExpanded();
+        } else if (onClick) {
+          handleCardClick();
+        }
+      }}
+      role={onClick || shouldShowReadMore ? "button" : "article"}
+      tabIndex={onClick || shouldShowReadMore ? 0 : undefined}
       data-testid={testId}
-      {...(onClick
+      {...((onClick || shouldShowReadMore)
         ? {
             onKeyDown: (e: React.KeyboardEvent) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
-                handleCardClick();
+                if (shouldShowReadMore) {
+                  toggleExpanded();
+                } else if (onClick) {
+                  handleCardClick();
+                }
               }
             },
           }
@@ -185,7 +198,7 @@ const PostCard: React.FC<PostCardProps> = ({
 
       {/* Body */}
       <div
-        className="mt-2 mb-3 font-europa text-[1.05rem] leading-[1.7] text-muted-foreground"
+        className="mt-6 mb-3 font-europa text-[1.05rem] leading-[1.7] text-muted-foreground [&>p]:mb-6 [&>p:last-child]:mb-0"
         dangerouslySetInnerHTML={{ __html: displayBody }}
       />
 
