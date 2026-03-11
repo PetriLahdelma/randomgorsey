@@ -11,7 +11,7 @@ describe("NotFound Page", () => {
       </HelmetProvider>
     );
     expect(
-      screen.getByRole("heading", { name: /Lost in the mix/i })
+      screen.getByRole("heading", { name: /Signal Not Found/i })
     ).toBeInTheDocument();
   });
 
