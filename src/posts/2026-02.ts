@@ -44,7 +44,7 @@ const feb2026: Post[] = [
     contentType: 'link',
     category: 'playlist',
     body: `<p>February playlist. Went deep on Bandcamp this month and ended up somewhere between meditative and groovy — not quite ambient, not quite dance music. Found this Japanese producer making lo-fi house with traditional instrument samples that I've been obsessing over. A few South African artists in there too doing something I hadn't heard before. Closes with a long ambient piece. Let it run.</p>
-<br /><iframe title="February 2026 Picks" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<br /><iframe title="RA Exchange — EX.763 Theo Parrish" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ra-exchange/ex763-theo-parrish&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
     avatarColor: '#2e2e3e',
     author: 'Random Gorsey',
     tags: ['playlist', 'february', '2026'],

@@ -49,7 +49,7 @@ const nov2025: Post[] = [
     category: 'playlist',
     body: `<p>This one came together without much effort, which is usually a good sign. Heavy on the lo-fi house side. There's a section in the middle that goes pretty ambient, which crept in from the quiet stuff I've been putting on between studio sessions. Grey Helsinki afternoons require a certain kind of music.</p>
 <p>Enjoy.</p>
-<br /><iframe title="November 2025 Picks" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<br /><iframe title="SPANDAU20 — SPND20 Mixtape by Gary Beck" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/spandau20/spnd20-mixtape-by-gary-beck&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
     avatarColor: '#1a1a33',
     author: 'Random Gorsey',
     tags: ['playlist', 'november', 'lo-fi-house'],

@@ -39,7 +39,7 @@ const aug29: Post = {
 <p>This playlist reflects that. Warmer and deeper than the July stuff, less about energy, more about feeling. Rolling basslines that don't rush anywhere. The kind of thing you put on when you're watching the light change through the window and you want the music to match that slow drift.</p>
 <p>The tail end gets more downtempo. Some ambient pieces, a couple of slower grooves for a late walk along the shore. August endings deserve music that knows how to be still.</p>
 <p>&nbsp;</p>
-<iframe title="August Picks playlist" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<iframe title="Charles Moon — Soft Debris Mix" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charlesmxxn/charles-moon-soft-debris&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
   avatarColor: '#d4a373',
   author: 'Random Gorsey',
   tags: ['playlist', 'august', 'deep-house'],

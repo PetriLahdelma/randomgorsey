@@ -30,7 +30,7 @@ const jul24: Post = {
 <p>Perfect for cycling along the seafront at sunset. That weird 11pm light. Pretending you're not sunburned.</p>
 
 <p>&nbsp;</p>
-<iframe title="July Heat Tape" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<iframe title="Charles Moon — HTS" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charlesmxxn/hts&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
   avatarColor: '#e76f51',
   author: 'Random Gorsey',
   tags: ['playlist', 'summer', 'lo-fi house'],

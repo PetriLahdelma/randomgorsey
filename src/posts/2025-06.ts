@@ -72,7 +72,7 @@ const jun2: Post = {
 <p>Hit shuffle or play front to back, I've tried to make both work.</p>
 
 <p>&nbsp;</p>
-<iframe title="Random Recommends playlist" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<iframe title="OLLI [KOPONEN] — Third Place 28-06-2025" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ollikoponen/third-place-28-06-2025&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
   avatarColor: '#00e0e0',
   author: 'Random Gorsey',
   tags: ['playlist', 'summer', 'recommendations'],

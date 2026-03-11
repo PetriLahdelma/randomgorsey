@@ -52,7 +52,7 @@ const dec2025: Post[] = [
 <p>I spent more time on Bandcamp and less time on algorithmic playlists this year and that felt genuinely good. The music that mattered was stuff I had to go looking for.</p>
 
 <p>Full playlist below. It's long, treat it as a journey.</p>
-<br /><iframe title="Best of 2025" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<br /><iframe title="minimal detroit — Steven Dermody vol.073" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/minimaldetroitaudio/steven-dermody-minimal-detroit-vol071&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
     avatarColor: '#ff3366',
     author: 'Random Gorsey',
     tags: ['playlist', 'best-of', '2025', 'year-end'],

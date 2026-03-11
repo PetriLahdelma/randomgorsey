@@ -34,7 +34,7 @@ const oct2025: Post[] = [
     contentType: 'link',
     category: 'playlist',
     body: `<p>Darker and deeper than usual this month. Dubbed-out house, some murky breakbeat stuff, a few tracks sitting in that space between ambient and dance music. Hit play, turn the lights down.</p>
-<br /><iframe title="October 2025 Picks" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<br /><iframe title="RA Exchange — EX.762 FKA twigs" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ra-exchange/12935bfa-c695-4987-b990-36ef883800af&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
     avatarColor: '#0d0d1a',
     author: 'Random Gorsey',
     tags: ['playlist', 'october', 'dark'],

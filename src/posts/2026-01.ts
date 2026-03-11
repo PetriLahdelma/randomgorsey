@@ -49,7 +49,7 @@ const jan2026: Post[] = [
     category: 'playlist',
     body: `<p>Contemplative energy on this one. Slow-building tracks, deep pads, rhythms that don't rush anywhere. Music for long dark evenings, basically.</p>
 <p>There's a Kerri Chandler record from the late 90s in here that I pulled from a crate in Kallio. Stopped me dead when I put the needle down. Sometimes the old stuff hits hardest.</p>
-<br /><iframe title="January 2026 Picks" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<br /><iframe title="Forbidden Dance Records — Alton Miller Headspace EP" width="100%" height="300" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fdance2020/sets/fd-002-alton-miller-headspace-ep&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
     avatarColor: '#1a1a3e',
     author: 'Random Gorsey',
     tags: ['playlist', 'january', '2026'],

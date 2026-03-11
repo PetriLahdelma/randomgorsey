@@ -57,7 +57,7 @@ const sep34: Post = {
 <p>The back end gets contemplative. A couple of ambient-leaning pieces, one track I keep coming back to because it does this thing where the rhythm dissolves and reforms over four minutes in a way that feels like breathing. Closing with something stripped and honest: just a drum machine, a chord, and space.</p>
 <p>Best listened to in order. Headphones recommended for this one.</p>
 <p>&nbsp;</p>
-<iframe title="September Selections playlist" src="https://open.spotify.com/embed/playlist/2UuOSxusqGSoi35dIstgiA?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`,
+<iframe title="RA Exchange — EX.763 Theo Parrish" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ra-exchange/ex763-theo-parrish&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
   avatarColor: '#264653',
   author: 'Random Gorsey',
   tags: ['playlist', 'september', 'autumn'],
