@@ -6,6 +6,7 @@ import SocialShare from "./SocialShare";
 import { BaseComponentProps } from "../types/common";
 import Heading from "./Heading";
 import { toAbsoluteSiteUrl } from "../config/site";
+import Lightbox from "./Lightbox";
 
 /**
  * Post category for display labels
@@ -155,6 +156,10 @@ const PostCard: React.FC<PostCardProps> = ({
   ...accessibilityProps
 }) => {
   const [expanded, setExpanded] = React.useState(showFullContent);
+  const [lightboxOpen, setLightboxOpen] = React.useState(false);
+  const [lightboxIndex, setLightboxIndex] = React.useState(0);
+  const [bodyImages, setBodyImages] = React.useState<string[]>([]);
+  const bodyRef = React.useRef<HTMLDivElement>(null);
 
   const toggleExpanded = React.useCallback(() => {
     setExpanded((prev) => !prev);
@@ -172,6 +177,32 @@ const PostCard: React.FC<PostCardProps> = ({
   const displayBody = shouldShowReadMore
     ? `${plainBody.slice(0, truncateLength)}...`
     : post.body;
+
+  React.useEffect(() => {
+    if (bodyRef.current) {
+      const imgs = bodyRef.current.querySelectorAll("img");
+      const srcs = Array.from(imgs)
+        .map((img) => img.src)
+        .filter(Boolean);
+      setBodyImages(srcs);
+    }
+  }, [expanded, displayBody]);
+
+  const handleBodyClick = React.useCallback(
+    (e: React.MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === "IMG") {
+        e.stopPropagation();
+        const src = (target as HTMLImageElement).src;
+        const index = bodyImages.indexOf(src);
+        if (index !== -1) {
+          setLightboxIndex(index);
+          setLightboxOpen(true);
+        }
+      }
+    },
+    [bodyImages]
+  );
 
   const isCompactTitle = headingLevel >= 4;
 
@@ -260,7 +291,9 @@ const PostCard: React.FC<PostCardProps> = ({
           style={{ overflow: "hidden" }}
         >
           <div
-            className="mt-6 mb-3 font-europa text-[1.05rem] leading-[1.7] text-[oklch(65%_0_0deg)] [&>p]:mb-6 [&>p:last-child]:mb-0 [&_iframe]:w-full [&_iframe]:my-6 [&_iframe]:border-0 [&_iframe]:rounded-none [&_iframe]:bg-[oklch(6%_0_0deg)]"
+            ref={bodyRef}
+            className="mt-6 mb-3 font-europa text-[1.05rem] leading-[1.7] text-[oklch(65%_0_0deg)] [&>p]:mb-6 [&>p:last-child]:mb-0 [&_iframe]:w-full [&_iframe]:my-6 [&_iframe]:border-0 [&_iframe]:rounded-none [&_iframe]:bg-[oklch(6%_0_0deg)] [&_img]:cursor-zoom-in"
+            onClick={handleBodyClick}
             dangerouslySetInnerHTML={{ __html: autoLinkUrls(displayBody) }}
           />
         </motion.div>
@@ -317,6 +350,15 @@ const PostCard: React.FC<PostCardProps> = ({
           className="w-full mt-3"
           preload="metadata"
           aria-label={`Audio: ${post.title}`}
+        />
+      )}
+
+      {lightboxOpen && bodyImages.length > 0 && (
+        <Lightbox
+          images={bodyImages}
+          currentIndex={lightboxIndex}
+          onClose={() => setLightboxOpen(false)}
+          onNavigate={setLightboxIndex}
         />
       )}
     </article>
