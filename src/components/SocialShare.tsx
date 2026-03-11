@@ -105,7 +105,7 @@ const SocialShare: React.FC<SocialShareProps> = ({ url, title, text, className }
     >
       <button
         type="button"
-        className="p-0 font-mono-label text-accent underline underline-offset-4 cursor-pointer bg-transparent border-none hover:text-foreground transition-colors"
+        className="share-signal p-0 font-mono-label text-accent underline underline-offset-4 cursor-pointer bg-transparent border-none hover:text-foreground transition-colors"
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={menuId}
