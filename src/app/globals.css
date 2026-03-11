@@ -297,3 +297,18 @@
   from { transform: scale(1); opacity: 0.6; }
   to { transform: scale(1.8); opacity: 0; }
 }
+
+/* Post expand: horizontal noise wipe sweeps down */
+@keyframes noise-wipe-down {
+  from {
+    clip-path: inset(0 0 100% 0);
+    filter: brightness(1.2) contrast(1.1);
+  }
+  to {
+    clip-path: inset(0 0 0% 0);
+    filter: brightness(1) contrast(1);
+  }
+}
+.noise-wipe-enter {
+  animation: noise-wipe-down 350ms cubic-bezier(0.22, 1, 0.36, 1) 1 forwards;
+}
