@@ -298,6 +298,17 @@
   to { transform: scale(1.8); opacity: 0; }
 }
 
+/* High-contrast mode: prioritize legibility */
+@media (prefers-contrast: more) {
+  [data-ambient] { display: none; }
+  .grain-overlay::after { display: none; }
+  [data-card] {
+    background-color: oklch(5% 0 0deg) !important;
+    border-color: oklch(30% 0 0deg) !important;
+  }
+  body { color: oklch(95% 0 0deg); }
+}
+
 /* Contact: submit success ring */
 @keyframes submit-ring {
   from { transform: scale(1); opacity: 0.6; border-color: var(--color-accent); }

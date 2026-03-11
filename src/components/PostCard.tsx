@@ -228,6 +228,7 @@ const PostCard: React.FC<PostCardProps> = ({
       whileInView={shouldAnimate ? "visible" : undefined}
       viewport={{ once: true, margin: "-5% 0px" }}
       id={id}
+      data-card
       className={cn(
         "bg-[oklch(8%_0_0deg)] card-signal p-8 mb-6 transition-colors hover:bg-[oklch(10%_0_0deg)] text-left",
         (onClick || shouldShowReadMore) && "cursor-pointer",

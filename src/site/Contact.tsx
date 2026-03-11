@@ -94,7 +94,7 @@ const Contact: React.FC = () => {
 
   const [isTyping, setIsTyping] = useState(false);
   const [showSuccessRing, setShowSuccessRing] = useState(false);
-  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const handleInput = useCallback(() => {
     setIsTyping(true);
