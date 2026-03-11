@@ -9,6 +9,7 @@
 @import "../styles/tokens/typography.css";
 @import "../styles/button-signal.css";
 @import "../styles/link-signal.css";
+@import "../styles/form-signal.css";
 
 /*
  * Custom Font Faces

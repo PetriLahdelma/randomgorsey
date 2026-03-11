@@ -75,7 +75,7 @@ const selectStyles =
   "w-full py-3 px-4 bg-[oklch(6%_0_0deg)] text-foreground border border-[oklch(14%_0_0deg)] font-mono-label text-sm focus:outline-none focus:border-accent transition-colors";
 
 const labelStyles =
-  "mb-2 block font-mono-label text-muted-foreground text-xs uppercase tracking-widest";
+  "mb-2 block font-mono-label text-muted-foreground text-xs uppercase tracking-widest label-signal";
 
 const Contact: React.FC = () => {
   const [name, setName] = useState("");
