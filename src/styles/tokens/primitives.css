@@ -44,6 +44,9 @@
   /* Gallery slate — the one "break" color */
   --color-gallery-slate: oklch(15% 0.02 230deg);
 
+  /* Contact magenta */
+  --color-contact-magenta: oklch(45% 0.28 328deg);
+
   /* Spacing — unchanged */
   --spacing: 0.25rem;
 
@@ -63,9 +66,9 @@
   --font-display: "Tschick Bold", ui-sans-serif, system-ui, sans-serif;
   --font-family-mono: ui-monospace, "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", "Courier New", monospace;
 
-  /* Animation — faster */
-  --animate-duration: 100ms;
-  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Animation — smooth gallery feel */
+  --animate-duration: 350ms;
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Semantic tokens defaults (dark-first for punk) */
   --color-background: oklch(4% 0 0deg);
