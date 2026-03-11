@@ -103,12 +103,13 @@ const Home: React.FC = () => {
             {remainingPosts.length > 0 && (
               <section aria-label="All posts">
                 <Stack gap="lg">
-                  {remainingPosts.map((post) => (
+                  {remainingPosts.map((post, index) => (
                     <RevealOnScroll key={post.id} amount={0.2}>
                       <PostCard
                         id={`post-${post.id}`}
                         post={post}
                         headingLevel={3}
+                        index={index}
                       />
                     </RevealOnScroll>
                   ))}

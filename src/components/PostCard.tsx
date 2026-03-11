@@ -1,6 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  postCardVariants,
+  postCardStagger,
+  postCardChild,
+} from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import SocialShare from "./SocialShare";
 import { BaseComponentProps } from "../types/common";
@@ -78,6 +83,8 @@ export interface Post {
 export interface PostCardProps extends Omit<BaseComponentProps, "children"> {
   /** Post data to display */
   post: Post;
+  /** Position in the feed — determines entrance direction */
+  index?: number;
   /** Whether to show full content initially */
   showFullContent?: boolean;
   /** Click handler for the entire card */
@@ -140,6 +147,7 @@ function formatTimestamp(iso: string): string {
 
 const PostCard: React.FC<PostCardProps> = ({
   post,
+  index,
   showFullContent = false,
   onClick,
   showSocialShare = true,
@@ -210,7 +218,12 @@ const PostCard: React.FC<PostCardProps> = ({
     plainBody.slice(0, 120) + (plainBody.length > 120 ? "..." : "");
 
   return (
-    <article
+    <motion.article
+      custom={index !== undefined ? index % 2 === 1 : false}
+      variants={postCardVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-5% 0px" }}
       id={id}
       className={cn(
         "bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] p-8 mb-6 transition-colors hover:bg-[oklch(10%_0_0deg)] text-left",
@@ -247,54 +260,62 @@ const PostCard: React.FC<PostCardProps> = ({
         : {})}
       {...accessibilityProps}
     >
-      {/* Category label */}
-      {post.category && (
-        <span className="font-mono-label text-xs text-accent tracking-[0.2em] uppercase block mb-1">
-          {categoryLabels[post.category]}
-        </span>
-      )}
+      <motion.div variants={postCardStagger} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <motion.div variants={postCardChild}>
+          {/* Category label */}
+          {post.category && (
+            <span className="font-mono-label text-xs text-accent tracking-[0.2em] uppercase block mb-1">
+              {categoryLabels[post.category]}
+            </span>
+          )}
 
-      {/* Date */}
-      <time
-        dateTime={post.timestamp}
-        className="font-mono-label text-muted-foreground block mb-2"
-      >
-        {formatTimestamp(post.timestamp)}
-      </time>
-
-      {/* Title */}
-      <Heading
-        level={headingLevel}
-        className={cn(
-          "m-0 mb-2 text-foreground",
-          isCompactTitle && "text-[clamp(1.2rem,5vw,1.4rem)]"
-        )}
-        tone="light"
-      >
-        {post.title}
-      </Heading>
-
-      {/* Body — animated expand/collapse */}
-      <AnimatePresence initial={false} mode="wait">
-        <motion.div
-          key={expanded ? "full" : "truncated"}
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{
-            height: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
-            opacity: { duration: 0.2 },
-          }}
-          style={{ overflow: "hidden" }}
-        >
-          <div
-            ref={bodyRef}
-            className="mt-6 mb-3 font-europa text-[1.05rem] leading-[1.7] text-[oklch(65%_0_0deg)] [&>p]:mb-6 [&>p:last-child]:mb-0 [&_iframe]:w-full [&_iframe]:my-6 [&_iframe]:border-0 [&_iframe]:rounded-none [&_iframe]:bg-[oklch(6%_0_0deg)] [&_img]:cursor-zoom-in"
-            onClick={handleBodyClick}
-            dangerouslySetInnerHTML={{ __html: autoLinkUrls(displayBody) }}
-          />
+          {/* Date */}
+          <time
+            dateTime={post.timestamp}
+            className="font-mono-label text-muted-foreground block mb-2"
+          >
+            {formatTimestamp(post.timestamp)}
+          </time>
         </motion.div>
-      </AnimatePresence>
+
+        <motion.div variants={postCardChild}>
+          {/* Title */}
+          <Heading
+            level={headingLevel}
+            className={cn(
+              "m-0 mb-2 text-foreground",
+              isCompactTitle && "text-[clamp(1.2rem,5vw,1.4rem)]"
+            )}
+            tone="light"
+          >
+            {post.title}
+          </Heading>
+        </motion.div>
+
+        <motion.div variants={postCardChild}>
+          {/* Body — animated expand/collapse */}
+          <AnimatePresence initial={false} mode="wait">
+            <motion.div
+              key={expanded ? "full" : "truncated"}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{
+                height: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+                opacity: { duration: 0.2 },
+              }}
+              style={{ overflow: "hidden" }}
+            >
+              <div
+                ref={bodyRef}
+                className="mt-6 mb-3 font-europa text-[1.05rem] leading-[1.7] text-[oklch(65%_0_0deg)] [&>p]:mb-6 [&>p:last-child]:mb-0 [&_iframe]:w-full [&_iframe]:my-6 [&_iframe]:border-0 [&_iframe]:rounded-none [&_iframe]:bg-[oklch(6%_0_0deg)] [&_img]:cursor-zoom-in"
+                onClick={handleBodyClick}
+                dangerouslySetInnerHTML={{ __html: autoLinkUrls(displayBody) }}
+              />
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
+      </motion.div>
 
       {/* Read more + share */}
       <div className="flex flex-wrap gap-3 items-center mt-3">
@@ -358,7 +379,7 @@ const PostCard: React.FC<PostCardProps> = ({
           onNavigate={setLightboxIndex}
         />
       )}
-    </article>
+    </motion.article>
   );
 };
 

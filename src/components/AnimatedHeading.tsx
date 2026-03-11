@@ -33,7 +33,8 @@ export function AnimatedHeading({
   className,
   static: isStatic = false,
 }: AnimatedHeadingProps) {
-  const Tag = `h${level}` as keyof React.JSX.IntrinsicElements;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Tag = `h${level}` as any;
   const ref = useRef<HTMLDivElement>(null);
   const { tier, isReducedMotion } = usePerformance();
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
