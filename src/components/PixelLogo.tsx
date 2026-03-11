@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useTransform } from "framer-motion";
 import { TransitionLink } from "@/lib/transition";
+import { useScrollVelocity } from "@/lib/motion/useScrollVelocity";
 import { cn } from "@/lib/utils";
 
 const PIXEL_FONTS = [
@@ -13,6 +14,8 @@ const PIXEL_FONTS = [
   "var(--font-geist-pixel-line)",
 ] as const;
 
+const LOGO_TEXT = "Random Gorsey";
+
 interface PixelLogoProps {
   className?: string;
 }
@@ -22,6 +25,18 @@ const PixelLogo: React.FC<PixelLogoProps> = ({ className }) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [showGhost, setShowGhost] = useState(false);
   const [ghostFont, setGhostFont] = useState(0);
+
+  // 6a: Idle micro-glitch state
+  const [glitchCharIndex, setGlitchCharIndex] = useState<number | null>(null);
+  const [glitchFont, setGlitchFont] = useState<string | null>(null);
+
+  // 6b: Scroll-velocity letter-spacing
+  const velocity = useScrollVelocity();
+  const letterSpacing = useTransform(
+    velocity,
+    [-30, 0, 30],
+    ["0.15em", "0.05em", "0.15em"]
+  );
 
   const cycleFont = useCallback(() => {
     setIsAnimating(true);
@@ -44,6 +59,30 @@ const PixelLogo: React.FC<PixelLogoProps> = ({ className }) => {
   useEffect(() => {
     cycleFont();
   }, [cycleFont]);
+
+  // 6a: Idle micro-glitch effect
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    function scheduleGlitch() {
+      const delay = 15000 + Math.random() * 15000;
+      timeoutId = setTimeout(() => {
+        const charIndex = Math.floor(Math.random() * LOGO_TEXT.length);
+        const font = PIXEL_FONTS[Math.floor(Math.random() * PIXEL_FONTS.length)];
+        setGlitchCharIndex(charIndex);
+        setGlitchFont(font);
+
+        setTimeout(() => {
+          setGlitchCharIndex(null);
+          setGlitchFont(null);
+          scheduleGlitch();
+        }, 33);
+      }, delay);
+    }
+
+    scheduleGlitch();
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   const handleMouseEnter = () => {
     // Pick a random different font for the ghost
@@ -70,12 +109,25 @@ const PixelLogo: React.FC<PixelLogoProps> = ({ className }) => {
       aria-label="Random Gorsey — Home"
     >
       <TransitionLink href="/">
-        <span
-          style={{ fontFamily: PIXEL_FONTS[fontIndex] }}
+        {/* 6c: Split characters for individual targeting */}
+        <motion.span
+          style={{ letterSpacing, fontFamily: PIXEL_FONTS[fontIndex] }}
           className="inline-block relative z-10"
         >
-          Random Gorsey
-        </span>
+          {LOGO_TEXT.split("").map((char, i) => (
+            <span
+              key={i}
+              style={{
+                display: "inline-block",
+                whiteSpace: char === " " ? "pre" : undefined,
+                fontFamily:
+                  i === glitchCharIndex && glitchFont ? glitchFont : undefined,
+              }}
+            >
+              {char}
+            </span>
+          ))}
+        </motion.span>
       </TransitionLink>
 
       <AnimatePresence>
@@ -89,7 +141,7 @@ const PixelLogo: React.FC<PixelLogoProps> = ({ className }) => {
             transition={{ duration: 0.3, ease: "easeOut" }}
             aria-hidden="true"
           >
-            Random Gorsey
+            {LOGO_TEXT}
           </motion.span>
         )}
       </AnimatePresence>
