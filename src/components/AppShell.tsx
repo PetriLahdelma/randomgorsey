@@ -5,6 +5,7 @@ import React from "react";
 import CookieConsent from "@/components/CookieConsent";
 
 import { AnimationProvider } from "@/lib/motion";
+import { TransitionOrchestrator } from "@/lib/transition";
 import { cn } from "@/lib/utils";
 import Footer from "@/patterns/Footer";
 import Header from "@/patterns/Header";
@@ -28,6 +29,7 @@ interface AppShellProps {
 
 export default function AppShell({ children }: AppShellProps) {
   const [isOverlayActive, setOverlayActive] = React.useState(false);
+  const contentRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     initializeSecurityMeasures();
@@ -40,14 +42,19 @@ export default function AppShell({ children }: AppShellProps) {
 
   return (
     <AnimationProvider>
+      <TransitionOrchestrator contentRef={contentRef}>
         <AppShellContext.Provider value={value}>
-          <div className={cn("flex min-h-screen flex-col text-center")}>
+          <div
+            ref={contentRef}
+            className={cn("flex min-h-screen flex-col text-center", "relative z-10")}
+          >
             <Header />
-            {children}
+            <main className="pt-16">{children}</main>
             {!isOverlayActive && <Footer />}
             <CookieConsent />
           </div>
         </AppShellContext.Provider>
+      </TransitionOrchestrator>
     </AnimationProvider>
   );
 }
