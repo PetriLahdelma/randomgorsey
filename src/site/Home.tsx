@@ -16,6 +16,7 @@ import { Stack } from "@/components/layout/Stack";
 
 const homeCanvasVideo = "/videos/home_canvas.webm";
 
+import { saveHomeScroll, loadHomeScroll } from "@/lib/session-scroll";
 import postsData from "../posts";
 
 const posts = postsData.filter(
@@ -34,6 +35,28 @@ const Home: React.FC = () => {
   const featuredPost = posts[0];
   const remainingPosts = posts.slice(1, visibleCount);
   const hasMore = visibleCount < posts.length;
+
+  // Restore scroll position from session storage on mount
+  React.useEffect(() => {
+    const saved = loadHomeScroll();
+    if (saved) {
+      requestAnimationFrame(() => {
+        window.scrollTo(0, saved.scrollY);
+      });
+    }
+  }, []);
+
+  // Save scroll position on unmount and beforeunload
+  React.useEffect(() => {
+    const save = () => {
+      saveHomeScroll({ scrollY: window.scrollY, expandedPosts: [] });
+    };
+    window.addEventListener("beforeunload", save);
+    return () => {
+      save();
+      window.removeEventListener("beforeunload", save);
+    };
+  }, []);
 
   React.useEffect(() => {
     if (autoLoads >= MAX_AUTO_LOADS) return;
