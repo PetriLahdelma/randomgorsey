@@ -7,6 +7,20 @@ import Heading from "./Heading";
 import { toAbsoluteSiteUrl } from "../config/site";
 
 /**
+ * Post category for display labels
+ */
+export type PostCategory = 'studio' | 'playlist' | 'scene' | 'release' | 'field-recording' | 'recommendation';
+
+export const categoryLabels: Record<PostCategory, string> = {
+  'studio': 'STUDIO',
+  'playlist': 'PLAYLIST',
+  'scene': 'SCENE',
+  'release': 'RELEASE',
+  'field-recording': 'FIELD RECORDING',
+  'recommendation': 'RECOMMENDATION',
+};
+
+/**
  * Supported content types for posts
  */
 export enum PostContentType {
@@ -44,6 +58,8 @@ export interface Post {
   author: string;
   /** Post excerpt for sharing */
   excerpt?: string;
+  /** Post category for display label */
+  category?: PostCategory;
   /** Post tags */
   tags?: string[];
   /** Whether the post is featured */
@@ -119,7 +135,7 @@ const PostCard: React.FC<PostCardProps> = ({
     <article
       id={id}
       className={cn(
-        "border-l-3 border-accent pl-5 py-4 mb-6",
+        "bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] p-8 mb-6 transition-colors hover:bg-[oklch(10%_0_0deg)]",
         onClick && "cursor-pointer",
         className
       )}
@@ -140,6 +156,13 @@ const PostCard: React.FC<PostCardProps> = ({
         : {})}
       {...accessibilityProps}
     >
+      {/* Category label */}
+      {post.category && (
+        <span className="font-mono-label text-xs text-accent tracking-[0.2em] uppercase block mb-1">
+          {categoryLabels[post.category]}
+        </span>
+      )}
+
       {/* Date */}
       <time
         dateTime={post.timestamp}
