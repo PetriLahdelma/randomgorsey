@@ -58,6 +58,15 @@ const GlitchLink: React.FC<GlitchLinkProps> = ({
           </motion.span>
         )}
       </AnimatePresence>
+
+      {/* Accent line — shoots from left on hover */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 h-[1px] bg-[color:var(--color-accent)]"
+        initial={{ scaleX: 0, originX: 0 }}
+        animate={{ scaleX: showGhost ? 1 : 0 }}
+        transition={{ duration: 0.1, ease: [0.22, 1, 0.36, 1] }}
+      />
     </span>
   );
 };

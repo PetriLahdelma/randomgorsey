@@ -23,7 +23,7 @@ export type IconPosition = "left" | "right";
  * CVA button variants configuration
  */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-mono-label cursor-pointer transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40",
+  "btn-signal inline-flex items-center justify-center gap-2 whitespace-nowrap font-mono-label cursor-pointer transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40",
   {
     variants: {
       variant: {

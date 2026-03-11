@@ -1,0 +1,18 @@
+.btn-signal {
+  transition: none;
+  position: relative;
+}
+.btn-signal:hover {
+  background-color: var(--color-accent);
+  color: oklch(5% 0 0deg);
+  animation: btn-jitter 16ms steps(1) 1;
+}
+.btn-signal:active {
+  padding-top: calc(var(--btn-py, 0.5rem) + 0.5px);
+  padding-bottom: calc(var(--btn-py, 0.5rem) - 0.5px);
+}
+@keyframes btn-jitter {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(1px); }
+  100% { transform: translateX(0); }
+}

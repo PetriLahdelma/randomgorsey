@@ -229,7 +229,7 @@ const PostCard: React.FC<PostCardProps> = ({
       viewport={{ once: true, margin: "-5% 0px" }}
       id={id}
       className={cn(
-        "bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] p-8 mb-6 transition-colors hover:bg-[oklch(10%_0_0deg)] text-left",
+        "bg-[oklch(8%_0_0deg)] card-signal p-8 mb-6 transition-colors hover:bg-[oklch(10%_0_0deg)] text-left",
         (onClick || shouldShowReadMore) && "cursor-pointer",
         className
       )}
@@ -330,7 +330,7 @@ const PostCard: React.FC<PostCardProps> = ({
         {hasLongContent && (
           <motion.button
             onClick={toggleExpanded}
-            className="p-0 font-mono-label text-accent underline underline-offset-4 cursor-pointer bg-transparent border-none hover:text-foreground"
+            className="p-0 font-mono-label text-accent link-signal cursor-pointer bg-transparent border-none hover:text-foreground"
             aria-expanded={expanded}
             aria-label={expanded ? "Show less content" : "Show more content"}
             key={expanded ? "less" : "more"}

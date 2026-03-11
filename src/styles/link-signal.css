@@ -1,0 +1,15 @@
+.link-signal {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: oklch(40% 0 0deg);
+  transition: text-decoration-color 100ms;
+}
+.link-signal:hover {
+  text-decoration-color: var(--color-accent);
+  animation: link-dash-break 100ms steps(2) 1;
+}
+@keyframes link-dash-break {
+  0% { text-decoration-style: dashed; text-decoration-color: oklch(60% 0 0deg); }
+  50% { text-decoration-style: dashed; text-decoration-color: var(--color-accent); }
+  100% { text-decoration-style: solid; text-decoration-color: var(--color-accent); }
+}

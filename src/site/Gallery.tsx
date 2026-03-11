@@ -41,6 +41,7 @@ const Gallery: React.FC = () => {
   const [overlayImage, setOverlayImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [loading, setLoading] = React.useState(true);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const images = useMemo(() => galleryImages, []);
 
@@ -137,22 +138,34 @@ const Gallery: React.FC = () => {
               {images.map((image, index) => (
                 <motion.div key={index} variants={staggerItem} className={styles['masonry-item']}>
                   <ScanLineReveal delay={index * 80}>
-                    <button
-                      type="button"
-                      className={styles["image-button"]}
-                      onClick={() => openOverlay(index)}
-                      aria-label={`Open image: ${image.caption}`}
+                    <div
+                      className="relative group overflow-hidden"
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
                     >
-                      <Image
-                        src={image.src}
-                        alt={image.caption}
-                        width={image.width}
-                        height={image.height}
-                        sizes="(min-width: 768px) 33vw, (min-width: 480px) 50vw, 100vw"
-                        className="w-full contrast-[1.2] brightness-[0.95]"
-                        onLoad={index === 0 ? handleContentLoad : undefined}
-                      />
-                    </button>
+                      <button
+                        type="button"
+                        className={styles["image-button"]}
+                        onClick={() => openOverlay(index)}
+                        aria-label={`Open image: ${image.caption}`}
+                      >
+                        <Image
+                          src={image.src}
+                          alt={image.caption}
+                          width={image.width}
+                          height={image.height}
+                          sizes="(min-width: 768px) 33vw, (min-width: 480px) 50vw, 100vw"
+                          className="w-full contrast-[1.2] brightness-[0.95] group-hover:brightness-[1.1] transition-[filter] duration-100"
+                          onLoad={index === 0 ? handleContentLoad : undefined}
+                        />
+                      </button>
+                      {hoveredIndex === index && (
+                        <div
+                          aria-hidden="true"
+                          className="animate-scan-sweep pointer-events-none absolute left-0 w-full h-[1px] bg-[color:var(--color-accent)]"
+                        />
+                      )}
+                    </div>
                   </ScanLineReveal>
                   <p className="text-neutral-500 text-xs mt-2">{image.caption}</p>
                 </motion.div>
