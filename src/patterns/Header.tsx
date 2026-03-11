@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BiSolidChevronUp, BiSolidChevronDown } from 'react-icons/bi';
+import { IoCloseSharp } from 'react-icons/io5';
 import { cn } from '@/lib/utils';
 import Button from '../components/Button';
 
 const navLinks = [
-  { to: '/', label: 'Home', title: 'Go to Home page' },
-  { to: '/listen/', label: 'Listen', title: 'Go to Listen page' },
-  { to: '/about/', label: 'About', title: 'Info about RG' },
-  { to: '/contact/', label: 'Contact', title: 'Contact RG' },
-  { to: '/discography/', label: 'Disco', title: 'View Discography' },
-  { to: '/gallery/', label: 'Gallery', title: 'View Gallery' },
+  { to: '/listen/', label: 'Listen', title: 'Listen to music' },
+  { to: '/about/', label: 'About', title: 'About Random Gorsey' },
+  { to: '/contact/', label: 'Contact', title: 'Get in touch' },
+  { to: '/discography/', label: 'Discography', title: 'View releases' },
+  { to: '/gallery/', label: 'Gallery', title: 'Photo gallery' },
 ];
 
 const ChevronUp = React.createElement(
@@ -51,12 +51,12 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
   return (
     <header
       className={cn(
-        "relative border-b border-border",
+        "relative",
         className
       )}
     >
       <div className="flex items-center justify-between px-6 py-4 mx-auto w-full max-w-5xl">
-        <Link href="/" className="font-tschick-bold text-lg text-foreground uppercase tracking-[0.05em] no-underline hover:text-accent">
+        <Link href="/" className="text-sm tracking-[0.25em] uppercase font-europa-light text-foreground no-underline hover:text-accent">
           Random Gorsey
         </Link>
 
@@ -69,10 +69,10 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
                     href={link.to}
                     title={link.title}
                     className={cn(
-                      "font-mono-label no-underline whitespace-nowrap",
+                      "text-sm tracking-wide no-underline whitespace-nowrap",
                       isActive(link.to)
                         ? "text-accent underline underline-offset-4"
-                        : "text-muted-foreground hover:text-foreground"
+                        : "text-neutral-400 hover:text-accent"
                     )}
                   >
                     {link.label}
@@ -86,7 +86,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
             <>
               <Button
                 variant="tertiary"
-                className="flex gap-1 items-center font-mono-label text-foreground bg-transparent border-none"
+                className="flex gap-1 items-center text-sm tracking-wide text-foreground bg-transparent border-none"
                 aria-label={menuOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={menuOpen}
                 aria-controls="mobile-menu"
@@ -97,34 +97,48 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
                 Menu
               </Button>
               {menuOpen && (
-                <ul
+                <div
                   id="mobile-menu"
-                  className={cn(
-                    "absolute top-full right-0 left-0 z-[1000]",
-                    "flex flex-col items-center",
-                    "py-4 px-0 m-0",
-                    "bg-background border-t border-border",
-                    "list-none"
-                  )}
+                  className="fixed inset-0 z-50 bg-background flex flex-col items-center justify-center gap-8"
                 >
+                  <button
+                    type="button"
+                    aria-label="Close menu"
+                    className="absolute top-4 right-6 text-foreground hover:text-accent bg-transparent border-none cursor-pointer"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <IoCloseSharp className="w-8 h-8" aria-hidden="true" />
+                  </button>
+                  <Link
+                    href="/"
+                    title="Go to Home page"
+                    onClick={() => setMenuOpen(false)}
+                    className={cn(
+                      "text-2xl tracking-wide no-underline",
+                      isActive('/')
+                        ? "text-accent underline underline-offset-4"
+                        : "text-neutral-400 hover:text-accent"
+                    )}
+                  >
+                    Home
+                  </Link>
                   {navLinks.map(link => (
-                    <li key={link.to} className="my-2">
-                      <Link
-                        href={link.to}
-                        title={link.title}
-                        onClick={() => setMenuOpen(false)}
-                        className={cn(
-                          "font-mono-label text-sm no-underline",
-                          isActive(link.to)
-                            ? "text-accent underline underline-offset-4"
-                            : "text-muted-foreground hover:text-foreground"
-                        )}
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
+                    <Link
+                      key={link.to}
+                      href={link.to}
+                      title={link.title}
+                      onClick={() => setMenuOpen(false)}
+                      className={cn(
+                        "text-2xl tracking-wide no-underline",
+                        isActive(link.to)
+                          ? "text-accent underline underline-offset-4"
+                          : "text-neutral-400 hover:text-accent"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
                   ))}
-                </ul>
+                </div>
               )}
             </>
           )}
