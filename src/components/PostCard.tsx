@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import SocialShare from "./SocialShare";
 import { BaseComponentProps } from "../types/common";
@@ -214,23 +215,41 @@ const PostCard: React.FC<PostCardProps> = ({
         {post.title}
       </Heading>
 
-      {/* Body */}
-      <div
-        className="mt-6 mb-3 font-europa text-[1.05rem] leading-[1.7] text-[oklch(65%_0_0deg)] [&>p]:mb-6 [&>p:last-child]:mb-0 [&_iframe]:w-full [&_iframe]:my-6 [&_iframe]:border-0 [&_iframe]:rounded-none [&_iframe]:bg-[oklch(6%_0_0deg)]"
-        dangerouslySetInnerHTML={{ __html: displayBody }}
-      />
+      {/* Body — animated expand/collapse */}
+      <AnimatePresence initial={false} mode="wait">
+        <motion.div
+          key={expanded ? "full" : "truncated"}
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{
+            height: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+            opacity: { duration: 0.2 },
+          }}
+          style={{ overflow: "hidden" }}
+        >
+          <div
+            className="mt-6 mb-3 font-europa text-[1.05rem] leading-[1.7] text-[oklch(65%_0_0deg)] [&>p]:mb-6 [&>p:last-child]:mb-0 [&_iframe]:w-full [&_iframe]:my-6 [&_iframe]:border-0 [&_iframe]:rounded-none [&_iframe]:bg-[oklch(6%_0_0deg)]"
+            dangerouslySetInnerHTML={{ __html: displayBody }}
+          />
+        </motion.div>
+      </AnimatePresence>
 
       {/* Read more + share */}
       <div className="flex flex-wrap gap-3 items-center mt-3">
         {hasLongContent && (
-          <button
+          <motion.button
             onClick={toggleExpanded}
             className="p-0 font-mono-label text-accent underline underline-offset-4 cursor-pointer bg-transparent border-none hover:text-foreground"
             aria-expanded={expanded}
             aria-label={expanded ? "Show less content" : "Show more content"}
+            key={expanded ? "less" : "more"}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
           >
             {expanded ? "Show Less" : "Read More"}
-          </button>
+          </motion.button>
         )}
         {showSocialShare && (
           <div className="ml-auto">
