@@ -99,6 +99,7 @@ export { useLenis } from 'lenis/react';
 // === CUSTOM HOOKS ===
 // Scroll utilities with Lenis integration
 export { useScrollToTopOnRouteChange, useLenisScrollTo } from './hooks';
+export { useScrollVelocity } from './useScrollVelocity';
 
 // === FRAMER MOTION RE-EXPORTS ===
 // Commonly used utilities for convenience

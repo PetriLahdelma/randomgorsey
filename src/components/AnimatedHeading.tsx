@@ -1,13 +1,14 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useTransform } from "framer-motion";
 import {
   headingCharVariants,
   headingContainerVariants,
   headingGhostVariants,
   headingUnderlineVariants,
 } from "@/lib/motion";
+import { useScrollVelocity } from "@/lib/motion/useScrollVelocity";
 import { usePerformance } from "@/lib/performance";
 import { cn } from "@/lib/utils";
 
@@ -39,6 +40,11 @@ export function AnimatedHeading({
   const { tier, isReducedMotion } = usePerformance();
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
 
+  const velocity = useScrollVelocity();
+  // Ghost drifts proportional to velocity
+  const ghostX = useTransform(velocity, [-20, 0, 20], [6, 0, -6]);
+  const ghostY = useTransform(velocity, [-20, 0, 20], [3, 0, -3]);
+
   const chars = children.split("");
 
   // Tier 0-1 or reduced motion: static rendering
@@ -64,6 +70,7 @@ export function AnimatedHeading({
         variants={headingGhostVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
+        style={{ x: ghostX, y: ghostY }}
         className={cn(
           "absolute inset-0 text-[color:var(--color-accent)] pointer-events-none select-none",
           "font-tschick-bold uppercase tracking-wider",
