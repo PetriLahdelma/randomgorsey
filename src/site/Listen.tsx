@@ -57,13 +57,6 @@ const Listen: React.FC = () => {
               </KineticText>
             </RevealOnScroll>
 
-            {/* Description */}
-            <RevealOnScroll>
-              <p className="font-europa text-lg text-muted-foreground">
-                Enjoy curated playlists and latest tracks.
-              </p>
-            </RevealOnScroll>
-
             {/* Spotify embed */}
             {typeof window !== 'undefined' && (
               <>
@@ -119,6 +112,36 @@ const Listen: React.FC = () => {
                   className="text-muted-foreground hover:text-foreground no-underline"
                 >
                   Tuunz
+                </a>
+              </div>
+            </RevealOnScroll>
+
+            {/* Streaming CTA cards */}
+            <RevealOnScroll>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12">
+                <a
+                  href="https://open.spotify.com/artist/54Vv9rlCqX2nW2V0tXw33q"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] p-6 text-center no-underline hover:bg-[oklch(10%_0_0deg)] transition-colors"
+                >
+                  <span className="text-foreground text-sm font-europa">Spotify</span>
+                </a>
+                <a
+                  href="https://soundcloud.com/randomgorsey"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] p-6 text-center no-underline hover:bg-[oklch(10%_0_0deg)] transition-colors"
+                >
+                  <span className="text-foreground text-sm font-europa">SoundCloud</span>
+                </a>
+                <a
+                  href="https://randomgorsey.bandcamp.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] p-6 text-center no-underline hover:bg-[oklch(10%_0_0deg)] transition-colors"
+                >
+                  <span className="text-foreground text-sm font-europa">Bandcamp</span>
                 </a>
               </div>
             </RevealOnScroll>
