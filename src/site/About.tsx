@@ -12,6 +12,14 @@ import Spinner from '../components/Spinner';
 import PageMeta from '../components/PageMeta';
 const promoCanvasVideo = "/videos/promo_canvas.webm";
 
+const HoverWords = ({ children }: { children: string }) => (
+  <>
+    {children.split(' ').map((word, i) => (
+      <span key={i} className="hover-word">{word} </span>
+    ))}
+  </>
+);
+
 const About: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
 
@@ -78,38 +86,28 @@ const About: React.FC = () => {
             {/* Bio text */}
             <RevealOnScroll>
               <p className="text-base leading-relaxed">
-                Helsinki-based producer/musician Random Gorsey aka DJ Pizza Hut makes warm,
-                nostalgic lo-fi house and electronic music with soulful chords and minimalist grooves.
-                His music pays homage to mid-paced, high-energy electronic music.
+                <HoverWords>Helsinki-based producer Random Gorsey aka DJ Pizza Hut makes warm, nostalgic lo-fi house and electronic music. Soulful chords, minimalist grooves, mid-paced and high-energy. Connected to both the Helsinki and Berlin electronic scenes.</HoverWords>
               </p>
             </RevealOnScroll>
 
             <RevealOnScroll>
               <p className="text-base leading-relaxed">
-                Having spent the last few years producing for his own amusement and after his debut EP
-                steadily brought the much-needed confidence, he decided to take a step forward and start
-                producing on a more regular basis. Random G doesn&apos;t feel he belongs to any particular scene.
-                As is the nature of his music, he just acts on instinct and goes wherever it takes him and
-                tries not to overthink it.
+                <HoverWords>{"Self-taught and driven by instinct. Random G doesn't belong to any particular scene and doesn't try to. He acts on instinct, explores wherever creativity takes him, and tries not to overthink it."}</HoverWords>
               </p>
             </RevealOnScroll>
 
             <RevealOnScroll>
               <p className="text-base leading-relaxed">
-                Originally from Turku, Finland, he studied graphic design in the UK, before returning to
-                Finland for his master&apos;s. While he is currently on hiatus focusing on his design career,
-                he has always had a deep passion for making music. He loves exploring new tools, sounds,
-                and ideas, constantly finding fresh processes in an artistic way. Mostly he is inspired by
-                aestheticism, raw energy, and talent, always looking to solve problems and push creative boundaries.
+                <HoverWords>{"Actively producing and exploring new tools, sounds, and ideas. Always finding fresh processes, inspired by raw energy and aestheticism, pushing creative boundaries."}</HoverWords>
               </p>
             </RevealOnScroll>
 
             {/* Side projects section */}
             <RevealOnScroll>
               <Stack gap="sm">
-                <h2 className="text-2xl font-bold">Side projects</h2>
+                <h2 className="text-2xl font-bold">Other projects</h2>
                 <p className="text-base">
-                  Random Gorsey is also involved in several side projects, including:
+                  Beyond Random Gorsey, there are a few other things going on:
                 </p>
               </Stack>
             </RevealOnScroll>
