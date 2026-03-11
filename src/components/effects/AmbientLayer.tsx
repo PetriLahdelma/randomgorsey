@@ -15,22 +15,26 @@ type AmbientVariant =
 interface AmbientLayerProps {
   variant: AmbientVariant;
   className?: string;
+  typing?: boolean;
+  activeBand?: number;
+  embedProximity?: number;
 }
 
-export function AmbientLayer({ variant, className }: AmbientLayerProps) {
+export function AmbientLayer({ variant, className, typing, activeBand, embedProximity }: AmbientLayerProps) {
   const { tier, isReducedMotion } = usePerformance();
   if (tier <= 1 || isReducedMotion) return null;
 
   return (
     <div
+      data-ambient
       className={cn("fixed inset-0 pointer-events-none z-[1]", className)}
       aria-hidden="true"
     >
       {variant === "not-found" && <NotFoundAmbient />}
-      {variant === "contact" && <ContactAmbient />}
-      {variant === "discography" && <DiscographyAmbient />}
+      {variant === "contact" && <ContactAmbient typing={typing} />}
+      {variant === "discography" && <DiscographyAmbient activeBand={activeBand} />}
       {variant === "about" && <AboutAmbient />}
-      {variant === "listen" && <ListenAmbient />}
+      {variant === "listen" && <ListenAmbient embedProximity={embedProximity} />}
       {/* home and gallery: no extra ambient layer */}
     </div>
   );
@@ -48,26 +52,33 @@ function NotFoundAmbient() {
   );
 }
 
-function ContactAmbient() {
+function ContactAmbient({ typing = false }: { typing?: boolean }) {
   return (
     <div className="absolute inset-8 md:inset-16 lg:inset-24">
       <div className="absolute inset-0 border border-[oklch(15%_0_0deg)] overflow-hidden">
         <div
           className="absolute w-[4px] h-[4px] bg-[color:var(--color-accent)] rounded-full"
-          style={{ animation: "border-travel 8s linear infinite" }}
+          style={{
+            animation: `border-travel ${typing ? "3s" : "8s"} linear infinite`,
+          }}
         />
       </div>
     </div>
   );
 }
 
-function DiscographyAmbient() {
+function DiscographyAmbient({ activeBand }: { activeBand?: number }) {
   return (
     <div className="absolute inset-0">
-      {[20, 40, 60, 80].map((pct) => (
+      {[20, 40, 60, 80].map((pct, i) => (
         <div
           key={pct}
-          className="absolute left-0 right-0 h-[1px] bg-[oklch(20%_0_0deg)]"
+          className={cn(
+            "absolute left-0 right-0 h-[1px] transition-colors duration-500",
+            i === activeBand
+              ? "bg-[color:var(--color-accent)] opacity-60"
+              : "bg-[oklch(20%_0_0deg)] opacity-100"
+          )}
           style={{ top: `${pct}%` }}
         />
       ))}
@@ -99,13 +110,16 @@ function AboutAmbient() {
   );
 }
 
-function ListenAmbient() {
+function ListenAmbient({ embedProximity = 0 }: { embedProximity?: number }) {
+  const opacity = 0.03 + embedProximity * 0.08;
   return (
     <div
-      className="absolute inset-0 opacity-[0.03]"
+      className="absolute inset-0"
       style={{
+        opacity,
         backgroundImage:
           "repeating-linear-gradient(0deg, transparent, transparent 3px, oklch(100% 0 0deg / 0.2) 3px, transparent 6px)",
+        transition: "opacity 300ms ease-out",
       }}
     />
   );

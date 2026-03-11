@@ -298,6 +298,24 @@
   to { transform: scale(1.8); opacity: 0; }
 }
 
+/* Contact: submit success ring */
+@keyframes submit-ring {
+  from { transform: scale(1); opacity: 0.6; border-color: var(--color-accent); }
+  to { transform: scale(2.5); opacity: 0; border-color: var(--color-accent); }
+}
+.submit-success-ring {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin: -50px 0 0 -50px;
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: submit-ring 500ms ease-out 1 forwards;
+}
+
 /* Post expand: horizontal noise wipe sweeps down */
 @keyframes noise-wipe-down {
   from {

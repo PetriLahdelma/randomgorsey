@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import {
   motion,
   AnimatePresence,
@@ -91,6 +91,16 @@ const Contact: React.FC = () => {
   const [sending, setSending] = useState(false);
   const [success, setSuccess] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+
+  const [isTyping, setIsTyping] = useState(false);
+  const [showSuccessRing, setShowSuccessRing] = useState(false);
+  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+
+  const handleInput = useCallback(() => {
+    setIsTyping(true);
+    clearTimeout(typingTimeoutRef.current);
+    typingTimeoutRef.current = setTimeout(() => setIsTyping(false), 1000);
+  }, []);
 
   const rateLimiterRef = useRef(new RateLimiter(5, 60 * 1000));
   const { tier, isReducedMotion } = usePerformance();
@@ -223,6 +233,8 @@ const Contact: React.FC = () => {
       .then(() => {
         setSending(false);
         setSuccess(true);
+        setShowSuccessRing(true);
+        setTimeout(() => setShowSuccessRing(false), 500);
       })
       .catch((error) => {
         console.error("EmailJS error:", error);
@@ -235,7 +247,7 @@ const Contact: React.FC = () => {
 
   return (
     <>
-      <AmbientLayer variant="contact" />
+      <AmbientLayer variant="contact" typing={isTyping} />
       <PageMeta
         title="Contact | Random Gorsey"
         description="Send a message to Random Gorsey."
@@ -273,7 +285,7 @@ const Contact: React.FC = () => {
                 <Spinner className="border-white/10 border-t-accent" />
               </div>
             ) : (
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-6" onInput={handleInput}>
                 <h1 className="text-foreground font-europa-light text-2xl uppercase tracking-[0.15em]">
                   Contact
                 </h1>
@@ -569,6 +581,7 @@ const Contact: React.FC = () => {
           </div>
         </Container>
       </motion.div>
+      {showSuccessRing && <div className="submit-success-ring" aria-hidden="true" />}
     </>
   );
 };
