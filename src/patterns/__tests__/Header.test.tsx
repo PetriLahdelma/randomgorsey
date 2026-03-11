@@ -14,9 +14,9 @@ describe("Header", () => {
 
   it("renders the logo linking to home", () => {
     render(<Header />);
-    const logo = screen.getByText("Random Gorsey");
+    const logo = screen.getByLabelText("Random Gorsey — Home");
     expect(logo).toBeInTheDocument();
-    expect(logo.closest("a")).toHaveAttribute("href", "/");
+    expect(logo.querySelector("a")).toHaveAttribute("href", "/");
   });
 
   it("renders desktop nav links without Home", () => {
@@ -39,6 +39,8 @@ describe("Header", () => {
   it("uses muted grey styling for inactive nav links", () => {
     render(<Header />);
     const link = screen.getByTitle("Listen to music");
-    expect(link.className).toContain("text-neutral-400");
+    // GlitchLink wraps the <a> in a <span> that carries the className
+    const wrapper = link.closest("span.relative");
+    expect(wrapper?.className).toContain("text-neutral-400");
   });
 });
