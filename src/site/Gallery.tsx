@@ -127,15 +127,15 @@ const Gallery: React.FC = () => {
               </KineticText>
             </RevealOnScroll>
 
-            {/* Staggered image grid */}
+            {/* Masonry image grid */}
             <motion.div
               variants={galleryStaggerContainer}
               initial="initial"
               animate="enter"
-              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              className={styles.masonry}
             >
               {images.map((image, index) => (
-                <motion.div key={index} variants={staggerItem}>
+                <motion.div key={index} variants={staggerItem} className={styles['masonry-item']}>
                   <button
                     type="button"
                     className={styles["image-button"]}
@@ -147,12 +147,12 @@ const Gallery: React.FC = () => {
                       alt={image.caption}
                       width={image.width}
                       height={image.height}
-                      sizes="(min-width: 768px) 50vw, 100vw"
+                      sizes="(min-width: 768px) 33vw, (min-width: 480px) 50vw, 100vw"
                       className="w-full contrast-[1.2] brightness-[0.95]"
                       onLoad={index === 0 ? handleContentLoad : undefined}
                     />
                   </button>
-                  <Caption>{image.caption}</Caption>
+                  <p className="text-neutral-500 text-xs mt-2">{image.caption}</p>
                 </motion.div>
               ))}
             </motion.div>
