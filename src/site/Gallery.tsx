@@ -12,7 +12,7 @@ import {
   overlayVariants,
   modalVariants,
 } from '@/lib/motion';
-import { VideoBackground } from '@/components/effects';
+import { VideoBackground, ScanLineReveal } from '@/components/effects';
 import { Container } from '@/components/layout/Container';
 import { Stack } from '@/components/layout/Stack';
 import { KineticText } from '@/components/KineticText';
@@ -136,22 +136,24 @@ const Gallery: React.FC = () => {
             >
               {images.map((image, index) => (
                 <motion.div key={index} variants={staggerItem} className={styles['masonry-item']}>
-                  <button
-                    type="button"
-                    className={styles["image-button"]}
-                    onClick={() => openOverlay(index)}
-                    aria-label={`Open image: ${image.caption}`}
-                  >
-                    <Image
-                      src={image.src}
-                      alt={image.caption}
-                      width={image.width}
-                      height={image.height}
-                      sizes="(min-width: 768px) 33vw, (min-width: 480px) 50vw, 100vw"
-                      className="w-full contrast-[1.2] brightness-[0.95]"
-                      onLoad={index === 0 ? handleContentLoad : undefined}
-                    />
-                  </button>
+                  <ScanLineReveal delay={index * 80}>
+                    <button
+                      type="button"
+                      className={styles["image-button"]}
+                      onClick={() => openOverlay(index)}
+                      aria-label={`Open image: ${image.caption}`}
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.caption}
+                        width={image.width}
+                        height={image.height}
+                        sizes="(min-width: 768px) 33vw, (min-width: 480px) 50vw, 100vw"
+                        className="w-full contrast-[1.2] brightness-[0.95]"
+                        onLoad={index === 0 ? handleContentLoad : undefined}
+                      />
+                    </button>
+                  </ScanLineReveal>
                   <p className="text-neutral-500 text-xs mt-2">{image.caption}</p>
                 </motion.div>
               ))}

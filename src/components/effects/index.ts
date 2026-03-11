@@ -38,3 +38,5 @@ export type { Scene3DProps } from './Scene3D';
 
 export { ParticleField } from './ParticleField';
 export type { ParticleFieldProps } from './ParticleField';
+
+export { ScanLineReveal } from './ScanLineReveal';
