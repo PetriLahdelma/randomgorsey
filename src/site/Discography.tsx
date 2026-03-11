@@ -22,6 +22,10 @@ interface Release {
   title: string;
   catalog: string;
   year: number;
+  image: string;
+  bandcamp: string;
+  spotify?: string;
+  tracks?: string[];
 }
 
 const releases: Release[] = [
@@ -29,11 +33,19 @@ const releases: Release[] = [
     title: 'So Long Spectrum',
     catalog: 'FIRGO2100004',
     year: 2022,
+    image: SoLong,
+    bandcamp: 'https://randomgorsey.bandcamp.com/track/so-long-spectrum',
+    spotify: 'https://open.spotify.com/artist/54Vv9rlCqX2nW2V0tXw33q',
+    tracks: ['So Long Spectrum'],
   },
   {
     title: 'The Customer is Always Right EP',
     catalog: 'RDGY 01',
     year: 2021,
+    image: Customer,
+    bandcamp: 'https://randomgorsey.bandcamp.com/album/the-customer-is-always-right',
+    spotify: 'https://open.spotify.com/artist/54Vv9rlCqX2nW2V0tXw33q',
+    tracks: ['The Customer Is Always Right', 'Deli Counter', 'Returns Policy'],
   },
 ];
 
@@ -72,55 +84,74 @@ const Discography: React.FC = () => {
               Discography
             </KineticText>
 
-            {/* Release grid with stagger animation */}
+            {/* Release cards with gallery styling */}
             <motion.div
               variants={discographyStaggerContainer}
               initial="initial"
               animate="enter"
-              className="grid grid-cols-1 gap-8 md:grid-cols-2"
+              className="grid grid-cols-1 gap-8"
             >
-              {releases.map((release) => {
-                const buyHref =
-                  release.title === 'So Long Spectrum'
-                    ? 'https://randomgorsey.bandcamp.com/track/so-long-spectrum'
-                    : 'https://randomgorsey.bandcamp.com/album/the-customer-is-always-right';
-                return (
-                  <motion.div
-                    key={release.catalog}
-                    variants={staggerItem}
-                    className="group text-center"
-                  >
+              {releases.map((release) => (
+                <motion.div
+                  key={release.catalog}
+                  variants={staggerItem}
+                  className="bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] p-8"
+                >
+                  <div className="flex flex-col md:flex-row gap-8">
                     <a
-                      href={buyHref}
+                      href={release.bandcamp}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block"
+                      className="block shrink-0"
                     >
-                      <div className="relative mx-auto h-48 w-48 overflow-hidden">
+                      <div className="relative w-full md:w-64 h-64 overflow-hidden">
                         <Image
-                          src={release.title === 'So Long Spectrum' ? SoLong : Customer}
+                          src={release.image}
                           alt={release.title}
                           fill
-                          sizes="192px"
+                          sizes="(min-width: 768px) 256px, 100vw"
                           className="object-cover"
                         />
                       </div>
                     </a>
-                    <h3 className="mt-4 text-xl font-bold">{release.title}</h3>
-                    <p className="font-mono-label text-muted-foreground">
-                      {release.catalog} · {release.year}
-                    </p>
-                    <a
-                      className="mt-3 inline-block bg-accent text-accent-foreground px-6 py-2 font-mono-label hover:bg-yellow-500"
-                      href={buyHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      BUY
-                    </a>
-                  </motion.div>
-                );
-              })}
+                    <div className="flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-2xl font-bold">{release.title}</h3>
+                        <p className="font-mono-label text-muted-foreground mt-1">
+                          {release.catalog} &middot; {release.year}
+                        </p>
+                        {release.tracks && (
+                          <ol className="mt-4 space-y-1 list-decimal list-inside text-sm text-muted-foreground">
+                            {release.tracks.map((track) => (
+                              <li key={track}>{track}</li>
+                            ))}
+                          </ol>
+                        )}
+                      </div>
+                      <div className="flex flex-wrap gap-3 mt-6">
+                        <a
+                          className="inline-block bg-accent text-accent-foreground px-6 py-2 font-mono-label hover:bg-yellow-500 text-sm"
+                          href={release.bandcamp}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Bandcamp
+                        </a>
+                        {release.spotify && (
+                          <a
+                            className="inline-block border border-[oklch(20%_0_0deg)] text-foreground px-6 py-2 font-mono-label hover:bg-[oklch(12%_0_0deg)] text-sm no-underline"
+                            href={release.spotify}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Spotify
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
           </Stack>
         </Container>
