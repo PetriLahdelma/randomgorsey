@@ -16,6 +16,19 @@
 
 **Homepage is king.** Gets the most ambitious treatment. Interior pages are quieter.
 
+## Performance Tier Definitions
+
+Aligned with the existing `gpu-tier.ts` in the codebase:
+
+| Tier | Device Class | Shader | Transitions | Ambient Effects | Cursor Trail |
+|---|---|---|---|---|---|
+| 0 | Reduced motion / no WebGL | Static poster | Instant cut | None | No |
+| 1 | Low-end / old mobile | Video fallback | Simple crossfade | Grain only | No |
+| 2 | Mid-range | Simplified shader (no particles) | Opacity crossfade + shader spike | Per-page CSS effects | No |
+| 3 | High-end desktop/mobile | Full shader + particles + mouse | Full 5-phase DOM tear sequence | All effects | Yes |
+
+All degradation tables throughout this spec use this four-tier vocabulary.
+
 ## Section 1: Homepage Shader Environment
 
 Replace the `home_canvas.webm` video background with a real-time GLSL fragment shader running on a fullscreen WebGL2 canvas.
@@ -37,16 +50,17 @@ The background is a corrupted broadcast signal. Horizontal noise bands that comp
 
 - **Renderer:** Raw WebGL2 canvas (no Three.js — single fullscreen quad)
 - **Shader:** Fragment shader with simplex noise, FBM, distance field particles
-- **Uniforms:** `u_time`, `u_scroll`, `u_scrollVelocity`, `u_mouse`, `u_resolution`, `u_hourAngle`, `u_transition`, `u_pageIntensity`
-- **Budget:** ~15KB shader source + WebGL bootstrap. Zero runtime dependencies.
-- **Targets:** 30fps on tier 1, 60fps on tier 2+
+- **Uniforms:** `u_time`, `u_scroll`, `u_scrollVelocity`, `u_mouse`, `u_resolution`, `u_hourAngle` (radians, drives subtle color temperature shift — warmer evenings, cooler mornings, barely perceptible), `u_transition` (0→1→0 during route changes), `u_pageIntensity` (per-page ambient intensity from 0.0-1.0)
+- **Budget:** ~15KB minified GLSL source + WebGL bootstrap JS. This is an aspiration — if the shader exceeds this, cut mouse influence first, then hot pixels, then time-of-day variation. Core noise topology + scroll response + glitch stutters are non-negotiable.
+- **Targets:** 60fps on tier 2+. Tier 1 uses video fallback, no shader rendering.
 
 ### Degradation Chain
 
-1. Tier 3: Full shader + particles + mouse influence
-2. Tier 2: Shader only, no particles
-3. Tier 1: Video fallback (`home_canvas.webm`)
-4. No WebGL / reduced motion: Static poster image
+Per the tier table above:
+- Tier 3: Full shader + distance field particles + mouse influence
+- Tier 2: Shader core (noise + bands + glitch), no particles or mouse
+- Tier 1: Video fallback (`home_canvas.webm`)
+- Tier 0: Static poster image, no animation
 
 ## Section 2: Page Transitions
 
@@ -66,15 +80,25 @@ When navigating, the signal breaks down. Current page destabilizes, tears apart,
 
 - **DOM tearing:** CSS `clip-path` slices page into 6-10 horizontal bands. Each band gets independent `translateX` via WAAPI for 60fps. No layout thrashing.
 - **Shader coordination:** `u_transition` uniform (0→1→0) drives turbulence intensity, scan line density, and refresh bar.
-- **Next.js integration:** `TransitionOrchestrator` in AppShell intercepts route changes via `usePathname`. Coordinates exit → shader spike → enter sequence.
 - **600ms ceiling.** Percussive, not cinematic.
+
+### Next.js App Router Integration
+
+The App Router does not support exit animations natively. The approach is **overlay masking**, not navigation delay:
+
+1. A custom `<TransitionLink>` component wraps all internal `<Link>` elements. On click, it calls `e.preventDefault()`, starts the exit animation, then calls `router.push()` after the tear phase completes (~220ms).
+2. During the "Raw Signal" phase (220-340ms), the shader overlay at z:5 (between content layers) masks the DOM swap happening underneath. The new route renders behind the overlay — the user never sees raw DOM replacement.
+3. Once the new page component mounts, the assemble phase begins (340-600ms). If the destination component hasn't mounted yet (slow dynamic import), the raw signal phase extends up to an additional 200ms maximum, then cuts to the new page. 800ms absolute ceiling.
+4. **Browser back/forward:** Cannot be intercepted. These skip the exit phase entirely — the shader fires a condensed 300ms transition (raw signal → assemble → lock only). Detected via `popstate` event listener.
+5. **Direct URL / refresh:** No transition. Standard server render + progressive shader boot.
+6. **Anchor links (same page):** No transition. Lenis smooth scroll only.
 
 ### Degradation
 
-- Tier 3: Full sequence
+- Tier 3: Full 5-phase sequence
 - Tier 2: Skip DOM tearing, use opacity crossfade + shader spike
-- Tier 1: Simple crossfade
-- Reduced motion: Instant cut
+- Tier 1: Simple 200ms crossfade
+- Tier 0: Instant cut, no animation
 
 ## Section 3: Typography & Scroll Choreography
 
@@ -104,10 +128,10 @@ When navigating, the signal breaks down. Current page destabilizes, tears apart,
 
 ### Technical
 
-- CSS `animation-timeline: scroll()` where supported, Lenis + `useInView` fallback
+- **Primary approach:** Lenis scroll events + `useInView` (Framer Motion) for all scroll-driven choreography. This is the only code path — no `animation-timeline: scroll()`. Browser support is too inconsistent to justify two implementations.
 - No scroll-jacking. Lenis smoothing only.
 - All velocity effects use single RAF loop via SignalBus
-- Disabled on tier 1
+- Scroll choreography disabled on tier 0 and tier 1. Tier 2 gets scroll reveals but no velocity feedback.
 
 ## Section 4: Micro-interactions & Craft Details
 
@@ -175,19 +199,76 @@ Each page gets a distinct ambient frequency within the shared signal vocabulary.
 
 A plain JS singleton (not React state) that collects all input signals in a single RAF callback and exposes them to consumers.
 
-**Inputs:** Lenis scroll position, Lenis scroll velocity, mouse position, route transition state, performance tier, monotonic time, current page.
+```typescript
+interface SignalState {
+  // Scroll (from Lenis)
+  scrollY: number;          // pixels from top
+  scrollVelocity: number;   // pixels/frame, smoothed
+  scrollProgress: number;   // 0-1 normalized
 
-**Consumers read via:** Direct property access, CSS custom properties on `document.documentElement`, or WebGL uniform updates.
+  // Mouse (desktop only, -1 when inactive)
+  mouseX: number;           // 0-1 normalized to viewport
+  mouseY: number;           // 0-1 normalized to viewport
+
+  // Transition
+  transition: number;       // 0-1, peaks during route change
+  page: string;             // current pathname
+  pageIntensity: number;    // 0-1, per-page ambient intensity
+
+  // System
+  time: number;             // monotonic seconds since boot
+  hourAngle: number;        // radians, derived from local clock
+  tier: 0 | 1 | 2 | 3;     // performance tier (set once at boot)
+  reducedMotion: boolean;   // prefers-reduced-motion
+}
+```
+
+**Write path:** A single RAF callback reads Lenis state, mouse position, and internal timers, then mutates the singleton object. Lenis fires first (via Framer Motion's `frame.update` as the existing `LenisProvider` does), then SignalBus reads the updated Lenis values in the same frame. No separate RAF loop — SignalBus hooks into Framer Motion's frame scheduler via `frame.read` (runs after `frame.update`).
+
+**Read paths:**
+- **WebGL shader:** `ShaderCanvas` reads SignalState properties directly in its own `frame.render` callback and pushes them as uniforms. Same frame, no delay.
+- **CSS custom properties:** SignalBus writes `--signal-velocity`, `--signal-transition`, `--signal-grain-opacity` to `document.documentElement.style` each frame. CSS consumers (grain overlay, ambient effects) bind to these variables. No JS needed per-consumer.
+- **React components:** `useSignal()` returns a stable ref (`React.useRef<SignalState>`) pointing to the singleton. Components read `ref.current.velocity` inside event handlers or layout effects. Never triggers re-renders. For components that need to re-render on tier change (rare, boot-only), a separate `usePerformance()` hook with React state is used (already exists).
 
 **Zero React re-renders in the animation path.**
 
+### RAF Loop Ownership
+
+There is one frame scheduler: **Framer Motion's**. The existing `LenisProvider` already uses `frame.update`. New systems hook in at appropriate priorities:
+
+1. `frame.update` — Lenis smooth scroll (existing)
+2. `frame.read` — SignalBus reads Lenis state + mouse + time, mutates singleton, writes CSS vars
+3. `frame.render` — ShaderCanvas pushes uniforms and renders WebGL frame
+
+This avoids multiple competing RAF loops.
+
 ### Key Decisions
 
-- **Shader is singleton:** One WebGL2 canvas in AppShell, persists across route changes. Never unmounts. Route changes modify uniforms only.
-- **Progressive boot:** Content + video render immediately. Shader initializes in parallel, fades in with noise burst when ready. WebGL failure = video stays.
+- **Shader is singleton:** One WebGL2 canvas in AppShell, persists across route changes. Never unmounts. Route changes modify `u_transition` and `u_pageIntensity` uniforms only.
+- **Progressive boot:** Content + video render immediately. Shader initializes in parallel, fades in with noise burst when ready. WebGL failure = video stays. User never sees a blank screen.
 - **No React in the loop:** SignalBus is mutated in RAF. No useState, no useEffect for animation values. React handles structure and lifecycle only.
-- **Transition gate:** TransitionOrchestrator intercepts route changes, coordinates exit → shader spike → enter sequence against 600ms budget.
-- **Extended tier system:** Existing `usePerformance` gains WebGL capability detection. Tier 3: everything. Tier 2: simplified shader + opacity transitions. Tier 1: video + crossfade. Reduced motion: static + instant cuts.
+- **Transition gate:** TransitionOrchestrator intercepts route changes via custom `<TransitionLink>`, coordinates exit → shader spike → enter sequence against 600ms budget (see Section 2).
+- **Extended tier system:** Existing `usePerformance` gains WebGL2 capability detection via `canvas.getContext('webgl2')` check at boot.
+- **ParticleField:** The existing Three.js ParticleField is removed. The homepage shader replaces its visual role. Gallery lightbox gets the shader at 5% intensity instead of a separate Three.js scene. No dual WebGL contexts.
+
+### Accessibility
+
+- **`prefers-reduced-motion`:** All animation disabled. Instant cuts for transitions. Static poster backgrounds. Tier 0 behavior regardless of GPU capability.
+- **Screen readers during transitions:** An `aria-live="polite"` region announces "Navigating to [page name]" at transition start. Content is never removed from the DOM during transition — it's visually masked by the shader overlay but remains accessible.
+- **Photosensitivity (WCAG 2.3.1):** The "Raw Signal" phase must not flash more than 3 times per second. The accent yellow glitch line (2-3 frames) fires at most once per transition. Hot pixel flicker is sub-threshold (individual pixels, not large areas). The shader's rhythmic pulse is slow (multi-second cycles) and low contrast. These constraints are hard requirements on the shader implementation.
+- **`prefers-contrast: more`:** Ambient effects disabled. Card borders and text contrast increased. Content legibility takes priority over atmosphere.
+
+### Favicon and Background Tab Behavior
+
+- Favicon cycling pauses when `document.visibilityState !== 'visible'`. Resumes on tab focus.
+- Shader RAF skips rendering when tab is not visible (already standard WebGL behavior, but enforced explicitly).
+- Cursor trail canvas is not created on devices without persistent pointer (touch-only tablets, phones). Detection via `window.matchMedia('(pointer: fine)')`.
+
+### sessionStorage Strategy
+
+- Storage key: `rg:home:scroll` — contains `{ scrollY: number, expandedPosts: number[], version: number }`.
+- `version` field incremented on deploy (build-time constant). Mismatched versions discard stored state.
+- Maximum 56 post IDs stored (current total). If posts exceed 200 in the future, only store the first screen's worth.
 
 ### New File Structure
 
@@ -214,6 +295,5 @@ src/
 │   │   ├── CursorTrail.tsx      — phosphor persistence canvas
 │   │   ├── ScanLineReveal.tsx   — image reveal animation
 │   │   ├── BorderCircuit.tsx    — traveling dot border effect
-│   │   ├── VideoBackground.tsx  — existing, becomes fallback
-│   │   └── ParticleField.tsx    — existing (gallery lightbox only)
+│   │   └── VideoBackground.tsx  — existing, becomes shader fallback
 ```
