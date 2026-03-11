@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import {
   motion,
@@ -54,10 +54,31 @@ const releases: Release[] = [
 const Discography: React.FC = () => {
   const { tier, isReducedMotion } = usePerformance();
   const shouldAnimate = tier >= 2 && !isReducedMotion;
+  const [activeBand, setActiveBand] = useState<number | undefined>();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const cards = document.querySelectorAll<HTMLElement>('[data-release-card]');
+      if (!cards.length) return;
+      const vh = window.innerHeight;
+      for (const card of cards) {
+        const rect = card.getBoundingClientRect();
+        if (rect.top >= 0 && rect.top < vh) {
+          const band = Math.min(3, Math.floor((rect.top / vh) * 4));
+          setActiveBand(band);
+          return;
+        }
+      }
+      setActiveBand(undefined);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
-      <AmbientLayer variant="discography" />
+      <AmbientLayer variant="discography" activeBand={activeBand} />
       <PageMeta
         title="Discography | Random Gorsey"
         description="Browse the official releases from Random Gorsey."
@@ -101,6 +122,7 @@ const Discography: React.FC = () => {
                 <motion.div
                   key={release.catalog}
                   variants={staggerItem}
+                  data-release-card
                   className="bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] p-8"
                 >
                   <div className="flex flex-col md:flex-row gap-8">

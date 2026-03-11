@@ -14,8 +14,22 @@ const glitchBgVideo = "/videos/rg-glitch-bg.webm";
 
 const Listen: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
+  const [embedProximity, setEmbedProximity] = React.useState(0);
   const { tier, isReducedMotion } = usePerformance();
   const shouldAnimate = tier >= 2 && !isReducedMotion;
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const anyVisible = entries.some((e) => e.isIntersecting);
+        setEmbedProximity(anyVisible ? 1 : 0);
+      },
+      { threshold: 0.1 }
+    );
+    const embeds = document.querySelectorAll('iframe[title="RG player"], iframe[title="SoundCloud Player"]');
+    embeds.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const handleContentLoad = () => {
     setLoading(false);
@@ -23,7 +37,7 @@ const Listen: React.FC = () => {
 
   return (
     <>
-      <AmbientLayer variant="listen" />
+      <AmbientLayer variant="listen" embedProximity={embedProximity} />
       <PageMeta
         title="Listen | Random Gorsey"
         description="Stream songs and playlists from Random Gorsey."
