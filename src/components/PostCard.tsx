@@ -153,7 +153,6 @@ const PostCard: React.FC<PostCardProps> = ({
   onClick,
   showSocialShare = true,
   truncateLength = 200,
-  showMetadata: _showMetadata = false,
   headingLevel = 2,
   className,
   style,

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BiSolidChevronUp, BiSolidChevronDown } from 'react-icons/bi';
 import { IoCloseSharp } from 'react-icons/io5';
