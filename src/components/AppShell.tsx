@@ -3,6 +3,7 @@
 import React from "react";
 
 import CookieConsent from "@/components/CookieConsent";
+import { CursorTrail } from "@/components/effects/CursorTrail";
 
 import { AnimationProvider } from "@/lib/motion";
 import { TransitionOrchestrator } from "@/lib/transition";
@@ -10,6 +11,7 @@ import { cn } from "@/lib/utils";
 import Footer from "@/patterns/Footer";
 import Header from "@/patterns/Header";
 import { initializeSecurityMeasures } from "@/utils/httpsEnforcement";
+import { startFaviconCycle } from "@/lib/favicon";
 
 interface AppShellContextValue {
   setOverlayActive: (active: boolean) => void;
@@ -35,6 +37,11 @@ export default function AppShell({ children }: AppShellProps) {
     initializeSecurityMeasures();
   }, []);
 
+  React.useEffect(() => {
+    const cleanup = startFaviconCycle();
+    return cleanup;
+  }, []);
+
   const value = React.useMemo(
     () => ({ setOverlayActive }),
     []
@@ -44,6 +51,7 @@ export default function AppShell({ children }: AppShellProps) {
     <AnimationProvider>
       <TransitionOrchestrator contentRef={contentRef}>
         <AppShellContext.Provider value={value}>
+          <CursorTrail />
           <div
             ref={contentRef}
             className={cn("flex min-h-screen flex-col text-center", "relative z-10")}
