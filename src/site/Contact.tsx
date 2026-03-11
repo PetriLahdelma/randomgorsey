@@ -18,7 +18,6 @@ import {
   ContactReason,
   contactSchemaByReason,
 } from "../utils/validation";
-import PageMeta from "../components/PageMeta";
 import { sanitizeText, RateLimiter } from "../utils/security";
 import { VideoBackground, AmbientLayer } from "@/components/effects";
 
@@ -299,11 +298,6 @@ const Contact: React.FC = () => {
   return (
     <>
       <AmbientLayer variant="contact" typing={isTyping} />
-      <PageMeta
-        title="Contact | Random Gorsey"
-        description="Send a message to Random Gorsey."
-        path="/contact/"
-      />
       <VideoBackground
         src={contactCanvasVideo}
         poster="/images/contact-poster.jpg"

@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { motion, pageVariants } from "@/lib/motion";
-import PageMeta from "../components/PageMeta";
 import PostCard from "../components/PostCard";
 import { getPostById, getAdjacentPosts } from "../posts";
 import NotFound from "./NotFound";
@@ -16,9 +15,6 @@ interface PostProps {
   postId: number;
 }
 
-const stripHtml = (value: string) =>
-  value.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-
 const Post: React.FC<PostProps> = ({ postId }) => {
   const post = Number.isFinite(postId) ? getPostById(postId) : undefined;
 
@@ -27,17 +23,9 @@ const Post: React.FC<PostProps> = ({ postId }) => {
   }
 
   const { prev, next } = getAdjacentPosts(postId);
-  const description =
-    post.excerpt || stripHtml(post.body).slice(0, 160);
 
   return (
     <>
-      <PageMeta
-        title={`${post.title} | Random Gorsey`}
-        description={description}
-        path={`/posts/${post.id}`}
-      />
-
       <VideoBackground
         src={homeCanvasVideo}
         poster="/images/home-poster.jpg"

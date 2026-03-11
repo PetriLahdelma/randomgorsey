@@ -1,11 +1,12 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { galleryRevealVariants } from "@/lib/motion";
 
 interface ScanLineRevealProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   delay?: number;
 }

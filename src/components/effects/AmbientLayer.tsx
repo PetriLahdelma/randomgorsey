@@ -20,9 +20,12 @@ interface AmbientLayerProps {
   embedProximity?: number;
 }
 
+const NO_AMBIENT_VARIANTS: AmbientVariant[] = ["home", "gallery"];
+
 export function AmbientLayer({ variant, className, typing, activeBand, embedProximity }: AmbientLayerProps) {
   const { tier, isReducedMotion } = usePerformance();
   if (tier <= 1 || isReducedMotion) return null;
+  if (NO_AMBIENT_VARIANTS.includes(variant)) return null;
 
   return (
     <div
@@ -35,7 +38,6 @@ export function AmbientLayer({ variant, className, typing, activeBand, embedProx
       {variant === "discography" && <DiscographyAmbient activeBand={activeBand} />}
       {variant === "about" && <AboutAmbient />}
       {variant === "listen" && <ListenAmbient embedProximity={embedProximity} />}
-      {/* home and gallery: no extra ambient layer */}
     </div>
   );
 }

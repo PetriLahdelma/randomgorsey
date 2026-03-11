@@ -21,7 +21,6 @@ import styles from './Gallery.module.css';
 import Spinner from '../components/Spinner';
 import galleryImages from '../data/galleryImages';
 import Caption from '../components/Caption';
-import PageMeta from '../components/PageMeta';
 import { useAppShell } from "@/components/AppShell";
 
 const logoCanvasVideo = "/videos/logo_canvas.webm";
@@ -92,12 +91,6 @@ const Gallery: React.FC = () => {
   return (
     <>
       <AmbientLayer variant="gallery" />
-      <PageMeta
-        title="Gallery | Random Gorsey"
-        description="Photo gallery featuring Random Gorsey visuals."
-        path="/gallery/"
-      />
-
       {/* Performance-tiered video background with poster fallback */}
       <VideoBackground
         src={logoCanvasVideo}

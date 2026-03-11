@@ -9,7 +9,6 @@ import { KineticText } from '@/components/KineticText';
 import { Container } from '@/components/layout/Container';
 import { Stack } from '@/components/layout/Stack';
 import Spinner from '../components/Spinner';
-import PageMeta from '../components/PageMeta';
 const glitchBgVideo = "/videos/rg-glitch-bg.webm";
 
 const Listen: React.FC = () => {
@@ -38,12 +37,6 @@ const Listen: React.FC = () => {
   return (
     <>
       <AmbientLayer variant="listen" embedProximity={embedProximity} />
-      <PageMeta
-        title="Listen | Random Gorsey"
-        description="Stream songs and playlists from Random Gorsey."
-        path="/listen/"
-      />
-
       {/* Video background with dark overlay for immersive mood */}
       <VideoBackground
         src={glitchBgVideo}

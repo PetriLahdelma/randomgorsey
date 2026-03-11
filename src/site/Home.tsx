@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import PageMeta from "../components/PageMeta";
 import {
   motion,
   heroVariants,
@@ -88,12 +87,6 @@ const Home: React.FC = () => {
   return (
     <>
       <AmbientLayer variant="home" />
-      <PageMeta
-        title="Random Gorsey"
-        description="Explore Random Gorsey's latest music and posts."
-        path="/"
-      />
-
       <VideoBackground
         src={homeCanvasVideo}
         poster="/images/home-poster.jpg"

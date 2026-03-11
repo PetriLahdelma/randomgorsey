@@ -10,7 +10,6 @@ import { Stack } from '../components/layout/Stack';
 import { VideoBackground, AmbientLayer } from '@/components/effects';
 import { KineticText } from '../components/KineticText';
 import Spinner from '../components/Spinner';
-import PageMeta from '../components/PageMeta';
 const promoCanvasVideo = "/videos/promo_canvas.webm";
 
 const HoverWords = ({ children }: { children: string }) => (
@@ -33,12 +32,6 @@ const About: React.FC = () => {
   return (
     <>
       <AmbientLayer variant="about" />
-      <PageMeta
-        title="About | Random Gorsey"
-        description="Background, influences and side projects of Random Gorsey."
-        path="/about/"
-      />
-
       {/* Performance-tiered video background */}
       <VideoBackground
         src={promoCanvasVideo}

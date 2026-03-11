@@ -1,12 +1,13 @@
 "use client";
 
+import type { ReactNode, MouseEvent } from "react";
 import Link from "next/link";
 import { useCallback } from "react";
 import { usePageTransition } from "./TransitionContext";
 
 interface TransitionLinkProps {
   href: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   title?: string;
   onClick?: () => void;
@@ -37,7 +38,7 @@ export function TransitionLink({
   const { navigate, isTransitioning } = usePageTransition();
 
   const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>) => {
+    (e: MouseEvent<HTMLAnchorElement>) => {
       // Let browser handle modifier clicks (new tab)
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       // Don't intercept external URLs or anchors

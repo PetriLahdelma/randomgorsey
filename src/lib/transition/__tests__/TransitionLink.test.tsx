@@ -1,10 +1,11 @@
+import type { ReactElement } from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { TransitionLink } from "../TransitionLink";
 import { TransitionContext } from "../TransitionContext";
 
 function renderWithContext(
-  ui: React.ReactElement,
+  ui: ReactElement,
   navigate = vi.fn(),
   isTransitioning = false
 ) {
