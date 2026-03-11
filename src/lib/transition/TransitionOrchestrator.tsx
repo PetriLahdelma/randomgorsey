@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { usePerformance } from "@/lib/performance";
 import { getSignalBus } from "@/lib/signal";
@@ -43,6 +43,35 @@ export function TransitionOrchestrator({
       announceRef.current.textContent = `Navigating to ${pageName}`;
     }
   }, []);
+
+  // Condensed transition for browser back/forward
+  useEffect(() => {
+    const handlePopState = () => {
+      if (tier <= 1 || isReducedMotion) return;
+
+      setIsTransitioning(true);
+      transitionRef.current = true;
+
+      // Raw signal flash
+      bus.setTransition(0.8);
+      setTimeout(() => {
+        bus.setTransition(0.4);
+        // Assemble
+        const content = contentRef.current;
+        if (content && tier >= 3) {
+          tearEnter(content, { duration: 100, stagger: 12, bandCount: 6 });
+        }
+        setTimeout(() => {
+          bus.setTransition(0);
+          transitionRef.current = false;
+          setIsTransitioning(false);
+        }, 180);
+      }, 120);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [tier, isReducedMotion, bus, contentRef]);
 
   const navigate = useCallback(
     async (href: string) => {
