@@ -125,20 +125,17 @@ function autoLinkUrls(html: string): string {
 
 function formatTimestamp(iso: string): string {
   const date = new Date(iso);
-  const month = date.toLocaleString("en-US", { month: "long" }).toLowerCase();
-  const day = date.getDate();
-  const year = date.getFullYear();
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
 
   if (iso.includes("T")) {
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const ampm = hours >= 12 ? "pm" : "am";
-    const displayHours = hours % 12 || 12;
-    const displayMinutes = minutes.toString().padStart(2, "0");
-    return `${month} ${day}, ${year} — ${displayHours}:${displayMinutes} ${ampm}`;
+    const h = String(date.getHours()).padStart(2, "0");
+    const min = String(date.getMinutes()).padStart(2, "0");
+    return `${y}-${m}-${d} ${h}:${min}:00`;
   }
 
-  return `${month} ${day}, ${year}`;
+  return `${y}-${m}-${d}`;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
