@@ -36,6 +36,9 @@
 
   --color-card: var(--color-surface);
   --color-card-foreground: var(--color-surface-foreground);
+  --color-card-gallery: oklch(8% 0 0deg);
+  --color-card-gallery-border: oklch(12% 0 0deg);
+  --color-card-gallery-hover: oklch(10% 0 0deg);
   --color-popover: var(--color-surface);
   --color-popover-foreground: var(--color-surface-foreground);
 
