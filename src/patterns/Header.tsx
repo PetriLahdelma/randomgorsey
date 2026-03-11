@@ -5,6 +5,8 @@ import { BiSolidChevronUp, BiSolidChevronDown } from 'react-icons/bi';
 import { IoCloseSharp } from 'react-icons/io5';
 import { cn } from '@/lib/utils';
 import Button from '../components/Button';
+import PixelLogo from '../components/PixelLogo';
+import GlitchLink from '../components/GlitchLink';
 
 const navLinks = [
   { to: '/listen/', label: 'Listen', title: 'Listen to music' },
@@ -51,21 +53,19 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 bg-background backdrop-blur-sm",
+        "fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm",
         className
       )}
     >
       <div className="flex items-center justify-between px-6 py-4 mx-auto w-full max-w-5xl">
-        <Link href="/" className="text-sm tracking-[0.25em] uppercase font-europa-light text-foreground no-underline hover:text-accent">
-          Random Gorsey
-        </Link>
+        <PixelLogo />
 
         <nav aria-label="Main navigation">
           {!isMobile && (
             <ul className="flex gap-6 p-0 m-0 list-none">
               {navLinks.map(link => (
                 <li key={link.to}>
-                  <Link
+                  <GlitchLink
                     href={link.to}
                     title={link.title}
                     className={cn(
@@ -76,7 +76,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
                     )}
                   >
                     {link.label}
-                  </Link>
+                  </GlitchLink>
                 </li>
               ))}
             </ul>
@@ -109,7 +109,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
                   >
                     <IoCloseSharp className="w-8 h-8" aria-hidden="true" />
                   </button>
-                  <Link
+                  <GlitchLink
                     href="/"
                     title="Go to Home page"
                     onClick={() => setMenuOpen(false)}
@@ -121,9 +121,9 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
                     )}
                   >
                     Home
-                  </Link>
+                  </GlitchLink>
                   {navLinks.map(link => (
-                    <Link
+                    <GlitchLink
                       key={link.to}
                       href={link.to}
                       title={link.title}
@@ -136,7 +136,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
                       )}
                     >
                       {link.label}
-                    </Link>
+                    </GlitchLink>
                   ))}
                 </div>
               )}

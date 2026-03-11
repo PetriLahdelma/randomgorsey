@@ -8,7 +8,7 @@ const nov2025: Post[] = [
     contentType: 'text',
     category: 'studio',
     body: `<p>Three weeks into a new batch of tracks and the home studio has basically become where I live. Mug rings on the desk, headphones always warm, scraps of paper everywhere with notes only I can decode. This is the state I've been trying to get back to all year.</p>
-<p>That track from last month, the one with the Tascam-processed chords, split into two things. The slower version is sitting at 112 BPM with this wide, empty feeling. Just chords, a simple kick, bass moving in slow motion. I've been calling it "Sunday" in my head, which is a terrible working title, obviously. The other version is pacier. I found the bass sound I was looking for by accident: pitched a Rhodes sample down two octaves and ran it through saturation until it barely sounds like a piano. Woody and warm. Happy accident.</p>
+<p>That track from last month, the one with the tape-saturated chords, split into two things. The slower version is sitting at 112 BPM with this wide, empty feeling. Just chords, a simple kick, bass moving in slow motion. I've been calling it "Sunday" in my head, which is a terrible working title, obviously. The other version is pacier. I found the bass sound I was looking for by accident: pitched a Rhodes sample down two octaves and ran it through saturation until it barely sounds like a piano. Woody and warm. Happy accident.</p>
 <p>Also started something with no chords at all, just rhythm and texture. My radiator makes this incredible clicking when the heating kicks in so I recorded it and built a percussion track around it. Layered some 808 hats and a deep kick on top. Industrial-meets-lo-fi. No idea if it goes anywhere but there's zero pressure on it, which is the whole point.</p>
 <p>The shape of something is forming. Too early to say what.</p>`,
     avatarColor: '#1a1a2e',
@@ -33,7 +33,7 @@ const nov2025: Post[] = [
     timestamp: '2025-11-17T09:30',
     contentType: 'text',
     category: 'field-recording',
-    body: `<p>Been carrying the Zoom H4n around for the past two weeks. November has this distinct sound I want to capture before it changes. The gap between autumn rain and first real snow is its own thing.</p>
+    body: `<p>Been carrying my recorder around for the past two weeks. November has this distinct sound I want to capture before it changes. The gap between autumn rain and first real snow is its own thing.</p>
 <p>Best capture so far: Rautatientori metro at 7am. The escalators hum at different pitches depending on load. Distant footsteps on wet tile, announcement echo off concrete, pneumatic hiss of train doors. Already a composition. I just need to stay out of its way.</p>
 <p>Also got the wind off the harbour near Allas. November wind here doesn't whistle, it roars. Low and constant, you feel it in your chest. On the recording it sounds like a sustained synth pad. Nature doing drone music.</p>
 <p>The idea is to process all of this beyond recognition. A two-second ice-crack recording, time-stretched and filtered, becomes a percussion hit. The harbour wind becomes texture. Not field recording as a gimmick but as a way to give the music somewhere to be from.</p>`,
@@ -46,13 +46,13 @@ const nov2025: Post[] = [
     title: 'November Picks',
     timestamp: '2025-11-24T20:00',
     contentType: 'link',
-    category: 'playlist',
-    body: `<p>This one came together without much effort, which is usually a good sign. Heavy on the lo-fi house side. There's a section in the middle that goes pretty ambient, which crept in from the quiet stuff I've been putting on between studio sessions. Grey Helsinki afternoons require a certain kind of music.</p>
-<p>Enjoy.</p>
+    category: 'recommendation',
+    body: `<p>Been putting on this Gary Beck SPANDAU20 mixtape a lot this month. Proper techno, no messing around. It's not what I usually reach for but November seems to demand it. The grey and the cold and the dark want something a bit more structural, a bit more relentless.</p>
+<p>Grey Helsinki afternoons require a certain kind of music. Apparently right now that kind is this.</p>
 <br /><iframe title="SPANDAU20 — SPND20 Mixtape by Gary Beck" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/spandau20/spnd20-mixtape-by-gary-beck&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
     avatarColor: '#1a1a33',
     author: 'Random Gorsey',
-    tags: ['playlist', 'november', 'lo-fi-house'],
+    tags: ['recommendation', 'november', 'techno', 'gary-beck'],
   },
 ];
 

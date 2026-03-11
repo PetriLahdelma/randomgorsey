@@ -23,20 +23,20 @@ const dec2025: Post[] = [
     category: 'studio',
     body: `<p>Went through all my Ableton project folders tonight. 47 files from this year. Forty-seven. Most are sketches and dead ends but eight or nine are things I'm actually proud of.</p>
 <p>The biggest shift was slowing down. Spent the first half of the year chasing this energetic, peak-time sound that wasn't really me. It sounded fine but felt like nothing. Around June I had a small reset and started making music I actually wanted to hear at home. Those ended up being better anyway. Turns out authenticity isn't just an Instagram caption.</p>
-<p>The Tascam 424 has been the MVP. Running things through tape and back into digital adds something no plugin quite does for me. I've done enough A/B comparisons to trust that. The wobble, the frequency roll-off, the noise floor. It makes the music feel like it exists somewhere.</p>
+<p>Sketch Cassette has been the MVP. That tape saturation plugin adds something I can't get from EQ and compression alone. The wobble, the frequency roll-off, the simulated noise floor. It makes the music feel like it exists somewhere.</p>
 <p>There's an EP in the pile somewhere if I can find the thread connecting them. December homework: no new stuff, just editing, finishing, curating. Hardest part of all of this, honestly.</p>`,
     avatarColor: '#1a2e1a',
     author: 'Random Gorsey',
-    tags: ['studio', 'year-review', 'tascam'],
+    tags: ['studio', 'year-review', 'tape-saturation'],
   },
   {
     id: 45,
     title: 'Best of 2025',
     timestamp: '2025-12-15T20:30',
     contentType: 'link',
-    category: 'playlist',
+    category: 'recommendation',
     featured: true,
-    body: `<p>Here it is. Everything that moved me this year, assembled from playlists, Bandcamp purchases, late-night Shazams, and a folder on my desktop called "NEED TO ID" which is just voice memos of stuff I heard out somewhere.</p>
+    body: `<p>End of year. Writing down what actually stuck.</p>
 
 <p><strong>Releases</strong></p>
 <p>The Chaos in the CBD album was probably my most-played thing. They make complex music feel effortless. "Midnight in Auckland" might be my track of the year. That rolling bass line with the distant vocal sample. I've listened to it probably 200 times.</p>
@@ -48,14 +48,14 @@ const dec2025: Post[] = [
 <p><strong>Labels</strong></p>
 <p>Shall Not Fade, Lobster Theremin, and Mood Hut had the strongest years for me. Consistent, physical releases, interesting signings. Optimo Music honourable mention, never boring.</p>
 
-<p><strong>Looking at 2025</strong></p>
-<p>I spent more time on Bandcamp and less time on algorithmic playlists this year and that felt genuinely good. The music that mattered was stuff I had to go looking for.</p>
+<p><strong>Looking back</strong></p>
+<p>I spent more time on Bandcamp and less time on algorithmic recommendations this year and that felt genuinely good. The music that mattered was stuff I had to go looking for.</p>
 
-<p>Full playlist below. It's long, treat it as a journey.</p>
+<p>Closing the year with this Steven Dermody mix on the minimal detroit channel. Something about it feels right for late December: precise, unhurried, a long way from anything flashy.</p>
 <br /><iframe title="minimal detroit — Steven Dermody vol.073" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/minimaldetroitaudio/steven-dermody-minimal-detroit-vol071&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
     avatarColor: '#ff3366',
     author: 'Random Gorsey',
-    tags: ['playlist', 'best-of', '2025', 'year-end'],
+    tags: ['recommendation', 'best-of', '2025', 'year-end'],
   },
   {
     id: 46,

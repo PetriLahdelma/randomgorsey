@@ -31,7 +31,7 @@ const feb2025: Post[] = [
 
 <p>Ross From Friends put out a remix recently that I can't stop playing. That warped, tape-saturated sound but with more space than usual. The bass is so deep it practically vibrates your chest.</p>
 
-<iframe title="DJ Koze Essential Mix" src="https://open.spotify.com/embed/track/1GkMjFHOSy35GmPzBuNjga?utm_source=generator" width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<iframe title="DJ Koze — Pick Up" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/dj-koze-official/pick-up&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>
 
 <p>Palms Trax's "Equation" too. And I dug out an old Mood II Swing record I forgot I had. "Move Me" still sounds like the future. Some music just doesn't age.</p>`,
     author: 'Random Gorsey',

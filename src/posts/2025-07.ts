@@ -19,13 +19,13 @@ const jul23: Post = {
 
 const jul24: Post = {
   id: 24,
-  title: 'July Heat Tape',
+  title: 'Listening: Charles Moon — HTS',
   timestamp: '2025-07-14T20:00',
   contentType: 'link',
-  category: 'playlist',
+  category: 'recommendation',
   body: `<p>July in Helsinki is a paradox. It's the hottest month in a country that shouldn't really get hot, and the music I want to hear reflects that dissonance. Warm but never quite comfortable. A little tension in the chords, a little grit in the texture.</p>
 
-<p>Been gravitating toward this zone between lo-fi house and something more percussive. That territory where the genre tag doesn't matter because the feeling is right. There's a Galcher Lustwerk track near the top where his voice sounds like he's talking to himself rather than performing, and over those dusty drums it becomes almost hypnotic. The back half gets slower as a nod to those late July evenings where the energy shifts from frenetic to contemplative.</p>
+<p>Been gravitating toward this zone between lo-fi house and something more percussive, and Charles Moon's "HTS" lands right there. That territory where the genre tag doesn't matter because the feeling is right. His voice sounds like he's talking to himself rather than performing, and over those dusty drums it becomes almost hypnotic. The track shifts: starts frenetic, goes somewhere more contemplative toward the end.</p>
 
 <p>Perfect for cycling along the seafront at sunset. That weird 11pm light. Pretending you're not sunburned.</p>
 
@@ -33,8 +33,8 @@ const jul24: Post = {
 <iframe title="Charles Moon — HTS" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charlesmxxn/hts&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
   avatarColor: '#e76f51',
   author: 'Random Gorsey',
-  tags: ['playlist', 'summer', 'lo-fi house'],
-  excerpt: 'Mid-summer selections for Helsinki heat: lo-fi house with grit and depth.',
+  tags: ['recommendation', 'summer', 'lo-fi house'],
+  excerpt: 'Charles Moon\'s HTS — dusty, percussive, warm. Exactly right for July.',
 };
 
 const jul25: Post = {
@@ -47,9 +47,9 @@ const jul25: Post = {
 
 <p>I used to fight this. Try to maintain normal hours, be disciplined about studio time. This summer I've given up and leaned into the weirdness. If my body wants to be awake at 3am making music, who am I to argue. Some of the best stuff I've made came from these disoriented sessions where I've lost track of what day it is.</p>
 
-<p>Tonight a track that started as a simple loop six hours ago has evolved into this sprawling eight-minute thing with three sections. Foundation is a Rhodes sample running through the SP-404's vinyl sim, gives everything this nostalgic degraded quality I'm addicted to. Over that a breakbeat pitched down and filtered until it barely sounds like drums anymore. More pulse than pattern.</p>
+<p>Tonight a track that started as a simple loop six hours ago has evolved into this sprawling eight-minute thing with three sections. Foundation is a Rhodes sample running through some vinyl sim plugins, gives everything this nostalgic degraded quality I'm addicted to. Over that a breakbeat pitched down and filtered until it barely sounds like drums anymore. More pulse than pattern.</p>
 
-<p>The middle section drops out except for a field recording of rain and a single sustained synth note. I stuck my Zoom H4n out the window last week during a sudden downpour and got five minutes of pure Helsinki summer rain, which sounds completely different from winter rain if you're paying attention. Warmer, less sharp. Almost friendly.</p>
+<p>The middle section drops out except for a field recording of rain and a single sustained synth note. I stuck my recorder out the window last week during a sudden downpour and got five minutes of pure Helsinki summer rain, which sounds completely different from winter rain if you're paying attention. Warmer, less sharp. Almost friendly.</p>
 
 <p>Don't know if this track will ever see a release. Sometimes the best sessions are purely for the process. But at 3am in this half-light, it feels like exactly where I should be.</p>`,
   avatarColor: '#4a90d9',

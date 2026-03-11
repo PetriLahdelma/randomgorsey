@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 export type AvatarProps = {
@@ -18,6 +19,14 @@ const sizeClasses = {
   XL: 'h-14 w-14 text-2xl',
 }
 
+const sizePixels = {
+  XS: 16,
+  S: 20,
+  M: 24,
+  L: 32,
+  XL: 56,
+} as const
+
 const Avatar: React.FC<AvatarProps> = ({
   avatarColor = '#000',
   avatarImage,
@@ -32,9 +41,12 @@ const Avatar: React.FC<AvatarProps> = ({
 
   if (!showFallback) {
     return (
-      <img
+      <Image
         src={avatarImage}
         alt={alt}
+        width={sizePixels[size]}
+        height={sizePixels[size]}
+        sizes={`${sizePixels[size]}px`}
         onError={() => setImageError(true)}
         className={cn(
           'rounded-full object-cover bg-cover',

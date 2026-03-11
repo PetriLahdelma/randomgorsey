@@ -1,17 +1,12 @@
-name: Deploy to GitHub Pages
+name: Main Branch Validation
 
 on:
   push:
     branches: [main]
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
 jobs:
-  pre-deploy-checks:
-    name: Pre-deployment Validation
+  main-branch-checks:
+    name: Main Branch Checks
     runs-on: ubuntu-latest
 
     steps:
@@ -33,7 +28,7 @@ jobs:
         run: npm run ts:check:types
 
       - name: Run Tests
-        run: npm test -- --watchAll=false
+        run: npm test
 
       - name: Security Audit
         run: |
@@ -51,43 +46,3 @@ jobs:
 
       - name: Build Application
         run: npm run build
-
-  deploy:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    needs: pre-deploy-checks
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-          cache: "npm"
-
-      - name: Install dependencies
-        run: |
-          echo "📦 Installing dependencies with legacy peer deps for React 19 compatibility..."
-          npm ci --legacy-peer-deps
-
-      - name: Generate sitemap.xml and llms files
-        run: npm run generate-meta
-
-      - name: Build for production
-        run: npm run build
-
-      - name: Add CNAME file
-        run: echo "randomgorsey.com" > ./build/CNAME
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-
-      - name: Post-deployment verification
-        run: |
-          echo "✅ Deployment completed successfully"
-          echo "🌐 Site available at: https://randomgorsey.com"

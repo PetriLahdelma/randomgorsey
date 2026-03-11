@@ -23,7 +23,7 @@ const sep32: Post = {
   body: `<p>New season, new energy. I cleared the decks in the home studio, literally and figuratively. Archived all the summer sketches (some will be revisited, most won't), reorganized the sample library, cleaned the actual desk for the first time in months. Found three USB sticks I'd forgotten about, each with half-finished tracks from various points over the past year. Problem for future me.</p>
 <p>What I'm excited about is starting something with intention rather than accident. The summer sessions were great: loose, spontaneous, driven by mood and weather. But autumn is when I want to be more deliberate. Thinking about a small set of tracks that share a specific palette. Not an EP in the traditional sense, more like pieces that could live together.</p>
 <p>The working concept is that transitional feeling: the shift from light to dark, warm to cool, outdoor to indoor. Tracks that sit on that threshold. Not quite summer, not quite winter. The musical equivalent of that first evening when you notice it gets dark before 8pm and feel a little pang of something that isn't quite sadness but isn't quite anything else either.</p>
-<p>Gear-wise, I'm leaning into the Juno-60 more than usual. There's something about its character that fits autumn. Those slightly detuned pads, the way it warms up and drifts over the course of a session. Imperfect in exactly the right way. Pairing it with the SP-404 for drums and the DAW for arrangement feels like the right balance. Early days. Could be three tracks, could be six. But the intention is set and the studio is clean and the autumn rain is hitting the window.</p>`,
+<p>Sound-wise, I've been obsessing over soft synth pads. Found a preset in TAL-U-NO that has this slightly detuned, drifting quality that fits autumn perfectly. Warm but unstable, like it might dissolve at any moment. Pairing that with Ableton's drum racks and some field recordings feels like the right palette. Early days. Could be three tracks, could be six. But the intention is set and the studio is clean and the autumn rain is hitting the window.</p>`,
   avatarColor: '#457b9d',
   author: 'Random Gorsey',
   tags: ['studio', 'new-project', 'production'],
@@ -52,16 +52,16 @@ const sep34: Post = {
   title: 'September Selections',
   timestamp: '2025-09-22T20:00',
   contentType: 'link',
-  category: 'playlist',
-  body: `<p>First autumn playlist. The mood has shifted noticeably from the summer editions: deeper, darker, more textured. The kind of music that pairs with early sunsets and the first proper coat of the season.</p>
-<p>The back end gets contemplative. A couple of ambient-leaning pieces, one track I keep coming back to because it does this thing where the rhythm dissolves and reforms over four minutes in a way that feels like breathing. Closing with something stripped and honest: just a drum machine, a chord, and space.</p>
-<p>Best listened to in order. Headphones recommended for this one.</p>
+  category: 'recommendation',
+  body: `<p>Been listening to this Theo Parrish RA Exchange episode all week. Found it on a slow Sunday afternoon and it's been playing in the background of everything since: cooking, tidying up, sitting with a coffee watching rain hit the window.</p>
+<p>The mood has shifted noticeably from summer. Deeper, darker, more textured. Theo Parrish in conversation is as interesting as Theo Parrish playing music. The way he talks about records and production feels like it's coming from somewhere completely different from the usual interview circuit.</p>
+<p>Headphones recommended.</p>
 <p>&nbsp;</p>
 <iframe title="RA Exchange — EX.763 Theo Parrish" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ra-exchange/ex763-theo-parrish&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
   avatarColor: '#264653',
   author: 'Random Gorsey',
-  tags: ['playlist', 'september', 'autumn'],
-  excerpt: 'Deeper, darker autumn selections for the return to indoor listening.',
+  tags: ['recommendation', 'september', 'theo-parrish', 'ra-exchange'],
+  excerpt: 'Theo Parrish on the RA Exchange — been listening all week. The conversations are as good as the music.',
 };
 
 const posts202509: Post[] = [sep31, sep32, sep33, sep34];

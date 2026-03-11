@@ -15,23 +15,19 @@ const mar2025: Post[] = [
   },
   {
     id: 8,
-    title: 'Track of the Week: Antal\'s "Nana"',
+    title: 'Listening: Techno Club Live Set',
     timestamp: '2025-03-10T20:00',
-    contentType: 'text',
+    contentType: 'link',
     category: 'recommendation',
-    body: `<p>Been stuck in my head for two weeks straight. Antal's "Nana" on Rush Hour. Go listen before you read further. I'll wait.</p>
+    body: `<p>Been thinking about economy in production lately. It's tempting working in Ableton, with unlimited tracks, to just keep adding layers. Another synth line, another percussion element, another effect. But the tracks that really stick are usually the ones where every element earns its place. Nothing there for decoration. Everything structural.</p>
 
-<p>What gets me is how simple it is on the surface. Straightforward four-on-the-floor kick, sparse percussion, a repeating vocal sample that gives it its name. That's basically it. But the space between the sounds is as important as the sounds themselves. That's where it lives.</p>
+<p>This Techno Club live set from late 2023 keeps coming back into rotation when I want something that just commits. No faffing around, no big drops telegraphed from a mile away. The kind of set where you realise halfway through that you've been nodding along for twenty minutes without noticing.</p>
 
-<p>The bass is worth paying attention to on its own. Round and warm, almost like a dub bass, but it sits so perfectly in the mix that it never overwhelms anything. On headphones you can hear these subtle harmonic overtones that give it texture. On a big system it would be devastating.</p>
+<iframe title="Techno Club — We Love Techno Live" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/javierdrada/techno-club-presents-we-love-techno-live-november-11-2023&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>
 
-<iframe title="Rush Hour Records" src="https://open.spotify.com/embed/track/3HT9kJYNMROOnOBJqfeDKE?utm_source=generator" width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
-<p>I've been thinking about economy in production lately. It's tempting working in Ableton, with unlimited tracks, to just keep adding layers. Another synth line, another percussion element, another effect. But the tracks that really stick are usually the ones where every element earns its place. "Nana" is a masterclass in that. Nothing is there for decoration. Everything is structural.</p>
-
-<p>Dig into the Rush Hour catalog if you haven't. Almost everything they put out is worth your time.</p>`,
+<p>Playing things like this while I work isn't really background music. It sets a standard for the session. The best records do that.</p>`,
     author: 'Random Gorsey',
-    excerpt: 'Breaking down why Antal\'s "Nana" is a masterclass in restraint and space.',
+    excerpt: 'A Techno Club live set from late 2023 that keeps coming back into rotation.',
   },
   {
     id: 9,
@@ -39,19 +35,19 @@ const mar2025: Post[] = [
     timestamp: '2025-03-17T15:00',
     contentType: 'text',
     category: 'studio',
-    body: `<p>Alright, I want to get into something I've been obsessing over in the home studio: tape saturation. Not the plugin kind. I mean actually running signals through a physical tape machine and back into the DAW. It changes everything.</p>
+    body: `<p>Alright, I want to get into something I've been obsessing over in the home studio: tape saturation plugins. Specifically, finding ones that actually convince me: not in a "sounds fine" way but in a "yes, that's the thing" way.</p>
 
-<p>I picked up an old Tascam 424 a while back from a second-hand shop in Sörnäinen. It's beaten up, the meters don't work properly, and one of the channels has a slight hum. It's perfect. When you push a signal through it, especially at higher levels, it adds this compression and harmonic distortion that no plugin has ever quite replicated for me. The high end softens, the low end gets rounder, and there's this subtle wobble from the tape speed that adds movement to everything.</p>
+<p>I've been down a rabbit hole. The lo-fi house stuff I make lives and dies on warmth and character, and for a while I couldn't figure out why some tracks felt alive and others felt like they were just sitting there. The answer, I've gradually figured out, is tape. Not the aesthetic of tape, not fake warmth from EQ boosting the mids. Actual tape saturation behavior: harmonic distortion, high-end softening, low-end rounding, subtle speed wobble. When it's working right you don't hear it so much as feel it. The whole thing gets denser and more real somehow.</p>
 
-<p>My current workflow for the lo-fi stuff: I'll build the basic track in Ableton, drums, bass, chords, whatever. Then I'll bounce individual stems out through the Tascam, record them back in, and rebuild the arrangement with the tape-processed versions. It's time-consuming and honestly a bit ridiculous when you think about it. Converting digital to analog to digital again. But the result is worth it.</p>
+<p>The one that broke through for me is Aberrant DSP Sketch Cassette. I'd tried it before and dismissed it as too obvious, too much of an effect. But when you back off the wow and flutter and drive, and just use the tape saturation subtly, it does something genuinely beautiful to drums in particular. A clean digital drum machine sound comes in, and what comes back has weight and a bit of sag. The transients round off just enough that everything sits together more naturally in the mix. The difference between drums that sound like they're coming from a computer and drums that sound like they're in a room.</p>
 
-<p>The drums especially benefit. A clean digital drum machine sound goes in, and what comes back has weight and character. The transients are slightly rounded, which makes everything sit together more naturally in the mix. The difference between drums that sound like they're coming from a computer and drums that sound like they're coming from a room.</p>
+<p>My current workflow: build the basic track in Ableton, then run individual stems through Sketch Cassette with different settings. Drums get a bit of drive. The chords get a gentler pass, mostly for the frequency roll-off at the top. The bass barely gets touched, just enough to add a tiny bit of harmonic density. Then I bring it all back together. Subtle, but cumulative.</p>
 
-<p>I've tried a lot of tape emulation plugins: Aberrant DSP Sketch Cassette, U-He Satin, the Waves J37. They all do a decent job. But there's something about the real thing that's hard to pin down. Maybe it's the unpredictability. Every pass through the tape is slightly different. You can't undo it, you can't A/B it precisely. You commit to the sound and work with what you get. That's the part I like. Constraints force decisions, and decisions force the music into being something rather than staying a blob of options.</p>
+<p>RC-20 Retro Color is the other one worth mentioning. More of a character plugin than a surgical tool. There's a magic knob approach to it that I usually resist but here it works. Good for when you want the whole thing to feel like it's coming from a specific place and time rather than a laptop in 2025.</p>
 
-<p>The Tascam will die eventually. The heads will wear out, or I'll run out of decent blank tape. But until then, it's staying in the chain.</p>`,
+<p>The unpredictability is what I kept thinking I was missing. Every pass through a real tape machine is slightly different. But honestly? Sketch Cassette has a randomization feature that handles that. And I can save recall settings, automate parameters, and put it across anything in seconds. The limitations I thought I needed were mostly just romanticism about physical gear.</p>`,
     author: 'Random Gorsey',
-    excerpt: 'Running everything through an old Tascam 424 and why real tape saturation still beats every plugin.',
+    excerpt: 'Deep in tape saturation plugins and why Sketch Cassette finally cracked the code for that warm, wrecked sound.',
   },
   {
     id: 10,

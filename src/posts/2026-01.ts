@@ -35,8 +35,7 @@ const jan2026: Post[] = [
     contentType: 'text',
     category: 'scene',
     body: `<p>About five and a half hours of daylight right now, if you're generous about what counts as daylight. The cold isn't just temperature at this point, it's structural. You move between warm interiors connected by brutal outdoor stretches. Home to metro, metro to wherever, wherever to home. The cold is the space between experiences.</p>
-<p>There's a Friday residency at Kuudes Linja this month doing local DJs only, three per night, extended sets. No guests, no hype, just people from the city playing for the city. Last one I went to had a set of nothing but Chicago house. Pure education on a great system.</p>
-<p>Ääniwalli is closed for renovations until mid-February. They're promising a better sound system when it reopens. I'll believe it when I hear it.</p>`,
+<p>The upside of midwinter is that you stop pretending you'll do anything except be indoors. No guilt about missing good weather. Just headphones, coffee, and whatever project is open on the laptop. Honestly the most productive time of year.</p>`,
     avatarColor: '#0d1a2e',
     author: 'Random Gorsey',
     tags: ['helsinki', 'winter', 'clubs'],
@@ -46,13 +45,13 @@ const jan2026: Post[] = [
     title: 'January Picks',
     timestamp: '2026-01-26T21:15',
     contentType: 'link',
-    category: 'playlist',
-    body: `<p>Contemplative energy on this one. Slow-building tracks, deep pads, rhythms that don't rush anywhere. Music for long dark evenings, basically.</p>
-<p>There's a Kerri Chandler record from the late 90s in here that I pulled from a crate in Kallio. Stopped me dead when I put the needle down. Sometimes the old stuff hits hardest.</p>
+    category: 'recommendation',
+    body: `<p>Contemplative energy this month. Slow-building tracks, deep pads, rhythms that don't rush anywhere. Music for long dark evenings, basically.</p>
+<p>Been spending a lot of time with the Alton Miller Headspace EP on Forbidden Dance Records. Detroit deep house, patient and warm, the kind of record that doesn't demand anything from you but keeps giving. Perfect January music. There's a Kerri Chandler record from the late 90s I pulled from a crate in Kallio that's been sitting next to it on the desk. Both live in that same unhurried, late-night space. Sometimes the old stuff hits hardest.</p>
 <br /><iframe title="Forbidden Dance Records — Alton Miller Headspace EP" width="100%" height="300" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fdance2020/sets/fd-002-alton-miller-headspace-ep&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
     avatarColor: '#1a1a3e',
     author: 'Random Gorsey',
-    tags: ['playlist', 'january', '2026'],
+    tags: ['recommendation', 'january', '2026', 'detroit', 'deep-house'],
   },
 ];
 

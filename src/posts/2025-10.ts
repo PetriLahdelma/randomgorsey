@@ -20,24 +20,24 @@ const oct2025: Post[] = [
     contentType: 'text',
     category: 'studio',
     body: `<p>First proper deep-focus week in the home studio after a loosely productive September and I'm remembering why I love this season for making music. There's a quality to the darkness that changes how I work. Summer sessions always felt stolen, like I should be outside. Now there's no competition. It's dark, it's raining, and sitting in front of the monitors is the only reasonable thing to do.</p>
-<p>I've been working on something that started as a simple chord loop back in July. Four bars, nothing fancy. But I kept coming back to it, and over the past week it's grown into something I'm genuinely excited about. The chords have this washed-out VHS quality. I ran them through my Tascam 424 and then resampled them, and there's a warmth there I can't get any other way. Sounds like a memory of a song rather than the song itself, which is exactly what I was going for.</p>
+<p>I've been working on something that started as a simple chord loop back in July. Four bars, nothing fancy. But I kept coming back to it, and over the past week it's grown into something I'm genuinely excited about. The chords have this washed-out VHS quality. I ran them through a tape saturation plugin and then resampled them, and there's a warmth there I can't get any other way. Sounds like a memory of a song rather than the song itself, which is exactly what I was going for.</p>
 <p>The low end is giving me trouble. Been going back and forth between a deep sub and something more mid-range and rubbery. Tried both, neither feels right yet. Going to let it sit a few days and come back with fresh ears. That's the one thing I've learned: never force a decision on bass when you're stuck. Sleep on it.</p>
 <p>Also dug through my sample folder and found some recordings I made in Turku last Christmas. Street sounds, tram bells, ice cracking. Might try weaving some of that texture into the new tracks, sitting just below the mix, almost subliminal. That quality of environmental sound as atmosphere rather than sample is something I've been thinking about a lot since the September field recording sessions.</p>`,
     avatarColor: '#2d2d44',
     author: 'Random Gorsey',
-    tags: ['production', 'studio', 'tascam'],
+    tags: ['production', 'studio', 'tape-saturation'],
   },
   {
     id: 37,
     title: 'October Picks',
     timestamp: '2025-10-20T19:50',
     contentType: 'link',
-    category: 'playlist',
-    body: `<p>Darker and deeper than usual this month. Dubbed-out house, some murky breakbeat stuff, a few tracks sitting in that space between ambient and dance music. Hit play, turn the lights down.</p>
+    category: 'recommendation',
+    body: `<p>This FKA twigs RA Exchange episode has been on repeat this week. Didn't expect to find it so absorbing. She talks about sound and process in a way that keeps pulling you back in. Darker mood this October, which fits.</p>
 <br /><iframe title="RA Exchange — EX.762 FKA twigs" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ra-exchange/12935bfa-c695-4987-b990-36ef883800af&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
     avatarColor: '#0d0d1a',
     author: 'Random Gorsey',
-    tags: ['playlist', 'october', 'dark'],
+    tags: ['recommendation', 'october', 'ra-exchange', 'fka-twigs'],
   },
   {
     id: 38,

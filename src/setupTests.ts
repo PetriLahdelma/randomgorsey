@@ -2,6 +2,7 @@
 
 // jest-dom adds custom matchers for asserting on DOM nodes.
 import "@testing-library/jest-dom";
+import React from "react";
 
 // Polyfill TextEncoder and TextDecoder for Node.js environment
 import { TextEncoder, TextDecoder } from "util";
@@ -78,4 +79,53 @@ vi.mock("lenis/react", () => ({
 vi.mock("@/lib/motion/LenisProvider", () => ({
   LenisProvider: ({ children }: { children: React.ReactNode }) => children,
   default: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+vi.mock("next/link", () => ({
+  default: ({
+    children,
+    href,
+    ...props
+  }: {
+    children: React.ReactNode;
+    href: string;
+    [key: string]: unknown;
+  }) => React.createElement("a", { href, ...props }, children),
+}));
+
+vi.mock("next/image", () => ({
+  default: (props: {
+    alt: string;
+    src: string | { src: string };
+    [key: string]: unknown;
+  }) => {
+    const { alt, src, ...imgProps } = props;
+    delete imgProps.fill;
+    delete imgProps.priority;
+    delete imgProps.unoptimized;
+    delete imgProps.placeholder;
+    delete imgProps.blurDataURL;
+    delete imgProps.quality;
+    delete imgProps.loader;
+    delete imgProps.onLoadingComplete;
+
+    return React.createElement("img", {
+      alt,
+      src: typeof src === "string" ? src : src.src,
+      ...imgProps,
+    });
+  },
+}));
+
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/",
+  useRouter: () => ({
+    push: vi.fn(),
+    replace: vi.fn(),
+    refresh: vi.fn(),
+    back: vi.fn(),
+    forward: vi.fn(),
+    prefetch: vi.fn(),
+  }),
+  useSearchParams: () => new URLSearchParams(),
 }));

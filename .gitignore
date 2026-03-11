@@ -11,6 +11,8 @@ node_modules/
 # production
 /build
 /dist
+/.next
+/out
 
 # misc
 .DS_Store

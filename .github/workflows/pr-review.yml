@@ -58,7 +58,10 @@ jobs:
           npm run build
           echo "## Bundle Size Analysis" >> $GITHUB_STEP_SUMMARY
           echo "```" >> $GITHUB_STEP_SUMMARY
-          du -sh build/assets/*.js | head -10 >> $GITHUB_STEP_SUMMARY
+          find .next/static/chunks -type f -name '*.js' -print0 \
+            | xargs -0 du -sh \
+            | sort -hr \
+            | head -10 >> $GITHUB_STEP_SUMMARY
           echo "```" >> $GITHUB_STEP_SUMMARY
         continue-on-error: true
 

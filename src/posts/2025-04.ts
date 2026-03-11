@@ -7,7 +7,7 @@ const apr2025: Post[] = [
     timestamp: '2025-04-07T11:00',
     contentType: 'text',
     category: 'field-recording',
-    body: `<p>Took my recorder out this weekend for the first time since autumn. A Zoom H4n, nothing fancy, but it picks up more than you'd expect. Just walked around and captured whatever Helsinki sounds like in early April. Spring here isn't dramatic. It's slow, hesitant, like the city isn't quite sure winter is really over.</p>
+    body: `<p>Took my recorder out this weekend for the first time since autumn. My phone, nothing fancy, but it picks up more than you'd expect. Just walked around and captured whatever Helsinki sounds like in early April. Spring here isn't dramatic. It's slow, hesitant, like the city isn't quite sure winter is really over.</p>
 
 <p>Started at Töölönlahti, the bay near the opera house. The ice is almost gone but there are still thin sheets of it along the edges, and when the wind picks up they clink against each other like broken glass. Recorded about fifteen minutes of that. Underneath you can hear seagulls, already back, which means spring is real even if the temperature doesn't agree. And there's this constant low hum from the city that you stop noticing until you listen through headphones later. Traffic, ventilation systems, the distant clatter of trams. Helsinki's baseline frequency.</p>
 
@@ -29,13 +29,13 @@ const apr2025: Post[] = [
 
 <p>It started with one of the field recordings I made at the harbor a couple weeks ago. There's a section where you can hear water lapping against concrete, and in the background a low drone from a ferry engine idling. I pitched the whole thing down an octave and it became this beautiful, dark pad. Like a synthetic sound but with all these organic imperfections that make it feel alive.</p>
 
-<p>From there I built a chord progression on top. Just three chords, very slow, using a Rhodes patch through the Tascam. The tape gives it that worn quality, like you're hearing it through a wall or from the other end of a hallway. I didn't want to rush it into becoming a dance track. For now it's just this floating, atmospheric thing that I keep adding small details to. A distant hi-hat pattern. Some filtered vocal murmurs from an old soul record. A sub-bass that comes in and out like breathing.</p>
+<p>From there I built a chord progression on top. Just three chords, very slow, using a Rhodes plugin with some tape saturation. It gives it that worn quality, like you're hearing it through a wall or from the other end of a hallway. I didn't want to rush it into becoming a dance track. For now it's just this floating, atmospheric thing that I keep adding small details to. A distant hi-hat pattern. Some filtered vocal murmurs from an old soul record. A sub-bass that comes in and out like breathing.</p>
 
 <p>It's already past eight minutes and doesn't feel finished. Most of my tracks are five, maybe six minutes. This one might need the time to develop properly. My usual process is very goal-oriented: start a track, finish a track, move on. But this one wants to evolve on its own schedule. Every day I open the project, listen through, add one or two things, remove something else. More like gardening than construction.</p>
 
 <p>No timeline on this one. It'll be done when it's done. Nobody is waiting for it except me.</p>`,
     author: 'Random Gorsey',
-    excerpt: 'Working on something more spacious and ambient than usual, with field recordings, Rhodes, and no deadline.',
+    excerpt: 'Working on something more spacious and ambient than usual, with field recordings, soft synths, and no deadline.',
   },
   {
     id: 13,

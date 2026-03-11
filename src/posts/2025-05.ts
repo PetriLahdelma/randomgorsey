@@ -22,19 +22,17 @@ const may2025: Post[] = [
     id: 15,
     title: 'Into the Light',
     timestamp: '2025-05-05T22:40',
-    contentType: 'text',
-    category: 'playlist',
+    contentType: 'link',
+    category: 'recommendation',
     body: `<p>May in Helsinki and the light is absurd. It doesn't get properly dark anymore, just this extended twilight that hangs around until sunrise. It does something to your brain. You feel awake at midnight, restless at 2am, and the music you want to hear shifts completely.</p>
-
-<p>Palms Trax — "To Paradise" has been the main one. That arpeggiated synth line is so simple but it just moves forward, relentlessly. Been playing it on my bike rides along the waterfront. Almost too on the nose.</p>
-
-<iframe title="Spring playlist picks" src="https://open.spotify.com/embed/track/5AaOIyOh3IjjISgMAnJGnQ?utm_source=generator" width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
 <p>Also been back in Four Tet's "New Energy" album. Every spring I come back to it. "Two Thousand and Seventeen" especially, those swelling strings over a delicate beat. It opens something up.</p>
 
-<p>The seasons change and the playlist follows. That's how it should be.</p>`,
+<p>This RA Exchange episode with Emily Witt has been good company for late evenings. She writes about raving and culture and the music world in a way that feels genuinely thoughtful. Good to listen to while watching the sky not quite go dark.</p>
+
+<iframe title="RA Exchange — EX.769 Emily Witt" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ra-exchange/ex769-emily-witt&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
     author: 'Random Gorsey',
-    excerpt: 'Soundtrack for the endless Helsinki twilight: Palms Trax, Four Tet, and more spring picks.',
+    excerpt: 'May light, Four Tet, and an RA Exchange with Emily Witt for the endless Helsinki twilight.',
   },
   {
     id: 16,
@@ -60,7 +58,7 @@ const may2025: Post[] = [
     category: 'studio',
     body: `<p>Three tracks in various stages of not-quite-done, all pulling in different directions.</p>
 
-<p>The first is the ambient thing built on that harbor field recording. It's over ten minutes now and still feels like it has more to say. One long arc: water and drone, then the Rhodes chords, then a beat that fades in and out like a distant radio, then back to texture. A friend said it sounded like "waking up on a ferry." I'll take that.</p>
+<p>The first is the ambient thing built on that harbor field recording. It's over ten minutes now and still feels like it has more to say. One long arc: water and drone, then the piano chords, then a beat that fades in and out like a distant radio, then back to texture. A friend said it sounded like "waking up on a ferry." I'll take that.</p>
 
 <p>Track two is lo-fi house, around 122 BPM, chopped soul vocal, bassline I'm really happy with. Problem is the arrangement. Every version feels either too predictable or too chaotic. I need to strip it back and rebuild. Been studying how Kerri Chandler introduces elements, that patience he has. That's what this one needs.</p>
 
@@ -87,7 +85,7 @@ const may2025: Post[] = [
 <p><strong>3. Hunee — "Rare"</strong></p>
 <p>Not new but I played it three times in a row last Tuesday and made myself late for dinner. That piano riff is one of the greatest things in dance music. Every time the track breaks down and it comes back in, it feels like a reward.</p>
 
-<iframe title="Hunee Rare" src="https://open.spotify.com/embed/track/3uyHDWkEgXYS6IFxdSYZbc?utm_source=generator" width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<iframe title="Hunee — Rare Silk (Original)" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/hunee/rare-silk-original&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>
 
 <p><strong>4. Mall Grab — "Sunflower"</strong></p>
 <p>The chords are so warm they practically glow. Nothing much happens structurally but the mood is so perfectly sustained you don't want it to change. Music that makes you want to make music.</p>

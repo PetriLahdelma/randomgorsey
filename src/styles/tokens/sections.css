@@ -8,6 +8,15 @@
     --color-border: oklch(22% 0.02 230deg);
   }
 
+  /* Contact — magenta break */
+  [data-section="contact"] {
+    --color-background: var(--color-contact-magenta);
+    --color-foreground: var(--color-neutral-50);
+    --color-surface: oklch(40% 0.22 328deg);
+    --color-surface-foreground: var(--color-neutral-50);
+    --color-border: oklch(50% 0.2 328deg);
+  }
+
   /* Base section styles */
   [data-section] {
     color: var(--color-foreground);

@@ -9,11 +9,11 @@
  *
  * @example
  * ```tsx
- * // In App.tsx or root
+ * // In src/app/layout.tsx or another root client boundary
  * import { PerformanceProvider } from '@/lib/performance';
  *
  * <PerformanceProvider>
- *   <App />
+ *   {children}
  * </PerformanceProvider>
  *
  * // In components

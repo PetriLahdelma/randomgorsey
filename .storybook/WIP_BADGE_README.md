@@ -30,11 +30,7 @@ When stories are ready for production and no longer work-in-progress:
    const preview: Preview = {
      decorators: [
        // WIPDecorator, // <- Remove this line
-       (Story) => (
-         <MemoryRouter>
-           <Story />
-         </MemoryRouter>
-       ),
+       (Story) => <Story />,
      ],
      // ... rest of config
    };

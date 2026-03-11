@@ -62,6 +62,8 @@ const HeroImage: React.FC<HeroImageProps> = ({
 }) => {
   return (
     <Bleed className={cn("relative", heightClasses[height], className)}>
+      {/* HeroImage intentionally supports raw srcSet input for arbitrary assets. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
         alt={alt}

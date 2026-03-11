@@ -27,14 +27,14 @@ const jun20: Post = {
 
 <p>Been working on a few sketches this week that lean into that summer feeling without being obvious about it. No beach sounds. More like the feeling of walking home at 3am when the sky is this deep violet-blue and the birds are already going. That in-between space.</p>
 
-<p>My home studio setup right now is pretty stripped back: just the SP-404, a couple of records to sample from, and Ableton for arrangement. Been going back to the 404 a lot because it forces me to commit. With a DAW you can endlessly A/B and second-guess everything. The 404 says: you made a choice, live with it. That limitation is genuinely freeing.</p>
+<p>My home studio setup right now is pretty stripped back: just my laptop, a MIDI keyboard, and a couple of records to sample from. Ableton and whatever plugins feel right that day. Trying to keep it simple: the fewer tools in front of me, the more decisions I actually make instead of endlessly tweaking.</p>
 
 <p>Sampled from an old Finnish jazz record I found at a flea market in Hakaniemi. The chords have this melancholy that feels very Finnish to me. Even in the sunniest track there's sadness underneath. Maybe your subconscious always knows winter is coming back.</p>
 
 <p>Got two sketches I'm happy with. Both around 120 bpm, rolling basslines sitting somewhere between lo-fi house and deep house. Nothing revolutionary. Just honest grooves. Sometimes that's enough.</p>`,
   avatarColor: '#f4a261',
   author: 'Random Gorsey',
-  tags: ['production', 'sp-404', 'summer'],
+  tags: ['production', 'summer'],
   excerpt: 'Midnight sun sessions and the warm loops they produce.',
 };
 
@@ -59,24 +59,22 @@ const jun21: Post = {
 
 const jun2: Post = {
   id: 2,
-  title: 'Random Recommends: Summer Selections',
+  title: 'Listening: OLLI [KOPONEN] Third Place',
   timestamp: '2025-06-21T14:00',
   contentType: 'link',
-  category: 'playlist',
-  body: `<p>Here it is. The summer playlist I've been building since the first warm day. It's been living in my headphones for weeks, growing and shifting as the season unfolds. Not a DJ mix, more like a mood board in track form. The kind of thing you put on during a long evening on someone's balcony when nobody wants to be the person choosing music but everyone wants the vibe to be right.</p>
+  category: 'recommendation',
+  body: `<p>Keep coming back to this one. OLLI KOPONEN's "Third Place" set from late June. Found it on SoundCloud a few days ago and it's been on repeat ever since.</p>
 
-<p>The thread running through it is warmth. Not in a "good vibes only" way, in the textural sense. Tracks with that slightly saturated, sun-bleached quality. Deep chords, unhurried rhythms, vocals that drift in and out like a half-remembered conversation.</p>
+<p>The thread running through it is warmth. Not in a "good vibes only" way, in the textural sense. That slightly saturated, sun-bleached quality. Deep chords, unhurried rhythms, vocals that drift in and out like a half-remembered conversation.</p>
 
-<p>There's a Chaos in the CBD track in there I keep coming back to, their stuff always sounds like it was recorded in a room with open windows. Also some Bandcamp finds from producers with 200 plays who deserve 200,000.</p>
-
-<p>Hit shuffle or play front to back, I've tried to make both work.</p>
+<p>The kind of thing you put on during a long evening on someone's balcony when nobody wants to be the person choosing music but everyone wants the vibe to be right. Helsinki summer in sound.</p>
 
 <p>&nbsp;</p>
 <iframe title="OLLI [KOPONEN] — Third Place 28-06-2025" width="100%" height="166" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ollikoponen/third-place-28-06-2025&color=%23e8d44d&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" loading="lazy"></iframe>`,
   avatarColor: '#00e0e0',
   author: 'Random Gorsey',
-  tags: ['playlist', 'summer', 'recommendations'],
-  excerpt: 'A summer playlist built for balcony evenings and long walks in the midnight sun.',
+  tags: ['summer', 'recommendation', 'soundcloud'],
+  excerpt: 'OLLI KOPONEN\'s Third Place set — warm, unhurried, exactly what a Helsinki summer evening sounds like.',
 };
 
 const jun22: Post = {
