@@ -5,53 +5,49 @@ import PageMeta from "../components/PageMeta";
 import {
   motion,
   heroVariants,
-  heroStaggerContainer,
-  staggerItem,
   useLenisScrollTo,
 } from "@/lib/motion";
 import RevealOnScroll from "../components/RevealOnScroll";
-import Spinner from "../components/Spinner";
 import Button from "../components/Button";
-import PostCard, { Post } from "../components/PostCard";
+import PostCard from "../components/PostCard";
 import { VideoBackground } from "@/components/effects";
-import { KineticText } from "@/components/KineticText";
 import { Container } from "@/components/layout/Container";
 import { Stack } from "@/components/layout/Stack";
+
 const homeCanvasVideo = "/videos/home_canvas.webm";
 
-// Import all posts statically for Jest compatibility
 import postsData from "../posts";
 
-const posts: Post[] = postsData
-  .filter((post) => post && typeof post === "object") // Ensure valid posts
-  .sort(
-    (a: Post, b: Post) =>
-      new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-  );
+const posts = postsData.filter(
+  (post) => post && typeof post === "object"
+);
+
+const BATCH_SIZE = 6;
+const MAX_AUTO_LOADS = 2;
 
 const Home: React.FC = () => {
-  const [loading, setLoading] = React.useState(true);
-  const [visibleCount, setVisibleCount] = React.useState(3);
+  const [visibleCount, setVisibleCount] = React.useState(1 + BATCH_SIZE);
   const [autoLoads, setAutoLoads] = React.useState(0);
   const sentinelRef = React.useRef<HTMLDivElement | null>(null);
   const scrollTo = useLenisScrollTo();
 
-  React.useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  const featuredPost = posts[0];
+  const remainingPosts = posts.slice(1, visibleCount);
+  const hasMore = visibleCount < posts.length;
 
   React.useEffect(() => {
+    if (autoLoads >= MAX_AUTO_LOADS) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && autoLoads < 2) {
-            setVisibleCount((v) => Math.min(v + 1, posts.length));
+          if (entry.isIntersecting && autoLoads < MAX_AUTO_LOADS) {
+            setVisibleCount((v) => Math.min(v + BATCH_SIZE, posts.length));
             setAutoLoads((l) => l + 1);
           }
         });
       },
-      { root: null, rootMargin: "100px", threshold: 0.25 }
+      { root: null, rootMargin: "200px", threshold: 0.1 }
     );
 
     const current = sentinelRef.current;
@@ -74,7 +70,6 @@ const Home: React.FC = () => {
         path="/"
       />
 
-      {/* VideoBackground with poster fallback for mobile/low-power */}
       <VideoBackground
         src={homeCanvasVideo}
         poster="/images/home-poster.jpg"
@@ -90,67 +85,64 @@ const Home: React.FC = () => {
       >
         <Container size="sm" padding="md" className="py-6">
           <Stack gap="lg">
-            {loading && (
-              <div className="flex justify-center py-12">
-                <Spinner className="border-white/10 border-t-yellow-400" />
+            {/* Featured post — latest, rendered large with no truncation */}
+            {featuredPost && (
+              <section aria-label="Featured post">
+                <PostCard
+                  id={`post-${featuredPost.id}`}
+                  post={featuredPost}
+                  headingLevel={2}
+                  truncateLength={Infinity}
+                  showFullContent
+                  className="border-[oklch(12%_0_0deg)]"
+                />
+              </section>
+            )}
+
+            {/* Post grid — responsive 1-col / 2-col */}
+            {remainingPosts.length > 0 && (
+              <section aria-label="All posts">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {remainingPosts.map((post) => (
+                    <PostCard
+                      key={post.id}
+                      id={`post-${post.id}`}
+                      post={post}
+                      headingLevel={3}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Load More button — shown after auto-loads exhausted */}
+            {hasMore && (
+              <div className="flex justify-center">
+                <Button
+                  onClick={() =>
+                    setVisibleCount((v) =>
+                      Math.min(v + BATCH_SIZE, posts.length)
+                    )
+                  }
+                  aria-label="Load more posts"
+                >
+                  Load More
+                </Button>
               </div>
             )}
 
-            {!loading && (
-              <>
-                {/* Dramatic kinetic headline */}
-                <KineticText
-                  as="h1"
-                  splitBy="chars"
-                  variant="dramatic"
-                  className="mb-8 font-display uppercase tracking-[-0.02em]"
+            {/* Back to Top */}
+            <RevealOnScroll>
+              <div className="flex justify-center pt-8">
+                <Button
+                  variant="secondary"
+                  onClick={() => scrollTo(0)}
+                  aria-label="Back to top"
                 >
-                  Latest Posts
-                </KineticText>
-
-                {/* Staggered posts reveal */}
-                <motion.div
-                  variants={heroStaggerContainer}
-                  initial="initial"
-                  animate="enter"
-                >
-                  <Stack gap="lg">
-                    {posts.slice(0, visibleCount).map((post) => (
-                      <motion.div key={post.id} variants={staggerItem}>
-                        <PostCard id={`post-${post.id}`} post={post} headingLevel={5} />
-                      </motion.div>
-                    ))}
-                  </Stack>
-                </motion.div>
-
-                {/* Load More button */}
-                {visibleCount < posts.length && (
-                  <div className="flex justify-center">
-                    <Button
-                      onClick={() =>
-                        setVisibleCount((v) => Math.min(v + 1, posts.length))
-                      }
-                      aria-label="Load more posts"
-                    >
-                      Load More
-                    </Button>
-                  </div>
-                )}
-
-                {/* Back to Top */}
-                <RevealOnScroll>
-                  <div className="flex justify-center pt-8">
-                    <Button
-                      variant="secondary"
-                      onClick={() => scrollTo(0)}
-                      aria-label="Back to top"
-                    >
-                      Back to Top
-                    </Button>
-                  </div>
-                </RevealOnScroll>
-              </>
-            )}
+                  Back to Top
+                </Button>
+              </div>
+            </RevealOnScroll>
           </Stack>
         </Container>
 
