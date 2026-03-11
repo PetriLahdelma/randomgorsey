@@ -90,6 +90,24 @@ export interface PostCardProps extends Omit<BaseComponentProps, "children"> {
   headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
+function formatTimestamp(iso: string): string {
+  const date = new Date(iso);
+  const month = date.toLocaleString("en-US", { month: "long" }).toLowerCase();
+  const day = date.getDate();
+  const year = date.getFullYear();
+
+  if (iso.includes("T")) {
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? "pm" : "am";
+    const displayHours = hours % 12 || 12;
+    const displayMinutes = minutes.toString().padStart(2, "0");
+    return `${month} ${day}, ${year} — ${displayHours}:${displayMinutes} ${ampm}`;
+  }
+
+  return `${month} ${day}, ${year}`;
+}
+
 const PostCard: React.FC<PostCardProps> = ({
   post,
   showFullContent = false,
@@ -181,7 +199,7 @@ const PostCard: React.FC<PostCardProps> = ({
         dateTime={post.timestamp}
         className="font-mono-label text-muted-foreground block mb-2"
       >
-        {post.timestamp}
+        {formatTimestamp(post.timestamp)}
       </time>
 
       {/* Title */}
@@ -198,7 +216,7 @@ const PostCard: React.FC<PostCardProps> = ({
 
       {/* Body */}
       <div
-        className="mt-6 mb-3 font-europa text-[1.05rem] leading-[1.7] text-muted-foreground [&>p]:mb-6 [&>p:last-child]:mb-0"
+        className="mt-6 mb-3 font-europa text-[1.05rem] leading-[1.7] text-[oklch(65%_0_0deg)] [&>p]:mb-6 [&>p:last-child]:mb-0"
         dangerouslySetInnerHTML={{ __html: displayBody }}
       />
 
