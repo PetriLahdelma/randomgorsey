@@ -7,6 +7,8 @@
 @import "../styles/tokens/semantic.css";
 @import "../styles/tokens/sections.css";
 @import "../styles/tokens/typography.css";
+@import "../styles/button-signal.css";
+@import "../styles/link-signal.css";
 
 /*
  * Custom Font Faces
@@ -208,6 +210,40 @@
   .custom-cursor {
     display: none !important;
   }
+}
+
+/* Signal vocabulary: hover effects */
+@keyframes scan-sweep {
+  from { top: -1px; opacity: 0.7; }
+  to { top: 100%; opacity: 0; }
+}
+.animate-scan-sweep {
+  animation: scan-sweep 200ms cubic-bezier(0.22, 1, 0.36, 1) 1 forwards;
+}
+
+@keyframes voltage-spike {
+  0% { border-color: var(--color-accent); }
+  6% { border-color: var(--color-accent); }
+  7% { border-color: oklch(18% 0 0deg); }
+  100% { border-color: oklch(18% 0 0deg); }
+}
+.card-signal {
+  border: 1px solid oklch(12% 0 0deg);
+}
+.card-signal:hover {
+  animation: voltage-spike 250ms steps(1, end) 1 forwards;
+}
+
+/* Transition destabilize phase */
+.signal-destabilize {
+  animation: signal-shake 120ms steps(4) forwards;
+}
+@keyframes signal-shake {
+  0% { transform: translateX(0); filter: none; }
+  25% { transform: translateX(-3px); filter: brightness(1.05); }
+  50% { transform: translateX(5px); filter: brightness(0.95); }
+  75% { transform: translateX(-2px); filter: brightness(1.1); }
+  100% { transform: translateX(0); filter: brightness(1); }
 }
 
 /* Ambient: contact border circuit */
