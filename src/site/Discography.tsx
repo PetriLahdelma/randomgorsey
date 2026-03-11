@@ -7,7 +7,9 @@ import {
   discographyVariants,
   discographyStaggerContainer,
   staggerItem,
+  embedBorderVariants,
 } from '@/lib/motion';
+import { usePerformance } from "@/lib/performance";
 import PageMeta from '../components/PageMeta';
 import { VideoBackground } from '@/components/effects';
 import { KineticText } from '@/components/KineticText';
@@ -50,6 +52,9 @@ const releases: Release[] = [
 ];
 
 const Discography: React.FC = () => {
+  const { tier, isReducedMotion } = usePerformance();
+  const shouldAnimate = tier >= 2 && !isReducedMotion;
+
   return (
     <>
       <PageMeta
@@ -104,15 +109,22 @@ const Discography: React.FC = () => {
                       rel="noopener noreferrer"
                       className="block shrink-0"
                     >
-                      <div className="relative w-full md:w-64 h-64 overflow-hidden">
-                        <Image
-                          src={release.image}
-                          alt={release.title}
-                          fill
-                          sizes="(min-width: 768px) 256px, 100vw"
-                          className="object-cover"
-                        />
-                      </div>
+                      <motion.div
+                        variants={shouldAnimate ? embedBorderVariants : undefined}
+                        initial={shouldAnimate ? "hidden" : undefined}
+                        whileInView={shouldAnimate ? "visible" : undefined}
+                        viewport={{ once: true, margin: "-10% 0px" }}
+                      >
+                        <div className="relative w-full md:w-64 h-64 overflow-hidden">
+                          <Image
+                            src={release.image}
+                            alt={release.title}
+                            fill
+                            sizes="(min-width: 768px) 256px, 100vw"
+                            className="object-cover"
+                          />
+                        </div>
+                      </motion.div>
                     </a>
                     <div className="flex flex-col justify-between">
                       <div>

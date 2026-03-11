@@ -5,7 +5,9 @@ import {
   motion,
   AnimatePresence,
   contactVariants,
+  bodyTextVariants,
 } from "@/lib/motion";
+import { usePerformance } from "@/lib/performance";
 import { cn } from "@/lib/utils";
 import styles from "./Contact.module.css";
 import emailjs from "@emailjs/browser";
@@ -91,6 +93,8 @@ const Contact: React.FC = () => {
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   const rateLimiterRef = useRef(new RateLimiter(5, 60 * 1000));
+  const { tier, isReducedMotion } = usePerformance();
+  const shouldAnimate = tier >= 2 && !isReducedMotion;
 
   React.useEffect(() => {
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
@@ -546,12 +550,18 @@ const Contact: React.FC = () => {
                 )}
 
                 {/* Disclaimer */}
-                <p className="text-[0.7rem] leading-relaxed text-neutral-500 mt-2">
+                <motion.p
+                  variants={shouldAnimate ? bodyTextVariants : undefined}
+                  initial={shouldAnimate ? "hidden" : undefined}
+                  whileInView={shouldAnimate ? "visible" : undefined}
+                  viewport={{ once: true }}
+                  className="text-[0.7rem] leading-relaxed text-neutral-500 mt-2"
+                >
                   By submitting this form, you agree that your personal
                   information (name, email, and message) will be used to respond
                   to your inquiry. Your data will not be shared with third parties
                   and will be handled in accordance with our privacy practices.
-                </p>
+                </motion.p>
               </div>
             )}
 

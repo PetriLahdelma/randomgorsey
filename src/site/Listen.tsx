@@ -1,7 +1,8 @@
 "use client";
 
 import React from 'react';
-import { motion, listenVariants } from '@/lib/motion';
+import { motion, listenVariants, embedBorderVariants } from '@/lib/motion';
+import { usePerformance } from "@/lib/performance";
 import { VideoBackground } from '@/components/effects';
 import RevealOnScroll from '../components/RevealOnScroll';
 import { KineticText } from '@/components/KineticText';
@@ -13,6 +14,8 @@ const glitchBgVideo = "/videos/rg-glitch-bg.webm";
 
 const Listen: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
+  const { tier, isReducedMotion } = usePerformance();
+  const shouldAnimate = tier >= 2 && !isReducedMotion;
 
   const handleContentLoad = () => {
     setLoading(false);
@@ -61,32 +64,46 @@ const Listen: React.FC = () => {
             {typeof window !== 'undefined' && (
               <>
                 <RevealOnScroll>
-                  <iframe
-                    title="RG player"
-                    className="w-full"
-                    src="https://open.spotify.com/embed/artist/54Vv9rlCqX2nW2V0tXw33q?utm_source=generator"
-                    width="100%"
-                    height="352"
-                    frameBorder="0"
-                    allowFullScreen={true}
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                    onLoad={handleContentLoad}
-                  />
+                  <motion.div
+                    variants={shouldAnimate ? embedBorderVariants : undefined}
+                    initial={shouldAnimate ? "hidden" : undefined}
+                    whileInView={shouldAnimate ? "visible" : undefined}
+                    viewport={{ once: true, margin: "-10% 0px" }}
+                  >
+                    <iframe
+                      title="RG player"
+                      className="w-full"
+                      src="https://open.spotify.com/embed/artist/54Vv9rlCqX2nW2V0tXw33q?utm_source=generator"
+                      width="100%"
+                      height="352"
+                      frameBorder="0"
+                      allowFullScreen={true}
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      loading="lazy"
+                      onLoad={handleContentLoad}
+                    />
+                  </motion.div>
                 </RevealOnScroll>
 
                 {/* SoundCloud embed */}
                 <RevealOnScroll>
-                  <iframe
-                    title="SoundCloud Player"
-                    className="w-full"
-                    width="100%"
-                    height="300"
-                    scrolling="no"
-                    frameBorder="no"
-                    allow="autoplay"
-                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2029288998&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
-                  />
+                  <motion.div
+                    variants={shouldAnimate ? embedBorderVariants : undefined}
+                    initial={shouldAnimate ? "hidden" : undefined}
+                    whileInView={shouldAnimate ? "visible" : undefined}
+                    viewport={{ once: true, margin: "-10% 0px" }}
+                  >
+                    <iframe
+                      title="SoundCloud Player"
+                      className="w-full"
+                      width="100%"
+                      height="300"
+                      scrolling="no"
+                      frameBorder="no"
+                      allow="autoplay"
+                      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2029288998&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                    />
+                  </motion.div>
                 </RevealOnScroll>
               </>
             )}

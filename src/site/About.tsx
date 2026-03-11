@@ -2,7 +2,8 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { motion, aboutVariants, aboutStaggerContainer, aboutCardItem } from '@/lib/motion';
+import { motion, aboutVariants, aboutStaggerContainer, aboutCardItem, bodyTextVariants } from '@/lib/motion';
+import { usePerformance } from "@/lib/performance";
 import RevealOnScroll from '../components/RevealOnScroll';
 import { Container } from '../components/layout/Container';
 import { Stack } from '../components/layout/Stack';
@@ -22,6 +23,8 @@ const HoverWords = ({ children }: { children: string }) => (
 
 const About: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
+  const { tier, isReducedMotion } = usePerformance();
+  const shouldAnimate = tier >= 2 && !isReducedMotion;
 
   const handleContentLoad = () => {
     setLoading(false);
@@ -85,21 +88,39 @@ const About: React.FC = () => {
 
             {/* Bio text */}
             <RevealOnScroll>
-              <p className="text-base leading-relaxed">
+              <motion.p
+                variants={shouldAnimate ? bodyTextVariants : undefined}
+                initial={shouldAnimate ? "hidden" : undefined}
+                whileInView={shouldAnimate ? "visible" : undefined}
+                viewport={{ once: true }}
+                className="text-base leading-relaxed"
+              >
                 <HoverWords>Helsinki-based producer Random Gorsey aka DJ Pizza Hut makes warm, nostalgic lo-fi house and electronic music. Soulful chords, minimalist grooves, mid-paced and high-energy. Connected to both the Helsinki and global electronic scenes.</HoverWords>
-              </p>
+              </motion.p>
             </RevealOnScroll>
 
             <RevealOnScroll>
-              <p className="text-base leading-relaxed">
+              <motion.p
+                variants={shouldAnimate ? bodyTextVariants : undefined}
+                initial={shouldAnimate ? "hidden" : undefined}
+                whileInView={shouldAnimate ? "visible" : undefined}
+                viewport={{ once: true }}
+                className="text-base leading-relaxed"
+              >
                 <HoverWords>{"Self-taught and driven by instinct. Random G doesn't belong to any particular scene and doesn't try to. He acts on instinct, explores wherever creativity takes him, and tries not to overthink it."}</HoverWords>
-              </p>
+              </motion.p>
             </RevealOnScroll>
 
             <RevealOnScroll>
-              <p className="text-base leading-relaxed">
+              <motion.p
+                variants={shouldAnimate ? bodyTextVariants : undefined}
+                initial={shouldAnimate ? "hidden" : undefined}
+                whileInView={shouldAnimate ? "visible" : undefined}
+                viewport={{ once: true }}
+                className="text-base leading-relaxed"
+              >
                 <HoverWords>{"Actively producing and exploring new tools, sounds, and ideas. Always finding fresh processes, inspired by raw energy and aestheticism, pushing creative boundaries."}</HoverWords>
-              </p>
+              </motion.p>
             </RevealOnScroll>
 
             {/* Side projects section */}

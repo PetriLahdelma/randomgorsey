@@ -6,6 +6,7 @@ import {
   postCardStagger,
   postCardChild,
 } from "@/lib/motion";
+import { usePerformance } from "@/lib/performance";
 import { cn } from "@/lib/utils";
 import SocialShare from "./SocialShare";
 import { BaseComponentProps } from "../types/common";
@@ -160,6 +161,8 @@ const PostCard: React.FC<PostCardProps> = ({
   testId,
   ...accessibilityProps
 }) => {
+  const { tier, isReducedMotion } = usePerformance();
+  const shouldAnimate = tier >= 2 && !isReducedMotion;
   const [expanded, setExpanded] = React.useState(showFullContent);
   const [lightboxOpen, setLightboxOpen] = React.useState(false);
   const [lightboxIndex, setLightboxIndex] = React.useState(0);
@@ -219,10 +222,10 @@ const PostCard: React.FC<PostCardProps> = ({
 
   return (
     <motion.article
-      custom={index !== undefined ? index % 2 === 1 : false}
-      variants={postCardVariants}
-      initial="hidden"
-      whileInView="visible"
+      custom={shouldAnimate ? (index !== undefined ? index % 2 === 1 : false) : undefined}
+      variants={shouldAnimate ? postCardVariants : undefined}
+      initial={shouldAnimate ? "hidden" : undefined}
+      whileInView={shouldAnimate ? "visible" : undefined}
       viewport={{ once: true, margin: "-5% 0px" }}
       id={id}
       className={cn(
@@ -260,7 +263,12 @@ const PostCard: React.FC<PostCardProps> = ({
         : {})}
       {...accessibilityProps}
     >
-      <motion.div variants={postCardStagger} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+      <motion.div
+        variants={shouldAnimate ? postCardStagger : undefined}
+        initial={shouldAnimate ? "hidden" : undefined}
+        whileInView={shouldAnimate ? "visible" : undefined}
+        viewport={{ once: true }}
+      >
         <motion.div variants={postCardChild}>
           {/* Category label */}
           {post.category && (
