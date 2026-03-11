@@ -44,3 +44,5 @@ export { ScanLineReveal } from './ScanLineReveal';
 export { CursorTrail } from './CursorTrail';
 
 export { AmbientLayer } from './AmbientLayer';
+
+export { NoiseShimmer } from './NoiseShimmer';
