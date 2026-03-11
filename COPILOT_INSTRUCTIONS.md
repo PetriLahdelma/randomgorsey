@@ -184,16 +184,16 @@ test("should handle user interaction", async () => {
 **Production Build**:
 
 - Automatic optimization and bundling
-- Static site generation with react-snap
-- Deployed to GitHub Pages
+- Next.js App Router metadata and static asset generation
+- Deployed through Vercel
 - Custom domain: randomgorsey.com
 
 **Build Process**:
 
 1. TypeScript compilation
-2. Webpack bundling
-3. react-snap static generation
-4. File optimization and copying
+2. Next.js production bundling
+3. Static asset generation
+4. Vercel deployment
 
 ### 💡 AI Assistant Guidelines
 

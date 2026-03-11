@@ -21,10 +21,10 @@ const setCookie = (value: string) => {
 const loadGoogleAnalytics = () => {
   if (document.getElementById("ga-script")) return;
 
-  const gaTrackingId = import.meta.env.VITE_GA_TRACKING_ID;
+  const gaTrackingId = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
   if (!gaTrackingId) {
     // Only show warning in production or when explicitly set
-    if (import.meta.env.PROD) {
+    if (process.env.NODE_ENV === "production") {
       console.warn("Google Analytics tracking ID not configured");
     }
     return;
@@ -51,13 +51,13 @@ export interface CookieConsentProps {
 }
 
 const CookieConsent: React.FC<CookieConsentProps> = ({ className }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(
+    () => typeof document !== "undefined" && getCookie() === null
+  );
 
   useEffect(() => {
     const consent = getCookie();
-    if (!consent) {
-      setOpen(true);
-    } else if (consent === "all") {
+    if (consent === "all") {
       loadGoogleAnalytics();
     }
   }, []);

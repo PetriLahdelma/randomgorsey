@@ -135,6 +135,8 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
     },
     ref
   ) => {
+    void validation;
+
     const inputId =
       id || (label ? label.replace(/\s+/g, "-").toLowerCase() : undefined);
 
@@ -147,11 +149,12 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
 
     // Base input classes
     const inputClasses = cn(
-      "w-full max-w-full box-border font-europa rounded border border-input bg-background",
-      "ring-offset-background transition-colors",
-      "placeholder:italic placeholder:text-muted-foreground",
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:border-primary",
-      "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted",
+      "w-full max-w-full box-border font-europa bg-background text-foreground",
+      "border border-border",
+      "ring-offset-background",
+      "placeholder:text-muted-foreground placeholder:font-mono-label placeholder:text-xs placeholder:uppercase placeholder:tracking-widest",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:border-accent",
+      "disabled:cursor-not-allowed disabled:opacity-40",
       sizeClasses[size],
       error && "border-destructive focus-visible:ring-destructive",
       icon && "pl-10",
@@ -207,7 +210,7 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
       <div className="flex flex-col w-full max-w-full mb-4">
         {label && (
           <Label
-            className="mb-2 font-bold text-primary"
+            className="mb-2 font-mono-label text-muted-foreground"
             htmlFor={inputId}
             required={required}
           >

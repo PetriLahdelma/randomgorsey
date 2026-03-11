@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 import { BiSolidChevronUp, BiSolidChevronDown } from 'react-icons/bi';
+import { IoCloseSharp } from 'react-icons/io5';
 import { cn } from '@/lib/utils';
 import Button from '../components/Button';
+import PixelLogo from '../components/PixelLogo';
+import GlitchLink from '../components/GlitchLink';
 
 const navLinks = [
-  { to: '/', label: 'Home', title: 'Go to Home page' },
-  { to: '/listen/', label: 'Listen', title: 'Go to Listen page' },
-  { to: '/about/', label: 'About', title: 'Info about RG' },
-  { to: '/contact/', label: 'Contact', title: 'Contact RG' },
-  { to: '/discography/', label: 'Discography', title: 'View Discography' },
-  { to: '/gallery/', label: 'Gallery', title: 'View Gallery' },
+  { to: '/listen/', label: 'Listen', title: 'Listen to music' },
+  { to: '/about/', label: 'About', title: 'About Random Gorsey' },
+  { to: '/contact/', label: 'Contact', title: 'Get in touch' },
+  { to: '/discography/', label: 'Discography', title: 'View releases' },
+  { to: '/gallery/', label: 'Gallery', title: 'Photo gallery' },
 ];
 
 const ChevronUp = React.createElement(
@@ -29,6 +31,7 @@ export interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ className }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
 
   React.useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 800);
@@ -37,91 +40,107 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Hide mobile menu if switching to desktop
   React.useEffect(() => {
     if (!isMobile && menuOpen) setMenuOpen(false);
   }, [isMobile, menuOpen]);
 
+  const isActive = (path: string) => {
+    if (path === '/') return pathname === '/';
+    return pathname.startsWith(path.replace(/\/$/, ''));
+  };
+
   return (
     <header
       className={cn(
-        "relative text-white bg-black",
+        "fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm",
         className
       )}
     >
-      <div className="flex flex-col items-center gap-4 px-4 py-4 mx-auto w-full max-w-5xl">
-        <Link to="/" className="w-full flex justify-center">
-          <img
-            src="/images/logo.jpg"
-            alt="Random Gorsey logo"
-            title="Back to the Homepage"
-            className={cn(
-              "block w-full h-auto object-contain max-w-[520px] md:max-w-[640px] lg:max-w-[720px]",
-              isMobile && "mb-2"
-            )}
-          />
-        </Link>
-        <nav aria-label="Main navigation" className="w-full">
-        {/* Desktop links */}
-        {!isMobile && (
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 justify-center p-0 m-0 list-none">
-            {navLinks.map(link => (
-              <li key={link.to}>
-                <Link
-                  to={link.to}
-                  title={link.title}
-                  className="font-tschick-bold text-[0.72rem] sm:text-xs md:text-sm lg:text-[0.95rem] font-bold text-white no-underline uppercase tracking-[0.06em] md:tracking-[0.1em] whitespace-nowrap hover:underline hover:text-yellow-400 transition-colors"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-        {/* Mobile menu button */}
-        {isMobile && (
-          <>
-            <Button
-              variant="tertiary"
-              className="flex gap-[0.4em] items-center justify-center px-[1em] py-[0.5em] font-bold cursor-pointer bg-transparent border-none text-white uppercase tracking-[0.1em]"
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
-              onClick={() => setMenuOpen(open => !open)}
-              type="button"
-              icon={menuOpen ? ChevronUp : ChevronDown}
-            >
-              Menu
-            </Button>
-            {/* Mobile dropdown menu */}
-            {menuOpen && (
-              <ul
-                id="mobile-menu"
-                className={cn(
-                  "absolute top-full right-0 left-0 z-[1000]",
-                  "flex flex-col items-center",
-                  "py-4 px-0 m-0",
-                  "bg-black border-t border-gray-600",
-                  "shadow-lg",
-                  "list-none"
-                )}
+      <div className="flex items-center justify-between px-6 py-4 mx-auto w-full max-w-5xl">
+        <PixelLogo />
+
+        <nav aria-label="Main navigation">
+          {!isMobile && (
+            <ul className="flex gap-6 p-0 m-0 list-none">
+              {navLinks.map(link => (
+                <li key={link.to}>
+                  <GlitchLink
+                    href={link.to}
+                    title={link.title}
+                    className={cn(
+                      "text-sm tracking-wide no-underline whitespace-nowrap",
+                      isActive(link.to)
+                        ? "text-accent underline underline-offset-4"
+                        : "text-neutral-400 hover:text-accent"
+                    )}
+                  >
+                    {link.label}
+                  </GlitchLink>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {isMobile && (
+            <>
+              <Button
+                variant="tertiary"
+                className="flex gap-1 items-center text-sm tracking-wide text-foreground bg-transparent border-none"
+                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={menuOpen}
+                aria-controls="mobile-menu"
+                onClick={() => setMenuOpen(open => !open)}
+                type="button"
+                icon={menuOpen ? ChevronUp : ChevronDown}
               >
-                {navLinks.map(link => (
-                  <li key={link.to} className="my-2">
-                    <Link
-                      to={link.to}
+                Menu
+              </Button>
+              {menuOpen && (
+                <div
+                  id="mobile-menu"
+                  className="fixed inset-0 z-50 bg-background flex flex-col items-center justify-center gap-8"
+                >
+                  <button
+                    type="button"
+                    aria-label="Close menu"
+                    className="absolute top-4 right-6 text-foreground hover:text-accent bg-transparent border-none cursor-pointer"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <IoCloseSharp className="w-8 h-8" aria-hidden="true" />
+                  </button>
+                  <GlitchLink
+                    href="/"
+                    title="Go to Home page"
+                    onClick={() => setMenuOpen(false)}
+                    className={cn(
+                      "text-2xl tracking-wide no-underline",
+                      isActive('/')
+                        ? "text-accent underline underline-offset-4"
+                        : "text-neutral-400 hover:text-accent"
+                    )}
+                  >
+                    Home
+                  </GlitchLink>
+                  {navLinks.map(link => (
+                    <GlitchLink
+                      key={link.to}
+                      href={link.to}
                       title={link.title}
                       onClick={() => setMenuOpen(false)}
-                      className="font-tschick-bold text-base font-bold text-white no-underline uppercase tracking-[0.1em] hover:underline hover:text-yellow-400 transition-colors"
+                      className={cn(
+                        "text-2xl tracking-wide no-underline",
+                        isActive(link.to)
+                          ? "text-accent underline underline-offset-4"
+                          : "text-neutral-400 hover:text-accent"
+                      )}
                     >
                       {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </>
-        )}
+                    </GlitchLink>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
         </nav>
       </div>
     </header>

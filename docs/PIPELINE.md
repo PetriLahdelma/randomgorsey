@@ -35,26 +35,19 @@ The Random Gorsey project uses a robust CI/CD pipeline with GitHub Actions to en
 - ✅ Security vulnerability scanning
 - ✅ EmailJS credential leak detection
 
-### 2. Deployment Workflow (`.github/workflows/deploy.yml`)
+### 2. Main Branch Validation (`.github/workflows/deploy.yml`)
 
 **Triggers**: Push to `main` branch
-**Purpose**: Secure production deployment to GitHub Pages
+**Purpose**: Validate the production branch before Vercel picks up the deploy
 
 **Jobs**:
 
-- **Pre-deployment Validation**:
+- **Main Branch Checks**:
 
   - TypeScript checking
   - Test execution
   - Security audit
   - Build verification
-
-- **Production Deployment**:
-  - Sitemap generation
-  - Production build
-  - CNAME setup
-  - GitHub Pages deployment
-  - Post-deployment verification
 
 ## 🔒 Security Features
 

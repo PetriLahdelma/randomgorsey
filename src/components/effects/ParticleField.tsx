@@ -52,15 +52,26 @@ export const ParticleField: React.FC<ParticleFieldProps> = ({
   // Scale count based on tier
   const actualCount = tier >= 3 ? count : tier >= 2 ? Math.floor(count / 2) : Math.floor(count / 4);
 
+  const createSeededRandom = (seed: number) => {
+    let value = seed >>> 0;
+
+    return () => {
+      value = (value * 1664525 + 1013904223) >>> 0;
+      return value / 4294967296;
+    };
+  };
+
   // Generate particle positions once
   const particles = useMemo(() => {
+    const random = createSeededRandom(actualCount * 97 + Math.round(spread * 100));
+
     return Array.from({ length: actualCount }, () => ({
       position: [
-        (Math.random() - 0.5) * spread,
-        (Math.random() - 0.5) * spread,
-        (Math.random() - 0.5) * spread,
+        (random() - 0.5) * spread,
+        (random() - 0.5) * spread,
+        (random() - 0.5) * spread,
       ] as [number, number, number],
-      scale: Math.random() * 0.5 + 0.5,
+      scale: random() * 0.5 + 0.5,
     }));
   }, [actualCount, spread]);
 

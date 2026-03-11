@@ -11,6 +11,8 @@ node_modules/
 # production
 /build
 /dist
+/.next
+/out
 
 # misc
 .DS_Store
@@ -29,3 +31,8 @@ yarn-error.log*
 # storybook
 *storybook.log
 storybook-static/
+
+# local dev artifacts
+.claude/
+.superpowers/
+tsconfig.tsbuildinfo

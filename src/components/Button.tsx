@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { BaseComponentProps, Size } from "../types/common";
@@ -22,22 +23,21 @@ export type IconPosition = "left" | "right";
  * CVA button variants configuration
  */
 const buttonVariants = cva(
-  // Base classes - flex, cursor, transitions, focus states
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-tschick-bold text-base cursor-pointer rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground disabled:border-muted",
+  "btn-signal inline-flex items-center justify-center gap-2 whitespace-nowrap font-mono-label cursor-pointer transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40",
   {
     variants: {
       variant: {
-        primary: "bg-primary text-primary-foreground hover:bg-primary/90",
+        primary: "bg-accent text-accent-foreground hover:bg-yellow-500",
         secondary:
-          "bg-transparent text-primary border border-primary hover:bg-primary/10",
-        danger: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        tertiary: "bg-transparent text-primary border-none hover:bg-accent/50",
-        success: "bg-success text-white hover:bg-success/90",
+          "bg-transparent text-foreground border border-foreground hover:text-accent hover:border-accent",
+        danger: "bg-destructive text-destructive-foreground hover:opacity-80",
+        tertiary: "bg-transparent text-muted-foreground border border-border hover:text-foreground hover:border-foreground",
+        success: "bg-success text-white hover:opacity-80",
       },
       size: {
-        small: "h-8 px-3 text-sm",
-        medium: "h-10 px-4",
-        large: "h-12 px-6 text-lg",
+        small: "h-8 px-3 text-xs",
+        medium: "h-10 px-5",
+        large: "h-12 px-6 text-sm",
       },
       iconOnly: {
         true: "w-10 h-10 p-0",
@@ -49,7 +49,6 @@ const buttonVariants = cva(
       },
     },
     compoundVariants: [
-      // Icon-only size adjustments
       { iconOnly: true, size: "small", class: "w-8 h-8" },
       { iconOnly: true, size: "large", class: "w-12 h-12" },
     ],
@@ -88,6 +87,8 @@ export interface ButtonProps
   type?: "button" | "submit" | "reset";
   /** Whether the button should take full width of its container */
   fullWidth?: boolean;
+  /** Render the button styles onto a child element */
+  asChild?: boolean;
   /** Whether the button is in a loading state */
   loading?: boolean;
   /** Auto-focus the button on mount */
@@ -127,6 +128,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       iconPosition = "left",
       type = "button",
       fullWidth = false,
+      asChild = false,
       loading = false,
       autoFocus = false,
       form,
@@ -142,16 +144,18 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
+    const Comp = asChild ? Slot : "button";
+
     // Accessible label for icon-only buttons
     const computedAriaLabel =
       ariaLabel ||
       (iconOnly && typeof children === "string" ? children : undefined);
 
     return (
-      <button
+      <Comp
         ref={ref}
         id={id}
-        type={type}
+        {...(!asChild ? { type } : {})}
         className={cn(
           buttonVariants({
             variant,
@@ -178,7 +182,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading && (
           <span
-            className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
+            className="inline-block h-4 w-4 animate-spin border-2 border-current border-t-transparent"
             aria-hidden="true"
           />
         )}
@@ -188,7 +192,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           </span>
         )}
         {!iconOnly && children}
-      </button>
+      </Comp>
     );
   }
 );

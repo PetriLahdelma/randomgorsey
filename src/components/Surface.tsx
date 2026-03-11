@@ -18,50 +18,37 @@ const DEFAULT_ELEMENT = "div";
  * Maps CSS Module styles to Tailwind utilities
  */
 const surfaceVariants = cva(
-  // Base classes - always applied
-  // Position, box model, colors, border, shadow, and transitions
   [
     "relative box-border block overflow-hidden",
-    "text-black bg-white",
-    "border border-black/[0.14]",
-    "rounded-xl", // 0.75rem default
-    "shadow-[0_18px_30px_rgb(0_0_0/0.18)]",
-    "transition-[transform,box-shadow,background-color,border-color,color]",
-    "duration-[350ms] ease-[cubic-bezier(0.4,0,0.2,1)]",
+    "text-foreground bg-surface",
+    "border border-border",
+    "transition-none",
   ].join(" "),
   {
     variants: {
       variant: {
-        // Flat: lighter shadow
-        flat: "shadow-[0_12px_22px_rgb(0_0_0/0.15)]",
-        // Raised: heavier shadow
-        raised: "shadow-[0_24px_45px_rgb(0_0_0/0.35)]",
-        // Inverted: dark background, light text
-        inverted: [
-          "text-white bg-black/[0.92]",
-          "border-white/[0.2]",
-          "shadow-[0_25px_50px_rgb(0_0_0/0.45)]",
-        ].join(" "),
+        flat: "",
+        raised: "",
+        inverted: "text-foreground bg-surface-elevated border-border",
       },
       padding: {
         none: "p-0",
         xs: "p-[0.35rem]",
         sm: "p-[0.75rem]",
-        md: "p-4", // 1rem
-        lg: "p-6", // 1.5rem
+        md: "p-4",
+        lg: "p-6",
       },
       radius: {
-        none: "rounded-none",
-        sm: "rounded-[0.35rem]",
-        md: "rounded-[0.5rem]",
-        lg: "rounded-xl", // 0.75rem
+        none: "",
+        sm: "",
+        md: "",
+        lg: "",
       },
       interactive: {
         true: [
           "cursor-pointer",
-          "hover:shadow-[0_30px_50px_rgb(0_0_0/0.45)] hover:-translate-y-0.5",
-          "focus-visible:shadow-[0_30px_50px_rgb(0_0_0/0.45)] focus-visible:-translate-y-0.5",
-          "focus-visible:outline-2 focus-visible:outline-[#ff0] focus-visible:outline-offset-[3px]",
+          "hover:-translate-y-0.5",
+          "focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[3px]",
         ].join(" "),
         false: "",
       },

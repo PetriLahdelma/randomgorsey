@@ -16,7 +16,6 @@ export type { InputProps, InputType } from "./Input";
 export { default as Label } from "./Label";
 export type { LabelProps } from "./Label";
 export { default as Modal } from "./Modal";
-export { default as PageMeta } from "./PageMeta";
 export { default as PostCard } from "./PostCard";
 export type { Post, PostCardProps } from "./PostCard";
 export { PostContentType } from "./PostCard";

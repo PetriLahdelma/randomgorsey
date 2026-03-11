@@ -1,0 +1,343 @@
+@import "tailwindcss";
+@source "../**/*.{js,jsx,ts,tsx,mdx}";
+@import "lenis/dist/lenis.css";
+
+/* Token imports - order matters for cascade */
+@import "../styles/tokens/primitives.css";
+@import "../styles/tokens/semantic.css";
+@import "../styles/tokens/sections.css";
+@import "../styles/tokens/typography.css";
+@import "../styles/button-signal.css";
+@import "../styles/link-signal.css";
+@import "../styles/form-signal.css";
+
+/*
+ * Custom Font Faces
+ * These fonts must stay in globals.css for proper font loading
+ *
+ * Font Loading Strategy:
+ * - font-display: swap prevents FOIT (Flash of Invisible Text)
+ * - Unified "Europa" family allows weight-based font selection
+ * - Individual font-family names retained for backwards compatibility
+ */
+
+/* Unified Europa font-family with weight axis */
+@font-face {
+  font-family: Europa;
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/europa-light-webfont.woff2") format("woff2"),
+    url("../fonts/europa-light-webfont.woff") format("woff"),
+    url("../fonts/europa-light-webfont.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Europa;
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/europa-regular-webfont.woff2") format("woff2"),
+    url("../fonts/europa-regular-webfont.woff") format("woff"),
+    url("../fonts/europa-regular-webfont.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Europa;
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/europa-bold-webfont.woff2") format("woff2"),
+    url("../fonts/europa-bold-webfont.woff") format("woff"),
+    url("../fonts/europa-bold-webfont.ttf") format("truetype");
+  font-display: swap;
+}
+
+/* Individual font-family declarations (backwards compatibility) */
+@font-face {
+  font-family: "Europa Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/europa-bold-webfont.woff2") format("woff2"),
+    url("../fonts/europa-bold-webfont.woff") format("woff"),
+    url("../fonts/europa-bold-webfont.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Europa Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/europa-regular-webfont.woff2") format("woff2"),
+    url("../fonts/europa-regular-webfont.woff") format("woff"),
+    url("../fonts/europa-regular-webfont.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Europa Light";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/europa-light-webfont.woff2") format("woff2"),
+    url("../fonts/europa-light-webfont.woff") format("woff"),
+    url("../fonts/europa-light-webfont.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tschick Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/Tschick-Bold.woff2") format("woff2"),
+    url("../fonts/Tschick-Bold.woff") format("woff");
+  font-display: swap;
+}
+
+/* Base layer styles */
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  /* Prevent horizontal overflow/scroll on mobile */
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  body {
+    /* Note: No background-color on body - pages use fixed video backgrounds */
+
+    /* that need to show through. Components apply their own backgrounds. */
+    color: var(--color-foreground);
+
+    margin: 0;
+    font-family: var(--font-family-europa-unified);
+    font-size: var(--text-base);
+    font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: var(--text-base--line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-tschick-bold);
+    text-transform: uppercase;
+    letter-spacing: clamp(0.02em, 0.5vw, 0.07em);
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+
+  /* Fluid typography scale applied to native heading elements
+   * This ensures ALL pages get fluid typography without needing
+   * to migrate to <Heading> components
+   * Scale: text-6xl -> text-xl (matches Heading component)
+   */
+  h1 {
+    font-size: var(--text-6xl);
+    line-height: var(--text-6xl--line-height);
+  }
+
+  h2 {
+    font-size: var(--text-5xl);
+    line-height: var(--text-5xl--line-height);
+  }
+
+  h3 {
+    font-size: var(--text-4xl);
+    line-height: var(--text-4xl--line-height);
+  }
+
+  h4 {
+    font-size: var(--text-3xl);
+    line-height: var(--text-3xl--line-height);
+  }
+
+  h5 {
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+  }
+
+  h6 {
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
+  }
+}
+
+/* Custom utility classes for fonts */
+@layer utilities {
+  .font-tschick-bold {
+    font-family: var(--font-family-tschick-bold);
+  }
+
+  .font-europa {
+    font-family: var(--font-family-europa-unified);
+  }
+
+  .font-europa-bold {
+    font-family: var(--font-family-europa-bold);
+  }
+
+  .font-europa-light {
+    font-family: var(--font-family-europa-light);
+  }
+}
+
+/* === CUSTOM CURSOR === */
+
+/* Hide default cursor when custom cursor is active (desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active {
+    cursor: none;
+  }
+
+  body.custom-cursor-active a,
+  body.custom-cursor-active button,
+  body.custom-cursor-active [role="button"],
+  body.custom-cursor-active input,
+  body.custom-cursor-active textarea,
+  body.custom-cursor-active select,
+  body.custom-cursor-active label {
+    cursor: none;
+  }
+}
+
+/* Touch/mobile devices - always show native cursor */
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
+/* Signal vocabulary: hover effects */
+@keyframes scan-sweep {
+  from { top: -1px; opacity: 0.7; }
+  to { top: 100%; opacity: 0; }
+}
+.animate-scan-sweep {
+  animation: scan-sweep 200ms cubic-bezier(0.22, 1, 0.36, 1) 1 forwards;
+}
+
+@keyframes voltage-spike {
+  0% { border-color: var(--color-accent); }
+  6% { border-color: var(--color-accent); }
+  7% { border-color: oklch(18% 0 0deg); }
+  100% { border-color: oklch(18% 0 0deg); }
+}
+.card-signal {
+  border: 1px solid oklch(12% 0 0deg);
+}
+.card-signal:hover {
+  animation: voltage-spike 250ms steps(1, end) 1 forwards;
+}
+
+/* Transition destabilize phase */
+.signal-destabilize {
+  animation: signal-shake 120ms steps(4) forwards;
+}
+@keyframes signal-shake {
+  0% { transform: translateX(0); filter: none; }
+  25% { transform: translateX(-3px); filter: brightness(1.05); }
+  50% { transform: translateX(5px); filter: brightness(0.95); }
+  75% { transform: translateX(-2px); filter: brightness(1.1); }
+  100% { transform: translateX(0); filter: brightness(1); }
+}
+
+/* Ambient: contact border circuit */
+@keyframes border-travel {
+  0% { top: 0; left: 0; }
+  25% { top: 0; left: calc(100% - 4px); }
+  50% { top: calc(100% - 4px); left: calc(100% - 4px); }
+  75% { top: calc(100% - 4px); left: 0; }
+  100% { top: 0; left: 0; }
+}
+
+/* Ambient: about hot pixel blink */
+@keyframes hot-pixel {
+  0%, 90% { opacity: 0; }
+  91%, 93% { opacity: 1; }
+  94%, 100% { opacity: 0; }
+}
+
+@keyframes shimmer-scan {
+  from { top: -2px; }
+  to { top: 100%; }
+}
+.animate-shimmer-scan {
+  animation: shimmer-scan 1.5s linear infinite;
+}
+
+/* Share button signal hover + sonar ping */
+.share-signal:hover {
+  animation: share-glitch 16ms steps(1) 1;
+}
+@keyframes share-glitch {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+.share-signal {
+  position: relative;
+  overflow: visible;
+}
+.share-signal:active::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 1px solid var(--color-accent);
+  border-radius: 50%;
+  animation: sonar-ping 300ms ease-out 1 forwards;
+  pointer-events: none;
+}
+@keyframes sonar-ping {
+  from { transform: scale(1); opacity: 0.6; }
+  to { transform: scale(1.8); opacity: 0; }
+}
+
+/* High-contrast mode: prioritize legibility */
+@media (prefers-contrast: more) {
+  [data-ambient] { display: none; }
+  .grain-overlay::after { display: none; }
+  [data-card] {
+    background-color: oklch(5% 0 0deg) !important;
+    border-color: oklch(30% 0 0deg) !important;
+  }
+  body { color: oklch(95% 0 0deg); }
+}
+
+/* Contact: submit success ring */
+@keyframes submit-ring {
+  from { transform: scale(1); opacity: 0.6; border-color: var(--color-accent); }
+  to { transform: scale(2.5); opacity: 0; border-color: var(--color-accent); }
+}
+.submit-success-ring {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin: -50px 0 0 -50px;
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: submit-ring 500ms ease-out 1 forwards;
+}
+
+/* Post expand: horizontal noise wipe sweeps down */
+@keyframes noise-wipe-down {
+  from {
+    clip-path: inset(0 0 100% 0);
+    filter: brightness(1.2) contrast(1.1);
+  }
+  to {
+    clip-path: inset(0 0 0% 0);
+    filter: brightness(1) contrast(1);
+  }
+}
+.noise-wipe-enter {
+  animation: noise-wipe-down 350ms cubic-bezier(0.22, 1, 0.36, 1) 1 forwards;
+}

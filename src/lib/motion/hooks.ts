@@ -6,7 +6,7 @@
  */
 
 import { useEffect, useCallback, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 import { LenisContext } from 'lenis/react';
 
 /**
@@ -22,11 +22,11 @@ function useLenisSafe() {
  * Scrolls to top of page when route changes.
  * Works with both Lenis (if active) and native scroll.
  *
- * Must be called within a component inside BrowserRouter.
+ * Must be called within a client component that runs inside the App Router.
  */
 export function useScrollToTopOnRouteChange(): void {
   const lenis = useLenisSafe();
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     // Immediate scroll to prevent seeing previous position
@@ -35,7 +35,7 @@ export function useScrollToTopOnRouteChange(): void {
     } else {
       window.scrollTo(0, 0);
     }
-  }, [location.pathname, lenis]);
+  }, [pathname, lenis]);
 }
 
 interface ScrollToOptions {

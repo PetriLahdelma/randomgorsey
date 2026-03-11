@@ -105,14 +105,13 @@ const SocialShare: React.FC<SocialShareProps> = ({ url, title, text, className }
     >
       <button
         type="button"
-        className="inline-flex items-center justify-center rounded-full border border-white/30 bg-black/80 p-2 text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+        className="share-signal p-0 font-mono-label text-accent underline underline-offset-4 cursor-pointer bg-transparent border-none hover:text-foreground transition-colors"
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => setOpen((prev) => !prev)}
       >
-        <Share2 className="h-4 w-4" aria-hidden="true" />
-        <span className="sr-only">Share</span>
+        Share
       </button>
 
       {open && (

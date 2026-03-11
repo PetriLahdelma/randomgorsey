@@ -1,7 +1,6 @@
 import type { Preview } from "@storybook/react";
-import "../src/styles/globals.css"; // Tailwind CSS
+import "../src/app/globals.css";
 import React from "react";
-import { MemoryRouter } from "react-router-dom";
 import Badge from "../src/components/Badge";
 
 /**
@@ -35,11 +34,6 @@ const WIPDecorator = (Story: React.ComponentType) => (
 const preview: Preview = {
   decorators: [
     WIPDecorator,
-    (Story) => (
-      <MemoryRouter>
-        <Story />
-      </MemoryRouter>
-    ),
   ],
   parameters: {
     controls: {
@@ -54,6 +48,9 @@ const preview: Preview = {
         { name: "light", value: "#ffffff" },
         { name: "dark", value: "#0a0a0a" },
       ],
+    },
+    nextjs: {
+      appDirectory: true,
     },
   },
 };

@@ -11,8 +11,6 @@ type HeadingTone = "light" | "dark" | "accent";
 type HeadingAlign = "left" | "center" | "right";
 type HeadingWeight = "regular" | "medium" | "bold";
 
-const DEFAULT_HEADING_TAG = "h2";
-
 /**
  * Heading component with fluid typography
  * Uses typography tokens from src/styles/tokens/typography.css
@@ -80,10 +78,10 @@ type HeadingOwnProps = BaseComponentProps & {
 };
 
 export type HeadingProps<
-  T extends ElementWithChildren = typeof DEFAULT_HEADING_TAG,
+  T extends ElementWithChildren = "h2",
 > = PolymorphicProps<T, HeadingOwnProps>;
 
-const Heading = <T extends ElementWithChildren = typeof DEFAULT_HEADING_TAG>({
+const Heading = <T extends ElementWithChildren = "h2">({
   as,
   level = 2,
   tone = "dark",

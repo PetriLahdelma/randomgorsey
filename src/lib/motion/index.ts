@@ -56,6 +56,21 @@ export {
   textRevealDramatic,
 } from './variants';
 
+// === SCROLL ENTRANCE VARIANTS ===
+// Per-content-type scroll-driven entrance animations
+export {
+  postCardVariants,
+  postCardStagger,
+  postCardChild,
+  galleryRevealVariants,
+  embedBorderVariants,
+  bodyTextVariants,
+  headingCharVariants,
+  headingContainerVariants,
+  headingGhostVariants,
+  headingUnderlineVariants,
+} from "./scroll-variants";
+
 // === SECTION-SPECIFIC VARIANTS ===
 // Per-page motion timing with distinct personalities
 export {
@@ -77,10 +92,6 @@ export {
 export { AnimationProvider } from './AnimationProvider';
 export { LenisProvider } from './LenisProvider';
 
-// === ROUTING ===
-// Animated route transitions with AnimatePresence
-export { AnimatedRoutes } from './AnimatedRoutes';
-
 // === SMOOTH SCROLL ===
 // Lenis hook for programmatic scroll control
 export { useLenis } from 'lenis/react';
@@ -88,6 +99,7 @@ export { useLenis } from 'lenis/react';
 // === CUSTOM HOOKS ===
 // Scroll utilities with Lenis integration
 export { useScrollToTopOnRouteChange, useLenisScrollTo } from './hooks';
+export { useScrollVelocity } from './useScrollVelocity';
 
 // === FRAMER MOTION RE-EXPORTS ===
 // Commonly used utilities for convenience

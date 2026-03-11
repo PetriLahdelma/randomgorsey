@@ -287,9 +287,9 @@ npm start                  # Development server
 #### Build Pipeline
 
 1. `npm run build` - Creates optimized production build
-2. react-snap - Generates static HTML for SEO
+2. App Router metadata and static assets are emitted into the Next build output
 3. Asset optimization and compression
-4. GitHub Pages deployment
+4. Vercel deploys the production build from the connected branch
 
 ### 🌐 Viewing the Live Site (For AI Agents)
 

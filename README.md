@@ -1,6 +1,6 @@
 # Random Gorsey Website
 
-This repository contains the source code for [randomgorsey.com](https://randomgorsey.com), a small React + TypeScript site. The project was originally bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and uses a couple of extra tools for linting and deploying to GitHub Pages.
+This repository contains the source code for [randomgorsey.com](https://randomgorsey.com). The site now runs on Next.js 16 with the App Router, Tailwind CSS 4, and a shadcn-compatible component setup. The old Vite SPA code has been migrated into `src/site` and is now routed through `src/app`.
 
 ## Requirements
 
@@ -13,7 +13,7 @@ Install the dependencies and start a local development server:
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 The site will be available at [http://localhost:3000](http://localhost:3000). Any saved changes will hot reload in the browser.
@@ -30,9 +30,11 @@ For the contact form to work, you need to configure EmailJS environment variable
 
 2. Fill in your EmailJS credentials in `.env`:
    ```
-   REACT_APP_EMAILJS_SERVICE_ID=your_service_id
-   REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
-   REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
+   NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
+   NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
+   NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
+   NEXT_PUBLIC_GA_TRACKING_ID=your_ga_tracking_id
+   NEXT_PUBLIC_SITE_ORIGIN=https://randomgorsey.com
    EMAILJS_PRIVATE_KEY=your_private_key
    ```
 
@@ -41,24 +43,31 @@ For the contact form to work, you need to configure EmailJS environment variable
 ## Useful Scripts
 
 - **`npm test`** – run unit tests using React Testing Library.
-- **`npm run lint`** – format and lint the CSS files with stylelint.
+- **`npm run lint`** – lint the runtime source used by the Next.js app.
+- **`npm run lint:css`** – lint the CSS files with stylelint.
 - **`npm run storybook`** – launch the component Storybook on port 6006.
 - **`npm run build-storybook`** – generate the static Storybook site.
-- **`npm run build`** – create an optimized production build and pre-render each route using `react-snap`.
+- **`npm run build`** – create an optimized Next.js production build.
 - **`npm run generate-meta`** – update `public/sitemap.xml`, `llms.txt` and `llms-full.txt` based on the current routes.
-- SEO metadata for each page is managed through the `PageMeta` component in `src/components`.
+
+SEO metadata is now defined at the App Router route layer in `src/app`.
 
 ## Deployment
 
-Deployment is handled through GitHub Pages. Two commands are available:
+Deployment should be handled through Vercel Git integration or the Vercel CLI:
 
 ```bash
-npm run predeploy   # build the site and copy CNAME for GitHub Pages
-npm run deploy      # publishes the build folder to the gh-pages branch
+vercel
 ```
 
-After a successful deploy, the site will be served from the `gh-pages` branch using the domain specified in `CNAME`.
+Recommended Vercel setup:
+
+- Import the repository into Vercel.
+- Set the production environment variables from `.env.example`.
+- Add `randomgorsey.com` and `www.randomgorsey.com` as domains in the Vercel project.
+- Update DNS away from GitHub Pages once the Vercel deployment is verified.
+- Use the cutover checklist in `docs/VERCEL_CUTOVER.md` for the DNS switch.
 
 ## Further Reading
 
-For more details on how Create React App works under the hood, see the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started). If you are new to React itself, the [React documentation](https://reactjs.org/) is a great starting point.
+For more details on the current stack, see the [Next.js documentation](https://nextjs.org/docs) and the [shadcn/ui documentation](https://ui.shadcn.com/docs).
