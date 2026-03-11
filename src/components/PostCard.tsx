@@ -91,6 +91,37 @@ export interface PostCardProps extends Omit<BaseComponentProps, "children"> {
   headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
+function autoLinkUrls(html: string): string {
+  const tagPattern = /<[^>]+>/g;
+  const parts = html.split(tagPattern);
+  const tags = html.match(tagPattern) || [];
+
+  let result = "";
+  let insideAnchorOrIframe = false;
+
+  for (let i = 0; i < parts.length; i++) {
+    let textPart = parts[i];
+
+    if (!insideAnchorOrIframe) {
+      textPart = textPart.replace(
+        /(https?:\/\/[^\s<>"']+)/g,
+        '<a href="$1" target="_blank" rel="noopener" class="text-accent underline underline-offset-4 hover:text-foreground transition-colors">$1</a>'
+      );
+    }
+
+    result += textPart;
+
+    if (i < tags.length) {
+      const tag = tags[i];
+      if (/<(a|iframe)\b/i.test(tag)) insideAnchorOrIframe = true;
+      if (/<\/(a|iframe)>/i.test(tag)) insideAnchorOrIframe = false;
+      result += tag;
+    }
+  }
+
+  return result;
+}
+
 function formatTimestamp(iso: string): string {
   const date = new Date(iso);
   const month = date.toLocaleString("en-US", { month: "long" }).toLowerCase();
@@ -230,7 +261,7 @@ const PostCard: React.FC<PostCardProps> = ({
         >
           <div
             className="mt-6 mb-3 font-europa text-[1.05rem] leading-[1.7] text-[oklch(65%_0_0deg)] [&>p]:mb-6 [&>p:last-child]:mb-0 [&_iframe]:w-full [&_iframe]:my-6 [&_iframe]:border-0 [&_iframe]:rounded-none [&_iframe]:bg-[oklch(6%_0_0deg)]"
-            dangerouslySetInnerHTML={{ __html: displayBody }}
+            dangerouslySetInnerHTML={{ __html: autoLinkUrls(displayBody) }}
           />
         </motion.div>
       </AnimatePresence>
