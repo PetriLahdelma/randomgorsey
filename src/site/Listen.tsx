@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion, listenVariants, embedBorderVariants } from '@/lib/motion';
 import { usePerformance } from "@/lib/performance";
-import { VideoBackground } from '@/components/effects';
+import { VideoBackground, AmbientLayer } from '@/components/effects';
 import RevealOnScroll from '../components/RevealOnScroll';
 import { KineticText } from '@/components/KineticText';
 import { Container } from '@/components/layout/Container';
@@ -23,6 +23,7 @@ const Listen: React.FC = () => {
 
   return (
     <>
+      <AmbientLayer variant="listen" />
       <PageMeta
         title="Listen | Random Gorsey"
         description="Stream songs and playlists from Random Gorsey."

@@ -7,7 +7,7 @@ import { usePerformance } from "@/lib/performance";
 import RevealOnScroll from '../components/RevealOnScroll';
 import { Container } from '../components/layout/Container';
 import { Stack } from '../components/layout/Stack';
-import { VideoBackground } from '../components/effects/VideoBackground';
+import { VideoBackground, AmbientLayer } from '@/components/effects';
 import { KineticText } from '../components/KineticText';
 import Spinner from '../components/Spinner';
 import PageMeta from '../components/PageMeta';
@@ -32,6 +32,7 @@ const About: React.FC = () => {
 
   return (
     <>
+      <AmbientLayer variant="about" />
       <PageMeta
         title="About | Random Gorsey"
         description="Background, influences and side projects of Random Gorsey."

@@ -5,13 +5,14 @@ import Link from "next/link";
 import { motion, pageVariants } from "@/lib/motion";
 import { Container } from "@/components/layout/Container";
 import PageMeta from "../components/PageMeta";
-import { VideoBackground } from "@/components/effects";
+import { VideoBackground, AmbientLayer } from "@/components/effects";
 
 const glitchBgVideo = "/videos/rg-glitch-bg.webm";
 
 const NotFound: React.FC = () => {
   return (
     <>
+      <AmbientLayer variant="not-found" />
       <PageMeta
         title="404 - Page Not Found"
         description="The page you requested could not be found."

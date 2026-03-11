@@ -12,7 +12,7 @@ import {
   overlayVariants,
   modalVariants,
 } from '@/lib/motion';
-import { VideoBackground, ScanLineReveal } from '@/components/effects';
+import { VideoBackground, ScanLineReveal, AmbientLayer } from '@/components/effects';
 import { Container } from '@/components/layout/Container';
 import { Stack } from '@/components/layout/Stack';
 import { KineticText } from '@/components/KineticText';
@@ -91,6 +91,7 @@ const Gallery: React.FC = () => {
 
   return (
     <>
+      <AmbientLayer variant="gallery" />
       <PageMeta
         title="Gallery | Random Gorsey"
         description="Photo gallery featuring Random Gorsey visuals."

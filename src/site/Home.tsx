@@ -10,7 +10,7 @@ import {
 import RevealOnScroll from "../components/RevealOnScroll";
 import Button from "../components/Button";
 import PostCard from "../components/PostCard";
-import { VideoBackground } from "@/components/effects";
+import { VideoBackground, AmbientLayer } from "@/components/effects";
 import { Container } from "@/components/layout/Container";
 import { Stack } from "@/components/layout/Stack";
 
@@ -64,6 +64,7 @@ const Home: React.FC = () => {
 
   return (
     <>
+      <AmbientLayer variant="home" />
       <PageMeta
         title="Random Gorsey"
         description="Explore Random Gorsey's latest music and posts."

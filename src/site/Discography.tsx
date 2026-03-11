@@ -11,7 +11,7 @@ import {
 } from '@/lib/motion';
 import { usePerformance } from "@/lib/performance";
 import PageMeta from '../components/PageMeta';
-import { VideoBackground } from '@/components/effects';
+import { VideoBackground, AmbientLayer } from '@/components/effects';
 import { KineticText } from '@/components/KineticText';
 import { Container } from '@/components/layout/Container';
 import { Stack } from '@/components/layout/Stack';
@@ -57,6 +57,7 @@ const Discography: React.FC = () => {
 
   return (
     <>
+      <AmbientLayer variant="discography" />
       <PageMeta
         title="Discography | Random Gorsey"
         description="Browse the official releases from Random Gorsey."

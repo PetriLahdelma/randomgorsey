@@ -21,7 +21,7 @@ import {
 import Button from "../components/Button";
 import PageMeta from "../components/PageMeta";
 import { sanitizeText, RateLimiter } from "../utils/security";
-import { VideoBackground } from "@/components/effects";
+import { VideoBackground, AmbientLayer } from "@/components/effects";
 import { Container } from "@/components/layout/Container";
 
 const contactCanvasVideo = "/videos/contact_canvas.webm";
@@ -235,6 +235,7 @@ const Contact: React.FC = () => {
 
   return (
     <>
+      <AmbientLayer variant="contact" />
       <PageMeta
         title="Contact | Random Gorsey"
         description="Send a message to Random Gorsey."
