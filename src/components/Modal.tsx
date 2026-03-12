@@ -85,6 +85,7 @@ const Modal: React.FC<ModalProps> = ({
             >
               {closeable && (
                 <button
+                  type="button"
                   onClick={onClose}
                   aria-label="Close modal"
                   className="absolute top-4 right-4 text-2xl font-bold text-blue-600 bg-transparent border-none cursor-pointer hover:opacity-70 leading-none"
