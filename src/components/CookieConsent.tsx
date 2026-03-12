@@ -104,6 +104,7 @@ const CookieConsent: React.FC<CookieConsentProps> = ({ className }) => {
             variant="secondary"
             onClick={acceptNecessary}
             aria-label="Accept only necessary cookies"
+            className="!text-neutral-900 !border-neutral-900 hover:!text-neutral-700 hover:!border-neutral-700"
           >
             Necessary
           </Button>
