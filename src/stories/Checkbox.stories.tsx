@@ -20,7 +20,7 @@ const Template: StoryFn<typeof Checkbox> = (args) => {
       checked={checked}
       onChange={(e) => {
         setChecked(e.target.checked);
-        args.onChange && args.onChange(e);
+        args.onChange?.(e);
       }}
     />
   );

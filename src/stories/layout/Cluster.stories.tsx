@@ -73,7 +73,7 @@ export const GapScale: Story = {
     <div className="space-y-8">
       {(["none", "xs", "sm", "md", "lg"] as const).map((gap) => (
         <div key={gap}>
-          <p className="text-sm text-muted-foreground mb-2">gap="{gap}"</p>
+          <p className="text-sm text-muted-foreground mb-2">gap=&quot;{gap}&quot;</p>
           <Cluster gap={gap}>
             <Tag>One</Tag>
             <Tag>Two</Tag>
@@ -99,7 +99,7 @@ export const Justify: Story = {
       {(["start", "center", "end", "between"] as const).map((justify) => (
         <div key={justify}>
           <p className="text-sm text-muted-foreground mb-2">
-            justify="{justify}"
+            justify=&quot;{justify}&quot;
           </p>
           <Cluster justify={justify} gap="sm" className="bg-muted/30 p-4 rounded">
             <Tag>A</Tag>
@@ -125,7 +125,7 @@ export const Align: Story = {
       {(["start", "center", "end", "baseline", "stretch"] as const).map(
         (align) => (
           <div key={align}>
-            <p className="text-sm text-muted-foreground mb-2">align="{align}"</p>
+            <p className="text-sm text-muted-foreground mb-2">align=&quot;{align}&quot;</p>
             <Cluster align={align} gap="sm" className="bg-muted/30 p-4 rounded">
               <span className="bg-accent text-accent-foreground px-3 py-1 rounded text-sm">
                 Small
@@ -187,18 +187,18 @@ export const NavigationExample: Story = {
     <Cluster as="nav" justify="between" align="center" gap="lg">
       <div className="font-bold text-lg">Logo</div>
       <Cluster gap="md">
-        <a href="/" className="hover:text-accent transition-colors">
+        <span className="hover:text-accent transition-colors cursor-pointer">
           Home
-        </a>
-        <a href="/about" className="hover:text-accent transition-colors">
+        </span>
+        <span className="hover:text-accent transition-colors cursor-pointer">
           About
-        </a>
-        <a href="/work" className="hover:text-accent transition-colors">
+        </span>
+        <span className="hover:text-accent transition-colors cursor-pointer">
           Work
-        </a>
-        <a href="/contact" className="hover:text-accent transition-colors">
+        </span>
+        <span className="hover:text-accent transition-colors cursor-pointer">
           Contact
-        </a>
+        </span>
       </Cluster>
     </Cluster>
   ),

@@ -63,7 +63,7 @@ export const SizeScale: Story = {
           <div key={size} className="bg-muted/20">
             <Container size={size} padding="md">
               <div className="bg-accent/20 p-4 rounded border border-accent/30">
-                <code className="text-sm font-mono">size="{size}"</code>
+                <code className="text-sm font-mono">size=&quot;{size}&quot;</code>
                 <p className="text-xs text-muted-foreground mt-1">
                   {size === "sm" && "max-w-screen-sm (640px)"}
                   {size === "md" && "max-w-screen-md (768px)"}
@@ -95,7 +95,7 @@ export const PaddingScale: Story = {
       {(["none", "sm", "md", "lg"] as const).map((padding) => (
         <Container key={padding} size="md" padding={padding}>
           <div className="bg-background p-4 rounded border border-border">
-            <code className="text-sm font-mono">padding="{padding}"</code>
+            <code className="text-sm font-mono">padding=&quot;{padding}&quot;</code>
             <p className="text-xs text-muted-foreground mt-1">
               {padding === "none" && "px-0 (0)"}
               {padding === "sm" && "px-4 (1rem)"}
@@ -136,7 +136,7 @@ export const Prose: Story = {
             centers on larger screens while maintaining comfortable line lengths.
           </p>
           <p>
-            Notice how the text doesn't stretch across the entire viewport even
+            Notice how the text doesn&apos;t stretch across the entire viewport even
             on wide screens - this is intentional and makes the content much
             easier to read.
           </p>
@@ -211,7 +211,7 @@ export const AsMain: Story = {
         <section className="space-y-4">
           <h2 className="text-xl font-semibold">Section One</h2>
           <p className="text-muted-foreground">
-            The Container component supports polymorphic rendering via the "as"
+            The Container component supports polymorphic rendering via the &quot;as&quot;
             prop, allowing you to use semantic HTML elements while maintaining
             the layout behavior.
           </p>
@@ -245,15 +245,15 @@ export const PageLayout: Story = {
           <div className="h-16 flex items-center justify-between">
             <span className="font-bold">Logo</span>
             <nav className="space-x-6">
-              <a href="/" className="text-muted-foreground hover:text-foreground">
+              <span className="text-muted-foreground hover:text-foreground cursor-pointer">
                 Home
-              </a>
-              <a href="/about" className="text-muted-foreground hover:text-foreground">
+              </span>
+              <span className="text-muted-foreground hover:text-foreground cursor-pointer">
                 About
-              </a>
-              <a href="/contact" className="text-muted-foreground hover:text-foreground">
+              </span>
+              <span className="text-muted-foreground hover:text-foreground cursor-pointer">
                 Contact
-              </a>
+              </span>
             </nav>
           </div>
         </Container>

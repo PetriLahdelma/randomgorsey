@@ -16,7 +16,7 @@ const Story = {
 };
 export default Story;
 
-export interface LabelProps extends ComponentProps<typeof Label> {}
+export type LabelProps = ComponentProps<typeof Label>;
 
 
 const Template: StoryFn<typeof Label> = (args) => <Label {...args} />;

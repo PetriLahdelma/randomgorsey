@@ -161,8 +161,8 @@ export const QuoteHighlight: Story = {
       <blockquote className="bg-accent/10 border-l-4 border-accent py-8 px-4">
         <Container size="md">
           <p className="text-xl italic text-foreground/90">
-            "Music and art have always been intertwined - each inspiring the
-            other in ways we're only beginning to understand."
+            &quot;Music and art have always been intertwined - each inspiring the
+            other in ways we&apos;re only beginning to understand.&quot;
           </p>
           <footer className="mt-4 text-sm text-muted-foreground">
             - Random Gorsey
