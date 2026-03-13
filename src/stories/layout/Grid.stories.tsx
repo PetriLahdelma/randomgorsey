@@ -63,7 +63,7 @@ export const FixedColumns: Story = {
       {(["1", "2", "3", "4"] as const).map((columns) => (
         <div key={columns}>
           <p className="text-sm text-muted-foreground mb-2">
-            columns="{columns}"
+            columns=&quot;{columns}&quot;
           </p>
           <Grid columns={columns} gap="md">
             {[1, 2, 3, 4, 5, 6].map((n) => (
@@ -87,7 +87,7 @@ export const AutoFit: Story = {
   render: () => (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        minItemWidth="200px" - items stretch to fill row, min 200px each
+        minItemWidth=&quot;200px&quot; - items stretch to fill row, min 200px each
       </p>
       <Grid minItemWidth="200px" gap="md">
         {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
@@ -110,7 +110,7 @@ export const GapScale: Story = {
     <div className="space-y-8">
       {(["sm", "md", "lg", "xl"] as const).map((gap) => (
         <div key={gap}>
-          <p className="text-sm text-muted-foreground mb-2">gap="{gap}"</p>
+          <p className="text-sm text-muted-foreground mb-2">gap=&quot;{gap}&quot;</p>
           <Grid columns="3" gap={gap}>
             {[1, 2, 3, 4, 5, 6].map((n) => (
               <DemoCard key={n} n={n} />

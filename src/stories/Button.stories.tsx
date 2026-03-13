@@ -10,7 +10,7 @@ export default {
     variant: {
       control: {
         type: 'select',
-        options: ['primary', 'secondary', 'danger', 'tertiary', 'success', 'icon'],
+        options: ['primary', 'secondary', 'secondary-dark', 'danger', 'tertiary', 'success', 'icon'],
       },
     },
     onClick: { action: 'clicked' },
@@ -29,6 +29,12 @@ export const Secondary = Template.bind({});
 Secondary.args = {
   variant: 'secondary',
   children: 'Secondary Button',
+};
+
+export const SecondaryDark = Template.bind({});
+SecondaryDark.args = {
+  variant: 'secondary-dark',
+  children: 'Secondary Dark Button',
 };
 
 export const Tertiary = Template.bind({});

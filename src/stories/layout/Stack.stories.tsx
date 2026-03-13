@@ -68,7 +68,7 @@ export const GapScale: Story = {
         ["none", "xs", "sm", "md", "lg", "xl", "2xl", "section"] as const
       ).map((gap) => (
         <div key={gap}>
-          <p className="text-sm text-muted-foreground mb-2">gap="{gap}"</p>
+          <p className="text-sm text-muted-foreground mb-2">gap=&quot;{gap}&quot;</p>
           <Stack gap={gap}>
             <DemoBox>A</DemoBox>
             <DemoBox>B</DemoBox>
@@ -92,7 +92,7 @@ export const Alignment: Story = {
     <div className="space-y-8">
       {(["start", "center", "end", "stretch"] as const).map((align) => (
         <div key={align}>
-          <p className="text-sm text-muted-foreground mb-2">align="{align}"</p>
+          <p className="text-sm text-muted-foreground mb-2">align=&quot;{align}&quot;</p>
           <Stack align={align} gap="sm" className="bg-muted/30 p-4 rounded">
             <div className="bg-accent text-accent-foreground px-4 py-2 rounded">
               Short

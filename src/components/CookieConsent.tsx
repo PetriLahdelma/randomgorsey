@@ -101,7 +101,7 @@ const CookieConsent: React.FC<CookieConsentProps> = ({ className }) => {
           )}
         >
           <Button
-            variant="secondary"
+            variant="secondary-dark"
             onClick={acceptNecessary}
             aria-label="Accept only necessary cookies"
           >

@@ -10,6 +10,7 @@ import { BaseComponentProps, Size } from "../types/common";
 export type ButtonVariant =
   | "primary"
   | "secondary"
+  | "secondary-dark"
   | "danger"
   | "tertiary"
   | "success";
@@ -30,6 +31,8 @@ const buttonVariants = cva(
         primary: "bg-accent text-accent-foreground hover:bg-yellow-500",
         secondary:
           "bg-transparent text-foreground border border-foreground hover:text-accent hover:border-accent",
+        "secondary-dark":
+          "bg-transparent text-neutral-900 border border-neutral-900 hover:text-neutral-700 hover:border-neutral-700",
         danger: "bg-destructive text-destructive-foreground hover:opacity-80",
         tertiary: "bg-transparent text-muted-foreground border border-border hover:text-foreground hover:border-foreground",
         success: "bg-success text-white hover:opacity-80",

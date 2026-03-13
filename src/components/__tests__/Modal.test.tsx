@@ -33,4 +33,19 @@ describe('Modal Component', () => {
     fireEvent.click(screen.getByRole('button'));
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
+
+  it('does not submit a parent form when close button is clicked', () => {
+    const handleClose = vi.fn();
+    const handleSubmit = vi.fn((e: React.FormEvent) => e.preventDefault());
+    render(
+      <form onSubmit={handleSubmit}>
+        <Modal isOpen onClose={handleClose}>
+          <p>Content</p>
+        </Modal>
+      </form>
+    );
+    fireEvent.click(screen.getByLabelText('Close modal'));
+    expect(handleClose).toHaveBeenCalledTimes(1);
+    expect(handleSubmit).not.toHaveBeenCalled();
+  });
 });

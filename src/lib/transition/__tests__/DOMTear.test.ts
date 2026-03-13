@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { computeBands, type TearBand } from "../DOMTear";
+import { describe, it, expect } from "vitest";
+import { computeBands } from "../DOMTear";
 
 describe("computeBands", () => {
   it("divides viewport into specified number of bands", () => {

@@ -176,7 +176,7 @@ export const Comparison: Story = {
   render: () => (
     <div className="p-8 bg-neutral-900 space-y-12 min-w-[600px]">
       <div>
-        <p className="text-neutral-500 text-sm mb-2">splitBy="chars"</p>
+        <p className="text-neutral-500 text-sm mb-2">splitBy=&quot;chars&quot;</p>
         <KineticText
           as="h2"
           splitBy="chars"
@@ -188,7 +188,7 @@ export const Comparison: Story = {
         </KineticText>
       </div>
       <div>
-        <p className="text-neutral-500 text-sm mb-2">splitBy="words"</p>
+        <p className="text-neutral-500 text-sm mb-2">splitBy=&quot;words&quot;</p>
         <KineticText
           as="h2"
           splitBy="words"

@@ -18,7 +18,7 @@ const Template: StoryFn<typeof Modal> = (args) => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open Modal</Button>
-      <Modal {...args} isOpen={open} onClose={() => { setOpen(false); args.onClose && args.onClose(); }}>
+      <Modal {...args} isOpen={open} onClose={() => { setOpen(false); args.onClose?.(); }}>
         {args.children}
       </Modal>
     </>

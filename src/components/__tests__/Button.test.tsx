@@ -26,4 +26,19 @@ describe('Button Component', () => {
     const button = screen.getByText('Disabled');
     expect(button).toBeDisabled();
   });
+
+  it('applies the correct classes for secondary-dark variant', () => {
+    render(<Button variant="secondary-dark">Dark</Button>);
+    const button = screen.getByText('Dark');
+    expect(button).toHaveClass('bg-transparent');
+    expect(button).toHaveClass('text-neutral-900');
+    expect(button).toHaveClass('border-neutral-900');
+  });
+
+  it('handles onClick for secondary-dark variant', () => {
+    const handleClick = vi.fn();
+    render(<Button variant="secondary-dark" onClick={handleClick}>Dark</Button>);
+    fireEvent.click(screen.getByText('Dark'));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
 });
