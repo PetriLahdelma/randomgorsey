@@ -1,4 +1,38 @@
-# https://www.robotstxt.org/robotstxt.html
+# Search and user-directed AI retrieval are allowed. Model training is not.
+# robots.txt and Content Signals express usage preferences; crawler compliance is voluntary.
+# Content Signals: https://contentsignals.org/
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
+
+# OpenAI search and user-requested retrieval.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic search and user-requested retrieval.
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Crawlers used to collect training data.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# Google-Extended currently controls both Gemini training and Gemini grounding.
+# It is blocked here to preserve the no-training preference. Google Search is unaffected,
+# but Random Gorsey content will not be eligible for Gemini grounding while this remains set.
+User-agent: Google-Extended
+Disallow: /
+
 Sitemap: https://randomgorsey.com/sitemap.xml
