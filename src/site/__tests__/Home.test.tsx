@@ -33,6 +33,15 @@ describe("Home Page", () => {
     expect(screen.getByLabelText("All posts")).toBeInTheDocument();
     vi.useRealTimers();
   });
+  it("keeps journal index titles separate from dates and arrows", () => {
+    const getContext=vi.spyOn(HTMLCanvasElement.prototype,"getContext").mockReturnValue(null);
+    render(<Home posts={posts.slice(0,7)} archive={posts.map(({id,title,timestamp,category})=>({id,title,timestamp,category}))} totalPosts={posts.length}/>);
+    fireEvent.click(screen.getByRole("button",{name:"Index"}));
+    const firstEntry=screen.getByRole("link",{name:new RegExp(posts[0].title)});
+    expect(firstEntry.querySelector("span:not([aria-hidden])")).toHaveTextContent(posts[0].title);
+    expect(firstEntry.querySelector('span[aria-hidden="true"]')).toHaveTextContent("↗");
+    getContext.mockRestore();
+  });
   it("loads archive bodies on demand and retains entries if a request fails", async () => {
     const getContext=vi.spyOn(HTMLCanvasElement.prototype,"getContext").mockReturnValue(null);
     const request=vi.fn().mockResolvedValueOnce({ok:false}).mockResolvedValueOnce({ok:true,json:async()=>({posts:posts.slice(7,13),totalPosts:posts.length})});

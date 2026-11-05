@@ -211,11 +211,13 @@ const PostCard: React.FC<PostCardProps> = ({
           <Heading
             level={headingLevel}
             className={cn(
-              "m-0 mb-2 font-europa tracking-normal text-foreground",
-              isCompactTitle && "text-[clamp(1.2rem,5vw,1.4rem)]"
+              "m-0 mb-2 tracking-normal text-foreground",
+              isCompactTitle && "text-[18px]"
             )}
             tone="light"
+            weight="regular"
             uppercase={false}
+            data-journal-title=""
           >
             {onClick ? (
               <button

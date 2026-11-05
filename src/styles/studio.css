@@ -159,14 +159,14 @@ a, button, input, textarea, select {
   animation: none;
 }
 
-.studioJournal [data-card] :is(h1,h2,h3), .studioArticle [data-card] :is(h1,h2,h3) {
+.studioJournal [data-card] [data-journal-title], .studioArticle [data-card] [data-journal-title] {
   max-width: 22ch;
-  font-family: Europa, sans-serif;
-  font-size: clamp(25px, 3vw, 40px);
+  font-family: var(--studio-terminal);
+  font-size: 36px;
   font-weight: 400;
-  line-height: 1.16;
+  line-height: 1;
   text-transform: none;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
 }
 
 .studioJournal [data-card] time, .studioArticle [data-card] time {
@@ -192,9 +192,9 @@ a, button, input, textarea, select {
   border-bottom: 0;
 }
 
-.studioArticle [data-card] h1 {
+.studioArticle [data-card] [data-journal-title]:where(h1) {
   max-width: 19ch;
-  font-size: clamp(38px, 6vw, 68px);
+  font-size: 72px;
 }
 
 @media (width <= 650px) {
@@ -208,6 +208,10 @@ a, button, input, textarea, select {
   }
 
   .studioTitle {
+    font-size: 36px;
+  }
+
+  .studioArticle [data-card] [data-journal-title]:where(h1) {
     font-size: 36px;
   }
 
