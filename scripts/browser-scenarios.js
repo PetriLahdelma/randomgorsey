@@ -73,7 +73,7 @@ async (page) => {
   check(!firstFrame.equals(nextFrame),"Permitted generative artwork moves automatically");
   await page.screenshot({path:"home-active.png"});
   await page.getByRole("button",{name:"Index",exact:true}).click();
-  check(await page.locator('main a[href^="/posts/"]').count()===56,"All 56 posts are reachable from the index");
+  check(await page.locator('main a[href^="/posts/"]').count()===65,"All 65 posts are reachable from the index");
   check((await page.locator('#journal ol li a span').first().evaluate(e=>getComputedStyle(e).fontFamily)).toLowerCase().includes('lisaterminal'),"Journal index titles use Lisa Terminal Paper");
   await page.getByRole("button",{name:"Entries",exact:true}).click();
   const before=await page.locator("main article").count();
@@ -82,12 +82,12 @@ async (page) => {
   check(await page.locator("main article").count()>before,"Journal load-more exposes more records");
 
   const routes=[];
-  for(const path of ["/listen/","/discography/","/about/","/gallery/","/contact/","/posts/56/"]) {
+  for(const path of ["/listen/","/discography/","/about/","/gallery/","/contact/","/posts/65/"]) {
     const response=await open(path);
     check(response.status()===200,path+" returns 200");
     await checkSocialPreview(path);
     check(await page.locator("main h1").count()===1,path+" has a primary heading");
-    if(path==="/posts/56/")check((await page.locator('main h1').evaluate(e=>getComputedStyle(e).fontFamily)).toLowerCase().includes('lisaterminal'),"Individual journal title uses Lisa Terminal Paper");
+    if(path==="/posts/65/")check((await page.locator('main h1').evaluate(e=>getComputedStyle(e).fontFamily)).toLowerCase().includes('lisaterminal'),"Individual journal title uses Lisa Terminal Paper");
     if(["/listen/","/discography/","/about/","/gallery/","/contact/"].includes(path))check((await page.locator("main h1").evaluate(e=>getComputedStyle(e).fontFamily)).toLowerCase().includes("lisaterminal"),path+" heading uses LisaTerminal");
     await page.screenshot({path:path.replaceAll("/","").replace("posts56","post")+"-desktop.png",fullPage:false});
     await page.addScriptTag({path:axePath});
@@ -198,7 +198,7 @@ async (page) => {
     check(await page.getByRole("navigation",{name:"Main navigation"}).getByRole("link",{name:"Contact",exact:true}).isVisible(),width+"px Contact remains reachable");
     await page.keyboard.press("Escape");
     await page.screenshot({path:"home-"+width+".png"});
-    for(const path of ["/listen/","/discography/","/about/","/gallery/","/contact/","/posts/56/"]) {
+    for(const path of ["/listen/","/discography/","/about/","/gallery/","/contact/","/posts/65/"]) {
       await open(path);
       check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),width+"px "+path+" has no horizontal overflow");
       if(path==="/listen/") await checkArtworkSizing("energetic", width+"px Listen artwork");

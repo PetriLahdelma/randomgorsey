@@ -6,6 +6,12 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 ## [Unreleased]
 
+## [0.4.3] - 2026-11-05
+
+### Added
+
+- Publish nine retrospective journal entries dated April–November 2026.
+
 ## [0.4.2] - 2026-11-05
 
 ### Changed

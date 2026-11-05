@@ -12,6 +12,13 @@ import dec2025 from "../posts/2025-12";
 import jan2026 from "../posts/2026-01";
 import feb2026 from "../posts/2026-02";
 import mar2026 from "../posts/2026-03";
+import apr2026 from "../posts/2026-04";
+import may2026 from "../posts/2026-05";
+import jul2026 from "../posts/2026-07";
+import aug2026 from "../posts/2026-08";
+import sep2026 from "../posts/2026-09";
+import oct2026 from "../posts/2026-10";
+import nov2026 from "../posts/2026-11";
 import type { Post } from "./post-types";
 
 export {
@@ -35,6 +42,13 @@ const posts: Post[] = [
   ...jan2026,
   ...feb2026,
   ...mar2026,
+  ...apr2026,
+  ...may2026,
+  ...jul2026,
+  ...aug2026,
+  ...sep2026,
+  ...oct2026,
+  ...nov2026,
 ].sort(
   (a, b) =>
     new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()

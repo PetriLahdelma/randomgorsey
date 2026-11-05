@@ -9,7 +9,7 @@ describe("GET /api/posts", () => {
     const result = await response.json();
 
     expect(response.status).toBe(200);
-    expect(result.totalPosts).toBe(56);
+    expect(result.totalPosts).toBe(65);
     expect(result.posts).toEqual(posts.slice(7, 13));
   });
 

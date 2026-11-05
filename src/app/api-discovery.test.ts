@@ -135,7 +135,7 @@ describe("public API discovery", () => {
         });
       } else {
         expect(body.posts).toHaveLength(expectedCount);
-        expect(body.totalPosts).toBe(56);
+        expect(body.totalPosts).toBe(65);
       }
     }
   );

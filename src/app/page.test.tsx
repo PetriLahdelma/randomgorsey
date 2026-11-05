@@ -10,8 +10,8 @@ describe("home route content boundary", () => {
     };
 
     expect(props.posts).toHaveLength(7);
-    expect(props.archive).toHaveLength(56);
-    expect(props.totalPosts).toBe(56);
+    expect(props.archive).toHaveLength(65);
+    expect(props.totalPosts).toBe(65);
     expect(Object.keys(props.archive[0]).sort()).toEqual([
       "category",
       "id",

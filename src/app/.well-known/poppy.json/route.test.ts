@@ -80,6 +80,6 @@ describe("Poppy draft 0.4 discovery", () => {
     expect(JSON.parse(JSON.stringify(poppyDiscoveryDocument))).not.toHaveProperty(
       "auth"
     );
-    expect(posts).toHaveLength(56);
+    expect(posts).toHaveLength(65);
   });
 });

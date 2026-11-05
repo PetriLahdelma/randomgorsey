@@ -87,7 +87,12 @@ describe("public read-only MCP server", () => {
     );
     const journalMessage = await journal.json();
     expect(journalMessage.result.structuredContent.posts).toHaveLength(2);
-    expect(journalMessage.result.structuredContent.totalPosts).toBe(56);
+    expect(journalMessage.result.structuredContent.totalPosts).toBe(65);
+    expect(journalMessage.result.structuredContent.posts[0]).toMatchObject({
+      id: 65,
+      title: "The List",
+      publishedAt: expect.stringMatching(/^2026-11-04/),
+    });
     expect(journalMessage.result.structuredContent.posts[0].canonicalUrl).toMatch(
       /^https:\/\/randomgorsey\.com\/posts\/\d+\/$/
     );

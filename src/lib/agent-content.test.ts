@@ -24,8 +24,8 @@ const expectedProviderUrl = (source: string): string => {
 
 describe("agent-readable content", () => {
   it("renders every canonical page and all preserved journal entries", () => {
-    expect(AGENT_DOCUMENT_COUNT).toBe(62);
-    expect(new Set(AGENT_DOCUMENT_PATHS).size).toBe(62);
+    expect(AGENT_DOCUMENT_COUNT).toBe(71);
+    expect(new Set(AGENT_DOCUMENT_PATHS).size).toBe(71);
 
     for (const path of AGENT_DOCUMENT_PATHS) {
       const entry = getAgentDocument(path);
@@ -73,7 +73,7 @@ describe("agent-readable content", () => {
     expect(full).toContain("Posing in sunglasses, Helsinki");
     expect(full).toContain("not exposed by the site's read-only posts API");
     expect(full).not.toContain("A person must review and submit");
-    expect(full).toContain("62 canonical documents");
+    expect(full).toContain("71 canonical documents");
     expect(full).not.toMatch(/<(?:p|iframe|strong|em)\b/i);
     expect(full).not.toMatch(/## (Tutorials|Forums|Presets|Similar artists)/i);
     expect(full).not.toContain("localhost");
