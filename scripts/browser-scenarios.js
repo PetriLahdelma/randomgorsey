@@ -129,15 +129,38 @@ async (page) => {
   await page.waitForTimeout(250);
   check(!listenFrame.equals(await listenCanvas.screenshot()),"Listen artwork moves automatically");
   check(await page.locator("iframe").count()===0,"Provider players are absent before explicit loading");
-  await page.route("https://open.spotify.com/**",route=>route.fulfill({contentType:"text/html",body:"<html><body>Player test fixture</body></html>"}));
+  const rate=8000, samples=rate*4, wave=Buffer.alloc(44+samples*2);
+  wave.write("RIFF",0);wave.writeUInt32LE(36+samples*2,4);wave.write("WAVEfmt ",8);wave.writeUInt32LE(16,16);wave.writeUInt16LE(1,20);wave.writeUInt16LE(1,22);wave.writeUInt32LE(rate,24);wave.writeUInt32LE(rate*2,28);wave.writeUInt16LE(2,32);wave.writeUInt16LE(16,34);wave.write("data",36);wave.writeUInt32LE(samples*2,40);
+  for(let i=0;i<samples;i++)wave.writeInt16LE(Math.round(3000*Math.sin(2*Math.PI*220*i/rate)),44+i*2);
+  const playerFixture=`<html><body><button onclick="document.querySelector('audio').play()">Play test audio</button><audio muted loop src="data:audio/wav;base64,${wave.toString("base64")}"></audio></body></html>`;
+  await page.route("https://open.spotify.com/**",route=>route.fulfill({contentType:"text/html",body:playerFixture}));
   await page.route("https://w.soundcloud.com/**",route=>route.fulfill({contentType:"text/html",body:"<html><body>Player test fixture</body></html>"}));
   await page.getByRole("button",{name:/Load Spotify/i}).click();
   check(await page.locator("iframe").count()===1,"Explicit Spotify loading creates one player");
   check(await page.locator(".studioSquarePlayer").evaluate(e=>getComputedStyle(e).borderRadius)==="0px","Spotify outer viewport has square corners");
+  await page.frameLocator('iframe[title="Spotify player"]').getByRole("button",{name:"Play test audio"}).click();
+  await page.waitForTimeout(200);
+  await page.evaluate(()=>{window.__rgPersistentFrame=document.querySelector('iframe[title="Spotify player"]');});
+  const beforeNavigation=await page.frameLocator('iframe[title="Spotify player"]').locator("audio").evaluate(a=>a.currentTime);
+  await page.getByRole("button",{name:"Minimize player"}).click();
+  check(await page.evaluate(()=>window.__rgPersistentFrame===document.querySelector('iframe[title="Spotify player"]')),"Minimizing retains the same player iframe");
+  await page.getByRole("button",{name:"Expand player"}).click();
+  await page.getByRole("navigation",{name:"Main navigation"}).getByRole("link",{name:"About",exact:true}).click();
+  await page.waitForURL("**/about/");
+  await page.getByRole("button",{name:"Expand player"}).waitFor();
+  check(await page.evaluate(()=>window.__rgPersistentFrame===document.querySelector('iframe[title="Spotify player"]')),"Client navigation retains the same player iframe");
+  await page.waitForTimeout(500);
+  const afterNavigation=await page.locator('iframe[title="Spotify player"]').contentFrame().locator("audio").evaluate(a=>({time:a.currentTime,paused:a.paused}));
+  check(!afterNavigation.paused && afterNavigation.time>beforeNavigation,"Playback continues after minimizing and navigating");
+  await page.getByRole("navigation",{name:"Main navigation"}).getByRole("link",{name:"Listen",exact:true}).click();
+  await page.waitForURL("**/listen/");
+  await page.getByRole("button",{name:"Minimize player"}).waitFor();
+  check(await page.evaluate(()=>window.__rgPersistentFrame===document.querySelector('iframe[title="Spotify player"]')),"Returning to Listen restores the same player");
   check(await page.getByRole("navigation",{name:"Music platforms"}).count()===0,"Listen does not repeat the footer platform links");
   check(await page.locator("footer .studioFooterLinks a").first().evaluate(e=>getComputedStyle(e).gap)==="12px","Footer link label and icon use the wider gap");
   await page.getByRole("button",{name:/Load SoundCloud/i}).click();
   check(await page.locator("iframe").count()===1 && /soundcloud/.test(await page.locator("iframe").getAttribute("src")),"Provider handoff retains one player");
+  await page.getByRole("button",{name:"Close player",exact:true}).click();
 
   await open("/posts/50/");
   check(await page.locator("iframe").count()===0,"Journal media is absent before explicit loading");
@@ -155,6 +178,9 @@ async (page) => {
   await page.keyboard.press("ArrowRight");
   await page.keyboard.press("Escape");
   check(await thumbnail.evaluate(element=>element===document.activeElement),"Gallery returns focus to the original thumbnail");
+
+  await page.setViewportSize({width:1104,height:844});
+  check(await page.locator("footer .studioFooterLinks a").evaluateAll(links=>links.length===5&&links.every(link=>Math.abs(link.getBoundingClientRect().top-links[0].getBoundingClientRect().top)<1)),"All footer platform links fit on one row at 1104px");
 
   for(const width of [390,320]) {
     await page.setViewportSize({width,height:844});
