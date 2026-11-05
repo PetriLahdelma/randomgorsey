@@ -4,6 +4,7 @@ async (page) => {
   const consoleErrors = [];
   const assertions = [];
   const violations = [];
+  let storyCount = 0;
 
   page.on("pageerror", (error) => consoleErrors.push(String(error)));
   page.on("console", (message) => {
@@ -16,6 +17,7 @@ async (page) => {
   };
 
   const openStory = async (id, width = 1200, height = 900) => {
+    storyCount += 1;
     await page.setViewportSize({ width, height });
     await page.goto(
       origin + "/iframe.html?id=" + id + "&viewMode=story",
@@ -174,8 +176,31 @@ async (page) => {
     "Motion Lab control changes the artwork state",
   );
 
+  for (const [id, heading] of [
+    ["production-surfaces--home-and-journal", "Random Gorsey"],
+    ["production-surfaces--listen-console", "Listen"],
+    ["production-surfaces--discography-page", "Discography"],
+    ["production-surfaces--about-page", "About"],
+    ["production-surfaces--gallery-page", "Gallery"],
+    ["production-surfaces--contact-page", "Get in touch"],
+  ]) {
+    await openStory(id);
+    check(await page.getByRole("heading", {name: heading, exact: true}).isVisible(), id + " renders its real page heading");
+    if (id === "production-surfaces--listen-console") {
+      check(await page.locator("iframe").count() === 0, "Listen story does not load providers without a click");
+    }
+    if (id === "production-surfaces--gallery-page") {
+      check(await page.getByText("UNTITLED_09.JPG", {exact: true}).isVisible(), "Gallery story uses the current portrait title");
+    }
+  }
+
+  await openStory("production-player-sitewideplayer--interactive-lifecycle", 390, 844);
+  check(await page.getByRole("button", {name: "Load Spotify player"}).isVisible(), "Player story exposes its real source controls");
+  check(await page.locator("iframe").count() === 0, "Player story starts without loading a third-party frame");
+  check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "Player story reflows on mobile");
+
   return {
-    storyCount: 5,
+    storyCount,
     assertionCount: assertions.length,
     assertions,
     consoleErrors,

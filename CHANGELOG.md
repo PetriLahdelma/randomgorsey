@@ -6,6 +6,17 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-05
+
+### Added
+
+- Keep the selected listening player available across pages, with minimize, expand and close controls.
+- Add Storybook stories for current site surfaces, navigation, privacy and player states.
+
+### Changed
+
+- Give footer platform links enough room to stay on one row at desktop widths.
+
 ## [0.3.2] - 2026-11-05
 
 ### Changed
@@ -69,7 +80,8 @@ This is a retrospective snapshot of the production site deployed on this date, n
 - 2026-11-05: Make the home heading readable to crawlers and align link, track-number and artwork treatments.
 - 2026-11-05: Restore the production Google Analytics configuration, with tracking enabled only after consent.
 
-[Unreleased]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.3.2...v0.4.0
 [0.3.2]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.2.0...v0.3.0
