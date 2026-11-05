@@ -5,6 +5,7 @@ import Image from "next/image";
 import React from "react";
 
 import { useAppShell } from "@/components/AppShell";
+import { StudioPageHeader } from "@/components/studio/StudioPageHeader";
 import { StudioWindow } from "@/components/studio/StudioWindow";
 import galleryImages from "@/data/galleryImages";
 
@@ -83,13 +84,13 @@ const Gallery: React.FC = () => {
 
   return (
     <div className={`studioPage ${styles.page}`}>
-      <header className={`studioPageHeader ${styles.header}`}>
-        <p className="studioKicker">{galleryImages.length} images / Helsinki &amp; Berlin</p>
-        <h1 className="studioTitle">Gallery</h1>
-        <p className={`studioLead ${styles.intro}`}>
-          Covers, rooms, lights, weather and the things that survived the night.
-        </p>
-      </header>
+      <StudioPageHeader
+        kicker={`${galleryImages.length} images / Helsinki & Berlin`}
+        title="Gallery"
+        lead="Covers, rooms, lights, weather and the things that survived the night."
+        className={styles.header}
+        leadClassName={styles.intro}
+      />
 
       <section className={styles.contactSheet} aria-label={`${galleryImages.length} gallery images`}>
         {galleryImages.map((image, index) => (
