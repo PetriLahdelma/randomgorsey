@@ -14,6 +14,7 @@ describe("agent content negotiation proxy", () => {
     expect(isPublicContentPath("/")).toBe(true);
     expect(isPublicContentPath("/listen")).toBe(true);
     expect(isPublicContentPath("/posts/56/")).toBe(true);
+    expect(isPublicContentPath("/posts/00056/")).toBe(false);
     expect(isPublicContentPath("/posts/not-a-number/")).toBe(false);
     expect(isPublicContentPath("/api/posts/")).toBe(false);
   });

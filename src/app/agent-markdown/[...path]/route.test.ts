@@ -57,6 +57,7 @@ describe("path-specific negotiated Markdown route", () => {
       "https://randomgorsey.com/listen/"
     );
     expect((await GET(markdownRequest(), route("unsupported"))).status).toBe(404);
+    expect((await GET(markdownRequest(), route("posts", "00056"))).status).toBe(404);
     expect((await GET(markdownRequest(), route("posts", "999999"))).status).toBe(404);
   });
 });
