@@ -199,6 +199,16 @@ async (page) => {
   check(await page.locator("iframe").count() === 0, "Player story starts without loading a third-party frame");
   check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "Player story reflows on mobile");
 
+  await openStory("production-surfaces--home-loads-more");
+  await page.waitForFunction(() => document.querySelectorAll("article").length === 12);
+  check(await page.getByRole("article").count() === 12, "Home story loads the next real journal entries");
+
+  let contactRequests = 0;
+  await page.route("**/api.emailjs.com/**", route => { contactRequests += 1; return route.abort(); });
+  await openStory("production-surfaces--contact-submission-blocked");
+  await page.getByText("Submission intercepted. No message was sent from Storybook.").waitFor();
+  check(contactRequests === 0, "Contact story blocks real message delivery");
+
   return {
     storyCount,
     assertionCount: assertions.length,
