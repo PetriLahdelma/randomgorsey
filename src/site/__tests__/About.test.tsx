@@ -77,6 +77,6 @@ describe("About Page", () => {
     await user.click(screen.getByRole("button", { name: "Play portrait loop" }));
 
     await waitFor(() => expect(container.querySelector('video[title="Portrait of Random Gorsey"]')).toBeInTheDocument());
-    expect(container.querySelector('source[src="/videos/portrait-loop.webm"]')).toBeInTheDocument();
+    expect(container.querySelector('source[src="/videos/shadow-portrait-loop.webm"]')).toBeInTheDocument();
   });
 });

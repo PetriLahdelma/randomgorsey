@@ -61,21 +61,21 @@ const About: React.FC = () => {
                 loop
                 autoPlay
                 playsInline
-                poster="/images/portrait.jpg"
+                poster="/images/shadow-portrait-still.jpg"
                 className={styles.portrait}
                 onPlay={() => setPortraitPlaying(true)}
                 onPause={() => setPortraitPlaying(false)}
                 onEnded={() => setPortraitPlaying(false)}
               >
-                <source src="/videos/portrait-loop.webm" type="video/webm" />
-                <source src="/videos/portrait-loop.mp4" type="video/mp4" />
+                <source src="/videos/shadow-portrait-loop.webm" type="video/webm" />
+                <source src="/videos/shadow-portrait-loop.mp4" type="video/mp4" />
               </video>
             ) : (
               <Image
-                src="/images/portrait.jpg"
+                src="/images/shadow-portrait-still.jpg"
                 alt="Portrait of Random Gorsey"
-                width={984}
-                height={984}
+                width={960}
+                height={960}
                 sizes="(max-width: 720px) calc(100vw - 64px), 42vw"
                 priority
                 className={styles.portrait}

@@ -6,6 +6,16 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-11-05
+
+### Added
+
+- Add “Varjostettu muotokuva pipossa ja laseissa” to the gallery and subtly layer it behind the journal.
+
+### Changed
+
+- Replace the About-page portrait loop with the new cropped motion artwork.
+
 ## [0.3.0] - 2026-11-05
 
 ### Added
@@ -53,7 +63,8 @@ This is a retrospective snapshot of the production site deployed on this date, n
 - 2026-11-05: Make the home heading readable to crawlers and align link, track-number and artwork treatments.
 - 2026-11-05: Restore the production Google Analytics configuration, with tracking enabled only after consent.
 
-[Unreleased]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/PetriLahdelma/randomgorsey/releases/tag/v0.2.0
 [0.1.0]: https://github.com/PetriLahdelma/randomgorsey/commit/7e6c8715

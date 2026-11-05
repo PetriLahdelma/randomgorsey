@@ -14,6 +14,12 @@ describe("Gallery Page", () => {
     for (const image of galleryImages) {
       expect(screen.getByText(image.caption)).toBeInTheDocument();
     }
+    expect(galleryImages).toContainEqual({
+      src: "/images/varjostettu-muotokuva-pipossa-ja-laseissa.png",
+      caption: "Varjostettu muotokuva pipossa ja laseissa",
+      width: 1254,
+      height: 1254,
+    });
   });
 
   it("opens a keyboard-operable viewer and returns focus to its thumbnail", async () => {
