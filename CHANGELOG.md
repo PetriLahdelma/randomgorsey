@@ -12,6 +12,8 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 - Publish current AI-readable Markdown, a complete sitemap, an API catalog and a read-only journal discovery skill.
 - Add factual artist and release structured data and optional read-only WebMCP discovery.
+- Add a read-only MCP server for the journal and releases, with discovery cards.
+- Add the Grit poster to the gallery.
 
 ### Changed
 

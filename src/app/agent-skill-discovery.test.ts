@@ -49,11 +49,11 @@ describe("agent skill and ARD discovery", () => {
       displayName: "Random Gorsey",
       identifier: "https://randomgorsey.com",
     });
-    expect(ard.entries).toHaveLength(2);
+    expect(ard.entries).toHaveLength(3);
 
     for (const entry of ard.entries) {
       expect(entry.identifier).toMatch(
-        /^urn:air:randomgorsey\.com:(api|skill):[a-z0-9-]+$/
+        /^urn:air:randomgorsey\.com:(api|skill|mcp):[a-z0-9-]+$/
       );
       expect(entry.displayName).toBeTruthy();
       expect(entry.type).toMatch(/^[a-z]+\/[a-z0-9.+-]+(?:;[a-z0-9=.+-]+)?$/);
@@ -64,6 +64,7 @@ describe("agent skill and ARD discovery", () => {
     }
 
     const serialized = JSON.stringify(ard);
-    expect(serialized).not.toMatch(/oauth|mcp|payment|contact submission/i);
+    expect(serialized).toContain("application/mcp-server-card+json");
+    expect(serialized).not.toMatch(/oauth|payment|contact submission/i);
   });
 });

@@ -31,6 +31,11 @@ describe("Poppy draft 0.4 discovery", () => {
           description:
             "Read-only, paginated access to the public Random Gorsey journal archive.",
         },
+        {
+          type: "mcp",
+          url: "https://randomgorsey.com/mcp/",
+          description: "Read-only tools for the public journal and releases.",
+        },
       ],
       skill_index: skillIndex,
     });

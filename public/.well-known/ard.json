@@ -37,6 +37,23 @@
         "find Random Gorsey posts about field recordings",
         "where can I listen to Random Gorsey"
       ]
+    },
+    {
+      "identifier": "urn:air:randomgorsey.com:mcp:public-content",
+      "displayName": "Random Gorsey public content MCP server",
+      "type": "application/mcp-server-card+json",
+      "url": "https://randomgorsey.com/mcp/server-card/",
+      "description": "Read-only MCP tools for the public Random Gorsey journal and releases.",
+      "capabilities": [
+        "journal-discovery",
+        "archive-reading",
+        "release-discovery"
+      ],
+      "representativeQueries": [
+        "list the latest Random Gorsey journal posts",
+        "read a Random Gorsey journal entry",
+        "list the official Random Gorsey releases"
+      ]
     }
   ]
 }

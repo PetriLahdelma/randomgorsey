@@ -7,8 +7,8 @@ The document exposes only capabilities that already exist publicly:
 
 - `web: {}` means a personal agent may browse the website as an ordinary
   signed-out visitor. No browser-session endpoint is offered.
-- `apis` points to the existing read-only OpenAPI description for the public
-  journal archive.
+- `apis` points to the read-only OpenAPI description for the public journal
+  archive and the read-only MCP endpoint for journal entries and releases.
 - `skill_index` embeds the canonical Agent Skills discovery index. The route
   imports that JSON artifact directly so its URL and digest cannot drift from
   the separately published well-known index.
