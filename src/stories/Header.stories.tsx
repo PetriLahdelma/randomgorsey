@@ -1,22 +1,24 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import Header from '../patterns/Header';
-import { version } from '../../package.json';
+import type { Meta, StoryObj } from "@storybook/react";
+import Header from "../patterns/Header";
+import { version } from "../../package.json";
 
-export default {
-  title: 'Patterns/Header',
+const meta = {
+  title: "Production/Navigation/Header",
   component: Header,
-} as Meta<typeof Header>;
+  args: { version },
+  parameters: {
+    layout: "fullscreen",
+    nextjs: { navigation: { pathname: "/listen/" } },
+  },
+} satisfies Meta<typeof Header>;
 
-const Template: StoryFn<typeof Header> = (args) => <Header {...args} />;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Desktop = Template.bind({});
-Desktop.args = { version };
+export const Desktop: Story = {};
 
-export const Mobile = Template.bind({});
-Mobile.args = { version };
-Mobile.parameters = {
-  viewport: {
-    defaultViewport: 'largeMobile',
+export const MobileMenu: Story = {
+  parameters: {
+    viewport: { defaultViewport: "mobile" },
   },
 };

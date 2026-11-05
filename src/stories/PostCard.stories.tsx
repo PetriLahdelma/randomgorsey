@@ -1,66 +1,48 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { HelmetProvider } from 'react-helmet-async';
-import PostCard, { Post, PostContentType } from '../components/PostCard';
+import type { Meta, StoryObj } from "@storybook/react";
+import PostCard from "../components/PostCard";
+import posts from "@/content/posts";
+import { PerformanceProvider } from "@/lib/performance";
 
-const basePost: Post = {
-  id: 99,
-  title: 'New Single Release',
-  timestamp: '2025-01-15',
-  contentType: PostContentType.IMAGE,
-  body: '<p>Fresh cuts from the Random Gorsey studio. Dive into the textures, movements, and inspirations behind the new tracks.</p>',
-  media: '/images/so_long_spectrum.jpg',
-  mediaWidth: 1440,
-  mediaHeight: 617,
-  author: 'Random Gorsey',
-  excerpt: 'Fresh cuts from the Random Gorsey studio.',
-  tags: ['release', 'studio'],
-  featured: false,
-  views: 1240,
-  likes: 320,
-  avatarColor: '#fefefe',
-};
+const featuredPost = posts[0];
+const compactPost = posts[1];
 
 const meta: Meta<typeof PostCard> = {
-  title: 'Components/PostCard',
+  title: "Production/Journal/PostCard",
   component: PostCard,
-  argTypes: {
-    showFullContent: { control: 'boolean' },
-    showSocialShare: { control: 'boolean' },
-    showMetadata: { control: 'boolean' },
-    onClick: { action: 'card-clicked' },
-  },
+  decorators: [
+    (Story) => (
+      <PerformanceProvider>
+        <div style={{ maxWidth: 780, margin: "0 auto" }}><Story /></div>
+      </PerformanceProvider>
+    ),
+  ],
+  parameters: { layout: "padded" },
 };
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
-const Template: StoryFn<typeof PostCard> = (args) => (
-  <HelmetProvider>
-    <div style={{ maxWidth: '720px', margin: '0 auto' }}>
-      <PostCard {...args} />
-    </div>
-  </HelmetProvider>
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  post: basePost,
-  showFullContent: false,
-  showSocialShare: true,
-  showMetadata: true,
+export const LatestEntry: Story = {
+  args: {
+    post: featuredPost,
+    headingLevel: 3,
+    showFullContent: true,
+  },
 };
 
-export const Featured = Template.bind({});
-Featured.args = {
-  post: {
-    ...basePost,
-    id: 100,
-    featured: true,
-    avatarColor: '#000',
-    title: 'Gallery Immersion',
-    body: '<p>Experience the audiovisual gallery tour with motion overlays powered by Framer Motion.</p>',
+export const CollapsedEntry: Story = {
+  args: {
+    post: compactPost,
+    headingLevel: 3,
+    truncateLength: 220,
   },
-  showFullContent: true,
-  showSocialShare: true,
-  showMetadata: true,
+};
+
+export const MobileEntry: Story = {
+  args: {
+    post: compactPost,
+    headingLevel: 3,
+    truncateLength: 160,
+  },
+  parameters: { viewport: { defaultViewport: "mobile" } },
 };
