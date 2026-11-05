@@ -12,6 +12,7 @@ Use the site's public, read-only sources to answer questions about Random Gorsey
 - Start with `https://randomgorsey.com/llms.txt` for the current content map.
 - Request `Accept: text/markdown` from the home page, section pages, or canonical journal URLs when readable prose is useful.
 - Use `GET https://randomgorsey.com/api/posts/?offset=0&limit=12` to page through the public journal. Increase `offset` by the number of returned posts; `limit` is capped at 12.
+- MCP clients can connect to `https://randomgorsey.com/mcp/` for read-only journal and release tools; discover its transport at `https://randomgorsey.com/mcp/server-card/`.
 - Use `https://randomgorsey.com/discography/` for verified release, catalog, year, track, and destination data.
 - Use `https://randomgorsey.com/listen/` for official platform destinations. Playback remains on the named third-party services.
 

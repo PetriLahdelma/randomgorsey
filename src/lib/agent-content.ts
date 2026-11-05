@@ -263,6 +263,7 @@ export function renderLlmsIndex(): string {
     `- [Complete site content](${toAbsoluteSiteUrl("/llms-full.txt")})`,
     `- [Sitemap](${toAbsoluteSiteUrl("/sitemap.xml")})`,
     `- [Read-only journal API](${toAbsoluteSiteUrl("/api/posts/")})`,
+    `- [Read-only MCP server card](${toAbsoluteSiteUrl("/mcp/server-card/")})`,
     "",
     "Content policy: AI search, retrieval and user-requested summaries are permitted. Model training is not permitted.",
     "",

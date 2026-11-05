@@ -20,6 +20,11 @@ export const poppyDiscoveryDocument = {
       description:
         "Read-only, paginated access to the public Random Gorsey journal archive.",
     },
+    {
+      type: "mcp",
+      url: `${SITE_ORIGIN}/mcp/`,
+      description: "Read-only tools for the public journal and releases.",
+    },
   ],
   skill_index: skillIndex,
 } as const;

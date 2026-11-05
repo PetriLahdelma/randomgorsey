@@ -6,7 +6,7 @@
       "type": "skill-md",
       "description": "Discover and cite Random Gorsey's public journal, verified releases, gallery, biography, and listening destinations. Use for source-backed research, catalog questions, summaries, or navigation of randomgorsey.com.",
       "url": "/.well-known/agent-skills/explore-random-gorsey/SKILL.md",
-      "digest": "sha256:24598fad467aca1e3b3a1851f2b0389cbd02ffd08697fe9f5c6caa58e86b7234"
+      "digest": "sha256:8415f597801de649d086817fbaf51dface2195c0a73037c8ea5dde03b8b4207f"
     }
   ]
 }
