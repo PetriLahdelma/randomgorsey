@@ -18,6 +18,19 @@ export interface VideoBackgroundProps {
   overlayOpacity?: number;
 }
 
+function subscribeToDocumentVisibility(onStoreChange: () => void) {
+  document.addEventListener('visibilitychange', onStoreChange);
+  return () => document.removeEventListener('visibilitychange', onStoreChange);
+}
+
+function getDocumentVisibility() {
+  return document.visibilityState === 'visible';
+}
+
+function getServerDocumentVisibility() {
+  return false;
+}
+
 /**
  * Full-bleed video background with performance-tiered fallbacks.
  *
@@ -46,12 +59,36 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
   className,
   overlayOpacity = 0,
 }) => {
-  const { tier, isMobile, isReducedMotion } = usePerformance();
+  const { tier, isMobile, isReducedMotion, effectsEnabled } = usePerformance();
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = React.useState(false);
+  const isDocumentVisible = React.useSyncExternalStore(
+    subscribeToDocumentVisibility,
+    getDocumentVisibility,
+    getServerDocumentVisibility
+  );
+  const eligible =
+    effectsEnabled && tier > 0 && !isReducedMotion && !isMobile;
 
-  // Tier 0, reduced motion, or mobile: static image only
-  if (tier === 0 || isReducedMotion || isMobile) {
+  React.useEffect(() => {
+    const node = containerRef.current;
+    if (!node || typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  const shouldLoadVideo = eligible && isVisible && isDocumentVisible;
+
+  if (!shouldLoadVideo) {
     return (
-      <div className={cn('fixed inset-0 -z-10 h-dvh', className)}>
+      <div
+        ref={containerRef}
+        className={cn('fixed inset-0 -z-10 h-dvh', className)}
+      >
         <div
           className="h-full w-full bg-cover bg-center"
           style={{ backgroundImage: `url(${poster})` }}
@@ -69,9 +106,11 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
     );
   }
 
-  // Desktop tier 1+: video with poster fallback
   return (
-    <div className={cn('fixed inset-0 -z-10 h-dvh', className)}>
+    <div
+      ref={containerRef}
+      className={cn('fixed inset-0 -z-10 h-dvh', className)}
+    >
       <video
         autoPlay
         muted

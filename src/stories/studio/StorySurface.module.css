@@ -1,0 +1,12 @@
+.releaseLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(220px, 0.75fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: center;
+}
+
+@media (width <= 700px) {
+  .releaseLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

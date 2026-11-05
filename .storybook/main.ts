@@ -8,7 +8,6 @@ const storybookDir = path.dirname(fileURLToPath(import.meta.url));
 
 const config: StorybookConfig = {
   stories: [
-    "../src/**/*.mdx",
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
   addons: [
@@ -19,9 +18,7 @@ const config: StorybookConfig = {
     name: "@storybook/nextjs-vite",
     options: {},
   },
-  docs: {
-    autodocs: "tag",
-  },
+  staticDirs: ["../public"],
   viteFinal: async (config) =>
     mergeConfig(config, {
       resolve: {

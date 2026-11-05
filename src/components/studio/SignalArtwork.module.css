@@ -1,0 +1,59 @@
+.artwork {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--studio-acid);
+}
+
+.fallback, .canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.canvas {
+  display: block;
+}
+
+.corners {
+  position: absolute;
+  inset: 18px;
+  pointer-events: none;
+}
+
+.corners i {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-color: var(--studio-ink);
+}
+
+.corners i:nth-child(1) {
+  top: 0;
+  left: 0;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+.corners i:nth-child(2) {
+  top: 0;
+  right: 0;
+  border-top: 1px solid;
+  border-right: 1px solid;
+}
+
+.corners i:nth-child(3) {
+  bottom: 0;
+  left: 0;
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+}
+
+.corners i:nth-child(4) {
+  right: 0;
+  bottom: 0;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+}

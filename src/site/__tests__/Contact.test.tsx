@@ -14,7 +14,7 @@ describe("Contact Page", () => {
     act(() => {
       vi.runAllTimers();
     });
-    expect(screen.getByText(/Contact/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /get in\s*touch/i })).toBeInTheDocument();
     vi.useRealTimers();
   });
 
@@ -29,7 +29,7 @@ describe("Contact Page", () => {
       vi.runAllTimers();
     });
     // The component should render without errors (helmet will update document.title)
-    expect(screen.getByText(/Contact/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /get in\s*touch/i })).toBeInTheDocument();
     vi.useRealTimers();
   });
 });

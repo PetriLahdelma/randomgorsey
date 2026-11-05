@@ -1,5 +1,6 @@
 @layer base {
   /* Gallery — the one "break" section with cooler slate tones */
+
   [data-section="gallery"] {
     --color-background: var(--color-gallery-slate);
     --color-foreground: var(--color-neutral-50);
@@ -9,6 +10,7 @@
   }
 
   /* Contact — magenta break */
+
   [data-section="contact"] {
     --color-background: var(--color-contact-magenta);
     --color-foreground: var(--color-neutral-50);
@@ -18,6 +20,7 @@
   }
 
   /* Base section styles */
+
   [data-section] {
     color: var(--color-foreground);
     background-color: var(--color-background);

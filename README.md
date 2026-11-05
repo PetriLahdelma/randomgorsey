@@ -4,7 +4,7 @@ This repository contains the source code for [randomgorsey.com](https://randomgo
 
 ## Requirements
 
-- Node.js 18 or newer
+- Node.js 22
 - npm (comes with Node) to manage packages
 
 ## Getting Started
@@ -44,9 +44,13 @@ For the contact form to work, you need to configure EmailJS environment variable
 
 - **`npm test`** – run unit tests using React Testing Library.
 - **`npm run lint`** – lint the runtime source used by the Next.js app.
-- **`npm run lint:css`** – lint the CSS files with stylelint.
+- **`npm run lint:css`** – lint and automatically fix CSS files with stylelint.
+- **`npx --no-install stylelint "src/**/*.css"`** – run the nonmutating CSS gate used by CI.
 - **`npm run storybook`** – launch the component Storybook on port 6006.
 - **`npm run build-storybook`** – generate the static Storybook site.
+- **`npx --no-install tsc --project tsconfig.stories.json`** – type-check Storybook configuration, the studio stories, and their imported component contracts.
+- **`npm run test:browser`** – run the production-build browser regression suite through Playwright CLI.
+- **`node scripts/storybook-check.mjs`** – test the static Storybook build for serious accessibility problems and core interactions. Build Storybook into `.omx/ci/storybook` first.
 - **`npm run build`** – create an optimized Next.js production build.
 - **`npm run generate-meta`** – update `public/sitemap.xml`, `llms.txt` and `llms-full.txt` based on the current routes.
 
@@ -54,20 +58,21 @@ SEO metadata is now defined at the App Router route layer in `src/app`.
 
 ## Deployment
 
-Deployment should be handled through Vercel Git integration or the Vercel CLI:
-
-```bash
-vercel
-```
+Deployment is handled through the existing Vercel Git integration. Use preview deployments for browser and content verification before promoting a production build.
 
 Recommended Vercel setup:
 
 - Import the repository into Vercel.
 - Set the production environment variables from `.env.example`.
-- Add `randomgorsey.com` and `www.randomgorsey.com` as domains in the Vercel project.
-- Update DNS away from GitHub Pages once the Vercel deployment is verified.
-- Use the cutover checklist in `docs/VERCEL_CUTOVER.md` for the DNS switch.
+- Preserve the existing `randomgorsey.com` project and domain configuration.
+- Treat `docs/VERCEL_CUTOVER.md` as historical migration context. Verify live project settings before making any domain or DNS change.
 
 ## Further Reading
 
 For more details on the current stack, see the [Next.js documentation](https://nextjs.org/docs) and the [shadcn/ui documentation](https://ui.shadcn.com/docs).
+
+## Artist assets and motion
+
+The original vector mark is exported from the native Illustrator working document; see [logo provenance](docs/design-system/logo-provenance.md). The two web variants preserve all twelve glyph paths and contain no bitmap. LisaTerminal is used unmodified at18px for selected window titlebars; its source/license files are retained under src/fonts and public/fonts.
+
+Artwork follows system reduced-motion/data-saving preferences automatically. There is no global Effects switch. Each gallery image has its own Windows-style window. The portrait loop autoplays muted with pause/resume; reduced-motion starts with a still and permits explicit playback. Its delivery renditions retain the full original loop; source files remain intact.

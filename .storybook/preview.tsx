@@ -1,39 +1,21 @@
 import type { Preview } from "@storybook/react";
+import type { CSSProperties } from "react";
 import "../src/app/globals.css";
-import React from "react";
-import Badge from "../src/components/Badge";
 
-/**
- * WIP (Work In Progress) Decorator
- *
- * This decorator adds a red "WIP" badge to the bottom-right corner of all Storybook stories.
- *
- * To remove the WIP badge:
- * 1. Remove the WIPDecorator from the decorators array below
- * 2. Remove the import for Badge component if no longer needed
- *
- * The badge appears on ALL stories until manually removed.
- */
-const WIPDecorator = (Story: React.ComponentType) => (
-  <div style={{ position: "relative", minHeight: "100vh", padding: "1rem" }}>
-    <Story />
-    <div
-      style={{
-        position: "fixed",
-        bottom: "16px",
-        right: "16px",
-        zIndex: 9999,
-        pointerEvents: "none",
-      }}
-    >
-      <Badge text="WIP" variant="danger" />
-    </div>
-  </div>
-);
+const canvasStyle = {
+  "--font-geist-pixel-square": "\"Courier New\", monospace",
+  boxSizing: "border-box",
+  minHeight: "100vh",
+  padding: "clamp(1rem, 4vw, 4rem)",
+} as CSSProperties;
 
 const preview: Preview = {
   decorators: [
-    WIPDecorator,
+    (Story) => (
+      <div style={canvasStyle}>
+        <Story />
+      </div>
+    ),
   ],
   parameters: {
     controls: {
@@ -43,11 +25,40 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      default: "light",
+      default: "graphite",
       values: [
-        { name: "light", value: "#ffffff" },
-        { name: "dark", value: "#0a0a0a" },
+        { name: "graphite", value: "#101210" },
+        { name: "system gray", value: "#d8d9d2" },
+        { name: "ivory", value: "#f0f0e6" },
+        { name: "electric blue", value: "#234bdf" },
       ],
+    },
+    viewport: {
+      options: {
+        mobile: {
+          name: "Mobile · 390 × 844",
+          styles: { width: "390px", height: "844px" },
+          type: "mobile",
+        },
+        narrow: {
+          name: "Minimum · 320 × 720",
+          styles: { width: "320px", height: "720px" },
+          type: "mobile",
+        },
+        tablet: {
+          name: "Tablet · 768 × 1024",
+          styles: { width: "768px", height: "1024px" },
+          type: "tablet",
+        },
+        laptop: {
+          name: "Laptop · 1366 × 768",
+          styles: { width: "1366px", height: "768px" },
+          type: "desktop",
+        },
+      },
+    },
+    a11y: {
+      test: "error",
     },
     nextjs: {
       appDirectory: true,

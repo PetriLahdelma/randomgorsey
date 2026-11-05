@@ -1,87 +1,51 @@
-"use client";
-
-import React from "react";
 import Link from "next/link";
-import { motion, pageVariants } from "@/lib/motion";
-import PostCard from "../components/PostCard";
-import { getPostById, getAdjacentPosts } from "../posts";
-import NotFound from "./NotFound";
-import { Container } from "@/components/layout/Container";
-import { VideoBackground } from "@/components/effects";
 
-const homeCanvasVideo = "/videos/home_canvas.webm";
+import PostCard from "@/components/PostCard";
+import { StudioWindow } from "@/components/studio/StudioWindow";
+import type { Post as PostRecord, PostLink } from "@/content/post-types";
 
 interface PostProps {
-  postId: number;
+  post: PostRecord;
+  previous?: PostLink;
+  next?: PostLink;
 }
 
-const Post: React.FC<PostProps> = ({ postId }) => {
-  const post = Number.isFinite(postId) ? getPostById(postId) : undefined;
+const Post = ({ post, previous, next }: PostProps) => (
+  <div className="studioPage studioArticle">
+    <div className="studioPageHeader">
+      <Link href="/" className="studioLink">
+        &larr; Journal
+      </Link>
+      <p className="studioKicker">Archive entry {String(post.id).padStart(2, "0")}</p>
+    </div>
 
-  if (!post) {
-    return <NotFound />;
-  }
-
-  const { prev, next } = getAdjacentPosts(postId);
-
-  return (
-    <>
-      <VideoBackground
-        src={homeCanvasVideo}
-        poster="/images/home-poster.jpg"
-        overlayOpacity={0.3}
+    <StudioWindow title="Random Gorsey / Journal" tone="paper">
+      <PostCard
+        post={post}
+        headingLevel={1}
+        truncateLength={Number.MAX_SAFE_INTEGER}
+        showFullContent
+        className="m-0 border-0 bg-transparent p-0 text-black hover:bg-transparent"
       />
+    </StudioWindow>
 
-      <motion.div
-        className="relative z-10 min-h-screen text-white"
-        variants={pageVariants}
-        initial="initial"
-        animate="enter"
-        exit="exit"
-      >
-        <Container size="sm" padding="md" className="py-6">
-          <Link
-            href="/"
-            className="font-mono-label text-sm text-neutral-400 no-underline transition-colors hover:text-foreground"
-          >
-            &larr; Back to home
+    <nav className="mt-8 grid gap-4 sm:grid-cols-2" aria-label="Adjacent journal entries">
+      <div>
+        {previous && (
+          <Link href={`/posts/${previous.id}/`} className="studioLink">
+            &larr; {previous.title}
           </Link>
-
-          <div className="mt-6">
-            <PostCard
-              post={post}
-              headingLevel={1}
-              truncateLength={Number.MAX_SAFE_INTEGER}
-              showFullContent={true}
-            />
-          </div>
-
-          <nav className="mt-8 flex items-start justify-between gap-4">
-            <div className="flex-1">
-              {prev && (
-                <Link
-                  href={`/posts/${prev.id}`}
-                  className="font-mono-label text-sm text-neutral-400 no-underline transition-colors hover:text-accent"
-                >
-                  &larr; {prev.title}
-                </Link>
-              )}
-            </div>
-            <div className="flex-1 text-right">
-              {next && (
-                <Link
-                  href={`/posts/${next.id}`}
-                  className="font-mono-label text-sm text-neutral-400 no-underline transition-colors hover:text-accent"
-                >
-                  {next.title} &rarr;
-                </Link>
-              )}
-            </div>
-          </nav>
-        </Container>
-      </motion.div>
-    </>
-  );
-};
+        )}
+      </div>
+      <div className="sm:text-right">
+        {next && (
+          <Link href={`/posts/${next.id}/`} className="studioLink">
+            {next.title} &rarr;
+          </Link>
+        )}
+      </div>
+    </nav>
+  </div>
+);
 
 export default Post;

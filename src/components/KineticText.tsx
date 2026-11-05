@@ -63,7 +63,7 @@ export function KineticText({
   className,
 }: KineticTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [elements, setElements] = useState<string[]>([]);
+  const [lineElements, setLineElements] = useState<string[]>([]);
   const prefersReducedMotion = useReducedMotion();
   const isInView = useInView(containerRef, {
     once: true,
@@ -107,20 +107,18 @@ export function KineticText({
     []
   );
 
-  // Split text on mount using SplitType (lines) or manual split (chars/words)
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-
-    if (splitBy === 'chars' || splitBy === 'words') {
-      const tokens =
-        splitBy === 'chars'
-          ? Array.from(children)
-          : children.split(/(\s+)/).filter((token) => token.length > 0);
-      setElements(tokens);
-      return () => {
-        setElements([]);
-      };
+  const derivedElements = useMemo(() => {
+    if (splitBy === 'chars') return Array.from(children);
+    if (splitBy === 'words') {
+      return children.split(/(\s+)/).filter((token) => token.length > 0);
     }
+    return lineElements;
+  }, [children, lineElements, splitBy]);
+
+  // SplitType needs layout information for lines. Character and word splits are
+  // derived during render and do not need effect-managed state.
+  useEffect(() => {
+    if (prefersReducedMotion || splitBy !== 'lines') return;
 
     if (!containerRef.current) return;
 
@@ -139,17 +137,18 @@ export function KineticText({
     const splitElements = split[splitBy] || [];
     const textContent = splitElements.map((el) => el.textContent || '');
 
-    // Store the text content
-    setElements(textContent);
-
     // Clean up the temporary element
     split.revert();
     if (containerRef.current.contains(tempEl)) {
       containerRef.current.removeChild(tempEl);
     }
 
+    let active = true;
+    queueMicrotask(() => {
+      if (active) setLineElements(textContent);
+    });
     return () => {
-      setElements([]);
+      active = false;
     };
   }, [children, splitBy, prefersReducedMotion]);
 
@@ -176,7 +175,7 @@ export function KineticText({
         perspective: needsPerspective ? '1000px' : undefined,
       }}
     >
-      {elements.length === 0 ? (
+      {derivedElements.length === 0 ? (
         // Show text until split completes (prevents flash)
         <span style={{ visibility: 'hidden' }}>{children}</span>
       ) : (
@@ -194,7 +193,7 @@ export function KineticText({
                 const groups: Group[] = [];
                 let currentWord: string[] = [];
 
-                elements.forEach((char) => {
+                derivedElements.forEach((char) => {
                   if (char.trim().length === 0) {
                     if (currentWord.length > 0) {
                       groups.push({ type: 'word', chars: currentWord });
@@ -260,7 +259,7 @@ export function KineticText({
           {splitBy === 'words' &&
             (() => {
               let wordIndex = 0;
-              return elements.map((text, i) => {
+              return derivedElements.map((text, i) => {
                 const isWhitespace = text.trim().length === 0;
                 if (isWhitespace) {
                   return (
@@ -296,7 +295,7 @@ export function KineticText({
             })()}
 
           {splitBy === 'lines' &&
-            elements.map((text, i) => (
+            derivedElements.map((text, i) => (
               <motion.span
                 key={`line-${i}`}
                 variants={itemVariant}

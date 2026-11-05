@@ -1,160 +1,254 @@
-.gallery-container {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 600px;
-  padding: 2rem;
-  margin: 0 auto;
-  overflow-x: hidden;
-  font-family: "Europa Regular", sans-serif;
-  line-height: 1.6;
-  color: var(--color-yellow);
-  background-color: var(--color-blue);
+.page {
+  min-height: 100vh;
+  background: var(--studio-stage);
 }
 
-.gallery-container h1 {
-  margin-bottom: 1rem;
-  font-family: "Tschick Bold", sans-serif;
-  color: var(--color-yellow);
-  text-transform: uppercase;
+.header {
+  max-width: 64rem;
+}
+
+.intro {
+  max-width: 38rem;
+}
+
+.contactSheet {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.75rem);
+  align-items: start;
+  max-width: 78rem;
+  margin: 0 auto;
+}
+
+.figureWindow {
+  box-shadow: 0.5rem 0.5rem 0 rgb(0 0 0 / 36%);
+}
+
+.figureWindow > :last-child {
+  padding: 0.375rem;
+}
+
+.figure {
+  margin: 0;
+  color: #11140f;
+  background: #f0f0e6;
+}
+
+.imageButton {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  cursor: zoom-in;
+  background: #151715;
+  border: 0;
+}
+
+.imageButton:focus-visible {
+  z-index: 1;
+  outline: 4px solid #d7ff44;
+  outline-offset: -4px;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 27rem;
+  object-fit: cover;
+  filter: saturate(0.8) contrast(1.04);
+  transition: filter 140ms ease;
+}
+
+.imageButton:hover .image,
+.imageButton:focus-visible .image {
+  filter: saturate(1.08) contrast(1.06);
+}
+
+.fileIndex {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  min-width: 2rem;
+  padding: 0.25rem 0.35rem;
+  font: 400 0.75rem/1 var(--font-geist-pixel-square), monospace;
+  color: #f0f0e6;
+  text-align: center;
+  background: #11140f;
+}
+
+.figureMeta {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.25rem 0.25rem;
+  font: 400 0.75rem/1 var(--font-geist-pixel-square), monospace;
+  color: #50544d;
+  border-top: 1px solid #8c8f87;
 }
 
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: clamp(0.75rem, 2vw, 2rem);
+  background: rgb(4 5 4 / 94%);
+}
+
+.viewer {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: min(100%, 88rem);
+  height: min(92vh, 60rem);
+  color: #11140f;
+  background: #d8d9d2;
+  border: 2px solid #f5f5ef;
+  box-shadow: inset -2px -2px 0 #585b55, inset 2px 2px 0 #fff, 1rem 1rem 0 #234bdf;
+}
+
+.viewerTitlebar {
   display: flex;
-  flex-direction: column;
+  gap: 1rem;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(0 0 0 / 80%);
+  justify-content: space-between;
+  min-height: 2.5rem;
+  padding: 0.25rem 0.35rem 0.25rem 0.65rem;
+  overflow: hidden;
+  font: 400 0.8125rem/1.2 var(--font-geist-pixel-square), monospace;
+  color: #fff;
+  background: #234bdf;
 }
 
-.image-button {
-  display: block;
-  width: 100%;
-  padding: 0;
-  text-align: inherit;
+.viewerTitlebar span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.windowClose {
+  display: grid;
+  flex: 0 0 2rem;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.25rem;
+  color: #11140f;
   cursor: pointer;
-  background: transparent;
-  border: none;
+  background: #d8d9d2;
+  border: 0;
+  box-shadow: inset -2px -2px 0 #585b55, inset 2px 2px 0 #fff;
 }
 
-.image-button:focus-visible {
-  outline: 2px solid var(--color-yellow);
-  outline-offset: 4px;
-  border-radius: 0.5rem;
+.windowClose:focus-visible {
+  outline: 3px solid #d7ff44;
+  outline-offset: 2px;
 }
 
-.overlay img {
+.windowClose svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.viewerImageArea {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: 1rem;
+  background: #050605;
+}
+
+.viewerImage {
   width: auto;
-  max-width: 90%;
+  max-width: 100%;
   height: auto;
-  max-height: 70%;
+  max-height: calc(92vh - 8.5rem);
   object-fit: contain;
 }
 
-.icon {
-  width: 100%;
-  height: 100%;
+.viewerControls {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  min-height: 3.5rem;
+  padding: 0.5rem;
 }
 
-.close-icon {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 1100;
-  width: 2rem;
-  height: 2rem;
-  color: var(--color-white);
+.viewerControls p {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.8125rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.viewerControls button {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  color: #11140f;
   cursor: pointer;
-  background: transparent;
-  border: none;
+  background: #d8d9d2;
+  border: 0;
+  box-shadow: inset -2px -2px 0 #585b55, inset 2px 2px 0 #fff;
 }
 
-.left-icon {
-  position: fixed;
-  top: 50%;
-  left: 1rem;
-  z-index: 1100;
-  width: 2rem;
-  height: 2rem;
-  color: var(--color-white);
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  transform: translateY(-50%);
+.viewerControls button:active {
+  box-shadow: inset 2px 2px 0 #585b55, inset -2px -2px 0 #fff;
 }
 
-.right-icon {
-  position: fixed;
-  top: 50%;
-  right: 1rem;
-  z-index: 1100;
-  width: 2rem;
-  height: 2rem;
-  color: var(--color-white);
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  transform: translateY(-50%);
+.viewerControls button:focus-visible {
+  outline: 3px solid #234bdf;
+  outline-offset: 2px;
 }
 
-.close-icon:focus-visible,
-.left-icon:focus-visible,
-.right-icon:focus-visible {
-  outline: 2px solid var(--color-yellow);
-  outline-offset: 3px;
+.viewerControls svg {
+  width: 1rem;
+  height: 1rem;
 }
 
-.gallery-overlay img,
-.gallery-overlay div,
-.gallery-overlay span {
-  transform: none;
-}
+@media (width <= 760px) {
+  .viewer {
+    box-shadow: 0.5rem 0.5rem 0 #234bdf;
+  }
 
-.gallery-content img {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+  .contactSheet {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
-.gallery-content img:hover {
-  box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
-  transform: scale(1.02);
-}
+  .viewerControls {
+    grid-template-columns: 1fr 1fr;
+  }
 
-.masonry {
-  columns: 3;
-  column-gap: 1rem;
-}
-
-.masonry-item {
-  break-inside: avoid;
-  margin-bottom: 1rem;
-}
-
-@media (max-width: 768px) {
-  .masonry {
-    columns: 2;
+  .viewerControls p {
+    grid-row: 1;
+    grid-column: 1 / -1;
   }
 }
 
-@media (max-width: 480px) {
-  .masonry {
-    columns: 1;
+@media (width <= 460px) {
+  .contactSheet {
+    grid-template-columns: 1fr;
+  }
+
+  .figureWindow > :last-child {
+    padding: 0.25rem;
+  }
+
+  .viewerControls button {
+    justify-content: center;
+    font-size: 0.8125rem;
   }
 }
 
-@media (width <= 800px) {
-  .gallery-container {
-    max-width: 100%;
-    padding-right: 1rem;
-    padding-left: 1rem;
-  }
-
-  .gallery-container h1 {
-    text-align: center;
-    word-break: break-word;
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    transition: none;
   }
 }

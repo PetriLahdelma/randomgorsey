@@ -1,28 +1,14 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { HelmetProvider } from "react-helmet-async";
 import NotFound from "../NotFound";
 
 describe("NotFound Page", () => {
-  it("renders heading", () => {
-    render(
-      <HelmetProvider>
-        <NotFound />
-      </HelmetProvider>
-    );
-    expect(
-      screen.getByRole("heading", { name: /Signal Not Found/i })
-    ).toBeInTheDocument();
-  });
+  it("offers useful routes out of the missing page", () => {
+    render(<NotFound />);
 
-  it("renders back to home link", () => {
-    render(
-      <HelmetProvider>
-        <NotFound />
-      </HelmetProvider>
-    );
-    expect(
-      screen.getByText(/Back to home/i)
-    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Signal Not Found" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
+    expect(screen.getByRole("link", { name: "Listen" })).toHaveAttribute("href", "/listen/");
+    expect(screen.getByRole("link", { name: "Contact" })).toHaveAttribute("href", "/contact/");
   });
 });

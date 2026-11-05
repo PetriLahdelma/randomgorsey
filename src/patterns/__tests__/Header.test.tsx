@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Header from "../Header";
 
 describe("Header", () => {
@@ -15,7 +15,7 @@ describe("Header", () => {
     render(<Header />);
     const logo = screen.getByLabelText("Random Gorsey — Home");
     expect(logo).toBeInTheDocument();
-    expect(logo.querySelector("a")).toHaveAttribute("href", "/");
+    expect(logo).toHaveAttribute("href", "/");
   });
 
   it("renders desktop nav links without Home", () => {
@@ -35,11 +35,13 @@ describe("Header", () => {
     expect(screen.queryByText("Disco")).not.toBeInTheDocument();
   });
 
-  it("uses muted grey styling for inactive nav links", () => {
+  it("opens and closes the mobile navigation with keyboard focus restored", () => {
     render(<Header />);
-    const link = screen.getByTitle("Listen to music");
-    // GlitchLink wraps the <a> in a <span> that carries the className
-    const wrapper = link.closest("span.relative");
-    expect(wrapper?.className).toContain("text-neutral-400");
+    const toggle = screen.getByRole("button", { name: "Open menu" });
+    fireEvent.click(toggle);
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
+    fireEvent.keyDown(screen.getByRole("navigation"), { key: "Escape" });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(toggle).toHaveFocus();
   });
 });

@@ -36,3 +36,6 @@ storybook-static/
 .claude/
 .superpowers/
 tsconfig.tsbuildinfo
+.vercel
+.env*.local
+.playwright-cli/

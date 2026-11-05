@@ -12,18 +12,29 @@
 
 @theme {
   /* Neutral Scale - darker, grittier */
-  --color-neutral-50: oklch(92% 0 0deg);    /* off-white text */
+  --color-neutral-50: oklch(92% 0 0deg);
+
+  /* off-white text */
   --color-neutral-100: oklch(85% 0 0deg);
   --color-neutral-200: oklch(70% 0 0deg);
   --color-neutral-300: oklch(55% 0 0deg);
-  --color-neutral-400: oklch(40% 0 0deg);    /* muted text */
-  --color-neutral-500: oklch(33% 0 0deg);
-  --color-neutral-600: oklch(27% 0 0deg);    /* dim borders */
-  --color-neutral-700: oklch(20% 0 0deg);
-  --color-neutral-800: oklch(11% 0 0deg);    /* elevated surface */
-  --color-neutral-900: oklch(8% 0 0deg);     /* surface */
-  --color-neutral-950: oklch(4% 0 0deg);     /* base black */
+  --color-neutral-400: oklch(40% 0 0deg);
 
+  /* muted text */
+  --color-neutral-500: oklch(33% 0 0deg);
+  --color-neutral-600: oklch(27% 0 0deg);
+
+  /* dim borders */
+  --color-neutral-700: oklch(20% 0 0deg);
+  --color-neutral-800: oklch(11% 0 0deg);
+
+  /* elevated surface */
+  --color-neutral-900: oklch(8% 0 0deg);
+
+  /* surface */
+  --color-neutral-950: oklch(4% 0 0deg);
+
+  /* base black */
   --color-white: oklch(100% 0 0deg);
   --color-black: oklch(0% 0 0deg);
 
@@ -32,10 +43,18 @@
   --color-yellow-500: oklch(85% 0.18 85deg);
 
   /* Remove magenta, blue as accent colors — keep only for legacy compat */
-  --color-magenta-400: oklch(90% 0.18 85deg);  /* map to yellow */
-  --color-magenta-500: oklch(85% 0.18 85deg);  /* map to yellow */
-  --color-blue-400: oklch(90% 0.18 85deg);     /* map to yellow */
-  --color-blue-500: oklch(85% 0.18 85deg);     /* map to yellow */
+  --color-magenta-400: oklch(90% 0.18 85deg);
+
+  /* map to yellow */
+  --color-magenta-500: oklch(85% 0.18 85deg);
+
+  /* map to yellow */
+  --color-blue-400: oklch(90% 0.18 85deg);
+
+  /* map to yellow */
+  --color-blue-500: oklch(85% 0.18 85deg);
+
+  /* map to yellow */
 
   /* Feedback colors stay */
   --color-red-500: oklch(57.7% 0.245 27.325deg);
@@ -64,7 +83,7 @@
   --font-family-europa-light: "Europa Light", ui-sans-serif, system-ui, sans-serif;
   --font-family-europa-unified: "Europa", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Tschick Bold", ui-sans-serif, system-ui, sans-serif;
-  --font-family-mono: ui-monospace, "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-family-mono: ui-monospace, "SFMono-Regular", "SF Mono", consolas, "Liberation Mono", "Courier New", monospace;
 
   /* Animation — smooth gallery feel */
   --animate-duration: 350ms;
@@ -77,7 +96,9 @@
   --color-surface-foreground: oklch(85% 0 0deg);
   --color-surface-elevated: oklch(11% 0 0deg);
   --color-surface-elevated-foreground: oklch(92% 0 0deg);
-  --color-primary: oklch(90% 0.18 85deg);   /* yellow */
+  --color-primary: oklch(90% 0.18 85deg);
+
+  /* yellow */
   --color-primary-foreground: oklch(4% 0 0deg);
   --color-secondary: oklch(11% 0 0deg);
   --color-secondary-foreground: oklch(92% 0 0deg);

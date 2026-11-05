@@ -1,0 +1,69 @@
+.panel {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 60;
+  width: min(28rem, calc(100vw - 2rem));
+  padding: 0;
+  overflow: hidden;
+  font-family: Europa, Arial, sans-serif;
+  color: #11140f;
+  text-align: left;
+  background: #d8d9d2;
+  border: 2px solid;
+  border-color: #f7f7ef #575951 #575951 #f7f7ef;
+  border-radius: 0;
+  box-shadow: 10px 10px 0 rgb(0 0 0 / 35%);
+}
+
+.titleBar {
+  min-height: 2.1rem;
+  padding: 0.45rem 2.6rem 0.4rem 0.65rem;
+  color: #fff;
+  background: #234bdf;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--studio-terminal);
+  font-size: 18px;
+  line-height: 1.2;
+  color: inherit;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.content {
+  padding: 1rem 1rem 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.content p {
+  margin: 0;
+}
+
+.currentChoice {
+  padding-top: 0.75rem;
+  font-size: 0.8rem;
+  color: #45473f;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  padding: 0 1rem 1rem;
+}
+
+@media (width <= 36rem) {
+  .panel {
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .actions > button {
+    flex: 1 1 8rem;
+  }
+}
