@@ -33,6 +33,7 @@ describe("agent skill and ARD discovery", () => {
     expect(skill.toString("utf8")).toMatch(
       /^---\nname: explore-random-gorsey\ndescription: .+\n---\n/
     );
+    expect(skill.toString("utf8")).toContain("untrusted source data");
   });
 
   it("publishes equivalent current and legacy ARD manifests with only real resources", async () => {
