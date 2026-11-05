@@ -4,6 +4,7 @@ import AppShell from "@/components/AppShell";
 import Footer from "@/patterns/Footer";
 import { siteMetadata, socialImage } from "@/lib/seo";
 import { GeistPixelSquare } from "geist/font/pixel";
+import { version } from "../../package.json";
 
 import "./globals.css";
 
@@ -39,7 +40,7 @@ export default function RootLayout({
       <body
         className={`${GeistPixelSquare.variable}`}
       >
-        <AppShell footer={<Footer />}>{children}</AppShell>
+        <AppShell footer={<Footer />} version={version}>{children}</AppShell>
       </body>
     </html>
   );

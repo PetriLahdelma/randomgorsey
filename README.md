@@ -56,6 +56,10 @@ For the contact form to work, you need to configure EmailJS environment variable
 
 SEO metadata is now defined at the App Router route layer in `src/app`.
 
+## Versions and changelog
+
+The header reads the version from `package.json`. Record notable changes in the [changelog](CHANGELOG.md) under `Unreleased`; for each release, update the package and lockfile versions together, move those notes under the released version and date, and tag the deployed commit.
+
 ## Deployment
 
 Deployment is handled through the existing Vercel Git integration. Use preview deployments for browser and content verification before promoting a production build.

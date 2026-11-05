@@ -1,6 +1,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import Header from '../patterns/Header';
+import { version } from '../../package.json';
 
 export default {
   title: 'Patterns/Header',
@@ -10,10 +11,10 @@ export default {
 const Template: StoryFn<typeof Header> = (args) => <Header {...args} />;
 
 export const Desktop = Template.bind({});
-Desktop.args = {};
+Desktop.args = { version };
 
 export const Mobile = Template.bind({});
-Mobile.args = {};
+Mobile.args = { version };
 Mobile.parameters = {
   viewport: {
     defaultViewport: 'largeMobile',

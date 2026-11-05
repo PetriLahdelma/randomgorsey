@@ -9,7 +9,7 @@ import Header from "@/patterns/Header";
 const AppShellContext = React.createContext<{ setOverlayActive: (active: boolean) => void }>({ setOverlayActive: () => {} });
 export function useAppShell() { return React.useContext(AppShellContext); }
 
-export default function AppShell({ children, footer }: { children: React.ReactNode; footer?: React.ReactNode }) {
+export default function AppShell({ children, footer, version }: { children: React.ReactNode; footer?: React.ReactNode; version: string }) {
   const [isOverlayActive, setOverlayActive] = React.useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -28,7 +28,7 @@ export default function AppShell({ children, footer }: { children: React.ReactNo
       <TransitionContext.Provider value={transition}>
         <AppShellContext.Provider value={overlay}>
           <a href="#main-content" className="studioSkip">Skip to content</a>
-          <Header />
+          <Header version={version} />
           <main id="main-content" tabIndex={-1}>{children}</main>
           {!isOverlayActive && footer}
           <CookieConsent />

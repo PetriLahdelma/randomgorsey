@@ -272,6 +272,15 @@ a, button, input, textarea, select {
   text-decoration: none;
 }
 
+.studioHeaderVersion {
+  padding-right: 12px;
+  font-family: var(--studio-terminal);
+  font-size: 18px;
+  line-height: 1;
+  white-space: nowrap;
+  border-right: 1px solid #8b8e81;
+}
+
 .studioEffects:disabled {
   cursor: default;
 }
