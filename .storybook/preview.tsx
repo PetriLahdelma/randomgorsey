@@ -6,18 +6,41 @@ const canvasStyle = {
   "--font-geist-pixel-square": "\"Courier New\", monospace",
   boxSizing: "border-box",
   minHeight: "100vh",
-  padding: "clamp(1rem, 4vw, 4rem)",
+  color: "var(--studio-white)",
+  background: "var(--studio-stage)",
 } as CSSProperties;
 
 const preview: Preview = {
   decorators: [
-    (Story) => (
-      <div style={canvasStyle}>
+    (Story, context) => (
+      <div
+        style={{
+          ...canvasStyle,
+          padding:
+            context.parameters.layout === "fullscreen"
+              ? 0
+              : "clamp(1rem, 4vw, 4rem)",
+        }}
+      >
         <Story />
       </div>
     ),
   ],
   parameters: {
+    options: {
+      storySort: {
+        order: [
+          "Production",
+          ["Coverage", "Foundations", "Navigation", "Journal", "Player", "Privacy", "Surfaces"],
+          "Studio",
+          "Foundations",
+          "Components",
+          "Patterns",
+          "Layout",
+          "Effects",
+        ],
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -62,6 +85,9 @@ const preview: Preview = {
     },
     nextjs: {
       appDirectory: true,
+      navigation: {
+        pathname: "/",
+      },
     },
   },
 };

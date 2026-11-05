@@ -348,10 +348,10 @@ a, button, input, textarea, select {
 
 .studioFooterLinks {
   display: flex;
-  flex-wrap: wrap;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
   gap: 14px 24px;
   justify-content: end;
-  max-width: 550px;
 }
 
 .studioFooterLinks a {
@@ -417,6 +417,21 @@ a, button, input, textarea, select {
   color: #50584a;
 }
 
+@media (width <= 1000px) {
+  .studioFooterTop {
+    flex-direction: column;
+    gap: 26px;
+    align-items: start;
+    padding-bottom: 25px;
+  }
+
+  .studioFooterLinks {
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    justify-content: start;
+  }
+}
+
 @media (width <= 800px) {
   .studioHeaderBar {
     gap: 9px;
@@ -454,17 +469,6 @@ a, button, input, textarea, select {
     padding: 38px 20px 18px;
   }
 
-  .studioFooterTop {
-    flex-direction: column;
-    gap: 26px;
-    align-items: start;
-    padding-bottom: 25px;
-  }
-
-  .studioFooterLinks {
-    gap: 6px 22px;
-    justify-content: start;
-  }
 }
 
 @media (width <= 360px) {

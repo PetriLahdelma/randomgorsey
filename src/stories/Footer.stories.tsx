@@ -1,13 +1,24 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import Footer from '../patterns/Footer';
+import type { Meta, StoryObj } from "@storybook/react";
+import Footer from "../patterns/Footer";
 
-export default {
-  title: 'Patterns/Footer',
+const meta = {
+  title: "Production/Navigation/Footer",
   component: Footer,
-} as Meta<typeof Footer>;
+  parameters: { layout: "fullscreen" },
+  decorators: [
+    (Story) => (
+      <div style={{ minHeight: "100vh", display: "grid", alignItems: "end" }}>
+        <Story />
+      </div>
+    ),
+  ],
+} satisfies Meta<typeof Footer>;
 
-const Template: StoryFn<typeof Footer> = (args) => <Footer {...args} />;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Desktop: Story = {};
+
+export const Mobile: Story = {
+  parameters: { viewport: { defaultViewport: "mobile" } },
+};
