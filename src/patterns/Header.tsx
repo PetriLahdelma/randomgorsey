@@ -5,13 +5,13 @@ import { usePathname } from "next/navigation";
 import PixelLogo from "@/components/PixelLogo";
 
 const links = [{href:"/listen/",label:"Listen"},{href:"/discography/",label:"Discography"},{href:"/#journal",label:"Journal"},{href:"/about/",label:"About"},{href:"/gallery/",label:"Gallery"},{href:"/contact/",label:"Contact"}];
-export interface HeaderProps { className?: string }
+export interface HeaderProps { className?: string; version: string }
 export default function Header(props: HeaderProps) {
   const pathname = usePathname();
   return <HeaderNavigation key={pathname} {...props} pathname={pathname} />;
 }
 
-function HeaderNavigation({ className = "", pathname }: HeaderProps & { pathname: string }) {
+function HeaderNavigation({ className = "", pathname, version }: HeaderProps & { pathname: string }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLButtonElement>(null);
   function closeMenu(event: React.KeyboardEvent) {
@@ -20,6 +20,7 @@ function HeaderNavigation({ className = "", pathname }: HeaderProps & { pathname
   return (
     <header className={"studioHeader " + className} onKeyDown={closeMenu}>
       <div className="studioHeaderBar">
+        <span className="studioHeaderVersion" aria-label={`Site version ${version}`}>v{version}</span>
         <PixelLogo />
         <button ref={menuRef} className="studioMenuToggle" type="button" aria-expanded={open} aria-controls="studio-navigation" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"}>{open ? "Close" : "Menu"} <span aria-hidden="true">{open ? "−" : "+"}</span></button>
       </div>
