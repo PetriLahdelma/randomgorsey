@@ -5,6 +5,7 @@ import CookieConsent from "@/components/CookieConsent";
 import { AnimationProvider } from "@/lib/motion/AnimationProvider";
 import { TransitionContext } from "@/lib/transition/TransitionContext";
 import Header from "@/patterns/Header";
+import AgentTools from "@/components/AgentTools";
 
 const AppShellContext = React.createContext<{ setOverlayActive: (active: boolean) => void }>({ setOverlayActive: () => {} });
 export function useAppShell() { return React.useContext(AppShellContext); }
@@ -32,6 +33,7 @@ export default function AppShell({ children, footer, version }: { children: Reac
           <main id="main-content" tabIndex={-1}>{children}</main>
           {!isOverlayActive && footer}
           <CookieConsent />
+          <AgentTools />
         </AppShellContext.Provider>
       </TransitionContext.Provider>
     </AnimationProvider>

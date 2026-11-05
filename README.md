@@ -52,9 +52,15 @@ For the contact form to work, you need to configure EmailJS environment variable
 - **`npm run test:browser`** – run the production-build browser regression suite through Playwright CLI.
 - **`node scripts/storybook-check.mjs`** – test the static Storybook build for serious accessibility problems and core interactions. Build Storybook into `.omx/ci/storybook` first.
 - **`npm run build`** – create an optimized Next.js production build.
-- **`npm run generate-meta`** – update `public/sitemap.xml`, `llms.txt` and `llms-full.txt` based on the current routes.
 
 SEO metadata is now defined at the App Router route layer in `src/app`.
+
+Agent-readable content is generated from the same canonical post, release,
+gallery, platform and biography records used by the site. `/llms.txt` is the
+compact discovery index, `/llms-full.txt` is the complete archive, and page
+Markdown negotiation uses `src/lib/agent-content.ts`. Do not maintain static
+copies of these files or add unsupported agent, authentication or commerce
+capabilities.
 
 ## Versions and changelog
 

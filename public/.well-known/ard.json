@@ -1,0 +1,42 @@
+{
+  "specVersion": "0.91",
+  "host": {
+    "displayName": "Random Gorsey",
+    "identifier": "https://randomgorsey.com"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:randomgorsey.com:api:journal-archive",
+      "displayName": "Random Gorsey Journal Archive API",
+      "type": "application/vnd.oai.openapi+json;version=3.1",
+      "url": "https://randomgorsey.com/openapi.json",
+      "description": "Read-only, paginated access to the public Random Gorsey journal archive.",
+      "capabilities": [
+        "journal-discovery",
+        "archive-reading"
+      ],
+      "representativeQueries": [
+        "list the latest Random Gorsey journal entries",
+        "find Random Gorsey posts about studio work",
+        "retrieve the public Random Gorsey journal archive"
+      ]
+    },
+    {
+      "identifier": "urn:air:randomgorsey.com:skill:explore-random-gorsey",
+      "displayName": "Explore Random Gorsey",
+      "type": "application/agent-skills+md",
+      "url": "https://randomgorsey.com/.well-known/agent-skills/explore-random-gorsey/SKILL.md",
+      "description": "Source-backed discovery of Random Gorsey's public music catalog, biography, gallery, listening destinations, and journal.",
+      "capabilities": [
+        "catalog-discovery",
+        "journal-research",
+        "source-citation"
+      ],
+      "representativeQueries": [
+        "summarize Random Gorsey's verified releases with sources",
+        "find Random Gorsey posts about field recordings",
+        "where can I listen to Random Gorsey"
+      ]
+    }
+  ]
+}

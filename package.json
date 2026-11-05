@@ -1,6 +1,6 @@
 {
   "name": "randomgorsey",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -48,7 +48,6 @@
     "lint:css": "stylelint 'src/**/*.css' --fix",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "generate-meta": "node scripts/generate-meta.js",
     "docs:update": "node scripts/update-docs.js update",
     "docs:report": "node scripts/update-docs.js report",
     "build:complete": "npm run build && npm run docs:update",

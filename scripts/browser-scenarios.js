@@ -48,6 +48,13 @@ async (page) => {
   const necessary=page.getByRole("button",{name:"Accept only necessary cookies",exact:true});
   await necessary.click();
   check(await page.locator("body").evaluate(element=>element.style.overflow!=="hidden"),"Consent leaves body scroll unlocked");
+  const footerCookie=page.locator(".studioFooterBottom").getByRole("button",{name:"Cookie preferences",exact:true});
+  const footerContact=page.locator(".studioFooterBottom").getByRole("link",{name:"Contact"});
+  check(await footerCookie.evaluate(e=>getComputedStyle(e).textDecorationLine)==="none" && await footerContact.evaluate(e=>getComputedStyle(e).textDecorationLine)==="none","Footer links and cookie preferences share their resting style");
+  await footerCookie.hover();
+  check(await footerCookie.evaluate(e=>getComputedStyle(e).textDecorationLine)==="underline","Cookie preferences underline on hover");
+  await footerContact.hover();
+  check(await footerContact.locator(".studioFooterLinkLabel").evaluate(e=>getComputedStyle(e).textDecorationLine)==="underline" && await footerContact.locator('[aria-hidden="true"]').evaluate(e=>getComputedStyle(e).textDecorationLine)==="none","Footer link text underlines without underlining the arrow");
   await page.getByRole("button",{name:"Cookie preferences",exact:true}).click();
   check(await page.getByRole("region",{name:"Cookie preferences",exact:true}).isVisible(),"Cookie choices can be revisited");
   await page.getByRole("button",{name:"Accept only necessary cookies",exact:true}).click();

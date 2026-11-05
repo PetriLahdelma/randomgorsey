@@ -6,6 +6,22 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-05
+
+### Added
+
+- Publish current AI-readable Markdown, a complete sitemap, an API catalog and a read-only journal discovery skill.
+- Add factual artist and release structured data and optional read-only WebMCP discovery.
+
+### Changed
+
+- Express the artist's preference for AI search and summaries while disallowing model training in crawler policy.
+- Align the cookie-preferences control with the footer link styling.
+
+### Removed
+
+- Retire stale generated agent files that no longer matched the site's content.
+
 ## [0.2.0] - 2026-11-05
 
 ### Added
@@ -35,6 +51,7 @@ This is a retrospective snapshot of the production site deployed on this date, n
 - 2026-11-05: Make the home heading readable to crawlers and align link, track-number and artwork treatments.
 - 2026-11-05: Restore the production Google Analytics configuration, with tracking enabled only after consent.
 
-[Unreleased]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/PetriLahdelma/randomgorsey/releases/tag/v0.2.0
 [0.1.0]: https://github.com/PetriLahdelma/randomgorsey/commit/7e6c8715

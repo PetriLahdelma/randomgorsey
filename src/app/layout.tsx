@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 import AppShell from "@/components/AppShell";
 import Footer from "@/patterns/Footer";
 import { siteMetadata, socialImage } from "@/lib/seo";
+import {
+  artistStructuredData,
+  serializeJsonLd,
+} from "@/lib/structured-data";
 import { GeistPixelSquare } from "geist/font/pixel";
 import { version } from "../../package.json";
 
@@ -40,6 +44,12 @@ export default function RootLayout({
       <body
         className={`${GeistPixelSquare.variable}`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: serializeJsonLd(artistStructuredData),
+          }}
+        />
         <AppShell footer={<Footer />} version={version}>{children}</AppShell>
       </body>
     </html>
