@@ -149,6 +149,15 @@ describe("public read-only MCP server", () => {
     expect(response.status).toBe(413);
   });
 
+  it("rejects unsupported request content types", async () => {
+    const response = await POST(new Request(endpoint, {
+      method: "POST",
+      headers: { Accept: accept, "Content-Type": "text/plain" },
+      body: JSON.stringify(request(12, "tools/list")),
+    }));
+    expect(response.status).toBe(415);
+  });
+
   it("rejects browser origins outside the site", async () => {
     const response = await rpc(request(7, "tools/list"), {
       Origin: "https://attacker.example",
