@@ -68,7 +68,7 @@ export default function Home({posts,archive,totalPosts}:{posts:Post[];archive:Ar
     <>
       <section className={styles.hero} aria-label="Random Gorsey">
         <div className={styles.heroIdentity}>
-          <h1 className={styles.artistName}><BrandMark priority/></h1>
+          <h1 className={styles.artistName}><span className="sr-only">Random Gorsey</span><BrandMark priority alt=""/></h1>
           <div className={styles.heroAction}>
             <Link href="/listen/" className={styles.listen}><span className={styles.playIcon} aria-hidden="true">▶</span>Listen<span aria-hidden="true">↗</span></Link>
             <span className={styles.heroNote}>Recordings &amp; selections</span>

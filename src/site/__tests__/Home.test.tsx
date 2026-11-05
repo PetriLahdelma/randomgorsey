@@ -15,6 +15,7 @@ describe("Home Page", () => {
     act(() => {
       vi.runAllTimers();
     });
+    expect(screen.getByRole("heading", { level: 1, name: "Random Gorsey" })).toHaveTextContent("Random Gorsey");
     expect(screen.getByLabelText("Featured post")).toBeInTheDocument();
     vi.useRealTimers();
   });

@@ -9,6 +9,13 @@ async (page) => {
   page.on("console", message => { if(message.type()==="error")errors.push(message.text()); });
   const check = (value, label) => { if (!value) throw new Error(label); checks.push(label); };
   const open = async path => { await page.waitForLoadState("networkidle"); const response = await page.goto(base+path,{waitUntil:"networkidle"}); await page.evaluate(()=>document.fonts.ready); return response; };
+  const checkSocialPreview = async path => {
+    const metadata = await page.evaluate(() => {
+      const value = (selector) => document.querySelector(selector)?.getAttribute("content");
+      return {image:value('meta[property="og:image"]'),width:value('meta[property="og:image:width"]'),height:value('meta[property="og:image:height"]'),twitter:value('meta[name="twitter:image"]')};
+    });
+    check(metadata.image === "https://randomgorsey.com/images/og.png" && metadata.width === "1200" && metadata.height === "630" && metadata.twitter === metadata.image, path+" exposes the approved social preview");
+  };
   const checkArtworkSizing = async (pace, label) => {
     const dimensions = await page.locator(`main [data-pace="${pace}"]`).evaluate(element => {
       const baseClass = element.classList.item(0);
@@ -26,6 +33,9 @@ async (page) => {
   await page.context().clearCookies();
   await page.setViewportSize({width:1440,height:1000});
   await open("/");
+  await checkSocialPreview("Home");
+  const socialImage=await page.request.get(base+"/images/og.png");
+  check(socialImage.status()===200 && socialImage.headers()["content-type"].includes("image/png"),"Social preview image is served as PNG");
   const style=await page.evaluate(()=>({font:getComputedStyle(document.body).fontFamily,color:getComputedStyle(document.body).color,accent:getComputedStyle(document.documentElement).getPropertyValue("--color-accent"),flex:getComputedStyle(document.querySelector("[data-card] .flex")).display}));
   check(style.font.includes("Europa") && style.color==="rgb(240, 240, 230)" && style.accent.trim()!=="" && style.flex==="flex","Production typography, design tokens and Tailwind utilities are compiled");
   const initialTransfer=await page.evaluate(()=>performance.getEntriesByType("resource").reduce((sum,entry)=>sum+entry.transferSize,0));
@@ -65,6 +75,7 @@ async (page) => {
   for(const path of ["/listen/","/discography/","/about/","/gallery/","/contact/","/posts/56/"]) {
     const response=await open(path);
     check(response.status()===200,path+" returns 200");
+    await checkSocialPreview(path);
     check(await page.locator("main h1").count()===1,path+" has a primary heading");
     if(["/listen/","/discography/","/about/","/gallery/","/contact/"].includes(path))check((await page.locator("main h1").evaluate(e=>getComputedStyle(e).fontFamily)).toLowerCase().includes("lisaterminal"),path+" heading uses LisaTerminal");
     await page.screenshot({path:path.replaceAll("/","").replace("posts56","post")+"-desktop.png",fullPage:false});
