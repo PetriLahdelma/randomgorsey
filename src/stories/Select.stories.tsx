@@ -35,7 +35,7 @@ const optionsWithDisabled: SelectOption[] = [
 ];
 
 export default {
-  title: 'Components/Select',
+  title: 'Library/Legacy/Forms/Select',
   component: Select,
   argTypes: {
     value: { 

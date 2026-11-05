@@ -6,6 +6,17 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-11-05
+
+### Added
+
+- Add a shared page-header component and Storybook stories for the live interface and Share states.
+
+### Changed
+
+- Give the journal Share menu the studio window treatment and distinguish legacy stories from production UI.
+- Add subtle interlacing to the About portrait and match its surrounding window to the biography panel.
+
 ## [0.4.0] - 2026-11-05
 
 ### Added
@@ -80,7 +91,8 @@ This is a retrospective snapshot of the production site deployed on this date, n
 - 2026-11-05: Make the home heading readable to crawlers and align link, track-number and artwork treatments.
 - 2026-11-05: Restore the production Google Analytics configuration, with tracking enabled only after consent.
 
-[Unreleased]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.3.2...v0.4.0
 [0.3.2]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/PetriLahdelma/randomgorsey/compare/v0.3.0...v0.3.1

@@ -8,7 +8,7 @@ async (page) => {
   page.on("pageerror", error => errors.push(String(error)));
   page.on("console", message => { if(message.type()==="error")errors.push(message.text()); });
   const check = (value, label) => { if (!value) throw new Error(label); checks.push(label); };
-  const open = async path => { await page.waitForLoadState("networkidle"); const response = await page.goto(base+path,{waitUntil:"networkidle"}); await page.evaluate(()=>document.fonts.ready); return response; };
+  const open = async path => { const response = await page.goto(base+path,{waitUntil:"domcontentloaded"}); await page.evaluate(()=>document.fonts.ready); return response; };
   const checkSocialPreview = async path => {
     const metadata = await page.evaluate(() => {
       const value = (selector) => document.querySelector(selector)?.getAttribute("content");
@@ -108,6 +108,8 @@ async (page) => {
       await portrait.waitFor();
       await page.waitForFunction(()=>{const v=document.querySelector("main video");return v&&!v.paused});
       check(await portrait.evaluate(v=>v.muted&&v.autoplay&&v.loop),"Portrait autoplays muted in a loop");
+      check(await portrait.evaluate(v=>{const s=getComputedStyle(v.parentElement,"::after");return s.backgroundImage.includes("repeating-linear-gradient")&&s.pointerEvents==="none";}),"Interlacing is decorative and leaves the video controls usable");
+      check(await page.locator('section[aria-label="Artist biography"] > section').evaluateAll(panels=>panels.length===2&&getComputedStyle(panels[0]).backgroundColor===getComputedStyle(panels[1]).backgroundColor),"Portrait and biography windows use the same gray");
       await page.getByRole("button",{name:/Pause portrait/}).click();
       check(await portrait.evaluate(v=>v.paused),"Portrait pauses without replacing the video");
     }

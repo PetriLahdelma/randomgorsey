@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Scene3D, ParticleField } from "@/components/effects";
+import { PerformanceProvider } from "@/lib/performance";
 
 const meta: Meta<typeof ParticleField> = {
-  title: "Effects/ParticleField",
+  title: "Laboratory/Effects/ParticleField",
   component: ParticleField,
   tags: ["autodocs"],
   parameters: {
@@ -34,12 +35,14 @@ const meta: Meta<typeof ParticleField> = {
   },
   decorators: [
     (Story) => (
-      <div className="h-[500px] w-full bg-black">
-        <Scene3D>
-          <ambientLight intensity={0.2} />
-          <Story />
-        </Scene3D>
-      </div>
+      <PerformanceProvider>
+        <div className="h-[500px] w-full bg-black">
+          <Scene3D>
+            <ambientLight intensity={0.2} />
+            <Story />
+          </Scene3D>
+        </div>
+      </PerformanceProvider>
     ),
   ],
 };

@@ -1,14 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { VideoBackground } from "@/components/effects";
+import { PerformanceProvider } from "@/lib/performance";
 
 // Placeholder assets for Storybook demos
-const PLACEHOLDER_VIDEO = "https://www.w3schools.com/html/mov_bbb.mp4";
-const PLACEHOLDER_POSTER = "https://picsum.photos/1920/1080";
+const PLACEHOLDER_VIDEO = "/videos/shadow-portrait-loop.webm";
+const PLACEHOLDER_POSTER = "/images/shadow-portrait-still.jpg";
 
 const meta: Meta<typeof VideoBackground> = {
-  title: "Effects/VideoBackground",
+  title: "Laboratory/Effects/VideoBackground",
   component: VideoBackground,
   tags: ["autodocs"],
+  decorators: [(Story) => <PerformanceProvider><Story /></PerformanceProvider>],
   parameters: {
     layout: "fullscreen",
     docs: {

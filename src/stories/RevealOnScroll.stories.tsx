@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import RevealOnScroll from '../components/RevealOnScroll';
 
 const meta: Meta<typeof RevealOnScroll> = {
-  title: 'Components/RevealOnScroll',
+  title: 'Library/Legacy/RevealOnScroll',
   component: RevealOnScroll,
   tags: ['autodocs'],
   parameters: {

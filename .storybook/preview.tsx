@@ -22,6 +22,26 @@ const preview: Preview = {
               : "clamp(1rem, 4vw, 4rem)",
         }}
       >
+        {(context.title.startsWith("Library/Legacy") || context.title.startsWith("Laboratory")) && (
+          <aside
+            role="note"
+            style={{
+              padding: "0.65rem 0.85rem",
+              marginBottom: "1.25rem",
+              color: "var(--studio-ink)",
+              background: "var(--studio-gray)",
+              border: "2px solid",
+              borderColor: "#fff #6f706b #6f706b #fff",
+              fontFamily: "var(--studio-system)",
+              fontSize: "0.75rem",
+              lineHeight: 1.4,
+            }}
+          >
+            {context.title.startsWith("Laboratory")
+              ? "Laboratory component — retained for experiments; not part of the current production interface."
+              : "Library / legacy component — retained for reference; not used by the current production site."}
+          </aside>
+        )}
         <Story />
       </div>
     ),
@@ -34,10 +54,11 @@ const preview: Preview = {
           ["Coverage", "Foundations", "Navigation", "Journal", "Player", "Privacy", "Surfaces"],
           "Studio",
           "Foundations",
-          "Components",
-          "Patterns",
-          "Layout",
           "Effects",
+          "Components",
+          "Library",
+          ["Layout", "Legacy"],
+          "Laboratory",
         ],
       },
     },

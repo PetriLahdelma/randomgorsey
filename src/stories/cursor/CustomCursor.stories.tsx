@@ -48,7 +48,7 @@ function CursorDemo() {
 }
 
 const meta: Meta = {
-  title: 'Effects/CustomCursor',
+  title: 'Laboratory/CustomCursor',
   component: CursorDemo,
   decorators: [
     (Story) => (

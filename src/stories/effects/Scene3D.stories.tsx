@@ -3,11 +3,13 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { Scene3D } from "@/components/effects";
+import { PerformanceProvider } from "@/lib/performance";
 
 const meta: Meta<typeof Scene3D> = {
-  title: "Effects/Scene3D",
+  title: "Laboratory/Effects/Scene3D",
   component: Scene3D,
   tags: ["autodocs"],
+  decorators: [(Story) => <PerformanceProvider><Story /></PerformanceProvider>],
   parameters: {
     docs: {
       description: {

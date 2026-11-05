@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Stack } from "@/components/layout";
 
 const meta: Meta<typeof Stack> = {
-  title: "Layout/Stack",
+  title: "Library/Layout/Stack",
   component: Stack,
   tags: ["autodocs"],
   parameters: {

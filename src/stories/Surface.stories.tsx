@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Surface from "../components/Surface";
 
 const meta: Meta<typeof Surface> = {
-  title: "Components/Surface",
+  title: "Library/Legacy/Surface",
   component: Surface,
   tags: ["autodocs"],
   argTypes: {

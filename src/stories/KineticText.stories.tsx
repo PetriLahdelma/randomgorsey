@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { KineticText } from '@/components/KineticText';
 
 const meta: Meta<typeof KineticText> = {
-  title: 'Components/KineticText',
+  title: 'Library/Legacy/KineticText',
   component: KineticText,
   parameters: {
     layout: 'centered',

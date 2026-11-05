@@ -165,9 +165,31 @@ export const AboutPage: Story = {
   parameters: { nextjs: { navigation: { pathname: "/about/" } } },
 };
 
+export const AboutPortraitPaused: Story = {
+  render: () => <SurfaceFrame><About /></SurfaceFrame>,
+  parameters: { nextjs: { navigation: { pathname: "/about/" } } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const pause = await canvas.findByRole("button", { name: "Pause portrait loop" });
+    await userEvent.click(pause);
+    await expect(canvas.getByRole("button", { name: "Play portrait loop" })).toBeVisible();
+  },
+};
+
 export const GalleryPage: Story = {
   render: () => <SurfaceFrame><Gallery /></SurfaceFrame>,
   parameters: { nextjs: { navigation: { pathname: "/gallery/" } } },
+};
+
+export const GalleryViewerOpen: Story = {
+  render: () => <SurfaceFrame><Gallery /></SurfaceFrame>,
+  parameters: { nextjs: { navigation: { pathname: "/gallery/" } } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Open image: UNTITLED_09.JPG" }));
+    await expect(canvas.getByRole("dialog", { name: "Image viewer" })).toBeVisible();
+    await expect(canvas.getByText("UNTITLED_09.JPG · 2 / 18")).toBeVisible();
+  },
 };
 
 export const ContactPage: Story = {

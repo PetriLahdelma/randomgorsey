@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { HeroImage } from "@/components/effects";
 import { Container } from "@/components/layout";
 
-const PLACEHOLDER_IMAGE = "https://picsum.photos/1920/1080";
+const PLACEHOLDER_IMAGE = "/images/shadow-portrait-still.jpg";
 
 const meta: Meta<typeof HeroImage> = {
-  title: "Effects/HeroImage",
+  title: "Laboratory/Effects/HeroImage",
   component: HeroImage,
   tags: ["autodocs"],
   parameters: {
