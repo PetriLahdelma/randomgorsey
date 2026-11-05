@@ -5,6 +5,7 @@ import type { CSSProperties } from "react";
 import { playerDetails } from "@/components/player/player-config";
 import { usePersistentPlayer } from "@/components/player/PersistentPlayer";
 import { SignalArtwork } from "@/components/studio/SignalArtwork";
+import { StudioPageHeader } from "@/components/studio/StudioPageHeader";
 import { StudioWindow } from "@/components/studio/StudioWindow";
 import styles from "./Listen.module.css";
 
@@ -14,11 +15,12 @@ export default function Listen() {
 
   return (
     <div className={`studioPage ${styles.page}`}>
-      <header className={`studioPageHeader ${styles.header}`}>
-        <p className="studioKicker">External playback</p>
-        <h1 className="studioTitle">Listen</h1>
-        <p className="studioLead">Recordings &amp; selections.</p>
-      </header>
+      <StudioPageHeader
+        kicker="External playback"
+        title="Listen"
+        lead="Recordings & selections."
+        className={styles.header}
+      />
 
       <section className={styles.console} aria-label="Listening console">
         <StudioWindow

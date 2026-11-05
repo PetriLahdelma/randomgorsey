@@ -26,8 +26,20 @@
 }
 
 .portraitFigure {
+  position: relative;
   margin: 0;
-  background: #050605;
+  background: var(--studio-paper);
+}
+
+.portraitFigure::after {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 1;
+  pointer-events: none;
+  content: "";
+  background: repeating-linear-gradient(to bottom, rgb(0 0 0 / 50%) 0 1px, transparent 1px 2px);
 }
 
 .portrait {
@@ -42,7 +54,7 @@
   display: flex;
   justify-content: flex-end;
   padding: 0.75rem;
-  background: #11140f;
+  background: var(--studio-paper);
   border-top: 1px solid #6e716a;
 }
 

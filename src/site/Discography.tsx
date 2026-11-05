@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { StudioPageHeader } from "@/components/studio/StudioPageHeader";
 import { StudioWindow } from "@/components/studio/StudioWindow";
 import { releases } from "@/content/releases";
 
@@ -8,13 +9,11 @@ import styles from "./Discography.module.css";
 export default function Discography() {
   return (
     <div className={`studioPage ${styles.page}`}>
-      <header className="studioPageHeader">
-        <p className="studioKicker">Selected recordings / 2021</p>
-        <h1 className="studioTitle">Discography</h1>
-        <p className="studioLead">
-          Two documents from the catalog. Artwork, tracklists and original platform destinations.
-        </p>
-      </header>
+      <StudioPageHeader
+        kicker="Selected recordings / 2021"
+        title="Discography"
+        lead="Two documents from the catalog. Artwork, tracklists and original platform destinations."
+      />
 
       <div className={styles.releaseStack}>
         {releases.map((release, index) => (

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React from "react";
 
+import { StudioPageHeader } from "@/components/studio/StudioPageHeader";
 import { StudioWindow } from "@/components/studio/StudioWindow";
 import { biography, projects } from "@/content/artist";
 import { usePerformance } from "@/lib/performance";
@@ -38,18 +39,18 @@ const About: React.FC = () => {
 
   return (
     <div className={`studioPage ${styles.page}`}>
-      <header className={`studioPageHeader ${styles.header}`}>
-        <p className="studioKicker">Helsinki / producer / DJ</p>
-        <h1 className="studioTitle">About</h1>
-        <p className={`studioLead ${styles.intro}`}>
-          The work is the introduction. A few facts sit beside it.
-        </p>
-      </header>
+      <StudioPageHeader
+        kicker="Helsinki / producer / DJ"
+        title="About"
+        lead="The work is the introduction. A few facts sit beside it."
+        className={styles.header}
+        leadClassName={styles.intro}
+      />
 
       <section className={styles.composition} aria-label="Artist biography">
         <StudioWindow
           title="Portrait"
-          tone="dark"
+          tone="paper"
           className={styles.portraitWindow}
         >
           <figure className={styles.portraitFigure}>
