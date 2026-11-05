@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
 
 import AppShell from "@/components/AppShell";
+import Footer from "@/patterns/Footer";
 import { siteMetadata } from "@/lib/seo";
-import {
-  GeistPixelSquare,
-  GeistPixelGrid,
-  GeistPixelCircle,
-  GeistPixelTriangle,
-  GeistPixelLine,
-} from "geist/font/pixel";
+import { GeistPixelSquare } from "geist/font/pixel";
 
 import "./globals.css";
 
@@ -40,9 +35,9 @@ export default function RootLayout({
   return (
     <html lang="en" style={{ backgroundColor: "#0a0a0a" }}>
       <body
-        className={`${GeistPixelSquare.variable} ${GeistPixelGrid.variable} ${GeistPixelCircle.variable} ${GeistPixelTriangle.variable} ${GeistPixelLine.variable}`}
+        className={`${GeistPixelSquare.variable}`}
       >
-        <AppShell>{children}</AppShell>
+        <AppShell footer={<Footer />}>{children}</AppShell>
       </body>
     </html>
   );

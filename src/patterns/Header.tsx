@@ -1,150 +1,31 @@
-import React, { useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { BiSolidChevronUp, BiSolidChevronDown } from 'react-icons/bi';
-import { IoCloseSharp } from 'react-icons/io5';
-import { cn } from '@/lib/utils';
-import Button from '../components/Button';
-import PixelLogo from '../components/PixelLogo';
-import GlitchLink from '../components/GlitchLink';
+"use client";
+import { useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import PixelLogo from "@/components/PixelLogo";
 
-const navLinks = [
-  { to: '/listen/', label: 'Listen', title: 'Listen to music' },
-  { to: '/about/', label: 'About', title: 'About Random Gorsey' },
-  { to: '/contact/', label: 'Contact', title: 'Get in touch' },
-  { to: '/discography/', label: 'Discography', title: 'View releases' },
-  { to: '/gallery/', label: 'Gallery', title: 'Photo gallery' },
-];
-
-const ChevronUp = React.createElement(
-  BiSolidChevronUp as React.ComponentType<React.SVGProps<SVGSVGElement>>,
-  { className: 'w-4 h-4', 'aria-hidden': 'true' }
-);
-const ChevronDown = React.createElement(
-  BiSolidChevronDown as React.ComponentType<React.SVGProps<SVGSVGElement>>,
-  { className: 'w-4 h-4', 'aria-hidden': 'true' }
-);
-
-export interface HeaderProps {
-  className?: string;
+const links = [{href:"/listen/",label:"Listen"},{href:"/discography/",label:"Discography"},{href:"/#journal",label:"Journal"},{href:"/about/",label:"About"},{href:"/gallery/",label:"Gallery"},{href:"/contact/",label:"Contact"}];
+export interface HeaderProps { className?: string }
+export default function Header(props: HeaderProps) {
+  const pathname = usePathname();
+  return <HeaderNavigation key={pathname} {...props} pathname={pathname} />;
 }
 
-const Header: React.FC<HeaderProps> = ({ className }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const pathname = usePathname();
-
-  React.useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 800);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  React.useEffect(() => {
-    if (!isMobile && menuOpen) setMenuOpen(false);
-  }, [isMobile, menuOpen]);
-
-  const isActive = (path: string) => {
-    if (path === '/') return pathname === '/';
-    return pathname.startsWith(path.replace(/\/$/, ''));
-  };
-
+function HeaderNavigation({ className = "", pathname }: HeaderProps & { pathname: string }) {
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLButtonElement>(null);
+  function closeMenu(event: React.KeyboardEvent) {
+    if (event.key === "Escape" && open) { setOpen(false); menuRef.current?.focus(); }
+  }
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm",
-        className
-      )}
-    >
-      <div className="flex items-center justify-between px-6 py-4 mx-auto w-full max-w-5xl">
+    <header className={"studioHeader " + className} onKeyDown={closeMenu}>
+      <div className="studioHeaderBar">
         <PixelLogo />
-
-        <nav aria-label="Main navigation">
-          {!isMobile && (
-            <ul className="flex gap-6 p-0 m-0 list-none">
-              {navLinks.map(link => (
-                <li key={link.to}>
-                  <GlitchLink
-                    href={link.to}
-                    title={link.title}
-                    className={cn(
-                      "text-sm tracking-wide no-underline whitespace-nowrap",
-                      isActive(link.to)
-                        ? "text-accent underline underline-offset-4"
-                        : "text-neutral-400 hover:text-accent"
-                    )}
-                  >
-                    {link.label}
-                  </GlitchLink>
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {isMobile && (
-            <>
-              <Button
-                variant="tertiary"
-                className="flex gap-1 items-center text-sm tracking-wide text-foreground bg-transparent border-none"
-                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-                aria-expanded={menuOpen}
-                aria-controls="mobile-menu"
-                onClick={() => setMenuOpen(open => !open)}
-                type="button"
-                icon={menuOpen ? ChevronUp : ChevronDown}
-              >
-                Menu
-              </Button>
-              {menuOpen && (
-                <div
-                  id="mobile-menu"
-                  className="fixed inset-0 z-50 bg-background flex flex-col items-center justify-center gap-8"
-                >
-                  <button
-                    type="button"
-                    aria-label="Close menu"
-                    className="absolute top-4 right-6 text-foreground hover:text-accent bg-transparent border-none cursor-pointer"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <IoCloseSharp className="w-8 h-8" aria-hidden="true" />
-                  </button>
-                  <GlitchLink
-                    href="/"
-                    title="Go to Home page"
-                    onClick={() => setMenuOpen(false)}
-                    className={cn(
-                      "text-2xl tracking-wide no-underline",
-                      isActive('/')
-                        ? "text-accent underline underline-offset-4"
-                        : "text-neutral-400 hover:text-accent"
-                    )}
-                  >
-                    Home
-                  </GlitchLink>
-                  {navLinks.map(link => (
-                    <GlitchLink
-                      key={link.to}
-                      href={link.to}
-                      title={link.title}
-                      onClick={() => setMenuOpen(false)}
-                      className={cn(
-                        "text-2xl tracking-wide no-underline",
-                        isActive(link.to)
-                          ? "text-accent underline underline-offset-4"
-                          : "text-neutral-400 hover:text-accent"
-                      )}
-                    >
-                      {link.label}
-                    </GlitchLink>
-                  ))}
-                </div>
-              )}
-            </>
-          )}
-        </nav>
+        <button ref={menuRef} className="studioMenuToggle" type="button" aria-expanded={open} aria-controls="studio-navigation" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"}>{open ? "Close" : "Menu"} <span aria-hidden="true">{open ? "−" : "+"}</span></button>
       </div>
+      <nav id="studio-navigation" className={open ? "studioNav studioNavOpen" : "studioNav"} aria-label="Main navigation">
+        {links.map(({href,label}) => <Link key={href} href={href} title={label === "Listen" ? "Listen to music" : label === "About" ? "About Random Gorsey" : label === "Contact" ? "Get in touch" : label === "Discography" ? "View releases" : label === "Gallery" ? "Photo gallery" : "Journal"} aria-current={href === pathname ? "page" : undefined} onClick={() => setOpen(false)}>{label}</Link>)}
+      </nav>
     </header>
   );
-};
-
-export default Header;
+}

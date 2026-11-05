@@ -1,248 +1,142 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import Image from 'next/image';
-import { XMarkIcon, ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
-import {
-  motion,
-  AnimatePresence,
-  galleryVariants,
-  galleryStaggerContainer,
-  staggerItem,
-  overlayVariants,
-  modalVariants,
-} from '@/lib/motion';
-import { VideoBackground, ScanLineReveal, AmbientLayer } from '@/components/effects';
-import { Container } from '@/components/layout/Container';
-import { Stack } from '@/components/layout/Stack';
-import { KineticText } from '@/components/KineticText';
-import RevealOnScroll from '../components/RevealOnScroll';
-import styles from './Gallery.module.css';
-import Spinner from '../components/Spinner';
-import galleryImages from '../data/galleryImages';
-import Caption from '../components/Caption';
+import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
+import React from "react";
+
 import { useAppShell } from "@/components/AppShell";
+import { StudioWindow } from "@/components/studio/StudioWindow";
+import galleryImages from "@/data/galleryImages";
 
-const logoCanvasVideo = "/videos/logo_canvas.webm";
+import styles from "./Gallery.module.css";
 
-/**
- * Gallery Page
- *
- * A light, spacious exhibition space for visual content.
- * Features:
- * - VideoBackground with poster fallback for mobile/low-power devices
- * - Staggered image grid reveals using galleryStaggerContainer
- * - Polished lightbox with modalVariants for smooth enter/exit
- * - Keyboard navigation (arrows, escape)
- */
 const Gallery: React.FC = () => {
   const { setOverlayActive } = useAppShell();
-  const [overlayImage, setOverlayImage] = useState<string | null>(null);
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [loading, setLoading] = React.useState(true);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [currentIndex, setCurrentIndex] = React.useState<number | null>(null);
+  const triggerRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
+  const closeRef = React.useRef<HTMLButtonElement | null>(null);
+  const overlayRef = React.useRef<HTMLDivElement | null>(null);
+  const previousOverflow = React.useRef("");
+  const focusReturnIndex = React.useRef<number | null>(null);
+  const openerIndex = React.useRef<number | null>(null);
 
-  const images = useMemo(() => galleryImages, []);
-
-  const openOverlay = (index: number) => {
-    setOverlayImage(images[index].src);
-    setCurrentIndex(index);
-    setOverlayActive(true);
-  };
-
-  const closeOverlay = useCallback(() => {
-    setOverlayImage(null);
+  const closeViewer = React.useCallback(() => {
+    focusReturnIndex.current = openerIndex.current;
+    setCurrentIndex(null);
     setOverlayActive(false);
   }, [setOverlayActive]);
 
-  useEffect(() => () => setOverlayActive(false), [setOverlayActive]);
+  const showPrevious = React.useCallback(() => {
+    setCurrentIndex((index) => index === null ? 0 : (index - 1 + galleryImages.length) % galleryImages.length);
+  }, []);
 
-  const navigateLeft = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : images.length - 1));
-    setOverlayImage(images[currentIndex > 0 ? currentIndex - 1 : images.length - 1].src);
-  }, [currentIndex, images]);
+  const showNext = React.useCallback(() => {
+    setCurrentIndex((index) => index === null ? 0 : (index + 1) % galleryImages.length);
+  }, []);
 
-  const navigateRight = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex < images.length - 1 ? prevIndex + 1 : 0));
-    setOverlayImage(images[currentIndex < images.length - 1 ? currentIndex + 1 : 0].src);
-  }, [currentIndex, images]);
+  React.useEffect(() => {
+    if (currentIndex !== null || focusReturnIndex.current === null) return;
+    triggerRefs.current[focusReturnIndex.current]?.focus();
+    focusReturnIndex.current = null;
+  }, [currentIndex]);
 
-  useEffect(() => {
+  React.useEffect(() => {
+    if (currentIndex === null) return;
+    previousOverflow.current = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+    return () => { document.body.style.overflow = previousOverflow.current; };
+  }, [currentIndex]);
+
+  React.useEffect(() => {
+    if (currentIndex === null) return;
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        closeOverlay();
-      } else if (event.key === 'ArrowLeft') {
-        navigateLeft();
-      } else if (event.key === 'ArrowRight') {
-        navigateRight();
+      if (event.key === "Escape") closeViewer();
+      if (event.key === "ArrowLeft") showPrevious();
+      if (event.key === "ArrowRight") showNext();
+      if (event.key === "Tab") {
+        const focusable = Array.from(
+          overlayRef.current?.querySelectorAll<HTMLButtonElement>("button:not([disabled])") ?? []
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [closeViewer, currentIndex, showNext, showPrevious]);
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [closeOverlay, navigateLeft, navigateRight]);
+  React.useEffect(() => () => {
+    setOverlayActive(false);
+    document.body.style.overflow = previousOverflow.current;
+  }, [setOverlayActive]);
 
-  const handleContentLoad = () => {
-    setLoading(false);
-  };
+  const currentImage = currentIndex === null ? null : galleryImages[currentIndex];
 
   return (
-    <>
-      <AmbientLayer variant="gallery" />
-      {/* Performance-tiered video background with poster fallback */}
-      <VideoBackground
-        src={logoCanvasVideo}
-        poster="/images/gallery-poster.jpg"
-        overlayOpacity={0.1}
-      />
+    <div className={`studioPage ${styles.page}`}>
+      <header className={`studioPageHeader ${styles.header}`}>
+        <p className="studioKicker">16 images / Helsinki &amp; Berlin</p>
+        <h1 className="studioTitle">Gallery</h1>
+        <p className={`studioLead ${styles.intro}`}>
+          Covers, rooms, lights, weather and the things that survived the night.
+        </p>
+      </header>
 
-      <motion.div
-        className={styles['gallery-container']}
-        data-section="gallery"
-        variants={galleryVariants}
-        initial="initial"
-        animate="enter"
-        exit="exit"
-      >
-        {loading && <Spinner />}
-
-        <Container size="md" padding="md">
-          <Stack gap="xl">
-            {/* Animated headline with word-by-word reveal for gentle feel */}
-            <RevealOnScroll>
-              <KineticText
-                as="h1"
-                splitBy="words"
-                variant="default"
-                className="mx-auto w-full max-w-[90%] text-center uppercase tracking-[0.02em] text-[clamp(1.5rem,4.8vw,2.6rem)] !text-black [&_*]:!text-black"
-              >
-                Gallery
-              </KineticText>
-            </RevealOnScroll>
-
-            {/* Masonry image grid */}
-            <motion.div
-              variants={galleryStaggerContainer}
-              initial="initial"
-              animate="enter"
-              className={styles.masonry}
-            >
-              {images.map((image, index) => (
-                <motion.div key={index} variants={staggerItem} className={styles['masonry-item']}>
-                  <ScanLineReveal delay={index * 80}>
-                    <div
-                      className="relative group overflow-hidden"
-                      onMouseEnter={() => setHoveredIndex(index)}
-                      onMouseLeave={() => setHoveredIndex(null)}
-                    >
-                      <button
-                        type="button"
-                        className={styles["image-button"]}
-                        onClick={() => openOverlay(index)}
-                        aria-label={`Open image: ${image.caption}`}
-                      >
-                        <Image
-                          src={image.src}
-                          alt={image.caption}
-                          width={image.width}
-                          height={image.height}
-                          sizes="(min-width: 768px) 33vw, (min-width: 480px) 50vw, 100vw"
-                          className="w-full contrast-[1.2] brightness-[0.95] group-hover:brightness-[1.1] transition-[filter] duration-100"
-                          onLoad={index === 0 ? handleContentLoad : undefined}
-                        />
-                      </button>
-                      {hoveredIndex === index && (
-                        <div
-                          aria-hidden="true"
-                          className="animate-scan-sweep pointer-events-none absolute left-0 w-full h-[1px] bg-[color:var(--color-accent)]"
-                        />
-                      )}
-                    </div>
-                  </ScanLineReveal>
-                  <p className="text-neutral-500 text-xs mt-2">{image.caption}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </Stack>
-        </Container>
-
-        {/* Lightbox overlay with polished transitions */}
-        <AnimatePresence>
-          {overlayImage && (
-            <motion.div
-              className={styles['overlay']}
-              onClick={closeOverlay}
-              variants={overlayVariants}
-              initial="initial"
-              animate="enter"
-              exit="exit"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Image viewer"
-              data-lenis-prevent
-            >
+      <section className={styles.contactSheet} aria-label={`${galleryImages.length} gallery images`}>
+        {galleryImages.map((image, index) => (
+          <StudioWindow key={image.src} title={image.caption} tone="paper" className={styles.figureWindow}>
+            <figure className={styles.figure}>
               <button
+                ref={(node) => { triggerRefs.current[index] = node; }}
                 type="button"
-                className={styles["close-icon"]}
-                aria-label="Close image"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  closeOverlay();
+                className={styles.imageButton}
+                onClick={() => {
+                  openerIndex.current = index;
+                  setCurrentIndex(index);
+                  setOverlayActive(true);
                 }}
+                aria-label={`Open image: ${image.caption}`}
               >
-                <XMarkIcon aria-hidden="true" className={styles["icon"]} />
+                <Image src={image.src} alt={image.caption} width={image.width} height={image.height} sizes="(max-width: 640px) calc(100vw - 64px), (max-width: 1000px) 45vw, 30vw" className={styles.image} />
+                <span className={styles.fileIndex} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
               </button>
-              <button
-                type="button"
-                className={styles["left-icon"]}
-                aria-label="Previous image"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigateLeft();
-                }}
-              >
-                <ArrowLeftIcon aria-hidden="true" className={styles["icon"]} />
-              </button>
+              <figcaption className={styles.figureMeta}>
+                <span>{image.width} × {image.height}</span>
+                <span>Open</span>
+              </figcaption>
+            </figure>
+          </StudioWindow>
+        ))}
+      </section>
 
-              {/* Lightbox content with modal scale animation */}
-              <motion.div
-                variants={modalVariants}
-                initial="initial"
-                animate="enter"
-                exit="exit"
-                className="relative flex flex-col items-center"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <Image
-                  src={overlayImage}
-                  alt={images[currentIndex].caption}
-                  width={images[currentIndex].width}
-                  height={images[currentIndex].height}
-                  sizes="90vw"
-                  className="max-w-[90vw] max-h-[70vh] w-auto h-auto object-contain"
-                  onClick={navigateRight}
-                />
-                <Caption>{images[currentIndex].caption}</Caption>
-              </motion.div>
-
-              <button
-                type="button"
-                className={styles["right-icon"]}
-                aria-label="Next image"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigateRight();
-                }}
-              >
-                <ArrowRightIcon aria-hidden="true" className={styles["icon"]} />
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
-    </>
+      {currentImage && currentIndex !== null && (
+        <div ref={overlayRef} className={styles.overlay} role="dialog" aria-modal="true" aria-label="Image viewer" data-lenis-prevent onMouseDown={(event) => { if (event.target === event.currentTarget) closeViewer(); }}>
+          <div className={styles.viewer}>
+            <div className={styles.viewerTitlebar}>
+              <span>{currentImage.caption}</span>
+              <button ref={closeRef} type="button" className={styles.windowClose} aria-label="Close image" onClick={closeViewer}><XMarkIcon aria-hidden="true" /></button>
+            </div>
+            <div className={styles.viewerImageArea}>
+              <Image src={currentImage.src} alt={currentImage.caption} width={currentImage.width} height={currentImage.height} sizes="92vw" priority className={styles.viewerImage} />
+            </div>
+            <div className={styles.viewerControls}>
+              <button type="button" onClick={showPrevious} aria-label="Previous image"><ArrowLeftIcon aria-hidden="true" />Previous</button>
+              <p aria-live="polite">{currentImage.caption} · {currentIndex + 1} / {galleryImages.length}</p>
+              <button type="button" onClick={showNext} aria-label="Next image">Next<ArrowRightIcon aria-hidden="true" /></button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

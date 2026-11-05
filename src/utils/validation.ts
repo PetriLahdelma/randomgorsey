@@ -28,7 +28,10 @@ export const bookingSchema = z.object({
   venue: z.string().min(1, 'Venue or event name is required').max(200),
   location: z.string().min(1, 'Location is required').max(200),
   budget: z.enum(['under-500', '500-1000', '1000-2500', '2500-plus', 'prefer-not-to-say']),
-  message: z.string().min(10, 'Please include some details').max(5000),
+  message: z
+    .string()
+    .min(10, 'Please include some details')
+    .max(5000, 'Message must be 5000 characters or fewer'),
 });
 
 export const collaborationSchema = z.object({
@@ -36,13 +39,19 @@ export const collaborationSchema = z.object({
   reason: z.literal('collaboration'),
   projectType: z.enum(['remix', 'track', 'other']),
   timeline: z.string().max(200).optional(),
-  message: z.string().min(10, 'Please include some details').max(5000),
+  message: z
+    .string()
+    .min(10, 'Please include some details')
+    .max(5000, 'Message must be 5000 characters or fewer'),
 });
 
 export const helloSchema = z.object({
   ...baseFields,
   reason: z.literal('hello'),
-  message: z.string().min(1, 'Say something!').max(5000),
+  message: z
+    .string()
+    .min(1, 'Say something!')
+    .max(5000, 'Message must be 5000 characters or fewer'),
 });
 
 export const contactSchemaByReason = {

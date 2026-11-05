@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "22"
           cache: "npm"
 
       - name: Install dependencies
@@ -27,14 +27,23 @@ jobs:
       - name: TypeScript Check
         run: npm run ts:check:types
 
+      - name: Studio Storybook Contract Type Check
+        run: npx --no-install tsc --project tsconfig.stories.json
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: CSS lint
+        run: npx --no-install stylelint "src/**/*.css"
+
       - name: Run Tests
         run: npm test
 
       - name: Security Audit
         run: |
           echo "🔒 Pre-deployment security check..."
-          # Focus on production dependencies and critical issues
-          npm audit --audit-level=high --production || echo "Non-critical vulnerabilities detected - continuing deployment"
+          # Block releases with high or critical production advisories.
+          npm audit --audit-level=high --omit=dev
 
           # Ensure no secrets are exposed
           echo "🔍 Checking for exposed secrets..."
@@ -46,3 +55,17 @@ jobs:
 
       - name: Build Application
         run: npm run build
+
+      - name: Install Playwright CLI and browser
+        run: |
+          npm install --global @playwright/cli@0.1.23
+          playwright-cli install-browser chromium --with-deps
+
+      - name: Browser regression checks
+        run: npm run test:browser
+
+      - name: Build Storybook
+        run: npm run build-storybook -- --output-dir .omx/ci/storybook
+
+      - name: Storybook accessibility and interaction checks
+        run: node scripts/storybook-check.mjs

@@ -1,68 +1,39 @@
 "use client";
-
-import React from "react";
-
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import CookieConsent from "@/components/CookieConsent";
-import { CursorTrail } from "@/components/effects/CursorTrail";
-
-import { AnimationProvider } from "@/lib/motion";
-import { TransitionOrchestrator } from "@/lib/transition";
-import { cn } from "@/lib/utils";
-import Footer from "@/patterns/Footer";
+import { AnimationProvider } from "@/lib/motion/AnimationProvider";
+import { TransitionContext } from "@/lib/transition/TransitionContext";
 import Header from "@/patterns/Header";
-import { initializeSecurityMeasures } from "@/utils/httpsEnforcement";
-import { startFaviconCycle } from "@/lib/favicon";
 
-interface AppShellContextValue {
-  setOverlayActive: (active: boolean) => void;
-}
+const AppShellContext = React.createContext<{ setOverlayActive: (active: boolean) => void }>({ setOverlayActive: () => {} });
+export function useAppShell() { return React.useContext(AppShellContext); }
 
-const AppShellContext = React.createContext<AppShellContextValue>({
-  setOverlayActive: () => {},
-});
-
-export function useAppShell() {
-  return React.useContext(AppShellContext);
-}
-
-interface AppShellProps {
-  children: React.ReactNode;
-}
-
-export default function AppShell({ children }: AppShellProps) {
+export default function AppShell({ children, footer }: { children: React.ReactNode; footer?: React.ReactNode }) {
   const [isOverlayActive, setOverlayActive] = React.useState(false);
-  const contentRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    initializeSecurityMeasures();
-  }, []);
-
-  React.useEffect(() => {
-    const cleanup = startFaviconCycle();
-    return cleanup;
-  }, []);
-
-  const value = React.useMemo(
-    () => ({ setOverlayActive }),
-    []
-  );
-
+  const router = useRouter();
+  const pathname = usePathname();
+  const previousPath = useRef(pathname);
+  const navigate = useCallback((href: string) => router.push(href), [router]);
+  const transition = useMemo(() => ({ navigate, isTransitioning: false }), [navigate]);
+  const overlay = useMemo(() => ({ setOverlayActive }), []);
+  useEffect(() => {
+    if (previousPath.current === pathname) return;
+    previousPath.current = pathname;
+    if (window.location.hash) return;
+    document.getElementById("main-content")?.focus({ preventScroll: true });
+  }, [pathname]);
   return (
     <AnimationProvider>
-      <TransitionOrchestrator contentRef={contentRef}>
-        <AppShellContext.Provider value={value}>
-          <CursorTrail />
-          <div
-            ref={contentRef}
-            className={cn("flex min-h-screen flex-col text-center", "relative z-10")}
-          >
-            <Header />
-            <main className="pt-16">{children}</main>
-            {!isOverlayActive && <Footer />}
-            <CookieConsent />
-          </div>
+      <TransitionContext.Provider value={transition}>
+        <AppShellContext.Provider value={overlay}>
+          <a href="#main-content" className="studioSkip">Skip to content</a>
+          <Header />
+          <main id="main-content" tabIndex={-1}>{children}</main>
+          {!isOverlayActive && footer}
+          <CookieConsent />
         </AppShellContext.Provider>
-      </TransitionOrchestrator>
+      </TransitionContext.Provider>
     </AnimationProvider>
   );
 }

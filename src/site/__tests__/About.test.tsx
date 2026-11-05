@@ -1,36 +1,82 @@
 import React from "react";
-import { render, screen, act } from "@testing-library/react";
-import { HelmetProvider } from "react-helmet-async";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+
 import About from "../About";
 
+const performanceState = vi.hoisted(() => ({
+  effectsEnabled: true,
+  isReducedMotion: false,
+}));
+
+vi.mock("@/lib/performance", () => ({
+  usePerformance: () => ({
+    tier: 1,
+    isMobile: false,
+    canWebGL: false,
+    setEffectsEnabled: vi.fn(),
+    ...performanceState,
+  }),
+}));
+
 describe("About Page", () => {
-  it("renders heading", () => {
-    vi.useFakeTimers();
-    render(
-      <HelmetProvider>
-        <About />
-      </HelmetProvider>
-    );
-    act(() => {
-      vi.runAllTimers();
-    });
-    expect(screen.getByText(/About/i)).toBeInTheDocument();
-    vi.useRealTimers();
+  beforeEach(() => {
+    performanceState.effectsEnabled = true;
+    performanceState.isReducedMotion = false;
+    vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
+    vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => undefined);
   });
 
-  it("sets page title", () => {
-    vi.useFakeTimers();
-    // Test that the component renders and check document title
-    render(
-      <HelmetProvider>
-        <About />
-      </HelmetProvider>
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("preserves the artist biography and side-project destinations", () => {
+    render(<About />);
+
+    expect(screen.getByRole("heading", { level: 1, name: "About" })).toBeInTheDocument();
+    expect(screen.getByText(/Helsinki-based producer Random Gorsey aka DJ Pizza Hut/)).toBeInTheDocument();
+    expect(screen.getByText(/Self-taught and driven by instinct/)).toBeInTheDocument();
+    expect(screen.getByText(/Actively producing and exploring new tools/)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Petri Lahdelma/ })).toHaveAttribute(
+      "href",
+      "https://soundcloud.com/petri-lahdelma"
     );
-    act(() => {
-      vi.runAllTimers();
-    });
-    // The component should render without errors (helmet will update document.title)
-    expect(screen.getByText(/About/i)).toBeInTheDocument();
-    vi.useRealTimers();
+    expect(screen.getByRole("link", { name: /Dj Pizza Hut/ })).toHaveAttribute(
+      "href",
+      "https://soundcloud.com/dj-pizza-hut"
+    );
+  });
+
+  it("autoplays the muted loop when motion policy allows and pauses the existing media", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<About />);
+
+    await waitFor(() => expect(container.querySelector("video")).toBeInTheDocument());
+    const video = container.querySelector('video[title="Portrait of Random Gorsey"]');
+    expect(video).toHaveProperty("muted", true);
+    expect(video).toHaveProperty("autoplay", true);
+    expect(HTMLMediaElement.prototype.play).toHaveBeenCalled();
+
+    fireEvent.play(video as HTMLVideoElement);
+    await user.click(screen.getByRole("button", { name: "Pause portrait loop" }));
+    expect(HTMLMediaElement.prototype.pause).toHaveBeenCalled();
+    expect(container.querySelector("video")).toBe(video);
+    fireEvent.pause(video as HTMLVideoElement);
+    expect(screen.getByRole("button", { name: "Play portrait loop" })).toBeInTheDocument();
+  });
+
+  it("uses the still under reduced motion until playback is explicitly requested", async () => {
+    performanceState.isReducedMotion = true;
+    const user = userEvent.setup();
+    const { container } = render(<About />);
+
+    expect(screen.getByRole("img", { name: "Portrait of Random Gorsey" })).toBeInTheDocument();
+    expect(container.querySelector("video")).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Play portrait loop" }));
+
+    await waitFor(() => expect(container.querySelector('video[title="Portrait of Random Gorsey"]')).toBeInTheDocument());
+    expect(container.querySelector('source[src="/videos/portrait-loop.webm"]')).toBeInTheDocument();
   });
 });

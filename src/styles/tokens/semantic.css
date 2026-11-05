@@ -8,32 +8,27 @@
  */
 
 :root {
-  --color-background: var(--color-neutral-950);
-  --color-foreground: var(--color-neutral-50);
-
+  --color-background: var(--studio-stage);
+  --color-foreground: var(--studio-white);
   --color-surface: var(--color-neutral-900);
   --color-surface-foreground: var(--color-neutral-100);
   --color-surface-elevated: var(--color-neutral-800);
-  --color-surface-elevated-foreground: var(--color-neutral-50);
-
-  --color-primary: var(--color-yellow-400);
-  --color-primary-foreground: var(--color-neutral-950);
+  --color-surface-elevated-foreground: var(--studio-white);
+  --color-primary: var(--studio-acid);
+  --color-primary-foreground: var(--studio-stage);
   --color-secondary: var(--color-neutral-800);
-  --color-secondary-foreground: var(--color-neutral-50);
-  --color-accent: var(--color-yellow-400);
-  --color-accent-foreground: var(--color-neutral-950);
-
+  --color-secondary-foreground: var(--studio-white);
+  --color-accent: var(--studio-acid);
+  --color-accent-foreground: var(--studio-stage);
   --color-destructive: var(--color-red-500);
-  --color-destructive-foreground: var(--color-neutral-50);
+  --color-destructive-foreground: var(--studio-white);
   --color-success: var(--color-green-500);
-  --color-success-foreground: var(--color-neutral-50);
-
+  --color-success-foreground: var(--studio-white);
   --color-border: var(--color-neutral-700);
   --color-input: var(--color-neutral-700);
-  --color-ring: var(--color-neutral-400);
+  --color-ring: var(--studio-muted);
   --color-muted: var(--color-neutral-800);
-  --color-muted-foreground: var(--color-neutral-400);
-
+  --color-muted-foreground: var(--studio-muted);
   --color-card: var(--color-surface);
   --color-card-foreground: var(--color-surface-foreground);
   --color-card-gallery: oklch(8% 0 0deg);
@@ -41,7 +36,6 @@
   --color-card-gallery-hover: oklch(10% 0 0deg);
   --color-popover: var(--color-surface);
   --color-popover-foreground: var(--color-surface-foreground);
-
   --space-page: calc(var(--spacing) * 6);
   --space-section: calc(var(--spacing) * 16);
   --space-element: calc(var(--spacing) * 4);

@@ -1,4 +1,4 @@
-import { Post } from '../components/PostCard';
+import type { Post } from '../content/post-types';
 
 const mar2026: Post[] = [
   {

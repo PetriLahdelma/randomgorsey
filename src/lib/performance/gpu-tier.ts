@@ -4,7 +4,7 @@ import { getGPUTier, TierResult } from 'detect-gpu';
  * Performance context describing device capability.
  *
  * Tiers:
- * - 0: Low-end / reduced motion preference (static images only)
+ * - 0: Unknown or unavailable GPU capability
  * - 1: Basic capability (optimized video, minimal effects)
  * - 2: Medium capability (video + basic WebGL)
  * - 3: High capability (full WebGL, particles, post-processing)
@@ -24,8 +24,8 @@ export interface PerformanceContext {
  * Detect device GPU tier and performance capabilities.
  *
  * Uses detect-gpu library which benchmarks the GPU against a database
- * of known GPU capabilities. Respects prefers-reduced-motion preference
- * by returning tier 0 when enabled.
+ * of known GPU capabilities. Motion preference is reported independently
+ * so accessibility does not masquerade as a hardware limitation.
  *
  * @returns Promise resolving to PerformanceContext
  */
@@ -37,18 +37,18 @@ export async function getPerformanceTier(): Promise<PerformanceContext> {
   try {
     const result: TierResult = await getGPUTier();
     return {
-      tier: reducedMotion ? 0 : result.tier,
+      tier: result.tier,
       isMobile: result.isMobile ?? false,
       isReducedMotion: reducedMotion,
       canWebGL: result.tier > 0,
     };
   } catch {
-    // Safe fallback: assume basic capability
+    // Conservative fallback: do not assume video or WebGL capability.
     return {
-      tier: reducedMotion ? 0 : 1,
+      tier: 0,
       isMobile: false,
       isReducedMotion: reducedMotion,
-      canWebGL: true,
+      canWebGL: false,
     };
   }
 }

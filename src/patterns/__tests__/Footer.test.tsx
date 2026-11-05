@@ -20,7 +20,7 @@ describe('Footer', () => {
 
   it('opens social links in new tab', () => {
     render(<Footer />);
-    const links = screen.getAllByRole('link');
+    const links = ['Spotify', 'SoundCloud', 'Instagram', 'YouTube', 'Bandcamp'].map(name => screen.getByLabelText(name));
     links.forEach(link => {
       expect(link).toHaveAttribute('target', '_blank');
       expect(link).toHaveAttribute('rel', 'noopener noreferrer');

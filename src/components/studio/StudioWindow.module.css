@@ -1,0 +1,66 @@
+.window {
+  min-width: 0;
+  color: var(--studio-ink);
+  background: var(--studio-paper);
+  border: 1px solid var(--studio-ink);
+  box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #66685f, 5px 5px 0 #0003;
+}
+
+.titleBar {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  min-height: 35px;
+  padding: 5px 9px;
+  margin: 4px;
+  color: #fff;
+  background: var(--studio-blue);
+}
+
+.windowIcon {
+  display: block;
+  flex: 0 0 12px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid currentcolor;
+  box-shadow: inset 3px 0 0 currentcolor;
+}
+
+.title {
+  min-width: 0;
+  font-family: var(--studio-terminal);
+  font-size: 18px;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto;
+  font-size: 12px;
+}
+
+.body {
+  min-width: 0;
+  padding: clamp(18px, 3vw, 36px);
+}
+
+.window[data-tone="dark"] .body {
+  color: var(--studio-white);
+  background: var(--studio-stage);
+}
+
+.window[data-tone="blue"] .body {
+  color: #fff;
+  background: var(--studio-blue);
+}
+
+.window[data-tone="paper"] {
+  --color-foreground: var(--studio-ink);
+  --color-background: var(--studio-paper);
+  --color-accent: #234bdf;
+  --color-muted-foreground: #50584a;
+  --studio-muted: #50584a;
+}

@@ -1,14 +1,15 @@
 import React from "react";
-import { render, screen, act } from "@testing-library/react";
+import { render, screen, act, fireEvent, waitFor } from "@testing-library/react";
 import { HelmetProvider } from "react-helmet-async";
 import Home from "../Home";
+import posts from "@/content/posts";
 
 describe("Home Page", () => {
   it("renders featured post section", () => {
     vi.useFakeTimers();
     render(
       <HelmetProvider>
-        <Home />
+        <Home posts={posts.slice(0,7)} archive={posts.map(({id,title,timestamp,category})=>({id,title,timestamp,category}))} totalPosts={posts.length} />
       </HelmetProvider>
     );
     act(() => {
@@ -22,7 +23,7 @@ describe("Home Page", () => {
     vi.useFakeTimers();
     render(
       <HelmetProvider>
-        <Home />
+        <Home posts={posts.slice(0,7)} archive={posts.map(({id,title,timestamp,category})=>({id,title,timestamp,category}))} totalPosts={posts.length} />
       </HelmetProvider>
     );
     act(() => {
@@ -31,4 +32,19 @@ describe("Home Page", () => {
     expect(screen.getByLabelText("All posts")).toBeInTheDocument();
     vi.useRealTimers();
   });
+  it("loads archive bodies on demand and retains entries if a request fails", async () => {
+    const getContext=vi.spyOn(HTMLCanvasElement.prototype,"getContext").mockReturnValue(null);
+    const request=vi.fn().mockResolvedValueOnce({ok:false}).mockResolvedValueOnce({ok:true,json:async()=>({posts:posts.slice(7,13),totalPosts:posts.length})});
+    vi.stubGlobal("fetch",request);
+    render(<Home posts={posts.slice(0,7)} archive={posts.map(({id,title,timestamp,category})=>({id,title,timestamp,category}))} totalPosts={posts.length}/>);
+    expect(screen.getAllByRole("article")).toHaveLength(7);
+    fireEvent.click(screen.getByRole("button",{name:"Load more posts"}));
+    expect(await screen.findByRole("alert")).toHaveTextContent("could not be loaded");
+    expect(screen.getAllByRole("article")).toHaveLength(7);
+    fireEvent.click(screen.getByRole("button",{name:"Load more posts"}));
+    await waitFor(()=>expect(screen.getAllByRole("article")).toHaveLength(13));
+    expect(request).toHaveBeenLastCalledWith("/api/posts?offset=7&limit=6");
+    vi.unstubAllGlobals();getContext.mockRestore();
+  });
+
 });

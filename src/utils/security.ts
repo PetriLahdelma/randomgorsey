@@ -19,21 +19,29 @@ export function escapeHtml(text: string): string {
 }
 
 /**
- * Sanitize text input by removing dangerous characters
+ * Sanitize text input by removing dangerous characters.
+ *
+ * The optional length limit is a transport guard, not validation. Pass `null`
+ * when the caller validates the complete sanitized value against a field-specific
+ * schema; clipping before validation can silently turn invalid input into valid
+ * input and lose user data.
  */
-export function sanitizeText(input: string): string {
+export function sanitizeText(
+  input: string,
+  maxLength: number | null = 1000
+): string {
   if (typeof input !== "string") {
     return "";
   }
 
-  // Remove or escape potentially dangerous characters
-  return input
+  const sanitized = input
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "") // Remove script tags
     .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, "") // Remove iframe tags
     .replace(/javascript:/gi, "") // Remove javascript: protocol
     .replace(/on\w+\s*=/gi, "") // Remove event handlers like onclick=
-    .trim()
-    .slice(0, 1000); // Limit length to prevent huge payloads
+    .trim();
+
+  return maxLength === null ? sanitized : sanitized.slice(0, maxLength);
 }
 
 /**
@@ -88,7 +96,7 @@ export function validateAndSanitizeContactForm(
     name: sanitizeText(data.name),
     email: sanitizeText(data.email),
     subject: sanitizeText(data.subject),
-    message: sanitizeText(data.message),
+    message: sanitizeText(data.message, null),
   };
 
   // Validate name

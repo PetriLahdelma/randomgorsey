@@ -1,188 +1,144 @@
 "use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { motion, aboutVariants, aboutStaggerContainer, aboutCardItem, bodyTextVariants } from '@/lib/motion';
-import { usePerformance } from "@/lib/performance";
-import RevealOnScroll from '../components/RevealOnScroll';
-import { Container } from '../components/layout/Container';
-import { Stack } from '../components/layout/Stack';
-import { VideoBackground, AmbientLayer } from '@/components/effects';
-import { KineticText } from '../components/KineticText';
-import Spinner from '../components/Spinner';
-const promoCanvasVideo = "/videos/promo_canvas.webm";
+import Image from "next/image";
+import React from "react";
 
-const HoverWords = ({ children }: { children: string }) => (
-  <>
-    {children.split(' ').map((word, i) => (
-      <span key={i} className="hover-word">{word} </span>
-    ))}
-  </>
-);
+import { StudioWindow } from "@/components/studio/StudioWindow";
+import { usePerformance } from "@/lib/performance";
+
+import styles from "./About.module.css";
+
+const biography = [
+  "Helsinki-based producer Random Gorsey aka DJ Pizza Hut makes warm, nostalgic lo-fi house and electronic music. Soulful chords, minimalist grooves, mid-paced and high-energy. Connected to both the Helsinki and global electronic scenes.",
+  "Self-taught and driven by instinct. Random G doesn't belong to any particular scene and doesn't try to. He acts on instinct, explores wherever creativity takes him, and tries not to overthink it.",
+  "Actively producing and exploring new tools, sounds, and ideas. Always finding fresh processes, inspired by raw energy and aestheticism, pushing creative boundaries.",
+] as const;
+
+const projects = [
+  {
+    href: "https://soundcloud.com/petri-lahdelma",
+    image: "/images/scportrait.jpg",
+    imageAlt: "Petri Lahdelma portrait",
+    text: "Petri Lahdelma - A raw techno project on Soundcloud.",
+  },
+  {
+    href: "https://soundcloud.com/dj-pizza-hut",
+    image: "/images/scpizza.jpg",
+    imageAlt: "DJ Pizza Hut",
+    text: "Dj Pizza Hut - Honestly, I don't even know, man. Check it out on SC.",
+  },
+] as const;
 
 const About: React.FC = () => {
-  const [loading, setLoading] = React.useState(true);
-  const { tier, isReducedMotion } = usePerformance();
-  const shouldAnimate = tier >= 2 && !isReducedMotion;
+  const { effectsEnabled, isReducedMotion } = usePerformance();
+  const [manualPlayback, setManualPlayback] = React.useState(false);
+  const [portraitPlaying, setPortraitPlaying] = React.useState(false);
+  const videoRef = React.useRef<HTMLVideoElement | null>(null);
+  const shouldAutoPlay = effectsEnabled && !isReducedMotion;
+  const showVideo = shouldAutoPlay || manualPlayback;
 
-  const handleContentLoad = () => {
-    setLoading(false);
+  React.useEffect(() => {
+    if (!showVideo || !videoRef.current) return;
+    const video = videoRef.current;
+    video.play().catch(() => setPortraitPlaying(false));
+  }, [showVideo]);
+
+  const togglePortrait = () => {
+    const video = videoRef.current;
+    if (!showVideo || !video) {
+      setManualPlayback(true);
+      return;
+    }
+    if (portraitPlaying) {
+      video.pause();
+    } else {
+      video.play().catch(() => setPortraitPlaying(false));
+    }
   };
 
   return (
-    <>
-      <AmbientLayer variant="about" />
-      {/* Performance-tiered video background */}
-      <VideoBackground
-        src={promoCanvasVideo}
-        poster="/images/about-poster.jpg"
-        overlayOpacity={0.2}
-      />
+    <div className={`studioPage ${styles.page}`}>
+      <header className={`studioPageHeader ${styles.header}`}>
+        <p className="studioKicker">Helsinki / producer / DJ</p>
+        <h1 className="studioTitle">About</h1>
+        <p className={`studioLead ${styles.intro}`}>
+          The work is the introduction. A few facts sit beside it.
+        </p>
+      </header>
 
-      <motion.div
-        className="min-h-screen grain-overlay"
-        variants={aboutVariants}
-        initial="initial"
-        animate="enter"
-        exit="exit"
-      >
-        <Container size="md" padding="lg" className="py-8 text-left bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] my-8">
-          <Stack gap="xl">
-            {loading && <Spinner className="border-t-accent" />}
-
-            {/* Heading with kinetic text */}
-            <RevealOnScroll>
-              <KineticText
-                as="h1"
-                splitBy="words"
-                variant="default"
-                className="text-6xl font-bold uppercase"
+      <section className={styles.composition} aria-label="Artist biography">
+        <StudioWindow
+          title="Portrait"
+          tone="dark"
+          className={styles.portraitWindow}
+        >
+          <figure className={styles.portraitFigure}>
+            {showVideo ? (
+              <video
+                ref={videoRef}
+                title="Portrait of Random Gorsey"
+                muted
+                loop
+                autoPlay
+                playsInline
+                poster="/images/portrait.jpg"
+                className={styles.portrait}
+                onPlay={() => setPortraitPlaying(true)}
+                onPause={() => setPortraitPlaying(false)}
+                onEnded={() => setPortraitPlaying(false)}
               >
-                About
-              </KineticText>
-            </RevealOnScroll>
-
-            {/* Portrait figure - video with jpg fallback */}
-            <RevealOnScroll>
-              <figure className="flex justify-center">
-                <video
-                  title="Portrait of Random Gorsey"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="/images/portrait.jpg"
-                  className="w-24 md:w-32 shadow-xl"
-                  onLoadedData={handleContentLoad}
-                >
-                  <source src="/images/portrait.webm" type="video/webm" />
-                </video>
-              </figure>
-            </RevealOnScroll>
-
-            {/* Bio text */}
-            <RevealOnScroll>
-              <motion.p
-                variants={shouldAnimate ? bodyTextVariants : undefined}
-                initial={shouldAnimate ? "hidden" : undefined}
-                whileInView={shouldAnimate ? "visible" : undefined}
-                viewport={{ once: true }}
-                className="text-base leading-relaxed"
+                <source src="/videos/portrait-loop.webm" type="video/webm" />
+                <source src="/videos/portrait-loop.mp4" type="video/mp4" />
+              </video>
+            ) : (
+              <Image
+                src="/images/portrait.jpg"
+                alt="Portrait of Random Gorsey"
+                width={984}
+                height={984}
+                sizes="(max-width: 720px) calc(100vw - 64px), 42vw"
+                priority
+                className={styles.portrait}
+              />
+            )}
+            <figcaption className={styles.portraitControls}>
+              <button
+                type="button"
+                className="studioButton"
+                onClick={togglePortrait}
               >
-                <HoverWords>Helsinki-based producer Random Gorsey aka DJ Pizza Hut makes warm, nostalgic lo-fi house and electronic music. Soulful chords, minimalist grooves, mid-paced and high-energy. Connected to both the Helsinki and global electronic scenes.</HoverWords>
-              </motion.p>
-            </RevealOnScroll>
+                {portraitPlaying ? "Pause portrait loop" : "Play portrait loop"}
+              </button>
+            </figcaption>
+          </figure>
+        </StudioWindow>
 
-            <RevealOnScroll>
-              <motion.p
-                variants={shouldAnimate ? bodyTextVariants : undefined}
-                initial={shouldAnimate ? "hidden" : undefined}
-                whileInView={shouldAnimate ? "visible" : undefined}
-                viewport={{ once: true }}
-                className="text-base leading-relaxed"
-              >
-                <HoverWords>{"Self-taught and driven by instinct. Random G doesn't belong to any particular scene and doesn't try to. He acts on instinct, explores wherever creativity takes him, and tries not to overthink it."}</HoverWords>
-              </motion.p>
-            </RevealOnScroll>
+        <StudioWindow title="random-gorsey.txt" tone="paper" className={styles.biographyWindow}>
+          <div className={styles.biography}>
+            {biography.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          </div>
+        </StudioWindow>
+      </section>
 
-            <RevealOnScroll>
-              <motion.p
-                variants={shouldAnimate ? bodyTextVariants : undefined}
-                initial={shouldAnimate ? "hidden" : undefined}
-                whileInView={shouldAnimate ? "visible" : undefined}
-                viewport={{ once: true }}
-                className="text-base leading-relaxed"
-              >
-                <HoverWords>{"Actively producing and exploring new tools, sounds, and ideas. Always finding fresh processes, inspired by raw energy and aestheticism, pushing creative boundaries."}</HoverWords>
-              </motion.p>
-            </RevealOnScroll>
+      <section className={styles.projects} aria-labelledby="other-projects">
+        <div className={styles.sectionHeading}>
+          <p className="studioKicker">Selected aliases</p>
+          <h2 id="other-projects">Other projects</h2>
+          <p>Beyond Random Gorsey, there are a few other things going on:</p>
+        </div>
 
-            {/* Side projects section */}
-            <RevealOnScroll>
-              <Stack gap="sm">
-                <h2 className="text-2xl font-bold">Other projects</h2>
-                <p className="text-base">
-                  Beyond Random Gorsey, there are a few other things going on:
-                </p>
-              </Stack>
-            </RevealOnScroll>
-
-            {/* Staggered side project cards */}
-            <motion.ul
-              variants={aboutStaggerContainer}
-              initial="initial"
-              whileInView="enter"
-              viewport={{ once: true, amount: 0.3 }}
-              className="space-y-4 list-none p-0"
-            >
-              <motion.li variants={aboutCardItem}>
-                <div className="flex items-center gap-4 py-3 border-l-3 border-accent pl-4">
-                  <Image
-                    src="/images/scportrait.jpg"
-                    alt="Petri Lahdelma portrait"
-                    width={1080}
-                    height={1080}
-                    sizes="48px"
-                    className="w-12 h-12 object-cover"
-                    onLoad={handleContentLoad}
-                  />
-                  <a
-                    href="https://soundcloud.com/petri-lahdelma"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground hover:text-accent no-underline font-semibold"
-                  >
-                    Petri Lahdelma - A raw techno project on Soundcloud.
-                  </a>
-                </div>
-              </motion.li>
-
-              <motion.li variants={aboutCardItem}>
-                <div className="flex items-center gap-4 py-3 border-l-3 border-accent pl-4">
-                  <Image
-                    src="/images/scpizza.jpg"
-                    alt="DJ Pizza Hut"
-                    width={1080}
-                    height={1080}
-                    sizes="48px"
-                    className="w-12 h-12 object-cover"
-                    onLoad={handleContentLoad}
-                  />
-                  <a
-                    href="https://soundcloud.com/dj-pizza-hut"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground hover:text-accent no-underline font-semibold"
-                  >
-                    Dj Pizza Hut - Honestly, I don&apos;t even know, man. Check it out on SC.
-                  </a>
-                </div>
-              </motion.li>
-            </motion.ul>
-          </Stack>
-        </Container>
-      </motion.div>
-    </>
+        <div className={styles.projectList}>
+          {projects.map((project, index) => (
+            <a key={project.href} href={project.href} target="_blank" rel="noopener noreferrer" className={styles.project}>
+              <span className={styles.projectIndex} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+              <Image src={project.image} alt={project.imageAlt} width={1080} height={1080} sizes="72px" className={styles.projectImage} />
+              <span className={styles.projectText}>{project.text}</span>
+              <span className={styles.projectArrow} aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 };
 

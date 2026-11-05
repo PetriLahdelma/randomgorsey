@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import Post from "@/site/Post";
-import posts, { getPostById } from "@/posts";
+import posts, { getAdjacentPosts, getPostById } from "@/content/posts";
 import { createMetadata } from "@/lib/seo";
 
 type PostPageProps = {
@@ -47,9 +47,19 @@ export default async function PostRoute({ params }: PostPageProps) {
   const { id } = await params;
   const postId = Number(id);
 
-  if (!Number.isFinite(postId) || !getPostById(postId)) {
+  const post = Number.isFinite(postId) ? getPostById(postId) : undefined;
+
+  if (!post) {
     notFound();
   }
 
-  return <Post postId={postId} />;
+  const { prev, next } = getAdjacentPosts(postId);
+
+  return (
+    <Post
+      post={post}
+      previous={prev ? { id: prev.id, title: prev.title } : undefined}
+      next={next ? { id: next.id, title: next.title } : undefined}
+    />
+  );
 }

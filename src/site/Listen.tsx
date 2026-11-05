@@ -1,180 +1,145 @@
 "use client";
 
-import React from 'react';
-import { motion, listenVariants, embedBorderVariants } from '@/lib/motion';
-import { usePerformance } from "@/lib/performance";
-import { VideoBackground, AmbientLayer } from '@/components/effects';
-import RevealOnScroll from '../components/RevealOnScroll';
-import { KineticText } from '@/components/KineticText';
-import { Container } from '@/components/layout/Container';
-import { Stack } from '@/components/layout/Stack';
-import Spinner from '../components/Spinner';
-const glitchBgVideo = "/videos/rg-glitch-bg.webm";
+import React from "react";
 
-const Listen: React.FC = () => {
-  const [loading, setLoading] = React.useState(true);
-  const [embedProximity, setEmbedProximity] = React.useState(0);
-  const { tier, isReducedMotion } = usePerformance();
-  const shouldAnimate = tier >= 2 && !isReducedMotion;
+import { SignalArtwork } from "@/components/studio/SignalArtwork";
+import { StudioWindow } from "@/components/studio/StudioWindow";
+import {
+  platformLinks,
+  soundcloudEmbedUrl,
+  soundcloudPlaylistUrl,
+  spotifyEmbedUrl,
+  type PlatformId,
+} from "@/content/platforms";
 
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const anyVisible = entries.some((e) => e.isIntersecting);
-        setEmbedProximity(anyVisible ? 1 : 0);
-      },
-      { threshold: 0.1 }
-    );
-    const embeds = document.querySelectorAll('iframe[title="RG player"], iframe[title="SoundCloud Player"]');
-    embeds.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+import styles from "./Listen.module.css";
 
-  const handleContentLoad = () => {
-    setLoading(false);
-  };
+type EmbedProvider = Extract<PlatformId, "spotify" | "soundcloud">;
+type EmbedStatus = "idle" | "loading" | "ready" | "timed-out";
 
-  return (
-    <>
-      <AmbientLayer variant="listen" embedProximity={embedProximity} />
-      {/* Video background with dark overlay for immersive mood */}
-      <VideoBackground
-        src={glitchBgVideo}
-        poster="/images/listen-poster.jpg"
-        overlayOpacity={0.4}
-      />
-
-      <motion.div
-        variants={listenVariants}
-        initial="initial"
-        animate="enter"
-        exit="exit"
-        className="relative z-10 min-h-screen py-16 grain-overlay"
-      >
-        <Container size="md" padding="md">
-          <Stack gap="xl">
-            {loading && <Spinner />}
-
-            {/* Animated headline */}
-            <RevealOnScroll>
-              <KineticText
-                as="h1"
-                splitBy="words"
-                variant="default"
-                staggerDelay={0.05}
-                className="font-display uppercase tracking-[-0.02em]"
-              >
-                Listen to Music
-              </KineticText>
-            </RevealOnScroll>
-
-            {/* Spotify embed */}
-            {typeof window !== 'undefined' && (
-              <>
-                <RevealOnScroll>
-                  <motion.div
-                    variants={shouldAnimate ? embedBorderVariants : undefined}
-                    initial={shouldAnimate ? "hidden" : undefined}
-                    whileInView={shouldAnimate ? "visible" : undefined}
-                    viewport={{ once: true, margin: "-10% 0px" }}
-                  >
-                    <iframe
-                      title="RG player"
-                      className="w-full"
-                      src="https://open.spotify.com/embed/artist/54Vv9rlCqX2nW2V0tXw33q?utm_source=generator"
-                      width="100%"
-                      height="352"
-                      frameBorder="0"
-                      allowFullScreen={true}
-                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                      loading="lazy"
-                      onLoad={handleContentLoad}
-                    />
-                  </motion.div>
-                </RevealOnScroll>
-
-                {/* SoundCloud embed */}
-                <RevealOnScroll>
-                  <motion.div
-                    variants={shouldAnimate ? embedBorderVariants : undefined}
-                    initial={shouldAnimate ? "hidden" : undefined}
-                    whileInView={shouldAnimate ? "visible" : undefined}
-                    viewport={{ once: true, margin: "-10% 0px" }}
-                  >
-                    <iframe
-                      title="SoundCloud Player"
-                      className="w-full"
-                      width="100%"
-                      height="300"
-                      scrolling="no"
-                      frameBorder="no"
-                      allow="autoplay"
-                      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2029288998&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
-                    />
-                  </motion.div>
-                </RevealOnScroll>
-              </>
-            )}
-
-            {/* SoundCloud attribution */}
-            <RevealOnScroll>
-              <div className="text-xs font-light text-muted-foreground truncate">
-                <a
-                  href="https://soundcloud.com/randomgorsey"
-                  title="Random Gorsey"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-muted-foreground hover:text-foreground no-underline"
-                >
-                  Random Gorsey
-                </a>
-                {' · '}
-                <a
-                  href="https://soundcloud.com/randomgorsey/sets/tuunz"
-                  title="Tuunz"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-muted-foreground hover:text-foreground no-underline"
-                >
-                  Tuunz
-                </a>
-              </div>
-            </RevealOnScroll>
-
-            {/* Streaming CTA cards */}
-            <RevealOnScroll>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12">
-                <a
-                  href="https://open.spotify.com/artist/54Vv9rlCqX2nW2V0tXw33q"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] p-6 text-center no-underline hover:bg-[oklch(10%_0_0deg)] transition-colors"
-                >
-                  <span className="text-foreground text-sm font-europa">Spotify</span>
-                </a>
-                <a
-                  href="https://soundcloud.com/randomgorsey"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] p-6 text-center no-underline hover:bg-[oklch(10%_0_0deg)] transition-colors"
-                >
-                  <span className="text-foreground text-sm font-europa">SoundCloud</span>
-                </a>
-                <a
-                  href="https://randomgorsey.bandcamp.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-[oklch(8%_0_0deg)] border border-[oklch(12%_0_0deg)] p-6 text-center no-underline hover:bg-[oklch(10%_0_0deg)] transition-colors"
-                >
-                  <span className="text-foreground text-sm font-europa">Bandcamp</span>
-                </a>
-              </div>
-            </RevealOnScroll>
-          </Stack>
-        </Container>
-      </motion.div>
-    </>
-  );
+const embedDetails: Record<
+  EmbedProvider,
+  { label: string; src: string; title: string; height: number; directHref: string; allow: string }
+> = {
+  spotify: {
+    label: "Spotify",
+    src: spotifyEmbedUrl,
+    title: "Spotify player",
+    height: 352,
+    directHref: platformLinks.find((platform) => platform.id === "spotify")!.href,
+    allow: "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture",
+  },
+  soundcloud: {
+    label: "SoundCloud",
+    src: soundcloudEmbedUrl,
+    title: "SoundCloud player",
+    height: 300,
+    directHref: soundcloudPlaylistUrl,
+    allow: "autoplay",
+  },
 };
 
-export default Listen;
+export default function Listen() {
+  const [activeProvider, setActiveProvider] = React.useState<EmbedProvider | null>(null);
+  const [status, setStatus] = React.useState<EmbedStatus>("idle");
+
+  React.useEffect(() => {
+    if (!activeProvider || status !== "loading") return;
+    const timeout = window.setTimeout(() => setStatus("timed-out"), 12_000);
+    return () => window.clearTimeout(timeout);
+  }, [activeProvider, status]);
+
+  const loadProvider = (provider: EmbedProvider) => {
+    setActiveProvider(provider);
+    setStatus("loading");
+  };
+
+  const activeEmbed = activeProvider ? embedDetails[activeProvider] : null;
+
+  return (
+    <div className={`studioPage ${styles.page}`}>
+      <header className={`studioPageHeader ${styles.header}`}>
+        <p className="studioKicker">External playback</p>
+        <h1 className="studioTitle">Listen</h1>
+        <p className="studioLead">Recordings &amp; selections.</p>
+      </header>
+
+      <section className={styles.console} aria-label="Listening console">
+        <StudioWindow
+          title={activeEmbed ? `${activeEmbed.label} / external player` : "Select a source"}
+          tone="paper"
+          className={styles.playerWindow}
+        >
+          <div className={styles.sourceButtons} aria-label="Player sources">
+            {(["spotify", "soundcloud"] as const).map((provider) => (
+              <button
+                key={provider}
+                type="button"
+                className={styles.sourceButton}
+                aria-pressed={activeProvider === provider}
+                aria-label={`Load ${embedDetails[provider].label} player`}
+                onClick={() => loadProvider(provider)}
+              >
+                <span>{embedDetails[provider].label}</span>
+                <span aria-hidden="true">↗</span>
+              </button>
+            ))}
+          </div>
+
+          <div className={styles.playerWell}>
+            {!activeEmbed ? (
+              <div className={styles.idleState}>
+                <span className={styles.idleGlyph} aria-hidden="true">ERROR</span>
+                <p>No third-party player loaded.</p>
+                <p className={styles.idleNote}>Direct links are available in the footer.</p>
+              </div>
+            ) : (
+              <>
+                {status === "loading" && (
+                  <p className={styles.playerStatus} role="status">
+                    Connecting to {activeEmbed.label}…
+                  </p>
+                )}
+                {status === "timed-out" && (
+                  <div className={styles.timeoutState} role="alert">
+                    <p>The player is taking longer than expected.</p>
+                    <a href={activeEmbed.directHref} target="_blank" rel="noopener noreferrer">
+                      Open {activeEmbed.label} directly
+                    </a>
+                  </div>
+                )}
+                <div className={activeProvider === "spotify" ? "studioPlayerViewport studioSquarePlayer" : "studioPlayerViewport"} style={{ "--player-height": `${activeEmbed.height}px` } as React.CSSProperties}>
+                <iframe
+                  key={activeProvider}
+                  title={activeEmbed.title}
+                  src={activeEmbed.src}
+                  width="100%"
+                  height={activeEmbed.height}
+                  allow={activeEmbed.allow}
+                  allowFullScreen={activeProvider === "spotify"}
+                  loading="lazy"
+                  className={styles.embed}
+                  onLoad={() => setStatus("ready")}
+                />
+                </div>
+              </>
+            )}
+          </div>
+        </StudioWindow>
+
+        <div className={styles.artworkPanel} aria-hidden="true">
+          <div className={styles.artworkTitle}>
+            <span>Signal study</span>
+            <span>↙</span>
+          </div>
+          <SignalArtwork className={styles.artwork} pace="energetic" />
+          <div className={styles.artworkFooter}>
+            <span>Random Gorsey</span>
+            <span>Generative artwork</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  );
+}
