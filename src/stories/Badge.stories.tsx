@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import Badge from '../components/Badge';
 
 export default {
-  title: 'Components/Badge',
+  title: 'Library/Legacy/Badge',
   component: Badge,
   argTypes: {
     text: { control: 'text' },

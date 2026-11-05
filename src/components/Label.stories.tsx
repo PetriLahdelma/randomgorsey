@@ -4,7 +4,7 @@ import { ComponentProps } from 'react';
 import type { StoryFn } from '@storybook/react';
 
 const Story = {
-  title: 'Components/Label',
+  title: 'Library/Legacy/Forms/Label',
   component: Label,
   argTypes: {
     children: { control: 'text', defaultValue: 'Label Text' },

@@ -1,69 +1,74 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import Button from '../components/Button';
-import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
+import type { Meta, StoryObj } from "@storybook/react";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import Button from "../components/Button";
 
-export default {
-  title: 'Components/Button',
+const meta = {
+  title: "Components/Button",
   component: Button,
-  argTypes: {
-    variant: {
-      control: {
-        type: 'select',
-        options: ['primary', 'secondary', 'secondary-dark', 'danger', 'tertiary', 'success', 'icon'],
+  tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          width: "min(32rem, 100%)",
+          padding: "1rem",
+          color: "var(--studio-ink)",
+          background: "var(--studio-gray)",
+          border: "2px solid",
+          borderColor: "#fff #6f706b #6f706b #fff",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "The live site uses primary and secondary-dark in Cookie preferences. Remaining variants are retained as library API coverage.",
       },
     },
-    onClick: { action: 'clicked' },
   },
-} as Meta<typeof Button>;
+} satisfies Meta<typeof Button>;
 
-const Template: StoryFn<typeof Button> = (args) => <Button {...args} />;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  variant: 'primary',
-  children: 'Primary Button',
+export const Primary: Story = { args: { variant: "primary", children: "Accept all" } };
+export const SecondaryDark: Story = { args: { variant: "secondary-dark", children: "Necessary" } };
+export const Secondary: Story = {
+  args: { variant: "secondary", children: "Open directly" },
+  parameters: { docs: { description: { story: "Library variant; not currently used by a production route." } } },
 };
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-  variant: 'secondary',
-  children: 'Secondary Button',
+export const Tertiary: Story = {
+  args: { variant: "tertiary", children: "Load more" },
+  parameters: { docs: { description: { story: "Library variant; the live archive uses studioButton." } } },
 };
-
-export const SecondaryDark = Template.bind({});
-SecondaryDark.args = {
-  variant: 'secondary-dark',
-  children: 'Secondary Dark Button',
+export const Danger: Story = {
+  args: { variant: "danger", children: "Remove" },
+  parameters: { docs: { description: { story: "Library-only destructive variant." } } },
 };
-
-export const Tertiary = Template.bind({});
-Tertiary.args = {
-  variant: 'tertiary',
-  children: 'Tertiary Button',
+export const Success: Story = {
+  args: { variant: "success", children: "Confirmed" },
+  parameters: { docs: { description: { story: "Library-only confirmation variant." } } },
 };
-
-export const Danger = Template.bind({});
-Danger.args = {
-  variant: 'danger',
-  children: 'Danger Button',
+export const Disabled: Story = { args: { variant: "primary", children: "Accept all", disabled: true } };
+export const Loading: Story = { args: { variant: "primary", children: "Saving choice…", loading: true } };
+export const KeyboardFocus: Story = { args: { variant: "primary", children: "Accept all", autoFocus: true } };
+export const Icon: Story = {
+  args: {
+    variant: "secondary-dark",
+    icon: <ArrowLeftIcon style={{ width: 20, height: 20 }} aria-hidden="true" />,
+    iconOnly: true,
+    "aria-label": "Back",
+    children: "Back",
+  },
 };
-
-export const Success = Template.bind({});
-Success.args = {
-  variant: 'success',
-  children: 'Success Button',
-};
-
-export const Icon = Template.bind({});
-Icon.args = {
-  variant: 'primary',
-  icon: <ArrowLeftCircleIcon style={{ height: '24px', width: '24px' }} />
-};
-
-export const TextWithIcon = Template.bind({});
-TextWithIcon.args = {
-  variant: 'primary',
-  children: 'Back',
-  icon: <ArrowLeftCircleIcon style={{ height: '24px', width: '24px' }} />
+export const TextWithIcon: Story = {
+  args: {
+    variant: "secondary-dark",
+    children: "Back",
+    icon: <ArrowLeftIcon style={{ width: 20, height: 20 }} aria-hidden="true" />,
+  },
 };

@@ -3,7 +3,7 @@ import GroupLabel from './GroupLabel';
 import type { StoryFn } from '@storybook/react';
 
 const Story = {
-  title: 'Components/GroupLabel',
+  title: 'Library/Legacy/Forms/GroupLabel',
   component: GroupLabel,
   argTypes: {
     children: { control: 'text', defaultValue: 'Group Label Example' },

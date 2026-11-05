@@ -4,7 +4,7 @@ import Modal from '../components/Modal';
 import Button from '../components/Button';
 
 export default {
-  title: 'Components/Modal',
+  title: 'Library/Legacy/Modal',
   component: Modal,
   argTypes: {
     isOpen: { control: 'boolean' },

@@ -209,6 +209,37 @@ async (page) => {
   await page.getByText("Submission intercepted. No message was sent from Storybook.").waitFor();
   check(contactRequests === 0, "Contact story blocks real message delivery");
 
+  await openStory("studio-page-header--listen", 390, 844);
+  check(await page.getByRole("heading", {name: "Listen", exact: true}).isVisible(), "Shared page-header story renders the real Listen heading");
+  check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "Shared page header fits mobile");
+
+  await openStory("components-socialshare--open-menu", 980, 280);
+  const shareMenu = page.getByRole("menu", {name: "Share Light Returning"});
+  await shareMenu.waitFor();
+  check(await shareMenu.getByRole("menuitem", {name: "Share on Telegram"}).isVisible(), "Share story exposes its full real menu");
+  check(await shareMenu.evaluate(menu => {const rect=menu.getBoundingClientRect();return rect.top>=0&&rect.bottom<=innerHeight;}), "Share menu fits a short viewport");
+  const shareAudit = await page.evaluate(async () => window.axe.run(document.querySelector('[role="menu"]'), {runOnly:{type:"tag",values:["wcag2a","wcag2aa","wcag21aa","wcag22aa"]}}));
+  for (const violation of shareAudit.violations) {
+    if (violation.impact === "serious" || violation.impact === "critical") violations.push({story:"components-socialshare--open-menu",id:violation.id,impact:violation.impact,help:violation.help,targets:violation.nodes.map(node=>node.target)});
+  }
+
+  await openStory("components-socialshare--keyboard-navigation");
+  await page.getByRole("button", {name:"Share"}).waitFor();
+  check(await page.getByRole("button", {name:"Share"}).getAttribute("aria-expanded") === "false", "Share keyboard story closes the menu");
+
+  await openStory("components-socialshare--paper-surface");
+  check(await page.getByRole("button", {name:"Share"}).isVisible(), "Share uses the real light journal window context");
+  await page.getByRole("button", {name:"Share"}).hover();
+  check(await page.getByRole("button", {name:"Share"}).evaluate(button=>getComputedStyle(button).color)==="rgb(17, 20, 15)", "Share remains legible on paper while hovered");
+
+  await openStory("production-surfaces--gallery-viewer-open", 390, 844);
+  await page.getByRole("dialog", {name:"Image viewer"}).waitFor();
+  check(await page.getByRole("button", {name:"Close image"}).isVisible(), "Gallery viewer story exposes its real close control");
+
+  await openStory("production-surfaces--about-portrait-paused", 390, 844);
+  await page.getByRole("button", {name:"Play portrait loop"}).waitFor();
+  check(await page.getByRole("button", {name:"Play portrait loop"}).isVisible(), "About portrait story shows the paused control");
+
   return {
     storyCount,
     assertionCount: assertions.length,

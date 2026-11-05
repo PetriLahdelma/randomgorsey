@@ -10,6 +10,8 @@ const rows = [
   ["Contact", "Full surface", "Inquiry selection and form UI; delivery is not invoked in stories"],
   ["Privacy", "Full component", "First-visit panel and reopen control"],
   ["Journal entry", "Full component", "Current PostCard with real authored content"],
+  ["Share menu", "Full component", "Production journal share control, including keyboard and copy states"],
+  ["Page header", "Full component", "Shared production header for Listen, Discography, About and Gallery"],
   ["Foundations", "Representative", "Type, links, controls, metadata, window tones, mark and motion"],
 ] as const;
 

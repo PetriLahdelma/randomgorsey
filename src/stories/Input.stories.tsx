@@ -3,7 +3,7 @@ import { StoryFn, Meta } from '@storybook/react';
 import Input from '../components/Input';
 
 export default {
-  title: 'Components/Input',
+  title: 'Library/Legacy/Forms/Input',
   component: Input,
   parameters: {
     docs: {
@@ -82,9 +82,10 @@ export const MultipleInputsSameLabel = () => (
   </div>
 );
 
-export const NoLabelOrId = Template.bind({});
-NoLabelOrId.args = {
+export const AriaLabelOnly = Template.bind({});
+AriaLabelOnly.args = {
   type: 'text',
   value: '',
-  placeholder: 'No label or id',
+  placeholder: 'Search the archive',
+  'aria-label': 'Search the archive',
 };

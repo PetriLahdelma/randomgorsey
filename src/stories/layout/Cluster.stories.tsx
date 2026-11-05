@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Cluster } from "@/components/layout";
 
 const meta: Meta<typeof Cluster> = {
-  title: "Layout/Cluster",
+  title: "Library/Layout/Cluster",
   component: Cluster,
   tags: ["autodocs"],
   parameters: {

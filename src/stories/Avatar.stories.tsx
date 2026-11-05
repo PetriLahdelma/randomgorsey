@@ -4,7 +4,7 @@ import Avatar, { AvatarProps } from '../components/Avatar';
 import PeteImg from '../../public/images/pete.jpg';
 
 export default {
-  title: 'Components/Avatar',
+  title: 'Library/Legacy/Avatar',
   component: Avatar,
 } as Meta;
 

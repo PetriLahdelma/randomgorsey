@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Container, Bleed } from "@/components/layout";
 
 const meta: Meta<typeof Container> = {
-  title: "Layout/Container",
+  title: "Library/Layout/Container",
   component: Container,
   tags: ["autodocs"],
   parameters: {

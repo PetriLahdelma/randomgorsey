@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import Checkbox from '../components/Checkbox';
 
 export default {
-  title: 'Components/Checkbox',
+  title: 'Library/Legacy/Forms/Checkbox',
   component: Checkbox,
   argTypes: {
     checked: { control: 'boolean' },
