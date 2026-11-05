@@ -6,6 +6,7 @@ import { AnimationProvider } from "@/lib/motion/AnimationProvider";
 import { TransitionContext } from "@/lib/transition/TransitionContext";
 import Header from "@/patterns/Header";
 import AgentTools from "@/components/AgentTools";
+import { PlayerProvider } from "@/components/player/PersistentPlayer";
 
 const AppShellContext = React.createContext<{ setOverlayActive: (active: boolean) => void }>({ setOverlayActive: () => {} });
 export function useAppShell() { return React.useContext(AppShellContext); }
@@ -28,12 +29,14 @@ export default function AppShell({ children, footer, version }: { children: Reac
     <AnimationProvider>
       <TransitionContext.Provider value={transition}>
         <AppShellContext.Provider value={overlay}>
-          <a href="#main-content" className="studioSkip">Skip to content</a>
-          <Header version={version} />
-          <main id="main-content" tabIndex={-1}>{children}</main>
-          {!isOverlayActive && footer}
-          <CookieConsent />
-          <AgentTools />
+          <PlayerProvider>
+            <a href="#main-content" className="studioSkip">Skip to content</a>
+            <Header version={version} />
+            <main id="main-content" tabIndex={-1}>{children}</main>
+            {!isOverlayActive && footer}
+            <CookieConsent />
+            <AgentTools />
+          </PlayerProvider>
         </AppShellContext.Provider>
       </TransitionContext.Provider>
     </AnimationProvider>
