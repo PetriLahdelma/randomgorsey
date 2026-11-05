@@ -28,9 +28,10 @@ describe("agent discovery", () => {
     expect(robots).toMatch(/User-agent: OAI-SearchBot\nAllow: \//);
     expect(robots).toMatch(/User-agent: Claude-SearchBot\nAllow: \//);
     expect(robots).toMatch(/User-agent: GPTBot\nDisallow: \//);
+    for (const crawler of ["Amazonbot", "Applebot-Extended", "Bytespider", "CCBot", "ClaudeBot", "Google-Extended", "GPTBot", "meta-externalagent"]) {
+      expect(robots).toContain(`User-agent: ${crawler}\nDisallow: /`);
+    }
     expect(robots).toMatch(/User-agent: ClaudeBot\nDisallow: \//);
-    expect(robots).not.toContain("User-agent: Bytespider");
-    expect(robots).not.toContain("User-agent: meta-externalagent");
     expect(robots).toContain("crawler compliance is voluntary");
     expect(robots).toContain("Sitemap: https://randomgorsey.com/sitemap.xml");
   });
