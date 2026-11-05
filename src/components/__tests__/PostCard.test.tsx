@@ -21,7 +21,8 @@ describe('PostCard', () => {
         <PostCard post={post} />
       </HelmetProvider>
     );
-    expect(screen.getByRole('heading', { name: 'Test Post' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Test Post' })).toHaveAttribute('data-journal-title');
+    expect(screen.getByRole('heading', { name: 'Test Post' })).toHaveClass('font-normal');
     const img = screen.getByAltText('Test Post');
     expect(img).toHaveAttribute('title', 'Test Post');
   });

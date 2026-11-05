@@ -43,6 +43,8 @@ async (page) => {
   check(!(await page.locator(".studioHeader").innerText()).includes("Images / Words"),"Removed header caption stays absent");
   check(await page.locator("h1").count()===1,"Home has one primary heading");
   check(await page.getByRole("heading",{level:1,name:"Random Gorsey",exact:true}).count()===1,"Original vector artist identity is rendered");
+  check((await page.locator('#journal [data-card] h3').first().evaluate(e=>getComputedStyle(e).fontFamily)).toLowerCase().includes('lisaterminal'),"Journal entry titles use Lisa Terminal Paper");
+  check(await page.locator('#journal').evaluate(e=>getComputedStyle(e,'::before').backgroundImage)==="none","Journal has no portrait background");
   check(await page.locator("video source,video[src]").count()===0,"Home attaches no decorative video");
   check((await page.locator(".studioNav a").first().evaluate(e=>getComputedStyle(e).fontFamily)).toLowerCase().includes("lisaterminal"),"Navigation uses LisaTerminal");
   const necessary=page.getByRole("button",{name:"Accept only necessary cookies",exact:true});
@@ -72,6 +74,7 @@ async (page) => {
   await page.screenshot({path:"home-active.png"});
   await page.getByRole("button",{name:"Index",exact:true}).click();
   check(await page.locator('main a[href^="/posts/"]').count()===56,"All 56 posts are reachable from the index");
+  check((await page.locator('#journal ol li a span').first().evaluate(e=>getComputedStyle(e).fontFamily)).toLowerCase().includes('lisaterminal'),"Journal index titles use Lisa Terminal Paper");
   await page.getByRole("button",{name:"Entries",exact:true}).click();
   const before=await page.locator("main article").count();
   await page.getByRole("button",{name:"Load more posts",exact:true}).click();
@@ -84,6 +87,7 @@ async (page) => {
     check(response.status()===200,path+" returns 200");
     await checkSocialPreview(path);
     check(await page.locator("main h1").count()===1,path+" has a primary heading");
+    if(path==="/posts/56/")check((await page.locator('main h1').evaluate(e=>getComputedStyle(e).fontFamily)).toLowerCase().includes('lisaterminal'),"Individual journal title uses Lisa Terminal Paper");
     if(["/listen/","/discography/","/about/","/gallery/","/contact/"].includes(path))check((await page.locator("main h1").evaluate(e=>getComputedStyle(e).fontFamily)).toLowerCase().includes("lisaterminal"),path+" heading uses LisaTerminal");
     await page.screenshot({path:path.replaceAll("/","").replace("posts56","post")+"-desktop.png",fullPage:false});
     await page.addScriptTag({path:axePath});

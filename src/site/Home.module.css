@@ -140,27 +140,10 @@
 }
 
 .journal {
-  position: relative;
   max-width: 1240px;
   padding: 80px 0 90px;
   margin: 0 auto;
   scroll-margin-top: 22px;
-  isolation: isolate;
-}
-
-.journal::before {
-  position: absolute;
-  top: 92px;
-  right: 0;
-  z-index: -1;
-  width: min(42%, 420px);
-  aspect-ratio: 1;
-  pointer-events: none;
-  content: "";
-  background: url('/images/varjostettu-background.webp') center / contain no-repeat;
-  mix-blend-mode: screen;
-  opacity: 0.2;
-  mask-image: radial-gradient(ellipse at center, #000 42%, transparent 73%);
 }
 
 .journalHeader {
@@ -301,6 +284,13 @@
   line-height: 1.3;
 }
 
+.archive li a > span:not(.archiveArrow) {
+  font-family: var(--studio-terminal);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
 @media (width <= 1320px) {
   .journal {
     margin: 0 36px;
@@ -401,11 +391,6 @@
     margin: 0 20px;
   }
 
-  .journal::before {
-    top: 60px;
-    width: min(70%, 300px);
-  }
-
   .journalHeader {
     flex-wrap: wrap;
     align-items: center;
@@ -429,7 +414,7 @@
     grid-column: 1 / -1;
   }
 
-  .archive li a > span {
-    font-size: 19px;
+  .archive li a > span:not(.archiveArrow) {
+    font-size: 18px;
   }
 }

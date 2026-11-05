@@ -12,7 +12,7 @@ const meta: Meta<typeof PostCard> = {
   decorators: [
     (Story) => (
       <PerformanceProvider>
-        <div style={{ maxWidth: 780, margin: "0 auto" }}><Story /></div>
+        <div className="studioJournal" style={{ maxWidth: 780, margin: "0 auto" }}><Story /></div>
       </PerformanceProvider>
     ),
   ],
