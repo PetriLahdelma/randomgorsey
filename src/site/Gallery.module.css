@@ -61,6 +61,10 @@
   transition: filter 140ms ease;
 }
 
+.posterImage {
+  max-height: none;
+}
+
 .imageButton:hover .image,
 .imageButton:focus-visible .image {
   filter: saturate(1.08) contrast(1.06);

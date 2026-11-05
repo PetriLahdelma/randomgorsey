@@ -96,7 +96,11 @@ async (page) => {
       check(await page.locator("main article img").evaluateAll(images=>images.length===2&&images.every(image=>{const box=image.getBoundingClientRect();return Math.abs(box.width-box.height)<1&&image.naturalWidth===image.naturalHeight;})),"Discography uses original square cover images");
       check(await page.locator("main article").evaluateAll(articles=>articles.every(article=>{const art=article.querySelector("img").getBoundingClientRect(),panel=article.querySelector("section[data-tone]").getBoundingClientRect();return art.left<panel.right&&art.right>panel.left&&art.top<panel.bottom&&art.bottom>panel.top;})),"Release windows retain their artwork overlap");
     }
-    if(path==="/gallery/")check(await page.locator("main section[data-tone]").count()===16,"Every gallery image has its own window");
+    if(path==="/gallery/"){
+      check(await page.locator("main section[data-tone]").count()===17,"Every gallery image has its own window");
+      check(await page.getByRole("img",{name:"Random Gorsey Grit Poster"}).count()===1,"The Grit poster appears in the gallery");
+      check(await page.getByRole("img",{name:"Random Gorsey Grit Poster"}).evaluate(e=>{const box=e.getBoundingClientRect();return Math.abs(box.width/box.height-1086/1448)<0.01;}),"The Grit poster retains its full portrait proportions");
+    }
     if(path==="/about/"){
       const portrait=page.locator("main video");
       await portrait.waitFor();

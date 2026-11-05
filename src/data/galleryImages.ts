@@ -6,6 +6,7 @@ export interface GalleryImage {
 }
 
 const galleryImages: GalleryImage[] = [
+  { src: '/images/random-gorsey-grit-poster.png', caption: 'Random Gorsey Grit Poster', width: 1086, height: 1448 },
   { src: '/images/clipart.jpg', caption: 'Clipart, Helsinki', width: 1734, height: 800 },
   { src: '/images/ride.jpg', caption: 'Ride in Birgit, Berlin', width: 983, height: 983 },
   { src: '/images/disco.jpg', caption: 'Disco balls in Birgit, Berlin', width: 1080, height: 720 },
