@@ -84,7 +84,7 @@ const Gallery: React.FC = () => {
   return (
     <div className={`studioPage ${styles.page}`}>
       <header className={`studioPageHeader ${styles.header}`}>
-        <p className="studioKicker">16 images / Helsinki &amp; Berlin</p>
+        <p className="studioKicker">{galleryImages.length} images / Helsinki &amp; Berlin</p>
         <h1 className="studioTitle">Gallery</h1>
         <p className={`studioLead ${styles.intro}`}>
           Covers, rooms, lights, weather and the things that survived the night.
@@ -106,7 +106,7 @@ const Gallery: React.FC = () => {
                 }}
                 aria-label={`Open image: ${image.caption}`}
               >
-                <Image src={image.src} alt={image.caption} width={image.width} height={image.height} sizes="(max-width: 640px) calc(100vw - 64px), (max-width: 1000px) 45vw, 30vw" className={styles.image} />
+                <Image src={image.src} alt={image.caption} width={image.width} height={image.height} sizes="(max-width: 640px) calc(100vw - 64px), (max-width: 1000px) 45vw, 30vw" className={`${styles.image} ${image.src === "/images/random-gorsey-grit-poster.png" ? styles.posterImage : ""}`} />
                 <span className={styles.fileIndex} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
               </button>
               <figcaption className={styles.figureMeta}>

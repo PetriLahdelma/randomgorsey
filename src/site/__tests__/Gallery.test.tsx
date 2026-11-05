@@ -10,7 +10,7 @@ describe("Gallery Page", () => {
     render(<Gallery />);
 
     expect(screen.getByRole("heading", { level: 1, name: "Gallery" })).toBeInTheDocument();
-    expect(screen.getAllByRole("button", { name: /^Open image:/ })).toHaveLength(16);
+    expect(screen.getAllByRole("button", { name: /^Open image:/ })).toHaveLength(galleryImages.length);
     for (const image of galleryImages) {
       expect(screen.getByText(image.caption)).toBeInTheDocument();
     }
