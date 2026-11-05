@@ -16,6 +16,24 @@ async (page) => {
     assertions.push(label);
   };
 
+  // The Storybook accessibility addon can still be auditing the story when
+  // this separate check begins. Retry only that transient overlap.
+  const runAxe = async (selector = null) => page.evaluate(async (target) => {
+    const element = target ? document.querySelector(target) : document.body;
+    if (!element) throw new Error("Accessibility target not found: " + target);
+    for (let attempt = 0; attempt < 40; attempt += 1) {
+      try {
+        return await window.axe.run(element, {
+          runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"] },
+        });
+      } catch (error) {
+        if (!(error instanceof Error) || !error.message.includes("Axe is already running") || attempt === 39) throw error;
+        await new Promise(resolve => setTimeout(resolve, 250));
+      }
+    }
+    throw new Error("Accessibility audit did not complete");
+  }, selector);
+
   const openStory = async (id, width = 1200, height = 900) => {
     storyCount += 1;
     await page.setViewportSize({ width, height });
@@ -27,14 +45,7 @@ async (page) => {
       () => !document.fonts || document.fonts.status === "loaded",
     );
     await page.addScriptTag({ url: origin + "/__axe.js" });
-    const result = await page.evaluate(async () => {
-      return window.axe.run(document.body, {
-        runOnly: {
-          type: "tag",
-          values: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"],
-        },
-      });
-    });
+    const result = await runAxe();
     for (const violation of result.violations) {
       if (violation.impact === "serious" || violation.impact === "critical") {
         violations.push({
@@ -218,7 +229,7 @@ async (page) => {
   await shareMenu.waitFor();
   check(await shareMenu.getByRole("menuitem", {name: "Share on Telegram"}).isVisible(), "Share story exposes its full real menu");
   check(await shareMenu.evaluate(menu => {const rect=menu.getBoundingClientRect();return rect.top>=0&&rect.bottom<=innerHeight;}), "Share menu fits a short viewport");
-  const shareAudit = await page.evaluate(async () => window.axe.run(document.querySelector('[role="menu"]'), {runOnly:{type:"tag",values:["wcag2a","wcag2aa","wcag21aa","wcag22aa"]}}));
+  const shareAudit = await runAxe('[role="menu"]');
   for (const violation of shareAudit.violations) {
     if (violation.impact === "serious" || violation.impact === "critical") violations.push({story:"components-socialshare--open-menu",id:violation.id,impact:violation.impact,help:violation.help,targets:violation.nodes.map(node=>node.target)});
   }
