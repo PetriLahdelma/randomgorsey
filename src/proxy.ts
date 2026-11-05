@@ -9,7 +9,7 @@ const CORE_PATHS = new Set([
   "/listen/",
 ]);
 
-const POST_PATH = /^\/posts\/(\d+)\/$/;
+const POST_PATH = /^\/posts\/([1-9]\d*)\/$/;
 const VERCEL_CONTENT_CACHE =
   "public, s-maxage=300, stale-while-revalidate=86400";
 const PREFETCH_HEADERS = [

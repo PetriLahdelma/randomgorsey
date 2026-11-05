@@ -16,7 +16,7 @@ function publicPath(segments: string[]): string | null {
   ) {
     return `/${segments[0]}/`;
   }
-  if (segments.length === 2 && segments[0] === "posts" && /^\d+$/.test(segments[1])) {
+  if (segments.length === 2 && segments[0] === "posts" && /^[1-9]\d*$/.test(segments[1])) {
     return `/posts/${segments[1]}/`;
   }
   return null;
