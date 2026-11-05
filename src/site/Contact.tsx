@@ -293,10 +293,10 @@ const Contact: React.FC = () => {
 
             <div className={styles.directLinks}>
               <a href="https://www.instagram.com/randomgorsey/" target="_blank" rel="noopener noreferrer">
-                Instagram <span aria-hidden="true">↗</span>
+                <span className={styles.directLinkLabel}>Instagram</span><span aria-hidden="true">↗</span>
               </a>
               <a href="https://soundcloud.com/randomgorsey" target="_blank" rel="noopener noreferrer">
-                SoundCloud <span aria-hidden="true">↗</span>
+                <span className={styles.directLinkLabel}>SoundCloud</span><span aria-hidden="true">↗</span>
               </a>
             </div>
           </aside>

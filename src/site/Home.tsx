@@ -96,7 +96,7 @@ export default function Home({posts,archive,totalPosts}:{posts:Post[];archive:Ar
             {loadedPosts.length<totalPosts&&<button type="button" className="studioButton" aria-label="Load more posts" disabled={loading} onClick={loadMore}>{loading ? "Loading entries…" : "Load more"} <span aria-hidden="true">↓</span></button>}
             {loadError&&<p role="alert">More entries could not be loaded. Use Load more to try again, or browse the index.</p>}
           </div>
-          <aside className={styles.journalAside}><span className="studioMeta">Collected entries</span><p>Studio notes,<br/>field recordings,<br/>things worth hearing.</p><button type="button" className="studioLink" onClick={()=>setView("index")}>Browse the index <span aria-hidden="true">↗</span></button></aside>
+          <aside className={styles.journalAside}><span className="studioMeta">Collected entries</span><p>Studio notes,<br/>field recordings,<br/>things worth hearing.</p><button type="button" className="studioLink" onClick={()=>setView("index")}><span className={styles.journalLinkLabel}>Browse the index</span><span aria-hidden="true">↗</span></button></aside>
         </div> : <div className={styles.archive}>
           <label className={styles.filterLabel}>Category<select value={category} onChange={event=>setCategory(event.target.value)}><option value="all">All entries</option>{categories.map(value=><option key={value} value={value}>{value.replaceAll("-"," ")}</option>)}</select></label>
           <ol>{filtered.map(post=><li id={"post-"+post.id} key={post.id}><Link href={"/posts/"+post.id+"/"}><time dateTime={post.timestamp}>{post.timestamp.slice(0,10)}</time><span>{post.title}</span><span className={styles.archiveArrow} aria-hidden="true">↗</span></Link></li>)}</ol>

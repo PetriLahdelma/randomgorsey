@@ -165,8 +165,7 @@
   text-decoration: none;
 }
 
-.directLinks a:hover,
-.directLinks a:focus-visible {
+.directLinks a:where(:hover, :focus-visible) .directLinkLabel {
   text-decoration: underline;
   text-underline-offset: 0.22em;
 }
@@ -208,7 +207,7 @@
   color: #656760;
 }
 
-.directLinks a span {
+.directLinks a span[aria-hidden="true"] {
   font-size: 19px;
 }
 

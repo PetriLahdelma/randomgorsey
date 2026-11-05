@@ -356,10 +356,13 @@ a, button, input, textarea, select {
 
 .studioFooterLinks a:where(:hover) {
   color: var(--studio-blue);
+}
+
+.studioFooterLinks a:where(:hover) .studioFooterLinkLabel {
   text-decoration: underline;
 }
 
-.studioFooterLinks a span {
+.studioFooterLinks a span[aria-hidden="true"] {
   font-size: 19px;
 }
 

@@ -210,6 +210,7 @@
 }
 
 .journalAside p {
+  margin-bottom: 24px;
   font-size: 22px;
   line-height: 1.4;
   color: var(--studio-muted);
@@ -219,9 +220,15 @@
   padding: 0;
   font: inherit;
   text-align: left;
+  text-decoration: none;
   cursor: pointer;
   background: transparent;
   border: 0;
+}
+
+.journalLinkLabel {
+  text-decoration: underline;
+  text-underline-offset: 5px;
 }
 
 .filterLabel {
