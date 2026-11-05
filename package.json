@@ -1,6 +1,6 @@
 {
   "name": "randomgorsey",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

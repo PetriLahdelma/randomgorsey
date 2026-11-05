@@ -1,13 +1,14 @@
 export interface GalleryImage {
   src: string;
   caption: string;
+  alt?: string;
   width: number;
   height: number;
 }
 
 const galleryImages: GalleryImage[] = [
   { src: '/images/random-gorsey-grit-poster.png', caption: 'Random Gorsey Grit Poster', width: 1086, height: 1448 },
-  { src: '/images/varjostettu-muotokuva-pipossa-ja-laseissa.png', caption: 'Varjostettu muotokuva pipossa ja laseissa', width: 1254, height: 1254 },
+  { src: '/images/untitled_09.png', caption: 'UNTITLED_09.JPG', alt: 'Shadowed portrait wearing a beanie and glasses', width: 1254, height: 1254 },
   { src: '/images/clipart.jpg', caption: 'Clipart, Helsinki', width: 1734, height: 800 },
   { src: '/images/ride.jpg', caption: 'Ride in Birgit, Berlin', width: 983, height: 983 },
   { src: '/images/disco.jpg', caption: 'Disco balls in Birgit, Berlin', width: 1080, height: 720 },

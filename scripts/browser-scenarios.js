@@ -100,8 +100,8 @@ async (page) => {
       check(await page.locator("main section[data-tone]").count()===18,"Every gallery image has its own window");
       check(await page.getByRole("img",{name:"Random Gorsey Grit Poster"}).count()===1,"The Grit poster appears in the gallery");
       check(await page.getByRole("img",{name:"Random Gorsey Grit Poster"}).evaluate(e=>{const box=e.getBoundingClientRect();return Math.abs(box.width/box.height-1086/1448)<0.01;}),"The Grit poster retains its full portrait proportions");
-      check(await page.getByRole("img",{name:"Varjostettu muotokuva pipossa ja laseissa"}).count()===1,"The shaded portrait appears in the gallery");
-      check(await page.getByRole("img",{name:"Varjostettu muotokuva pipossa ja laseissa"}).evaluate(e=>{const box=e.getBoundingClientRect();return Math.abs(box.width/box.height-1)<0.01;}),"The shaded portrait retains its square proportions");
+      check(await page.getByText("UNTITLED_09.JPG",{exact:true}).count()===1,"The portrait window has the requested title");
+      check(await page.getByRole("img",{name:"Shadowed portrait wearing a beanie and glasses"}).evaluate(e=>{const box=e.getBoundingClientRect();return Math.abs(box.width/box.height-1)<0.01;}),"The portrait retains its square proportions");
     }
     if(path==="/about/"){
       const portrait=page.locator("main video");
