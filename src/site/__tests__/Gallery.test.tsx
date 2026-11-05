@@ -15,8 +15,9 @@ describe("Gallery Page", () => {
       expect(screen.getByText(image.caption)).toBeInTheDocument();
     }
     expect(galleryImages).toContainEqual({
-      src: "/images/varjostettu-muotokuva-pipossa-ja-laseissa.png",
-      caption: "Varjostettu muotokuva pipossa ja laseissa",
+      src: "/images/untitled_09.png",
+      caption: "UNTITLED_09.JPG",
+      alt: "Shadowed portrait wearing a beanie and glasses",
       width: 1254,
       height: 1254,
     });

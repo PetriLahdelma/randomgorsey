@@ -106,7 +106,7 @@ const Gallery: React.FC = () => {
                 }}
                 aria-label={`Open image: ${image.caption}`}
               >
-                <Image src={image.src} alt={image.caption} width={image.width} height={image.height} sizes="(max-width: 640px) calc(100vw - 64px), (max-width: 1000px) 45vw, 30vw" className={`${styles.image} ${image.src === "/images/random-gorsey-grit-poster.png" ? styles.posterImage : ""}`} />
+                <Image src={image.src} alt={image.alt ?? image.caption} width={image.width} height={image.height} sizes="(max-width: 640px) calc(100vw - 64px), (max-width: 1000px) 45vw, 30vw" className={`${styles.image} ${image.src === "/images/random-gorsey-grit-poster.png" ? styles.posterImage : ""}`} />
                 <span className={styles.fileIndex} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
               </button>
               <figcaption className={styles.figureMeta}>
@@ -126,7 +126,7 @@ const Gallery: React.FC = () => {
               <button ref={closeRef} type="button" className={styles.windowClose} aria-label="Close image" onClick={closeViewer}><XMarkIcon aria-hidden="true" /></button>
             </div>
             <div className={styles.viewerImageArea}>
-              <Image src={currentImage.src} alt={currentImage.caption} width={currentImage.width} height={currentImage.height} sizes="92vw" priority className={styles.viewerImage} />
+              <Image src={currentImage.src} alt={currentImage.alt ?? currentImage.caption} width={currentImage.width} height={currentImage.height} sizes="92vw" priority className={styles.viewerImage} />
             </div>
             <div className={styles.viewerControls}>
               <button type="button" onClick={showPrevious} aria-label="Previous image"><ArrowLeftIcon aria-hidden="true" />Previous</button>
