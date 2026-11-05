@@ -36,11 +36,15 @@ function StorybookHome() {
         url.origin === window.location.origin &&
         url.pathname === "/api/posts"
       ) {
-        const offset = Number(url.searchParams.get("offset") ?? 0);
-        const requestedLimit = Number(url.searchParams.get("limit") ?? 6);
+        const offsetParam = url.searchParams.get("offset");
+        const limitParam = url.searchParams.get("limit");
+        const offset = Number(offsetParam ?? 0);
+        const requestedLimit = Number(limitParam ?? 6);
         const limit = Math.min(requestedLimit, 12);
 
         if (
+          (offsetParam !== null && !/^\d+$/.test(offsetParam)) ||
+          (limitParam !== null && !/^\d+$/.test(limitParam)) ||
           !Number.isSafeInteger(offset) ||
           offset < 0 ||
           !Number.isSafeInteger(requestedLimit) ||
