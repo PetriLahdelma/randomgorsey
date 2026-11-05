@@ -16,4 +16,4 @@ export const spotifyEmbedUrl =
   "https://open.spotify.com/embed/artist/54Vv9rlCqX2nW2V0tXw33q?utm_source=generator";
 export const soundcloudPlaylistUrl = "https://soundcloud.com/randomgorsey/sets/tuunz";
 export const soundcloudEmbedUrl =
-  "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2029288998&color=%23d7ff44&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true";
+  "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2029288998&color=%2311140f&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true";
