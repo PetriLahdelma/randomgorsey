@@ -19,6 +19,8 @@ The content and metadata derive from `src/content`, `src/data/galleryImages.ts`,
 
 The artist permits search and user-requested AI summaries, and does not permit model training. The site expresses this with `Content-Signal: search=yes, ai-input=yes, ai-train=no` and selectively disallows documented training crawlers. These signals are usage preferences, not technical enforcement; not every crawler honors them.
 
+The blocked list follows [Cloudflare's published training-crawler example](https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/). Some providers use the same crawler for other purposes, so blocking it may also limit those services.
+
 Google currently combines Gemini model training and Gemini grounding under `Google-Extended`. At the artist's direction it is blocked to prioritize no training, which also limits Gemini grounding. Ordinary Google Search is unaffected. See [Google's crawler documentation](https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers).
 
 ## Boundaries
