@@ -39,6 +39,8 @@ describe("Home Page", () => {
     render(<Home posts={posts.slice(0,1)} archive={archive} totalPosts={archive.length}/>);
     fireEvent.click(screen.getByRole("button",{name:"Index"}));
     const firstEntry=screen.getByRole("link",{name:new RegExp(posts[0].title)});
+    expect(firstEntry.querySelector("time")).toHaveAttribute("datetime", posts[0].timestamp);
+    expect(firstEntry.querySelector("time")).toHaveTextContent(posts[0].timestamp);
     expect(firstEntry.querySelector("span:not([aria-hidden])")).toHaveTextContent(posts[0].title);
     expect(firstEntry.querySelector('span[aria-hidden="true"]')).toHaveTextContent("↗");
     getContext.mockRestore();

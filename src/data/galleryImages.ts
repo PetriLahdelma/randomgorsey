@@ -6,6 +6,17 @@ export interface GalleryImage {
   height: number;
 }
 
+/** A filename-style display label; original captions remain available as image descriptions. */
+export function galleryDisplayName(image: GalleryImage): string {
+  const base = image.caption
+    .replace(/\.(?:jpe?g|png|webp)$/i, "")
+    .replace(/\bHelsinki\b/gi, "")
+    .replace(/[^a-z0-9]+/gi, "_")
+    .replace(/^_+|_+$/g, "")
+    .toUpperCase();
+  return `${base}.JPG`;
+}
+
 const galleryImages: GalleryImage[] = [
   { src: '/images/random-gorsey-grit-poster.png', caption: 'Random Gorsey Grit Poster', width: 1086, height: 1448 },
   { src: '/images/untitled_09.png', caption: 'UNTITLED_09.JPG', alt: 'Shadowed portrait wearing a beanie and glasses', width: 1254, height: 1254 },

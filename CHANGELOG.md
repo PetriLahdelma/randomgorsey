@@ -6,6 +6,19 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 ## [Unreleased]
 
+## [0.4.7] - 2026-11-06
+
+### Changed
+
+- Display journal timestamps verbatim in the feed and index, with varied fictional times for the retrospective entries.
+- Set the 404 page title in Lisa Terminal Paper.
+- Display gallery image labels as underscore-separated `.JPG` names without repeating Helsinki.
+- Interlace gallery thumbnails while showing original images in the viewer.
+
+### Fixed
+
+- End journal excerpts at word boundaries.
+
 ## [0.4.6] - 2026-11-06
 
 ### Changed

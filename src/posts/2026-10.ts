@@ -4,7 +4,7 @@ const oct2026: Post[] = [
   {
     id: 63,
     title: 'Too Many Tabs',
-    timestamp: '2026-10-09T12:00',
+    timestamp: '2026-10-09T23:14',
     contentType: 'text',
     category: 'studio',
     body: `<p>Too many tabs open, several documents called FINAL, and one Ableton project quietly waiting behind everything else.</p>
@@ -17,7 +17,7 @@ const oct2026: Post[] = [
   {
     id: 64,
     title: 'Windowlicker Weather',
-    timestamp: '2026-10-27T12:00',
+    timestamp: '2026-10-27T22:42',
     contentType: 'text',
     category: 'recommendation',
     body: `<p>Aphex Twin while working late is either extremely helpful or completely destabilising. No middle ground. I put on a few records expecting background music and immediately stopped doing anything useful.</p>

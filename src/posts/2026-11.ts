@@ -4,7 +4,7 @@ const nov2026: Post[] = [
   {
     id: 65,
     title: 'The List',
-    timestamp: '2026-11-04T12:00',
+    timestamp: '2026-11-04T20:31',
     contentType: 'text',
     category: 'studio',
     body: `<p>The list has started generating its own weather system. Small tasks orbit larger tasks, messages produce more messages, and every finished thing reveals two things underneath it. Running a design studio is apparently also running a very elaborate list.</p>

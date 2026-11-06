@@ -100,7 +100,7 @@ export default function Home({posts,archive,totalPosts}:{posts:Post[];archive:Ar
           <aside className={styles.journalAside}><span className="studioMeta">Collected entries</span><p>Studio notes,<br/>field recordings,<br/>things worth hearing.</p><button type="button" className="studioLink" onClick={()=>setView("index")}><span className={styles.journalLinkLabel}>Browse the index</span><span aria-hidden="true">↗</span></button></aside>
         </div> : <div className={styles.archive}>
           <label className={styles.filterLabel}>Category<select value={category} onChange={event=>setCategory(event.target.value)}><option value="all">All entries</option>{categories.map(value=><option key={value} value={value}>{value.replaceAll("-"," ")}</option>)}</select></label>
-          <ol>{filtered.map(post=><li id={"post-"+post.id} key={post.id}><Link href={"/posts/"+post.id+"/"}><time dateTime={post.timestamp}>{post.timestamp.slice(0,10)}</time><span>{post.title}</span><span className={styles.archiveArrow} aria-hidden="true">↗</span></Link></li>)}</ol>
+          <ol>{filtered.map(post=><li id={"post-"+post.id} key={post.id}><Link href={"/posts/"+post.id+"/"}><time dateTime={post.timestamp}>{post.timestamp}</time><span>{post.title}</span><span className={styles.archiveArrow} aria-hidden="true">↗</span></Link></li>)}</ol>
         </div>}
       </section>
     </>

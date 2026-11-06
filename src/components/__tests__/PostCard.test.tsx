@@ -27,6 +27,37 @@ describe('PostCard', () => {
     expect(img).toHaveAttribute('title', 'Test Post');
   });
 
+  it('shows the stored timestamp verbatim without inventing seconds or a timezone', () => {
+    const timestamp = '2026-11-04T12:00';
+    const { container } = render(<PostCard post={{ ...post, timestamp }} />);
+    const time = container.querySelector('time');
+    expect(time).toHaveAttribute('datetime', timestamp);
+    expect(time).toHaveTextContent(timestamp);
+  });
+
+  it('ends truncated excerpts at a whole word and still expands to the complete text', async () => {
+    const user = userEvent.setup();
+    const body = '<p>Music takes unexpected directions when the studio is quiet.</p>';
+    render(<PostCard post={{ ...post, body }} truncateLength={20} showSocialShare={false} />);
+
+    expect(screen.getByText('Music takes...')).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Show more content' }));
+    expect(screen.getByText('Music takes unexpected directions when the studio is quiet.')).toBeInTheDocument();
+  });
+
+  it('keeps an entire first word even when it exceeds the excerpt limit', () => {
+    const body = '<p>Supercalifragilistic is a long first word.</p>';
+    render(<PostCard post={{ ...post, body }} truncateLength={8} showSocialShare={false} />);
+    expect(screen.getByText('Supercalifragilistic...')).toBeInTheDocument();
+  });
+
+  it('does not add an ellipsis when HTML length alone exceeds the excerpt limit', () => {
+    const body = '<p><strong>Short text.</strong></p>';
+    render(<PostCard post={{ ...post, body }} truncateLength={20} showSocialShare={false} />);
+    expect(screen.getByText('Short text.')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Show more content' })).toBeInTheDocument();
+  });
+
   it('keeps expansion and sharing as separate controls', async () => {
     const user = userEvent.setup();
     const longPost: Post = {

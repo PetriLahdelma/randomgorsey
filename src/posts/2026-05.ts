@@ -4,7 +4,7 @@ const may2026: Post[] = [
   {
     id: 58,
     title: 'Systems Everywhere',
-    timestamp: '2026-05-08T12:00',
+    timestamp: '2026-05-08T22:13',
     contentType: 'text',
     category: 'studio',
     body: `<p>Everything is a system now. Design systems, prompt systems, file systems, ways of keeping track of the ways I keep track of things.</p>
@@ -18,7 +18,7 @@ const may2026: Post[] = [
   {
     id: 59,
     title: 'One Good Hour',
-    timestamp: '2026-05-24T12:00',
+    timestamp: '2026-05-24T16:37',
     contentType: 'text',
     category: 'studio',
     body: `<p>Had one good hour with Ableton this week. That was the entire music schedule.</p>

@@ -46,6 +46,13 @@ describe("post content contract", () => {
     ]);
   });
 
+  it("gives retrospective entries distinct, explicit clock times", () => {
+    const timestamps = posts.filter((post) => post.id >= 57 && post.id <= 65).map((post) => post.timestamp);
+    expect(timestamps).toHaveLength(9);
+    expect(timestamps.every((timestamp) => /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(timestamp))).toBe(true);
+    expect(new Set(timestamps.map((timestamp) => timestamp.slice(11))).size).toBe(9);
+  });
+
   it("preserves the approved retrospective titles, dates, and prose", () => {
     const approvedContent = posts
       .filter((post) => post.id >= 57 && post.id <= 65)

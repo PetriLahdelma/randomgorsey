@@ -4,7 +4,7 @@ const apr2026: Post[] = [
   {
     id: 57,
     title: 'After the Demos',
-    timestamp: '2026-04-12T12:00',
+    timestamp: '2026-04-12T09:48',
     contentType: 'text',
     category: 'studio',
     body: `<p>The demos are still out there somewhere. I stopped checking for a reply every five minutes, which is progress. Now I only remember at inconvenient moments.</p>

@@ -82,14 +82,16 @@ function autoLinkUrls(html: string): string {
   return result;
 }
 
-function formatTimestamp(iso: string): string {
-  const [date, time] = iso.split("T");
+function truncateAtWord(text: string, limit: number): string {
+  if (text.length <= limit) return text;
 
-  if (time) {
-    return `${date} ${time.slice(0, 5)}:00`;
+  const words = text.split(/\s+/);
+  let excerpt = words[0];
+  for (const word of words.slice(1)) {
+    if (excerpt.length + 1 + word.length > limit) break;
+    excerpt += ` ${word}`;
   }
-
-  return date;
+  return `${excerpt}...`;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -129,7 +131,7 @@ const PostCard: React.FC<PostCardProps> = ({
   const hasLongContent = post.body.length > truncateLength;
   const shouldShowReadMore = hasLongContent && !expanded;
   const displayBody = shouldShowReadMore
-    ? `${plainBody.slice(0, truncateLength)}...`
+    ? truncateAtWord(plainBody, truncateLength)
     : post.body;
 
   React.useEffect(() => {
@@ -163,8 +165,7 @@ const PostCard: React.FC<PostCardProps> = ({
   const postUrl = toAbsoluteSiteUrl(`/posts/${post.id}/`);
 
   const shareText =
-    post.excerpt ||
-    plainBody.slice(0, 120) + (plainBody.length > 120 ? "..." : "");
+    post.excerpt || truncateAtWord(plainBody, 120);
 
   return (
     <motion.article
@@ -202,7 +203,7 @@ const PostCard: React.FC<PostCardProps> = ({
             dateTime={post.timestamp}
             className="font-mono-label text-muted-foreground block mb-2"
           >
-            {formatTimestamp(post.timestamp)}
+            {post.timestamp}
           </time>
         </motion.div>
 

@@ -4,7 +4,7 @@ const jul2026: Post[] = [
   {
     id: 60,
     title: 'The Other Studio',
-    timestamp: '2026-07-02T12:00',
+    timestamp: '2026-07-02T20:46',
     contentType: 'text',
     category: 'studio',
     body: `<p>The design studio has quietly become the main studio.</p>

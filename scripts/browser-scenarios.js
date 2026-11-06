@@ -140,6 +140,12 @@ async (page) => {
   const missingPage=await page.context().newPage();
   const missing=await missingPage.goto(base+"/posts/999999/",{waitUntil:"networkidle"});
   check(missing.status()===404,"Unknown post returns a real 404");
+  for(const width of [320,1440]) {
+    await missingPage.setViewportSize({width,height:844});
+    const heading = missingPage.getByRole("heading", {name:"Signal Not Found"});
+    check((await heading.evaluate(element=>getComputedStyle(element).fontFamily)).toLowerCase().includes("lisaterminal"), width+"px 404 heading uses Lisa Terminal Paper");
+    check(await missingPage.evaluate(()=>document.documentElement.scrollWidth<=innerWidth), width+"px 404 page has no horizontal overflow");
+  }
   await missingPage.close();
 
   await open("/listen/");
@@ -294,8 +300,11 @@ async (page) => {
 
   await open("/gallery/");
   const thumbnail=page.getByRole("button",{name:/Open image:/}).first();
+  check(await page.getByRole("button",{name:/Open image:/}).evaluateAll(buttons=>buttons.length===18&&buttons.every(button=>/^Open image: [A-Z0-9]+(?:_[A-Z0-9]+)*\.JPG$/.test(button.getAttribute("aria-label"))&&!button.getAttribute("aria-label").includes("HELSINKI"))),"Gallery names use raw-looking JPG labels without Helsinki");
+  check(await thumbnail.evaluate(element=>{const effect=getComputedStyle(element,"::after");return effect.backgroundImage.includes("repeating-linear-gradient")&&effect.pointerEvents==="none";}),"Gallery thumbnail has a non-interactive interlace overlay");
   await thumbnail.click();
   check(await page.getByRole("dialog",{name:"Image viewer"}).isVisible(),"Gallery viewer opens");
+  check(await page.getByRole("dialog",{name:"Image viewer"}).locator("img").evaluate(element=>getComputedStyle(element).filter==="none"),"Opened gallery image has no thumbnail filter");
   await page.keyboard.press("ArrowRight");
   await page.keyboard.press("Escape");
   check(await thumbnail.evaluate(element=>element===document.activeElement),"Gallery returns focus to the original thumbnail");

@@ -4,7 +4,7 @@ const sep2026: Post[] = [
   {
     id: 62,
     title: 'Small Machine',
-    timestamp: '2026-09-14T12:00',
+    timestamp: '2026-09-14T21:07',
     contentType: 'text',
     category: 'studio',
     body: `<p>Tried a small Ableton experiment: one synth, one drum rack, one return channel. No sample hunting and no opening another plugin because the current sound was not immediately perfect.</p>

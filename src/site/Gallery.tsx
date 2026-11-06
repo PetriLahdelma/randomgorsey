@@ -7,7 +7,7 @@ import React from "react";
 import { useAppShell } from "@/components/AppShell";
 import { StudioPageHeader } from "@/components/studio/StudioPageHeader";
 import { StudioWindow } from "@/components/studio/StudioWindow";
-import galleryImages from "@/data/galleryImages";
+import galleryImages, { galleryDisplayName } from "@/data/galleryImages";
 
 import styles from "./Gallery.module.css";
 
@@ -94,7 +94,7 @@ const Gallery: React.FC = () => {
 
       <section className={styles.contactSheet} aria-label={`${galleryImages.length} gallery images`}>
         {galleryImages.map((image, index) => (
-          <StudioWindow key={image.src} title={image.caption} tone="paper" className={styles.figureWindow}>
+          <StudioWindow key={image.src} title={galleryDisplayName(image)} tone="paper" className={styles.figureWindow}>
             <figure className={styles.figure}>
               <button
                 ref={(node) => { triggerRefs.current[index] = node; }}
@@ -105,7 +105,7 @@ const Gallery: React.FC = () => {
                   setCurrentIndex(index);
                   setOverlayActive(true);
                 }}
-                aria-label={`Open image: ${image.caption}`}
+                aria-label={`Open image: ${galleryDisplayName(image)}`}
               >
                 <Image src={image.src} alt={image.alt ?? image.caption} width={image.width} height={image.height} sizes="(max-width: 640px) calc(100vw - 64px), (max-width: 1000px) 45vw, 30vw" className={`${styles.image} ${image.src === "/images/random-gorsey-grit-poster.png" ? styles.posterImage : ""}`} />
                 <span className={styles.fileIndex} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
@@ -123,7 +123,7 @@ const Gallery: React.FC = () => {
         <div ref={overlayRef} className={styles.overlay} role="dialog" aria-modal="true" aria-label="Image viewer" data-lenis-prevent onMouseDown={(event) => { if (event.target === event.currentTarget) closeViewer(); }}>
           <div className={styles.viewer}>
             <div className={styles.viewerTitlebar}>
-              <span>{currentImage.caption}</span>
+              <span>{galleryDisplayName(currentImage)}</span>
               <button ref={closeRef} type="button" className={styles.windowClose} aria-label="Close image" onClick={closeViewer}><XMarkIcon aria-hidden="true" /></button>
             </div>
             <div className={styles.viewerImageArea}>
@@ -131,7 +131,7 @@ const Gallery: React.FC = () => {
             </div>
             <div className={styles.viewerControls}>
               <button type="button" onClick={showPrevious} aria-label="Previous image"><ArrowLeftIcon aria-hidden="true" />Previous</button>
-              <p aria-live="polite">{currentImage.caption} · {currentIndex + 1} / {galleryImages.length}</p>
+              <p aria-live="polite">{galleryDisplayName(currentImage)} · {currentIndex + 1} / {galleryImages.length}</p>
               <button type="button" onClick={showNext} aria-label="Next image">Next<ArrowRightIcon aria-hidden="true" /></button>
             </div>
           </div>
