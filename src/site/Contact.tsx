@@ -239,7 +239,7 @@ const Contact: React.FC = () => {
       <div className={styles.pageHeader}>
         <p className={styles.kicker}>Contact / Helsinki</p>
         <h1 className="studioTitle">Get in touch</h1>
-        <p className={styles.pageLead}>Booking, collaboration, or a note. Choose a route and send the relevant details.</p>
+        <p className={styles.pageLead}>Booking, collaboration, or a note. Choose a route and send the relevant details. Thanks!</p>
       </div>
 
       <StudioWindow

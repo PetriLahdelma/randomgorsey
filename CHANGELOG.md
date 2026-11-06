@@ -6,6 +6,12 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 ## [Unreleased]
 
+## [0.4.11] - 2026-11-06
+
+### Changed
+
+- Add a thank-you to the contact introduction.
+
 ## [0.4.10] - 2026-11-06
 
 ### Added
