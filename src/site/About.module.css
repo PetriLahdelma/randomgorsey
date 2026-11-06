@@ -12,15 +12,21 @@
 
 .composition {
   display: grid;
-  grid-template-columns: minmax(0, min(39%, 30rem)) minmax(0, 1fr);
+  grid-template-columns: minmax(0, min(19.5%, 15rem)) minmax(0, 1fr);
   gap: clamp(1.5rem, 4vw, 4rem);
+  column-gap: 0;
   align-items: start;
 }
 
 .portraitWindow {
   position: sticky;
   top: 6.5rem;
+  z-index: 2;
   margin-top: clamp(0rem, 8vw, 7rem);
+}
+
+.portraitWindow > :last-child {
+  padding: 0.75rem;
 }
 
 .portraitFigure {
@@ -62,6 +68,7 @@
 
 .biographyWindow {
   width: min(100%, 44rem);
+  margin-left: -1rem;
   box-shadow: 1rem 1rem 0 #d7ff44;
 }
 
@@ -83,9 +90,8 @@
 
 .projects {
   display: grid;
-  grid-template-columns: minmax(15rem, 0.6fr) minmax(20rem, 1.4fr);
-  gap: clamp(2rem, 7vw, 7rem);
-  max-width: 75rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
   margin: clamp(6rem, 13vw, 11rem) 0 0;
 }
 
@@ -149,6 +155,13 @@
   font-size: 1.35rem;
 }
 
+@media (width <= 850px) {
+  .portraitWindow > :first-child > :where(span:last-child) {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+}
+
 @media (width <= 720px) {
   .composition,
   .projects {
@@ -157,10 +170,12 @@
 
   .portraitWindow {
     position: static;
+    width: 50%;
     margin-top: 0;
   }
 
   .biographyWindow {
+    margin-left: 0;
     box-shadow: 0.5rem 0.5rem 0 #d7ff44;
   }
 

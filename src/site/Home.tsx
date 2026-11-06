@@ -8,6 +8,7 @@ import { releases } from "@/content/releases";
 import PostCard from "@/components/PostCard";
 import { StudioWindow } from "@/components/studio/StudioWindow";
 import { SignalArtwork } from "@/components/studio/SignalArtwork";
+import { SignalLabel } from "@/components/studio/SignalLabel";
 import { BrandMark } from "@/components/studio/BrandMark";
 import { saveHomeScroll, loadHomeScroll } from "@/lib/session-scroll";
 import styles from "./Home.module.css";
@@ -75,9 +76,9 @@ export default function Home({posts,archive,totalPosts}:{posts:Post[];archive:Ar
           </div>
         </div>
         <div className={styles.heroVisual}>
-          <div className={styles.artworkTitle}><span>Signal study</span><span aria-hidden="true">↙</span></div>
+          <div className={styles.artworkTitle}><SignalLabel /><span aria-hidden="true">↙</span></div>
           <SignalArtwork className={styles.signal}/>
-          <div className={styles.artworkFooter}><span>Random Gorsey</span><span>Generative artwork</span></div>
+          <div className={styles.artworkFooter}><span>Random Gorsey</span></div>
         </div>
         <StudioWindow title="Selected recording" className={styles.recordWindow}>
           <Link href={"/discography/#"+release.id} className={styles.recordCover} aria-label={"View "+release.title}>

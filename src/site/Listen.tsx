@@ -5,12 +5,13 @@ import type { CSSProperties } from "react";
 import { playerDetails } from "@/components/player/player-config";
 import { usePersistentPlayer } from "@/components/player/PersistentPlayer";
 import { SignalArtwork } from "@/components/studio/SignalArtwork";
+import { SignalLabel } from "@/components/studio/SignalLabel";
 import { StudioPageHeader } from "@/components/studio/StudioPageHeader";
 import { StudioWindow } from "@/components/studio/StudioWindow";
 import styles from "./Listen.module.css";
 
 export default function Listen() {
-  const { activeProvider, status, loadProvider } = usePersistentPlayer();
+  const { activeProvider, status, presentation, loadProvider } = usePersistentPlayer();
   const activeEmbed = activeProvider ? playerDetails[activeProvider] : null;
 
   return (
@@ -22,11 +23,19 @@ export default function Listen() {
         className={styles.header}
       />
 
-      <section className={styles.console} aria-label="Listening console">
+      <section
+        className={styles.console}
+        aria-label="Listening console"
+        style={{
+          "--listen-player-height": `${activeEmbed?.frameHeight ?? 280}px`,
+          "--listen-player-max-height": `${Math.max(playerDetails.spotify.frameHeight, playerDetails.soundcloud.frameHeight)}px`,
+        } as CSSProperties}
+      >
         <StudioWindow
           title={activeEmbed ? `${activeEmbed.label} / sitewide player` : "Select a source"}
           tone="paper"
-          className={styles.playerWindow}
+          className={`${styles.playerWindow} ${activeProvider && presentation === "compact" ? styles.playerWindowMinimized : ""}`}
+          inert={Boolean(activeProvider && presentation === "compact")}
         >
           <div className={styles.sourceButtons} aria-label="Player sources">
             {(["spotify", "soundcloud"] as const).map((provider) => (
@@ -47,7 +56,6 @@ export default function Listen() {
           <div
             className={styles.playerWell}
             data-player-anchor
-            style={activeEmbed ? { "--listen-player-height": `${activeEmbed.frameHeight}px` } as CSSProperties : undefined}
           >
             {!activeEmbed ? (
               <div className={styles.idleState}>
@@ -67,13 +75,12 @@ export default function Listen() {
 
         <div className={styles.artworkPanel} aria-hidden="true">
           <div className={styles.artworkTitle}>
-            <span>Signal study</span>
+            <SignalLabel />
             <span>↙</span>
           </div>
           <SignalArtwork className={styles.artwork} pace="energetic" />
           <div className={styles.artworkFooter}>
             <span>Random Gorsey</span>
-            <span>Generative artwork</span>
           </div>
         </div>
       </section>

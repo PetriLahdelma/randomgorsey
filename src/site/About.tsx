@@ -49,7 +49,7 @@ const About: React.FC = () => {
 
       <section className={styles.composition} aria-label="Artist biography">
         <StudioWindow
-          title="Portrait"
+          title="UNTITLED_09.JPG"
           tone="paper"
           className={styles.portraitWindow}
         >
@@ -86,9 +86,10 @@ const About: React.FC = () => {
               <button
                 type="button"
                 className="studioButton"
+                aria-label={portraitPlaying ? "Pause portrait loop" : "Play portrait loop"}
                 onClick={togglePortrait}
               >
-                {portraitPlaying ? "Pause portrait loop" : "Play portrait loop"}
+                {portraitPlaying ? "Pause" : "Play"}
               </button>
             </figcaption>
           </figure>

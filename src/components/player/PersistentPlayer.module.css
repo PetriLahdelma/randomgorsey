@@ -16,6 +16,7 @@
 }
 
 .listenAligned {
+  position: absolute;
   inset: var(--player-anchor-top, 8rem) auto auto var(--player-anchor-left, 50%);
   width: var(--player-anchor-width, min(44rem, calc(100vw - 2rem)));
   background: transparent;
@@ -57,6 +58,30 @@
   font-size: 18px;
   line-height: 1;
   white-space: nowrap;
+}
+
+.ticker {
+  flex: 1 1 auto;
+}
+
+.tickerTrack {
+  display: inline-block;
+  width: max-content;
+  padding-left: 100%;
+  animation: ticker-scroll 18s linear infinite;
+}
+
+@keyframes ticker-scroll {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tickerTrack {
+    padding-left: 0;
+    animation: none;
+  }
 }
 
 .playerActions {

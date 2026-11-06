@@ -10,9 +10,9 @@
 .console {
   display: grid;
   grid-template-areas: "art player";
-  grid-template-columns: minmax(0, 56%) minmax(22rem, 44%);
+  grid-template-columns: minmax(0, 1fr) minmax(22rem, 50%);
   align-items: start;
-  max-width: 78rem;
+  max-width: 84rem;
   margin-top: clamp(1.5rem, 4vw, 3.5rem);
 }
 
@@ -50,7 +50,13 @@
   z-index: 2;
   grid-area: player;
   width: min(44rem, calc(100% + 2.5rem));
-  margin: 2rem 0 0 -2.5rem;
+  margin: 2rem 0 calc(var(--listen-player-max-height) - var(--listen-player-height)) -2.5rem;
+}
+
+/* Keep the inline panel's footprint while the persistent player is minimized. */
+.playerWindowMinimized {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .sourceButtons {
@@ -136,7 +142,7 @@
 
   .playerWindow {
     width: 100%;
-    margin: 0;
+    margin: 0 0 calc(var(--listen-player-max-height) - var(--listen-player-height));
   }
 
   .artworkPanel {

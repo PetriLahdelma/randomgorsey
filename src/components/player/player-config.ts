@@ -25,7 +25,7 @@ export const playerDetails: Record<
     src: spotifyEmbedUrl,
     title: "Spotify player",
     height: 352,
-    frameHeight: 368,
+    frameHeight: 356,
     directHref: platformLinks.find((platform) => platform.id === "spotify")!.href,
     allow: "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture",
   },

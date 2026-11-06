@@ -1,0 +1,57 @@
+.label {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+
+.equalizer {
+  display: inline-flex;
+  gap: 2px;
+  align-items: end;
+  height: 10px;
+}
+
+.equalizer span {
+  display: block;
+  width: 2px;
+  height: 10px;
+  background: currentcolor;
+  transform: scaleY(0.4);
+  transform-origin: bottom;
+}
+
+.equalizer span:nth-child(2) {
+  transform: scaleY(0.8);
+}
+
+.equalizer span:nth-child(3) {
+  transform: scaleY(0.6);
+}
+
+.equalizer span:nth-child(4) {
+  transform: scaleY(0.3);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .equalizer span {
+    animation: signal-level 1s steps(3, end) infinite alternate;
+  }
+
+  .equalizer span:nth-child(2) {
+    animation-delay: -0.65s;
+  }
+
+  .equalizer span:nth-child(3) {
+    animation-delay: -0.25s;
+  }
+
+  .equalizer span:nth-child(4) {
+    animation-delay: -0.8s;
+  }
+}
+
+@keyframes signal-level {
+  from { transform: scaleY(0.2); }
+  to { transform: scaleY(1); }
+}

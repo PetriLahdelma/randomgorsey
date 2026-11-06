@@ -82,6 +82,7 @@ describe("Listen Page", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Minimize player" }));
     expect(screen.getByTitle("Spotify player")).toBe(iframe);
+    expect(screen.getByTitle("Now playing: Random Gorsey")).toBeInTheDocument();
     const expand = screen.getByRole("button", { name: "Expand player" });
     expect(expand).toBeInTheDocument();
     expect(iframe).toHaveAttribute("tabindex", "-1");
@@ -92,13 +93,32 @@ describe("Listen Page", () => {
     expect(iframe).toHaveAttribute("tabindex", "0");
   });
 
-  it("expands an already-active provider without resetting or replacing it", () => {
+  it("hides the listening-console player panel while minimized and restores it on expansion", () => {
+    renderListen();
+    fireEvent.click(screen.getByRole("button", { name: /load soundcloud player/i }));
+    const panel = screen.getByText("SoundCloud / sitewide player").closest("section");
+
+    expect(panel).not.toHaveAttribute("aria-hidden");
+    expect(panel).not.toHaveAttribute("inert");
+    fireEvent.click(screen.getByRole("button", { name: "Minimize player" }));
+    expect(panel).toHaveAttribute("aria-hidden", "true");
+    expect(panel).toHaveAttribute("inert");
+    expect(screen.queryByRole("button", { name: /load soundcloud player/i })).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Expand player" }));
+    expect(panel).not.toHaveAttribute("aria-hidden");
+    expect(panel).not.toHaveAttribute("inert");
+    expect(screen.getByRole("button", { name: /load soundcloud player/i })).toBeInTheDocument();
+  });
+
+  it("does not reset an active provider when selected again after restoring the console", () => {
     renderListen();
     const source = screen.getByRole("button", { name: /load spotify player/i });
     fireEvent.click(source);
     const iframe = screen.getByTitle("Spotify player");
     fireEvent.load(iframe);
     fireEvent.click(screen.getByRole("button", { name: "Minimize player" }));
+    fireEvent.click(screen.getByRole("button", { name: "Expand player" }));
 
     fireEvent.click(source);
 

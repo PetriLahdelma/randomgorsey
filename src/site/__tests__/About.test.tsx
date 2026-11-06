@@ -35,6 +35,7 @@ describe("About Page", () => {
     render(<About />);
 
     expect(screen.getByRole("heading", { level: 1, name: "About" })).toBeInTheDocument();
+    expect(screen.getByText("UNTITLED_09.JPG")).toBeInTheDocument();
     expect(screen.getByText(/Helsinki-based producer Random Gorsey aka DJ Pizza Hut/)).toBeInTheDocument();
     expect(screen.getByText(/Self-taught and driven by instinct/)).toBeInTheDocument();
     expect(screen.getByText(/Actively producing and exploring new tools/)).toBeInTheDocument();

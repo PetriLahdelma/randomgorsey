@@ -8,6 +8,8 @@ import {
   type EmbedProvider,
 } from "@/components/player/player-config";
 
+import { attachSoundCloudMetadata, type SoundCloudPlaybackMetadata } from "./soundcloud-metadata";
+
 import styles from "./PersistentPlayer.module.css";
 
 type EmbedStatus = "idle" | "loading" | "ready" | "timed-out";
@@ -125,6 +127,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     <PlayerContext.Provider value={value}>
       {children}
       <PersistentPlayer
+        key={activeProvider ?? "none"}
         activeProvider={activeProvider}
         status={status}
         presentation={presentation}
@@ -161,9 +164,17 @@ function PersistentPlayer({
   onClose,
 }: PersistentPlayerProps) {
   const frameRef = React.useRef<HTMLDivElement | null>(null);
+  const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
+  const [track, setTrack] = React.useState<SoundCloudPlaybackMetadata | null>(null);
   const compactExpandRef = React.useRef<HTMLButtonElement | null>(null);
   const expandedMinimizeRef = React.useRef<HTMLButtonElement | null>(null);
   const focusAfterChange = React.useRef<"expand" | "minimize" | null>(null);
+
+  React.useEffect(() => {
+    if (activeProvider !== "soundcloud" || !iframeRef.current) return;
+    const iframe = iframeRef.current;
+    return attachSoundCloudMetadata(iframe, setTrack);
+  }, [activeProvider]);
 
   React.useLayoutEffect(() => {
     const target = focusAfterChange.current;
@@ -182,31 +193,33 @@ function PersistentPlayer({
     const anchor = document.querySelector<HTMLElement>("[data-player-anchor]");
     if (!anchor) return;
 
-    let animationFrame = 0;
+    // Position against the document so the iframe and its placeholder scroll together.
+    // The iframe stays mounted here while the player changes presentation or route.
     const place = () => {
-      cancelAnimationFrame(animationFrame);
-      animationFrame = requestAnimationFrame(() => {
-        const rect = anchor.getBoundingClientRect();
-        frame.style.setProperty("--player-anchor-top", `${rect.top}px`);
-        frame.style.setProperty("--player-anchor-left", `${rect.left}px`);
-        frame.style.setProperty("--player-anchor-width", `${rect.width}px`);
-      });
+      const rect = anchor.getBoundingClientRect();
+      frame.style.setProperty("--player-anchor-top", `${rect.top + window.scrollY}px`);
+      frame.style.setProperty("--player-anchor-left", `${rect.left + window.scrollX}px`);
+      frame.style.setProperty("--player-anchor-width", `${rect.width}px`);
     };
     const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(place);
     observer?.observe(anchor);
+    const main = document.getElementById("main-content");
+    const header = document.querySelector(".studioHeader");
+    if (main) observer?.observe(main);
+    if (header) observer?.observe(header);
     window.addEventListener("resize", place);
-    window.addEventListener("scroll", place, { passive: true });
     place();
     return () => {
-      cancelAnimationFrame(animationFrame);
       observer?.disconnect();
       window.removeEventListener("resize", place);
-      window.removeEventListener("scroll", place);
     };
   }, [activeProvider, pathname, presentation]);
 
   if (!activeProvider) return null;
   const detail = playerDetails[activeProvider];
+  const currentTrack = activeProvider === "soundcloud" && track?.isPlaying
+    ? `Now playing: ${track.artist} — ${track.title}`
+    : "Now playing: Random Gorsey";
   const alignedToListen = pathname === "/listen/" && presentation === "expanded";
   const className = [
     styles.player,
@@ -237,7 +250,13 @@ function PersistentPlayer({
     >
       <div className={styles.playerHeader}>
         <span className={styles.windowIcon} aria-hidden="true" />
-        <span className={styles.playerTitle}>{presentation === "compact" ? detail.label : `${detail.label} / external player`}</span>
+        {presentation === "compact" ? (
+          <span className={`${styles.playerTitle} ${styles.ticker}`} title={currentTrack}>
+            <span className={styles.tickerTrack}>{currentTrack}</span>
+          </span>
+        ) : (
+          <span className={styles.playerTitle}>{detail.label} / external player</span>
+        )}
         <div className={styles.playerActions}>{actions}</div>
       </div>
       <div className={styles.playerBody}>
@@ -254,6 +273,7 @@ function PersistentPlayer({
             style={{ "--player-height": `${detail.height}px` } as React.CSSProperties}
           >
             <iframe
+              ref={iframeRef}
               key={activeProvider}
               title={detail.title}
               src={detail.src}

@@ -6,6 +6,20 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 ## [Unreleased]
 
+## [0.4.6] - 2026-11-06
+
+### Changed
+
+- Keep the listening console in place as the page scrolls and reserve its space when the player is minimized or its source changes.
+- Widen the listening player and add a scrolling compact label with SoundCloud track details when available.
+- Rename the signal artwork to Stable azimuth, add a small animated equalizer label, and remove the misleading generative-artwork caption.
+- Halve the About portrait, label it `UNTITLED_09.JPG`, and overlap it slightly with the biography window.
+- Stack the Other projects heading above its full-width list and remove the rule above Collected entries.
+
+### Fixed
+
+- Remove excess vertical space around the Spotify embed.
+
 ## [0.4.5] - 2026-11-06
 
 ### Changed

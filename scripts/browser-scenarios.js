@@ -30,9 +30,26 @@ async (page) => {
     });
     check(dimensions && dimensions.heightBefore >= 200 && Math.abs(dimensions.heightAfter-dimensions.heightBefore)<1, label+" retains its height when component CSS loads last: "+JSON.stringify(dimensions));
   };
+  const checkSignalLabel = async (label, shouldAnimate) => {
+    const equalizer=page.locator("main [class*=equalizer]").first();
+    check(await page.getByText("Stable azimuth",{exact:true}).count()===1,label+" uses the Stable azimuth artwork label");
+    check(await page.getByText("Signal study",{exact:true}).count()===0&&await page.getByText("Generative artwork",{exact:true}).count()===0,label+" removes the old signal and generative captions");
+    check(await equalizer.getAttribute("aria-hidden")==="true"&&await equalizer.locator(":scope > span").count()===4,label+" equalizer is a four-bar decorative graphic");
+    const before=await equalizer.locator(":scope > span").evaluateAll(bars=>bars.map(bar=>({animation:getComputedStyle(bar).animationName,transform:getComputedStyle(bar).transform})));
+    if(shouldAnimate){
+      await page.waitForTimeout(450);
+      const after=await equalizer.locator(":scope > span").evaluateAll(bars=>bars.map(bar=>getComputedStyle(bar).transform));
+      check(before.every(bar=>bar.animation!=="none")&&after.some((transform,index)=>transform!==before[index].transform),label+" equalizer bars animate under default motion");
+    } else {
+      await page.waitForTimeout(250);
+      const after=await equalizer.locator(":scope > span").evaluateAll(bars=>bars.map(bar=>getComputedStyle(bar).transform));
+      check(before.every(bar=>bar.animation==="none")&&after.every((transform,index)=>transform===before[index].transform),label+" equalizer bars remain static under reduced motion");
+    }
+  };
   await page.context().clearCookies();
   await page.setViewportSize({width:1440,height:1000});
   await open("/");
+  await checkSignalLabel("Home",true);
   await checkSocialPreview("Home");
   const socialImage=await page.request.get(base+"/images/og.png");
   check(socialImage.status()===200 && socialImage.headers()["content-type"].includes("image/png"),"Social preview image is served as PNG");
@@ -126,6 +143,7 @@ async (page) => {
   await missingPage.close();
 
   await open("/listen/");
+  await checkSignalLabel("Listen",true);
   const listenArtwork=page.locator("main [data-pace=energetic]");
   check(await listenArtwork.count()===1,"Listen artwork uses the energetic pace");
   await checkArtworkSizing("energetic", "Listen artwork");
@@ -141,16 +159,50 @@ async (page) => {
   const playerFixture=`<html><body><button onclick="document.querySelector('audio').play()">Play test audio</button><audio muted loop src="data:audio/wav;base64,${wave.toString("base64")}"></audio></body></html>`;
   await page.route("https://open.spotify.com/**",route=>route.fulfill({contentType:"text/html",body:playerFixture}));
   await page.route("https://w.soundcloud.com/**",route=>route.fulfill({contentType:"text/html",body:"<html><body>Player test fixture</body></html>"}));
+  await page.route("https://w.soundcloud.com/player/api.js",route=>route.fulfill({contentType:"application/javascript",body:`(()=>{function Widget(){const handlers={},widget={sound:{title:"Night Bus",user:{username:"Random Gorsey"}},bind:(event,listener)=>{handlers[event]=listener;},unbind:event=>{delete handlers[event];},getCurrentSound:callback=>callback(widget.sound),emit:event=>handlers[event]?.()};window.__rgSoundCloudTestWidget=widget;return widget;}Widget.Events={READY:"READY",PLAY:"PLAY",PAUSE:"PAUSE",FINISH:"FINISH"};window.SC={Widget};})();`}));
   await page.getByRole("button",{name:/Load Spotify/i}).click();
   check(await page.locator("iframe").count()===1,"Explicit Spotify loading creates one player");
   check(await page.locator(".studioSquarePlayer").evaluate(e=>getComputedStyle(e).borderRadius)==="0px","Spotify outer viewport has square corners");
   await page.frameLocator('iframe[title="Spotify player"]').getByRole("button",{name:"Play test audio"}).click();
   await page.waitForTimeout(200);
   await page.evaluate(()=>{window.__rgPersistentFrame=document.querySelector('iframe[title="Spotify player"]');});
+  const scrollAlignment=await page.evaluate(()=>{
+    const player=document.querySelector("[data-persistent-player]"),anchor=document.querySelector("[data-player-anchor]");
+    const beforePlayer=player.getBoundingClientRect(),beforeAnchor=anchor.getBoundingClientRect();
+    const scrollDistance=Math.min(220,document.documentElement.scrollHeight-innerHeight-scrollY);
+    window.scrollBy(0,Math.max(1,scrollDistance));
+    const afterPlayer=player.getBoundingClientRect(),afterAnchor=anchor.getBoundingClientRect();
+    return {
+      beforeGap:beforePlayer.top-beforeAnchor.top,
+      afterGap:afterPlayer.top-afterAnchor.top,
+      playerDelta:afterPlayer.top-beforePlayer.top,
+      anchorDelta:afterAnchor.top-beforeAnchor.top
+    };
+  });
+  check(Math.abs(scrollAlignment.beforeGap)<1&&Math.abs(scrollAlignment.afterGap)<1&&Math.abs(scrollAlignment.playerDelta-scrollAlignment.anchorDelta)<1,"Listen player remains attached to its panel during immediate page scrolling");
+  await page.evaluate(()=>window.scrollTo(0,0));
+  const listenLayoutBeforeMinimize=await page.evaluate(()=>{
+    const panel=document.querySelector("main [class*=playerWindow]"),footer=document.querySelector("footer"),rect=panel.getBoundingClientRect();
+    return {panelTop:rect.top+scrollY,panelLeft:rect.left,panelWidth:rect.width,panelHeight:rect.height,footerTop:footer.getBoundingClientRect().top+scrollY,documentHeight:document.documentElement.scrollHeight,scrollY};
+  });
   const beforeNavigation=await page.frameLocator('iframe[title="Spotify player"]').locator("audio").evaluate(a=>a.currentTime);
   await page.getByRole("button",{name:"Minimize player"}).click();
   check(await page.evaluate(()=>window.__rgPersistentFrame===document.querySelector('iframe[title="Spotify player"]')),"Minimizing retains the same player iframe");
+  check(await page.locator('[data-persistent-player] [title="Now playing: Random Gorsey"]').isVisible(),"Compact Spotify player uses the exact Now playing fallback label");
+  check(!await page.locator("main [class*=playerWindow]").isVisible(),"Minimizing hides the expanded listening-console panel");
+  check(await page.locator('iframe[title="Spotify player"]').getAttribute("tabindex")==="-1"&&await page.locator('iframe[title="Spotify player"]').evaluate(element=>element.closest('[aria-hidden="true"]')?.hasAttribute("inert")===true),"Minimized player iframe is removed from tab focus");
+  const listenLayoutAfterMinimize=await page.evaluate(()=>{
+    const panel=document.querySelector("main [class*=playerWindow]"),footer=document.querySelector("footer"),rect=panel.getBoundingClientRect();
+    return {panelTop:rect.top+scrollY,panelLeft:rect.left,panelWidth:rect.width,panelHeight:rect.height,footerTop:footer.getBoundingClientRect().top+scrollY,documentHeight:document.documentElement.scrollHeight,scrollY};
+  });
+  check(Object.keys(listenLayoutBeforeMinimize).every(key=>Math.abs(listenLayoutBeforeMinimize[key]-listenLayoutAfterMinimize[key])<1),"Desktop minimization preserves panel, footer, document and scroll geometry: "+JSON.stringify({before:listenLayoutBeforeMinimize,after:listenLayoutAfterMinimize}));
   await page.getByRole("button",{name:"Expand player"}).click();
+  check(await page.locator("main [class*=playerWindow]").isVisible(),"Expanding restores the listening-console panel");
+  const listenLayoutAfterExpand=await page.evaluate(()=>{
+    const panel=document.querySelector("main [class*=playerWindow]"),footer=document.querySelector("footer"),rect=panel.getBoundingClientRect();
+    return {panelTop:rect.top+scrollY,panelLeft:rect.left,panelWidth:rect.width,panelHeight:rect.height,footerTop:footer.getBoundingClientRect().top+scrollY,documentHeight:document.documentElement.scrollHeight,scrollY};
+  });
+  check(Object.keys(listenLayoutBeforeMinimize).every(key=>Math.abs(listenLayoutBeforeMinimize[key]-listenLayoutAfterExpand[key])<1),"Desktop expansion preserves the original panel and footer geometry");
   await page.getByRole("navigation",{name:"Main navigation"}).getByRole("link",{name:"About",exact:true}).click();
   await page.waitForURL("**/about/");
   await page.getByRole("button",{name:"Expand player"}).waitFor();
@@ -164,8 +216,71 @@ async (page) => {
   check(await page.evaluate(()=>window.__rgPersistentFrame===document.querySelector('iframe[title="Spotify player"]')),"Returning to Listen restores the same player");
   check(await page.getByRole("navigation",{name:"Music platforms"}).count()===0,"Listen does not repeat the footer platform links");
   check(await page.locator("footer .studioFooterLinks a").first().evaluate(e=>getComputedStyle(e).gap)==="12px","Footer link label and icon use the wider gap");
+  const desktopProviderLayout=await page.evaluate(()=>{const panel=document.querySelector("main [class*=playerWindow]"),footer=document.querySelector("footer"),rect=panel.getBoundingClientRect();return {panelTop:rect.top+scrollY,footerTop:footer.getBoundingClientRect().top+scrollY,documentHeight:document.documentElement.scrollHeight};});
   await page.getByRole("button",{name:/Load SoundCloud/i}).click();
   check(await page.locator("iframe").count()===1 && /soundcloud/.test(await page.locator("iframe").getAttribute("src")),"Provider handoff retains one player");
+  await page.waitForFunction(()=>Boolean(window.__rgSoundCloudTestWidget));
+  await page.evaluate(()=>window.__rgSoundCloudTestWidget.emit("PLAY"));
+  await page.getByRole("button",{name:"Minimize player"}).click();
+  const tickerText="Now playing: Random Gorsey — Night Bus";
+  const ticker=page.locator('[data-persistent-player] [title="'+tickerText+'"]');
+  check(await ticker.isVisible()&&await ticker.locator('[class*=tickerTrack]').textContent()===tickerText,"Compact SoundCloud ticker contains one exact artist and title copy");
+  const tickerStart=await ticker.evaluate(element=>{const track=element.firstElementChild,range=document.createRange();range.selectNodeContents(track);const mask=element.getBoundingClientRect(),text=range.getBoundingClientRect();return {maskLeft:mask.left,maskRight:mask.right,textLeft:text.left,textRight:text.right};});
+  check(tickerStart.textLeft>=tickerStart.maskRight-8,"Compact ticker enters fully from the right mask edge: "+JSON.stringify(tickerStart));
+  await page.waitForTimeout(400);
+  const tickerMoving=await ticker.evaluate(element=>{const track=element.firstElementChild,range=document.createRange();range.selectNodeContents(track);const mask=element.getBoundingClientRect(),text=range.getBoundingClientRect();return {maskLeft:mask.left,maskRight:mask.right,textLeft:text.left,textRight:text.right};});
+  check(tickerMoving.textLeft<tickerMoving.maskRight&&tickerMoving.textRight>tickerMoving.maskLeft,"Compact ticker moves into the visible mask from the right: "+JSON.stringify(tickerMoving));
+  check(await page.locator("iframe").count()===1,"SoundCloud metadata enhancement creates no extra iframe");
+  await page.emulateMedia({reducedMotion:"reduce"});
+  check(await page.locator('[data-persistent-player] [class*=tickerTrack]').evaluate(element=>{const range=document.createRange();range.selectNodeContents(element);const mask=element.parentElement.getBoundingClientRect(),text=range.getBoundingClientRect();return getComputedStyle(element).animationName==="none"&&text.left<mask.right&&text.right>mask.left;}),"Reduced-motion ticker stops and remains readable inside its mask");
+  await page.emulateMedia({reducedMotion:"no-preference"});
+  await page.getByRole("button",{name:"Expand player"}).click();
+  await page.evaluate(()=>window.__rgSoundCloudTestWidget.emit("PAUSE"));
+  await page.getByRole("button",{name:"Minimize player"}).click();
+  check(await page.locator('[data-persistent-player] [title="Now playing: Random Gorsey"]').isVisible(),"Paused SoundCloud player returns to the exact Now playing fallback label");
+  await page.getByRole("button",{name:"Expand player"}).click();
+  const desktopSoundCloudLayout=await page.evaluate(()=>{const panel=document.querySelector("main [class*=playerWindow]"),footer=document.querySelector("footer"),rect=panel.getBoundingClientRect();return {panelTop:rect.top+scrollY,footerTop:footer.getBoundingClientRect().top+scrollY,documentHeight:document.documentElement.scrollHeight};});
+  check(Object.keys(desktopProviderLayout).every(key=>Math.abs(desktopProviderLayout[key]-desktopSoundCloudLayout[key])<1),"Desktop Spotify to SoundCloud switching preserves panel, footer and document geometry: "+JSON.stringify({spotify:desktopProviderLayout,soundcloud:desktopSoundCloudLayout}));
+  await page.getByRole("button",{name:/Load Spotify/i}).click();
+  const desktopSpotifyRestoredLayout=await page.evaluate(()=>{const panel=document.querySelector("main [class*=playerWindow]"),footer=document.querySelector("footer"),rect=panel.getBoundingClientRect();return {panelTop:rect.top+scrollY,footerTop:footer.getBoundingClientRect().top+scrollY,documentHeight:document.documentElement.scrollHeight};});
+  check(Object.keys(desktopProviderLayout).every(key=>Math.abs(desktopProviderLayout[key]-desktopSpotifyRestoredLayout[key])<1),"Desktop SoundCloud to Spotify switching preserves panel, footer and document geometry");
+  await page.getByRole("button",{name:/Load SoundCloud/i}).click();
+  await page.evaluate(()=>{window.__rgPersistentFrame=document.querySelector('iframe[title="SoundCloud player"]');});
+  await page.setViewportSize({width:390,height:844});
+  const mobileProviderLayout=await page.evaluate(()=>{const panel=document.querySelector("main [class*=playerWindow]"),footer=document.querySelector("footer"),rect=panel.getBoundingClientRect();return {panelTop:rect.top+scrollY,footerTop:footer.getBoundingClientRect().top+scrollY,documentHeight:document.documentElement.scrollHeight};});
+  await page.getByRole("button",{name:/Load Spotify/i}).click();
+  const mobileSpotifyLayout=await page.evaluate(()=>{const panel=document.querySelector("main [class*=playerWindow]"),footer=document.querySelector("footer"),rect=panel.getBoundingClientRect();return {panelTop:rect.top+scrollY,footerTop:footer.getBoundingClientRect().top+scrollY,documentHeight:document.documentElement.scrollHeight};});
+  check(Object.keys(mobileProviderLayout).every(key=>Math.abs(mobileProviderLayout[key]-mobileSpotifyLayout[key])<1),"Mobile SoundCloud to Spotify switching preserves panel, footer and document geometry");
+  await page.getByRole("button",{name:/Load SoundCloud/i}).click();
+  const mobileSoundCloudRestoredLayout=await page.evaluate(()=>{const panel=document.querySelector("main [class*=playerWindow]"),footer=document.querySelector("footer"),rect=panel.getBoundingClientRect();return {panelTop:rect.top+scrollY,footerTop:footer.getBoundingClientRect().top+scrollY,documentHeight:document.documentElement.scrollHeight};});
+  check(Object.keys(mobileProviderLayout).every(key=>Math.abs(mobileProviderLayout[key]-mobileSoundCloudRestoredLayout[key])<1),"Mobile Spotify to SoundCloud switching preserves panel, footer and document geometry");
+  await page.evaluate(()=>{window.__rgPersistentFrame=document.querySelector('iframe[title="SoundCloud player"]');});
+  await page.getByRole("button",{name:"Open menu",exact:true}).click();
+  await page.waitForFunction(()=>{const player=document.querySelector("[data-persistent-player]"),anchor=document.querySelector("[data-player-anchor]");if(!player||!anchor)return false;const a=anchor.getBoundingClientRect(),p=player.getBoundingClientRect();return Math.abs(a.top-p.top)<1&&Math.abs(a.left-p.left)<1&&Math.abs(a.width-p.width)<1;});
+  check(await page.evaluate(()=>window.__rgPersistentFrame===document.querySelector('iframe[title="SoundCloud player"]')),"Opening the mobile menu repositions the same SoundCloud iframe with its anchor");
+  await page.getByRole("button",{name:"Close menu",exact:true}).click();
+  await page.waitForFunction(()=>{const player=document.querySelector("[data-persistent-player]"),anchor=document.querySelector("[data-player-anchor]");if(!player||!anchor)return false;const a=anchor.getBoundingClientRect(),p=player.getBoundingClientRect();return Math.abs(a.top-p.top)<1&&Math.abs(a.left-p.left)<1&&Math.abs(a.width-p.width)<1;});
+  check(await page.evaluate(()=>window.__rgPersistentFrame===document.querySelector('iframe[title="SoundCloud player"]')),"Closing the mobile menu repositions the same SoundCloud iframe with its anchor");
+  const mobileLayoutBeforeMinimize=await page.evaluate(()=>{
+    const panel=document.querySelector("main [class*=playerWindow]"),footer=document.querySelector("footer"),rect=panel.getBoundingClientRect();
+    return {panelTop:rect.top+scrollY,panelLeft:rect.left,panelWidth:rect.width,panelHeight:rect.height,footerTop:footer.getBoundingClientRect().top+scrollY,documentHeight:document.documentElement.scrollHeight,scrollY};
+  });
+  await page.getByRole("button",{name:"Minimize player"}).click();
+  check(!await page.locator("main [class*=playerWindow]").isVisible(),"SoundCloud minimization hides the expanded listening-console panel");
+  check(await page.evaluate(()=>window.__rgPersistentFrame===document.querySelector('iframe[title="SoundCloud player"]')),"SoundCloud minimization retains the same iframe");
+  const mobileLayoutAfterMinimize=await page.evaluate(()=>{
+    const panel=document.querySelector("main [class*=playerWindow]"),footer=document.querySelector("footer"),rect=panel.getBoundingClientRect();
+    return {panelTop:rect.top+scrollY,panelLeft:rect.left,panelWidth:rect.width,panelHeight:rect.height,footerTop:footer.getBoundingClientRect().top+scrollY,documentHeight:document.documentElement.scrollHeight,scrollY};
+  });
+  check(Object.keys(mobileLayoutBeforeMinimize).every(key=>Math.abs(mobileLayoutBeforeMinimize[key]-mobileLayoutAfterMinimize[key])<1),"Mobile minimization preserves panel, footer, document and scroll geometry");
+  await page.getByRole("button",{name:"Expand player"}).click();
+  check(await page.evaluate(()=>window.__rgPersistentFrame===document.querySelector('iframe[title="SoundCloud player"]')),"SoundCloud expansion restores the same iframe");
+  const mobileLayoutAfterExpand=await page.evaluate(()=>{
+    const panel=document.querySelector("main [class*=playerWindow]"),footer=document.querySelector("footer"),rect=panel.getBoundingClientRect();
+    return {panelTop:rect.top+scrollY,panelLeft:rect.left,panelWidth:rect.width,panelHeight:rect.height,footerTop:footer.getBoundingClientRect().top+scrollY,documentHeight:document.documentElement.scrollHeight,scrollY};
+  });
+  check(Object.keys(mobileLayoutBeforeMinimize).every(key=>Math.abs(mobileLayoutBeforeMinimize[key]-mobileLayoutAfterExpand[key])<1),"Mobile expansion preserves the original panel and footer geometry");
+  await page.setViewportSize({width:1440,height:1000});
   await page.getByRole("button",{name:"Close player",exact:true}).click();
 
   await open("/posts/50/");
@@ -216,12 +331,15 @@ async (page) => {
   check(await page.locator("main [class*=contactWindow]").evaluate(element=>{const rect=element.getBoundingClientRect(),inset=parseFloat(getComputedStyle(document.querySelector(".studioHeaderBar")).paddingLeft);return Math.abs(rect.left-inset)<1&&Math.abs(rect.width-72*16)<1;}),"1920px contact window stays left-aligned and capped at 72rem");
 
   await open("/about/");
-  check(await page.locator('section[aria-label="Artist biography"] > section').first().evaluate(element=>element.getBoundingClientRect().width<=30*16+1),"1920px About portrait window stays capped at 30rem");
+  check(await page.getByText("UNTITLED_09.JPG").isVisible(),"About portrait window uses the approved UNTITLED_09.JPG title");
+  check(await page.locator('section[aria-label="Artist biography"] > section').first().evaluate(element=>Math.abs(element.getBoundingClientRect().width-15*16)<1),"1920px About portrait window uses the half-size 15rem width");
   check(await page.locator('section[aria-label="Artist biography"] > section').nth(1).evaluate(element=>element.getBoundingClientRect().width<=44*16+1),"1920px About biography window stays capped at 44rem");
+  check(await page.locator('section[aria-label="Artist biography"] > section').evaluateAll(elements=>{const portrait=elements[0].getBoundingClientRect(),biography=elements[1].getBoundingClientRect();return biography.left<portrait.right&&biography.right>portrait.left;}),"1920px About portrait retains its overlap with the biography window");
+  check(await page.locator('main section[aria-labelledby="other-projects"]').evaluate(section=>{const rect=section.getBoundingClientRect(),main=document.querySelector("main .studioPage").getBoundingClientRect(),list=section.querySelector('div[class*=projectList]').getBoundingClientRect();return Math.abs(rect.left-main.left)<1&&Math.abs(rect.right-main.right)<1&&Math.abs(list.width-rect.width)<1&&getComputedStyle(section).gridTemplateColumns.split(" ").length===1;}),"1920px Other projects uses a stacked full-width list");
 
   await open("/listen/");
-  check(await page.locator("main [class*=console]").evaluate(element=>{const rect=element.getBoundingClientRect(),inset=parseFloat(getComputedStyle(document.querySelector(".studioHeaderBar")).paddingLeft);return Math.abs(rect.left-inset)<1&&rect.width<=78*16+1;}),"1920px listening console stays left-aligned and capped at 78rem");
-  check(await page.locator("main [class*=playerWindow]").evaluate(element=>element.getBoundingClientRect().width<=44*16+1),"1920px player window stays capped at 44rem");
+  check(await page.locator("main [class*=console]").evaluate(element=>{const rect=element.getBoundingClientRect(),inset=parseFloat(getComputedStyle(document.querySelector(".studioHeaderBar")).paddingLeft);return Math.abs(rect.left-inset)<1&&Math.abs(rect.width-84*16)<1;}),"1920px listening console stays left-aligned and uses its 84rem field");
+  check(await page.locator("main [class*=playerWindow]").evaluate(element=>{const width=element.getBoundingClientRect().width;return width>=42*16&&width<=44*16+1;}),"1920px player window uses the wider track-name space without exceeding 44rem");
 
   await open("/gallery/");
   check(await page.locator("main [class*=contactSheet]").evaluate(element=>getComputedStyle(element).gridTemplateColumns.split(" ").length===4),"1920px gallery uses four columns instead of stretching three windows");
@@ -250,6 +368,7 @@ async (page) => {
         check(await page.locator("main article img").evaluateAll(images=>images.every(image=>{const box=image.getBoundingClientRect();return Math.abs(box.width-box.height)<1;})),width+"px Discography covers remain square");
         check(await page.locator("main article").evaluateAll(articles=>articles.every(article=>{const art=article.querySelector("img").getBoundingClientRect(),panel=article.querySelector("section[data-tone]").getBoundingClientRect();return art.left<panel.right&&art.right>panel.left&&art.top<panel.bottom&&art.bottom>panel.top;})),width+"px release windows retain their artwork overlap");
       }
+      if(path==="/about/") check(await page.locator('section[aria-label="Artist biography"] > section').first().evaluate(element=>{const portrait=element.getBoundingClientRect(),main=document.querySelector("main .studioPage").getBoundingClientRect();return Math.abs(portrait.width-main.width/2)<1;}),width+"px About portrait remains half of the content width");
       if(width===390) await page.screenshot({path:path.replaceAll("/","").replace("posts56","post")+"-mobile.png"});
     }
   }
@@ -261,9 +380,11 @@ async (page) => {
   }
   await page.emulateMedia({reducedMotion:"reduce"});
   await open("/");
+  await checkSignalLabel("Reduced-motion Home",false);
   check(await page.locator("[data-motion=static]").count()>0,"Reduced motion keeps artwork static");
   check(await page.evaluate(()=>performance.getEntriesByType("resource").every(entry=>!/\.(webm|mp4)(\?|$)/.test(entry.name))),"Reduced-motion visit transfers no video");
   await open("/listen/");
+  await checkSignalLabel("Reduced-motion Listen",false);
   check(await page.locator("main [data-pace=energetic][data-motion=static]").count()===1,"Listen artwork stays still under reduced motion");
   const stillMesh=page.locator("main [data-pace=energetic] canvas");
   await stillMesh.scrollIntoViewIfNeeded();
