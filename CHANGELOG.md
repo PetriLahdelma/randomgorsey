@@ -6,6 +6,12 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 ## [Unreleased]
 
+## [0.4.5] - 2026-11-06
+
+### Changed
+
+- Expand page compositions and the footer to align with the full-width header.
+
 ## [0.4.4] - 2026-11-06
 
 ### Changed

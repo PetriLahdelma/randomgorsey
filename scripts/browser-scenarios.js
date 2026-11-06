@@ -188,6 +188,50 @@ async (page) => {
   await page.setViewportSize({width:1104,height:844});
   check(await page.locator("footer .studioFooterLinks a").evaluateAll(links=>links.length===5&&links.every(link=>Math.abs(link.getBoundingClientRect().top-links[0].getBoundingClientRect().top)<1)),"All footer platform links fit on one row at 1104px");
 
+  await page.setViewportSize({width:1920,height:1000});
+  await open("/listen/");
+  const desktopEdges=await page.evaluate(()=>{
+    const box=selector=>document.querySelector(selector)?.getBoundingClientRect();
+    const header=document.querySelector(".studioHeaderBar");
+    const main=box("main .studioPage");
+    const footer=document.querySelector(".studioFooter");
+    const footerTop=box(".studioFooterTop");
+    return {
+      headerInset:parseFloat(getComputedStyle(header).paddingLeft),
+      mainLeft:main?.left,
+      mainRight:main?.right,
+      footerInset:parseFloat(getComputedStyle(footer).paddingLeft),
+      footerTopLeft:footerTop?.left,
+      footerTopRight:footerTop?.right,
+      viewport:innerWidth
+    };
+  });
+  check(Math.abs(desktopEdges.mainLeft-desktopEdges.headerInset)<1&&Math.abs(desktopEdges.viewport-desktopEdges.mainRight-desktopEdges.headerInset)<1,"1920px page shell aligns to the header gutter");
+  check(Math.abs(desktopEdges.footerInset-desktopEdges.headerInset)<1&&Math.abs(desktopEdges.footerTopLeft-desktopEdges.headerInset)<1&&Math.abs(desktopEdges.viewport-desktopEdges.footerTopRight-desktopEdges.headerInset)<1,"1920px footer content aligns to the header gutter");
+
+  await open("/");
+  check(await page.locator("#journal").evaluate(section=>{const rect=section.getBoundingClientRect(),inset=parseFloat(getComputedStyle(document.querySelector(".studioHeaderBar")).paddingLeft);return Math.abs(rect.left-inset)<1&&Math.abs(innerWidth-rect.right-inset)<1;}),"1920px journal spans the header-aligned content field");
+
+  await open("/contact/");
+  check(await page.locator("main [class*=contactWindow]").evaluate(element=>{const rect=element.getBoundingClientRect(),inset=parseFloat(getComputedStyle(document.querySelector(".studioHeaderBar")).paddingLeft);return Math.abs(rect.left-inset)<1&&Math.abs(rect.width-72*16)<1;}),"1920px contact window stays left-aligned and capped at 72rem");
+
+  await open("/about/");
+  check(await page.locator('section[aria-label="Artist biography"] > section').first().evaluate(element=>element.getBoundingClientRect().width<=30*16+1),"1920px About portrait window stays capped at 30rem");
+  check(await page.locator('section[aria-label="Artist biography"] > section').nth(1).evaluate(element=>element.getBoundingClientRect().width<=44*16+1),"1920px About biography window stays capped at 44rem");
+
+  await open("/listen/");
+  check(await page.locator("main [class*=console]").evaluate(element=>{const rect=element.getBoundingClientRect(),inset=parseFloat(getComputedStyle(document.querySelector(".studioHeaderBar")).paddingLeft);return Math.abs(rect.left-inset)<1&&rect.width<=78*16+1;}),"1920px listening console stays left-aligned and capped at 78rem");
+  check(await page.locator("main [class*=playerWindow]").evaluate(element=>element.getBoundingClientRect().width<=44*16+1),"1920px player window stays capped at 44rem");
+
+  await open("/gallery/");
+  check(await page.locator("main [class*=contactSheet]").evaluate(element=>getComputedStyle(element).gridTemplateColumns.split(" ").length===4),"1920px gallery uses four columns instead of stretching three windows");
+
+  await open("/discography/");
+  check(await page.locator("main article").evaluateAll(articles=>articles.length===2&&articles.every(article=>{const rect=article.getBoundingClientRect(),inset=parseFloat(getComputedStyle(document.querySelector(".studioHeaderBar")).paddingLeft);return Math.abs(rect.left-inset)<1&&rect.width<=78*16+1;})),"1920px release compositions stay left-aligned and capped at 78rem");
+  check(await page.locator("main article img").evaluateAll(images=>images.length===2&&images.every(image=>{const box=image.getBoundingClientRect();return Math.abs(box.width-box.height)<1;})),"1920px Discography covers remain square");
+  check(await page.locator("main article section[data-tone]").evaluateAll(panels=>panels.length===2&&panels.every(panel=>panel.getBoundingClientRect().width<=43*16+1)),"1920px release windows stay capped at 43rem");
+  check(await page.locator("main article").evaluateAll(articles=>articles.every(article=>{const art=article.querySelector("img").getBoundingClientRect(),panel=article.querySelector("section[data-tone]").getBoundingClientRect();return art.left<panel.right&&art.right>panel.left&&art.top<panel.bottom&&art.bottom>panel.top;})),"1920px release windows retain their artwork overlap");
+
   for(const width of [390,320]) {
     await page.setViewportSize({width,height:844});
     await open("/");

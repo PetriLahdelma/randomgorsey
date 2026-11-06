@@ -16,8 +16,6 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1rem, 2vw, 1.75rem);
   align-items: start;
-  max-width: 78rem;
-  margin: 0 auto;
 }
 
 .figureWindow {
@@ -254,5 +252,17 @@
 @media (prefers-reduced-motion: reduce) {
   .image {
     transition: none;
+  }
+}
+
+@media (width >= 1650px) {
+  .contactSheet {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 2300px) {
+  .contactSheet {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }

@@ -273,7 +273,7 @@ const PostCard: React.FC<PostCardProps> = ({
       </motion.div>
 
       {/* Read more + share */}
-      <div className="flex flex-wrap gap-3 items-center mt-3">
+      <div data-post-actions className="flex flex-wrap gap-3 items-center mt-3">
         {hasLongContent && (
           <motion.button
             onClick={toggleExpanded}

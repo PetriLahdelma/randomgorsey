@@ -12,11 +12,9 @@
 
 .composition {
   display: grid;
-  grid-template-columns: minmax(17rem, 0.78fr) minmax(19rem, 1.22fr);
+  grid-template-columns: minmax(0, min(39%, 30rem)) minmax(0, 1fr);
   gap: clamp(1.5rem, 4vw, 4rem);
   align-items: start;
-  max-width: 75rem;
-  margin: 0 auto;
 }
 
 .portraitWindow {
@@ -63,6 +61,7 @@
 }
 
 .biographyWindow {
+  width: min(100%, 44rem);
   box-shadow: 1rem 1rem 0 #d7ff44;
 }
 
@@ -87,7 +86,7 @@
   grid-template-columns: minmax(15rem, 0.6fr) minmax(20rem, 1.4fr);
   gap: clamp(2rem, 7vw, 7rem);
   max-width: 75rem;
-  margin: clamp(6rem, 13vw, 11rem) auto 0;
+  margin: clamp(6rem, 13vw, 11rem) 0 0;
 }
 
 .sectionHeading h2 {

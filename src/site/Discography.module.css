@@ -11,8 +11,9 @@
 .release {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 56%) minmax(23rem, 44%);
+  grid-template-columns: minmax(0, min(56%, 46rem)) minmax(23rem, 1fr);
   align-items: center;
+  width: min(100%, 78rem);
 }
 
 .artworkFrame {
@@ -52,7 +53,7 @@
 }
 
 .release:nth-child(even) {
-  grid-template-columns: minmax(23rem, 44%) minmax(0, 56%);
+  grid-template-columns: minmax(23rem, 1fr) minmax(0, min(56%, 46rem));
 }
 
 .release:nth-child(even) .artworkFrame {
@@ -67,6 +68,7 @@
 .release:nth-child(even) .releaseWindow {
   grid-row: 1;
   grid-column: 1;
+  justify-self: end;
   margin-right: -3rem;
   margin-left: 0;
 }
