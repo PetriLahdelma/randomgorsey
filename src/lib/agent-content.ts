@@ -207,7 +207,7 @@ export function getAgentDocument(pathname: string): AgentDocument | null {
     return document(
       "About Random Gorsey",
       normalized,
-      `${biography.join("\n\n")}\n\n## Other projects\n\n${aliases}`,
+      `${biography.join("\n\n")}\n\nbitmap attachment: [SIGNATURE.JPG](${toAbsoluteSiteUrl("/images/signature-sharp.png")})\n\n## Other projects\n\n${aliases}`,
       "Biography and selected aliases."
     );
   }

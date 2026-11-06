@@ -98,6 +98,17 @@ const About: React.FC = () => {
         <StudioWindow title="random-gorsey.txt" tone="paper" className={styles.biographyWindow}>
           <div className={styles.biography}>
             {biography.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            <figure className={styles.signature}>
+              <figcaption>bitmap attachment: SIGNATURE.JPG</figcaption>
+              <Image
+                src="/images/signature-sharp.png"
+                alt="Random Gorsey's signature"
+                width={1767}
+                height={725}
+                sizes="96px"
+                className={styles.signatureImage}
+              />
+            </figure>
           </div>
         </StudioWindow>
       </section>

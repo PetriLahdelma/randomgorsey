@@ -1,6 +1,7 @@
 export const biography = [
-  "Random Gorsey is a Helsinki-based producer and DJ making lo-fi house and electronic music. Warm chords, textured sounds and spare grooves.",
-  "Also working as DJ Pizza Hut. Recordings, notes and images are collected here.",
+  "Hello,",
+  "I'm Random Gorsey, a Helsinki-based producer and DJ making lo-fi house and electronic music. I like warm chords, textured sounds and loose grooves.",
+  "I also make music as DJ Pizza Hut. You'll find recordings, notes and images here.",
 ] as const;
 
 export const projects = [

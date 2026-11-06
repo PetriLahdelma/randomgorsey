@@ -125,6 +125,8 @@ async (page) => {
       check(await page.getByRole("img",{name:"Shadowed portrait wearing a beanie and glasses"}).evaluate(e=>{const box=e.getBoundingClientRect();return Math.abs(box.width/box.height-1)<0.01;}),"The portrait retains its square proportions");
     }
     if(path==="/about/"){
+      check(await page.getByText("bitmap attachment: SIGNATURE.JPG",{exact:true}).isVisible(),"About shows the signature attachment label");
+      check(await page.getByRole("img",{name:"Random Gorsey's signature"}).evaluate(image=>getComputedStyle(image).imageRendering==="pixelated"),"About signature uses pixelated rendering");
       const portrait=page.locator("main video");
       await portrait.waitFor();
       await page.waitForFunction(()=>{const v=document.querySelector("main video");return v&&!v.paused});

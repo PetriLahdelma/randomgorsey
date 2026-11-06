@@ -88,6 +88,25 @@
   margin-top: 1.5em;
 }
 
+.signature {
+  margin: 2.5rem 0 0;
+}
+
+.signature figcaption {
+  font: 400 0.75rem/1.4 var(--studio-system);
+  color: var(--studio-muted);
+  overflow-wrap: anywhere;
+}
+
+.signatureImage {
+  display: block;
+  width: min(100%, 20rem);
+  height: auto;
+  margin-top: 0.75rem;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 0 var(--studio-ink)) drop-shadow(0 0 0 var(--studio-ink)) drop-shadow(0 0 0 var(--studio-ink));
+}
+
 .projects {
   display: grid;
   grid-template-columns: minmax(0, 1fr);

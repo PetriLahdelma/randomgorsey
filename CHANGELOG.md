@@ -6,6 +6,16 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 ## [Unreleased]
 
+## [0.4.10] - 2026-11-06
+
+### Added
+
+- Add the artist’s signature as a pixelated bitmap attachment beneath the About biography.
+
+### Changed
+
+- Write the About biography in the artist’s first-person voice.
+
 ## [0.4.9] - 2026-11-06
 
 ### Changed

@@ -60,6 +60,11 @@ describe("agent-readable content", () => {
     expect(embedded).toBe("Listen.\n\n[Example](https://open.spotify.com/track/123)");
   });
 
+  it("includes the About signature attachment in agent-readable content", () => {
+    const about = getAgentDocument("/about/");
+    expect(about?.markdown).toContain("bitmap attachment: [SIGNATURE.JPG](https://randomgorsey.com/images/signature-sharp.png)");
+  });
+
   it("publishes a factual compact index and deterministic complete archive", () => {
     const index = renderLlmsIndex();
     const full = renderLlmsFull();
