@@ -54,7 +54,7 @@ export default function Listen() {
           </div>
 
           <div
-            className={styles.playerWell}
+            className={`${styles.playerWell} ${!activeEmbed ? styles.playerWellIdle : ""}`}
             data-player-anchor
           >
             {!activeEmbed ? (

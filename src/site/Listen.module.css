@@ -45,6 +45,16 @@
   height: clamp(250px, 28vw, 390px);
 }
 
+.artworkPanel > .artwork::after,
+.playerWellIdle::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  content: "";
+  background: repeating-linear-gradient(to bottom, rgb(0 0 0 / 50%) 0 1px, transparent 1px 2px);
+}
+
 .playerWindow {
   position: relative;
   z-index: 2;

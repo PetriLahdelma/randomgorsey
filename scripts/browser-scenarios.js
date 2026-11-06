@@ -152,6 +152,8 @@ async (page) => {
   await checkSignalLabel("Listen",true);
   const listenArtwork=page.locator("main [data-pace=energetic]");
   check(await listenArtwork.count()===1,"Listen artwork uses the energetic pace");
+  check(await listenArtwork.evaluate(element=>{const overlay=getComputedStyle(element,"::after");return overlay.backgroundImage.includes("repeating-linear-gradient")&&overlay.pointerEvents==="none";}),"Listen artwork has a decorative interlace overlay");
+  check(await page.locator("[data-player-anchor]").evaluate(element=>{const overlay=getComputedStyle(element,"::after");return overlay.backgroundImage.includes("repeating-linear-gradient")&&overlay.pointerEvents==="none";}),"Unloaded player display is interlaced without blocking interaction");
   await checkArtworkSizing("energetic", "Listen artwork");
   await listenArtwork.scrollIntoViewIfNeeded();
   const listenCanvas=listenArtwork.locator("canvas");
@@ -168,6 +170,7 @@ async (page) => {
   await page.route("https://w.soundcloud.com/player/api.js",route=>route.fulfill({contentType:"application/javascript",body:`(()=>{function Widget(){const handlers={},widget={sound:{title:"Night Bus",user:{username:"Random Gorsey"}},bind:(event,listener)=>{handlers[event]=listener;},unbind:event=>{delete handlers[event];},getCurrentSound:callback=>callback(widget.sound),emit:event=>handlers[event]?.()};window.__rgSoundCloudTestWidget=widget;return widget;}Widget.Events={READY:"READY",PLAY:"PLAY",PAUSE:"PAUSE",FINISH:"FINISH"};window.SC={Widget};})();`}));
   await page.getByRole("button",{name:/Load Spotify/i}).click();
   check(await page.locator("iframe").count()===1,"Explicit Spotify loading creates one player");
+  check(await page.locator("[data-player-anchor]").evaluate(element=>getComputedStyle(element,"::after").backgroundImage==="none"),"Interlacing does not cover a loaded player");
   check(await page.locator(".studioSquarePlayer").evaluate(e=>getComputedStyle(e).borderRadius)==="0px","Spotify outer viewport has square corners");
   await page.frameLocator('iframe[title="Spotify player"]').getByRole("button",{name:"Play test audio"}).click();
   await page.waitForTimeout(200);
