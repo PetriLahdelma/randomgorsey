@@ -36,9 +36,8 @@ describe("About Page", () => {
 
     expect(screen.getByRole("heading", { level: 1, name: "About" })).toBeInTheDocument();
     expect(screen.getByText("UNTITLED_09.JPG")).toBeInTheDocument();
-    expect(screen.getByText(/Helsinki-based producer Random Gorsey aka DJ Pizza Hut/)).toBeInTheDocument();
-    expect(screen.getByText(/Self-taught and driven by instinct/)).toBeInTheDocument();
-    expect(screen.getByText(/Actively producing and exploring new tools/)).toBeInTheDocument();
+    expect(screen.getByText("Random Gorsey is a Helsinki-based producer and DJ making lo-fi house and electronic music. Warm chords, textured sounds and spare grooves.")).toBeInTheDocument();
+    expect(screen.getByText("Also working as DJ Pizza Hut. Recordings, notes and images are collected here.")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Petri Lahdelma/ })).toHaveAttribute(
       "href",
       "https://soundcloud.com/petri-lahdelma"
