@@ -6,6 +6,23 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-13
+
+### Added
+
+- Add a DTCG 2025.10 token source, deterministic CSS generation and validation for the reusable component library.
+- Add Storybook foundations, component disposition documentation and expanded accessibility and responsive checks.
+- Add shared form-field components consumed by the Contact page while preserving its production presentation.
+
+### Changed
+
+- Bring form, feedback, display and dialog components into the cold industrial design-system language.
+- Expand production component stories with keyboard, responsive, long-content and reduced-motion states.
+
+### Fixed
+
+- Keep dialog focus and scroll locking stable when parent callbacks change during an open session.
+
 ## [0.5.0] - 2026-11-13
 
 ### Added
