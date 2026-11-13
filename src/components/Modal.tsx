@@ -18,6 +18,7 @@ interface ModalProps {
   children: React.ReactNode
   labelledById?: string
   describedById?: string
+  ariaLabel?: string
   closeable?: boolean
   className?: string
   overlayClassName?: string
@@ -29,6 +30,7 @@ const Modal: React.FC<ModalProps> = ({
   children,
   labelledById,
   describedById,
+  ariaLabel,
   closeable = true,
   className,
   overlayClassName,
@@ -131,6 +133,7 @@ const Modal: React.FC<ModalProps> = ({
               role="dialog"
               aria-modal="true"
               aria-labelledby={labelledById}
+              aria-label={labelledById ? undefined : (ariaLabel ?? 'Dialog')}
               aria-describedby={describedById}
               tabIndex={-1}
               onClick={(e) => e.stopPropagation()}

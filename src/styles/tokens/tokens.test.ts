@@ -1,4 +1,5 @@
 import { readFile } from "node:fs/promises";
+import path from "node:path";
 
 import { describe, expect, it } from "vitest";
 
@@ -6,6 +7,7 @@ import {
   assertFresh,
   check,
   collectTokens,
+  compareCodePoints,
   GENERATED_CSS,
   generateCss,
   TOKEN_SOURCE,
@@ -71,6 +73,10 @@ describe("industrial design tokens", () => {
     expect(first).toContain("--ds-color-neutral-950: #101210;");
     expect(first).toContain("--component-control-focus-on-dark: var(--ds-color-signal-acid);");
     expect(first).not.toMatch(/--studio-/);
+    const declarations = first.split("\n").filter((line) => line.startsWith("  --"));
+    const declarationNames = declarations.map((line) => line.trim().split(":", 1)[0]);
+    expect(declarationNames).toEqual([...declarationNames].sort(compareCodePoints));
+    expect(["--ds-z", "--ds-a", "--ds-aa"].sort(compareCodePoints)).toEqual(["--ds-a", "--ds-aa", "--ds-z"]);
   });
 
   it("keeps productive control boundaries above the three-to-one contrast threshold", async () => {
@@ -140,6 +146,12 @@ describe("industrial design tokens", () => {
     expect(result.tokenCount).toBe(collectTokens(await sourceDocument()).size);
     expect(result.debt.files).toContain("src/components/Alert.tsx");
     expect(result.debt.excluded.productionPreserved).toContain("src/components/Button.tsx");
+    const studioWindow = await readFile(
+      path.resolve(path.dirname(TOKEN_SOURCE), "../../components/studio/StudioWindow.module.css"),
+      "utf8"
+    );
+    expect(studioWindow).toContain("--window-muted: #50584a;");
+    expect(studioWindow).not.toMatch(/--studio-muted\s*:/);
   });
 
   it("reports bounded debt by colors, named utilities, spacing and motion", async () => {

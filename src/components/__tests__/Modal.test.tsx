@@ -10,6 +10,23 @@ describe('Modal Component', () => {
       </Modal>
     );
     expect(screen.getByText('Content')).toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: 'Dialog' })).toBeInTheDocument();
+  });
+
+  it('uses an explicit aria label when no labelled-by relationship is supplied', () => {
+    render(<Modal isOpen ariaLabel="Player settings" onClose={() => {}}><p>Content</p></Modal>);
+    expect(screen.getByRole('dialog', { name: 'Player settings' })).toBeInTheDocument();
+  });
+
+  it('gives labelledById precedence over the explicit aria label', () => {
+    render(
+      <Modal isOpen labelledById="dialog-title" ariaLabel="Fallback label" onClose={() => {}}>
+        <h2 id="dialog-title">Confirm source</h2>
+      </Modal>
+    );
+    const dialog = screen.getByRole('dialog', { name: 'Confirm source' });
+    expect(dialog).toHaveAttribute('aria-labelledby', 'dialog-title');
+    expect(dialog).not.toHaveAttribute('aria-label');
   });
 
   it('calls onClose when overlay is clicked', () => {

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import styles from "./Coverage.module.css";
 
-type Status = "modernized" | "production-preserved" | "structural" | "laboratory-retained";
+type Status = "modernized" | "production-preserved" | "structural" | "laboratory-retained" | "retired";
 
 const rows: ReadonlyArray<{
   family: string;
@@ -19,7 +19,8 @@ const rows: ReadonlyArray<{
   { family: "Navigation + journal", status: "production-preserved", consumer: "Live site", evidence: "Header, footer, PostCard and share stories" },
   { family: "Privacy + player", status: "production-preserved", consumer: "App shell", evidence: "Consent and persistent-player stories" },
   { family: "Motion / effects", status: "laboratory-retained", consumer: "No direct production consumer", evidence: "Laboratory warning and purpose stories" },
-  { family: "Legacy reference artifacts", status: "laboratory-retained", consumer: "None", evidence: "Excluded from the supported API and Storybook discovery" },
+  { family: "Duplicate UI button", status: "retired", consumer: "None", evidence: "Removed after import and barrel-export audit; canonical Button remains" },
+  { family: "Legacy reference artifacts", status: "laboratory-retained", consumer: "None", evidence: "Examples/config remnants excluded from supported APIs and Storybook discovery" },
 ] as const;
 
 function Coverage() {

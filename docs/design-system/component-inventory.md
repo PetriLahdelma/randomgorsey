@@ -85,13 +85,18 @@ These utilities are not part of the production component contract. Their ownersh
 | `effects/Scene3D.tsx` | Three.js scene wrapper | none |
 | `effects/VideoBackground.tsx` | full-bleed video experiment | none |
 
+## Retired artifacts
+
+| Source | Disposition | Rationale |
+| --- | --- | --- |
+| `components/ui/button.tsx` | retired | removed after confirming zero imports, zero barrel exports and no unique role; canonical `components/Button.tsx` owns the supported button API |
+
 ## Legacy retained / non-production artifacts
 
 These files remain in the repository, so they are not classified as retired. They are retained as non-production references and excluded from supported Storybook/component APIs.
 
 | Source | Disposition | Rationale |
 | --- | --- | --- |
-| `components/ui/button.tsx` | laboratory-retained | duplicate implementation with no consumers; canonical `components/Button.tsx` owns the supported button API |
 | `components/Select.examples.tsx` | laboratory-retained | historical example reference; supported usage lives in Storybook state stories |
 | `stories/Configure.mdx.old` | laboratory-retained | setup remnant excluded from Storybook discovery by its `.old` suffix |
 

@@ -26,6 +26,8 @@ const toKebab = (value) =>
 
 const tokenName = (tokenPath) => `--${tokenPath.map(toKebab).join("-")}`;
 
+export const compareCodePoints = (first, second) => first < second ? -1 : first > second ? 1 : 0;
+
 function isObject(value) {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
@@ -200,7 +202,7 @@ export function validateDocument(document) {
 export function generateCss(document) {
   const tokens = validateDocument(document);
   const declarations = [...tokens.values()]
-    .sort((a, b) => tokenName(a.path).localeCompare(tokenName(b.path)))
+    .sort((a, b) => compareCodePoints(tokenName(a.path), tokenName(b.path)))
     .map((token) => {
       const reference = typeof token.value === "string" ? token.value.match(REFERENCE) : null;
       const value = reference
@@ -243,6 +245,9 @@ async function validateNamespaces() {
   for (const file of cssFiles) {
     const source = await readFile(file, "utf8");
     if (/--(?:ds|component)-[a-z0-9-]+\s*:/i.test(source)) collisions.push(path.relative(ROOT, file));
+    if (file !== path.join(ROOT, "src/styles/studio.css") && /--studio-[a-z0-9-]+\s*:/i.test(source)) {
+      collisions.push(`${path.relative(ROOT, file)} (reserved --studio-* declaration)`);
+    }
   }
   if (collisions.length > 0) throw new Error(`Generated token namespace is also declared in: ${collisions.join(", ")}`);
 }

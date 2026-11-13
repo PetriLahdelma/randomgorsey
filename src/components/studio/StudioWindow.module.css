@@ -58,9 +58,9 @@
 }
 
 .window[data-tone="paper"] {
+  --window-muted: #50584a;
   --color-foreground: var(--studio-ink);
   --color-background: var(--studio-paper);
   --color-accent: #234bdf;
-  --color-muted-foreground: #50584a;
-  --studio-muted: #50584a;
+  --color-muted-foreground: var(--window-muted);
 }

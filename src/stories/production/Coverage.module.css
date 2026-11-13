@@ -119,6 +119,12 @@
   border-color: var(--ds-color-neutral-400);
 }
 
+.status[data-status="retired"] {
+  color: var(--ds-color-neutral-0);
+  background: var(--ds-color-support-error);
+  border-color: var(--ds-color-support-error);
+}
+
 .note {
   margin-block: var(--ds-space-4) 0;
   line-height: 1.6;
