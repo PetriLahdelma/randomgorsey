@@ -94,7 +94,7 @@
 
 .signature figcaption {
   font: 400 0.75rem/1.4 var(--studio-system);
-  color: var(--studio-muted);
+  color: var(--window-muted, var(--studio-muted));
   overflow-wrap: anywhere;
 }
 

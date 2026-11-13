@@ -152,6 +152,16 @@ describe("industrial design tokens", () => {
     );
     expect(studioWindow).toContain("--window-muted: #50584a;");
     expect(studioWindow).not.toMatch(/--studio-muted\s*:/);
+    const about = await readFile(
+      path.resolve(path.dirname(TOKEN_SOURCE), "../../site/About.module.css"),
+      "utf8"
+    );
+    const studio = await readFile(
+      path.resolve(path.dirname(TOKEN_SOURCE), "../studio.css"),
+      "utf8"
+    );
+    expect(about).toContain("color: var(--window-muted, var(--studio-muted));");
+    expect(studio.match(/color: var\(--window-muted, var\(--studio-muted\)\);/g)).toHaveLength(2);
   });
 
   it("reports bounded debt by colors, named utilities, spacing and motion", async () => {
