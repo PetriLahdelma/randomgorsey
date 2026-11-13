@@ -63,7 +63,9 @@
     "mcp:checker": "node mcp/typescript-checker.js",
     "test:browser": "node scripts/browser-check.mjs",
     "typecheck": "tsc --noEmit --incremental false",
-    "typecheck:stories": "tsc --noEmit --project tsconfig.stories.json --incremental false"
+    "typecheck:stories": "tsc --noEmit --project tsconfig.stories.json --incremental false",
+    "tokens:build": "node scripts/design-tokens.mjs build",
+    "tokens:check": "node scripts/design-tokens.mjs check"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

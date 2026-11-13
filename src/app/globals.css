@@ -2,6 +2,7 @@
 @import "lenis/dist/lenis.css";
 
 /* Token imports - order matters for cascade */
+@import "../styles/tokens/generated.css";
 @import "../styles/tokens/primitives.css";
 @import "../styles/tokens/semantic.css";
 @import "../styles/tokens/sections.css";
