@@ -59,6 +59,7 @@ const meta: Meta = {
   ],
   parameters: {
     layout: 'fullscreen',
+    controls: { disable: true },
     docs: {
       description: {
         component: `

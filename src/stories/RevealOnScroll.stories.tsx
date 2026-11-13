@@ -8,6 +8,7 @@ const meta: Meta<typeof RevealOnScroll> = {
   tags: ['autodocs'],
   parameters: {
     layout: 'padded',
+    controls: { include: ['as', 'once', 'amount', 'margin'] },
     docs: {
       description: {
         component: 'Wrapper component for scroll-triggered reveal animations. Respects reduced-motion preferences.',
@@ -28,6 +29,16 @@ const meta: Meta<typeof RevealOnScroll> = {
       control: { type: 'range', min: 0, max: 1, step: 0.1 },
       description: 'Visibility threshold (0-1)',
     },
+    margin: {
+      control: 'text',
+      description: 'Intersection observer root margin.',
+    },
+  },
+  args: {
+    as: 'div',
+    once: true,
+    amount: 0.3,
+    margin: '0px',
   },
 };
 
@@ -45,6 +56,7 @@ const ScrollContainer = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const Default: Story = {
+  name: 'Playground',
   render: (args) => (
     <ScrollContainer>
       <RevealOnScroll {...args}>
@@ -67,6 +79,7 @@ export const Default: Story = {
 };
 
 export const MultipleItems: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ScrollContainer>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>

@@ -12,10 +12,10 @@ function ArtworkControl({ active = true, pace = "calm" }: { active?: boolean; pa
   </StudioWindow>;
 }
 function MotionLab(props:{active?:boolean;pace?:"calm" | "energetic"}) { return <PerformanceProvider><ArtworkControl {...props}/></PerformanceProvider>; }
-const meta={title:"Effects/Motion Lab",component:MotionLab,parameters:{layout:"padded"}} satisfies Meta<typeof MotionLab>;
+const meta={title:"Effects/Motion Lab",component:MotionLab,parameters:{layout:"padded",controls:{include:["active","pace"]}},args:{active:true,pace:"calm"},argTypes:{active:{control:"boolean",description:"Initial artwork playback state."},pace:{control:"inline-radio",options:["calm","energetic"],description:"Artwork movement profile."}}} satisfies Meta<typeof MotionLab>;
 export default meta;
 type Story=StoryObj<typeof meta>;
-export const Interactive:Story={args:{active:true}};
+export const Interactive:Story={name:"Playground",args:{active:true}};
 export const Energetic:Story={args:{active:true,pace:"energetic"}};
 export const Dormant:Story={args:{active:false}};
 export const Narrow:Story={args:{active:true},globals:{viewport:{value:"mobile",isRotated:false}}};

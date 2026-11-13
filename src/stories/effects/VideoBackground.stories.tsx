@@ -13,6 +13,7 @@ const meta: Meta<typeof VideoBackground> = {
   decorators: [(Story) => <PerformanceProvider><Story /></PerformanceProvider>],
   parameters: {
     layout: "fullscreen",
+    controls: { include: ["src", "poster", "fallbackSrc", "overlayOpacity"] },
     docs: {
       description: {
         component:
@@ -38,6 +39,12 @@ const meta: Meta<typeof VideoBackground> = {
       description: "Overlay opacity for text readability (0-1)",
     },
   },
+  args: {
+    src: PLACEHOLDER_VIDEO,
+    poster: PLACEHOLDER_POSTER,
+    fallbackSrc: "",
+    overlayOpacity: 0,
+  },
 };
 
 export default meta;
@@ -49,6 +56,7 @@ type Story = StoryObj<typeof VideoBackground>;
  * On mobile or low-tier devices, only the poster image is shown.
  */
 export const Default: Story = {
+  name: "Playground",
   args: {
     src: PLACEHOLDER_VIDEO,
     poster: PLACEHOLDER_POSTER,

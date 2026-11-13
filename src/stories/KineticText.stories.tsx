@@ -6,6 +6,7 @@ const meta: Meta<typeof KineticText> = {
   component: KineticText,
   parameters: {
     layout: 'centered',
+    controls: { include: ['children', 'as', 'splitBy', 'staggerDelay', 'variant', 'triggerOnView', 'viewportAmount'] },
     docs: {
       description: {
         component: `
@@ -65,6 +66,16 @@ import { KineticText } from '@/components/KineticText';
       control: { type: 'range', min: 0, max: 1, step: 0.1 },
       description: 'Viewport amount required to trigger (0-1)',
     },
+    className: { control: false },
+  },
+  args: {
+    children: 'Random Gorsey',
+    as: 'h1',
+    splitBy: 'chars',
+    staggerDelay: 0.03,
+    variant: 'default',
+    triggerOnView: false,
+    viewportAmount: 0.3,
   },
 };
 
@@ -72,6 +83,7 @@ export default meta;
 type Story = StoryObj<typeof KineticText>;
 
 export const Characters: Story = {
+  name: 'Playground',
   args: {
     children: 'Random Gorsey',
     as: 'h1',
@@ -202,6 +214,7 @@ export const Comparison: Story = {
     </div>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       description: {
         story: 'Comparison of different split modes.',

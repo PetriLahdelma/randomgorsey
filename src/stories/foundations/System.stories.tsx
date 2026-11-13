@@ -130,6 +130,7 @@ const meta = {
   component: ColorSystem,
   parameters: {
     layout: "padded",
+    controls: { disable: true },
     docs: {
       description: {
         component: "Generated component-library foundations. Values are resolved from the checked-in CSS custom properties; the live artist-shell tokens remain separately owned.",

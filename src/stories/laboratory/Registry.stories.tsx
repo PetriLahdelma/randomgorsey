@@ -38,6 +38,7 @@ const meta = {
   title: "Laboratory/Registry",
   component: Registry,
   parameters: {
+    controls: { disable: true },
     docs: { description: { component: "Purpose and ownership for retained experiments. Direct rendering stories remain separate and carry the same Laboratory warning." } },
   },
 } satisfies Meta<typeof Registry>;

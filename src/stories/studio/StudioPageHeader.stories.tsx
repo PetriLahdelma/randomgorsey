@@ -8,6 +8,7 @@ const meta = {
   component: StudioPageHeader,
   parameters: {
     layout: "padded",
+    controls: { include: ["kicker", "title", "lead"] },
   },
   decorators: [
     (Story) => (
@@ -21,12 +22,19 @@ const meta = {
     title: "Listen",
     lead: "Recordings & selections.",
   },
+  argTypes: {
+    kicker: { control: "text", description: "Small contextual line above the page title." },
+    title: { control: "text", description: "Primary page heading." },
+    lead: { control: "text", description: "Short factual page introduction." },
+    className: { control: false },
+    leadClassName: { control: false },
+  },
 } satisfies Meta<typeof StudioPageHeader>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Listen: Story = {};
+export const Listen: Story = { name: "Playground" };
 
 export const Discography: Story = {
   args: {
@@ -53,6 +61,7 @@ export const About: Story = {
 };
 
 export const Mobile: Story = {
+  name: "Listen / Mobile",
   parameters: {
     viewport: { defaultViewport: "mobile" },
   },

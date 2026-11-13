@@ -10,6 +10,9 @@ const meta: Meta<typeof HeroImage> = {
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
+    controls: {
+      include: ["src", "alt", "srcSet", "sizes", "height", "objectFit", "objectPosition", "overlayOpacity", "loading"],
+    },
     docs: {
       description: {
         component:
@@ -58,6 +61,17 @@ const meta: Meta<typeof HeroImage> = {
       description: "Loading strategy for the image",
     },
   },
+  args: {
+    src: PLACEHOLDER_IMAGE,
+    alt: "Shadowed portrait",
+    srcSet: "",
+    sizes: "",
+    height: "half",
+    objectFit: "cover",
+    objectPosition: "center",
+    overlayOpacity: 0,
+    loading: "lazy",
+  },
 };
 
 export default meta;
@@ -68,6 +82,7 @@ type Story = StoryObj<typeof HeroImage>;
  * Most common usage for section headers.
  */
 export const Default: Story = {
+  name: "Playground",
   args: {
     src: PLACEHOLDER_IMAGE,
     alt: "Hero image",

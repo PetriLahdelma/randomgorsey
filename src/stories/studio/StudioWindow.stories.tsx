@@ -8,9 +8,20 @@ const meta = {
   args: {
     title: "Random Gorsey · Catalog",
     children: "Window content",
+    tone: "paper",
+    inert: false,
+  },
+  argTypes: {
+    title: { control: "text", description: "Text shown in the window title bar." },
+    tone: { control: "select", options: ["paper", "dark", "blue"] },
+    inert: { control: "boolean", description: "Removes the window subtree from interaction and accessibility navigation." },
+    children: { control: "text", description: "Simple content for the interactive playground." },
+    actions: { control: false },
+    className: { control: false },
   },
   parameters: {
     layout: "centered",
+    controls: { include: ["title", "tone", "inert", "children"] },
   },
   decorators: [
     (Story) => (
@@ -23,6 +34,8 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+export const Playground: Story = {};
 
 export const Paper: Story = {
   args: {
@@ -40,6 +53,7 @@ export const Paper: Story = {
       </div>
     ),
   },
+  parameters: { controls: { disable: true } },
 };
 
 export const Dark: Story = {
@@ -59,6 +73,7 @@ export const Dark: Story = {
       </div>
     ),
   },
+  parameters: { controls: { disable: true } },
 };
 
 export const ElectricBlue: Story = {
@@ -73,6 +88,7 @@ export const ElectricBlue: Story = {
       </p>
     ),
   },
+  parameters: { controls: { disable: true } },
 };
 
 export const LongTitleAndActions: Story = {
@@ -94,5 +110,6 @@ export const LongTitleAndActions: Story = {
   },
   parameters: {
     viewport: { defaultViewport: "mobile" },
+    controls: { disable: true },
   },
 };

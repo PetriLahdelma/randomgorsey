@@ -10,6 +10,7 @@ const meta = {
   component: ReleaseWindow,
   parameters: {
     layout: "fullscreen",
+    controls: { disable: true },
     nextjs: { navigation: { pathname: "/discography/" } },
     docs: {
       description: {

@@ -7,6 +7,7 @@ const meta: Meta<typeof ParticleField> = {
   component: ParticleField,
   tags: ["autodocs"],
   parameters: {
+    controls: { include: ["count", "color", "spread", "size"] },
     docs: {
       description: {
         component:
@@ -45,6 +46,12 @@ const meta: Meta<typeof ParticleField> = {
       </PerformanceProvider>
     ),
   ],
+  args: {
+    count: 1000,
+    color: "#ffffff",
+    spread: 10,
+    size: 0.05,
+  },
 };
 
 export default meta;
@@ -55,6 +62,7 @@ type Story = StoryObj<typeof ParticleField>;
  * Actual rendered count depends on GPU tier.
  */
 export const Default: Story = {
+  name: "Playground",
   args: {
     count: 1000,
     color: "#ffffff",

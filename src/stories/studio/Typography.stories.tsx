@@ -58,6 +58,7 @@ const meta = {
   title: "Foundations/Typography",
   component: TypographySpecimen,
   parameters: {
+    controls: { disable: true },
     layout: "fullscreen",
     docs: {
       description: {

@@ -11,6 +11,7 @@ const meta: Meta<typeof Scene3D> = {
   tags: ["autodocs"],
   decorators: [(Story) => <PerformanceProvider><Story /></PerformanceProvider>],
   parameters: {
+    controls: { include: ["overlay", "dpr"] },
     docs: {
       description: {
         component:
@@ -28,6 +29,10 @@ const meta: Meta<typeof Scene3D> = {
       description:
         "Initial DPR (device pixel ratio), auto-adjusts based on performance tier",
     },
+  },
+  args: {
+    overlay: false,
+    dpr: 1,
   },
 };
 
@@ -60,6 +65,7 @@ const RotatingCube = ({ color = "hotpink" }: { color?: string }) => {
  * Performance tier determines DPR and antialiasing quality.
  */
 export const Default: Story = {
+  name: "Playground",
   render: (args) => (
     <div className="h-[400px] w-full bg-gray-900">
       <Scene3D {...args}>
