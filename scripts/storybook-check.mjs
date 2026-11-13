@@ -102,6 +102,12 @@ async function cli(args) {
   return result.stdout;
 }
 
+function parsePlaywrightResult(output, label) {
+  const match = output.match(/### Result\n([\s\S]*?)\n### Ran/);
+  if (!match) throw new Error(label + " did not return a JSON result:\n" + output);
+  return JSON.parse(match[1]);
+}
+
 try {
   await new Promise((resolve, reject) => {
     server.once("error", reject);
@@ -116,10 +122,7 @@ try {
   ]);
   await writeFile(path.join(output, "output.log"), result);
 
-  const match = result.match(/### Result\n([\s\S]*?)\n### Ran/);
-  if (!match) throw new Error(result);
-
-  const report = JSON.parse(match[1]);
+  const report = parsePlaywrightResult(result, "Storybook accessibility scenarios");
   await writeFile(
     path.join(output, "result.json"),
     JSON.stringify(report, null, 2) + "\n",
@@ -148,11 +151,54 @@ try {
     );
   }
 
+
+  const controlsResult = await cli([
+    "run-code",
+    "--filename=" +
+      path.join(root, "scripts", "storybook-controls-scenarios.js"),
+  ]);
+  await writeFile(path.join(output, "controls-output.log"), controlsResult);
+  const controlsReport = parsePlaywrightResult(
+    controlsResult,
+    "Storybook controls scenarios",
+  );
+  await writeFile(
+    path.join(output, "controls-result.json"),
+    JSON.stringify(controlsReport, null, 2) + "\n",
+  );
+
+  if (controlsReport.auditedPlaygroundCount !== 33) {
+    throw new Error(
+      "Storybook controls audit expected 33 playgrounds but covered " +
+        controlsReport.auditedPlaygroundCount +
+        ".",
+    );
+  }
+  if (controlsReport.auditedControlStoryCount !== 35) {
+    throw new Error(
+      "Storybook controls audit expected 35 interactive stories but covered " +
+        controlsReport.auditedControlStoryCount +
+        ".",
+    );
+  }
+  if (controlsReport.consoleErrors.length > 0) {
+    throw new Error(
+      "Storybook controls browser errors:\n" +
+        controlsReport.consoleErrors.join("\n"),
+    );
+  }
+
   console.log(
     report.storyCount +
       " Storybook scenarios passed with " +
       report.assertionCount +
-      " assertions and no serious accessibility violations.",
+      " assertions and no serious accessibility violations; " +
+      controlsReport.auditedPlaygroundCount +
+      " component playgrounds and " +
+      controlsReport.auditedControlStoryCount +
+      " interactive stories passed " +
+      controlsReport.assertionCount +
+      " controls assertions.",
   );
 } finally {
   try {
