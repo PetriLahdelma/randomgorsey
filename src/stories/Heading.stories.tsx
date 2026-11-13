@@ -14,6 +14,7 @@ const meta = {
     ),
   ],
   parameters: {
+    controls: { include: ["as", "children", "level", "tone", "align", "weight", "uppercase"] },
     docs: {
       description: {
         component:
@@ -21,11 +22,39 @@ const meta = {
       },
     },
   },
+  args: {
+    as: "h2",
+    children: "Light Returning",
+    level: 2,
+    tone: "light",
+    align: "left",
+    weight: "bold",
+    uppercase: false,
+  },
+  argTypes: {
+    as: {
+      control: "select",
+      options: ["h1", "h2", "h3", "h4", "h5", "h6", "p", "span"],
+      description: "Rendered HTML element. Keep semantic heading levels aligned with the document outline.",
+    },
+    children: { control: "text", description: "Heading copy." },
+    level: { control: "inline-radio", options: [1, 2, 3, 4, 5, 6] },
+    tone: { control: "inline-radio", options: ["light", "dark", "accent"] },
+    align: { control: "inline-radio", options: ["left", "center", "right"] },
+    weight: { control: "inline-radio", options: ["regular", "medium", "bold"] },
+    className: { table: { disable: true } },
+    style: { table: { disable: true } },
+    id: { table: { disable: true } },
+    testId: { table: { disable: true } },
+    role: { table: { disable: true } },
+    tabIndex: { table: { disable: true } },
+  },
 } satisfies Meta<typeof Heading>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const Playground: Story = {};
 export const Default: Story = {
   args: { children: "Light Returning", level: 3, tone: "light", uppercase: false },
 };
@@ -48,6 +77,7 @@ export const AllLevels: Story = {
       <Heading level={4} tone="light" uppercase={false}>Field Notes: Frozen City</Heading>
     </div>
   ),
+  parameters: { controls: { disable: true } },
 };
 export const AllTones: Story = {
   render: () => (
@@ -59,6 +89,7 @@ export const AllTones: Story = {
       <Heading level={4} tone="accent" uppercase>Archive signal</Heading>
     </div>
   ),
+  parameters: { controls: { disable: true } },
 };
 
 export const SemanticLevels: Story = {
@@ -77,6 +108,7 @@ export const SemanticLevels: Story = {
     await expect(canvas.getByRole("heading", { level: 3, name: "Light Returning" })).toBeVisible();
     await expect(canvas.getByRole("heading", { level: 4, name: "Field note" })).toBeVisible();
   },
+  parameters: { controls: { disable: true } },
 };
 
 export const LongJournalTitle: Story = {

@@ -23,6 +23,9 @@ const meta = {
     ),
   ],
   parameters: {
+    controls: {
+      include: ["variant", "size", "children", "disabled", "type", "fullWidth", "loading"],
+    },
     docs: {
       description: {
         component:
@@ -30,11 +33,55 @@ const meta = {
       },
     },
   },
+  args: {
+    variant: "primary",
+    size: "medium",
+    children: "Accept all",
+    disabled: false,
+    iconOnly: false,
+    iconPosition: "left",
+    type: "button",
+    fullWidth: false,
+    asChild: false,
+    loading: false,
+    autoFocus: false,
+    onClick: fn(),
+  },
+  argTypes: {
+    variant: {
+      control: "select",
+      options: ["primary", "secondary", "secondary-dark", "danger", "tertiary", "success"],
+      description: "Visual treatment and semantic emphasis.",
+    },
+    size: {
+      control: "inline-radio",
+      options: ["small", "medium", "large"],
+      description: "Control height and horizontal padding.",
+    },
+    children: { control: "text", description: "Visible button label." },
+    iconPosition: { control: "inline-radio", options: ["left", "right"] },
+    type: { control: "inline-radio", options: ["button", "submit", "reset"] },
+    onClick: { control: false },
+    icon: { control: false },
+    asChild: {
+      control: false,
+      table: { disable: true },
+      description: "Composition API; documented separately because it requires a child element.",
+    },
+    className: { table: { disable: true } },
+    style: { table: { disable: true } },
+    form: { table: { disable: true } },
+    id: { table: { disable: true } },
+    testId: { table: { disable: true } },
+    role: { table: { disable: true } },
+    tabIndex: { table: { disable: true } },
+  },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const Playground: Story = {};
 export const Primary: Story = { args: { variant: "primary", children: "Accept all" } };
 export const SecondaryDark: Story = { args: { variant: "secondary-dark", children: "Necessary" } };
 export const Secondary: Story = {
@@ -64,6 +111,7 @@ export const Icon: Story = {
     "aria-label": "Back",
     children: "Back",
   },
+  parameters: { controls: { disable: true } },
 };
 export const TextWithIcon: Story = {
   args: {
@@ -71,6 +119,7 @@ export const TextWithIcon: Story = {
     children: "Back",
     icon: <ArrowLeftIcon style={{ width: 20, height: 20 }} aria-hidden="true" />,
   },
+  parameters: { controls: { disable: true } },
 };
 
 export const ProductionVariants: Story = {
@@ -83,6 +132,7 @@ export const ProductionVariants: Story = {
     </div>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       description: {
         story: "The variants and states currently exercised by the production cookie-preferences flow.",
@@ -106,6 +156,7 @@ export const Sizes: Story = {
       <Button size="large">Large</Button>
     </div>
   ),
+  parameters: { controls: { disable: true } },
 };
 
 export const FullWidthAndLongLabel: Story = {

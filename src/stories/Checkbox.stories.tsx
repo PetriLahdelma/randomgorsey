@@ -1,15 +1,39 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
+import { useArgs } from "storybook/preview-api";
 
 import Checkbox from "../components/Checkbox";
 
 const meta = {
   title: "Components/Forms/Checkbox",
   component: Checkbox,
-  args: { checked: false, onChange: () => undefined, label: "Retain a local copy of this selection" },
+  parameters: { docs: { description: { component: "Controlled native checkbox with stable label, help, required, disabled, and error semantics." } } },
+  args: {
+    checked: false,
+    onChange: () => undefined,
+    label: "Retain a local copy of this selection",
+    required: false,
+    disabled: false,
+    helpText: "This setting stays in the current browser.",
+    error: "",
+    name: "retainSelection",
+  },
+  argTypes: {
+    checked: { control: "boolean", description: "Controlled checked state. Clicking the preview updates this arg." },
+    label: { control: "text" },
+    required: { control: "boolean" },
+    disabled: { control: "boolean" },
+    helpText: { control: "text" },
+    error: { control: "text" },
+    name: { control: "text" },
+    onChange: { control: false, table: { disable: true } },
+    className: { control: false, table: { disable: true } },
+    id: { control: false, table: { disable: true } },
+    "aria-label": { control: false, table: { disable: true } },
+    "aria-labelledby": { control: false, table: { disable: true } },
+  },
   render: function Render(args) {
-    const [checked, setChecked] = useState(args.checked);
-    return <div style={{ width: "min(100%, 34rem)", padding: "var(--ds-space-6)", background: "var(--component-surface-panel)" }}><Checkbox {...args} checked={checked} onChange={(event) => setChecked(event.target.checked)} /></div>;
+    const [, updateArgs] = useArgs();
+    return <div style={{ width: "min(100%, 34rem)", padding: "var(--ds-space-6)", background: "var(--component-surface-panel)" }}><Checkbox {...args} checked={Boolean(args.checked)} onChange={(event) => { updateArgs({ checked: event.target.checked }); args.onChange(event); }} /></div>;
   },
 } satisfies Meta<typeof Checkbox>;
 
