@@ -6,6 +6,20 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-11-13
+
+### Added
+
+- Add a Playwright CLI gate that verifies Storybook Controls defaults, synchronization and preview updates across the supported interactive inventory.
+
+### Changed
+
+- Give interactive Storybook examples explicit playgrounds and focused control sets while disabling controls on fixed production, structural and laboratory specimens.
+
+### Fixed
+
+- Keep controlled form and dialog stories synchronized when state changes from either the Controls panel or the rendered preview.
+
 ## [0.6.0] - 2026-11-13
 
 ### Added
