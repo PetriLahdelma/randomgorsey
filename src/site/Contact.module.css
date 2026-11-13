@@ -141,7 +141,6 @@
 }
 
 .asideError,
-.fieldError,
 .generalError {
   margin: 0.55rem 0 0;
   font-size: 0.82rem;
@@ -203,66 +202,8 @@
   border-top: 1px solid #9a9c94;
 }
 
-.field {
-  min-width: 0;
-}
-
-.fieldHeading {
-  display: flex;
-  gap: 0.75rem;
-  justify-content: space-between;
-  margin-bottom: 0.4rem;
-  font-family: var(--font-geist-pixel-square), monospace;
-  font-size: 0.78rem;
-}
-
-.fieldHeading span {
-  color: #656760;
-}
-
 .directLinks a span[aria-hidden="true"] {
   font-size: 19px;
-}
-
-.control,
-.textarea {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 0.72rem 0.78rem;
-  font: inherit;
-  color: #11140f;
-  background: #fffef3;
-  border: 2px solid;
-  border-color: #696b64 #fff #fff #696b64;
-  border-radius: 0;
-  box-shadow: inset 1px 1px rgb(0 0 0 / 8%);
-}
-
-.control {
-  min-height: 2.85rem;
-}
-
-.textarea {
-  min-height: 9rem;
-  line-height: 1.5;
-  resize: vertical;
-}
-
-.control:focus-visible,
-.textarea:focus-visible {
-  outline: 3px solid #234bdf;
-  outline-offset: 2px;
-}
-
-.control[aria-invalid="true"],
-.textarea[aria-invalid="true"] {
-  border-color: #8b1328;
-}
-
-.control:disabled,
-.textarea:disabled {
-  cursor: wait;
-  opacity: 0.7;
 }
 
 .emptyDetails {

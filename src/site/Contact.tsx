@@ -3,6 +3,7 @@
 import emailjs from "@emailjs/browser";
 import React, { useEffect, useRef, useState } from "react";
 
+import { Field, formFieldStyles } from "@/components/forms";
 import { StudioWindow } from "@/components/studio/StudioWindow";
 import { RateLimiter, sanitizeText } from "@/utils/security";
 import {
@@ -85,31 +86,6 @@ function clearFieldError(errors: FormErrors, field: string): FormErrors {
   delete next[field];
   delete next.general;
   return next;
-}
-
-interface FieldProps {
-  id: string;
-  label: string;
-  error?: string;
-  children: React.ReactNode;
-  optional?: boolean;
-}
-
-function Field({ id, label, error, children, optional = false }: FieldProps) {
-  return (
-    <div className={styles.field}>
-      <div className={styles.fieldHeading}>
-        <label htmlFor={id}>{label}</label>
-        {optional && <span>Optional</span>}
-      </div>
-      {children}
-      {error && (
-        <p id={`${id}-error`} className={styles.fieldError} role="alert">
-          {error}
-        </p>
-      )}
-    </div>
-  );
 }
 
 const Contact: React.FC = () => {
@@ -413,10 +389,10 @@ const Contact: React.FC = () => {
               inert={success || undefined}
             >
                 <div className={styles.identityFields}>
-                  <Field id="contact-name" label="Name" error={formErrors.name}>
+                  <Field id="contact-name" label="Name" error={formErrors.name} presentation="contact">
                     <input
                       id="contact-name"
-                      className={styles.control}
+                      className={formFieldStyles.contactControl}
                       value={name}
                       onChange={(event) => updateField("name", setName, event.target.value)}
                       autoComplete="name"
@@ -425,10 +401,10 @@ const Contact: React.FC = () => {
                       disabled={formDisabled}
                     />
                   </Field>
-                  <Field id="contact-email" label="Email" error={formErrors.email}>
+                  <Field id="contact-email" label="Email" error={formErrors.email} presentation="contact">
                     <input
                       id="contact-email"
-                      className={styles.control}
+                      className={formFieldStyles.contactControl}
                       type="email"
                       value={email}
                       onChange={(event) => updateField("email", setEmail, event.target.value)}
@@ -445,10 +421,10 @@ const Contact: React.FC = () => {
                 {reason === "booking" && (
                   <div className={styles.detailFields} data-motion-detail>
                     <div className={`${styles.identityFields} ${styles.detailRow}`}>
-                      <Field id="contact-date" label="Date or date range" error={formErrors.date}>
+                      <Field id="contact-date" label="Date or date range" error={formErrors.date} presentation="contact">
                         <input
                           id="contact-date"
-                          className={styles.control}
+                          className={formFieldStyles.contactControl}
                           value={date}
                           onChange={(event) => updateField("date", setDate, event.target.value)}
                           placeholder="e.g. 15 June 2027"
@@ -457,10 +433,10 @@ const Contact: React.FC = () => {
                           disabled={formDisabled}
                         />
                       </Field>
-                      <Field id="contact-venue" label="Venue or event" error={formErrors.venue}>
+                      <Field id="contact-venue" label="Venue or event" error={formErrors.venue} presentation="contact">
                         <input
                           id="contact-venue"
-                          className={styles.control}
+                          className={formFieldStyles.contactControl}
                           value={venue}
                           onChange={(event) => updateField("venue", setVenue, event.target.value)}
                           aria-invalid={Boolean(formErrors.venue)}
@@ -470,10 +446,10 @@ const Contact: React.FC = () => {
                       </Field>
                     </div>
                     <div className={`${styles.identityFields} ${styles.detailRowDelayed}`}>
-                      <Field id="contact-location" label="Location" error={formErrors.location}>
+                      <Field id="contact-location" label="Location" error={formErrors.location} presentation="contact">
                         <input
                           id="contact-location"
-                          className={styles.control}
+                          className={formFieldStyles.contactControl}
                           value={location}
                           onChange={(event) => updateField("location", setLocation, event.target.value)}
                           aria-invalid={Boolean(formErrors.location)}
@@ -481,10 +457,10 @@ const Contact: React.FC = () => {
                           disabled={formDisabled}
                         />
                       </Field>
-                      <Field id="contact-budget" label="Budget" error={formErrors.budget}>
+                      <Field id="contact-budget" label="Budget" error={formErrors.budget} presentation="contact">
                         <select
                           id="contact-budget"
-                          className={styles.control}
+                          className={formFieldStyles.contactControl}
                           value={budget}
                           onChange={(event) => updateField("budget", setBudget, event.target.value)}
                           aria-invalid={Boolean(formErrors.budget)}
@@ -510,10 +486,10 @@ const Contact: React.FC = () => {
                 {reason === "collaboration" && (
                   <div className={styles.detailFields} data-motion-detail>
                     <div className={`${styles.identityFields} ${styles.detailRow}`}>
-                      <Field id="contact-project-type" label="Project type" error={formErrors.projectType}>
+                      <Field id="contact-project-type" label="Project type" error={formErrors.projectType} presentation="contact">
                         <select
                           id="contact-project-type"
-                          className={styles.control}
+                          className={formFieldStyles.contactControl}
                           value={projectType}
                           onChange={(event) => updateField("projectType", setProjectType, event.target.value)}
                           aria-invalid={Boolean(formErrors.projectType)}
@@ -524,10 +500,10 @@ const Contact: React.FC = () => {
                           {PROJECT_TYPE_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
                         </select>
                       </Field>
-                      <Field id="contact-timeline" label="Timeline" optional error={formErrors.timeline}>
+                      <Field id="contact-timeline" label="Timeline" optional error={formErrors.timeline} presentation="contact">
                         <input
                           id="contact-timeline"
-                          className={styles.control}
+                          className={formFieldStyles.contactControl}
                           value={timeline}
                           onChange={(event) => updateField("timeline", setTimeline, event.target.value)}
                           aria-invalid={Boolean(formErrors.timeline)}
@@ -611,10 +587,10 @@ interface MessageFieldProps {
 
 function MessageField({ message, error, disabled, rows = 6, update }: MessageFieldProps) {
   return (
-    <Field id="contact-message" label="Message" error={error}>
+    <Field id="contact-message" label="Message" error={error} presentation="contact">
       <textarea
         id="contact-message"
-        className={styles.textarea}
+        className={formFieldStyles.contactTextarea}
         rows={rows}
         value={message}
         onChange={(event) => update(event.target.value)}

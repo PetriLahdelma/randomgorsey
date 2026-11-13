@@ -1,91 +1,37 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import Input from '../components/Input';
+import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 
-export default {
-  title: 'Library/Legacy/Forms/Input',
+import Input from "../components/Input";
+
+const shell = { width: "min(100%, 34rem)", padding: "var(--ds-space-6)", background: "var(--component-surface-panel)", color: "var(--component-text-primary)" };
+
+const meta = {
+  title: "Components/Forms/Input",
   component: Input,
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Input now generates and uses unique id/htmlFor for accessibility. You can provide an explicit id, or it will be derived from the label.',
-      },
-    },
+  parameters: { docs: { description: { component: "Productive text input with native semantics, explicit help/error association, deterministic density, and reduced-motion support." } } },
+  args: { type: "text", value: "", onChange: () => undefined, label: "Project reference", placeholder: "RG-2026-11" },
+  render: function Render(args) {
+    const [value, setValue] = useState(String(args.value));
+    return <div style={shell}><Input {...args} value={value} onChange={(event) => setValue(event.target.value)} /></div>;
   },
-  argTypes: {
-    type: {
-      control: {
-        type: 'select',
-        options: ['text', 'email', 'password', 'textarea'],
-      },
-    },
-    onChange: { action: 'changed' },
-    id: { control: 'text' },
-    label: { control: 'text' },
-  },
-} as Meta<typeof Input>;
+} satisfies Meta<typeof Input>;
 
-const Template: StoryFn<typeof Input> = (args) => (
-  <div style={{ maxWidth: '400px' }}>
-    <Input {...args} />
-  </div>
-);
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Text = Template.bind({});
-Text.args = {
-  type: 'text',
-  value: '',
-  placeholder: 'Enter text',
-  label: 'Text Input',
-};
+export const Playground: Story = {};
+export const Required: Story = { args: { required: true, helpText: "Use the reference included in the brief." } };
+export const Invalid: Story = { args: { value: "RG", error: "Enter the complete project reference." } };
+export const Loading: Story = { args: { value: "Retrieving record", loading: true } };
+export const Disabled: Story = { args: { value: "Archived record", disabled: true } };
+export const LongContent: Story = { args: { label: "Localized production reference with a deliberately long field label", value: "RG-2026-11-HELSINKI-AFTER-HOURS-MASTER-ARCHIVE" } };
 
-export const Email = Template.bind({});
-Email.args = {
-  type: 'email',
-  value: '',
-  placeholder: 'Enter email',
-  label: 'Email Input',
-};
-
-export const Password = Template.bind({});
-Password.args = {
-  type: 'password',
-  value: '',
-  placeholder: 'Enter password',
-  label: 'Password Input',
-};
-
-export const TextArea = Template.bind({});
-TextArea.args = {
-  type: 'textarea',
-  value: '',
-  placeholder: 'Enter message',
-  label: 'Text Area',
-};
-
-export const WithCustomId = Template.bind({});
-WithCustomId.args = {
-  type: 'text',
-  value: '',
-  placeholder: 'Custom id',
-  label: 'Custom ID',
-  id: 'custom-input-id',
-};
-
-export const MultipleInputsSameLabel = () => (
-  <div style={{ maxWidth: '400px' }}>
-    <Input type="text" value="" onChange={() => {}} label="Name" id="name-1" placeholder="First input" />
-    <div style={{ marginTop: 16 }}>
-      <Input type="text" value="" onChange={() => {}} label="Name" id="name-2" placeholder="Second input" />
-    </div>
-  </div>
-);
-
-export const AriaLabelOnly = Template.bind({});
-AriaLabelOnly.args = {
-  type: 'text',
-  value: '',
-  placeholder: 'Search the archive',
-  'aria-label': 'Search the archive',
+export const StateMatrix: Story = {
+  render: () => <div style={{ ...shell, display: "grid", gap: "var(--ds-space-4)" }}>
+    <Input type="text" label="Default" value="" onChange={() => undefined} placeholder="Enter reference" />
+    <Input type="text" label="With help" value="RG-2026" onChange={() => undefined} helpText="Local archive identifier" />
+    <Input type="text" label="Invalid" value="RG" onChange={() => undefined} error="Reference is incomplete." />
+    <Input type="text" label="Loading" value="Retrieving record" onChange={() => undefined} loading />
+    <Input type="text" label="Disabled" value="Archived" onChange={() => undefined} disabled />
+  </div>,
 };

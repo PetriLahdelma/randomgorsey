@@ -1,6 +1,7 @@
 import React from "react";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
+import { formFieldStyles } from "@/components/forms";
 import Contact from "../Contact";
 
 const sendMock = vi.fn();
@@ -425,5 +426,32 @@ describe("Contact inquiry behavior", () => {
     expect(screen.getByLabelText("Message")).toHaveValue(
       "This message should remain in the form."
     );
+  });
+
+  it("reports a synchronous provider failure and leaves the completed form editable", async () => {
+    sendMock.mockImplementation(() => {
+      throw new Error("provider initialization failed");
+    });
+    render(<Contact />);
+    fillHelloForm();
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+
+    expect(await screen.findByRole("alert")).toHaveTextContent(
+      /could not be submitted/i
+    );
+    expect(screen.getByRole("button", { name: /send message/i })).toBeEnabled();
+    expect(screen.getByLabelText("Message")).toHaveValue("Hello from Helsinki.");
+  });
+
+  it("consumes the shared Contact field presentation without changing labels or focus order", () => {
+    render(<Contact />);
+    const name = screen.getByLabelText("Name");
+    const email = screen.getByLabelText("Email");
+    const submit = screen.getByRole("button", { name: /send message/i });
+
+    expect(name).toHaveClass(formFieldStyles.contactControl);
+    expect(email).toHaveClass(formFieldStyles.contactControl);
+    expect(name.compareDocumentPosition(email) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(email.compareDocumentPosition(submit) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 });

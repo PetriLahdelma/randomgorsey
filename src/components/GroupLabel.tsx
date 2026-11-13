@@ -1,28 +1,38 @@
-import React from 'react';
-import { cn } from '@/lib/utils';
+import type { CSSProperties, ReactNode } from "react";
+
+import { cn } from "@/lib/utils";
+import styles from "./forms/FormField.module.css";
 
 export type GroupLabelProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   required?: boolean;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
+  as?: "div" | "legend";
+  description?: ReactNode;
+  id?: string;
+  descriptionId?: string;
 };
 
-const GroupLabel: React.FC<GroupLabelProps> = ({ children, className, required, style }) => (
-  <div
-    className={cn(
-      "block mb-2",
-      "font-europa text-[1.1rem] font-bold",
-      "text-blue-800 uppercase tracking-[0.03em]",
-      className
-    )}
-    style={style}
-  >
-    {children}
-    {required && (
-      <span className="ml-1 text-[1em] text-destructive">*</span>
-    )}
-  </div>
-);
+const GroupLabel = ({ children, className, required, style, as = "div", description, id, descriptionId }: GroupLabelProps) => {
+  const label = <>{children}{required && <span className={styles.required} aria-hidden="true">*</span>}</>;
+
+  if (as === "legend") {
+    return (
+      <>
+        <legend className={cn(styles.groupLabel, className)} style={style} id={id}>{label}</legend>
+        {description && <span className={styles.groupDescription} id={descriptionId}>{description}</span>}
+      </>
+    );
+  }
+
+  return (
+    <div className={cn(styles.groupLabel, className)} style={style} id={id}>
+      {label}
+      {description && <span className={styles.groupDescription} id={descriptionId}>{description}</span>}
+    </div>
+  );
+};
 
 export default GroupLabel;
+export { GroupLabel };

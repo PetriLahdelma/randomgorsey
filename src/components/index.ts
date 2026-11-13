@@ -6,6 +6,7 @@ export { default as Button } from "./Button";
 export type { ButtonProps, ButtonVariant, IconPosition } from "./Button";
 export { default as Caption } from "./Caption";
 export { default as Checkbox } from "./Checkbox";
+export type { CheckboxProps } from "./Checkbox";
 export { default as CookieConsent } from "./CookieConsent";
 export { default as GroupLabel } from "./GroupLabel";
 export type { GroupLabelProps } from "./GroupLabel";
@@ -34,3 +35,6 @@ export type {
 export { default as Text } from "./Text";
 export type { TextProps } from "./Text";
 export { default as TextArea } from "./TextArea";
+export type { TextAreaProps } from "./TextArea";
+export { Field } from "./forms";
+export type { FieldProps } from "./forms";
