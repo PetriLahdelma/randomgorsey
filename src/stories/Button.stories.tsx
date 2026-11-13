@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { expect, fn, userEvent, within } from "storybook/test";
 import Button from "../components/Button";
 
 const meta = {
@@ -11,11 +12,10 @@ const meta = {
       <div
         style={{
           width: "min(32rem, 100%)",
-          padding: "1rem",
-          color: "var(--studio-ink)",
-          background: "var(--studio-gray)",
-          border: "2px solid",
-          borderColor: "#fff #6f706b #6f706b #fff",
+          padding: "var(--ds-space-4)",
+          color: "var(--component-text-primary)",
+          background: "var(--component-surface-panel)",
+          border: "var(--ds-border-width-hairline) solid var(--component-control-border)",
         }}
       >
         <Story />
@@ -70,5 +70,61 @@ export const TextWithIcon: Story = {
     variant: "secondary-dark",
     children: "Back",
     icon: <ArrowLeftIcon style={{ width: 20, height: 20 }} aria-hidden="true" />,
+  },
+};
+
+export const ProductionVariants: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--ds-space-3)" }}>
+      <Button variant="primary">Accept all</Button>
+      <Button variant="secondary-dark">Necessary only</Button>
+      <Button variant="primary" disabled>Unavailable</Button>
+      <Button variant="primary" loading>Saving choice…</Button>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "The variants and states currently exercised by the production cookie-preferences flow.",
+      },
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("button", { name: "Accept all" })).toBeEnabled();
+    await expect(canvas.getByRole("button", { name: "Necessary only" })).toBeEnabled();
+    await expect(canvas.getByRole("button", { name: "Unavailable" })).toBeDisabled();
+    await expect(canvas.getByRole("button", { name: "Saving choice…" })).toBeDisabled();
+  },
+};
+
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "var(--ds-space-3)" }}>
+      <Button size="small">Small</Button>
+      <Button size="medium">Medium</Button>
+      <Button size="large">Large</Button>
+    </div>
+  ),
+};
+
+export const FullWidthAndLongLabel: Story = {
+  args: {
+    variant: "secondary-dark",
+    fullWidth: true,
+    children: "Keep necessary cookies and close preferences",
+  },
+  parameters: { viewport: { defaultViewport: "mobile" } },
+};
+
+export const KeyboardActivation: Story = {
+  args: { variant: "primary", children: "Confirm selection", onClick: fn() },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole("button", { name: "Confirm selection" });
+    await userEvent.tab();
+    await expect(button).toHaveFocus();
+    await userEvent.keyboard("{Enter}");
+    await expect(args.onClick).toHaveBeenCalledOnce();
   },
 };
