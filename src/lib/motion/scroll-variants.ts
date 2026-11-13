@@ -1,5 +1,5 @@
 import { type Variants } from "framer-motion";
-import { eases, durations } from "./config";
+import { stagger, transitions } from "./config";
 
 /**
  * Post card entrance: alternating horizontal slide-in.
@@ -15,10 +15,7 @@ export const postCardVariants: Variants = {
     opacity: 1,
     x: 0,
     filter: "brightness(1) contrast(1)",
-    transition: {
-      duration: durations.slow,
-      ease: eases.default,
-    },
+    transition: transitions.enter,
   },
 };
 
@@ -26,7 +23,7 @@ export const postCardStagger: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.06,
+      staggerChildren: stagger.rows,
     },
   },
 };
@@ -36,10 +33,7 @@ export const postCardChild: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: durations.fast,
-      ease: eases.default,
-    },
+    transition: transitions.enter,
   },
 };
 
@@ -51,10 +45,7 @@ export const galleryRevealVariants: Variants = {
   visible: {
     clipPath: "inset(0 0 0% 0)",
     opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: eases.default,
-    },
+    transition: transitions.enter,
   },
 };
 
@@ -66,10 +57,7 @@ export const embedBorderVariants: Variants = {
   visible: {
     opacity: 1,
     clipPath: "inset(0 0% 0% 0)",
-    transition: {
-      duration: 0.5,
-      ease: eases.default,
-    },
+    transition: transitions.enter,
   },
 };
 
@@ -78,10 +66,7 @@ export const bodyTextVariants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: durations.normal,
-      ease: eases.default,
-    },
+    transition: transitions.enter,
   },
 };
 
@@ -95,10 +80,7 @@ export const headingCharVariants: Variants = {
     opacity: 1,
     x: 0,
     filter: "blur(0px)",
-    transition: {
-      duration: 0.4,
-      ease: eases.default,
-    },
+    transition: transitions.enter,
   },
 };
 
@@ -122,11 +104,7 @@ export const headingGhostVariants: Variants = {
     opacity: 0.12,
     x: 2,
     scale: 1.08,
-    transition: {
-      duration: 0.6,
-      ease: eases.default,
-      delay: 0.2,
-    },
+    transition: { ...transitions.enter, delay: 0.2 },
   },
 };
 
@@ -137,10 +115,6 @@ export const headingUnderlineVariants: Variants = {
   },
   visible: {
     scaleX: 1,
-    transition: {
-      duration: 0.4,
-      ease: eases.default,
-      delay: 0.4,
-    },
+    transition: { ...transitions.enter, delay: 0.4 },
   },
 };

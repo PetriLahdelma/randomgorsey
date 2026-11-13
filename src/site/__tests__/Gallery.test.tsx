@@ -1,11 +1,16 @@
 import React from "react";
-import { render, screen, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import galleryImages, { galleryDisplayName } from "@/data/galleryImages";
 import Gallery from "../Gallery";
 
 describe("Gallery Page", () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
   it("renders every preserved gallery image and caption", () => {
     render(<Gallery />);
 
@@ -52,5 +57,40 @@ describe("Gallery Page", () => {
     expect(screen.queryByRole("dialog", { name: "Image viewer" })).not.toBeInTheDocument();
     expect(document.body.style.overflow).toBe("");
     expect(firstTrigger).toHaveFocus();
+  });
+
+  it("uses the thumbnail as the viewer origin and keeps the exit mounted briefly", async () => {
+    vi.useFakeTimers();
+    vi.stubGlobal("matchMedia", vi.fn().mockImplementation((query: string) => ({
+      matches: query.includes("no-preference"),
+      media: query,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    })));
+    const { container } = render(<Gallery />);
+    const trigger = container.querySelector<HTMLButtonElement>(`button[aria-label="Open image: ${galleryDisplayName(galleryImages[0])}"]`)!;
+    vi.spyOn(trigger, "getBoundingClientRect").mockReturnValue({
+      x: 100, y: 120, left: 100, top: 120, right: 300, bottom: 280,
+      width: 200, height: 160, toJSON: () => ({}),
+    });
+
+    fireEvent.click(trigger);
+    const dialog = container.querySelector<HTMLElement>('[role="dialog"]')!;
+    expect(dialog).toHaveStyle({ "--viewer-mask-x": "200px", "--viewer-mask-y": "200px" });
+    expect(dialog.firstElementChild).toHaveStyle({
+      "--viewer-local-x": "200px",
+      "--viewer-local-y": "200px",
+    });
+
+    fireEvent.click(dialog.querySelector<HTMLButtonElement>('button[aria-label="Close image"]')!);
+    expect(container.querySelector('[role="dialog"]')).toBeInTheDocument();
+    fireEvent.click(trigger);
+    act(() => vi.advanceTimersByTime(160));
+    expect(container.querySelector('[role="dialog"]')).toBeInTheDocument();
+
+    fireEvent.click(container.querySelector<HTMLButtonElement>('button[aria-label="Close image"]')!);
+    act(() => vi.advanceTimersByTime(160));
+    expect(container.querySelector('[role="dialog"]')).not.toBeInTheDocument();
+    expect(trigger).toHaveFocus();
   });
 });

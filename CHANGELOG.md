@@ -6,6 +6,21 @@ The package version `0.1.0` was introduced on 2025-05-14 and remained unchanged 
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-11-13
+
+### Added
+
+- Document the interaction motion contract and add production stories for the error and individual journal pages.
+
+### Changed
+
+- Apply consistent, reduced-motion-aware timing to the shared motion system, share menu, gallery viewer and contact states.
+- Use the actual Discography composition in the release story, retaining square artwork and overlap.
+
+### Fixed
+
+- Prevent browser autofill from silently blocking the contact form, and provide clear validation and delivery status feedback.
+
 ## [0.4.11] - 2026-11-06
 
 ### Changed

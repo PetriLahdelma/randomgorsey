@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { HelmetProvider } from 'react-helmet-async';
 import PostCard, { Post } from '../PostCard';
@@ -238,6 +238,41 @@ describe('PostCard', () => {
     expect(screen.queryByTitle('First selection')).not.toBeInTheDocument();
     expect(screen.getByTitle('Second selection')).toBeInTheDocument();
     expect(document.querySelectorAll('iframe')).toHaveLength(1);
+  });
+
+  it('keeps the journal lightbox mounted through exit and returns focus afterward', async () => {
+    const user = userEvent.setup();
+    const postWithImage: Post = {
+      ...post,
+      contentType: 'text',
+      body: '<p><img src="/images/detail.jpg" alt="In-body detail" /></p>',
+    };
+
+    render(
+      <PostCard
+        post={postWithImage}
+        showFullContent
+        truncateLength={Number.MAX_SAFE_INTEGER}
+        showSocialShare={false}
+      />
+    );
+
+    const trigger = screen.getByRole('img', { name: 'In-body detail' });
+    await user.click(trigger);
+
+    const dialog = screen.getByRole('dialog', { name: 'Image viewer' });
+    expect(dialog).toBeInTheDocument();
+    expect(document.body.style.overflow).toBe('hidden');
+    expect(screen.getByRole('button', { name: 'Close lightbox' })).toHaveFocus();
+    await user.tab();
+    expect(screen.getByRole('button', { name: 'Close lightbox' })).toHaveFocus();
+    await user.tab({ shift: true });
+    expect(screen.getByRole('button', { name: 'Close lightbox' })).toHaveFocus();
+
+    await user.click(screen.getByRole('button', { name: 'Close lightbox' }));
+    await waitFor(() => expect(dialog).not.toBeInTheDocument());
+    expect(document.body.style.overflow).toBe('');
+    expect(screen.getByRole('img', { name: 'In-body detail' })).toHaveFocus();
   });
 
   it('expands immediately without effect classes when effects are off', async () => {

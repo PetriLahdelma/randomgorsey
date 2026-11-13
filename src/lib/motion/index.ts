@@ -32,8 +32,8 @@
  */
 
 // === CONFIGURATION ===
-// Spring physics, duration, and easing presets
-export { springs, durations, eases } from './config';
+// Semantic tween timing plus retained spring presets for exceptional focal motion
+export { springs, durations, eases, transitions, stagger } from './config';
 export type { SpringPreset, DurationPreset, EasePreset } from './config';
 
 // === VARIANTS ===

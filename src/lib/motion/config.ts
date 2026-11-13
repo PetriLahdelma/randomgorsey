@@ -1,7 +1,8 @@
 /**
  * Motion Configuration Constants
  *
- * Gallery timing: smooth, deliberate, elegant.
+ * Shared motion contract for routine interface movement.
+ * Durations are expressed in seconds for Framer Motion.
  */
 
 export const springs = {
@@ -21,6 +22,17 @@ export const springs = {
 
 export const durations = {
   instant: 0,
+  /** Immediate tactile feedback such as a button press. */
+  press: 0.1,
+  /** Routine exits are 20% shorter than the standard entrance. */
+  exit: 0.16,
+  /** Standard interface entrance. */
+  enter: 0.2,
+  /** Dropdowns and popovers stay inside the requested 150-250ms range. */
+  dropdown: 0.2,
+  /** On-screen movement between settled states. */
+  movement: 0.2,
+  /** Existing aliases retained for consumers outside the shared variants. */
   fast: 0.2,
   normal: 0.35,
   slow: 0.5,
@@ -28,11 +40,26 @@ export const durations = {
 } as const;
 
 export const eases = {
-  /** Gallery ease — smooth attack, gentle deceleration */
-  default: [0.22, 1, 0.36, 1] as const,
+  /** Confident deceleration for entrances. */
+  default: [0.16, 1, 0.3, 1] as const,
   in: [0.4, 0, 1, 1] as const,
-  out: [0.22, 1, 0.36, 1] as const,
-  inOut: [0.22, 1, 0.36, 1] as const,
+  out: [0.16, 1, 0.3, 1] as const,
+  /** Symmetric acceleration and deceleration for movement already on screen. */
+  inOut: [0.65, 0, 0.35, 1] as const,
+} as const;
+
+/** Semantic transitions used by routine production UI. */
+export const transitions = {
+  enter: { type: 'tween' as const, duration: durations.enter, ease: eases.out },
+  exit: { type: 'tween' as const, duration: durations.exit, ease: eases.in },
+  dropdown: { type: 'tween' as const, duration: durations.dropdown, ease: eases.out },
+  movement: { type: 'tween' as const, duration: durations.movement, ease: eases.inOut },
+} as const;
+
+/** List rows settle 30ms apart; reverse exits retain the 20% shorter ratio. */
+export const stagger = {
+  rows: 0.03,
+  rowsExit: 0.024,
 } as const;
 
 // === TYPE EXPORTS ===

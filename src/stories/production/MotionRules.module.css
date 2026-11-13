@@ -1,0 +1,197 @@
+.page {
+  display: grid;
+  gap: 4rem;
+  max-width: 80rem;
+  padding: 3rem 2rem 5rem;
+  margin: 0 auto;
+}
+
+.intro {
+  margin: 0;
+}
+
+.samples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.dropdownAnchor {
+  position: relative;
+  min-height: 17rem;
+}
+
+.dropdown {
+  display: grid;
+  margin-top: 0.75rem;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--studio-paper);
+  border: 1px solid var(--studio-ink);
+  opacity: 0;
+  clip-path: inset(0 0 100% 0);
+  transform: scale(0.95);
+  transform-origin: top left;
+}
+
+.dropdownOpen {
+  pointer-events: auto;
+  opacity: 1;
+  clip-path: inset(0);
+  transform: scale(1);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid #a6a7a1;
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+.dropdownOpen .row {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: calc(var(--row-index) * var(--motion-stagger, 30ms));
+}
+
+.rowIndex,
+.ruleNumber {
+  font-family: var(--studio-system);
+  font-size: 0.75rem;
+}
+
+.movementStage {
+  position: relative;
+  height: 8rem;
+  margin-top: 1rem;
+  overflow: hidden;
+  background: var(--studio-ink);
+  border: 2px solid;
+  border-color: #5c5d58 #fff #fff #5c5d58;
+}
+
+.movingObject {
+  position: absolute;
+  top: calc(50% - 1rem);
+  left: 1rem;
+  width: 2rem;
+  height: 2rem;
+  background: var(--studio-acid);
+}
+
+.movingObjectEnd {
+  transform: translateX(clamp(8rem, 24vw, 20rem));
+}
+
+.referenceTitle {
+  margin: 0.5rem 0 1.5rem;
+  font-family: var(--studio-terminal);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.reference {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-top: 1px solid var(--studio-line);
+}
+
+.referenceItem {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(14rem, 0.8fr) minmax(0, 1.2fr);
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--studio-line);
+}
+
+.ruleTitle,
+.ruleNote {
+  margin: 0;
+}
+
+.ruleTitle {
+  color: var(--studio-white);
+}
+
+.status {
+  font-family: var(--studio-system);
+  font-size: 0.72rem;
+  color: var(--studio-acid);
+}
+
+.conditional {
+  color: var(--studio-muted);
+}
+
+.ruleNote {
+  color: var(--studio-muted);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .dropdown {
+    transition:
+      transform var(--motion-duration-exit, 160ms) var(--motion-ease-in-out, cubic-bezier(0.65, 0, 0.35, 1)),
+      clip-path var(--motion-duration-exit, 160ms) var(--motion-ease-in-out, cubic-bezier(0.65, 0, 0.35, 1)),
+      opacity var(--motion-duration-exit, 160ms) linear;
+  }
+
+  .dropdownOpen {
+    transition-timing-function: var(--motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+    transition-duration: var(--motion-duration-menu, 200ms);
+  }
+
+  .row {
+    transition:
+      transform var(--motion-duration-menu, 200ms) var(--motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      opacity var(--motion-duration-menu, 200ms) linear;
+  }
+
+  .movingObject {
+    transition: transform 400ms var(--motion-ease-in-out, cubic-bezier(0.65, 0, 0.35, 1));
+  }
+}
+
+.staticMotion :where(.dropdown, .row, .movingObject) {
+  transition: none;
+  animation: none;
+}
+
+.staticMotion .pressTarget,
+.staticMotion .pressTarget:active {
+  scale: 1;
+}
+
+@media (prefers-reduced-motion: reduce), (pointer: coarse) {
+  .dropdown,
+  .row,
+  .movingObject {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (width <= 46rem) {
+  .page {
+    padding: 2rem 1rem 4rem;
+  }
+
+  .samples {
+    grid-template-columns: 1fr;
+  }
+
+  .referenceItem {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+
+  .ruleNote,
+  .status {
+    grid-column: 2;
+  }
+}

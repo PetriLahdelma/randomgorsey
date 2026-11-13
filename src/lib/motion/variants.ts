@@ -2,7 +2,7 @@
  * Reusable Animation Variants
  *
  * Pre-defined Framer Motion variant objects for common animation patterns.
- * These use the centralized spring and duration presets from config.ts
+ * These use the centralized duration and easing presets from config.ts
  * to ensure consistent motion throughout the application.
  *
  * Usage with motion components:
@@ -17,7 +17,7 @@
  */
 
 import type { Variants } from 'framer-motion';
-import { springs, durations, eases } from './config';
+import { stagger, transitions } from './config';
 
 // === PAGE TRANSITIONS ===
 
@@ -25,19 +25,18 @@ import { springs, durations, eases } from './config';
  * Standard page-level animation with vertical slide and fade.
  * Use for main content sections and page components.
  *
- * Applies spring physics for natural feel on enter,
- * quick fade for exit to avoid blocking navigation.
+ * Routine page movement uses a non-bouncing tween and a shorter exit.
  */
 export const pageVariants: Variants = {
   initial: { opacity: 0, y: 12 },
   enter: {
     opacity: 1,
     y: 0,
-    transition: { type: 'spring', ...springs.snappy },
+    transition: transitions.enter,
   },
   exit: {
     opacity: 0,
-    transition: { duration: durations.fast },
+    transition: transitions.exit,
   },
 };
 
@@ -52,11 +51,11 @@ export const fadeVariants: Variants = {
   initial: { opacity: 0 },
   enter: {
     opacity: 1,
-    transition: { duration: durations.normal },
+    transition: transitions.enter,
   },
   exit: {
     opacity: 0,
-    transition: { duration: durations.fast },
+    transition: transitions.exit,
   },
 };
 
@@ -81,13 +80,13 @@ export const staggerContainer: Variants = {
   initial: {},
   enter: {
     transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.08,
+      staggerChildren: stagger.rows,
+      delayChildren: stagger.rows,
     },
   },
   exit: {
     transition: {
-      staggerChildren: 0.03,
+      staggerChildren: stagger.rowsExit,
       staggerDirection: -1,
     },
   },
@@ -102,9 +101,9 @@ export const staggerItem: Variants = {
   enter: {
     opacity: 1,
     y: 0,
-    transition: { type: 'spring', ...springs.snappy },
+    transition: transitions.enter,
   },
-  exit: { opacity: 0, y: -4 },
+  exit: { opacity: 0, y: -4, transition: transitions.exit },
 };
 
 // === MODAL/OVERLAY ANIMATIONS ===
@@ -117,11 +116,11 @@ export const overlayVariants: Variants = {
   initial: { opacity: 0 },
   enter: {
     opacity: 1,
-    transition: { duration: durations.fast },
+    transition: transitions.enter,
   },
   exit: {
     opacity: 0,
-    transition: { duration: durations.fast },
+    transition: transitions.exit,
   },
 };
 
@@ -135,12 +134,12 @@ export const modalVariants: Variants = {
   enter: {
     opacity: 1,
     scale: 1,
-    transition: { type: 'spring', ...springs.snappy },
+    transition: transitions.enter,
   },
   exit: {
     opacity: 0,
     scale: 0.95,
-    transition: { duration: durations.fast },
+    transition: transitions.exit,
   },
 };
 
@@ -157,10 +156,7 @@ export const revealVariants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: durations.normal,
-      ease: eases.default,
-    },
+    transition: transitions.enter,
   },
 };
 
@@ -188,8 +184,8 @@ export const revealContainerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.08,
+      staggerChildren: stagger.rows,
+      delayChildren: stagger.rows,
     },
   },
 };
@@ -203,10 +199,7 @@ export const revealItemVariants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: durations.normal,
-      ease: eases.default,
-    },
+    transition: transitions.enter,
   },
 };
 
@@ -219,7 +212,7 @@ export const revealFadeVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { duration: durations.normal },
+    transition: transitions.enter,
   },
 };
 
@@ -240,8 +233,8 @@ export const textRevealContainer: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.12,
+      staggerChildren: stagger.rows,
+      delayChildren: stagger.rows * 2,
     },
   },
 };
@@ -255,10 +248,7 @@ export const textRevealItem: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.35,
-      ease: eases.default,
-    },
+    transition: transitions.enter,
   },
 };
 
@@ -272,9 +262,6 @@ export const textRevealDramatic: Variants = {
     opacity: 1,
     y: 0,
     rotateX: 0,
-    transition: {
-      duration: 0.5,
-      ease: eases.default,
-    },
+    transition: { ...transitions.enter, duration: 0.5 },
   },
 };

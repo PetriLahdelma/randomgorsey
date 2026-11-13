@@ -1,14 +1,13 @@
 import type { Variants } from 'framer-motion';
-import { springs, durations } from './config';
+import { stagger, transitions } from './config';
 
-// All sections use smooth gallery timing
+// Section transitions use deterministic tweens with no routine bounce.
 const sectionEnter = {
-  type: 'spring' as const,
-  ...springs.snappy,
+  ...transitions.enter,
   delay: 0.08,
 };
 
-const sectionExit = { duration: durations.fast };
+const sectionExit = transitions.exit;
 
 export const heroVariants: Variants = {
   initial: { opacity: 0, y: 12 },
@@ -46,11 +45,11 @@ export const discographyVariants: Variants = {
   exit: { opacity: 0, transition: sectionExit },
 };
 
-// Stagger containers — smooth gallery pace
+// List rows settle 30ms apart and exit in reverse 20% faster.
 const galleryStagger = {
   initial: {},
-  enter: { transition: { staggerChildren: 0.06, delayChildren: 0.08 } },
-  exit: { transition: { staggerChildren: 0.03, staggerDirection: -1 } },
+  enter: { transition: { staggerChildren: stagger.rows, delayChildren: stagger.rows } },
+  exit: { transition: { staggerChildren: stagger.rowsExit, staggerDirection: -1 } },
 };
 
 export const heroStaggerContainer: Variants = galleryStagger;
@@ -64,7 +63,7 @@ export const aboutCardItem: Variants = {
   enter: {
     opacity: 1,
     y: 0,
-    transition: { type: 'spring', ...springs.snappy },
+    transition: transitions.enter,
   },
-  exit: { opacity: 0, transition: { duration: durations.fast } },
+  exit: { opacity: 0, transition: transitions.exit },
 };

@@ -1,6 +1,12 @@
 :root {
   --studio-stage: #101210;
   --studio-link-icon-gap: 12px;
+  --motion-duration-press: 100ms;
+  --motion-duration-menu: 200ms;
+  --motion-duration-exit: 160ms;
+  --motion-stagger: 30ms;
+  --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --studio-gutter: 30px;
   --studio-terminal: lisaterminal, var(--studio-system);
   --studio-paper: #d8d9d2;
@@ -27,6 +33,26 @@ body {
 
 a, button, input, textarea, select {
   -webkit-tap-highlight-color: transparent;
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  :where(button, a, input, select, textarea) {
+    /* Component-local transitions must not override this input and accessibility policy. */
+    /* stylelint-disable-next-line declaration-no-important */
+    transition-duration: 0s !important;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  button:not(:disabled),
+  a.studioButton {
+    transition: scale var(--motion-duration-press) var(--motion-ease-out);
+  }
+
+  button:not(:disabled):active,
+  a.studioButton:active {
+    scale: 0.97;
+  }
 }
 
 :focus-visible {

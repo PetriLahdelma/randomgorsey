@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import Contact from "../Contact";
 
@@ -21,8 +21,23 @@ describe("Contact inquiry behavior", () => {
   });
 
   afterEach(() => {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
     vi.unstubAllEnvs();
   });
+
+  function fillHelloForm() {
+    fireEvent.change(screen.getByLabelText("Name"), {
+      target: { value: "Quiet Listener" },
+    });
+    fireEvent.change(screen.getByLabelText("Email"), {
+      target: { value: "listener@example.com" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /just saying hello/i }));
+    fireEvent.change(screen.getByLabelText("Message"), {
+      target: { value: "Hello from Helsinki." },
+    });
+  }
 
   it("explains the missing inquiry type instead of presenting a dead submit button", async () => {
     render(<Contact />);
@@ -62,6 +77,57 @@ describe("Contact inquiry behavior", () => {
     expect(screen.queryByDisplayValue("Kaiku")).not.toBeInTheDocument();
   });
 
+  it("summarizes validation errors and focuses the first invalid field", async () => {
+    render(<Contact />);
+    fireEvent.click(screen.getByRole("button", { name: /just saying hello/i }));
+    fireEvent.change(screen.getByLabelText("Message"), {
+      target: { value: "The required identity fields were missed." },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+
+    expect(await screen.findByText("Please check the highlighted fields.")).toBeVisible();
+    expect(screen.getByLabelText("Name")).toHaveFocus();
+    expect(sendMock).not.toHaveBeenCalled();
+  });
+
+  it("uses a hidden non-autofillable spam trap", () => {
+    render(<Contact />);
+    const trap = document.getElementById("contact-company");
+    expect(trap).toHaveAttribute("type", "hidden");
+    expect(trap).toHaveAttribute("name", "contact_website");
+    expect(trap).toHaveAttribute("autocomplete", "off");
+  });
+
+  it("blocks a normally filled spam trap with visible feedback", async () => {
+    render(<Contact />);
+    fillHelloForm();
+    const trap = document.getElementById("contact-company") as HTMLInputElement;
+    trap.value = "bot-filled";
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+
+    expect(await screen.findByText(/clear browser autofill/i)).toBeVisible();
+    expect(sendMock).not.toHaveBeenCalled();
+    expect(screen.getByLabelText("Message")).toHaveValue("Hello from Helsinki.");
+  });
+
+  it("clears a browser-autofilled trap and submits the valid visible form", async () => {
+    sendMock.mockResolvedValue({ status: 200, text: "OK" });
+    const originalMatches = Element.prototype.matches;
+    vi.spyOn(Element.prototype, "matches").mockImplementation(function (selector) {
+      if (selector === ":-webkit-autofill" && this.id === "contact-company") return true;
+      return originalMatches.call(this, selector);
+    });
+    render(<Contact />);
+    fillHelloForm();
+    const trap = document.getElementById("contact-company") as HTMLInputElement;
+    trap.value = "browser-profile";
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+
+    await waitFor(() => expect(sendMock).toHaveBeenCalledOnce());
+    expect(trap).toHaveValue("");
+    expect(await screen.findByRole("heading", { name: "Message submitted" })).toBeVisible();
+  });
+
   it("submits once while pending and retains the entered values when delivery fails", async () => {
     let rejectDelivery: ((reason: Error) => void) | undefined;
     sendMock.mockReturnValue(
@@ -98,6 +164,95 @@ describe("Contact inquiry behavior", () => {
     expect(screen.getByLabelText("Name")).toHaveValue("Quiet Listener");
     expect(screen.getByLabelText("Email")).toHaveValue("listener@example.com");
     expect(screen.getByLabelText("Message")).toHaveValue("Hello from Helsinki.");
+  });
+
+  it("shows an unconfirmed locked state, then reconciles a late success", async () => {
+    vi.useFakeTimers();
+    let resolveDelivery: ((value: { status: number; text: string }) => void) | undefined;
+    sendMock.mockReturnValue(
+      new Promise((resolve) => {
+        resolveDelivery = resolve;
+      })
+    );
+    render(<Contact />);
+    fillHelloForm();
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+
+    await act(async () => vi.advanceTimersByTime(12_000));
+    expect(screen.getByText("UNCONFIRMED")).toBeVisible();
+    expect(screen.getByRole("button", { name: "Delivery unconfirmed" })).toBeDisabled();
+    expect(screen.getByLabelText("Name")).toBeDisabled();
+    expect(screen.getByRole("button", { name: /just saying hello/i })).toBeDisabled();
+    expect(screen.getByRole("link", { name: "SoundCloud" })).toBeEnabled();
+    expect(screen.getByText(/request is still pending/i)).toBeVisible();
+
+    await act(async () => resolveDelivery?.({ status: 200, text: "OK" }));
+    expect(screen.getByRole("heading", { name: "Message submitted" })).toBeVisible();
+    expect(screen.getByText("SUBMITTED")).toBeVisible();
+  });
+
+  it("unlocks the retained form after a late delivery failure", async () => {
+    vi.useFakeTimers();
+    let rejectDelivery: ((reason: Error) => void) | undefined;
+    sendMock.mockReturnValue(
+      new Promise((_resolve, reject) => {
+        rejectDelivery = reject;
+      })
+    );
+    render(<Contact />);
+    fillHelloForm();
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+    await act(async () => vi.advanceTimersByTime(12_000));
+
+    await act(async () => rejectDelivery?.(new Error("late provider failure")));
+    expect(screen.getByText(/delayed delivery failed/i)).toBeVisible();
+    expect(screen.getByText("READY")).toBeVisible();
+    expect(screen.getByRole("button", { name: "Send message" })).toBeEnabled();
+    expect(screen.getByLabelText("Name")).toHaveValue("Quiet Listener");
+    expect(screen.getByLabelText("Message")).toHaveValue("Hello from Helsinki.");
+  });
+
+  it("reconciles a late success under StrictMode effect replay", async () => {
+    vi.useFakeTimers();
+    let resolveDelivery: ((value: { status: number; text: string }) => void) | undefined;
+    sendMock.mockReturnValue(
+      new Promise((resolve) => {
+        resolveDelivery = resolve;
+      })
+    );
+    render(
+      <React.StrictMode>
+        <Contact />
+      </React.StrictMode>
+    );
+    fillHelloForm();
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+    await act(async () => vi.advanceTimersByTime(12_000));
+    await act(async () => resolveDelivery?.({ status: 200, text: "OK" }));
+
+    expect(screen.getByRole("heading", { name: "Message submitted" })).toBeVisible();
+  });
+
+  it("reconciles a late failure under StrictMode effect replay", async () => {
+    vi.useFakeTimers();
+    let rejectDelivery: ((reason: Error) => void) | undefined;
+    sendMock.mockReturnValue(
+      new Promise((_resolve, reject) => {
+        rejectDelivery = reject;
+      })
+    );
+    render(
+      <React.StrictMode>
+        <Contact />
+      </React.StrictMode>
+    );
+    fillHelloForm();
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+    await act(async () => vi.advanceTimersByTime(12_000));
+    await act(async () => rejectDelivery?.(new Error("late provider failure")));
+
+    expect(screen.getByText(/delayed delivery failed/i)).toBeVisible();
+    expect(screen.getByRole("button", { name: "Send message" })).toBeEnabled();
   });
 
   it("delivers an allowed long message without truncating its ending", async () => {
@@ -140,7 +295,7 @@ describe("Contact inquiry behavior", () => {
     });
     fireEvent.click(screen.getByRole("button", { name: /send message/i }));
 
-    expect(await screen.findByRole("alert")).toHaveTextContent(/5000 characters/i);
+    expect(await screen.findByText(/5000 characters/i)).toBeVisible();
     expect(sendMock).not.toHaveBeenCalled();
     expect(screen.getByLabelText("Message")).toHaveValue("x".repeat(5001));
   });

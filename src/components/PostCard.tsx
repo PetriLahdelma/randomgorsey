@@ -82,6 +82,13 @@ function autoLinkUrls(html: string): string {
   return result;
 }
 
+function ensureImageFocusTargets(html: string): string {
+  return html.replace(
+    /<img\b(?![^>]*\btabindex\s*=)/gi,
+    '<img tabindex="-1"',
+  );
+}
+
 function truncateAtWord(text: string, limit: number): string {
   if (text.length <= limit) return text;
 
@@ -108,14 +115,15 @@ const PostCard: React.FC<PostCardProps> = ({
   testId,
   ...accessibilityProps
 }) => {
-  const { tier, isReducedMotion, effectsEnabled } = usePerformance();
-  const shouldAnimate =
-    effectsEnabled && tier >= 2 && !isReducedMotion;
+  const { isMobile, isReducedMotion, effectsEnabled } = usePerformance();
+  const shouldAnimate = effectsEnabled && !isMobile && !isReducedMotion;
   const [expanded, setExpanded] = React.useState(showFullContent);
   const [lightboxOpen, setLightboxOpen] = React.useState(false);
   const [lightboxIndex, setLightboxIndex] = React.useState(0);
   const [bodyImages, setBodyImages] = React.useState<string[]>([]);
   const bodyRef = React.useRef<HTMLDivElement>(null);
+  const lightboxTriggerRef = React.useRef<HTMLElement | null>(null);
+  const lightboxTriggerIndexRef = React.useRef(0);
 
   const toggleExpanded = React.useCallback(() => {
     setExpanded((prev) => !prev);
@@ -149,9 +157,11 @@ const PostCard: React.FC<PostCardProps> = ({
       const target = e.target as HTMLElement;
       if (target.tagName === "IMG") {
         e.stopPropagation();
+        lightboxTriggerRef.current = target;
         const src = (target as HTMLImageElement).src;
         const index = bodyImages.indexOf(src);
         if (index !== -1) {
+          lightboxTriggerIndexRef.current = index;
           setLightboxIndex(index);
           setLightboxOpen(true);
         }
@@ -234,28 +244,25 @@ const PostCard: React.FC<PostCardProps> = ({
           </Heading>
         </motion.div>
 
-        <motion.div variants={postCardChild}>
+        <motion.div variants={postCardChild} style={{ position: "relative" }}>
           {/* Body — animated expand/collapse */}
           <AnimatePresence
             initial={false}
-            mode={shouldAnimate ? "wait" : "sync"}
+            mode={shouldAnimate ? "popLayout" : "sync"}
           >
             <motion.div
               key={expanded ? "full" : "truncated"}
               initial={shouldAnimate ? { opacity: 0, height: 0 } : false}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={shouldAnimate ? { opacity: 0, height: 0 } : undefined}
-              transition={
-                shouldAnimate
-                  ? {
-                      height: {
-                        duration: 0.3,
-                        ease: [0.22, 1, 0.36, 1],
-                      },
-                      opacity: { duration: 0.2 },
-                    }
-                  : { duration: 0 }
-              }
+              animate={{
+                opacity: 1,
+                height: "auto",
+                transition: { duration: shouldAnimate ? 0.2 : 0, ease: [0.16, 1, 0.3, 1] },
+              }}
+              exit={shouldAnimate ? {
+                opacity: 0,
+                height: 0,
+                transition: { duration: 0.16, ease: [0.4, 0, 1, 1] },
+              } : undefined}
               style={{ overflow: "hidden" }}
             >
               <DeferredPostBody
@@ -266,7 +273,7 @@ const PostCard: React.FC<PostCardProps> = ({
                   expanded && shouldAnimate && "noise-wipe-enter"
                 )}
                 onClick={handleBodyClick}
-                html={autoLinkUrls(displayBody)}
+                html={ensureImageFocusTargets(autoLinkUrls(displayBody))}
               />
             </motion.div>
           </AnimatePresence>
@@ -327,14 +334,27 @@ const PostCard: React.FC<PostCardProps> = ({
         />
       )}
 
-      {lightboxOpen && bodyImages.length > 0 && (
-        <Lightbox
-          images={bodyImages}
-          currentIndex={lightboxIndex}
-          onClose={() => setLightboxOpen(false)}
-          onNavigate={setLightboxIndex}
-        />
-      )}
+      <AnimatePresence
+        initial={false}
+        onExitComplete={() => {
+          const currentTrigger = bodyRef.current?.querySelectorAll("img")[
+            lightboxTriggerIndexRef.current
+          ] as HTMLElement | undefined;
+          const trigger = currentTrigger ?? lightboxTriggerRef.current;
+          if (!trigger?.isConnected) return;
+          trigger.focus({ preventScroll: true });
+        }}
+      >
+        {lightboxOpen && bodyImages.length > 0 && (
+          <Lightbox
+            key="journal-lightbox"
+            images={bodyImages}
+            currentIndex={lightboxIndex}
+            onClose={() => setLightboxOpen(false)}
+            onNavigate={setLightboxIndex}
+          />
+        )}
+      </AnimatePresence>
     </motion.article>
   );
 };

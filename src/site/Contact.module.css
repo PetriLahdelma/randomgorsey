@@ -171,9 +171,22 @@
 }
 
 .form {
+  display: grid;
   min-width: 0;
   padding: clamp(1.25rem, 4vw, 3rem);
   background: #efefe7;
+}
+
+.formState,
+.success {
+  grid-area: 1 / 1;
+}
+
+.formState[data-active="false"],
+.success[data-active="false"] {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
 }
 
 .identityFields {
@@ -409,4 +422,59 @@
   .secondaryButton {
     scroll-behavior: auto;
   }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .formState,
+  .success {
+    transition:
+      opacity var(--motion-duration-menu, 200ms) var(--motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      filter var(--motion-duration-menu, 200ms) var(--motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      visibility 0s linear;
+  }
+
+  .formState[data-active="false"],
+  .success[data-active="false"] {
+    filter: blur(2px);
+    transition-delay: 0s, 0s, var(--motion-duration-exit, 160ms);
+    transition-duration: var(--motion-duration-exit, 160ms), var(--motion-duration-exit, 160ms), 0s;
+  }
+
+  .detailRow,
+  .detailRowDelayed,
+  .detailRowLast {
+    animation: contact-detail-enter var(--motion-duration-menu, 200ms) var(--motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+  }
+
+  .detailRowDelayed {
+    animation-delay: var(--motion-stagger, 30ms);
+  }
+
+  .detailRowLast {
+    animation-delay: calc(var(--motion-stagger, 30ms) * 2);
+  }
+
+  .success[data-active="true"] .successMark {
+    animation: contact-success-pulse 240ms var(--motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+  }
+}
+
+@keyframes contact-detail-enter {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes contact-success-pulse {
+  0% { transform: scale(0.92); }
+  60% { transform: scale(1.06); }
+  100% { transform: scale(1); }
 }

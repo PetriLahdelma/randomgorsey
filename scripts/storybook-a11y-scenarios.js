@@ -78,7 +78,7 @@ async (page) => {
   );
 
   await openStory(
-    "studio-compositions-release--catalog-surface",
+    "production-compositions-release--catalog-surface",
     390,
     844,
   );
@@ -90,7 +90,7 @@ async (page) => {
   );
   check(
     /randomgorsey\.bandcamp\.com/.test(
-      (await page.getByRole("link", { name: "Bandcamp" }).getAttribute("href")) ||
+      (await page.getByRole("link", { name: "So Long Spectrum on Bandcamp" }).getAttribute("href")) ||
         "",
     ),
     "Release composition preserves the Bandcamp destination",
@@ -194,6 +194,8 @@ async (page) => {
     ["production-surfaces--about-page", "About"],
     ["production-surfaces--gallery-page", "Gallery"],
     ["production-surfaces--contact-page", "Get in touch"],
+    ["production-surfaces--journal-entry-page", "The List"],
+    ["production-surfaces--not-found-page", "Signal Not Found"],
   ]) {
     await openStory(id);
     check(await page.getByRole("heading", {name: heading, exact: true}).isVisible(), id + " renders its real page heading");
@@ -204,6 +206,41 @@ async (page) => {
       check(await page.getByText("UNTITLED_09.JPG", {exact: true}).isVisible(), "Gallery story uses the current portrait title");
     }
   }
+
+  await openStory("production-foundations-motionrules--interactive-contract", 1200, 900);
+  check(await page.locator("#motion-rule-list + ol > li").count() === 20, "Motion contract documents all 20 requested rules");
+  check(await page.getByText("Conditional", {exact: true}).count() === 4, "Motion contract marks inapplicable interaction types as conditional");
+  const motionContract = await page.evaluate(() => {
+    const root = getComputedStyle(document.documentElement);
+    return {
+      menu: root.getPropertyValue("--motion-duration-menu").trim(),
+      exit: root.getPropertyValue("--motion-duration-exit").trim(),
+      stagger: root.getPropertyValue("--motion-stagger").trim(),
+      easeOut: root.getPropertyValue("--motion-ease-out").trim(),
+      easeInOut: root.getPropertyValue("--motion-ease-in-out").trim(),
+    };
+  });
+  check(["200ms", ".2s"].includes(motionContract.menu) && ["160ms", ".16s"].includes(motionContract.exit) && motionContract.stagger === "30ms", "Motion timing tokens resolve to 200ms, 160ms and 30ms");
+  check(/\.16|0\.16/.test(motionContract.easeOut) && /\.65|0\.65/.test(motionContract.easeInOut), "Motion easing tokens distinguish entrance from on-screen movement");
+  const openMotionMenu = page.getByRole("button", {name: "Open menu"});
+  await openMotionMenu.click();
+  const motionRows = page.locator('[aria-hidden="false"] > div');
+  check(await motionRows.count() === 4, "Motion reference renders four staggered menu rows");
+  check(await motionRows.nth(1).evaluate(row => getComputedStyle(row).transitionDelay.includes("0.03")), "Motion reference staggers its second row by 30ms");
+  const closeMotionMenu = page.getByRole("button", {name: "Close menu"});
+  await closeMotionMenu.hover();
+  await page.mouse.down();
+  await page.waitForTimeout(120);
+  check(await closeMotionMenu.evaluate(button => getComputedStyle(button).scale === "0.97"), "Production button press resolves to scale 0.97");
+  await page.mouse.up();
+
+  await openStory("production-foundations-motionrules--handheld-reference", 390, 844);
+  const handheldButton = page.getByRole("button", {name: "Open menu"});
+  await handheldButton.hover();
+  await page.mouse.down();
+  await page.waitForTimeout(120);
+  check(await handheldButton.evaluate(button => getComputedStyle(button).scale === "1"), "Forced handheld reference has no press scale");
+  await page.mouse.up();
 
   await openStory("production-player-sitewideplayer--interactive-lifecycle", 390, 844);
   check(await page.getByRole("button", {name: "Load Spotify player"}).isVisible(), "Player story exposes its real source controls");

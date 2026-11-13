@@ -16,7 +16,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Heading is used by journal PostCard titles. Page-level LisaTerminal titles use studioTitle instead.",
+          "Standalone library heading variants are shown here. Production journal titles use this component inside the journal context, which applies Lisa Terminal Paper; see Production / Surfaces for the live result. Page titles use StudioPageHeader.",
       },
     },
   },

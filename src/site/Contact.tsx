@@ -14,6 +14,35 @@ import styles from "./Contact.module.css";
 
 type FormErrors = Record<string, string>;
 
+const DELIVERY_TIMEOUT_MS = 12_000;
+
+class DeliveryTimeoutError extends Error {
+  constructor() {
+    super("Message delivery confirmation timed out");
+    this.name = "DeliveryTimeoutError";
+  }
+}
+
+const FIELD_IDS: Record<string, string> = {
+  name: "contact-name",
+  email: "contact-email",
+  date: "contact-date",
+  venue: "contact-venue",
+  location: "contact-location",
+  budget: "contact-budget",
+  projectType: "contact-project-type",
+  timeline: "contact-timeline",
+  message: "contact-message",
+};
+
+function wasBrowserAutofilled(input: HTMLInputElement): boolean {
+  try {
+    return input.matches(":-webkit-autofill");
+  } catch {
+    return false;
+  }
+}
+
 interface ReasonOption {
   key: ContactReason;
   index: string;
@@ -95,16 +124,22 @@ const Contact: React.FC = () => {
   const [projectType, setProjectType] = useState("");
   const [timeline, setTimeline] = useState("");
   const [sending, setSending] = useState(false);
+  const [deliveryLocked, setDeliveryLocked] = useState(false);
   const [success, setSuccess] = useState(false);
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const honeypotRef = useRef<HTMLInputElement>(null);
   const firstReasonRef = useRef<HTMLButtonElement>(null);
   const pendingRef = useRef(false);
+  const mountedRef = useRef(true);
   const rateLimiterRef = useRef(new RateLimiter(5, 60 * 1000));
 
   useEffect(() => {
+    mountedRef.current = true;
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
     if (publicKey) emailjs.init(publicKey);
+    return () => {
+      mountedRef.current = false;
+    };
   }, []);
 
   const clearReasonFields = () => {
@@ -148,14 +183,25 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (pendingRef.current) return;
+    if (pendingRef.current || deliveryLocked) return;
 
     if (!reason) {
       setFormErrors({ reason: "Choose an inquiry type." });
       firstReasonRef.current?.focus();
       return;
     }
-    if (honeypotRef.current?.value) return;
+    const honeypot = honeypotRef.current;
+    if (honeypot?.value) {
+      if (wasBrowserAutofilled(honeypot)) {
+        honeypot.value = "";
+      } else {
+        setFormErrors({
+          general:
+            "Your message could not be submitted. Clear browser autofill and try again; your details remain here.",
+        });
+        return;
+      }
+    }
 
     const sanitizedData = Object.fromEntries(
       Object.entries(buildFormData()).map(([key, value]) => [
@@ -166,12 +212,18 @@ const Contact: React.FC = () => {
 
     const result = contactSchemaByReason[reason].safeParse(sanitizedData);
     if (!result.success) {
-      const errors: FormErrors = {};
+      const errors: FormErrors = {
+        general: "Please check the highlighted fields.",
+      };
       result.error.issues.forEach((issue) => {
         const field = String(issue.path[0] ?? "general");
         if (!errors[field]) errors[field] = issue.message;
       });
       setFormErrors(errors);
+      const firstInvalidField = result.error.issues
+        .map((issue) => FIELD_IDS[String(issue.path[0] ?? "")])
+        .find(Boolean);
+      if (firstInvalidField) document.getElementById(firstInvalidField)?.focus();
       return;
     }
 
@@ -211,8 +263,9 @@ const Contact: React.FC = () => {
       message: sanitizedData.message,
     });
 
+    let delivery: ReturnType<typeof emailjs.send>;
     try {
-      await emailjs.send(
+      delivery = emailjs.send(
         serviceId,
         templateId,
         {
@@ -223,16 +276,63 @@ const Contact: React.FC = () => {
         },
         publicKey
       );
-      setSuccess(true);
     } catch {
       setFormErrors({
         general: "Your message could not be submitted. The details are still here so you can try again.",
       });
-    } finally {
       pendingRef.current = false;
       setSending(false);
+      return;
+    }
+
+    let timeoutId: number | undefined;
+    try {
+      const timeout = new Promise<never>((_resolve, reject) => {
+        timeoutId = window.setTimeout(
+          () => reject(new DeliveryTimeoutError()),
+          DELIVERY_TIMEOUT_MS
+        );
+      });
+      await Promise.race([delivery, timeout]);
+      if (mountedRef.current) setSuccess(true);
+    } catch (error) {
+      if (error instanceof DeliveryTimeoutError) {
+        if (mountedRef.current) {
+          setDeliveryLocked(true);
+          setFormErrors({
+            general:
+              "Delivery confirmation is taking longer than expected. The request is still pending. Keep this page open; your details remain here.",
+          });
+        }
+        void delivery.then(
+          () => {
+            if (!mountedRef.current) return;
+            setDeliveryLocked(false);
+            setFormErrors({});
+            setSuccess(true);
+          },
+          () => {
+            if (!mountedRef.current) return;
+            setDeliveryLocked(false);
+            setFormErrors({
+              general:
+                "The delayed delivery failed. Your details are still here so you can try again or use a direct link.",
+            });
+          }
+        );
+      } else if (mountedRef.current) {
+        setFormErrors({
+          general: "Your message could not be submitted. The details are still here so you can try again.",
+        });
+      }
+    } finally {
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+      pendingRef.current = false;
+      if (mountedRef.current) setSending(false);
     }
   };
+
+  const formDisabled = sending || deliveryLocked;
 
   return (
     <div className={styles.page}>
@@ -246,7 +346,11 @@ const Contact: React.FC = () => {
         title="Contact / Random Gorsey"
         tone="paper"
         className={styles.contactWindow}
-        actions={<span className={styles.windowStatus}>{success ? "SUBMITTED" : sending ? "SENDING" : "READY"}</span>}
+        actions={
+          <span className={styles.windowStatus}>
+            {success ? "SUBMITTED" : sending ? "SENDING" : deliveryLocked ? "UNCONFIRMED" : "READY"}
+          </span>
+        }
       >
         <div className={styles.windowGrid}>
           <aside className={styles.aside}>
@@ -266,7 +370,7 @@ const Contact: React.FC = () => {
                   data-selected={reason === option.key}
                   aria-pressed={reason === option.key}
                   onClick={() => chooseReason(option.key)}
-                  disabled={sending}
+                  disabled={formDisabled}
                 >
                   <span className={styles.reasonIndex}>{option.index}</span>
                   <span>
@@ -282,7 +386,7 @@ const Contact: React.FC = () => {
                 type="button"
                 className={styles.changeReason}
                 onClick={resetReason}
-                disabled={sending}
+                disabled={formDisabled}
                 aria-label="Change inquiry type"
               >
                 Clear selection
@@ -302,17 +406,12 @@ const Contact: React.FC = () => {
           </aside>
 
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
-            {success ? (
-              <div className={styles.success} role="status">
-                <span className={styles.successMark} aria-hidden="true">✓</span>
-                <h2>Message submitted</h2>
-                <p className={styles.successCopy}>The message service accepted your submission. Keep this page open if you want to retain a copy of the details.</p>
-                <button type="button" className={styles.secondaryButton} onClick={() => setSuccess(false)}>
-                  View submitted details
-                </button>
-              </div>
-            ) : (
-              <>
+            <div
+              className={styles.formState}
+              data-active={!success}
+              aria-hidden={success || undefined}
+              inert={success || undefined}
+            >
                 <div className={styles.identityFields}>
                   <Field id="contact-name" label="Name" error={formErrors.name}>
                     <input
@@ -323,7 +422,7 @@ const Contact: React.FC = () => {
                       autoComplete="name"
                       aria-invalid={Boolean(formErrors.name)}
                       aria-describedby={formErrors.name ? "contact-name-error" : undefined}
-                      disabled={sending}
+                      disabled={formDisabled}
                     />
                   </Field>
                   <Field id="contact-email" label="Email" error={formErrors.email}>
@@ -336,7 +435,7 @@ const Contact: React.FC = () => {
                       autoComplete="email"
                       aria-invalid={Boolean(formErrors.email)}
                       aria-describedby={formErrors.email ? "contact-email-error" : undefined}
-                      disabled={sending}
+                      disabled={formDisabled}
                     />
                   </Field>
                 </div>
@@ -344,8 +443,8 @@ const Contact: React.FC = () => {
                 {!reason && <div className={styles.emptyDetails}>Select an inquiry type to open the relevant fields.</div>}
 
                 {reason === "booking" && (
-                  <div className={styles.detailFields}>
-                    <div className={styles.identityFields}>
+                  <div className={styles.detailFields} data-motion-detail>
+                    <div className={`${styles.identityFields} ${styles.detailRow}`}>
                       <Field id="contact-date" label="Date or date range" error={formErrors.date}>
                         <input
                           id="contact-date"
@@ -355,7 +454,7 @@ const Contact: React.FC = () => {
                           placeholder="e.g. 15 June 2027"
                           aria-invalid={Boolean(formErrors.date)}
                           aria-describedby={formErrors.date ? "contact-date-error" : undefined}
-                          disabled={sending}
+                          disabled={formDisabled}
                         />
                       </Field>
                       <Field id="contact-venue" label="Venue or event" error={formErrors.venue}>
@@ -366,11 +465,11 @@ const Contact: React.FC = () => {
                           onChange={(event) => updateField("venue", setVenue, event.target.value)}
                           aria-invalid={Boolean(formErrors.venue)}
                           aria-describedby={formErrors.venue ? "contact-venue-error" : undefined}
-                          disabled={sending}
+                          disabled={formDisabled}
                         />
                       </Field>
                     </div>
-                    <div className={styles.identityFields}>
+                    <div className={`${styles.identityFields} ${styles.detailRowDelayed}`}>
                       <Field id="contact-location" label="Location" error={formErrors.location}>
                         <input
                           id="contact-location"
@@ -379,7 +478,7 @@ const Contact: React.FC = () => {
                           onChange={(event) => updateField("location", setLocation, event.target.value)}
                           aria-invalid={Boolean(formErrors.location)}
                           aria-describedby={formErrors.location ? "contact-location-error" : undefined}
-                          disabled={sending}
+                          disabled={formDisabled}
                         />
                       </Field>
                       <Field id="contact-budget" label="Budget" error={formErrors.budget}>
@@ -390,25 +489,27 @@ const Contact: React.FC = () => {
                           onChange={(event) => updateField("budget", setBudget, event.target.value)}
                           aria-invalid={Boolean(formErrors.budget)}
                           aria-describedby={formErrors.budget ? "contact-budget-error" : undefined}
-                          disabled={sending}
+                          disabled={formDisabled}
                         >
                           <option value="">Select a range</option>
                           {BUDGET_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
                         </select>
                       </Field>
                     </div>
-                    <MessageField
-                      message={message}
-                      error={formErrors.message}
-                      sending={sending}
-                      update={(value) => updateField("message", setMessage, value)}
-                    />
+                    <div className={styles.detailRowLast}>
+                      <MessageField
+                        message={message}
+                        error={formErrors.message}
+                        disabled={formDisabled}
+                        update={(value) => updateField("message", setMessage, value)}
+                      />
+                    </div>
                   </div>
                 )}
 
                 {reason === "collaboration" && (
-                  <div className={styles.detailFields}>
-                    <div className={styles.identityFields}>
+                  <div className={styles.detailFields} data-motion-detail>
+                    <div className={`${styles.identityFields} ${styles.detailRow}`}>
                       <Field id="contact-project-type" label="Project type" error={formErrors.projectType}>
                         <select
                           id="contact-project-type"
@@ -417,7 +518,7 @@ const Contact: React.FC = () => {
                           onChange={(event) => updateField("projectType", setProjectType, event.target.value)}
                           aria-invalid={Boolean(formErrors.projectType)}
                           aria-describedby={formErrors.projectType ? "contact-project-type-error" : undefined}
-                          disabled={sending}
+                          disabled={formDisabled}
                         >
                           <option value="">Select a type</option>
                           {PROJECT_TYPE_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
@@ -431,46 +532,68 @@ const Contact: React.FC = () => {
                           onChange={(event) => updateField("timeline", setTimeline, event.target.value)}
                           aria-invalid={Boolean(formErrors.timeline)}
                           aria-describedby={formErrors.timeline ? "contact-timeline-error" : undefined}
-                          disabled={sending}
+                          disabled={formDisabled}
                         />
                       </Field>
                     </div>
-                    <MessageField
-                      message={message}
-                      error={formErrors.message}
-                      sending={sending}
-                      update={(value) => updateField("message", setMessage, value)}
-                    />
+                    <div className={styles.detailRowDelayed}>
+                      <MessageField
+                        message={message}
+                        error={formErrors.message}
+                        disabled={formDisabled}
+                        update={(value) => updateField("message", setMessage, value)}
+                      />
+                    </div>
                   </div>
                 )}
 
                 {reason === "hello" && (
-                  <div className={styles.detailFields}>
-                    <MessageField
-                      message={message}
-                      error={formErrors.message}
-                      sending={sending}
-                      rows={8}
-                      update={(value) => updateField("message", setMessage, value)}
-                    />
+                  <div className={styles.detailFields} data-motion-detail>
+                    <div className={styles.detailRow}>
+                      <MessageField
+                        message={message}
+                        error={formErrors.message}
+                        disabled={formDisabled}
+                        rows={8}
+                        update={(value) => updateField("message", setMessage, value)}
+                      />
+                    </div>
                   </div>
                 )}
 
-                <div className={styles.honeypot} aria-hidden="true">
-                  <label htmlFor="contact-company">Company website</label>
-                  <input ref={honeypotRef} id="contact-company" name="honeypot" tabIndex={-1} autoComplete="off" />
-                </div>
+                <input
+                  ref={honeypotRef}
+                  id="contact-company"
+                  name="contact_website"
+                  type="hidden"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
 
                 {formErrors.general && <p className={styles.generalError} role="alert">{formErrors.general}</p>}
 
                 <div className={styles.sendBar}>
-                  <button type="submit" className={styles.submitButton} disabled={sending}>
-                    {sending ? "Sending…" : "Send message"}
+                  <button type="submit" className={styles.submitButton} disabled={formDisabled}>
+                    {deliveryLocked ? "Delivery unconfirmed" : sending ? "Sending…" : "Send message"}
                   </button>
                   <p className={styles.deliveryNote}>Delivery is handled by EmailJS. Submission shares the form details with that service so it can deliver the message.</p>
                 </div>
-              </>
-            )}
+            </div>
+
+            <div
+              className={styles.success}
+              data-active={success}
+              role="status"
+              aria-hidden={!success || undefined}
+              inert={!success || undefined}
+            >
+              <span className={styles.successMark} aria-hidden="true">✓</span>
+              <h2>Message submitted</h2>
+              <p className={styles.successCopy}>The message service accepted your submission. Keep this page open if you want to retain a copy of the details.</p>
+              <button type="button" className={styles.secondaryButton} onClick={() => setSuccess(false)}>
+                View submitted details
+              </button>
+            </div>
           </form>
         </div>
       </StudioWindow>
@@ -481,12 +604,12 @@ const Contact: React.FC = () => {
 interface MessageFieldProps {
   message: string;
   error?: string;
-  sending: boolean;
+  disabled: boolean;
   rows?: number;
   update: (value: string) => void;
 }
 
-function MessageField({ message, error, sending, rows = 6, update }: MessageFieldProps) {
+function MessageField({ message, error, disabled, rows = 6, update }: MessageFieldProps) {
   return (
     <Field id="contact-message" label="Message" error={error}>
       <textarea
@@ -497,7 +620,7 @@ function MessageField({ message, error, sending, rows = 6, update }: MessageFiel
         onChange={(event) => update(event.target.value)}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? "contact-message-error" : undefined}
-        disabled={sending}
+        disabled={disabled}
       />
     </Field>
   );

@@ -10,6 +10,8 @@ import Discography from "@/site/Discography";
 import Gallery from "@/site/Gallery";
 import Home from "@/site/Home";
 import Listen from "@/site/Listen";
+import NotFound from "@/site/NotFound";
+import Post from "@/site/Post";
 
 function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -188,7 +190,7 @@ export const GalleryViewerOpen: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button", { name: "Open image: UNTITLED_09.JPG" }));
     await expect(canvas.getByRole("dialog", { name: "Image viewer" })).toBeVisible();
-    await expect(canvas.getByText("UNTITLED_09.JPG · 2 / 18")).toBeVisible();
+    await waitFor(() => expect(canvas.getByText("UNTITLED_09.JPG · 2 / 18")).toBeVisible());
   },
 };
 
@@ -210,5 +212,33 @@ export const ContactSubmissionBlocked: Story = {
     await expect(canvas.getByRole("status")).toHaveTextContent(
       "Submission intercepted. No message was sent from Storybook."
     );
+  },
+};
+
+export const JournalEntryPage: Story = {
+  render: () => (
+    <SurfaceFrame>
+      <Post
+        post={posts[0]}
+        next={posts[1] ? { id: posts[1].id, title: posts[1].title } : undefined}
+      />
+    </SurfaceFrame>
+  ),
+  parameters: { nextjs: { navigation: { pathname: `/posts/${posts[0].id}/` } } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("heading", { level: 1, name: posts[0].title })).toBeVisible();
+    await expect(canvas.getByRole("navigation", { name: "Adjacent journal entries" })).toBeVisible();
+  },
+};
+
+export const NotFoundPage: Story = {
+  render: () => <SurfaceFrame><NotFound /></SurfaceFrame>,
+  parameters: { nextjs: { navigation: { pathname: "/missing-signal/" } } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("heading", { level: 1, name: "Signal Not Found" })).toBeVisible();
+    await userEvent.tab();
+    await expect(canvas.getByRole("link", { name: "Home" })).toHaveFocus();
   },
 };

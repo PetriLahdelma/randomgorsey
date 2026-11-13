@@ -118,6 +118,7 @@
   background: #d8d9d2;
   border: 2px solid #f5f5ef;
   box-shadow: inset -2px -2px 0 #585b55, inset 2px 2px 0 #fff, 1rem 1rem 0 #234bdf;
+  transform-origin: var(--viewer-local-x, 50%) var(--viewer-local-y, 50%);
 }
 
 .viewerTitlebar {
@@ -262,6 +263,68 @@
 @media (prefers-reduced-motion: reduce) {
   .image {
     transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .overlay {
+    animation: viewer-mask-in var(--motion-duration-menu, 200ms) var(--motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+  }
+
+  .viewer {
+    animation: viewer-window-in var(--motion-duration-menu, 200ms) var(--motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+  }
+
+  .overlayClosing {
+    animation: viewer-mask-out var(--motion-duration-exit, 160ms) var(--motion-ease-in-out, cubic-bezier(0.65, 0, 0.35, 1)) both;
+  }
+
+  .overlayClosing .viewer {
+    animation: viewer-window-out var(--motion-duration-exit, 160ms) var(--motion-ease-in-out, cubic-bezier(0.65, 0, 0.35, 1)) both;
+  }
+}
+
+@keyframes viewer-mask-in {
+  from {
+    clip-path: circle(0 at var(--viewer-mask-x, 50%) var(--viewer-mask-y, 50%));
+  }
+
+  to {
+    clip-path: circle(200% at var(--viewer-mask-x, 50%) var(--viewer-mask-y, 50%));
+  }
+}
+
+@keyframes viewer-mask-out {
+  from {
+    clip-path: circle(200% at var(--viewer-mask-x, 50%) var(--viewer-mask-y, 50%));
+  }
+
+  to {
+    clip-path: circle(0 at var(--viewer-mask-x, 50%) var(--viewer-mask-y, 50%));
+  }
+}
+
+@keyframes viewer-window-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes viewer-window-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.95);
   }
 }
 

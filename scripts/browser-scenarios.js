@@ -312,6 +312,7 @@ async (page) => {
   check(await page.getByRole("dialog",{name:"Image viewer"}).locator("img").evaluate(element=>getComputedStyle(element).filter==="none"),"Opened gallery image has no thumbnail filter");
   await page.keyboard.press("ArrowRight");
   await page.keyboard.press("Escape");
+  await page.getByRole("dialog",{name:"Image viewer"}).waitFor({state:"hidden"});
   check(await thumbnail.evaluate(element=>element===document.activeElement),"Gallery returns focus to the original thumbnail");
 
   await page.setViewportSize({width:1104,height:844});
@@ -392,6 +393,26 @@ async (page) => {
     await page.evaluate(()=>{document.documentElement.style.zoom="200%";});
     check(await page.evaluate(()=>{const heading=document.querySelector("main h1");const rect=heading.getBoundingClientRect();return rect.left>=0&&rect.right<=innerWidth&&document.documentElement.scrollWidth<=document.documentElement.clientWidth;}),"200% CSS zoom reflows "+path+" heading without horizontal overflow");
   }
+  await page.emulateMedia({reducedMotion:"no-preference"});
+  await open("/contact/");
+  const pressButton=page.getByRole("button",{name:"Send message",exact:true});
+  await pressButton.scrollIntoViewIfNeeded();
+  const pressBox=await pressButton.boundingBox();
+  await page.mouse.move(pressBox.x+pressBox.width/2,pressBox.y+pressBox.height/2);
+  await page.mouse.down();
+  await page.waitForTimeout(150);
+  check(await pressButton.evaluate(element=>getComputedStyle(element).scale==="0.97"&&getComputedStyle(element).transform==="none"),"Fine-pointer button press scales to exactly 0.97");
+  await page.mouse.move(1,1);
+  await page.mouse.up();
+  const handheld=await page.context().browser().newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+  try {
+    const mobilePage=await handheld.newPage();
+    await mobilePage.goto(base+"/contact/",{waitUntil:"domcontentloaded"});
+    check(await mobilePage.getByRole("button",{name:"Send message",exact:true}).evaluate(element=>matchMedia("(pointer: coarse)").matches&&getComputedStyle(element).transitionDuration==="0s"),"Handheld input disables control tweens");
+  } finally {
+    await handheld.close();
+  }
+
   await page.emulateMedia({reducedMotion:"reduce"});
   await open("/");
   await checkSignalLabel("Reduced-motion Home",false);

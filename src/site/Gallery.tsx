@@ -14,17 +14,58 @@ import styles from "./Gallery.module.css";
 const Gallery: React.FC = () => {
   const { setOverlayActive } = useAppShell();
   const [currentIndex, setCurrentIndex] = React.useState<number | null>(null);
+  const [viewerClosing, setViewerClosing] = React.useState(false);
+  const [viewerOrigin, setViewerOrigin] = React.useState({ x: 0, y: 0 });
+  const [viewerLocalOrigin, setViewerLocalOrigin] = React.useState({ x: 0, y: 0 });
   const triggerRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
   const closeRef = React.useRef<HTMLButtonElement | null>(null);
   const overlayRef = React.useRef<HTMLDivElement | null>(null);
+  const viewerRef = React.useRef<HTMLDivElement | null>(null);
   const previousOverflow = React.useRef("");
   const focusReturnIndex = React.useRef<number | null>(null);
   const openerIndex = React.useRef<number | null>(null);
+  const closeTimeout = React.useRef<number | null>(null);
 
-  const closeViewer = React.useCallback(() => {
+  const finishCloseViewer = React.useCallback(() => {
+    if (closeTimeout.current !== null) {
+      window.clearTimeout(closeTimeout.current);
+      closeTimeout.current = null;
+    }
     focusReturnIndex.current = openerIndex.current;
     setCurrentIndex(null);
+    setViewerClosing(false);
     setOverlayActive(false);
+  }, [setOverlayActive]);
+
+  const closeViewer = React.useCallback(() => {
+    if (viewerClosing) return;
+    const animateExit = window.matchMedia?.(
+      "(prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine)"
+    ).matches;
+
+    if (!animateExit) {
+      finishCloseViewer();
+      return;
+    }
+
+    setViewerClosing(true);
+    closeTimeout.current = window.setTimeout(finishCloseViewer, 160);
+  }, [finishCloseViewer, viewerClosing]);
+
+  const openViewer = React.useCallback((index: number, trigger: HTMLButtonElement) => {
+    if (closeTimeout.current !== null) {
+      window.clearTimeout(closeTimeout.current);
+      closeTimeout.current = null;
+    }
+    const rect = trigger.getBoundingClientRect();
+    setViewerOrigin({
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+    });
+    openerIndex.current = index;
+    setViewerClosing(false);
+    setCurrentIndex(index);
+    setOverlayActive(true);
   }, [setOverlayActive]);
 
   const showPrevious = React.useCallback(() => {
@@ -40,6 +81,15 @@ const Gallery: React.FC = () => {
     triggerRefs.current[focusReturnIndex.current]?.focus();
     focusReturnIndex.current = null;
   }, [currentIndex]);
+
+  React.useLayoutEffect(() => {
+    if (currentIndex === null || !viewerRef.current) return;
+    const viewer = viewerRef.current;
+    setViewerLocalOrigin({
+      x: viewerOrigin.x - viewer.offsetLeft,
+      y: viewerOrigin.y - viewer.offsetTop,
+    });
+  }, [currentIndex, viewerOrigin]);
 
   React.useEffect(() => {
     if (currentIndex === null) return;
@@ -76,6 +126,7 @@ const Gallery: React.FC = () => {
   }, [closeViewer, currentIndex, showNext, showPrevious]);
 
   React.useEffect(() => () => {
+    if (closeTimeout.current !== null) window.clearTimeout(closeTimeout.current);
     setOverlayActive(false);
     document.body.style.overflow = previousOverflow.current;
   }, [setOverlayActive]);
@@ -100,11 +151,7 @@ const Gallery: React.FC = () => {
                 ref={(node) => { triggerRefs.current[index] = node; }}
                 type="button"
                 className={styles.imageButton}
-                onClick={() => {
-                  openerIndex.current = index;
-                  setCurrentIndex(index);
-                  setOverlayActive(true);
-                }}
+                onClick={(event) => openViewer(index, event.currentTarget)}
                 aria-label={`Open image: ${galleryDisplayName(image)}`}
               >
                 <Image src={image.src} alt={image.alt ?? image.caption} width={image.width} height={image.height} sizes="(max-width: 640px) calc(100vw - 64px), (max-width: 1000px) 45vw, 30vw" className={`${styles.image} ${image.src === "/images/random-gorsey-grit-poster.png" ? styles.posterImage : ""}`} />
@@ -120,8 +167,27 @@ const Gallery: React.FC = () => {
       </section>
 
       {currentImage && currentIndex !== null && (
-        <div ref={overlayRef} className={styles.overlay} role="dialog" aria-modal="true" aria-label="Image viewer" data-lenis-prevent onMouseDown={(event) => { if (event.target === event.currentTarget) closeViewer(); }}>
-          <div className={styles.viewer}>
+        <div
+          ref={overlayRef}
+          className={`${styles.overlay} ${viewerClosing ? styles.overlayClosing : ""}`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image viewer"
+          data-lenis-prevent
+          style={{
+            "--viewer-mask-x": `${viewerOrigin.x}px`,
+            "--viewer-mask-y": `${viewerOrigin.y}px`,
+          } as React.CSSProperties}
+          onMouseDown={(event) => { if (event.target === event.currentTarget) closeViewer(); }}
+        >
+          <div
+            ref={viewerRef}
+            className={styles.viewer}
+            style={{
+              "--viewer-local-x": `${viewerLocalOrigin.x}px`,
+              "--viewer-local-y": `${viewerLocalOrigin.y}px`,
+            } as React.CSSProperties}
+          >
             <div className={styles.viewerTitlebar}>
               <span>{galleryDisplayName(currentImage)}</span>
               <button ref={closeRef} type="button" className={styles.windowClose} aria-label="Close image" onClick={closeViewer}><XMarkIcon aria-hidden="true" /></button>

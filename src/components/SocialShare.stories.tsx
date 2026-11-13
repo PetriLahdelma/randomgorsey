@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { expect, fn, userEvent, within } from "storybook/test";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
 import { getPostById } from "@/content/posts";
 import { StudioWindow } from "@/components/studio/StudioWindow";
@@ -61,8 +61,29 @@ export const OpenMenu: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button", { name: "Share" }));
-    await expect(canvas.getByRole("menu", { name: `Share ${post.title}` })).toBeVisible();
+    await waitFor(() =>
+      expect(canvas.getByRole("menu", { name: `Share ${post.title}` })).toBeVisible()
+    );
     await expect(canvas.getByRole("menuitem", { name: "Close share menu" })).toHaveFocus();
+  },
+};
+
+export const TriggerOrigin: Story = {
+  decorators: [
+    (Story) => (
+      <div style={{ minHeight: "100vh", padding: 24 }}>
+        <Story />
+      </div>
+    ),
+  ],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Share" }));
+    const menu = canvas.getByRole("menu", { name: `Share ${post.title}` });
+    await waitFor(() => expect(menu).toHaveAttribute("data-origin-ready", "true"));
+    await waitFor(() => expect(menu).toBeVisible());
+    const origin = menu.style.transformOrigin.split(" ").map(Number.parseFloat);
+    await expect(origin.some((value) => value < 0)).toBe(true);
   },
 };
 

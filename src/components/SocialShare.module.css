@@ -5,6 +5,9 @@
 }
 
 .trigger {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
   min-height: 44px;
   padding: 0;
   font: inherit;
@@ -14,6 +17,26 @@
   cursor: pointer;
   background: transparent;
   border: 0;
+}
+
+.triggerIcon {
+  position: relative;
+  display: inline-grid;
+  flex: 0 0 16px;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+}
+
+.triggerIcon > span {
+  position: absolute;
+  display: grid;
+  place-items: center;
+}
+
+.triggerIcon svg {
+  width: 16px;
+  height: 16px;
 }
 
 .trigger:hover {
@@ -130,6 +153,16 @@
 .menuItem:active {
   color: var(--studio-ink);
   background: var(--studio-acid);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .menuItem[href] {
+    transition: transform 100ms var(--motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+  }
+
+  .menuItem[href]:active {
+    transform: scale(0.97);
+  }
 }
 
 .icon {
