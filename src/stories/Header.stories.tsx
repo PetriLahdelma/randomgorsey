@@ -7,8 +7,13 @@ const meta = {
   title: "Production/Navigation/Header",
   component: Header,
   args: { version },
+  argTypes: {
+    version: { control: "text", description: "Release identifier shown in the top-left corner." },
+    className: { control: false },
+  },
   parameters: {
     layout: "fullscreen",
+    controls: { include: ["version"] },
     nextjs: { navigation: { pathname: "/listen/" } },
     docs: {
       description: {
@@ -21,7 +26,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Desktop: Story = {};
+export const Desktop: Story = { name: "Playground" };
 
 export const CurrentRoute: Story = {
   parameters: { nextjs: { navigation: { pathname: "/about/" } } },

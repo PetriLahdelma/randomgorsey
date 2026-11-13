@@ -35,6 +35,7 @@ const meta = {
   component: PlayerStory,
   parameters: {
     layout: "padded",
+    controls: { disable: true },
     nextjs: { navigation: { pathname: "/about/" } },
     docs: {
       description: {

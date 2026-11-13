@@ -19,11 +19,32 @@ const meta: Meta<typeof PostCard> = {
   ],
   parameters: {
     layout: "padded",
+    controls: {
+      include: ["headingLevel", "showFullContent", "showSocialShare", "showMetadata", "truncateLength"],
+    },
     docs: {
       description: {
         component: "The production journal entry surface. These stories use real post data and preserve the live Lisa Terminal title context.",
       },
     },
+  },
+  args: {
+    post: featuredPost,
+    headingLevel: 3,
+    showFullContent: false,
+    showSocialShare: true,
+    showMetadata: false,
+    truncateLength: 220,
+  },
+  argTypes: {
+    post: { control: false },
+    headingLevel: { control: "select", options: [1, 2, 3, 4, 5, 6] },
+    showFullContent: { control: "boolean" },
+    showSocialShare: { control: "boolean" },
+    showMetadata: { control: "boolean" },
+    truncateLength: { control: { type: "range", min: 80, max: 600, step: 20 } },
+    onClick: { control: false },
+    className: { control: false },
   },
 };
 
@@ -31,6 +52,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const LatestEntry: Story = {
+  name: "Playground",
   args: {
     post: featuredPost,
     headingLevel: 3,

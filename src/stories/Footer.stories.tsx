@@ -7,6 +7,7 @@ const meta = {
   component: Footer,
   parameters: {
     layout: "fullscreen",
+    controls: { disable: true },
     docs: {
       description: {
         component: "The production footer with the complete external channel row, contact route, cookie preferences and in-page return action.",

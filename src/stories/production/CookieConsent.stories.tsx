@@ -23,6 +23,7 @@ function CookiePreferencesStory() {
 const meta = {
   title: "Production/Privacy/CookiePreferences",
   component: CookiePreferencesStory,
+  parameters: { controls: { disable: true } },
   beforeEach: () => {
     document.cookie = "cookieConsent=; path=/; max-age=0; SameSite=Lax";
   },

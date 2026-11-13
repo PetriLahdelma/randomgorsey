@@ -35,6 +35,7 @@ function InterfaceLanguage() {
 const meta = {
   title: "Production/Foundations/InterfaceLanguage",
   component: InterfaceLanguage,
+  parameters: { controls: { disable: true } },
 } satisfies Meta<typeof InterfaceLanguage>;
 
 export default meta;

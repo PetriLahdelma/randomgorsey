@@ -10,16 +10,22 @@ const post = getPostById(56)!;
 const args = {
   url: `https://randomgorsey.com/posts/${post.id}/`,
   title: post.title,
-  text: post.excerpt,
+  text: post.excerpt || "Studio notes and field recordings from Random Gorsey.",
 };
 
 const meta = {
   title: "Components/SocialShare",
   component: SocialShare,
   args,
+  argTypes: {
+    url: { control: "text", description: "Canonical URL offered to share targets." },
+    title: { control: "text", description: "Accessible menu label and native-share title." },
+    text: { control: "text", description: "Share copy sent to supported platforms." },
+    className: { control: false },
+  },
   parameters: {
     layout: "fullscreen",
-    options: { showPanel: false },
+    controls: { include: ["url", "title", "text"] },
     docs: {
       description: {
         component:
@@ -39,7 +45,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = { name: "Playground" };
 
 export const PaperSurface: Story = {
   render: (storyArgs) => (

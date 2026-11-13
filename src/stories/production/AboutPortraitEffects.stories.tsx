@@ -16,6 +16,17 @@ function AboutPortraitPreview({ effect }: { effect: "interlaced" | "redLines" | 
 const meta = {
   title: "Demos/About Portrait",
   component: AboutPortraitPreview,
+  args: {
+    effect: "interlaced",
+  },
+  argTypes: {
+    effect: {
+      control: "select",
+      options: ["interlaced", "redLines", "redLinesSoft"],
+      description: "Applies the selected scan treatment around the production About portrait.",
+      table: { defaultValue: { summary: "interlaced" } },
+    },
+  },
   parameters: {
     layout: "fullscreen",
     nextjs: { navigation: { pathname: "/about/" } },

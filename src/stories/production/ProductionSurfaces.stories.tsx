@@ -130,7 +130,10 @@ function StorybookContact() {
 const meta = {
   title: "Production/Surfaces",
   component: SurfaceFrame,
-  parameters: { layout: "fullscreen" },
+  parameters: {
+    layout: "fullscreen",
+    controls: { disable: true },
+  },
 } satisfies Meta<typeof SurfaceFrame>;
 
 export default meta;

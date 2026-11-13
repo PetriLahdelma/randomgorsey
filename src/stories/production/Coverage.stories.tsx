@@ -70,6 +70,7 @@ const meta = {
   title: "Production/Coverage",
   component: Coverage,
   parameters: {
+    controls: { disable: true },
     docs: {
       description: {
         component: "Release-level component status. The complete file-by-file register lives in docs/design-system/component-inventory.md.",

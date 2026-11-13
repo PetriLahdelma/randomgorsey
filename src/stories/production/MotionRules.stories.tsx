@@ -111,6 +111,16 @@ function MotionRules({ staticMotion = false }: { staticMotion?: boolean }) {
 const meta = {
   title: "Production/Foundations/MotionRules",
   component: MotionRules,
+  args: {
+    staticMotion: false,
+  },
+  argTypes: {
+    staticMotion: {
+      control: "boolean",
+      description: "Stops sample transitions for reduced-motion and handheld review.",
+      table: { defaultValue: { summary: "false" } },
+    },
+  },
   parameters: {
     docs: {
       description: {
