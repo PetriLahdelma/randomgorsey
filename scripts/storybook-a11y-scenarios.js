@@ -168,6 +168,159 @@ async (page) => {
     "System type resolves independently with a visible foreground",
   );
 
+  await openStory("foundations-system--color-and-layers", 1200, 900);
+  check(
+    await page.getByText("--component-surface-canvas", { exact: true }).isVisible(),
+    "Foundation color story derives its surface roles from generated tokens",
+  );
+  check(
+    await page.getByText("#101210", { exact: true }).isVisible() &&
+      await page.getByText("#d7ff44", { exact: true }).isVisible(),
+    "Foundation color story resolves canvas and signal values from CSS custom properties",
+  );
+
+  await openStory("foundations-system--spacing-and-density", 390, 844);
+  check(
+    await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+    "Foundation spacing scale reflows without horizontal overflow",
+  );
+  check(
+    await page.locator("code").evaluateAll((codes) => codes.filter((code) => code.textContent?.trim()).length === 6) &&
+      await page.getByText("4px", { exact: true }).isVisible() &&
+      await page.getByText("32px", { exact: true }).isVisible(),
+    "Foundation spacing story exposes six token names with resolved endpoint values",
+  );
+
+  await openStory("foundations-system--focus-and-motion", 768, 800);
+  const foundationFocusTarget = page.getByRole("button", { name: "Keyboard target" }).first();
+  await foundationFocusTarget.focus();
+  check(
+    await foundationFocusTarget.evaluate((target) => {
+      const style = getComputedStyle(target);
+      return style.outlineWidth === "3px" && style.outlineColor === "rgb(35, 75, 223)";
+    }),
+    "Foundation focus story resolves the generated 3px blue focus treatment on paper",
+  );
+
+  await openStory("components-forms-input--invalid");
+  const invalidInput = page.getByLabel("Project reference");
+  const inputDescription = await invalidInput.getAttribute("aria-describedby");
+  check(
+    await invalidInput.getAttribute("aria-invalid") === "true" &&
+      Boolean(inputDescription) &&
+      await page.locator("#" + inputDescription).getByText("Enter the complete project reference.", { exact: true }).isVisible(),
+    "Input invalid state associates its control with the visible error",
+  );
+
+  await openStory("components-forms-select--invalid");
+  const invalidSelect = page.getByLabel("Inquiry type");
+  check(
+    await invalidSelect.getAttribute("aria-invalid") === "true" &&
+      await page.getByRole("alert").getByText("Choose an inquiry type.", { exact: true }).isVisible(),
+    "Select invalid state preserves native semantics and an associated error",
+  );
+
+  await openStory("components-forms-checkbox--invalid");
+  const invalidCheckbox = page.getByRole("checkbox", { name: /Retain a local copy/ });
+  check(
+    await invalidCheckbox.getAttribute("aria-invalid") === "true" &&
+      await invalidCheckbox.getAttribute("required") !== null &&
+      await page.getByRole("alert").isVisible(),
+    "Checkbox invalid state remains native, required and described",
+  );
+
+  await openStory("components-forms-textarea--long-content", 390, 844);
+  check(
+    await page.getByLabel("Message").isVisible() &&
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+    "TextArea long-content state remains labelled and fits a mobile viewport",
+  );
+
+  await openStory("components-forms-label--default");
+  check(
+    await page.getByLabel("Project reference").isVisible(),
+    "Standalone Label default story remains associated with its native input",
+  );
+  await openStory("components-forms-label--required");
+  check(
+    await page.getByText("Project reference", { exact: false }).isVisible() &&
+      await page.locator("#storybook-root label").first().evaluate((label) => label.textContent?.trim().endsWith("*")),
+    "Standalone Label required state exposes a visible required marker",
+  );
+
+  await openStory("components-forms-grouplabel--fieldset-legend");
+  check(
+    await page.getByRole("group", { name: "Delivery preferences" }).isVisible() &&
+      await page.getByText("Choose every route that can receive updates.", { exact: true }).isVisible(),
+    "GroupLabel story exposes a named and described fieldset",
+  );
+
+  await openStory("library-feedback-alert--state-matrix");
+  check(
+    await page.getByRole("alert").count() === 4,
+    "Alert state matrix renders all four semantic status variants",
+  );
+  await page.getByRole("button", { name: "Close alert" }).click();
+  check(
+    await page.getByRole("alert").count() === 3,
+    "Alert dismiss control removes only the closeable alert",
+  );
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await openStory("library-feedback-modal--default");
+  await page.getByRole("button", { name: "Open dialog" }).click();
+  const reducedModal = page.getByRole("dialog", { name: "Confirm source change" });
+  await reducedModal.waitFor();
+  await page.waitForFunction(() => document.activeElement?.getAttribute("aria-label") === "Close modal");
+  check(
+    await reducedModal.evaluate((dialog) => {
+      const transform = getComputedStyle(dialog).transform;
+      return transform === "none" || transform === "matrix(1, 0, 0, 1, 0, 0)";
+    }) &&
+      await page.getByRole("button", { name: "Close modal" }).evaluate((button) => button === document.activeElement),
+    "Modal honors reduced motion while retaining focus placement",
+  );
+  await page.keyboard.press("Escape");
+  await reducedModal.waitFor({ state: "detached" });
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+
+  await openStory("library-feedback-modal--default");
+  const modalTrigger = page.getByRole("button", { name: "Open dialog" });
+  await modalTrigger.click();
+  const modal = page.getByRole("dialog", { name: "Confirm source change" });
+  await modal.waitFor();
+  await page.waitForFunction(() => document.activeElement?.getAttribute("aria-label") === "Close modal");
+  check(
+    await page.getByRole("button", { name: "Close modal" }).evaluate((button) => button === document.activeElement),
+    "Modal moves focus to its first control",
+  );
+  await page.keyboard.press("Escape");
+  await modal.waitFor({ state: "detached" });
+  check(
+    await modalTrigger.evaluate((button) => button === document.activeElement),
+    "Modal Escape exit restores focus to its trigger",
+  );
+
+  await openStory("library-surfaces-surface--state-matrix");
+  check(
+    await page.getByRole("button", { name: "Interactive semantic button surface" }).isVisible(),
+    "Surface state matrix preserves polymorphic button semantics",
+  );
+
+  for (const [id, width, label] of [
+    ["library-layout-bleed--default", 320, "Bleed"],
+    ["library-layout-cluster--distribution", 320, "Cluster"],
+    ["library-layout-container--size-scale", 320, "Container"],
+    ["library-layout-grid--minimum-width", 390, "Grid"],
+    ["library-layout-stack--gap-scale", 320, "Stack"],
+  ]) {
+    await openStory(id, width, 844);
+    check(
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+      label + " structural story has no mobile horizontal overflow",
+    );
+  }
+
   await openStory("effects-motion-lab--interactive", 768, 800);
   const motionButton = page.getByRole("button", {
     name: /Pause artwork|Resume artwork/,

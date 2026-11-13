@@ -1,0 +1,239 @@
+.page {
+  width: min(100%, 1120px);
+  margin-inline: auto;
+  color: var(--component-text-on-dark);
+}
+
+.header {
+  display: grid;
+  gap: var(--ds-space-3);
+  padding-block-end: var(--ds-space-6);
+  margin-block-end: var(--ds-space-10);
+  border-block-end: var(--ds-border-width-hairline) solid var(--ds-color-neutral-600);
+}
+
+.eyebrow,
+.sectionIndex,
+.tokenName,
+.tokenValue,
+.measurement,
+.rule {
+  font-family: var(--ds-font-family-mono);
+  font-size: var(--ds-font-size-meta);
+}
+
+.eyebrow,
+.sectionIndex {
+  margin: 0;
+  color: var(--ds-color-signal-acid);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.title {
+  max-width: 18ch;
+  margin: 0;
+  font-family: var(--ds-font-family-sans);
+  font-size: clamp(2.5rem, 7vw, 6.5rem);
+  font-weight: var(--ds-font-weight-regular);
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+}
+
+.lead {
+  max-width: 62ch;
+  margin: 0;
+  line-height: 1.65;
+  color: var(--ds-color-neutral-400);
+}
+
+.section {
+  display: grid;
+  gap: var(--ds-space-6);
+  margin-block-start: var(--ds-space-12);
+}
+
+.sectionHeader {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: var(--ds-space-4);
+  align-items: baseline;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: var(--ds-font-size-title);
+  font-weight: var(--ds-font-weight-medium);
+  letter-spacing: -0.01em;
+}
+
+.swatchGrid,
+.typeGrid,
+.motionGrid,
+.focusGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ds-border-width-hairline);
+  padding: var(--ds-border-width-hairline);
+  background: var(--ds-color-neutral-600);
+}
+
+.motionGrid,
+.focusGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.swatch,
+.specimen,
+.motionCard,
+.focusCard {
+  min-width: 0;
+  color: var(--component-text-primary);
+  background: var(--component-surface-field);
+}
+
+.swatchSample {
+  display: block;
+  min-height: 112px;
+  border-block-end: var(--ds-border-width-hairline) solid var(--component-control-border);
+}
+
+.tokenData {
+  display: grid;
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-3);
+}
+
+.tokenName,
+.tokenValue {
+  overflow-wrap: anywhere;
+}
+
+.tokenValue {
+  color: var(--component-text-secondary);
+}
+
+.specimen,
+.motionCard,
+.focusCard {
+  display: grid;
+  gap: var(--ds-space-4);
+  padding: var(--ds-space-6);
+}
+
+.terminal {
+  font-family: var(--ds-font-family-terminal);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.sans {
+  font-family: var(--ds-font-family-sans);
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.mono {
+  font-family: var(--ds-font-family-mono);
+  font-size: var(--ds-font-size-control);
+  font-variant-numeric: tabular-nums;
+}
+
+.scale {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-4);
+  align-items: end;
+  padding: var(--ds-space-6);
+  color: var(--component-text-primary);
+  background: var(--component-surface-panel);
+}
+
+.spaceUnit {
+  display: grid;
+  gap: var(--ds-space-2);
+  justify-items: center;
+}
+
+.spaceBar {
+  width: var(--measure);
+  height: var(--ds-space-8);
+  background: var(--ds-color-signal-blue);
+}
+
+.measurement {
+  color: var(--component-text-secondary);
+}
+
+.motionTrack {
+  position: relative;
+  height: var(--ds-size-control-default);
+  overflow: hidden;
+  background: var(--component-surface-panel);
+  border: var(--ds-border-width-hairline) solid var(--component-control-border);
+}
+
+.motionObject {
+  position: absolute;
+  inset: var(--ds-space-2) auto var(--ds-space-2) var(--ds-space-2);
+  width: var(--ds-space-6);
+  background: var(--ds-color-signal-blue);
+  animation: travel var(--ds-motion-duration-enter) var(--ds-motion-ease-out) alternate infinite;
+}
+
+.focusTarget {
+  min-height: var(--ds-size-control-touch);
+  padding-inline: var(--ds-space-4);
+  font: inherit;
+  color: var(--component-control-text);
+  background: var(--component-control-background);
+  border: var(--ds-border-width-hairline) solid var(--component-control-border);
+  border-radius: var(--ds-border-radius-none);
+}
+
+.focusTarget:focus-visible {
+  outline: var(--ds-border-width-focus) solid var(--component-control-focus);
+  outline-offset: var(--component-control-focus-offset);
+}
+
+.darkFocus {
+  background: var(--component-surface-layer);
+}
+
+.darkFocus .focusTarget:focus-visible {
+  outline-color: var(--component-control-focus-on-dark);
+}
+
+@keyframes travel {
+  to { transform: translateX(150px); }
+}
+
+@media (prefers-reduced-motion: reduce), (pointer: coarse) {
+  .motionObject {
+    transform: translateX(75px);
+    animation: none;
+  }
+}
+
+@media (width <= 48rem) {
+  .swatchGrid,
+  .typeGrid,
+  .motionGrid,
+  .focusGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (forced-colors: active) {
+  .swatchGrid,
+  .typeGrid,
+  .motionGrid,
+  .focusGrid {
+    background: CanvasText;
+  }
+
+  .spaceBar,
+  .motionObject {
+    background: Highlight;
+  }
+}

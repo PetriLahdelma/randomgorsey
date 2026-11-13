@@ -59,6 +59,11 @@ const meta = {
   component: TypographySpecimen,
   parameters: {
     layout: "fullscreen",
+    docs: {
+      description: {
+        component: "The expressive typography already used by the live artist site. Productive component typography is documented separately under Foundations/System.",
+      },
+    },
   },
 } satisfies Meta<typeof TypographySpecimen>;
 

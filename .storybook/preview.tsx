@@ -1,19 +1,22 @@
 import type { Preview } from "@storybook/react";
 import type { CSSProperties } from "react";
 import "../src/app/globals.css";
+import "./preview.css";
 
 const canvasStyle = {
   "--font-geist-pixel-square": "\"Courier New\", monospace",
   boxSizing: "border-box",
   minHeight: "100vh",
-  color: "var(--studio-white)",
-  background: "var(--studio-stage)",
+  color: "var(--component-text-on-dark)",
+  background: "var(--component-surface-canvas)",
 } as CSSProperties;
 
 const preview: Preview = {
   decorators: [
     (Story, context) => (
       <div
+        className="rgStoryCanvas"
+        data-story-domain={context.title.split("/")[0]?.toLowerCase()}
         style={{
           ...canvasStyle,
           padding:
@@ -24,18 +27,8 @@ const preview: Preview = {
       >
         {(context.title.startsWith("Library/Legacy") || context.title.startsWith("Laboratory")) && (
           <aside
+            className="rgStoryNotice"
             role="note"
-            style={{
-              padding: "0.65rem 0.85rem",
-              marginBottom: "1.25rem",
-              color: "var(--studio-ink)",
-              background: "var(--studio-gray)",
-              border: "2px solid",
-              borderColor: "#fff #6f706b #6f706b #fff",
-              fontFamily: "var(--studio-system)",
-              fontSize: "0.75rem",
-              lineHeight: 1.4,
-            }}
           >
             {context.title.startsWith("Laboratory")
               ? "Laboratory component — retained for experiments; not part of the current production interface."
@@ -51,14 +44,17 @@ const preview: Preview = {
       storySort: {
         order: [
           "Production",
-          ["Coverage", "Foundations", "Navigation", "Journal", "Player", "Privacy", "Surfaces"],
-          "Studio",
+          ["Coverage", "Foundations", "Navigation", "Journal", "Player", "Privacy", "Surfaces", "Compositions", "Artwork"],
           "Foundations",
-          "Effects",
+          ["System", "Color", "Typography", "Spacing", "Focus", "Motion"],
           "Components",
+          ["Actions", "Forms", "Feedback", "Data Display", "Typography", "Dialog"],
+          "Layout",
+          "Studio",
           "Library",
           ["Layout", "Legacy"],
           "Laboratory",
+          "Demos",
         ],
       },
     },
@@ -97,6 +93,16 @@ const preview: Preview = {
         laptop: {
           name: "Laptop · 1366 × 768",
           styles: { width: "1366px", height: "768px" },
+          type: "desktop",
+        },
+        desktop: {
+          name: "Desktop · 1440 × 900",
+          styles: { width: "1440px", height: "900px" },
+          type: "desktop",
+        },
+        wide: {
+          name: "Wide · 1920 × 1080",
+          styles: { width: "1920px", height: "1080px" },
           type: "desktop",
         },
       },

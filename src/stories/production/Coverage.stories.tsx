@@ -1,52 +1,65 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-const rows = [
-  ["Navigation", "Full", "Header, mobile menu, footer and external-link treatment"],
-  ["Home + Journal", "Full surface", "Hero, selected release, real latest posts and archive views"],
-  ["Listen", "Full surface", "Source console, energetic artwork and persistent player lifecycle"],
-  ["Discography", "Full surface", "Real releases, square artwork, overlap, tracklists and destinations"],
-  ["About", "Full surface", "Portrait loop, reduced-motion still, biography and aliases"],
-  ["Gallery", "Full surface", "All current image windows and interactive viewer"],
-  ["Contact", "Full surface", "Inquiry selection and form UI; delivery is not invoked in stories"],
-  ["Privacy", "Full component", "First-visit panel and reopen control"],
-  ["Journal entry", "Full surface", "Individual entry, authored content and adjacent-entry navigation"],
-  ["404", "Full surface", "Signal Not Found recovery surface and keyboard route"],
-  ["Share menu", "Full component", "Production journal share control, including keyboard and copy states"],
-  ["Page header", "Full component", "Shared production header for Listen, Discography, About and Gallery"],
-  ["Foundations", "Representative", "Type, links, controls, metadata, window tones, mark and motion"],
+import styles from "./Coverage.module.css";
+
+type Status = "modernized" | "production-preserved" | "structural" | "laboratory-retained";
+
+const rows: ReadonlyArray<{
+  family: string;
+  status: Status;
+  consumer: string;
+  evidence: string;
+}> = [
+  { family: "Actions / Button", status: "production-preserved", consumer: "Cookie consent + library", evidence: "Unchanged implementation; upgraded compatibility/state stories" },
+  { family: "Typography / Heading", status: "production-preserved", consumer: "Journal PostCard + library", evidence: "Unchanged implementation; upgraded context/type-role stories" },
+  { family: "Forms", status: "modernized", consumer: "Contact extraction + library", evidence: "Field states and Contact parity" },
+  { family: "Feedback + display", status: "modernized", consumer: "Library", evidence: "State, contrast and keyboard stories" },
+  { family: "Layout primitives", status: "structural", consumer: "Library / composition", evidence: "Existing API documented with responsive stories" },
+  { family: "Artist shell", status: "production-preserved", consumer: "Live pages", evidence: "Studio windows, page headers, mark and signal" },
+  { family: "Navigation + journal", status: "production-preserved", consumer: "Live site", evidence: "Header, footer, PostCard and share stories" },
+  { family: "Privacy + player", status: "production-preserved", consumer: "App shell", evidence: "Consent and persistent-player stories" },
+  { family: "Motion / effects", status: "laboratory-retained", consumer: "No direct production consumer", evidence: "Laboratory warning and purpose stories" },
+  { family: "Legacy reference artifacts", status: "laboratory-retained", consumer: "None", evidence: "Excluded from the supported API and Storybook discovery" },
 ] as const;
 
 function Coverage() {
   return (
-    <main style={{ maxWidth: 1000, margin: "0 auto" }}>
-      <p className="studioKicker">Production parity</p>
-      <h1 className="studioTitle">Storybook coverage</h1>
-      <p className="studioLead">
-        Authored production UI is represented with the live components and real
-        content. Provider-owned iframe controls remain external.
-      </p>
-      <div style={{ overflowX: "auto" }}>
-        <table style={{ width: "100%", borderCollapse: "collapse", lineHeight: 1.5 }}>
+    <main className={styles.page}>
+      <header className={styles.header}>
+        <p className={styles.kicker}>System register / v2</p>
+        <h1 className={styles.title}>Coverage is a claim with evidence.</h1>
+        <p className={styles.lead}>
+          Each retained family has one terminal disposition. “Production” means a
+          real site consumer; a Storybook example alone does not qualify.
+        </p>
+      </header>
+
+      <div className={styles.tableWrap}>
+        <table className={styles.table}>
           <thead>
             <tr>
-              {['Area', 'Coverage', 'Evidence'].map((label) => (
-                <th key={label} scope="col" style={{ padding: "12px 10px", textAlign: "left", borderBottom: "1px solid var(--studio-line)" }}>{label}</th>
-              ))}
+              <th scope="col">Family</th>
+              <th scope="col">Disposition</th>
+              <th scope="col">Actual consumer</th>
+              <th scope="col">Evidence</th>
             </tr>
           </thead>
           <tbody>
-            {rows.map(([area, coverage, evidence]) => (
-              <tr key={area}>
-                <th scope="row" style={{ padding: "12px 10px", textAlign: "left", borderBottom: "1px solid var(--studio-line)" }}>{area}</th>
-                <td style={{ padding: "12px 10px", color: "var(--studio-acid)", borderBottom: "1px solid var(--studio-line)" }}>{coverage}</td>
-                <td style={{ padding: "12px 10px", color: "var(--studio-muted)", borderBottom: "1px solid var(--studio-line)" }}>{evidence}</td>
+            {rows.map(({ family, status, consumer, evidence }, index) => (
+              <tr key={family}>
+                <th scope="row"><span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>{family}</th>
+                <td><span className={styles.status} data-status={status}>{status}</span></td>
+                <td>{consumer}</td>
+                <td>{evidence}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p className="studioMeta" style={{ marginTop: 24 }}>
-        Excluded from simulation: Spotify/SoundCloud internals and live EmailJS delivery.
+
+      <p className={styles.note}>
+        External ownership: Spotify and SoundCloud iframe internals. Safety boundary:
+        Storybook never sends live EmailJS messages.
       </p>
     </main>
   );
@@ -55,6 +68,13 @@ function Coverage() {
 const meta = {
   title: "Production/Coverage",
   component: Coverage,
+  parameters: {
+    docs: {
+      description: {
+        component: "Release-level component status. The complete file-by-file register lives in docs/design-system/component-inventory.md.",
+      },
+    },
+  },
 } satisfies Meta<typeof Coverage>;
 
 export default meta;

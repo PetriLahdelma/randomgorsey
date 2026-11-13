@@ -1,0 +1,36 @@
+.rgStoryCanvas {
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-body);
+}
+
+.rgStoryNotice {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--ds-space-3);
+  align-items: start;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  margin-block-end: var(--ds-space-5);
+  font-family: var(--ds-font-family-mono);
+  font-size: var(--ds-font-size-meta);
+  line-height: 1.5;
+  color: var(--component-text-primary);
+  background: var(--component-surface-panel);
+  border: var(--ds-border-width-hairline) solid var(--component-control-border);
+}
+
+.rgStoryNotice::before {
+  font-weight: var(--ds-font-weight-bold);
+  color: var(--ds-color-signal-blue);
+  letter-spacing: 0.08em;
+  content: "STATUS";
+}
+
+@media (forced-colors: active) {
+  .rgStoryNotice {
+    border-color: CanvasText;
+  }
+
+  .rgStoryNotice::before {
+    color: LinkText;
+  }
+}
