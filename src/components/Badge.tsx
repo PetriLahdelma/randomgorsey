@@ -1,21 +1,22 @@
 import React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
+import styles from './SystemPrimitives.module.css'
 
 const badgeVariants = cva(
-  'inline-block px-2 py-1 font-sans text-xs font-semibold uppercase tracking-wider rounded',
+  styles.badge,
   {
     variants: {
       variant: {
-        default: 'bg-gray-300 text-black',
-        primary: 'bg-blue-600 text-white',
-        secondary: 'bg-transparent text-blue-600 border border-blue-600',
-        tertiary: 'bg-gray-100 text-blue-600',
-        success: 'bg-green-500 text-black',
-        danger: 'bg-red-600 text-white',
+        default: styles.badgeDefault,
+        primary: styles.badgePrimary,
+        secondary: styles.badgeSecondary,
+        tertiary: styles.badgeTertiary,
+        success: styles.badgeSuccess,
+        danger: styles.badgeDanger,
       },
       disabled: {
-        true: 'bg-gray-200 text-gray-500 cursor-not-allowed',
+        true: styles.badgeDisabled,
         false: '',
       },
     },
@@ -41,7 +42,7 @@ const Badge: React.FC<BadgeProps> = ({
 }) => (
   <span
     className={cn(badgeVariants({ variant, disabled }), className)}
-    aria-disabled={disabled ?? undefined}
+    aria-disabled={disabled || undefined}
     {...props}
   >
     {text}

@@ -6,6 +6,7 @@ describe("Spinner Component", () => {
   it("renders the spinner element", () => {
     render(<Spinner />);
     const spinnerElement = screen.getByRole("status");
-    expect(spinnerElement).toHaveClass("animate-spin");
+    expect(spinnerElement).toHaveAccessibleName("Loading");
+    expect(spinnerElement).toHaveTextContent("Loading");
   });
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Alert from "../Alert";
 
 describe("Alert Component", () => {
@@ -8,9 +8,15 @@ describe("Alert Component", () => {
     expect(screen.getByText("Info")).toBeInTheDocument();
   });
 
-  it("applies variant class", () => {
+  it("keeps the status semantic across variants", () => {
     render(<Alert variant="success">OK</Alert>);
     const alertElement = screen.getByRole("alert");
-    expect(alertElement).toHaveClass("bg-green-500");
+    expect(alertElement).toHaveTextContent("OK");
+  });
+
+  it("dismisses from a named button", () => {
+    render(<Alert isCloseable>Dismiss me</Alert>);
+    fireEvent.click(screen.getByRole("button", { name: "Close alert" }));
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   });
 });

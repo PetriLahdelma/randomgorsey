@@ -1,59 +1,17 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import Badge from '../components/Badge';
+import type { Meta, StoryObj } from '@storybook/react'
+import Badge from '@/components/Badge'
+import frame from './LibraryStory.module.css'
 
-export default {
-  title: 'Library/Legacy/Badge',
-  component: Badge,
-  argTypes: {
-    text: { control: 'text' },
-    variant: {
-      control: { type: 'select', options: ['default', 'primary', 'secondary', 'tertiary', 'success', 'danger'] },
-    },
-  },
-} as Meta<typeof Badge>;
+const meta = {
+  title: 'Library/Display/Badge', component: Badge, tags: ['autodocs'],
+  parameters: { layout: 'fullscreen', docs: { description: { component: 'Compact machine-readable status label. Badges describe state; they are not interactive controls.' } } },
+  decorators: [(Story) => <div className={frame.paperStage}><Story /></div>],
+  args: { text: 'Indexed', variant: 'default' },
+  argTypes: { variant: { control: 'select', options: ['default', 'primary', 'secondary', 'tertiary', 'success', 'danger'] } },
+} satisfies Meta<typeof Badge>
+export default meta
+type Story = StoryObj<typeof meta>
 
-const Template: StoryFn<typeof Badge> = (args) => <Badge {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {
-  text: 'Default',
-  variant: 'default',
-};
-
-export const Primary = Template.bind({});
-Primary.args = {
-  text: 'Primary',
-  variant: 'primary',
-};
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-  text: 'Secondary',
-  variant: 'secondary',
-};
-
-export const Tertiary = Template.bind({});
-Tertiary.args = {
-  text: 'Tertiary',
-  variant: 'tertiary',
-};
-
-export const Success = Template.bind({});
-Success.args = {
-  text: 'Success',
-  variant: 'success',
-};
-
-export const Danger = Template.bind({});
-Danger.args = {
-  text: 'Danger',
-  variant: 'danger',
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  text: 'Disabled',
-  variant: 'default',
-  disabled: true,
-};
+export const Default: Story = {}
+export const Disabled: Story = { args: { text: 'Unavailable', disabled: true } }
+export const StateMatrix: Story = { render: () => <div className={frame.row}><Badge text="Default" /><Badge text="Active" variant="primary" /><Badge text="Reference" variant="secondary" /><Badge text="Archived" variant="tertiary" /><Badge text="Ready" variant="success" /><Badge text="Error" variant="danger" /><Badge text="Disabled" disabled /></div> }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
+import styles from './SystemPrimitives.module.css'
 
 interface SpinnerProps {
   size?: 'sm' | 'md' | 'lg' | number
@@ -8,9 +9,9 @@ interface SpinnerProps {
 }
 
 const sizeClasses = {
-  sm: 'h-4 w-4 border-2',
-  md: 'h-8 w-8 border-4',
-  lg: 'h-12 w-12 border-4',
+  sm: styles.spinnerSm,
+  md: styles.spinnerMd,
+  lg: styles.spinnerLg,
 }
 
 const Spinner: React.FC<SpinnerProps> = ({
@@ -23,12 +24,12 @@ const Spinner: React.FC<SpinnerProps> = ({
   const sizeStyle = isNumericSize
     ? { width: size, height: size }
     : undefined
-  const sizeClass = isNumericSize ? 'border-4' : sizeClasses[size]
+  const sizeClass = isNumericSize ? styles.spinnerMd : sizeClasses[size]
 
   return (
     <div
       className={cn(
-        'animate-spin rounded-full border-black/10 border-t-black mx-auto',
+        styles.spinner,
         sizeClass,
         className
       )}

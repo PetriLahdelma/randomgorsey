@@ -1,5 +1,6 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
+import styles from './SystemPrimitives.module.css'
 
 interface CaptionProps extends React.HTMLAttributes<HTMLElement> {
   as?: 'figcaption' | 'span' | 'p'
@@ -14,11 +15,7 @@ const Caption: React.FC<CaptionProps> = ({
   return (
     <Component
       className={cn(
-        'mt-2 italic text-center',
-        // Use amber-300 for better readability while maintaining yellow aesthetic
-        // On dark backgrounds: bright enough to read
-        // On light backgrounds: darker amber provides contrast
-        'text-amber-600 dark:text-amber-300',
+        styles.caption,
         className
       )}
       {...props}

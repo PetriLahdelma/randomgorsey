@@ -1,6 +1,16 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence, overlayVariants, modalVariants } from '@/lib/motion'
 import { cn } from '@/lib/utils'
+import styles from './SystemPrimitives.module.css'
+
+const focusableSelector = [
+  'a[href]',
+  'button:not([disabled])',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  'textarea:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(',')
 
 interface ModalProps {
   isOpen: boolean
@@ -23,30 +33,74 @@ const Modal: React.FC<ModalProps> = ({
   className,
   overlayClassName,
 }) => {
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null)
+  const onCloseRef = useRef(onClose)
+  const closeableRef = useRef(closeable)
+
+  useEffect(() => {
+    onCloseRef.current = onClose
+    closeableRef.current = closeable
+  }, [onClose, closeable])
+
   // Handle escape key
-  const handleEscape = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && closeable) {
-        onClose()
-      }
-    },
-    [onClose, closeable]
-  )
+  const handleEscape = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape' && closeableRef.current) {
+      onCloseRef.current()
+    }
+  }, [])
 
   useEffect(() => {
     if (isOpen) {
+      previouslyFocusedRef.current = document.activeElement as HTMLElement | null
+      const previousOverflow = document.body.style.overflow
       document.addEventListener('keydown', handleEscape)
       document.body.style.overflow = 'hidden'
+
+      const focusTimer = window.setTimeout(() => {
+        const firstControl = dialogRef.current?.querySelector<HTMLElement>(focusableSelector)
+        ;(firstControl ?? dialogRef.current)?.focus({ preventScroll: true })
+      }, 0)
+
+      return () => {
+        window.clearTimeout(focusTimer)
+        document.removeEventListener('keydown', handleEscape)
+        document.body.style.overflow = previousOverflow
+        previouslyFocusedRef.current?.focus({ preventScroll: true })
+      }
     }
-    return () => {
-      document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'unset'
-    }
+
+    return undefined
   }, [isOpen, handleEscape])
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget && closeable) {
       onClose()
+    }
+  }
+
+  const handleDialogKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== 'Tab' || !dialogRef.current) return
+
+    const controls = Array.from(
+      dialogRef.current.querySelectorAll<HTMLElement>(focusableSelector)
+    )
+
+    if (controls.length === 0) {
+      event.preventDefault()
+      dialogRef.current.focus()
+      return
+    }
+
+    const first = controls[0]
+    const last = controls[controls.length - 1]
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault()
+      last.focus()
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault()
+      first.focus()
     }
   }
 
@@ -63,13 +117,14 @@ const Modal: React.FC<ModalProps> = ({
             onClick={handleOverlayClick}
             data-testid="modal-overlay"
             className={cn(
-              'fixed inset-0 z-50 flex items-center justify-center bg-black/80',
+              styles.modalOverlay,
               overlayClassName
             )}
           >
             {/* Modal Content */}
             <motion.div
               variants={modalVariants}
+              ref={dialogRef}
               initial="initial"
               animate="enter"
               exit="exit"
@@ -77,9 +132,11 @@ const Modal: React.FC<ModalProps> = ({
               aria-modal="true"
               aria-labelledby={labelledById}
               aria-describedby={describedById}
+              tabIndex={-1}
               onClick={(e) => e.stopPropagation()}
+              onKeyDown={handleDialogKeyDown}
               className={cn(
-                'relative p-8 bg-white text-black rounded-lg shadow-lg font-sans',
+                styles.modalPanel,
                 className
               )}
             >
@@ -88,7 +145,7 @@ const Modal: React.FC<ModalProps> = ({
                   type="button"
                   onClick={onClose}
                   aria-label="Close modal"
-                  className="absolute top-4 right-4 text-2xl font-bold text-blue-600 bg-transparent border-none cursor-pointer hover:opacity-70 leading-none"
+                  className={styles.modalClose}
                 >
                   ×
                 </button>

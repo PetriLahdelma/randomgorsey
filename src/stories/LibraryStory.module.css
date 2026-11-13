@@ -1,0 +1,148 @@
+.stage {
+  min-height: 100vh;
+  padding: var(--ds-space-8);
+  font-family: var(--ds-font-family-sans);
+  color: var(--component-text-on-dark);
+  background: var(--component-surface-canvas);
+}
+
+.paperStage {
+  min-height: 100vh;
+  padding: var(--ds-space-8);
+  font-family: var(--ds-font-family-sans);
+  color: var(--component-text-primary);
+  background: var(--component-surface-panel);
+}
+
+.matrix {
+  display: grid;
+  gap: var(--ds-space-4);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-3);
+  align-items: center;
+}
+
+.label {
+  margin: 0 0 var(--ds-space-2);
+  font-family: var(--ds-font-family-mono);
+  font-size: var(--ds-font-size-meta);
+  color: var(--component-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.measure { max-width: 68ch; }
+
+.dialogContent {
+  display: grid;
+  gap: var(--ds-space-4);
+  padding-top: var(--ds-space-3);
+}
+
+.dialogTitle {
+  padding-right: var(--ds-space-12);
+  margin: 0;
+  font-size: 28px;
+  font-weight: var(--ds-font-weight-medium);
+  letter-spacing: -0.025em;
+}
+
+.dialogActions {
+  display: flex;
+  gap: var(--ds-space-2);
+  justify-content: flex-end;
+}
+
+.systemButton {
+  min-height: var(--component-control-height-default);
+  padding: 0 var(--ds-space-4);
+  font: var(--ds-font-weight-medium) var(--ds-font-size-control) / 1 var(--ds-font-family-sans);
+  color: var(--component-button-secondary-text);
+  cursor: pointer;
+  background: var(--component-button-secondary-background);
+  border: var(--ds-border-width-strong) solid var(--component-button-secondary-border);
+  border-radius: 0;
+}
+
+.systemButtonPrimary {
+  color: var(--component-button-primary-text);
+  background: var(--component-button-primary-background);
+  border-color: var(--component-control-border-strong);
+}
+
+.systemButton:focus-visible {
+  outline: var(--ds-border-width-focus) solid var(--component-control-focus);
+  outline-offset: var(--component-control-focus-offset);
+}
+
+.layoutStage {
+  padding: var(--ds-space-6);
+  font-family: var(--ds-font-family-sans);
+  color: var(--component-text-primary);
+  background: var(--component-surface-panel);
+}
+
+.layoutItem {
+  min-height: var(--component-control-height-default);
+  padding: var(--ds-space-3);
+  font-family: var(--ds-font-family-mono);
+  font-size: var(--ds-font-size-meta);
+  color: var(--component-text-primary);
+  background: var(--component-surface-field);
+  border: var(--ds-border-width-hairline) solid var(--component-control-border-strong);
+}
+
+.layoutItemDark {
+  color: var(--component-text-on-dark);
+  background: var(--component-surface-layer);
+  border-color: var(--ds-color-neutral-600);
+}
+
+.layoutItemBlue {
+  color: var(--ds-color-neutral-0);
+  background: var(--ds-color-signal-blue);
+  border-color: var(--ds-color-signal-blue);
+}
+
+.layoutItemAcid {
+  color: var(--component-text-primary);
+  background: var(--ds-color-signal-acid);
+  border-color: var(--component-control-border-strong);
+}
+
+.layoutLine {
+  height: 1px;
+  background: var(--component-control-border-strong);
+}
+
+.fullBleed {
+  padding: var(--ds-space-10) var(--ds-space-6);
+  color: var(--ds-color-neutral-0);
+  background: var(--ds-color-signal-blue);
+}
+
+.fullBleed .label {
+  color: var(--ds-color-neutral-0);
+}
+
+.resizable {
+  width: 100%;
+  min-width: 200px;
+  max-width: 100%;
+  padding: var(--ds-space-3);
+  overflow: auto;
+  resize: horizontal;
+  border: var(--ds-border-width-strong) dashed var(--component-control-border-strong);
+}
+
+@media (width <= 640px) {
+  .stage,
+  .paperStage,
+  .layoutStage {
+    padding: var(--ds-space-4);
+  }
+}

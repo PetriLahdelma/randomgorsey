@@ -1,0 +1,439 @@
+.alert {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--ds-space-3);
+  align-items: start;
+  min-height: var(--component-control-height-default);
+  padding: var(--ds-space-3) var(--ds-space-4);
+  margin: 0 0 var(--ds-space-4);
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-control);
+  line-height: 1.45;
+  color: var(--status-text);
+  background: var(--status-background);
+  border: var(--ds-border-width-strong) solid var(--status-border);
+}
+
+.alertInfo {
+  --status-background: var(--component-status-info-background);
+  --status-border: var(--component-status-info-border);
+  --status-text: var(--component-status-info-text);
+}
+
+.alertSuccess {
+  --status-background: var(--component-status-success-background);
+  --status-border: var(--component-status-success-border);
+  --status-text: var(--component-status-success-text);
+}
+
+.alertWarning {
+  --status-background: var(--component-status-warning-background);
+  --status-border: var(--component-status-warning-border);
+  --status-text: var(--component-status-warning-text);
+}
+
+.alertError {
+  --status-background: var(--component-status-error-background);
+  --status-border: var(--component-status-error-border);
+  --status-text: var(--component-status-error-text);
+}
+
+.alertIcon {
+  width: var(--ds-space-5);
+  height: var(--ds-space-5);
+  margin-top: var(--ds-border-width-hairline);
+  color: currentcolor;
+}
+
+.alertContent {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.dismiss {
+  display: grid;
+  place-items: center;
+  width: var(--component-control-height-default);
+  height: var(--component-control-height-default);
+  padding: 0;
+  margin: calc(var(--ds-space-2) * -1) calc(var(--ds-space-2) * -1) calc(var(--ds-space-2) * -1) 0;
+  color: currentcolor;
+  cursor: pointer;
+  background: transparent;
+  border: var(--ds-border-width-hairline) solid transparent;
+  transition: background-color var(--ds-motion-duration-enter) var(--ds-motion-ease-out), transform var(--ds-motion-duration-press) var(--ds-motion-ease-in-out);
+}
+
+.dismiss:hover {
+  background: color-mix(in srgb, currentcolor 14%, transparent);
+}
+
+.dismissIcon {
+  width: var(--ds-space-5);
+  height: var(--ds-space-5);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--ds-space-6);
+  padding: var(--ds-border-width-strong) var(--ds-space-2);
+  font-family: var(--ds-font-family-mono);
+  font-size: var(--ds-font-size-meta);
+  font-weight: var(--ds-font-weight-medium);
+  line-height: 1.3;
+  color: var(--badge-text);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-font-tracking-meta);
+  background: var(--badge-background);
+  border: var(--ds-border-width-hairline) solid var(--badge-border);
+}
+
+.badgeDefault {
+  --badge-background: var(--component-surface-panel);
+  --badge-border: var(--component-control-border);
+  --badge-text: var(--component-text-primary);
+}
+
+.badgePrimary {
+  --badge-background: var(--ds-color-signal-blue);
+  --badge-border: var(--ds-color-signal-blue);
+  --badge-text: var(--ds-color-neutral-0);
+}
+
+.badgeSecondary {
+  --badge-background: transparent;
+  --badge-border: var(--ds-color-signal-blue);
+  --badge-text: var(--ds-color-signal-blue);
+}
+
+.badgeTertiary {
+  --badge-background: var(--component-surface-field);
+  --badge-border: var(--component-control-border);
+  --badge-text: var(--component-text-secondary);
+}
+
+.badgeSuccess {
+  --badge-background: var(--component-status-success-background);
+  --badge-border: var(--component-status-success-border);
+  --badge-text: var(--component-status-success-text);
+}
+
+.badgeDanger {
+  --badge-background: var(--component-status-error-background);
+  --badge-border: var(--component-status-error-border);
+  --badge-text: var(--component-status-error-text);
+}
+
+.badgeDisabled {
+  color: var(--component-text-secondary);
+  background: var(--component-surface-panel);
+  border-color: var(--component-control-border);
+  opacity: 0.64;
+}
+
+.avatar {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: var(--ds-font-family-mono);
+  font-weight: var(--ds-font-weight-medium);
+  line-height: 1;
+  color: var(--ds-color-neutral-0);
+  text-align: center;
+  background-color: var(--avatar-background, var(--ds-color-neutral-950));
+  border: var(--ds-border-width-hairline) solid var(--component-control-border-strong);
+  border-radius: 0;
+}
+
+.avatarImage {
+  object-fit: cover;
+}
+
+.avatarXs {
+  width: var(--ds-space-4);
+  height: var(--ds-space-4);
+  font-size: calc(var(--ds-font-size-meta) * 0.6667);
+}
+
+.avatarSm {
+  width: var(--ds-space-5);
+  height: var(--ds-space-5);
+  font-size: calc(var(--ds-font-size-meta) * 0.8333);
+}
+
+.avatarMd {
+  width: var(--ds-space-6);
+  height: var(--ds-space-6);
+  font-size: var(--ds-font-size-meta);
+}
+
+.avatarLg {
+  width: var(--ds-size-control-compact);
+  height: var(--ds-size-control-compact);
+  font-size: var(--ds-font-size-control);
+}
+
+.avatarXl {
+  width: calc(var(--ds-size-control-large) + var(--ds-space-2));
+  height: calc(var(--ds-size-control-large) + var(--ds-space-2));
+  font-size: calc(var(--ds-font-size-body) * 1.4);
+}
+
+.surface {
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  color: var(--component-text-primary);
+  background: var(--component-surface-field);
+  border: var(--ds-border-width-hairline) solid var(--component-control-border);
+}
+
+.surfaceFlat {
+  background: var(--component-surface-field);
+}
+
+.surfaceRaised {
+  background: var(--component-surface-panel);
+  border-color: var(--component-control-border-strong);
+  box-shadow: var(--ds-space-1) var(--ds-space-1) 0 var(--component-control-border-strong);
+}
+
+.surfaceInverted {
+  color: var(--component-text-on-dark);
+  background: var(--component-surface-layer);
+  border-color: var(--ds-color-neutral-600);
+}
+
+.radiusNone {
+  border-radius: 0;
+}
+
+.radiusSm {
+  border-radius: var(--ds-border-radius-none);
+}
+
+.radiusMd {
+  border-radius: var(--ds-border-radius-none);
+}
+
+.radiusLg {
+  border-radius: var(--ds-border-radius-none);
+}
+.paddingNone { padding: 0; }
+.paddingXs { padding: var(--ds-space-1); }
+.paddingSm { padding: var(--ds-space-3); }
+.paddingMd { padding: var(--ds-space-4); }
+.paddingLg { padding: var(--ds-space-6); }
+.fullWidth { width: 100%; }
+
+.interactiveSurface {
+  cursor: pointer;
+  transition: background-color var(--ds-motion-duration-enter) var(--ds-motion-ease-out), transform var(--ds-motion-duration-press) var(--ds-motion-ease-in-out);
+}
+
+.interactiveSurface:hover {
+  background: var(--component-control-background-hover);
+}
+
+.text {
+  margin: 0;
+  font-family: var(--ds-font-family-sans);
+  color: var(--component-text-primary);
+}
+
+.textBody {
+  font-size: var(--ds-font-size-body);
+  line-height: 1.55;
+}
+
+.textBodySmall {
+  font-size: var(--ds-font-size-control);
+  line-height: 1.5;
+}
+
+.textCaption {
+  font-size: var(--ds-font-size-meta);
+  line-height: 1.4;
+  letter-spacing: var(--ds-font-tracking-meta);
+}
+
+.textEyebrow {
+  font-family: var(--ds-font-family-mono);
+  font-size: var(--ds-font-size-meta);
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: var(--ds-font-tracking-wide);
+}
+.textMuted { color: var(--component-text-secondary); }
+.textContrast { color: var(--component-text-on-dark); }
+.textAccent { color: var(--ds-color-signal-blue); }
+.textLeft { text-align: left; }
+.textCenter { text-align: center; }
+.textRight { text-align: right; }
+.weightRegular { font-weight: var(--ds-font-weight-regular); }
+.weightMedium { font-weight: var(--ds-font-weight-medium); }
+.weightBold { font-weight: var(--ds-font-weight-bold); }
+.uppercase { text-transform: uppercase; }
+
+.caption {
+  margin: var(--ds-space-2) 0 0;
+  font-family: var(--ds-font-family-mono);
+  font-size: var(--ds-font-size-meta);
+  font-style: normal;
+  line-height: 1.4;
+  color: var(--component-text-secondary);
+  text-align: left;
+  letter-spacing: var(--ds-font-tracking-meta);
+}
+
+.spinner {
+  box-sizing: border-box;
+  margin-inline: auto;
+  border-color: var(--component-control-border);
+  border-style: solid;
+  border-top-color: var(--ds-color-signal-blue);
+  border-radius: 0;
+  animation: system-spinner calc(var(--ds-motion-duration-enter) * 4) linear infinite;
+}
+
+.spinnerSm {
+  width: var(--ds-space-4);
+  height: var(--ds-space-4);
+  border-width: var(--ds-border-width-strong);
+}
+
+.spinnerMd {
+  width: var(--ds-size-control-compact);
+  height: var(--ds-size-control-compact);
+  border-width: var(--ds-border-width-focus);
+}
+
+.spinnerLg {
+  width: var(--ds-size-control-large);
+  height: var(--ds-size-control-large);
+  border-width: var(--ds-space-1);
+}
+
+@keyframes system-spinner {
+  to { transform: rotate(360deg); }
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ds-space-4);
+  background: color-mix(in srgb, var(--component-surface-canvas) 82%, transparent);
+}
+
+.modalPanel {
+  position: relative;
+  width: min(100%, var(--ds-size-content-dialog));
+  max-height: calc(100dvh - (var(--ds-space-8) * 2));
+  padding: var(--ds-space-8);
+  overflow: auto;
+  font-family: var(--ds-font-family-sans);
+  color: var(--component-text-primary);
+  background: var(--component-surface-panel);
+  border: var(--ds-border-width-strong) solid var(--component-control-border-strong);
+  box-shadow: var(--ds-space-2) var(--ds-space-2) 0 color-mix(in srgb, var(--ds-color-neutral-1000) 45%, transparent);
+}
+
+.modalPanel::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: var(--ds-space-2);
+  content: "";
+  background: var(--ds-color-signal-blue);
+}
+
+.modalClose {
+  position: absolute;
+  top: var(--ds-space-3);
+  right: var(--ds-space-3);
+  display: grid;
+  place-items: center;
+  width: var(--ds-size-control-touch);
+  height: var(--ds-size-control-touch);
+  padding: 0;
+  font-family: var(--ds-font-family-mono);
+  font-size: calc(var(--ds-font-size-title) * 1.3333);
+  line-height: 1;
+  color: var(--component-text-primary);
+  cursor: pointer;
+  background: var(--component-control-background);
+  border: var(--ds-border-width-strong) solid var(--component-control-border-strong);
+  transition: background-color var(--ds-motion-duration-enter) var(--ds-motion-ease-out), transform var(--ds-motion-duration-press) var(--ds-motion-ease-in-out);
+}
+
+.modalClose:hover { background: var(--component-control-background-hover); }
+
+.dismiss:focus-visible {
+  outline: var(--ds-border-width-focus) solid var(--component-control-focus-on-dark);
+  outline-offset: var(--component-control-focus-offset);
+}
+
+.interactiveSurface:focus-visible,
+.modalClose:focus-visible {
+  outline: var(--ds-border-width-focus) solid var(--component-control-focus);
+  outline-offset: var(--component-control-focus-offset);
+}
+
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .dismiss:active,
+  .interactiveSurface:active,
+  .modalClose:active {
+    transform: scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce), (pointer: coarse) {
+  .dismiss,
+  .interactiveSurface,
+  .modalClose {
+    transition: none;
+  }
+
+  .spinner { animation: none; }
+}
+
+@media (forced-colors: active) {
+  .alert,
+  .badge,
+  .avatar,
+  .surface,
+  .modalPanel,
+  .modalClose { border-color: CanvasText; }
+
+  .dismiss:focus-visible,
+  .interactiveSurface:focus-visible,
+  .modalClose:focus-visible { outline-color: Highlight; }
+
+  .spinner {
+    border-color: CanvasText;
+    border-top-color: Highlight;
+  }
+}
+
+/* CSS custom properties are invalid in media-query conditions. This compact
+ * breakpoint remains the single documented literal exception in this module. */
+@media (width <= 30rem) {
+  .modalOverlay {
+    align-items: flex-end;
+    padding: var(--ds-space-2);
+  }
+
+  .modalPanel {
+    max-height: calc(100dvh - var(--ds-space-4));
+    padding: var(--ds-space-6) var(--ds-space-4);
+  }
+}

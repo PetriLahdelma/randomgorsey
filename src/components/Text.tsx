@@ -1,6 +1,7 @@
 import { createElement } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import styles from "./SystemPrimitives.module.css";
 import {
   BaseComponentProps,
   type ElementWithChildren,
@@ -22,36 +23,30 @@ const DEFAULT_TEXT_TAG = "p";
 const textVariants = cva(
   // Base classes - always applied
   // Using font-europa utility class for custom font
-  "m-0 font-europa",
+  styles.text,
   {
     variants: {
       variant: {
-        // Maps to --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem)
-        body: "text-base",
-        // Maps to --text-sm: clamp(0.8rem, 0.75rem + 0.25vw, 1rem)
-        bodySmall: "text-sm",
-        // Maps to --text-xs: clamp(0.64rem, 0.6rem + 0.2vw, 0.8rem)
-        // Keep tracking-[0.02em] for caption styling
-        caption: "text-xs tracking-[0.02em]",
-        // Keep text-xs with uppercase and wider tracking for eyebrow
-        eyebrow: "text-xs uppercase tracking-[0.25em]",
+        body: styles.textBody,
+        bodySmall: styles.textBodySmall,
+        caption: styles.textCaption,
+        eyebrow: styles.textEyebrow,
       },
       tone: {
-        default: "text-black",
-        muted: "text-[#6c757d]", // gray-dark
-        contrast: "text-white",
-        // Accent uses amber for better contrast - amber-600 on light, amber-300 on dark
-        accent: "text-amber-600 dark:text-amber-300",
+        default: "",
+        muted: styles.textMuted,
+        contrast: styles.textContrast,
+        accent: styles.textAccent,
       },
       align: {
-        left: "text-left",
-        center: "text-center",
-        right: "text-right",
+        left: styles.textLeft,
+        center: styles.textCenter,
+        right: styles.textRight,
       },
       weight: {
-        regular: "font-normal", // 400
-        medium: "font-medium", // 500
-        bold: "font-bold", // 700
+        regular: styles.weightRegular,
+        medium: styles.weightMedium,
+        bold: styles.weightBold,
       },
     },
     defaultVariants: {
@@ -97,7 +92,7 @@ const Text = <T extends ElementWithChildren = typeof DEFAULT_TEXT_TAG>({
       className: cn(
         textVariants({ variant, tone, align, weight }),
         // Apply uppercase only if not eyebrow (which already has uppercase)
-        uppercase && variant !== "eyebrow" && "uppercase",
+        uppercase && variant !== "eyebrow" && styles.uppercase,
         className
       ),
       style,

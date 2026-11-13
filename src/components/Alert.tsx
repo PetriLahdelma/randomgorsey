@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
-import Button from './Button'
+import styles from './SystemPrimitives.module.css'
 import {
   XCircleIcon,
   InformationCircleIcon,
@@ -11,14 +11,14 @@ import {
 } from '@heroicons/react/24/solid'
 
 const alertVariants = cva(
-  'relative flex items-center gap-2 min-h-6 p-4 mb-4 font-sans',
+  styles.alert,
   {
     variants: {
       variant: {
-        info: 'bg-blue-600 text-white',
-        success: 'bg-green-500 text-black',
-        warning: 'bg-yellow-400 text-black',
-        error: 'bg-pink-600 text-white',
+        info: styles.alertInfo,
+        success: styles.alertSuccess,
+        warning: styles.alertWarning,
+        error: styles.alertError,
       },
     },
     defaultVariants: {
@@ -26,13 +26,6 @@ const alertVariants = cva(
     },
   }
 )
-
-const iconColorMap = {
-  info: 'text-white',
-  success: 'text-black',
-  warning: 'text-black',
-  error: 'text-white',
-}
 
 const iconMap = {
   info: InformationCircleIcon,
@@ -71,22 +64,20 @@ const Alert: React.FC<AlertProps> = ({
     >
       {hasIcon && (
         <IconComponent
-          className={cn('h-6 w-6 shrink-0', iconColorMap[variant || 'info'])}
+          className={styles.alertIcon}
+          aria-hidden="true"
         />
       )}
-      <div className="flex-1">{children}</div>
+      <div className={styles.alertContent}>{children}</div>
       {isCloseable && (
-        <Button
-          variant="tertiary"
-          className="ml-auto flex h-6 w-6 items-center justify-center bg-transparent border-none p-0"
+        <button
+          type="button"
+          className={styles.dismiss}
           aria-label="Close alert"
-          icon={
-            <XCircleIcon
-              className={cn('h-6 w-6', iconColorMap[variant || 'info'])}
-            />
-          }
           onClick={() => setIsVisible(false)}
-        />
+        >
+          <XCircleIcon className={styles.dismissIcon} aria-hidden="true" />
+        </button>
       )}
     </div>
   )

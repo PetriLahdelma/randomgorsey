@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import Image from 'next/image'
+import Image, { type ImageProps } from 'next/image'
 import { cn } from '@/lib/utils'
+import styles from './SystemPrimitives.module.css'
 
 export type AvatarProps = {
   avatarColor?: string
-  avatarImage?: string
+  avatarImage?: ImageProps['src']
   initials?: string
   size?: 'XS' | 'S' | 'M' | 'L' | 'XL'
   alt?: string
@@ -12,11 +13,11 @@ export type AvatarProps = {
 }
 
 const sizeClasses = {
-  XS: 'h-4 w-4 text-[8px]',
-  S: 'h-5 w-5 text-[10px]',
-  M: 'h-6 w-6 text-xs',
-  L: 'h-8 w-8 text-sm',
-  XL: 'h-14 w-14 text-2xl',
+  XS: styles.avatarXs,
+  S: styles.avatarSm,
+  M: styles.avatarMd,
+  L: styles.avatarLg,
+  XL: styles.avatarXl,
 }
 
 const sizePixels = {
@@ -28,7 +29,7 @@ const sizePixels = {
 } as const
 
 const Avatar: React.FC<AvatarProps> = ({
-  avatarColor = '#000',
+  avatarColor,
   avatarImage,
   initials = 'RG',
   size = 'M',
@@ -49,11 +50,12 @@ const Avatar: React.FC<AvatarProps> = ({
         sizes={`${sizePixels[size]}px`}
         onError={() => setImageError(true)}
         className={cn(
-          'rounded-full object-cover bg-cover',
+          styles.avatar,
+          styles.avatarImage,
           sizeClasses[size],
           className
         )}
-        style={{ backgroundColor: avatarColor }}
+        style={avatarColor ? { backgroundColor: avatarColor } : undefined}
       />
     )
   }
@@ -61,12 +63,13 @@ const Avatar: React.FC<AvatarProps> = ({
   return (
     <div
       className={cn(
-        'flex items-center justify-center rounded-full font-bold text-white text-center',
+        styles.avatar,
         sizeClasses[size],
         className
       )}
-      style={{ backgroundColor: avatarColor }}
+      style={avatarColor ? { backgroundColor: avatarColor } : undefined}
       aria-label={alt}
+      role="img"
     >
       {initials}
     </div>

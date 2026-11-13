@@ -7,6 +7,8 @@ describe("Avatar Component", () => {
     render(<Avatar avatarColor="#f00" initials="AB" />);
     const avatar = screen.getByText("AB");
     expect(avatar).toBeInTheDocument();
+    expect(avatar).toHaveAttribute("role", "img");
+    expect(avatar).toHaveAccessibleName("User avatar");
     expect(avatar).toHaveStyle("background-color: #f00");
   });
 

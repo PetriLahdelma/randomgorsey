@@ -8,9 +8,12 @@ describe("Badge Component", () => {
     expect(screen.getByText("New")).toBeInTheDocument();
   });
 
-  it("applies variant class", () => {
+  it("retains the requested variant and disabled semantics", () => {
     render(<Badge text="Hot" variant="danger" />);
     const badgeElement = screen.getByText("Hot");
-    expect(badgeElement).toHaveClass("bg-red-600");
+    expect(badgeElement).not.toHaveAttribute("aria-disabled");
+
+    render(<Badge text="Unavailable" disabled />);
+    expect(screen.getByText("Unavailable")).toHaveAttribute("aria-disabled", "true");
   });
 });

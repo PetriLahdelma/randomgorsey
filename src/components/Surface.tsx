@@ -1,6 +1,7 @@
 import { createElement } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import styles from "./SystemPrimitives.module.css";
 import {
   BaseComponentProps,
   type ElementWithChildren,
@@ -18,42 +19,33 @@ const DEFAULT_ELEMENT = "div";
  * Maps CSS Module styles to Tailwind utilities
  */
 const surfaceVariants = cva(
-  [
-    "relative box-border block overflow-hidden",
-    "text-foreground bg-surface",
-    "border border-border",
-    "transition-none",
-  ].join(" "),
+  styles.surface,
   {
     variants: {
       variant: {
-        flat: "",
-        raised: "",
-        inverted: "text-foreground bg-surface-elevated border-border",
+        flat: styles.surfaceFlat,
+        raised: styles.surfaceRaised,
+        inverted: styles.surfaceInverted,
       },
       padding: {
-        none: "p-0",
-        xs: "p-[0.35rem]",
-        sm: "p-[0.75rem]",
-        md: "p-4",
-        lg: "p-6",
+        none: styles.paddingNone,
+        xs: styles.paddingXs,
+        sm: styles.paddingSm,
+        md: styles.paddingMd,
+        lg: styles.paddingLg,
       },
       radius: {
-        none: "",
-        sm: "",
-        md: "",
-        lg: "",
+        none: styles.radiusNone,
+        sm: styles.radiusSm,
+        md: styles.radiusMd,
+        lg: styles.radiusLg,
       },
       interactive: {
-        true: [
-          "cursor-pointer",
-          "hover:-translate-y-0.5",
-          "focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[3px]",
-        ].join(" "),
+        true: styles.interactiveSurface,
         false: "",
       },
       fullWidth: {
-        true: "w-full",
+        true: styles.fullWidth,
         false: "",
       },
     },
